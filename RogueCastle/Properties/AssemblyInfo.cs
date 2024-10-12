@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Rogue Legacy")]
-[assembly: AssemblyProduct("RogueLegacy")]
-[assembly: AssemblyDescription("Rogue Legacy")]
+[assembly: AssemblyTitle("Rogue Legacy Randomizer")]
+[assembly: AssemblyProduct("RogueLegacyRandomizer")]
+[assembly: AssemblyDescription("Rogue Legacy Randomizer")]
 [assembly: AssemblyCompany("Cellar Door Games, Inc.")]
 [assembly: AssemblyCopyright("Copyright © Cellar Door Games, Inc. 2013 - 2018")]
 [assembly: AssemblyTrademark("Trademark Cellar Door Games, Inc. 2013 - 2018")]
