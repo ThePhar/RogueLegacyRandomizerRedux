@@ -6,3 +6,6 @@ obj_core/
 *.userprefs
 *.suo
 *.vs
+
+# RLR specific
+.idea/
