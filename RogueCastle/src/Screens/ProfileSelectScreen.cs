@@ -5,6 +5,7 @@ using InputSystem;
 using Microsoft.Xna.Framework;
 using RogueCastle.EVs;
 using RogueCastle.GameObjects;
+using RogueCastle.Screens.BaseObjects;
 using Tweener;
 using Tweener.Ease;
 

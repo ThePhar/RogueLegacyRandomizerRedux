@@ -11,6 +11,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using RogueCastle.EVs;
+using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle
 {

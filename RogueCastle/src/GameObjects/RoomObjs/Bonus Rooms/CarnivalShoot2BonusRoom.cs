@@ -7,6 +7,7 @@ using DS2DEngine;
 using Tweener.Ease;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle
 {

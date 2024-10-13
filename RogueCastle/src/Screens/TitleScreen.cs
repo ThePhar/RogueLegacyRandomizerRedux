@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Randomchaos2DGodRays;
 using RogueCastle.EVs;
 using RogueCastle.Randomizer;
+using RogueCastle.Screens.BaseObjects;
 using Tweener;
 using Tweener.Ease;
 

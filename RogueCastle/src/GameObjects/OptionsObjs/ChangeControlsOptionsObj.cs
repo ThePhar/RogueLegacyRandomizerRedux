@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle
 {

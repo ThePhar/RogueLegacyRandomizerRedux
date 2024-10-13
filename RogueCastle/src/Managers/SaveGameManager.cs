@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using System.IO;
 using DS2DEngine;
 using RogueCastle.EVs;
+using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle
 {

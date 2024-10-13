@@ -9,6 +9,7 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle
 {

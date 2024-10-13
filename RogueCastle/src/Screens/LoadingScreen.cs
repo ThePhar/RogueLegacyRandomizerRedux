@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using System.Threading;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.Screens;
+using RogueCastle.Screens.BaseObjects;
 using Tweener;
 using Tweener.Ease;
 

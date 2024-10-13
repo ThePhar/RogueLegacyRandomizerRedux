@@ -11,6 +11,7 @@ using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EVs;
+using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle
 {

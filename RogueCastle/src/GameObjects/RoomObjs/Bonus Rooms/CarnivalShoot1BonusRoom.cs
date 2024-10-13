@@ -6,6 +6,7 @@ using DS2DEngine;
 using Tweener;
 using InputSystem;
 using Microsoft.Xna.Framework;
+using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle
 {

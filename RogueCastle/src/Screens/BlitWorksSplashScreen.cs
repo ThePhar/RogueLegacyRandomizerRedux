@@ -8,6 +8,7 @@ using Tweener;
 using Tweener.Ease;
 using Microsoft.Xna.Framework.Audio;
 using RogueCastle.EVs;
+using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle
 {

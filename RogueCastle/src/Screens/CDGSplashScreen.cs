@@ -8,6 +8,7 @@ using Tweener;
 using Tweener.Ease;
 using System.Threading;
 using RogueCastle.EVs;
+using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle
 {

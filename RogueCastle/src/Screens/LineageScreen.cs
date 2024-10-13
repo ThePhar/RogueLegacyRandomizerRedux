@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using InputSystem;
 using System.Text.RegularExpressions;
 using RogueCastle.EVs;
+using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle
 {

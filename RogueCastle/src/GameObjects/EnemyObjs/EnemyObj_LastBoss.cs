@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Tweener;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EVs;
+using RogueCastle.Screens.BaseObjects;
 using Tweener.Ease;
 
 namespace RogueCastle
