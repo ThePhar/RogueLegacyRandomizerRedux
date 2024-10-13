@@ -21,6 +21,13 @@ namespace RogueCastle
             m_languageArray = new Dictionary<string, Dictionary<string, DialogueObj>>();
             m_dialogDict = new Dictionary<string, DialogueObj>();
 
+            // Randomizer entries
+            m_dialogDict.Add("Multiworld Connect",
+                new DialogueObj(
+                    [""],
+                    ["LOC_ID_RANDOMIZER_TEXT_1"]
+                ));
+            
             // Text entries
             m_dialogDict.Add("Meet Blacksmith",
                 new DialogueObj(

@@ -10,6 +10,7 @@ using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using InputSystem;
 using RogueCastle.EVs;
+using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.Screens.BaseObjects;
 
 namespace RogueCastle

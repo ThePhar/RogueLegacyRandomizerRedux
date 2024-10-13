@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.EVs;
 using RogueCastle.GameObjects.OptionsObjs;
+using RogueCastle.Screens.BaseObjects;
 using Tweener;
 
 namespace RogueCastle.Screens;
@@ -68,6 +70,7 @@ public class RandomizerScreen : Screen
         _options.Add(_slotname);
         _options.Add(_hostname);
         _options.Add(_password);
+        _options.Add(new ConnectArchipelagoOptionsObj("LOC_ID_RANDOMIZER_CONNECT", this));
         
         _container.AddChild(_title);
         for (var i = 0; i < _options.Count; i++)
@@ -80,6 +83,10 @@ public class RandomizerScreen : Screen
         
         // Mark the first option as selected.
         _options[0].IsSelected = true;
+        
+        // Move last option.
+        _options[_options.Count - 1].X += 24;
+        _options[_options.Count - 1].Y += 80 + 36;
 
         base.LoadContent();
     }
@@ -204,5 +211,33 @@ public class RandomizerScreen : Screen
         _password = null;
         
         base.Dispose();
+    }
+    
+    public void StartGame()
+    {
+        SoundManager.PlaySound("Game_Start");
+
+        var hostname = _hostname.GetValue;
+        var username = _slotname.GetValue;
+        var password = _password.GetValue;
+        
+        var result = (ScreenManager.Game as Game)!.ArchipelagoManager.TryConnect(hostname, username, password);
+        if (result is not null)
+        {
+            throw new Exception(result.ToString());
+        }
+        
+        Game.PlayerStats.CharacterFound = true;
+        Game.PlayerStats.Gold = 0;
+        
+        // Necessary to change his headpiece so he doesn't look like the first dude.
+        Game.PlayerStats.HeadPiece = (byte) CDGMath.RandomInt(1, PlayerPart.NumHeadPieces);
+        Game.PlayerStats.EnemiesKilledInRun.Clear();
+        
+        // Create new player, lineage, and upgrade data.
+        (ScreenManager.Game as Game)!.SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Lineage, SaveType.UpgradeData);
+        (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.StartingRoom, true);
+
+        SoundManager.StopMusic(0.2f);
     }
 }

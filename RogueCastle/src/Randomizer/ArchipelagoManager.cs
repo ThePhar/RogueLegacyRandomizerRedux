@@ -18,17 +18,18 @@ public class ArchipelagoManager
     
     public SlotData SlotData { get; private set; }
 
-    public LoginFailure TryConnect()
+    public LoginFailure TryConnect(string hostname, string username, string password)
     {
         _lastDeath = DateTime.MinValue;
-        _session = ArchipelagoSessionFactory.CreateSession("wss://archipelago.gg:38373");
+        _session = ArchipelagoSessionFactory.CreateSession(hostname);
 
         _session.Socket.ErrorReceived += OnError;
         _session.Socket.PacketReceived += OnPacketReceived;
 
         var result = _session.TryConnectAndLogin(
             game: "Rogue Legacy", 
-            name: "Phar", 
+            name: username,
+            password: password,
             itemsHandlingFlags: ItemsHandlingFlags.AllItems,
             version: SupportedVersion
         );
@@ -45,6 +46,11 @@ public class ArchipelagoManager
         return null;
     }
 
+    public void Disconnect()
+    {
+        _session?.Socket.DisconnectAsync();
+    }
+    
     private static void OnError(Exception exception, string message)
     {
         Console.WriteLine(@$"[Error]: ${message}");

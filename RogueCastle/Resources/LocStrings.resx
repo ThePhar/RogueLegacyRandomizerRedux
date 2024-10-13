@@ -4987,4 +4987,10 @@
   <data name="LOC_ID_RANDOMIZER_CONNECT_TITLE" xml:space="preserve">
       <value>Connect to Archipelago</value>
   </data>
+  <data name="LOC_ID_RANDOMIZER_CONNECT" xml:space="preserve">
+      <value>Connect &amp; Start</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_TEXT_1" xml:space="preserve">
+      <value>Are you ready to connect?</value>
+  </data>
 </root>
