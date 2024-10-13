@@ -588,10 +588,10 @@ public class TitleScreen : Screen
             (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.Credits, false);
         }
 
-        if (Game.GlobalInput.JustPressed(InputMapType.MENU_PROFILESELECT))
-        {
-            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.ProfileSelect, false);
-        }
+        // if (Game.GlobalInput.JustPressed(InputMapType.MENU_PROFILESELECT))
+        // {
+        //     (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.ProfileSelect, false);
+        // }
 
         base.HandleInput();
     }
@@ -793,18 +793,18 @@ public class TitleScreen : Screen
         _pressStartText.Draw(Camera);
         _pressStartText2.Draw(Camera);
 
-        if (_startNewLegacy == false)
+        if (false) // (_startNewLegacy == false)
         {
             _profileCardKey.Draw(Camera);
         }
 
         _creditsKey.Draw(Camera);
         _optionsKey.Draw(Camera);
-        _profileSelectKey.Draw(Camera);
+        // _profileSelectKey.Draw(Camera);
         Camera.End();
 
         Camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, null);
-        if (_startNewLegacy == false)
+        if (false) // (_startNewLegacy == false)
         {
             _profileCard.Draw(Camera);
         }
