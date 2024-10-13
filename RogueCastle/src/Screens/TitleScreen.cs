@@ -550,21 +550,23 @@ public class TitleScreen : Screen
             Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM2) ||
             Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM3))
         {
-            var result = (ScreenManager.Game as Game)!.ArchipelagoManager.TryConnect();
-            if (result is null)
-            {
-                StartPressed();
-                foreach (PropertyDescriptor desc in TypeDescriptor.GetProperties((ScreenManager.Game as Game)!.ArchipelagoManager.SlotData))
-                {
-                    var name = desc.Name;
-                    var value = desc.GetValue((ScreenManager.Game as Game)!.ArchipelagoManager.SlotData);
-                    Console.WriteLine($@"{name}: {value}");
-                }
-            }
-            else
-            {
-                throw new Exception(result.ToString());
-            }
+            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.Randomizer, false);
+            
+            // var result = (ScreenManager.Game as Game)!.ArchipelagoManager.TryConnect();
+            // if (result is null)
+            // {
+            //     StartPressed();
+            //     foreach (PropertyDescriptor desc in TypeDescriptor.GetProperties((ScreenManager.Game as Game)!.ArchipelagoManager.SlotData))
+            //     {
+            //         var name = desc.Name;
+            //         var value = desc.GetValue((ScreenManager.Game as Game)!.ArchipelagoManager.SlotData);
+            //         Console.WriteLine($@"{name}: {value}");
+            //     }
+            // }
+            // else
+            // {
+            //     throw new Exception(result.ToString());
+            // }
         }
 
         if (_startNewLegacy == false)

@@ -14,26 +14,26 @@ namespace RogueCastle
 {
     public class RCScreenManager : ScreenManager
     {
-        private GameOverScreen m_gameOverScreen;
-        private SkillScreen m_traitScreen;
-        private EnchantressScreen m_enchantressScreen;
-        private BlacksmithScreen m_blacksmithScreen;
-        private GetItemScreen m_getItemScreen;
-        private DialogueScreen m_dialogueScreen;
-        private MapScreen m_mapScreen;
-        private PauseScreen m_pauseScreen;
-        private OptionsScreen m_optionsScreen;
-        private ProfileCardScreen m_profileCardScreen;
-        private CreditsScreen m_creditsScreen;
-        private SkillUnlockScreen m_skillUnlockScreen;
-        private DiaryEntryScreen m_diaryEntryScreen;
-        private DeathDefiedScreen m_deathDefyScreen;
-        private DiaryFlashbackScreen m_flashbackScreen;
-        private TextScreen m_textScreen;
-        private GameOverBossScreen m_gameOverBossScreen;
-
-        private ProfileSelectScreen  m_profileSelectScreen;
-
+        private GameOverScreen              m_gameOverScreen;
+        private SkillScreen                 m_traitScreen;
+        private EnchantressScreen           m_enchantressScreen;
+        private BlacksmithScreen            m_blacksmithScreen;
+        private GetItemScreen               m_getItemScreen;
+        private DialogueScreen              m_dialogueScreen;
+        private MapScreen                   m_mapScreen;
+        private PauseScreen                 m_pauseScreen;
+        private OptionsScreen               m_optionsScreen;
+        private ProfileCardScreen           m_profileCardScreen;
+        private CreditsScreen               m_creditsScreen;
+        private SkillUnlockScreen           m_skillUnlockScreen;
+        private DiaryEntryScreen            m_diaryEntryScreen;
+        private DeathDefiedScreen           m_deathDefyScreen;
+        private DiaryFlashbackScreen        m_flashbackScreen;
+        private TextScreen                  m_textScreen;
+        private GameOverBossScreen          m_gameOverBossScreen;
+        private ProfileSelectScreen         m_profileSelectScreen;
+        private RandomizerScreen _mRandomizerScreen;
+        
         private VirtualScreen m_virtualScreen;
 
         private bool m_isTransitioning = false;
@@ -169,6 +169,10 @@ namespace RogueCastle
             if (m_profileSelectScreen != null)
                 m_screenCleanupList.Add(m_profileSelectScreen);
             m_profileSelectScreen = new ProfileSelectScreen();
+            
+            if (_mRandomizerScreen != null)
+                m_screenCleanupList.Add(_mRandomizerScreen);
+            _mRandomizerScreen = new RandomizerScreen();
         }
 
         public override void LoadContent()
@@ -190,6 +194,7 @@ namespace RogueCastle
             m_flashbackScreen.LoadContent();
             m_gameOverBossScreen.LoadContent();
             m_profileSelectScreen.LoadContent();
+            _mRandomizerScreen.LoadContent();
 
             if (IsContentLoaded == false)
             {
@@ -353,6 +358,9 @@ namespace RogueCastle
                     break;
                 case (ScreenType.ProfileSelect):
                     this.AddScreen(m_profileSelectScreen, null);
+                    break;
+                case (ScreenType.Randomizer):
+                    this.AddScreen(_mRandomizerScreen, null);
                     break;
             }
 

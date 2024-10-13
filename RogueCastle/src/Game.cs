@@ -622,6 +622,7 @@ public class Game : Microsoft.Xna.Framework.Game
         SpriteFontArray.SpriteFontList.Add(GoldFont);
         GoldFont.Spacing = -5;
         JunicodeFont = Content.Load<SpriteFont>("Fonts\\Junicode");
+        JunicodeFont.DefaultCharacter = 'П';
         SpriteFontArray.SpriteFontList.Add(JunicodeFont);
         //JunicodeFont.Spacing = -1;
         JunicodeLargeFont = Content.Load<SpriteFont>("Fonts\\JunicodeLarge");
