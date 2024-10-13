@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Randomchaos2DGodRays;
 using RogueCastle.EVs;
+using RogueCastle.Randomizer;
 using Tweener;
 using Tweener.Ease;
 
@@ -549,8 +550,18 @@ public class TitleScreen : Screen
             Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM2) ||
             Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM3))
         {
+            var result = (ScreenManager.Game as Game)!.ArchipelagoManager.TryConnect();
+            if (result is null)
+            {
+                StartPressed();
+            }
+            else
+            {
+                throw new Exception(result.ToString());
+            }
+            
             // StartPressed();
-            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.Randomizer, false);
+            // (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.Randomizer, false);
         }
 
         if (_startNewLegacy == false)

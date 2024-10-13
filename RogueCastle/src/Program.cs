@@ -28,8 +28,8 @@ public static class Program
             LevelEV.TestRoomReverse = false;
             LevelEV.RunTestRoom = false;
             LevelEV.ShowDebugText = false;
-            LevelEV.LoadTitleScreen = false;
-            LevelEV.LoadSplashScreen = true;
+            LevelEV.LoadTitleScreen = true;
+            LevelEV.LoadSplashScreen = false;
             LevelEV.ShowSaveLoadDebugText = false;
             LevelEV.DeleteSaveFile = false;
             LevelEV.CloseTestRoomDoors = false;

@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.EVs;
+using RogueCastle.Randomizer;
 using SpriteSystem;
 using Tweener;
 
@@ -67,7 +68,7 @@ public class Game : Microsoft.Xna.Framework.Game
     private readonly float m_frameLimit = 1 / 40f;
 
     private WeakReference gcTracker = new(new object());
-
+    
     public GraphicsDeviceManager graphics;
 
     /// <summary>
@@ -137,7 +138,8 @@ public class Game : Microsoft.Xna.Framework.Game
         Window.Title = "Rogue Legacy Randomizer";
         ScreenManager = new RCScreenManager(this);
         SaveManager = new SaveGameManager(this);
-
+        ArchipelagoManager = new ArchipelagoManager();
+        
         // Set first to false and last to true for targetelapsedtime to work.
         IsFixedTimeStep = false; // Sets game to slow down instead of frame skip if set to false.
         graphics.SynchronizeWithVerticalRetrace =
@@ -211,6 +213,8 @@ public class Game : Microsoft.Xna.Framework.Game
 
     public SaveGameManager SaveManager { get; }
 
+    public ArchipelagoManager ArchipelagoManager { get; }
+    
     public GraphicsDeviceManager GraphicsDeviceManager => graphics;
 
     protected void ChangeGraphicsSettings(object sender, PreparingDeviceSettingsEventArgs e)
