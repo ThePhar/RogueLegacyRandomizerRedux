@@ -45,5 +45,7 @@ namespace RogueCastle
 
         public const int ProfileSelect = 31;
         public const int Loading = 32;
+
+        public const int Randomizer = 80;
     }
 }

@@ -67,24 +67,38 @@ public class TitleScreen : Screen
         //_bg.TextureColor = Color.Black;
         //_hardCoreModeOpacity = 0.5f;
 
-        _logo = new SpriteObj("TitleLogo_Sprite");
-        _logo.Position = new Vector2(1320 / 2, 720 / 2);
-        _logo.DropShadow = new Vector2(0, 5);
+        _logo = new SpriteObj("TitleLogo_Sprite")
+        {
+            Position = new Vector2(1320 / 2, 720 / 2),
+            DropShadow = new Vector2(0, 5),
+        };
 
-        _castle = new SpriteObj("TitleCastle_Sprite");
-        _castle.Scale = new Vector2(2, 2);
+        _castle = new SpriteObj("TitleCastle_Sprite")
+        {
+            Scale = new Vector2(2, 2),
+        };
         _castle.Position = new Vector2(1320 / 2 - 30, 720 - _castle.Height / 2);
 
-        _smallCloud1 = new SpriteObj("TitleSmallCloud1_Sprite");
-        _smallCloud1.Position = new Vector2(1320 / 2, 0);
-        _smallCloud2 = new SpriteObj("TitleSmallCloud2_Sprite");
-        _smallCloud2.Position = _smallCloud1.Position;
-        _smallCloud3 = new SpriteObj("TitleSmallCloud3_Sprite");
-        _smallCloud3.Position = _smallCloud1.Position;
-        _smallCloud4 = new SpriteObj("TitleSmallCloud4_Sprite");
-        _smallCloud4.Position = _smallCloud1.Position;
-        _smallCloud5 = new SpriteObj("TitleSmallCloud5_Sprite");
-        _smallCloud5.Position = _smallCloud1.Position;
+        _smallCloud1 = new SpriteObj("TitleSmallCloud1_Sprite")
+        {
+            Position = new Vector2(1320 / 2, 0),
+        };
+        _smallCloud2 = new SpriteObj("TitleSmallCloud2_Sprite")
+        {
+            Position = _smallCloud1.Position,
+        };
+        _smallCloud3 = new SpriteObj("TitleSmallCloud3_Sprite")
+        {
+            Position = _smallCloud1.Position,
+        };
+        _smallCloud4 = new SpriteObj("TitleSmallCloud4_Sprite")
+        {
+            Position = _smallCloud1.Position,
+        };
+        _smallCloud5 = new SpriteObj("TitleSmallCloud5_Sprite")
+        {
+            Position = _smallCloud1.Position,
+        };
 
         _largeCloud1 = new SpriteObj("TitleLargeCloud1_Sprite");
         _largeCloud1.Position = new Vector2(0, 720 - _largeCloud1.Height);
@@ -97,41 +111,49 @@ public class TitleScreen : Screen
         _largeCloud4.Position = new Vector2(1320, 720 - _largeCloud4.Height);
         _largeCloud4.Flip = SpriteEffects.FlipHorizontally;
 
-        _titleText = new TextObj();
-        _titleText.Font = Game.JunicodeFont;
-        _titleText.FontSize = 45;
-        _titleText.Text = "ROGUE CASTLE";
-        _titleText.Position = new Vector2(1320 / 2, 720 / 2 - 300);
-        _titleText.Align = Types.TextAlign.Centre;
+        _titleText = new TextObj
+        {
+            Font = Game.JunicodeFont,
+            FontSize = 45,
+            Text = "ROGUE CASTLE",
+            Position = new Vector2(1320 / 2, 720 / 2 - 300),
+            Align = Types.TextAlign.Centre,
+        };
 
-        _copyrightText = new TextObj(Game.JunicodeFont);
-        _copyrightText.FontSize = 8;
-        _copyrightText.Text = "Copyright(C) 2013-2018, Cellar Door Games Inc. Rogue Legacy(TM) is a trademark or registered trademark of Cellar Door Games Inc. All Rights Reserved.";
-        _copyrightText.Align = Types.TextAlign.Centre;
+        _copyrightText = new TextObj(Game.JunicodeFont)
+        {
+            FontSize = 8,
+            Text = "Copyright(C) 2013-2018, Cellar Door Games Inc. Rogue Legacy(TM) is a trademark or registered trademark of Cellar Door Games Inc. All Rights Reserved.",
+            Align = Types.TextAlign.Centre,
+        };
         _copyrightText.Position = new Vector2(1320 / 2, 720 - _copyrightText.Height - 10);
         _copyrightText.DropShadow = new Vector2(1, 2);
 
         _gameVersionNumber = _copyrightText.Clone() as TextObj;
-        _gameVersionNumber.Align = Types.TextAlign.Right;
+        _gameVersionNumber!.Align = Types.TextAlign.Right;
         _gameVersionNumber.FontSize = 8;
         _gameVersionNumber.Position = new Vector2(1320 - 15, 25);
         _gameVersionNumber.Text = "Rogue Legacy " + LevelEV.GAME_VERSION;
 
         _rlrxVersionNumber = _gameVersionNumber.Clone() as TextObj;
-        _rlrxVersionNumber.Align = Types.TextAlign.Right;
+        _rlrxVersionNumber!.Align = Types.TextAlign.Right;
         _rlrxVersionNumber.FontSize = 8;
         _rlrxVersionNumber.Position = new Vector2(1320 - 15, 5);
         _rlrxVersionNumber.Text = "Rogue Legacy Randomizer " + LevelEV.RLRX_VERSION;
 
-        _pressStartText = new KeyIconTextObj(Game.JunicodeFont);
-        _pressStartText.FontSize = 20;
-        _pressStartText.Text = "Press Enter to begin";
-        _pressStartText.Align = Types.TextAlign.Centre;
-        _pressStartText.Position = new Vector2(1320 / 2, 720 / 2 + 200);
-        _pressStartText.DropShadow = new Vector2(2, 2);
+        _pressStartText = new KeyIconTextObj(Game.JunicodeFont)
+        {
+            FontSize = 20,
+            Text = "Press Enter to begin",
+            Align = Types.TextAlign.Centre,
+            Position = new Vector2(1320 / 2, 720 / 2 + 200),
+            DropShadow = new Vector2(2, 2),
+        };
 
-        _pressStartText2 = new TextObj(Game.JunicodeFont);
-        _pressStartText2.FontSize = 20;
+        _pressStartText2 = new TextObj(Game.JunicodeFont)
+        {
+            FontSize = 20,
+        };
         _pressStartText2.Text =
             LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE",
                 _pressStartText2); // dummy locID to add TextObj to language refresh list
@@ -140,49 +162,63 @@ public class TitleScreen : Screen
         _pressStartText2.Y -= _pressStartText.Height - 5;
         _pressStartText2.DropShadow = new Vector2(2, 2);
 
-        _profileCard = new SpriteObj("TitleProfileCard_Sprite");
-        _profileCard.OutlineWidth = 2;
-        _profileCard.Scale = new Vector2(2, 2);
+        _profileCard = new SpriteObj("TitleProfileCard_Sprite")
+        {
+            OutlineWidth = 2,
+            Scale = new Vector2(2, 2),
+        };
         _profileCard.Position = new Vector2(_profileCard.Width, 720 - _profileCard.Height);
         _profileCard.ForceDraw = true;
 
-        _optionsIcon = new SpriteObj("TitleOptionsIcon_Sprite");
-        _optionsIcon.Scale = new Vector2(2, 2);
-        _optionsIcon.OutlineWidth = _profileCard.OutlineWidth;
+        _optionsIcon = new SpriteObj("TitleOptionsIcon_Sprite")
+        {
+            Scale = new Vector2(2, 2),
+            OutlineWidth = _profileCard.OutlineWidth,
+        };
         _optionsIcon.Position = new Vector2(1320 - _optionsIcon.Width * 2, _profileCard.Y);
         _optionsIcon.ForceDraw = true;
 
-        _creditsIcon = new SpriteObj("TitleCreditsIcon_Sprite");
-        _creditsIcon.Scale = new Vector2(2, 2);
-        _creditsIcon.OutlineWidth = _profileCard.OutlineWidth;
-        _creditsIcon.Position = new Vector2(_optionsIcon.X + 120, _profileCard.Y);
-        _creditsIcon.ForceDraw = true;
+        _creditsIcon = new SpriteObj("TitleCreditsIcon_Sprite")
+        {
+            Scale = new Vector2(2, 2),
+            OutlineWidth = _profileCard.OutlineWidth,
+            Position = new Vector2(_optionsIcon.X + 120, _profileCard.Y),
+            ForceDraw = true,
+        };
 
-        _profileCardKey = new KeyIconTextObj(Game.JunicodeFont);
-        _profileCardKey.Align = Types.TextAlign.Centre;
-        _profileCardKey.FontSize = 12;
-        _profileCardKey.Text = "[Input:" + InputMapType.MENU_PROFILECARD + "]";
+        _profileCardKey = new KeyIconTextObj(Game.JunicodeFont)
+        {
+            Align = Types.TextAlign.Centre,
+            FontSize = 12,
+            Text = "[Input:" + InputMapType.MENU_PROFILECARD + "]",
+        };
         _profileCardKey.Position =
             new Vector2(_profileCard.X, _profileCard.Bounds.Top - _profileCardKey.Height - 10);
         _profileCardKey.ForceDraw = true;
 
-        _optionsKey = new KeyIconTextObj(Game.JunicodeFont);
-        _optionsKey.Align = Types.TextAlign.Centre;
-        _optionsKey.FontSize = 12;
-        _optionsKey.Text = "[Input:" + InputMapType.MENU_OPTIONS + "]";
+        _optionsKey = new KeyIconTextObj(Game.JunicodeFont)
+        {
+            Align = Types.TextAlign.Centre,
+            FontSize = 12,
+            Text = "[Input:" + InputMapType.MENU_OPTIONS + "]",
+        };
         _optionsKey.Position = new Vector2(_optionsIcon.X, _optionsIcon.Bounds.Top - _optionsKey.Height - 10);
         _optionsKey.ForceDraw = true;
 
-        _creditsKey = new KeyIconTextObj(Game.JunicodeFont);
-        _creditsKey.Align = Types.TextAlign.Centre;
-        _creditsKey.FontSize = 12;
-        _creditsKey.Text = "[Input:" + InputMapType.MENU_CREDITS + "]";
+        _creditsKey = new KeyIconTextObj(Game.JunicodeFont)
+        {
+            Align = Types.TextAlign.Centre,
+            FontSize = 12,
+            Text = "[Input:" + InputMapType.MENU_CREDITS + "]",
+        };
         _creditsKey.Position = new Vector2(_creditsIcon.X, _creditsIcon.Bounds.Top - _creditsKey.Height - 10);
         _creditsKey.ForceDraw = true;
 
-        _profileSelectKey = new KeyIconTextObj(Game.JunicodeFont);
-        _profileSelectKey.Align = Types.TextAlign.Left;
-        _profileSelectKey.FontSize = 10;
+        _profileSelectKey = new KeyIconTextObj(Game.JunicodeFont)
+        {
+            Align = Types.TextAlign.Left,
+            FontSize = 10,
+        };
         _profileSelectKey.Text =
             string.Format(LocaleBuilder.getString("LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW", _profileSelectKey),
                 Game.GameConfig.ProfileSlot);
@@ -191,18 +227,22 @@ public class TitleScreen : Screen
         _profileSelectKey.ForceDraw = true;
         _profileSelectKey.DropShadow = new Vector2(2, 2);
 
-        _crown = new SpriteObj("Crown_Sprite");
-        _crown.ForceDraw = true;
-        _crown.Scale = new Vector2(0.7f, 0.7f);
-        _crown.Rotation = -30;
-        _crown.OutlineWidth = 2;
+        _crown = new SpriteObj("Crown_Sprite")
+        {
+            ForceDraw = true,
+            Scale = new Vector2(0.7f, 0.7f),
+            Rotation = -30,
+            OutlineWidth = 2,
+        };
 
-        _dlcIcon = new SpriteObj("MedallionPiece5_Sprite");
-        _dlcIcon.Position = new Vector2(950, 310);
-        //_dlcIcon.OutlineWidth = 2;
-        //_dlcIcon.Scale = new Vector2(2, 2);
-        _dlcIcon.ForceDraw = true;
-        _dlcIcon.TextureColor = Color.Yellow;
+        _dlcIcon = new SpriteObj("MedallionPiece5_Sprite")
+        {
+            Position = new Vector2(950, 310),
+            //_dlcIcon.OutlineWidth = 2;
+            //_dlcIcon.Scale = new Vector2(2, 2);
+            ForceDraw = true,
+            TextureColor = Color.Yellow,
+        };
         base.LoadContent();
     }
 
@@ -242,11 +282,7 @@ public class TitleScreen : Screen
         Tween.By(_crown, 3, Quad.EaseInOut, "Y", "50");
 
         _dlcIcon.Opacity = 0;
-        _dlcIcon.Visible = false;
-        if (Game.PlayerStats.ChallengeLastBossBeaten)
-        {
-            _dlcIcon.Visible = true;
-        }
+        _dlcIcon.Visible = Game.PlayerStats.ChallengeLastBossBeaten;
 
         _dlcIcon.Position = new Vector2(898, 317 - 50);
         Tween.To(_dlcIcon, 2, Linear.EaseNone, "Opacity", "1");
@@ -289,7 +325,7 @@ public class TitleScreen : Screen
 
     public override void OnExit()
     {
-        if (_seagullCue != null && _seagullCue.IsPlaying)
+        if (_seagullCue is { IsPlaying: true })
         {
             _seagullCue.Stop(AudioStopOptions.Immediate);
             _seagullCue.Dispose();
@@ -303,8 +339,8 @@ public class TitleScreen : Screen
         SkillSystem.ResetAllTraits();
         Game.PlayerStats.Dispose();
         Game.PlayerStats = new PlayerStats();
-        (ScreenManager as RCScreenManager).Player.Reset();
-        (ScreenManager.Game as Game).SaveManager.LoadFiles(null, SaveType.PlayerData, SaveType.Lineage,
+        (ScreenManager as RCScreenManager)!.Player.Reset();
+        (ScreenManager.Game as Game)!.SaveManager.LoadFiles(null, SaveType.PlayerData, SaveType.Lineage,
             SaveType.UpgradeData);
         // Special circumstance where you should override player's current HP/MP
         Game.ScreenManager.Player.CurrentHealth = Game.PlayerStats.CurrentHealth;
@@ -317,7 +353,7 @@ public class TitleScreen : Screen
 
         if (_startNewLegacy == false)
         {
-            // You have an active character who is not dead. Therefore begin the game like normal.
+            // You have an active character who is not dead. Therefore, begin the game like normal.
             if (_heroIsDead == false)
             {
                 if (Game.PlayerStats.TimesCastleBeaten == 1)
@@ -353,7 +389,7 @@ public class TitleScreen : Screen
         }
         else
         {
-            // No character was found, and the castle was never beaten. Therefore you are starting a new game.
+            // No character was found, and the castle was never beaten. Therefore, you are starting a new game.
             if (_startNewGamePlus == false)
             {
                 _pressStartText2.Text = LocaleBuilder.getResourceString("LOC_ID_TITLE_SCREEN_4", true);
@@ -381,24 +417,18 @@ public class TitleScreen : Screen
         {
             if (_heroIsDead == false) // Loading a previous file.
             {
-                if (_loadStartingRoom)
-                {
-                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.StartingRoom, true);
-                }
-                else
-                {
-                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Level, true);
-                }
+                (ScreenManager as RCScreenManager)!.DisplayScreen(
+                    _loadStartingRoom ? ScreenType.StartingRoom : ScreenType.Level, true);
             }
             else // Selecting a new heir.
             {
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Lineage, true);
+                (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.Lineage, true);
             }
         }
         else
         {
             Game.PlayerStats.CharacterFound = true; // Signifies that a new game is being started.
-            // Start a brand new game.
+            // Start a brand-new game.
             if (_startNewGamePlus) // If start new game plus is true, erase these flags.
             {
                 Game.PlayerStats.LastbossBeaten = false;
@@ -407,10 +437,10 @@ public class TitleScreen : Screen
                 Game.PlayerStats.FairyBossBeaten = false;
                 Game.PlayerStats.FireballBossBeaten = false;
                 Game.PlayerStats.FinalDoorOpened = false;
-                if ((ScreenManager.Game as Game).SaveManager.FileExists(SaveType.Map))
+                if ((ScreenManager.Game as Game)!.SaveManager.FileExists(SaveType.Map))
                 {
-                    (ScreenManager.Game as Game).SaveManager.ClearFiles(SaveType.Map, SaveType.MapData);
-                    (ScreenManager.Game as Game).SaveManager.ClearBackupFiles(SaveType.Map, SaveType.MapData);
+                    (ScreenManager.Game as Game)!.SaveManager.ClearFiles(SaveType.Map, SaveType.MapData);
+                    (ScreenManager.Game as Game)!.SaveManager.ClearBackupFiles(SaveType.Map, SaveType.MapData);
                 }
             }
             else
@@ -426,9 +456,9 @@ public class TitleScreen : Screen
                         .NumHeadPieces); // Necessary to change his headpiece so he doesn't look like the first dude.
             Game.PlayerStats.EnemiesKilledInRun.Clear();
 
-            (ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Lineage,
+            (ScreenManager.Game as Game)!.SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Lineage,
                 SaveType.UpgradeData); // Create new player, lineage, and upgrade data.
-            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.StartingRoom, true);
+            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.StartingRoom, true);
         }
 
         SoundManager.StopMusic(0.2f);
@@ -442,7 +472,7 @@ public class TitleScreen : Screen
             _randomSeagullSFX -= (float) gameTime.ElapsedGameTime.TotalSeconds;
             if (_randomSeagullSFX <= 0)
             {
-                if (_seagullCue != null && _seagullCue.IsPlaying)
+                if (_seagullCue is { IsPlaying: true })
                 {
                     _seagullCue.Stop(AudioStopOptions.Immediate);
                     _seagullCue.Dispose();
@@ -519,34 +549,34 @@ public class TitleScreen : Screen
             Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM2) ||
             Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM3))
         {
-            StartPressed();
+            // StartPressed();
+            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.Randomizer, false);
         }
 
         if (_startNewLegacy == false)
         {
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_PROFILECARD))
             {
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.ProfileCard, false);
+                (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.ProfileCard, false);
             }
         }
 
         if (Game.GlobalInput.JustPressed(InputMapType.MENU_OPTIONS))
         {
             _optionsEntered = true;
-            var optionsData = new List<object>();
-            optionsData.Add(true);
-            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Options, false, optionsData);
+            var optionsData = new List<object> { true };
+            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.Options, false, optionsData);
         }
 
         if (Game.GlobalInput.JustPressed(InputMapType
-                .MENU_CREDITS)) // && InputManager.Pressed(Keys.LeftAlt, PlayerIndex.One) == false && InputManager.Pressed(Keys.RightAlt, PlayerIndex.One) == false) // Make sure not to load credits if alttabbing.                
+                .MENU_CREDITS)) // && InputManager.Pressed(Keys.LeftAlt, PlayerIndex.One) == false && InputManager.Pressed(Keys.RightAlt, PlayerIndex.One) == false) // Make sure not to load credits if alt-tabbing.                
         {
-            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Credits, false);
+            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.Credits, false);
         }
 
         if (Game.GlobalInput.JustPressed(InputMapType.MENU_PROFILESELECT))
         {
-            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.ProfileSelect, false);
+            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.ProfileSelect, false);
         }
 
         base.HandleInput();
@@ -587,13 +617,13 @@ public class TitleScreen : Screen
                     GameUtil.IsAchievementUnlocked("FEAR_OF_SPACE") &&
                     GameUtil.IsAchievementUnlocked("LOVE_OF_LAUGHING_AT_OTHERS"))
                 {
-                    Console.WriteLine("UNLOCKED THANATOPHOBIA");
+                    Console.WriteLine(@"UNLOCKED THANATOPHOBIA");
                     GameUtil.UnlockAchievement("FEAR_OF_DYING");
                 }
             }
             else if (InputManager.JustPressed(Keys.S, PlayerIndex.One))
             {
-                Console.WriteLine("UNLOCKED SOMNIPHOBIA");
+                Console.WriteLine(@"UNLOCKED SOMNIPHOBIA");
                 GameUtil.UnlockAchievement("FEAR_OF_SLEEP");
             }
         }
@@ -686,7 +716,7 @@ public class TitleScreen : Screen
         Camera.GraphicsDevice.SetRenderTarget(_godRayTexture);
         Camera.GraphicsDevice.Clear(Color.White);
         Camera.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, SamplerState.LinearClamp, null,
-            null); // Anything that is affected by the godray should be drawn here.
+            null); // Anything that is affected by the god ray should be drawn here.
         _smallCloud1.DrawOutline(Camera);
         _smallCloud3.DrawOutline(Camera);
         _smallCloud4.DrawOutline(Camera);
@@ -708,7 +738,7 @@ public class TitleScreen : Screen
         //_largeCloud4.DrawOutline(Camera);
         Camera.End();
 
-        // Draw the post-processed stuff to the godray render target
+        // Draw the post-processed stuff to the god ray render target
         _ppm.Draw(gameTime, _godRayTexture);
 
         //Anything not affected by god ray should get drawn here.
@@ -771,7 +801,7 @@ public class TitleScreen : Screen
         Camera.End();
 
         // Draw the render targets to the screen
-        Camera.GraphicsDevice.SetRenderTarget((ScreenManager as RCScreenManager).RenderTarget);
+        Camera.GraphicsDevice.SetRenderTarget((ScreenManager as RCScreenManager)!.RenderTarget);
         Camera.GraphicsDevice.Clear(Color.Black);
 
         Camera.Begin(SpriteSortMode.Immediate, BlendState.Additive);
@@ -790,7 +820,7 @@ public class TitleScreen : Screen
     {
         if (IsDisposed == false)
         {
-            Console.WriteLine("Disposing Title Screen");
+            Console.WriteLine(@"Disposing Title Screen");
             _godRayTexture.Dispose();
             _godRayTexture = null;
 

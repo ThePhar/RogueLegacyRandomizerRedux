@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EVs;
+using RogueCastle.Screens;
 using Tweener;
 using Tweener.Ease;
 
@@ -31,7 +32,8 @@ namespace RogueCastle
         private TextScreen m_textScreen;
         private GameOverBossScreen m_gameOverBossScreen;
 
-        private ProfileSelectScreen m_profileSelectScreen;
+        private ProfileSelectScreen  m_profileSelectScreen;
+        private RandomizerMenuScreen m_randomizerMenuScreen;
 
         private VirtualScreen m_virtualScreen;
 
@@ -168,6 +170,10 @@ namespace RogueCastle
             if (m_profileSelectScreen != null)
                 m_screenCleanupList.Add(m_profileSelectScreen);
             m_profileSelectScreen = new ProfileSelectScreen();
+
+            if (m_randomizerMenuScreen != null)
+                m_screenCleanupList.Add(m_randomizerMenuScreen);
+            m_randomizerMenuScreen = new RandomizerMenuScreen();
         }
 
         public override void LoadContent()
@@ -189,6 +195,7 @@ namespace RogueCastle
             m_flashbackScreen.LoadContent();
             m_gameOverBossScreen.LoadContent();
             m_profileSelectScreen.LoadContent();
+            m_randomizerMenuScreen.LoadContent();
 
             if (IsContentLoaded == false)
             {
@@ -352,6 +359,9 @@ namespace RogueCastle
                     break;
                 case (ScreenType.ProfileSelect):
                     this.AddScreen(m_profileSelectScreen, null);
+                    break;
+                case (ScreenType.Randomizer):
+                    this.AddScreen(m_randomizerMenuScreen, null);
                     break;
             }
 

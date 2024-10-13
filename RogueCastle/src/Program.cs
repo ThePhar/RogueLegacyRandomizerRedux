@@ -36,7 +36,8 @@ public static class Program
             LevelEV.RunTutorial = false;
             LevelEV.RunDemoVersion = false;
             LevelEV.DisableSaving = false;
-            LevelEV.RunCrashLogs = true;
+            // LevelEV.RunCrashLogs = true;
+            LevelEV.RunCrashLogs = false;
             LevelEV.WeakenBosses = false;
             LevelEV.EnableBackupSaving = true;
             LevelEV.EnableOffscreenControl = false;
