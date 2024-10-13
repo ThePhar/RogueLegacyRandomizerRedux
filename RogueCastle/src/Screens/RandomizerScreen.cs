@@ -9,15 +9,15 @@ namespace RogueCastle.Screens;
 
 public class RandomizerScreen : Screen
 {
-    private bool                      _transitioning;
-    private bool                      _lockControls;
-    private ObjContainer              _container;
-    private TextObj                   _title;
-    private TextInputOptionsObj       _hostname;
-    private TextInputOptionsObj       _slotname;
-    private TextInputOptionsObj       _password;
-    private List<TextInputOptionsObj> _options = [];
-    private int                       _selectedIndex;
+    private bool                       _transitioning;
+    private bool                       _lockControls;
+    private ObjContainer               _container;
+    private TextObj                    _title;
+    private TextInputOptionsObj        _hostname;
+    private TextInputOptionsObj        _slotname;
+    private TextInputOptionsObj        _password;
+    private List<RandomizerOptionsObj> _options = [];
+    private int                        _selectedIndex;
 
     public RandomizerScreen()
     {
@@ -25,9 +25,9 @@ public class RandomizerScreen : Screen
         DrawIfCovered = true;
     }
 
-    public bool                LockedControls    => _lockControls || _transitioning;
-    public TextInputOptionsObj SelectedOption    => _options[_selectedIndex];
-    public float               BackBufferOpacity { get; set; }
+    public bool                 LockedControls    => _lockControls || _transitioning;
+    public RandomizerOptionsObj SelectedOption    => _options[_selectedIndex];
+    public float                BackBufferOpacity { get; set; }
 
     public override void OnEnter()
     {
@@ -56,15 +56,15 @@ public class RandomizerScreen : Screen
         
         _title = new TextObj(Game.JunicodeLargeFont)
         {
-            Text = "Connect to Archipelago",
             FontSize = 20f,
             Align = Types.TextAlign.Centre,
             Position = new Vector2(GlobalEV.SCREEN_WIDTH / 2, 24f),
         };
+        _title.Text = LocaleBuilder.getString("LOC_ID_RANDOMIZER_CONNECT_TITLE", _title);
 
-        _slotname = new TextInputOptionsObj("Slot Name:", "Sir Phar");
-        _hostname = new TextInputOptionsObj("Room Hostname:", "wss://archipelago.gg:38281");
-        _password = new TextInputOptionsObj("Room Password:", hidden: true);
+        _slotname = new TextInputOptionsObj("LOC_ID_RANDOMIZER_SLOT_NAME", "Sir Phar");
+        _hostname = new TextInputOptionsObj("LOC_ID_RANDOMIZER_ROOM_HOSTNAME", "archipelago.gg:38281");
+        _password = new TextInputOptionsObj("LOC_ID_RANDOMIZER_ROOM_PASSWORD", hidden: true);
         _options.Add(_slotname);
         _options.Add(_hostname);
         _options.Add(_password);
@@ -78,6 +78,9 @@ public class RandomizerScreen : Screen
             _container.AddChild(_options[i]);
         }
         
+        // Mark the first option as selected.
+        _options[0].IsSelected = true;
+
         base.LoadContent();
     }
     

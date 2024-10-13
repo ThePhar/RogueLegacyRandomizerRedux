@@ -6,41 +6,32 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RogueCastle.GameObjects.OptionsObjs;
 
-public sealed class TextInputOptionsObj : ObjContainer
+public sealed class TextInputOptionsObj : RandomizerOptionsObj
 {
-    private const int OptionsTextOffset = 24;
 
-    private bool             _isActive;
-    private bool             _isSelected;
     private bool             _ready;
     private bool             _hidden;
     private string           _placeholder;
     private string           _currentValue = "";
-    private TextObj          _titleText;
+
     private TextObj          _valueText;
     private int              _cursorIndex;
     
-    public TextInputOptionsObj(string title, string placeholder = "", bool hidden = false)
+    public TextInputOptionsObj(string title, string placeholder = "", bool hidden = false) : base(title)
     {
-        _titleText = new TextObj(Game.JunicodeFont)
-        {
-            FontSize = 12f,
-            Text = title,
-            DropShadow = new Vector2(2f, 2f),
-            Align = Types.TextAlign.Right,
-        };
-
         _placeholder = placeholder;
         _hidden = hidden;
+
+        TitleText.Align = Types.TextAlign.Right;
         
         // Toggle text highlighting.
-        _valueText = _titleText.Clone() as TextObj;
-        _valueText!.X = OptionsTextOffset;
+        _valueText = TitleText.Clone() as TextObj;
+        _valueText!.X = OPTIONS_TEXT_OFFSET;
         _valueText.Text = _placeholder;
         _valueText.TextureColor = Color.Gray;
         _valueText.Align = Types.TextAlign.Left;
 
-        AddChild(_titleText);
+        AddChild(TitleText);
         AddChild(_valueText);
 
         ForceDraw = true;
@@ -48,12 +39,12 @@ public sealed class TextInputOptionsObj : ObjContainer
 
     public string GetValue => _currentValue != string.Empty ? _currentValue : _placeholder;
 
-    public bool IsActive
+    public override bool IsActive
     {
-        get => _isActive;
+        get => base.IsActive;
         set
         {
-            _isActive = value;
+            base.IsActive = value;
             if (value)
             {
                 _valueText.TextureColor = Color.Yellow;
@@ -80,24 +71,8 @@ public sealed class TextInputOptionsObj : ObjContainer
             }
         }
     }
-
-    public bool IsSelected
-    {
-        get => _isSelected;
-        set
-        {
-            _isSelected = value;
-            if (value)
-            {
-                _titleText.TextureColor = Color.Yellow;
-                return;
-            }
-
-            _titleText.TextureColor = Color.White;
-        }
-    }
     
-    public void HandleInput()
+    public override void HandleInput()
     {
         // Do not leave early if we're still typing.
         if (!TextInputEXT.IsTextInputActive() && (InputHelper.PressedCancel() || InputHelper.PressedConfirm()))
@@ -148,15 +123,11 @@ public sealed class TextInputOptionsObj : ObjContainer
                 break;
             }
             
-            // Tab, Enter, Return (to cancel input)
+            // Enter/Return (to confirm input)
             case '\n':
             case '\r':
                 TextInputEXT.StopTextInput();
                 TextInputEXT.TextInput -= InterceptKey;
-                break;
-            
-            default:
-                Console.WriteLine($@"Ignored key: {chr} ({char.GetNumericValue(chr)})");
                 break;
         }
     }
@@ -168,9 +139,8 @@ public sealed class TextInputOptionsObj : ObjContainer
             return;
         }
         
-        _titleText?.Dispose();
-        _titleText = null;
         _valueText?.Dispose();
         _valueText = null;
+        base.Dispose();
     }
 }
