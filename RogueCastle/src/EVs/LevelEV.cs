@@ -189,7 +189,7 @@ public static class LevelEV
     public static bool TestRoomReverse = false;
     public static bool RunTestRoom = false;
     public static bool ShowDebugText = false;
-    public static bool LoadTitleScreen = true;
+    public static bool LoadTitleScreen = false; // TODO: Remove
     public static bool LoadSplashScreen = false;
     public static bool ShowSaveLoadDebugText = false;
 

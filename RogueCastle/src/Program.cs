@@ -115,7 +115,7 @@ public static class Program
                 var osDir = Environment.GetEnvironmentVariable("XDG_CONFIG_HOME");
                 if (!string.IsNullOrEmpty(osDir))
                 {
-                    return Path.Combine(osDir, "RogueLegacy");
+                    return Path.Combine(osDir, "RogueLegacyRandomizer");
                 }
 
                 osDir = Environment.GetEnvironmentVariable("HOME");

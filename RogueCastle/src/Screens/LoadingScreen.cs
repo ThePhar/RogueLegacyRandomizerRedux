@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using System.Threading;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.Screens;
 using Tweener;
 using Tweener.Ease;
 
