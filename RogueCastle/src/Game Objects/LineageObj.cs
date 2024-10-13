@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Tweener;
 using System.Text.RegularExpressions;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {

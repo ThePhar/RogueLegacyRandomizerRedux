@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.EVs;
 using SpriteSystem;
 using Tweener;
 
@@ -98,17 +99,17 @@ public class Game : Microsoft.Xna.Framework.Game
 
         if (filePath.Contains("-t"))
         {
-            LevelEV.TESTROOM_LEVELTYPE = GameTypes.LevelType.TOWER;
+            LevelEV.TestRoomLevelType = GameTypes.LevelType.TOWER;
             filePath = filePath.Replace("-t", "");
         }
         else if (filePath.Contains("-d"))
         {
-            LevelEV.TESTROOM_LEVELTYPE = GameTypes.LevelType.DUNGEON;
+            LevelEV.TestRoomLevelType = GameTypes.LevelType.DUNGEON;
             filePath = filePath.Replace("-d", "");
         }
         else if (filePath.Contains("-g"))
         {
-            LevelEV.TESTROOM_LEVELTYPE = GameTypes.LevelType.GARDEN;
+            LevelEV.TestRoomLevelType = GameTypes.LevelType.GARDEN;
             filePath = filePath.Replace("-g", "");
         }
 
@@ -129,8 +130,8 @@ public class Game : Microsoft.Xna.Framework.Game
         //this.graphics.PreferredBackBufferHeight = 768;//GlobalEV.ScreenHeight;
 
         EngineEV.ScreenWidth =
-            GlobalEV.ScreenWidth; // Very important. Tells the engine if the game is running at a fixed resolution (which it is).
-        EngineEV.ScreenHeight = GlobalEV.ScreenHeight;
+            GlobalEV.SCREEN_WIDTH; // Very important. Tells the engine if the game is running at a fixed resolution (which it is).
+        EngineEV.ScreenHeight = GlobalEV.SCREEN_HEIGHT;
 
         //this.graphics.IsFullScreen = true;
         Window.Title = "Rogue Legacy Randomizer";
@@ -140,12 +141,12 @@ public class Game : Microsoft.Xna.Framework.Game
         // Set first to false and last to true for targetelapsedtime to work.
         IsFixedTimeStep = false; // Sets game to slow down instead of frame skip if set to false.
         graphics.SynchronizeWithVerticalRetrace =
-            !LevelEV.SHOW_FPS; // Disables setting the FPS to your screen's refresh rate.
+            !LevelEV.ShowFps; // Disables setting the FPS to your screen's refresh rate.
         // WARNING, if you turn off frame limiting, if the framerate goes over 1000 then the elapsed time will be too small a number for a float to carry and things will break.
         //this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 60.0f);// Sets the frame rate to 30 fps.
         Window.AllowUserResizing = false;
 
-        if (LevelEV.ENABLE_OFFSCREEN_CONTROL == false)
+        if (LevelEV.EnableOffscreenControl == false)
         {
             InactiveSleepTime = new TimeSpan(); // Overrides sleep time, which disables the lag when losing focus.
         }
@@ -289,7 +290,7 @@ public class Game : Microsoft.Xna.Framework.Game
         InitializeMaleNameArray(false);
         InitializeFemaleNameArray(false);
 
-        if (LevelEV.SHOW_FPS)
+        if (LevelEV.ShowFps)
         {
             var fpsCounter = new FrameRateCounter(this);
             Components.Add(fpsCounter);
@@ -308,7 +309,7 @@ public class Game : Microsoft.Xna.Framework.Game
 
         // Everything below this line can be disabled for release.
 
-        if (LevelEV.CREATE_RETAIL_VERSION == false)
+        if (LevelEV.CreateRetailVersion == false)
         {
             //Steps for adding enemies to editor.
             //1. Add a new EnemyEditorData object to enemyList with the name of the enemy class as the constructor (right below).
@@ -481,7 +482,7 @@ public class Game : Microsoft.Xna.Framework.Game
             GenericTexture.SetData(new[] { Color.White });
 
             // This causes massive slowdown on load.
-            if (LevelEV.LOAD_SPLASH_SCREEN == false)
+            if (LevelEV.LoadSplashScreen == false)
             {
                 LevelBuilder2.Initialize();
                 LevelParser.ParseRooms("Map_1x1", Content);
@@ -590,7 +591,7 @@ public class Game : Microsoft.Xna.Framework.Game
 
             Area1List = new[] { CastleZone, GardenZone, TowerZone, DungeonZone }; //DUNGEON IS LAST AREA
 
-            if (LevelEV.RUN_DEMO_VERSION)
+            if (LevelEV.RunDemoVersion)
             {
                 Area1List = new[] { CastleZoneDemo }; //DUNGEON IS LAST AREA
             }
@@ -699,15 +700,15 @@ public class Game : Microsoft.Xna.Framework.Game
         if (m_gameLoaded == false)
         {
             m_gameLoaded = true;
-            if (LevelEV.DELETE_SAVEFILE)
+            if (LevelEV.DeleteSaveFile)
             {
                 SaveManager.ClearAllFileTypes(true);
                 SaveManager.ClearAllFileTypes(false);
             }
 
-            if (LevelEV.LOAD_SPLASH_SCREEN)
+            if (LevelEV.LoadSplashScreen)
             {
-                if (LevelEV.RUN_DEMO_VERSION)
+                if (LevelEV.RunDemoVersion)
                 {
                     ScreenManager.DisplayScreen(ScreenType.DemoStart, true);
                 }
@@ -718,15 +719,15 @@ public class Game : Microsoft.Xna.Framework.Game
             }
             else
             {
-                if (LevelEV.LOAD_TITLE_SCREEN == false)
+                if (LevelEV.LoadTitleScreen == false)
                 {
-                    if (LevelEV.RUN_TESTROOM)
+                    if (LevelEV.RunTestRoom)
                     {
                         ScreenManager.DisplayScreen(ScreenType.Level, true);
                     }
                     else
                     {
-                        if (LevelEV.RUN_TUTORIAL)
+                        if (LevelEV.RunTutorial)
                         {
                             ScreenManager.DisplayScreen(ScreenType.TutorialRoom, true);
                         }
@@ -773,12 +774,12 @@ public class Game : Microsoft.Xna.Framework.Game
         // The screenmanager is updated via the Components.Add call in the game constructor. It is called after this Update() call.
         SoundManager.Update(gameTimeToUse);
         if ((m_previouslyActiveCounter <= 0 && IsActive) ||
-            LevelEV.ENABLE_OFFSCREEN_CONTROL) // Only accept input if you have screen focus.
+            LevelEV.EnableOffscreenControl) // Only accept input if you have screen focus.
         {
             InputManager.Update(gameTimeToUse);
         }
 
-        if (LevelEV.ENABLE_DEBUG_INPUT)
+        if (LevelEV.EnableDebugInput)
         {
             HandleDebugInput();
         }
@@ -1392,7 +1393,7 @@ public class Game : Microsoft.Xna.Framework.Game
                                 break;
                             case "ReduceQuality":
                                 GameConfig.ReduceQuality = bool.Parse(lineValue);
-                                LevelEV.SAVE_FRAMES = GameConfig.ReduceQuality;
+                                LevelEV.SaveFrames = GameConfig.ReduceQuality;
                                 break;
                             case "EnableSteamCloud":
                                 GameConfig.EnableSteamCloud = bool.Parse(lineValue);

@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Globalization;
+using RogueCastle.EVs;
 using Tweener;
 
 namespace RogueCastle
@@ -404,7 +405,7 @@ namespace RogueCastle
             foreach (DoorObj door in DoorList)
                 door.Draw(camera);
 
-            if (LevelEV.SHOW_DEBUG_TEXT == true)
+            if (LevelEV.ShowDebugText == true)
             {
                 m_indexText.Position = new Vector2(this.Position.X + this.Width / 2, this.Position.Y + this.Height / 2 - m_indexText.Height / 2);
                 m_indexText.Draw(camera);

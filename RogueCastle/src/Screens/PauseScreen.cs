@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using System.Text.RegularExpressions;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -34,8 +35,8 @@ namespace RogueCastle
         public override void LoadContent()
         {
             m_titleText = new SpriteObj("GamePausedTitleText_Sprite");
-            m_titleText.X = GlobalEV.ScreenWidth / 2;
-            m_titleText.Y = GlobalEV.ScreenHeight * 0.1f;
+            m_titleText.X = GlobalEV.SCREEN_WIDTH / 2;
+            m_titleText.Y = GlobalEV.SCREEN_HEIGHT * 0.1f;
             m_titleText.ForceDraw = true;
 
             m_infoObjList = new List<PauseInfoObj>();
@@ -126,7 +127,7 @@ namespace RogueCastle
                     PauseInfoObj enemyInfo = m_infoObjList[i];
                     enemyInfo.Visible = true;
                     //enemyInfo.AddItem("Name: ", enemy.Name);
-                    if (LevelEV.CREATE_RETAIL_VERSION == false)
+                    if (LevelEV.CreateRetailVersion == false)
                         enemyInfo.AddItem("LOC_ID_PAUSE_SCREEN_5", enemy.Level.ToString());
                     else
                         enemyInfo.AddItem("LOC_ID_PAUSE_SCREEN_5", ((int)(enemy.Level * LevelEV.ENEMY_LEVEL_FAKE_MULTIPLIER)).ToString());
@@ -152,7 +153,7 @@ namespace RogueCastle
                     PauseInfoObj enemyInfo = m_infoObjList[i + 1 + tempEnemyIndex];
                     enemyInfo.Visible = true;
                     //enemyInfo.AddItem("Name: ", enemy.Name);
-                    if (LevelEV.CREATE_RETAIL_VERSION == false)
+                    if (LevelEV.CreateRetailVersion == false)
                         enemyInfo.AddItem("LOC_ID_PAUSE_SCREEN_5", enemy.Level.ToString());
                     else
                         enemyInfo.AddItem("LOC_ID_PAUSE_SCREEN_5", ((int)(enemy.Level * LevelEV.ENEMY_LEVEL_FAKE_MULTIPLIER)).ToString());
@@ -210,7 +211,7 @@ namespace RogueCastle
                     (ScreenManager as RCScreenManager).HideCurrentScreen();
                 }
 
-                if (LevelEV.ENABLE_DEBUG_INPUT == true)
+                if (LevelEV.EnableDebugInput == true)
                     HandleDebugInput();
 
                 base.HandleInput();

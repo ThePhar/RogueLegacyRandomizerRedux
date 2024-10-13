@@ -25,6 +25,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using DS2DEngine;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -151,7 +152,7 @@ namespace RogueCastle
             if (m_renderHolder2 != null && m_renderHolder2.IsDisposed == false)
                 m_renderHolder2.Dispose();
 
-            if (LevelEV.SAVE_FRAMES == true)
+            if (LevelEV.SaveFrames == true)
             {
                 m_renderHolder = new RenderTarget2D(game.GraphicsDevice, screenWidth / 2, screenHeight / 2, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
                 m_renderHolder2 = new RenderTarget2D(game.GraphicsDevice, screenWidth / 2, screenHeight / 2, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
@@ -267,14 +268,14 @@ namespace RogueCastle
             }
             Camera.Begin(0, BlendState.Opaque, SamplerState.LinearClamp, null, null, effect);
             //Camera.Draw(srcTexture, Vector2.Zero, Color.White);
-            if (LevelEV.SAVE_FRAMES == true)
+            if (LevelEV.SaveFrames == true)
                 Camera.Draw(srcTexture, Vector2.Zero, null, Color.White, 0, Vector2.Zero, new Vector2(0.5f, 0.5f), SpriteEffects.None, 1);
             else
                 Camera.Draw(srcTexture, Vector2.Zero, Color.White);
             Camera.End();
 
 
-            if (LevelEV.SAVE_FRAMES == true)
+            if (LevelEV.SaveFrames == true)
             {
                 // Perform vertical Gaussian blur.
                 Camera.GraphicsDevice.SetRenderTarget(m_renderHolder2);

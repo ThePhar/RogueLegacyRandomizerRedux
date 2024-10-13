@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
-namespace RogueCastle
+namespace RogueCastle.EVs
 {
-    class EnemyEV
+    public static class EnemyEV
     {
         public const string Skeleton_Basic_Name = "Skeleton"; public const int Skeleton_Basic_MaxHealth = 27; public const int Skeleton_Basic_Damage = 20; public const int Skeleton_Basic_XPValue = 100; public const int Skeleton_Basic_Speed = 80; public const int Skeleton_Basic_Jump = 925; public const float Skeleton_Basic_Cooldown = 0.75f; public const int Skeleton_Basic_MinDropAmount = 1; public const int Skeleton_Basic_MaxDropAmount = 2; public const float Skeleton_Basic_DropChance = 0.4f; public const float Skeleton_Basic_TurnSpeed = 10f; public const float Skeleton_Basic_ProjectileSpeed = 1040f; public const float Skeleton_Basic_AnimationDelay = 10f; public const bool Skeleton_Basic_AlwaysFaceTarget = true; public const bool Skeleton_Basic_CanFallOffLedges = false; public const bool Skeleton_Basic_CanBeKnockedBack = true; public const bool Skeleton_Basic_IsWeighted = true; public static Vector2 Skeleton_Basic_KnockBack = new Vector2(0, 0); public static Vector2 Skeleton_Basic_Scale = new Vector2(2.5f, 2.5f); public static Vector2 Skeleton_Basic_ProjectileScale = new Vector2(1.25f, 1.25f); public static Color Skeleton_Basic_Tint = new Color(255, 255, 255); public const int Skeleton_Basic_MeleeRadius = 225; public const int Skeleton_Basic_ProjectileRadius = 500; public const int Skeleton_Basic_EngageRadius = 700;
         public const string Skeleton_Advanced_Name = "Mr Bones"; public const int Skeleton_Advanced_MaxHealth = 36; public const int Skeleton_Advanced_Damage = 26; public const int Skeleton_Advanced_XPValue = 150; public const int Skeleton_Advanced_Speed = 80; public const int Skeleton_Advanced_Jump = 925; public const float Skeleton_Advanced_Cooldown = 0.45f; public const int Skeleton_Advanced_MinDropAmount = 1; public const int Skeleton_Advanced_MaxDropAmount = 2; public const float Skeleton_Advanced_DropChance = 0.5f; public const float Skeleton_Advanced_TurnSpeed = 10f; public const float Skeleton_Advanced_ProjectileSpeed = 1040f; public const float Skeleton_Advanced_AnimationDelay = 10f; public const bool Skeleton_Advanced_AlwaysFaceTarget = true; public const bool Skeleton_Advanced_CanFallOffLedges = false; public const bool Skeleton_Advanced_CanBeKnockedBack = true; public const bool Skeleton_Advanced_IsWeighted = true; public static Vector2 Skeleton_Advanced_KnockBack = new Vector2(0, 0); public static Vector2 Skeleton_Advanced_Scale = new Vector2(3.0f, 3.0f); public static Vector2 Skeleton_Advanced_ProjectileScale = new Vector2(1.5f, 1.5f); public static Color Skeleton_Advanced_Tint = new Color(215, 125, 135); public const int Skeleton_Advanced_MeleeRadius = 225; public const int Skeleton_Advanced_ProjectileRadius = 500; public const int Skeleton_Advanced_EngageRadius = 700;

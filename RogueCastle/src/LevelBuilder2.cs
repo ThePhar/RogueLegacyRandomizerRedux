@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using DS2DEngine;
 using System.Globalization;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -98,14 +99,14 @@ namespace RogueCastle
                 room.Name != "Compass" && room.Name != "DEBUG_ROOM" && room.Name != "ChallengeBoss")
             {
 
-                if (room.Width % GlobalEV.ScreenWidth != 0)
-                    throw new Exception("Room Name: " + room.Name + " is not a width divisible by " + GlobalEV.ScreenWidth + ". Cannot parse the file.");
+                if (room.Width % GlobalEV.SCREEN_WIDTH != 0)
+                    throw new Exception("Room Name: " + room.Name + " is not a width divisible by " + GlobalEV.SCREEN_WIDTH + ". Cannot parse the file.");
 
-                if (room.Height % GlobalEV.ScreenHeight != 0)
-                    throw new Exception("Room Name: " + room.Name + " is not a height divisible by " + GlobalEV.ScreenHeight + ". Cannot parse the file.");
+                if (room.Height % GlobalEV.SCREEN_HEIGHT != 0)
+                    throw new Exception("Room Name: " + room.Name + " is not a height divisible by " + GlobalEV.SCREEN_HEIGHT + ". Cannot parse the file.");
 
-                int i = (int)(room.Width / GlobalEV.ScreenWidth);
-                int k = (int)(room.Height / GlobalEV.ScreenHeight);
+                int i = (int)(room.Width / GlobalEV.SCREEN_WIDTH);
+                int k = (int)(room.Height / GlobalEV.SCREEN_HEIGHT);
 
                 if (room.IsDLCMap == false)
                 {
@@ -148,7 +149,7 @@ namespace RogueCastle
             if (storeDebug == true)
             {
                 m_testRoom = room.Clone() as RoomObj;
-                m_testRoom.LevelType = LevelEV.TESTROOM_LEVELTYPE;
+                m_testRoom.LevelType = LevelEV.TestRoomLevelType;
             }
             //else
             {
@@ -1249,20 +1250,20 @@ namespace RogueCastle
                 {
                     default:
                     case (GameTypes.LevelType.CASTLE):
-                        enemyPool = LevelEV.CASTLE_ENEMY_LIST;
-                        enemyDifficultyPool = LevelEV.CASTLE_ENEMY_DIFFICULTY_LIST;
+                        enemyPool = LevelEV.CastleEnemyList;
+                        enemyDifficultyPool = LevelEV.CastleEnemyDifficultyList;
                         break;
                     case (GameTypes.LevelType.GARDEN):
-                        enemyPool = LevelEV.GARDEN_ENEMY_LIST;
-                        enemyDifficultyPool = LevelEV.GARDEN_ENEMY_DIFFICULTY_LIST;
+                        enemyPool = LevelEV.GardenEnemyList;
+                        enemyDifficultyPool = LevelEV.GardenEnemyDifficultyList;
                         break;
                     case (GameTypes.LevelType.TOWER):
-                        enemyPool = LevelEV.TOWER_ENEMY_LIST;
-                        enemyDifficultyPool = LevelEV.TOWER_ENEMY_DIFFICULTY_LIST;
+                        enemyPool = LevelEV.TowerEnemyList;
+                        enemyDifficultyPool = LevelEV.TowerEnemyDifficultyList;
                         break;
                     case (GameTypes.LevelType.DUNGEON):
-                        enemyPool = LevelEV.DUNGEON_ENEMY_LIST;
-                        enemyDifficultyPool = LevelEV.DUNGEON_ENEMY_DIFFICULTY_LIST;
+                        enemyPool = LevelEV.DungeonEnemyList;
+                        enemyDifficultyPool = LevelEV.DungeonEnemyDifficultyList;
                         break;
                 }
 
@@ -1658,16 +1659,16 @@ namespace RogueCastle
 
         public static ProceduralLevelScreen CreateLevel(RoomObj startingRoom = null, params AreaStruct[] areaStructs)
         {
-            if (m_testRoom != null && LevelEV.RUN_TESTROOM == true)
+            if (m_testRoom != null && LevelEV.RunTestRoom == true)
             {
                 Console.WriteLine("OVERRIDING ROOM CREATION. RUNNING TEST ROOM");
                 ProceduralLevelScreen debugLevel = new ProceduralLevelScreen();
                 RoomObj debugRoom = m_testRoom.Clone() as RoomObj;
-                if (LevelEV.TESTROOM_REVERSE == true)
+                if (LevelEV.TestRoomReverse == true)
                     debugRoom.Reverse();
                 MoveRoom(debugRoom, Vector2.Zero);
                 debugLevel.AddRoom(debugRoom);
-                if (LevelEV.CLOSE_TESTROOM_DOORS == true)
+                if (LevelEV.CloseTestRoomDoors == true)
                     CloseRemainingDoors(debugLevel.RoomList);
                 AddDoorBorders(debugLevel.RoomList);
                 AddBottomPlatforms(debugLevel.RoomList);
@@ -1680,7 +1681,7 @@ namespace RogueCastle
                 ConvertChallengeBossRooms(debugLevel.RoomList);
                 InitializeRooms(debugLevel.RoomList);
 
-                debugLevel.RoomList[0].LevelType = LevelEV.TESTROOM_LEVELTYPE; // A hack for special rooms, since they're set to none level type.
+                debugLevel.RoomList[0].LevelType = LevelEV.TestRoomLevelType; // A hack for special rooms, since they're set to none level type.
 
                 return debugLevel;
             }

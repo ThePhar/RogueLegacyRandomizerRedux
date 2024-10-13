@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Tweener;
 using System.Globalization;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {

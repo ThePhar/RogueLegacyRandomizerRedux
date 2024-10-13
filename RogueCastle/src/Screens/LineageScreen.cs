@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using InputSystem;
 using System.Text.RegularExpressions;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -65,8 +66,8 @@ namespace RogueCastle
             m_bgShadow.Position = new Vector2(1320 / 2f, 720 / 2f);
 
             m_titleText = new SpriteObj("LineageTitleText_Sprite");
-            m_titleText.X = GlobalEV.ScreenWidth / 2;
-            m_titleText.Y = GlobalEV.ScreenHeight * 0.1f;
+            m_titleText.X = GlobalEV.SCREEN_WIDTH / 2;
+            m_titleText.Y = GlobalEV.SCREEN_HEIGHT * 0.1f;
             m_titleText.ForceDraw = true;
 
             int xPlatePos = 20;
@@ -172,7 +173,7 @@ namespace RogueCastle
             m_rerollText.FontSize = 12;
             m_rerollText.DropShadow = new Vector2(2, 2);
             m_rerollText.ForceDraw = true;
-            m_rerollText.Position = new Vector2(0 + 30, GlobalEV.ScreenHeight - 50);
+            m_rerollText.Position = new Vector2(0 + 30, GlobalEV.SCREEN_HEIGHT - 50);
             m_rerollText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_rerollText); // dummy locID to add TextObj to language refresh list
 
             base.LoadContent();
@@ -726,7 +727,7 @@ namespace RogueCastle
                     base.HandleInput();
                 }
 
-                if (LevelEV.ENABLE_DEBUG_INPUT == true)
+                if (LevelEV.EnableDebugInput == true)
                     HandleDebugInput();
             }
         }

@@ -7,6 +7,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework.Graphics;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.EVs;
 using Tweener;
 using Tweener.Ease;
 
@@ -197,7 +198,7 @@ namespace RogueCastle
 
             m_titleText = new SpriteObj("ManorTitleText_Sprite");
             m_titleText.X = m_titleText.Width/2f + 20;
-            m_titleText.Y = GlobalEV.ScreenHeight * 0.09f;
+            m_titleText.Y = GlobalEV.SCREEN_HEIGHT * 0.09f;
             m_titleText.ForceDraw = true;
 
             m_continueText = new KeyIconTextObj(Game.JunicodeFont);
@@ -863,7 +864,7 @@ namespace RogueCastle
                         //(ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Lineage, true);
                     }
 
-                    if (LevelEV.ENABLE_DEBUG_INPUT == true)
+                    if (LevelEV.EnableDebugInput == true)
                         HandleDebugInput();
 
                     //if (InputManager.JustPressed(Keys.H, null))

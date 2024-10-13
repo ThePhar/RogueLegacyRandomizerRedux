@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.EVs;
 using Tweener;
 using Tweener.Ease;
 
@@ -56,7 +57,7 @@ namespace RogueCastle
             InitializeScreens();
             base.Initialize(); // Camera gets initialized here.
 
-            m_virtualScreen = new VirtualScreen(GlobalEV.ScreenWidth, GlobalEV.ScreenHeight, Camera.GraphicsDevice);
+            m_virtualScreen = new VirtualScreen(GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT, Camera.GraphicsDevice);
             Game.Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
             Game.Deactivated += new EventHandler<EventArgs>(PauseGame);
 
@@ -498,7 +499,7 @@ namespace RogueCastle
             m_blackScreen.Draw(Camera);
             Camera.End();
 
-            if (LevelEV.ENABLE_DEBUG_INPUT == true)
+            if (LevelEV.EnableDebugInput == true)
             {
                 Camera.Begin();
                 string forcedGenderString = "None";

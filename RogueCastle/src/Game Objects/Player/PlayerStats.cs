@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -147,7 +148,7 @@ namespace RogueCastle
 
         public PlayerStats()
         {
-            if (LevelEV.RUN_TUTORIAL == false && this.TutorialComplete == false && LevelEV.RUN_TESTROOM == true) // This is debug that needs to be removed once tutorial is properly implemented.
+            if (LevelEV.RunTutorial == false && this.TutorialComplete == false && LevelEV.RunTestRoom == true) // This is debug that needs to be removed once tutorial is properly implemented.
                 this.TutorialComplete = true;
 
             PlayerName = "Lee";//"Sir Johannes";
@@ -383,7 +384,7 @@ namespace RogueCastle
         public byte GetNumberOfEquippedRunes(int equipmentAbilityType)
         {
             byte numEquippedAbilities = 0;
-            if (LevelEV.UNLOCK_ALL_ABILITIES == true)
+            if (LevelEV.UnlockAllAbilities == true)
                 return EquipmentCategoryType.Total;
             foreach (sbyte equippedAbility in m_equippedRuneArray)
             {

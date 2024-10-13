@@ -10,6 +10,7 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -298,7 +299,7 @@ namespace RogueCastle
                 m_levelUpParticles[i].Visible = true;
                 m_levelUpParticles[i].Scale = new Vector2(0.1f, 0.1f);
                 m_levelUpParticles[i].Opacity = 0;
-                m_levelUpParticles[i].Position = new Vector2(GlobalEV.ScreenWidth / 2f, GlobalEV.ScreenHeight / 2f);
+                m_levelUpParticles[i].Position = new Vector2(GlobalEV.SCREEN_WIDTH / 2f, GlobalEV.SCREEN_HEIGHT / 2f);
                 m_levelUpParticles[i].Position += new Vector2(CDGMath.RandomInt(-100, 100), CDGMath.RandomInt(-50, 50));
                 float randDelay = CDGMath.RandomFloat(0, 0.5f);
                 Tween.To(m_levelUpParticles[i], 0.2f, Tweener.Ease.Linear.EaseNone, "delay", randDelay.ToString(), "Opacity", "1");
@@ -307,7 +308,7 @@ namespace RogueCastle
                 Tween.AddEndHandlerToLastTween(m_levelUpParticles[i], "PlayAnimation", false);
             }
 
-            m_itemFoundSprite.Position = new Vector2(GlobalEV.ScreenWidth / 2f, GlobalEV.ScreenHeight / 2f - 170);
+            m_itemFoundSprite.Position = new Vector2(GlobalEV.SCREEN_WIDTH / 2f, GlobalEV.SCREEN_HEIGHT / 2f - 170);
             m_itemFoundSprite.Scale = Vector2.Zero;
             m_itemFoundSprite.Visible = true;
             Tween.To(m_itemFoundSprite, 0.5f, Tweener.Ease.Back.EaseOut, "delay", "0.05", "ScaleX", "1", "ScaleY", "1");
@@ -377,7 +378,7 @@ namespace RogueCastle
                      || Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM3) || Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL3))
                     ExitScreenTransition();
 
-                if (LevelEV.ENABLE_DEBUG_INPUT == true)
+                if (LevelEV.EnableDebugInput == true)
                     HandleDebugInput();
             }
 
@@ -520,7 +521,7 @@ namespace RogueCastle
         public override void Draw(GameTime gameTime)
         {
             Camera.Begin(SpriteSortMode.Immediate, null, SamplerState.LinearClamp, null, null);
-            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight), Color.Black * BackBufferOpacity);
+            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT), Color.Black * BackBufferOpacity);
 
             //// Level up animation sprites.
             m_levelUpBGImage.Draw(Camera);

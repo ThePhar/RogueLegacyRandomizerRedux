@@ -9,6 +9,7 @@ using Tweener;
 using Tweener.Ease;
 using Microsoft.Xna.Framework.Graphics;
 using System.Globalization;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -398,7 +399,7 @@ namespace RogueCastle
 
             base.Draw(camera);
             camera.End();
-            if (LevelEV.SHOW_ENEMY_RADII == false)
+            if (LevelEV.ShowEnemyRadii == false)
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, null, null, null, camera.GetTransformation()); // Set SpriteSortMode to immediate to allow instant changes to samplerstates.
             else
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, null, null, null, camera.GetTransformation());
@@ -413,7 +414,7 @@ namespace RogueCastle
 
             camera.End();
 
-            if (LevelEV.SHOW_ENEMY_RADII == false)
+            if (LevelEV.ShowEnemyRadii == false)
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, camera.GetTransformation()); // Set SpriteSortMode to immediate to allow instant changes to samplerstates.
             else
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, camera.GetTransformation());

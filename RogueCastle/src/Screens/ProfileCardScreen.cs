@@ -10,6 +10,7 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using System.Text.RegularExpressions;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -764,7 +765,7 @@ namespace RogueCastle
                  ExitScreenTransition();
             }
 
-            if (LevelEV.ENABLE_DEBUG_INPUT == true)
+            if (LevelEV.EnableDebugInput == true)
                 HandleDebugInput();
 
             base.HandleInput();
@@ -881,7 +882,7 @@ namespace RogueCastle
             m_playerHUD.SetPosition(new Vector2(m_frontCard.X + 46, m_frontCard.Y + 220 + 64));
 
             Camera.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, null, null);
-            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight), Color.Black * BackBufferOpacity);
+            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT), Color.Black * BackBufferOpacity);
             m_frontCard.Draw(Camera);
             m_backCard.Draw(Camera);
 

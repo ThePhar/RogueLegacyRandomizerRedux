@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Tweener;
 using Tweener.Ease;
 using System.Threading;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -73,7 +74,7 @@ namespace RogueCastle
 
         public void LoadNextScreen()
         {
-            if (LevelEV.ENABLE_BLITWORKS_SPLASH == true)
+            if (LevelEV.EnableBlitworksSplash == true)
                 (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.BlitWorks, true, null);
             else
             {
