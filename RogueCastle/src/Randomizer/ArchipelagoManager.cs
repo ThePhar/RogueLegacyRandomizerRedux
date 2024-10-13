@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Enums;
+using Archipelago.MultiClient.Net.Packets;
+using Newtonsoft.Json;
 
 namespace RogueCastle.Randomizer;
 
@@ -13,6 +15,8 @@ public class ArchipelagoManager
     private ArchipelagoSession _session;
     private DeathLinkService   _deathLinkService;
     private DateTime           _lastDeath;
+    
+    public SlotData SlotData { get; private set; }
 
     public LoginFailure TryConnect()
     {
@@ -35,6 +39,9 @@ public class ArchipelagoManager
         }
 
         _deathLinkService = _session.CreateDeathLinkService();
+
+        SlotData = _session.DataStorage.GetSlotData<SlotData>();
+        
         return null;
     }
 

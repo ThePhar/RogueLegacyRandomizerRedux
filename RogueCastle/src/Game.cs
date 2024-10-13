@@ -146,7 +146,7 @@ public class Game : Microsoft.Xna.Framework.Game
             !LevelEV.ShowFps; // Disables setting the FPS to your screen's refresh rate.
         // WARNING, if you turn off frame limiting, if the framerate goes over 1000 then the elapsed time will be too small a number for a float to carry and things will break.
         //this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 60.0f);// Sets the frame rate to 30 fps.
-        Window.AllowUserResizing = false;
+        Window.AllowUserResizing = true;
 
         if (LevelEV.EnableOffscreenControl == false)
         {

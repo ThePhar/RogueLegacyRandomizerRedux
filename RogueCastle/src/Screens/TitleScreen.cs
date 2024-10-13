@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using DS2DEngine;
 using InputSystem;
 using Microsoft.Xna.Framework;
@@ -544,8 +545,7 @@ public class TitleScreen : Screen
     public override void HandleInput()
     {
         HandleAchievementInput();
-
-        //ChangeRay();
+        
         if (Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM1) ||
             Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM2) ||
             Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM3))
@@ -554,14 +554,17 @@ public class TitleScreen : Screen
             if (result is null)
             {
                 StartPressed();
+                foreach (PropertyDescriptor desc in TypeDescriptor.GetProperties((ScreenManager.Game as Game)!.ArchipelagoManager.SlotData))
+                {
+                    var name = desc.Name;
+                    var value = desc.GetValue((ScreenManager.Game as Game)!.ArchipelagoManager.SlotData);
+                    Console.WriteLine($@"{name}: {value}");
+                }
             }
             else
             {
                 throw new Exception(result.ToString());
             }
-            
-            // StartPressed();
-            // (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.Randomizer, false);
         }
 
         if (_startNewLegacy == false)
