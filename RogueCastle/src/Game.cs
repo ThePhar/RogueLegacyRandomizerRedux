@@ -63,6 +63,7 @@ public class Game : Microsoft.Xna.Framework.Game
     public static float TotalGameTime;
 
     public static bool gameIsCorrupt;
+    private readonly float m_frameLimit = 1 / 40f;
 
     private WeakReference gcTracker = new(new object());
 
@@ -82,7 +83,6 @@ public class Game : Microsoft.Xna.Framework.Game
     private bool m_femaleChineseNamesLoaded;
 
     private GameTime m_forcedGameTime1, m_forcedGameTime2;
-    private readonly float m_frameLimit = 1 / 40f;
     private bool m_frameLimitSwap;
     private bool m_gameLoaded;
 
@@ -146,7 +146,9 @@ public class Game : Microsoft.Xna.Framework.Game
         Window.AllowUserResizing = false;
 
         if (LevelEV.ENABLE_OFFSCREEN_CONTROL == false)
+        {
             InactiveSleepTime = new TimeSpan(); // Overrides sleep time, which disables the lag when losing focus.
+        }
 
         PhysicsManager = new PhysicsManager();
         EquipmentSystem = new EquipmentSystem();
@@ -241,7 +243,7 @@ public class Game : Microsoft.Xna.Framework.Game
             Buttons.Back,
             Buttons.Start,
             Buttons.LeftStick,
-            Buttons.RightStick
+            Buttons.RightStick,
         };
         InputManager.RemapDXPad(buttonList);
 
@@ -295,8 +297,8 @@ public class Game : Microsoft.Xna.Framework.Game
         }
 
         // Code used to handle game chop.
-        m_forcedGameTime1 = new GameTime(new TimeSpan(), new TimeSpan(0, 0, 0, 0, (int)(m_frameLimit * 1000)));
-        m_forcedGameTime2 = new GameTime(new TimeSpan(), new TimeSpan(0, 0, 0, 0, (int)(m_frameLimit * 1050)));
+        m_forcedGameTime1 = new GameTime(new TimeSpan(), new TimeSpan(0, 0, 0, 0, (int) (m_frameLimit * 1000)));
+        m_forcedGameTime2 = new GameTime(new TimeSpan(), new TimeSpan(0, 0, 0, 0, (int) (m_frameLimit * 1050)));
 
         // Initializes the global input map.
         //InitializeGlobalInput();
@@ -354,9 +356,13 @@ public class Game : Microsoft.Xna.Framework.Game
     public static void InitializeGlobalInput()
     {
         if (GlobalInput != null)
+        {
             GlobalInput.ClearAll();
+        }
         else
+        {
             GlobalInput = new InputMap(PlayerIndex.One, true);
+        }
 
         //////////// KEYBOARD INPUT MAP
         GlobalInput.AddInput(InputMapType.MENU_CONFIRM1, Keys.Enter);
@@ -466,7 +472,9 @@ public class Game : Microsoft.Xna.Framework.Game
             SoundManager.GlobalSFXVolume = GameConfig.SFXVolume;
 
             if (InputManager.GamePadIsConnected(PlayerIndex.One))
+            {
                 InputManager.SetPadType(PlayerIndex.One, PadTypes.GamePad);
+            }
 
             // Creating a generic texture for use.
             GenericTexture = new Texture2D(GraphicsDevice, 1, 1);
@@ -499,7 +507,7 @@ public class Game : Microsoft.Xna.Framework.Game
                 BossInArea = true,
                 SecretRooms = new Vector2(1, 3), //(2, 3),
                 BonusRooms = new Vector2(2, 3),
-                Color = Color.White
+                Color = Color.White,
             };
 
             var GardenZone = new AreaStruct
@@ -509,7 +517,7 @@ public class Game : Microsoft.Xna.Framework.Game
                 BossInArea = true,
                 SecretRooms = new Vector2(1, 3),
                 BonusRooms = new Vector2(2, 3),
-                Color = Color.Green
+                Color = Color.Green,
             };
 
             var TowerZone = new AreaStruct
@@ -519,7 +527,7 @@ public class Game : Microsoft.Xna.Framework.Game
                 BossInArea = true,
                 SecretRooms = new Vector2(1, 3),
                 BonusRooms = new Vector2(2, 3),
-                Color = Color.DarkBlue
+                Color = Color.DarkBlue,
             };
 
             var DungeonZone = new AreaStruct
@@ -529,7 +537,7 @@ public class Game : Microsoft.Xna.Framework.Game
                 BossInArea = true,
                 SecretRooms = new Vector2(1, 3),
                 BonusRooms = new Vector2(2, 3),
-                Color = Color.Red
+                Color = Color.Red,
             };
 
             #region Demo Levels
@@ -542,7 +550,7 @@ public class Game : Microsoft.Xna.Framework.Game
                 BossInArea = true,
                 SecretRooms = new Vector2(2, 3),
                 BonusRooms = new Vector2(2, 3),
-                Color = Color.White
+                Color = Color.White,
             };
 
             var GardenZoneDemo = new AreaStruct
@@ -553,7 +561,7 @@ public class Game : Microsoft.Xna.Framework.Game
                 BossInArea = true,
                 SecretRooms = new Vector2(2, 3),
                 BonusRooms = new Vector2(1, 2),
-                Color = Color.Green
+                Color = Color.Green,
             };
 
             var DungeonZoneDemo = new AreaStruct
@@ -564,7 +572,7 @@ public class Game : Microsoft.Xna.Framework.Game
                 BossInArea = true,
                 SecretRooms = new Vector2(2, 3),
                 BonusRooms = new Vector2(1, 2),
-                Color = Color.Red
+                Color = Color.Red,
             };
 
             var TowerZoneDemo = new AreaStruct
@@ -575,7 +583,7 @@ public class Game : Microsoft.Xna.Framework.Game
                 BossInArea = true,
                 SecretRooms = new Vector2(2, 3),
                 BonusRooms = new Vector2(1, 2),
-                Color = Color.DarkBlue
+                Color = Color.DarkBlue,
             };
 
             #endregion
@@ -583,7 +591,9 @@ public class Game : Microsoft.Xna.Framework.Game
             Area1List = new[] { CastleZone, GardenZone, TowerZone, DungeonZone }; //DUNGEON IS LAST AREA
 
             if (LevelEV.RUN_DEMO_VERSION)
+            {
                 Area1List = new[] { CastleZoneDemo }; //DUNGEON IS LAST AREA
+            }
             //Area1List = new AreaStruct[] { CastleZoneDemo, GardenZoneDemo, TowerZoneDemo, DungeonZoneDemo }; //DUNGEON IS LAST AREA
         }
 
@@ -694,13 +704,17 @@ public class Game : Microsoft.Xna.Framework.Game
                 SaveManager.ClearAllFileTypes(true);
                 SaveManager.ClearAllFileTypes(false);
             }
-            
+
             if (LevelEV.LOAD_SPLASH_SCREEN)
             {
                 if (LevelEV.RUN_DEMO_VERSION)
+                {
                     ScreenManager.DisplayScreen(ScreenType.DemoStart, true);
+                }
                 else
+                {
                     ScreenManager.DisplayScreen(ScreenType.CDGSplash, true);
+                }
             }
             else
             {
@@ -713,10 +727,14 @@ public class Game : Microsoft.Xna.Framework.Game
                     else
                     {
                         if (LevelEV.RUN_TUTORIAL)
+                        {
                             ScreenManager.DisplayScreen(ScreenType.TutorialRoom, true);
+                        }
                         else
                             //ScreenManager.DisplayScreen(ScreenType.Lineage, true, null); // Just for testing lineages.
+                        {
                             ScreenManager.DisplayScreen(ScreenType.StartingRoom, true);
+                        }
                         //ScreenManager.DisplayScreen(ScreenType.Ending, true, null);
                         //ScreenManager.DisplayScreen(ScreenType.Credits, true, null);
                     }
@@ -729,7 +747,7 @@ public class Game : Microsoft.Xna.Framework.Game
         }
 
         // This code forces the game to slow down (instead of chop) if it drops below the frame limit.
-        TotalGameTime = (float)gameTime.TotalGameTime.TotalSeconds;
+        TotalGameTime = (float) gameTime.TotalGameTime.TotalSeconds;
 
         var gameTimeToUse = gameTime;
         if (gameTime.ElapsedGameTime.TotalSeconds > m_frameLimit)
@@ -756,62 +774,82 @@ public class Game : Microsoft.Xna.Framework.Game
         SoundManager.Update(gameTimeToUse);
         if ((m_previouslyActiveCounter <= 0 && IsActive) ||
             LevelEV.ENABLE_OFFSCREEN_CONTROL) // Only accept input if you have screen focus.
+        {
             InputManager.Update(gameTimeToUse);
+        }
+
         if (LevelEV.ENABLE_DEBUG_INPUT)
+        {
             HandleDebugInput();
+        }
+
         Tween.Update(gameTimeToUse);
         ScreenManager.Update(gameTimeToUse);
         SoundManager.Update3DSounds(); // Special method to handle 3D sound overrides. Must go after enemy update.
         base.Update(gameTime);
 
         if (IsActive == false)
+        {
             m_previouslyActiveCounter = 0.25f;
+        }
 
         // Prevents mouse from accidentally leaving game while active.
         //if (IsActive == true)
         //    Mouse.SetPosition((int)(GlobalEV.ScreenWidth / 2f), (int)(GlobalEV.ScreenHeight / 2f));
 
         if (m_previouslyActiveCounter > 0)
+        {
             m_previouslyActiveCounter -= 0.016f;
+        }
     }
 
     private void HandleDebugInput()
     {
-        var languageType = (int)LocaleBuilder.languageType;
+        var languageType = (int) LocaleBuilder.languageType;
 
         if (InputManager.JustPressed(Keys.OemQuotes, null))
         {
             languageType++;
-            if (languageType >= (int)LanguageType.MAX)
+            if (languageType >= (int) LanguageType.MAX)
+            {
                 languageType = 0;
+            }
 
-            LocaleBuilder.languageType = (LanguageType)languageType;
+            LocaleBuilder.languageType = (LanguageType) languageType;
             LocaleBuilder.RefreshAllText();
-            Console.WriteLine("Changing to language type: " + (LanguageType)languageType);
+            Console.WriteLine("Changing to language type: " + (LanguageType) languageType);
         }
         else if (InputManager.JustPressed(Keys.OemSemicolon, null))
         {
             languageType--;
             if (languageType < 0)
-                languageType = (int)LanguageType.MAX - 1;
+            {
+                languageType = (int) LanguageType.MAX - 1;
+            }
 
-            LocaleBuilder.languageType = (LanguageType)languageType;
+            LocaleBuilder.languageType = (LanguageType) languageType;
             LocaleBuilder.RefreshAllText();
-            Console.WriteLine("Changing to language type: " + (LanguageType)languageType);
+            Console.WriteLine("Changing to language type: " + (LanguageType) languageType);
         }
 
         if (InputManager.JustPressed(Keys.OemPipe, null))
         {
             PlayerStats.ForceLanguageGender++;
             if (PlayerStats.ForceLanguageGender > 2)
+            {
                 PlayerStats.ForceLanguageGender = 0;
+            }
+
             LocaleBuilder.RefreshAllText();
         }
 
         if (InputManager.JustPressed(Keys.Z, null))
         {
             graphicsToggle++;
-            if (graphicsToggle > 1) graphicsToggle = 0;
+            if (graphicsToggle > 1)
+            {
+                graphicsToggle = 0;
+            }
 
             switch (graphicsToggle)
             {
@@ -843,15 +881,23 @@ public class Game : Microsoft.Xna.Framework.Game
         // The name list needs to be reloaded every time the language is from Chinese to another language or vice versa.
         if ((m_maleChineseNamesLoaded == false && LocaleBuilder.languageType == LanguageType.Chinese_Simp) ||
             (m_maleChineseNamesLoaded && LocaleBuilder.languageType != LanguageType.Chinese_Simp))
+        {
             forceCreate = true;
+        }
 
         if (NameArray != null && NameArray.Count > 0 && forceCreate == false)
+        {
             return;
+        }
 
         if (NameArray != null)
+        {
             NameArray.Clear();
+        }
         else
+        {
             NameArray = new List<string>();
+        }
 
         // Logographic fonts cannot make use of the name change system, otherwise the bitmap spritesheet
         // generated by the system would have to include every single glyph.
@@ -881,7 +927,9 @@ public class Game : Microsoft.Xna.Framework.Game
                     }
 
                     if (!name.Contains("//") && hasSpecialChar == false)
+                    {
                         NameArray.Add(name);
+                    }
                 }
 
                 specialCharTest.Dispose();
@@ -939,15 +987,23 @@ public class Game : Microsoft.Xna.Framework.Game
         // The name list needs to be reloaded every time the language is from Chinese to another language or vice versa.
         if ((m_femaleChineseNamesLoaded == false && LocaleBuilder.languageType == LanguageType.Chinese_Simp) ||
             (m_femaleChineseNamesLoaded && LocaleBuilder.languageType != LanguageType.Chinese_Simp))
+        {
             forceCreate = true;
+        }
 
         if (FemaleNameArray != null && FemaleNameArray.Count > 0 && forceCreate == false)
+        {
             return;
+        }
 
         if (FemaleNameArray != null)
+        {
             FemaleNameArray.Clear();
+        }
         else
+        {
             FemaleNameArray = new List<string>();
+        }
 
         // Logographic fonts cannot make use of the name change system, otherwise the bitmap spritesheet
         // generated by the system would have to include every single glyph.
@@ -977,7 +1033,9 @@ public class Game : Microsoft.Xna.Framework.Game
                     }
 
                     if (!name.Contains("//") && hasSpecialChar == false)
+                    {
                         FemaleNameArray.Add(name);
+                    }
                 }
 
                 specialCharTest.Dispose();
@@ -1033,18 +1091,24 @@ public class Game : Microsoft.Xna.Framework.Game
     public static void ConvertPlayerNameFormat(ref string playerName, ref string romanNumeral)
     {
         if (playerName.Length < 3)
+        {
             return;
+        }
 
         // Remove the Sir or Lady title in the player name.
         if (playerName.Substring(0, 3) == "Sir")
         {
             if (playerName.Length > 3)
+            {
                 playerName = playerName.Substring(4); // Removing "Sir ".
+            }
         }
         else if (playerName.Length > 3 && playerName.Substring(0, 4) == "Lady")
         {
             if (playerName.Length > 4)
+            {
                 playerName = playerName.Substring(5); // Removing "Lady ".
+            }
         }
 
         // Remove the roman numerals in the player name.
@@ -1059,15 +1123,17 @@ public class Game : Microsoft.Xna.Framework.Game
                 "XVII", "XVIII", "XIX", "XX",
                 "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII",
                 "XXXIII", "XXXIV", "XXXV", "XXXVI",
-                "XXXVII", "XXXVIII", "XXXIX", "XXXX"
+                "XXXVII", "XXXVIII", "XXXIX", "XXXX",
             };
             for (var i = 0; i < romanNumeralCheckArray.Length; i++)
+            {
                 if (romanNumeralString == romanNumeralCheckArray[i])
                 {
                     playerName = playerName.Substring(0, playerName.Length - romanNumeralString.Length).Trim();
                     romanNumeral = romanNumeralString.Trim();
                     break;
                 }
+            }
         }
     }
 
@@ -1075,21 +1141,29 @@ public class Game : Microsoft.Xna.Framework.Game
         bool forceConversionCheck = false)
     {
         if (PlayerStats.RevisionNumber <= 0 || forceConversionCheck)
+        {
             ConvertPlayerNameFormat(ref playerName, ref romanNumerals);
+        }
 
         if (isFemale)
         {
             if (LocaleBuilder.languageType == LanguageType.Chinese_Simp &&
                 (romanNumerals == "" || romanNumerals == null))
+            {
                 return string.Format(LocaleBuilder.getResourceString("LOC_ID_LINEAGE_OBJ_14_NEW_SINGULAR_ZH"),
                     playerName, "").Trim();
+            }
+
             return string.Format(LocaleBuilder.getResourceString("LOC_ID_LINEAGE_OBJ_14_NEW"), playerName,
                 romanNumerals).Trim();
         }
 
         if (LocaleBuilder.languageType == LanguageType.Chinese_Simp && (romanNumerals == "" || romanNumerals == null))
+        {
             return string.Format(LocaleBuilder.getResourceString("LOC_ID_LINEAGE_OBJ_12_NEW_SINGULAR_ZH"), playerName,
                 "").Trim();
+        }
+
         return string.Format(LocaleBuilder.getResourceString("LOC_ID_LINEAGE_OBJ_12_NEW"), playerName, romanNumerals)
             .Trim();
     }
@@ -1103,6 +1177,7 @@ public class Game : Microsoft.Xna.Framework.Game
     {
         if (gameIsCorrupt == false)
             // Quick hack to fix bug where save file is deleted on closing during splash screen.
+        {
             if (ScreenManager.CurrentScreen is CDGSplashScreen == false &&
                 ScreenManager.CurrentScreen is DemoStartScreen == false)
             {
@@ -1112,9 +1187,14 @@ public class Game : Microsoft.Xna.Framework.Game
                                       level.CurrentRoom is CarnivalShoot2BonusRoom))
                 {
                     if (level.CurrentRoom is CarnivalShoot1BonusRoom)
+                    {
                         (level.CurrentRoom as CarnivalShoot1BonusRoom).UnequipPlayer();
+                    }
+
                     if (level.CurrentRoom is CarnivalShoot2BonusRoom)
+                    {
                         (level.CurrentRoom as CarnivalShoot2BonusRoom).UnequipPlayer();
+                    }
                 }
 
                 // A check to make sure challenge rooms do not override player save data.
@@ -1133,7 +1213,9 @@ public class Game : Microsoft.Xna.Framework.Game
 
                 // Special check in case the user closes the program while in the game over screen to reset the traits.
                 if (ScreenManager.CurrentScreen is GameOverScreen)
+                {
                     PlayerStats.Traits = Vector2.Zero;
+                }
 
                 if (SaveManager.FileExists(SaveType.PlayerData))
                 {
@@ -1142,14 +1224,19 @@ public class Game : Microsoft.Xna.Framework.Game
                     // This code is needed otherwise the lineage data will still be on Revision 0 when the game exits, but player data is Rev1
                     // which results in a mismatch.
                     if (PlayerStats.RevisionNumber <= 0)
+                    {
                         SaveManager.SaveFiles(SaveType.Lineage);
+                    }
 
                     // IMPORTANT!! Only save map data if you are actually in the castle. Not at the title screen, starting room, or anywhere else. Also make sure not to save during the intro scene.
                     if (PlayerStats.TutorialComplete && level != null && level.CurrentRoom.Name != "Start" &&
                         level.CurrentRoom.Name != "Ending" && level.CurrentRoom.Name != "Tutorial")
+                    {
                         SaveManager.SaveFiles(SaveType.MapData);
+                    }
                 }
             }
+        }
     }
 
     public List<Vector2> GetSupportedResolutions()
@@ -1157,13 +1244,17 @@ public class Game : Microsoft.Xna.Framework.Game
         var list = new List<Vector2>();
         foreach (var mode in GraphicsDevice.Adapter.SupportedDisplayModes)
             //if (mode.AspectRatio > 1.7f)
+        {
             if (mode.Width < 2000 &&
                 mode.Height < 2000) // Restricts the resolution to below 2048 (which is max supported texture size).
             {
                 var res = new Vector2(mode.Width, mode.Height);
                 if (list.Contains(res) == false)
+                {
                     list.Add(new Vector2(mode.Width, mode.Height));
+                }
             }
+        }
 
         //list.Sort(delegate(Vector2 obj1, Vector2 obj2) { return obj1.X.CompareTo(obj2.X); }); // Why did I do this? It just screwed up the ordering.
 
@@ -1175,7 +1266,10 @@ public class Game : Microsoft.Xna.Framework.Game
         Console.WriteLine("Saving Config file");
 
         if (!Directory.Exists(Program.OSDir))
+        {
             Directory.CreateDirectory(Program.OSDir);
+        }
+
         var configFilePath = Path.Combine(Program.OSDir, "GameConfig.ini");
 
         using (var writer = new StreamWriter(configFilePath, false))
@@ -1237,7 +1331,9 @@ public class Game : Microsoft.Xna.Framework.Game
             writer.WriteLine("Language=" + LocaleBuilder.languageType);
             writer.WriteLine();
             if (GameConfig.UnlockTraitor > 0)
+            {
                 writer.WriteLine("UnlockTraitor=" + GameConfig.UnlockTraitor);
+            }
 
             writer.Close();
         }
@@ -1306,86 +1402,86 @@ public class Game : Microsoft.Xna.Framework.Game
                                 break;
                             case "KeyUP":
                                 GlobalInput.KeyList[InputMapType.PLAYER_UP1] =
-                                    (Keys)Enum.Parse(typeof(Keys), lineValue);
+                                    (Keys) Enum.Parse(typeof(Keys), lineValue);
                                 break;
                             case "KeyDOWN":
                                 GlobalInput.KeyList[InputMapType.PLAYER_DOWN1] =
-                                    (Keys)Enum.Parse(typeof(Keys), lineValue);
+                                    (Keys) Enum.Parse(typeof(Keys), lineValue);
                                 break;
                             case "KeyLEFT":
                                 GlobalInput.KeyList[InputMapType.PLAYER_LEFT1] =
-                                    (Keys)Enum.Parse(typeof(Keys), lineValue);
+                                    (Keys) Enum.Parse(typeof(Keys), lineValue);
                                 break;
                             case "KeyRIGHT":
                                 GlobalInput.KeyList[InputMapType.PLAYER_RIGHT1] =
-                                    (Keys)Enum.Parse(typeof(Keys), lineValue);
+                                    (Keys) Enum.Parse(typeof(Keys), lineValue);
                                 break;
                             case "KeyATTACK":
                                 GlobalInput.KeyList[InputMapType.PLAYER_ATTACK] =
-                                    (Keys)Enum.Parse(typeof(Keys), lineValue);
+                                    (Keys) Enum.Parse(typeof(Keys), lineValue);
                                 break;
                             case "KeyJUMP":
                                 GlobalInput.KeyList[InputMapType.PLAYER_JUMP1] =
-                                    (Keys)Enum.Parse(typeof(Keys), lineValue);
+                                    (Keys) Enum.Parse(typeof(Keys), lineValue);
                                 break;
                             case "KeySPECIAL":
                                 GlobalInput.KeyList[InputMapType.PLAYER_BLOCK] =
-                                    (Keys)Enum.Parse(typeof(Keys), lineValue);
+                                    (Keys) Enum.Parse(typeof(Keys), lineValue);
                                 break;
                             case "KeyDASHLEFT":
                                 GlobalInput.KeyList[InputMapType.PLAYER_DASHLEFT] =
-                                    (Keys)Enum.Parse(typeof(Keys), lineValue);
+                                    (Keys) Enum.Parse(typeof(Keys), lineValue);
                                 break;
                             case "KeyDASHRIGHT":
                                 GlobalInput.KeyList[InputMapType.PLAYER_DASHRIGHT] =
-                                    (Keys)Enum.Parse(typeof(Keys), lineValue);
+                                    (Keys) Enum.Parse(typeof(Keys), lineValue);
                                 break;
                             case "KeySPELL1":
                                 GlobalInput.KeyList[InputMapType.PLAYER_SPELL1] =
-                                    (Keys)Enum.Parse(typeof(Keys), lineValue);
+                                    (Keys) Enum.Parse(typeof(Keys), lineValue);
                                 break;
                             case "ButtonUP":
                                 GlobalInput.ButtonList[InputMapType.PLAYER_UP1] =
-                                    (Buttons)Enum.Parse(typeof(Buttons), lineValue);
+                                    (Buttons) Enum.Parse(typeof(Buttons), lineValue);
                                 break;
                             case "ButtonDOWN":
                                 GlobalInput.ButtonList[InputMapType.PLAYER_DOWN1] =
-                                    (Buttons)Enum.Parse(typeof(Buttons), lineValue);
+                                    (Buttons) Enum.Parse(typeof(Buttons), lineValue);
                                 break;
                             case "ButtonLEFT":
                                 GlobalInput.ButtonList[InputMapType.PLAYER_LEFT1] =
-                                    (Buttons)Enum.Parse(typeof(Buttons), lineValue);
+                                    (Buttons) Enum.Parse(typeof(Buttons), lineValue);
                                 break;
                             case "ButtonRIGHT":
                                 GlobalInput.ButtonList[InputMapType.PLAYER_RIGHT1] =
-                                    (Buttons)Enum.Parse(typeof(Buttons), lineValue);
+                                    (Buttons) Enum.Parse(typeof(Buttons), lineValue);
                                 break;
                             case "ButtonATTACK":
                                 GlobalInput.ButtonList[InputMapType.PLAYER_ATTACK] =
-                                    (Buttons)Enum.Parse(typeof(Buttons), lineValue);
+                                    (Buttons) Enum.Parse(typeof(Buttons), lineValue);
                                 break;
                             case "ButtonJUMP":
                                 GlobalInput.ButtonList[InputMapType.PLAYER_JUMP1] =
-                                    (Buttons)Enum.Parse(typeof(Buttons), lineValue);
+                                    (Buttons) Enum.Parse(typeof(Buttons), lineValue);
                                 break;
                             case "ButtonSPECIAL":
                                 GlobalInput.ButtonList[InputMapType.PLAYER_BLOCK] =
-                                    (Buttons)Enum.Parse(typeof(Buttons), lineValue);
+                                    (Buttons) Enum.Parse(typeof(Buttons), lineValue);
                                 break;
                             case "ButtonDASHLEFT":
                                 GlobalInput.ButtonList[InputMapType.PLAYER_DASHLEFT] =
-                                    (Buttons)Enum.Parse(typeof(Buttons), lineValue);
+                                    (Buttons) Enum.Parse(typeof(Buttons), lineValue);
                                 break;
                             case "ButtonDASHRIGHT":
                                 GlobalInput.ButtonList[InputMapType.PLAYER_DASHRIGHT] =
-                                    (Buttons)Enum.Parse(typeof(Buttons), lineValue);
+                                    (Buttons) Enum.Parse(typeof(Buttons), lineValue);
                                 break;
                             case "ButtonSPELL1":
                                 GlobalInput.ButtonList[InputMapType.PLAYER_SPELL1] =
-                                    (Buttons)Enum.Parse(typeof(Buttons), lineValue);
+                                    (Buttons) Enum.Parse(typeof(Buttons), lineValue);
                                 break;
                             case "Language":
-                                LocaleBuilder.languageType = (LanguageType)Enum.Parse(typeof(LanguageType), lineValue);
+                                LocaleBuilder.languageType = (LanguageType) Enum.Parse(typeof(LanguageType), lineValue);
                                 break;
                             case "UnlockTraitor":
                                 GameConfig.UnlockTraitor = byte.Parse(lineValue, NumberStyles.Any, ci);
@@ -1402,7 +1498,9 @@ public class Game : Microsoft.Xna.Framework.Game
 
                 // Game config file was not loaded properly. Throw an exception.
                 if (GameConfig.ScreenHeight <= 0 || GameConfig.ScreenWidth <= 0)
+                {
                     throw new Exception("Blank Config File");
+                }
             }
         }
         catch
@@ -1432,9 +1530,13 @@ public class Game : Microsoft.Xna.Framework.Game
             graphics.PreferredBackBufferHeight = GameConfig.ScreenHeight;
             if ((graphics.IsFullScreen && GameConfig.FullScreen == false) ||
                 (graphics.IsFullScreen == false && GameConfig.FullScreen))
+            {
                 graphics.ToggleFullScreen();
+            }
             else
+            {
                 graphics.ApplyChanges();
+            }
         }
 
         // No need to call Graphics.ApplyChanges() since ToggleFullScreen() implicitly calls it.
