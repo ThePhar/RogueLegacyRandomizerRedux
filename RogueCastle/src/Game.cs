@@ -24,53 +24,42 @@ namespace RogueCastle;
 public class Game : Microsoft.Xna.Framework.Game
 {
     //Generic textures used for multiple objects.
-    public static Texture2D GenericTexture;
-    public static Effect MaskEffect;
-    public static Effect BWMaskEffect;
-    public static Effect ShadowEffect;
-    public static Effect ParallaxEffect;
-    public static Effect RippleEffect;
-    public static GaussianBlur GaussianBlur;
-    public static Effect HSVEffect;
-    public static Effect InvertShader;
-    public static Effect ColourSwapShader;
-
-    public static AreaStruct[] Area1List;
-
+    public static Texture2D       GenericTexture;
+    public static Effect          MaskEffect;
+    public static Effect          BWMaskEffect;
+    public static Effect          ShadowEffect;
+    public static Effect          ParallaxEffect;
+    public static Effect          RippleEffect;
+    public static GaussianBlur    GaussianBlur;
+    public static Effect          HSVEffect;
+    public static Effect          InvertShader;
+    public static Effect          ColourSwapShader;
+    public static AreaStruct[]    Area1List;
     public static EquipmentSystem EquipmentSystem;
-    //public static TraitSystem TraitSystem;
+    public static PlayerStats     PlayerStats = new();
+    public static SpriteFont      PixelArtFont;
+    public static SpriteFont      PixelArtFontBold;
+    public static SpriteFont      JunicodeFont;
+    public static SpriteFont      EnemyLevelFont;
+    public static SpriteFont      PlayerLevelFont;
+    public static SpriteFont      GoldFont;
+    public static SpriteFont      HerzogFont;
+    public static SpriteFont      JunicodeLargeFont;
+    public static SpriteFont      CinzelFont;
+    public static SpriteFont      BitFont;
+    public static SpriteFont      NotoSansSCFont; // Noto Sans Simplified Chinese
+    public static SpriteFont      RobotoSlabFont;
+    public static Cue             LineageSongCue;
+    public static InputMap        GlobalInput;
+    public static SettingStruct   GameConfig;
+    public static List<string>    NameArray;
+    public static List<string>    FemaleNameArray;
+    public static float           TotalGameTime;
+    public static bool            gameIsCorrupt;
 
-    public static PlayerStats PlayerStats = new();
-    public static SpriteFont PixelArtFont;
-    public static SpriteFont PixelArtFontBold;
-    public static SpriteFont JunicodeFont;
-    public static SpriteFont EnemyLevelFont;
-    public static SpriteFont PlayerLevelFont;
-    public static SpriteFont GoldFont;
-    public static SpriteFont HerzogFont;
-    public static SpriteFont JunicodeLargeFont;
-    public static SpriteFont CinzelFont;
-    public static SpriteFont BitFont;
-    public static SpriteFont NotoSansSCFont; // Noto Sans Simplified Chinese
-    public static SpriteFont RobotoSlabFont;
-
-    public static Cue LineageSongCue;
-
-    public static InputMap GlobalInput;
-
-    public static SettingStruct GameConfig;
-    //Song tempSong;
-
-    public static List<string> NameArray;
-    public static List<string> FemaleNameArray;
-    public static float TotalGameTime;
-
-    public static bool gameIsCorrupt;
-    private readonly float m_frameLimit = 1 / 40f;
-
-    private WeakReference gcTracker = new(new object());
-    
-    public GraphicsDeviceManager graphics;
+    private readonly float                 m_frameLimit = 1 / 40f;
+    private          WeakReference         gcTracker    = new(new object());
+    public           GraphicsDeviceManager graphics;
 
     /// <summary>
     ///     Allows the game to run logic such as updating the world,
@@ -79,20 +68,16 @@ public class Game : Microsoft.Xna.Framework.Game
     /// <param name="gameTime">Provides a snapshot of timing values.</param>
     public int graphicsToggle;
 
-    private string m_commandLineFilePath = "";
-
-    private bool m_contentLoaded;
-
-    private bool m_femaleChineseNamesLoaded;
-
+    private string   m_commandLineFilePath = "";
+    private bool     m_contentLoaded;
+    private bool     m_femaleChineseNamesLoaded;
     private GameTime m_forcedGameTime1, m_forcedGameTime2;
-    private bool m_frameLimitSwap;
-    private bool m_gameLoaded;
+    private bool     m_frameLimitSwap;
+    private bool     m_gameLoaded;
+    private bool     m_maleChineseNamesLoaded;
 
-    private bool m_maleChineseNamesLoaded;
-
-    private float
-        m_previouslyActiveCounter; // This makes sure your very first inputs upon returning after leaving the screen does not register (no accidental inputs happen).
+    // This makes sure your very first inputs upon returning after leaving the screen does not register (no accidental inputs happen).
+    private float m_previouslyActiveCounter;
 
     public Game(string filePath = "")
     {
@@ -139,8 +124,8 @@ public class Game : Microsoft.Xna.Framework.Game
         Window.Title = "Rogue Legacy Randomizer";
         ScreenManager = new RCScreenManager(this);
         SaveManager = new SaveGameManager(this);
-        ArchipelagoManager = new ArchipelagoManager();
-        
+        ArchipelagoManager = new ArchipelagoManager(this);
+
         // Set first to false and last to true for targetelapsedtime to work.
         IsFixedTimeStep = false; // Sets game to slow down instead of frame skip if set to false.
         graphics.SynchronizeWithVerticalRetrace =
@@ -215,7 +200,7 @@ public class Game : Microsoft.Xna.Framework.Game
     public SaveGameManager SaveManager { get; }
 
     public ArchipelagoManager ArchipelagoManager { get; }
-    
+
     public GraphicsDeviceManager GraphicsDeviceManager => graphics;
 
     protected void ChangeGraphicsSettings(object sender, PreparingDeviceSettingsEventArgs e)
@@ -264,7 +249,7 @@ public class Game : Microsoft.Xna.Framework.Game
             //TxtToBinConverter.Convert("Content\\Languages\\Text_En.txt");
             
             // Comment out these language documents when creating a release build.
-            // Don't forget to copy paste the created bin files to your project's language folder!
+            // Don't forget to copy/paste the created bin files to your project's language folder!
             if (LevelEV.CREATE_RETAIL_VERSION == false)
             {
                 DialogueManager.LoadLanguageDocument(Content, "Languages\\Text_En");
@@ -285,15 +270,11 @@ public class Game : Microsoft.Xna.Framework.Game
         //this.IsMouseVisible = true;
 
         //Components.Add(ScreenManager);
-        ScreenManager
-            .Initialize(); // Necessary to manually call screenmanager initialize otherwise its LoadContent() method will be called first.
+        // Necessary to manually call screen-manager initialize otherwise its LoadContent() method will be called first.
+        ScreenManager.Initialize();
         InitializeGlobalInput();
         LoadConfig(); // Loads the config file, override language if specified in config file
         InitializeScreenConfig(); // Applies the screen config data.
-
-        // Must be called after config file is loaded so that the correct language name array is loaded.
-        InitializeMaleNameArray(false);
-        InitializeFemaleNameArray(false);
 
         if (LevelEV.ShowFps)
         {
@@ -878,221 +859,93 @@ public class Game : Microsoft.Xna.Framework.Game
     /// <param name="gameTime">Provides a snapshot of timing values.</param>
     protected override void Draw(GameTime gameTime)
     {
-        // The screenmanager is drawn via the Components.Add call in the game constructor. It is called after this Draw() call.
+        // The screen-manager is drawn via the Components.Add call in the game constructor. It is called after this
+        // Draw() call.
         ScreenManager.Draw(gameTime);
         base.Draw(gameTime);
     }
 
-    public void InitializeMaleNameArray(bool forceCreate)
+    public void InitializeNameArray(bool isFemale, HashSet<string> names, bool forceCreate = false)
     {
-        // The name list needs to be reloaded every time the language is from Chinese to another language or vice versa.
-        if ((m_maleChineseNamesLoaded == false && LocaleBuilder.languageType == LanguageType.Chinese_Simp) ||
-            (m_maleChineseNamesLoaded && LocaleBuilder.languageType != LanguageType.Chinese_Simp))
+        if (LocaleBuilder.languageType == LanguageType.Chinese_Simp)
         {
-            forceCreate = true;
+            throw new NotImplementedException("Chinese name entry is not supported by the randomizer at this time.");
         }
 
-        if (NameArray != null && NameArray.Count > 0 && forceCreate == false)
+        var array = isFemale ? FemaleNameArray : NameArray;
+        var dataset = isFemale ? "HeroineNames.txt" : "HeroNames.txt";
+
+        if (array is { Count: > 0 } && !forceCreate)
         {
             return;
         }
 
-        if (NameArray != null)
+        // Initialize array.
+        if (array != null)
         {
-            NameArray.Clear();
+            array.Clear();
+        }
+        else if (isFemale)
+        {
+            FemaleNameArray = [];
+            array = FemaleNameArray;
         }
         else
         {
-            NameArray = new List<string>();
+            NameArray = [];
+            array = NameArray;
         }
 
-        // Logographic fonts cannot make use of the name change system, otherwise the bitmap spritesheet
-        // generated by the system would have to include every single glyph.
-        if (LocaleBuilder.languageType != LanguageType.Chinese_Simp)
+        var loadContent = names.Contains("__default");
+        if (loadContent)
         {
-            m_maleChineseNamesLoaded = false;
+            names.Remove("__default");
 
-            using (var sr = new StreamReader(Path.Combine("Content", "HeroNames.txt")))
+            // Load default names.
+            using var stream = new StreamReader(Path.Combine("Content", dataset));
+            var junicode = Content.Load<SpriteFont>(@"Fonts\Junicode");
+            SpriteFontArray.SpriteFontList.Add(junicode);
+            var invalidCharacterTest = new TextObj(junicode);
+
+            while (!stream.EndOfStream)
             {
-                // A test to make sure no special characters are used in the game.
-                var junicode = Content.Load<SpriteFont>("Fonts\\Junicode");
-                SpriteFontArray.SpriteFontList.Add(junicode);
-                var specialCharTest = new TextObj(junicode);
+                var name = stream.ReadLine()!.Trim();
+                var hasInvalidChar = false;
 
-                while (!sr.EndOfStream)
+                try
                 {
-                    var name = sr.ReadLine();
-                    var hasSpecialChar = false;
-
-                    try
-                    {
-                        specialCharTest.Text = name;
-                    }
-                    catch
-                    {
-                        hasSpecialChar = true;
-                    }
-
-                    if (!name.Contains("//") && hasSpecialChar == false)
-                    {
-                        NameArray.Add(name);
-                    }
+                    invalidCharacterTest.Text = name;
+                }
+                catch
+                {
+                    hasInvalidChar = true;
                 }
 
-                specialCharTest.Dispose();
-                SpriteFontArray.SpriteFontList.Remove(junicode);
-            }
-        }
-        else
-        {
-            m_maleChineseNamesLoaded = true;
-
-            // List of male Chinese names.
-            NameArray.Add("马如龙");
-            NameArray.Add("常遇春");
-            NameArray.Add("胡不归");
-            NameArray.Add("何千山");
-            NameArray.Add("方日中");
-            NameArray.Add("谢南山");
-            NameArray.Add("慕江南");
-            NameArray.Add("赵寒江");
-            NameArray.Add("宋乔木");
-            NameArray.Add("应楚山");
-            NameArray.Add("江山月");
-            NameArray.Add("赵慕寒");
-            NameArray.Add("万重山");
-            NameArray.Add("郭百鸣");
-            NameArray.Add("谢武夫");
-            NameArray.Add("关中林");
-            NameArray.Add("吴深山");
-            NameArray.Add("向春风");
-            NameArray.Add("牛始旦");
-            NameArray.Add("卫东方");
-            NameArray.Add("萧北辰");
-            NameArray.Add("黃鹤年");
-            NameArray.Add("王石柱");
-            NameArray.Add("胡江林");
-            NameArray.Add("周宇浩");
-            NameArray.Add("程向阳");
-            NameArray.Add("魏海风");
-            NameArray.Add("龚剑辉");
-            NameArray.Add("周宇浩");
-            NameArray.Add("何汝平");
-        }
-
-        // Ensures the name array is greater than 0.
-        if (NameArray.Count < 1)
-        {
-            NameArray.Add("Lee");
-            NameArray.Add("Charles");
-            NameArray.Add("Lancelot");
-        }
-    }
-
-    public void InitializeFemaleNameArray(bool forceCreate)
-    {
-        // The name list needs to be reloaded every time the language is from Chinese to another language or vice versa.
-        if ((m_femaleChineseNamesLoaded == false && LocaleBuilder.languageType == LanguageType.Chinese_Simp) ||
-            (m_femaleChineseNamesLoaded && LocaleBuilder.languageType != LanguageType.Chinese_Simp))
-        {
-            forceCreate = true;
-        }
-
-        if (FemaleNameArray != null && FemaleNameArray.Count > 0 && forceCreate == false)
-        {
-            return;
-        }
-
-        if (FemaleNameArray != null)
-        {
-            FemaleNameArray.Clear();
-        }
-        else
-        {
-            FemaleNameArray = new List<string>();
-        }
-
-        // Logographic fonts cannot make use of the name change system, otherwise the bitmap spritesheet
-        // generated by the system would have to include every single glyph.
-        if (LocaleBuilder.languageType != LanguageType.Chinese_Simp)
-        {
-            m_femaleChineseNamesLoaded = false;
-
-            using (var sr = new StreamReader(Path.Combine("Content", "HeroineNames.txt")))
-            {
-                // A test to make sure no special characters are used in the game.
-                var junicode = Content.Load<SpriteFont>("Fonts\\Junicode");
-                SpriteFontArray.SpriteFontList.Add(junicode);
-                var specialCharTest = new TextObj(junicode);
-
-                while (!sr.EndOfStream)
+                if (name.Length > 0 && !name.StartsWith("//") && !hasInvalidChar)
                 {
-                    var name = sr.ReadLine();
-                    var hasSpecialChar = false;
-
-                    try
-                    {
-                        specialCharTest.Text = name;
-                    }
-                    catch
-                    {
-                        hasSpecialChar = true;
-                    }
-
-                    if (!name.Contains("//") && hasSpecialChar == false)
-                    {
-                        FemaleNameArray.Add(name);
-                    }
+                    names.Add(name);
                 }
+            }
 
-                specialCharTest.Dispose();
-                SpriteFontArray.SpriteFontList.Remove(junicode);
+            invalidCharacterTest.Dispose();
+            SpriteFontArray.SpriteFontList.Remove(junicode);
+        }
+
+        // Ensure we always have enough names for the amount of offspring that can exist to be chosen from.
+        if (names.Count < 5)
+        {
+            string[] defaults = isFemale
+                ? ["Jenny", "Shanoa", "Chun Li", "Dorian", "Sasha"]
+                : ["Lee", "Charles", "Lancelot", "Phar", "Travis"];
+
+            for (var i = 0; names.Count < 5; i++)
+            {
+                names.Add(defaults[i]);
             }
         }
-        else
-        {
-            m_femaleChineseNamesLoaded = true;
 
-            // List of female Chinese names.
-            FemaleNameArray.Add("水一方");
-            FemaleNameArray.Add("刘妙音");
-            FemaleNameArray.Add("郭釆薇");
-            FemaleNameArray.Add("颜如玉");
-            FemaleNameArray.Add("陈巧雅");
-            FemaleNameArray.Add("萧玉旋");
-            FemaleNameArray.Add("花可秀");
-            FemaleNameArray.Add("董小婉");
-            FemaleNameArray.Add("李诗诗");
-            FemaleNameArray.Add("唐秋香");
-            FemaleNameArray.Add("方美人");
-            FemaleNameArray.Add("金喜儿");
-            FemaleNameArray.Add("达莉萍");
-            FemaleNameArray.Add("蔡靜语");
-            FemaleNameArray.Add("郭玲玲");
-            FemaleNameArray.Add("黃晓莺");
-            FemaleNameArray.Add("杜秋娘");
-            FemaleNameArray.Add("高媛媛");
-            FemaleNameArray.Add("林靜妤");
-            FemaleNameArray.Add("凤雨婷");
-            FemaleNameArray.Add("徐瑶瑶");
-            FemaleNameArray.Add("祝台英");
-            FemaleNameArray.Add("郭燕秋");
-            FemaleNameArray.Add("江小满");
-            FemaleNameArray.Add("项月芳");
-            FemaleNameArray.Add("郑云云");
-            FemaleNameArray.Add("王琼琼");
-            FemaleNameArray.Add("李瓶儿");
-            FemaleNameArray.Add("周楚红");
-            FemaleNameArray.Add("叶秋菊");
-        }
-
-        // Ensures the female name array is greater than 0.
-        if (FemaleNameArray.Count < 1)
-        {
-            FemaleNameArray.Add("Jenny");
-            FemaleNameArray.Add("Shanoa");
-            FemaleNameArray.Add("Chun Li");
-        }
+        // Convert HashSet to List
+        array.AddRange(names);
     }
 
     public static void ConvertPlayerNameFormat(ref string playerName, ref string romanNumeral)
@@ -1583,16 +1436,16 @@ public class Game : Microsoft.Xna.Framework.Game
 
     public struct SettingStruct
     {
-        public int ScreenWidth;
-        public int ScreenHeight;
-        public bool FullScreen;
+        public int   ScreenWidth;
+        public int   ScreenHeight;
+        public bool  FullScreen;
         public float MusicVolume;
         public float SFXVolume;
-        public bool QuickDrop;
-        public bool EnableDirectInput;
-        public byte ProfileSlot;
-        public bool ReduceQuality;
-        public bool EnableSteamCloud;
-        public byte UnlockTraitor;
+        public bool  QuickDrop;
+        public bool  EnableDirectInput;
+        public byte  ProfileSlot;
+        public bool  ReduceQuality;
+        public bool  EnableSteamCloud;
+        public byte  UnlockTraitor;
     }
 }

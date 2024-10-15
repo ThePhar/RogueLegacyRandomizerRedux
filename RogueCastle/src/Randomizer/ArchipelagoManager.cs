@@ -1,22 +1,20 @@
 using System;
-using System.Threading.Tasks;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Enums;
-using Archipelago.MultiClient.Net.Packets;
-using Newtonsoft.Json;
 
 namespace RogueCastle.Randomizer;
 
-public class ArchipelagoManager
+public class ArchipelagoManager(Game game)
 {
-    private static readonly Version SupportedVersion = new(0, 5, 0);
+    private static readonly Version          SupportedVersion = new(0, 5, 1);
+    private                 DeathLinkService _deathLinkService;
+    private readonly        Game             _game = game;
+    private                 DateTime         _lastDeath;
 
     private ArchipelagoSession _session;
-    private DeathLinkService   _deathLinkService;
-    private DateTime           _lastDeath;
-    
-    public SlotData SlotData { get; private set; }
+
+    public SlotDataV3 SlotData { get; private set; }
 
     public LoginFailure TryConnect(string hostname, string username, string password)
     {
@@ -27,8 +25,8 @@ public class ArchipelagoManager
         _session.Socket.PacketReceived += OnPacketReceived;
 
         var result = _session.TryConnectAndLogin(
-            game: "Rogue Legacy", 
-            name: username,
+            "Rogue Legacy",
+            username,
             password: password,
             itemsHandlingFlags: ItemsHandlingFlags.AllItems,
             version: SupportedVersion
@@ -41,8 +39,7 @@ public class ArchipelagoManager
 
         _deathLinkService = _session.CreateDeathLinkService();
 
-        SlotData = _session.DataStorage.GetSlotData<SlotData>();
-        
+        BuildSlotData();
         return null;
     }
 
@@ -50,7 +47,15 @@ public class ArchipelagoManager
     {
         _session?.Socket.DisconnectAsync();
     }
-    
+
+    private void BuildSlotData()
+    {
+        SlotData = _session.DataStorage.GetSlotData<SlotDataV3>();
+
+        _game.InitializeNameArray(true, SlotData.CharacterNamesLady);
+        _game.InitializeNameArray(false, SlotData.CharacterNamesSir);
+    }
+
     private static void OnError(Exception exception, string message)
     {
         Console.WriteLine(@$"[Error]: ${message}");
@@ -59,6 +64,7 @@ public class ArchipelagoManager
 
     private static void OnPacketReceived(ArchipelagoPacketBase packet)
     {
+        // TODO: This should probably be removed before a live-version goes out.
         Console.WriteLine(@$"[Packet]: Received a {packet.PacketType} packet.");
     }
 }
