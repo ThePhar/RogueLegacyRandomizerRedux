@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
 using Newtonsoft.Json;
 using RogueCastle.Randomizer.Types;
 
@@ -81,4 +84,26 @@ public record SlotDataV3
 
     [JsonProperty("fountain_pieces_required")]
     public int FountainPiecesRequired { get; init; }
+
+    public override string ToString()
+    {
+        StringBuilder builder = new();
+        builder.Append("SlotDataV3 {\n");
+        foreach (var pi in GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+        {
+            var value = pi.GetValue(this);
+            switch (value)
+            {
+                case ICollection<string> collection:
+                    builder.Append($"    {pi.Name} = {collection.Count}: [{string.Join(", ", collection.ToArray())}]\n");
+                    break;
+                default:
+                    builder.Append($"    {pi.Name} = {value}\n");
+                    break;
+            }
+        }
+
+        builder.Append("}");
+        return builder.ToString();
+    }
 }

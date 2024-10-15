@@ -615,6 +615,7 @@ public class Game : Microsoft.Xna.Framework.Game
         CinzelFont = Content.Load<SpriteFont>("Fonts\\CinzelFont");
         SpriteFontArray.SpriteFontList.Add(CinzelFont);
         BitFont = Content.Load<SpriteFont>("Fonts\\BitFont");
+        BitFont.DefaultCharacter = '?';
         SpriteFontArray.SpriteFontList.Add(BitFont);
         NotoSansSCFont = Content.Load<SpriteFont>("Fonts\\NotoSansSC");
         SpriteFontArray.SpriteFontList.Add(NotoSansSCFont);

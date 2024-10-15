@@ -4,7 +4,7 @@ public static class LevelEV
 {
     public const string GAME_VERSION = "v1.4.1";
     public const string RLRX_VERSION = "v1.0.0-dev";
-    
+
     // The number of levels an enemy needs to be before he goes to the next difficulty.
     public const int ENEMY_LEVEL_DIFFICULTY_MOD = 32; //30;//40;//30;//15;//6;//12;
 
@@ -30,48 +30,48 @@ public static class LevelEV
 
     // EVs related to New Game Plus
     //////////////////////////////////////////////////////////////
-    
+
     // These are room levels prior to dividing by ROOM_LEVEL_MOD.
-    public const int CASTLE_ROOM_LEVEL_BOOST = 0;
-    public const int GARDEN_ROOM_LEVEL_BOOST = 2; //3;//5;//10;
-    public const int TOWER_ROOM_LEVEL_BOOST = 4; //6;//10;//20;
+    public const int CASTLE_ROOM_LEVEL_BOOST  = 0;
+    public const int GARDEN_ROOM_LEVEL_BOOST  = 2; //3;//5;//10;
+    public const int TOWER_ROOM_LEVEL_BOOST   = 4; //6;//10;//20;
     public const int DUNGEON_ROOM_LEVEL_BOOST = 6; //9;//15;//30;
 
-    public const int NEWGAMEPLUS_LEVEL_BASE = 128; //120;//120;//10;
-    public const int NEWGAMEPLUS_LEVEL_APPRECIATION = 128; //80; //60;
-    public const int NEWGAMEPLUS_MINIBOSS_LEVEL_BASE = 0;
+    public const int NEWGAMEPLUS_LEVEL_BASE                  = 128; //120;//120;//10;
+    public const int NEWGAMEPLUS_LEVEL_APPRECIATION          = 128; //80; //60;
+    public const int NEWGAMEPLUS_MINIBOSS_LEVEL_BASE         = 0;
     public const int NEWGAMEPLUS_MINIBOSS_LEVEL_APPRECIATION = 0;
 
     //////////////////////////////////////////////////////////////
 
     public const bool LINK_TO_CASTLE_ONLY = true;
-    public const byte CASTLE_BOSS_ROOM = BossRoomType.EyeballBossRoom;
-    public const byte TOWER_BOSS_ROOM = BossRoomType.FireballBossRoom;
-    public const byte DUNGEON_BOSS_ROOM = BossRoomType.BlobBossRoom;
-    public const byte GARDEN_BOSS_ROOM = BossRoomType.FairyBossRoom;
-    public const byte LAST_BOSS_ROOM = BossRoomType.LastBossRoom;
+    public const byte CASTLE_BOSS_ROOM    = BossRoomType.EyeballBossRoom;
+    public const byte TOWER_BOSS_ROOM     = BossRoomType.FireballBossRoom;
+    public const byte DUNGEON_BOSS_ROOM   = BossRoomType.BlobBossRoom;
+    public const byte GARDEN_BOSS_ROOM    = BossRoomType.FairyBossRoom;
+    public const byte LAST_BOSS_ROOM      = BossRoomType.LastBossRoom;
 
     // Percent chance the door direction will be open or closed when procedurally generating a room.
     ///////////////////////////////////////////////////////////////
-    
-    public const int LEVEL_CASTLE_LEFTDOOR = 90; //70;
-    public const int LEVEL_CASTLE_RIGHTDOOR = 90; //70;
-    public const int LEVEL_CASTLE_TOPDOOR = 90; //70;
+
+    public const int LEVEL_CASTLE_LEFTDOOR   = 90; //70;
+    public const int LEVEL_CASTLE_RIGHTDOOR  = 90; //70;
+    public const int LEVEL_CASTLE_TOPDOOR    = 90; //70;
     public const int LEVEL_CASTLE_BOTTOMDOOR = 90; //70;
 
-    public const int LEVEL_GARDEN_LEFTDOOR = 70; //80;
-    public const int LEVEL_GARDEN_RIGHTDOOR = 100; //80;
-    public const int LEVEL_GARDEN_TOPDOOR = 45; //85;//40;
+    public const int LEVEL_GARDEN_LEFTDOOR   = 70; //80;
+    public const int LEVEL_GARDEN_RIGHTDOOR  = 100; //80;
+    public const int LEVEL_GARDEN_TOPDOOR    = 45; //85;//40;
     public const int LEVEL_GARDEN_BOTTOMDOOR = 45; //85;//40;
 
-    public const int LEVEL_TOWER_LEFTDOOR = 45; //65;
-    public const int LEVEL_TOWER_RIGHTDOOR = 45; //65;
-    public const int LEVEL_TOWER_TOPDOOR = 100; //90;
+    public const int LEVEL_TOWER_LEFTDOOR   = 45; //65;
+    public const int LEVEL_TOWER_RIGHTDOOR  = 45; //65;
+    public const int LEVEL_TOWER_TOPDOOR    = 100; //90;
     public const int LEVEL_TOWER_BOTTOMDOOR = 60; //40;
 
-    public const int LEVEL_DUNGEON_LEFTDOOR = 55; //50;
-    public const int LEVEL_DUNGEON_RIGHTDOOR = 55; //50;
-    public const int LEVEL_DUNGEON_TOPDOOR = 45; //40;
+    public const int LEVEL_DUNGEON_LEFTDOOR   = 55; //50;
+    public const int LEVEL_DUNGEON_RIGHTDOOR  = 55; //50;
+    public const int LEVEL_DUNGEON_TOPDOOR    = 45; //40;
     public const int LEVEL_DUNGEON_BOTTOMDOOR = 100; //75; //100;
 
     // The list of enemies that each area will randomly add enemies to.
@@ -119,9 +119,9 @@ public static class LevelEV
         EnemyType.Starburst, EnemyType.HomingTurret, EnemyType.Horse,
     ];
 
-    public static readonly byte[] CastleEnemyDifficultyList = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    public static readonly byte[] GardenEnemyDifficultyList = { 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    public static readonly byte[] TowerEnemyDifficultyList = { 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0 };
+    public static readonly byte[] CastleEnemyDifficultyList  = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public static readonly byte[] GardenEnemyDifficultyList  = { 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public static readonly byte[] TowerEnemyDifficultyList   = { 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0 };
     public static readonly byte[] DungeonEnemyDifficultyList = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
     // Every implemented enemy type.
@@ -176,41 +176,38 @@ public static class LevelEV
         "GardenFountain_Character", "GardenBush1_Sprite", "GardenBush2_Sprite", "", "", "", "GardenMushroom1_Character",
         "GardenMushroom2_Character", "GardenTrunk1_Character", "GardenTrunk2_Character", "GardenDoorOpen_Sprite", "",
     ];
-    
+
     // Debugging EVs
     ////////////////////////////////////////////////////////////////
-    
-    public static bool ShowEnemyRadii = false;
-    public static bool EnableDebugInput = true;
-    public static bool UnlockAllAbilities = false;
-    public static bool UnlockAllDiaryEntries = false;
 
-    public static GameTypes.LevelType TestRoomLevelType = GameTypes.LevelType.CASTLE;
-    public static bool TestRoomReverse = false;
-    public static bool RunTestRoom = false;
-    public static bool ShowDebugText = false;
-    public static bool LoadTitleScreen = false; // TODO: Remove
-    public static bool LoadSplashScreen = false;
-    public static bool ShowSaveLoadDebugText = false;
-
-    public static bool DeleteSaveFile = false;
-    
-    public static bool CloseTestRoomDoors = false;
-    public static bool RunTutorial = false;
-    public static bool RunDemoVersion = false;
-    public static bool DisableSaving = false;
-    public static bool RunCrashLogs = false;
-    public static bool WeakenBosses = false;
-    public static bool EnableOffscreenControl = false;
-    public static bool EnableBackupSaving = true;
-    public static bool EnableBlitworksSplash = false;
+    public static bool                ShowEnemyRadii         = false;
+    public static bool                EnableDebugInput       = true;
+    public static bool                UnlockAllAbilities     = false;
+    public static bool                UnlockAllDiaryEntries  = false;
+    public static GameTypes.LevelType TestRoomLevelType      = GameTypes.LevelType.CASTLE;
+    public static bool                TestRoomReverse        = false;
+    public static bool                RunTestRoom            = false;
+    public static bool                ShowDebugText          = false;
+    public static bool                LoadTitleScreen        = true;
+    public static bool                LoadSplashScreen       = false;
+    public static bool                ShowSaveLoadDebugText  = false;
+    public static bool                ShowAPDebugText        = false;
+    public static bool                DeleteSaveFile         = false;
+    public static bool                CloseTestRoomDoors     = false;
+    public static bool                RunTutorial            = false;
+    public static bool                RunDemoVersion         = false;
+    public static bool                DisableSaving          = false;
+    public static bool                RunCrashLogs           = false;
+    public static bool                WeakenBosses           = false;
+    public static bool                EnableOffscreenControl = false;
+    public static bool                EnableBackupSaving     = true;
+    public static bool                EnableBlitworksSplash  = false;
+    public static bool                SaveFrames             = false;
+    public static int                 SaveFileRevisionNumber = 1;
 
     // This EV overrides all the other Level EVs to create a retail build of the game.
-    public static bool CreateRetailVersion = true; 
+    public static bool CreateRetailVersion = true;
 
     // Setting this true also turns vsync off (so that you can get an FPS greater than 60).
-    public static bool ShowFps = false; 
-
-    public static bool SaveFrames = false;
-    public static int SaveFileRevisionNumber = 1;
+    public static bool ShowFps = false;
 }

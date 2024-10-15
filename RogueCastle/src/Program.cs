@@ -20,7 +20,7 @@ public static class Program
         if (LevelEV.CreateRetailVersion)
         {
             Steamworks.Init();
-            
+
             LevelEV.ShowEnemyRadii = false;
             LevelEV.EnableDebugInput = false;
             LevelEV.UnlockAllAbilities = false;
@@ -29,15 +29,15 @@ public static class Program
             LevelEV.RunTestRoom = false;
             LevelEV.ShowDebugText = false;
             LevelEV.LoadTitleScreen = true;
-            LevelEV.LoadSplashScreen = false;
+            LevelEV.LoadSplashScreen = false; // todo
             LevelEV.ShowSaveLoadDebugText = false;
             LevelEV.DeleteSaveFile = false;
+            LevelEV.ShowAPDebugText = true; // todo
             LevelEV.CloseTestRoomDoors = false;
             LevelEV.RunTutorial = false;
             LevelEV.RunDemoVersion = false;
             LevelEV.DisableSaving = false;
-            // LevelEV.RunCrashLogs = true;
-            LevelEV.RunCrashLogs = false;
+            LevelEV.RunCrashLogs = false; // todo
             LevelEV.WeakenBosses = false;
             LevelEV.EnableBackupSaving = true;
             LevelEV.EnableOffscreenControl = false;
@@ -126,9 +126,8 @@ public static class Program
                 }
 
                 return Path.Combine(osDir, ".config", "RogueLegacyRandomizer");
-
             }
-            
+
             case "Mac OS X":
             {
                 var osDir = Environment.GetEnvironmentVariable("HOME");
@@ -139,13 +138,13 @@ public static class Program
 
                 return Path.Combine(osDir, "Library/Application Support/RogueLegacyRandomizer");
             }
-            
+
             case "Windows":
             {
                 var osDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 return Path.Combine(osDir, "Rogue Legacy Randomizer");
             }
-            
+
             // Unsupported SDL3 platform.
             default:
                 throw new NotSupportedException("Unhandled SDL3 platform!");

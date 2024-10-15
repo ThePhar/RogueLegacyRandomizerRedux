@@ -8,8 +8,8 @@ namespace RogueCastle.Randomizer;
 public class ArchipelagoManager(Game game)
 {
     private static readonly Version          SupportedVersion = new(0, 5, 1);
+    private readonly        Game             _game            = game;
     private                 DeathLinkService _deathLinkService;
-    private readonly        Game             _game = game;
     private                 DateTime         _lastDeath;
 
     private ArchipelagoSession _session;
@@ -54,6 +54,8 @@ public class ArchipelagoManager(Game game)
 
         _game.InitializeNameArray(true, SlotData.CharacterNamesLady);
         _game.InitializeNameArray(false, SlotData.CharacterNamesSir);
+
+        Console.WriteLine(SlotData.ToString());
     }
 
     private static void OnError(Exception exception, string message)
