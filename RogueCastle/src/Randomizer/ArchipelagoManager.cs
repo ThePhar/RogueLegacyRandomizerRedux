@@ -16,9 +16,12 @@ public class ArchipelagoManager(Game game)
 
     public SlotDataV3 SlotData { get; private set; }
 
+    public DeathLink QueuedDeathLink { get; private set; }
+
+    public string Alias => _session.Players.ActivePlayer.Alias;
+
     public LoginFailure TryConnect(string hostname, string username, string password)
     {
-        _lastDeath = DateTime.MinValue;
         _session = ArchipelagoSessionFactory.CreateSession(hostname);
 
         _session.Socket.ErrorReceived += OnError;
@@ -38,6 +41,7 @@ public class ArchipelagoManager(Game game)
         }
 
         _deathLinkService = _session.CreateDeathLinkService();
+        _deathLinkService.OnDeathLinkReceived += OnDeathLink;
 
         BuildSlotData();
         return null;
@@ -46,6 +50,29 @@ public class ArchipelagoManager(Game game)
     public void Disconnect()
     {
         _session?.Socket.DisconnectAsync();
+    }
+
+    public void EnableDeathLink()
+    {
+        _lastDeath = DateTime.MinValue;
+        _deathLinkService.EnableDeathLink();
+    }
+
+    public void DisableDeathLink()
+    {
+        _deathLinkService.DisableDeathLink();
+    }
+
+    public void ClearDeathLink()
+    {
+        QueuedDeathLink = null;
+    }
+
+    public void SendDeathLink(string cause)
+    {
+        var deathLink = new DeathLink(_session.Players.ActivePlayer.Alias, cause);
+        _lastDeath = deathLink.Timestamp;
+        _deathLinkService.SendDeathLink(deathLink);
     }
 
     private void BuildSlotData()
@@ -68,5 +95,17 @@ public class ArchipelagoManager(Game game)
     {
         // TODO: This should probably be removed before a live-version goes out.
         Console.WriteLine(@$"[Packet]: Received a {packet.PacketType} packet.");
+    }
+
+    private void OnDeathLink(DeathLink deathLink)
+    {
+        // Ignore our own deaths.
+        if (deathLink.Timestamp <= _lastDeath)
+        {
+            return;
+        }
+
+        _lastDeath = deathLink.Timestamp;
+        QueuedDeathLink = deathLink;
     }
 }
