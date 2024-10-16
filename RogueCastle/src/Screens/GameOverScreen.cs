@@ -10,6 +10,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using System.Text.RegularExpressions;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -467,7 +468,7 @@ namespace RogueCastle
 
         public override void Update(GameTime gameTime)
         {
-            if (LevelEV.ENABLE_DEBUG_INPUT == true)
+            if (LevelEV.EnableDebugInput == true)
                 HandleDebugInput();
 
             if (m_player.SpriteName == "PlayerDeath_Character")

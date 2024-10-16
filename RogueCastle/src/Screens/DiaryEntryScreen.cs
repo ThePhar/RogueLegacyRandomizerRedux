@@ -10,6 +10,7 @@ using System.IO;
 using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -101,7 +102,7 @@ namespace RogueCastle
             m_entryIndex = 0;
             UpdateSelection();
             m_unlockedEntries = Game.PlayerStats.DiaryEntry;
-            if (LevelEV.UNLOCK_ALL_DIARY_ENTRIES == true)
+            if (LevelEV.UnlockAllDiaryEntries == true)
                 m_unlockedEntries = LevelEV.TOTAL_JOURNAL_ENTRIES - 1;
 
             if (m_unlockedEntries >= LevelEV.TOTAL_JOURNAL_ENTRIES - 1)

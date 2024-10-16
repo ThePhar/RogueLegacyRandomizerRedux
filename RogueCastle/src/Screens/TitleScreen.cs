@@ -11,6 +11,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Randomchaos2DGodRays;
 using Microsoft.Xna.Framework.Audio;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {

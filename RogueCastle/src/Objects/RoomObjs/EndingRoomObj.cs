@@ -9,6 +9,8 @@ using Tweener;
 using Tweener.Ease;
 using Microsoft.Xna.Framework.Graphics;
 using System.Globalization;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -133,7 +135,7 @@ namespace RogueCastle
                 numSlain.OutlineColour = new Color(181, 142, 39);
                 numSlain.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", numSlain); // dummy locID to add TextObj to language refresh list
                 numSlain.OutlineWidth = 2;
-                numSlain.HeadingX = enemy.Type;
+                numSlain.HeadingX = (float)enemy.Type;
                 numSlain.HeadingY = (int)enemy.Difficulty;
                 numSlain.Position = new Vector2(frame.X, frame.Bounds.Bottom + 80);
                 m_slainCountText.Add(numSlain);
@@ -398,7 +400,7 @@ namespace RogueCastle
 
             base.Draw(camera);
             camera.End();
-            if (LevelEV.SHOW_ENEMY_RADII == false)
+            if (LevelEV.ShowEnemyRadii == false)
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, null, null, null, camera.GetTransformation()); // Set SpriteSortMode to immediate to allow instant changes to samplerstates.
             else
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, null, null, null, camera.GetTransformation());
@@ -413,7 +415,7 @@ namespace RogueCastle
 
             camera.End();
 
-            if (LevelEV.SHOW_ENEMY_RADII == false)
+            if (LevelEV.ShowEnemyRadii == false)
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, camera.GetTransformation()); // Set SpriteSortMode to immediate to allow instant changes to samplerstates.
             else
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, camera.GetTransformation());

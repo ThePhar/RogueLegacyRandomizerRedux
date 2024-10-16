@@ -6,6 +6,8 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Tweener;
 using Microsoft.Xna.Framework.Audio;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -125,7 +127,7 @@ namespace RogueCastle
 
                     NumHits = 1;
                     #endregion
-                    if (LevelEV.WEAKEN_BOSSES == true)
+                    if (LevelEV.WeakenBosses == true)
                         this.MaxHealth = 1;
                     break;
 
@@ -703,7 +705,7 @@ namespace RogueCastle
             fairy.MainFairy = false;
             fairy.SavedStartingPos = fairy.Position;
             fairy.SaveToFile = false;
-            if (LevelEV.SHOW_ENEMY_RADII == true)
+            if (LevelEV.ShowEnemyRadii == true)
                 fairy.InitializeDebugRadii();
             fairy.SpawnRoom = m_levelScreen.CurrentRoom;
             fairy.GivesLichHealth = false;

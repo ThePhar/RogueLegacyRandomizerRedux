@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Tweener;
 using System.Globalization;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -101,7 +103,7 @@ namespace RogueCastle
 
         public bool IsProcedural { get; set; }
         public bool SaveToFile = true;
-        public byte Type;
+        public EnemyType Type;
 
         private bool m_isPaused = false;
         protected bool m_bossVersionKilled = false;

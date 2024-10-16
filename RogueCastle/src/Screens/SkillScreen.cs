@@ -7,6 +7,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework.Graphics;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.EVs;
 using Tweener;
 using Tweener.Ease;
 
@@ -863,7 +864,7 @@ namespace RogueCastle
                         //(ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Lineage, true);
                     }
 
-                    if (LevelEV.ENABLE_DEBUG_INPUT == true)
+                    if (LevelEV.EnableDebugInput == true)
                         HandleDebugInput();
 
                     //if (InputManager.JustPressed(Keys.H, null))

@@ -1,123 +1,63 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DS2DEngine;
-using Microsoft.Xna.Framework;
+using RogueCastle.Enumerations;
 
-namespace RogueCastle
+namespace RogueCastle;
+
+public static class EnemyBuilder
 {
-    public class EnemyBuilder
+    public static EnemyObj BuildEnemy(
+        EnemyType enemyType,
+        PlayerObj player,
+        PhysicsManager physMgr,
+        ProceduralLevelScreen levelToAttachTo,
+        GameTypes.EnemyDifficulty difficulty,
+        bool doNotInitialize = false
+    )
     {
-        public static EnemyObj BuildEnemy(int enemyType, PlayerObj player, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty, bool doNotInitialize = false)
+        EnemyObj objToReturn = enemyType switch
         {
-            EnemyObj objToReturn = null;
-            switch (enemyType)
-            {
-                case (EnemyType.Skeleton):
-                    objToReturn = new EnemyObj_Skeleton(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Knight):
-                    objToReturn = new EnemyObj_Knight(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Fireball):
-                    objToReturn = new EnemyObj_Fireball(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Fairy):
-                    objToReturn = new EnemyObj_Fairy(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Turret):
-                    objToReturn = new EnemyObj_Turret(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Wall):
-                    objToReturn = new EnemyObj_Wall(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Horse):
-                    objToReturn = new EnemyObj_Horse(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Zombie):
-                    objToReturn = new EnemyObj_Zombie(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Wolf):
-                    objToReturn = new EnemyObj_Wolf(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.BallAndChain):
-                    objToReturn = new EnemyObj_BallAndChain(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Eyeball):
-                    objToReturn = new EnemyObj_Eyeball(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Ninja):
-                    objToReturn = new EnemyObj_Ninja(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Blob):
-                    objToReturn = new EnemyObj_Blob(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.SwordKnight):
-                    objToReturn = new EnemyObj_SwordKnight(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Eagle):
-                    objToReturn = new EnemyObj_Eagle(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.ShieldKnight):
-                    objToReturn = new EnemyObj_ShieldKnight(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.FireWizard):
-                    objToReturn = new EnemyObj_FireWizard(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.IceWizard):
-                    objToReturn = new EnemyObj_IceWizard(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.EarthWizard):
-                    objToReturn = new EnemyObj_EarthWizard(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.BouncySpike):
-                    objToReturn = new EnemyObj_BouncySpike(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.SpikeTrap):
-                    objToReturn = new EnemyObj_SpikeTrap(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Plant):
-                    objToReturn = new EnemyObj_Plant(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Energon):
-                    objToReturn = new EnemyObj_Energon(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Spark):
-                    objToReturn = new EnemyObj_Spark(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.SkeletonArcher):
-                    objToReturn = new EnemyObj_SkeletonArcher(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Chicken):
-                    objToReturn = new EnemyObj_Chicken(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Platform):
-                    objToReturn = new EnemyObj_Platform(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.HomingTurret):
-                    objToReturn = new EnemyObj_HomingTurret(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.LastBoss):
-                    objToReturn = new EnemyObj_LastBoss(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Dummy):
-                    objToReturn = new EnemyObj_Dummy(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Starburst):
-                    objToReturn = new EnemyObj_Starburst(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Portrait):
-                    objToReturn = new EnemyObj_Portrait(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-                case (EnemyType.Mimic):
-                    objToReturn = new EnemyObj_Mimic(player, physicsManager, levelToAttachTo, difficulty);
-                    break;
-            }
+            EnemyType.Skeleton       => new EnemyObj_Skeleton(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Knight         => new EnemyObj_Knight(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Fireball       => new EnemyObj_Fireball(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Fairy          => new EnemyObj_Fairy(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Turret         => new EnemyObj_Turret(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Wall           => new EnemyObj_Wall(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Horse          => new EnemyObj_Horse(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Zombie         => new EnemyObj_Zombie(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Wolf           => new EnemyObj_Wolf(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.BallAndChain   => new EnemyObj_BallAndChain(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Eyeball        => new EnemyObj_Eyeball(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Ninja          => new EnemyObj_Ninja(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Blob           => new EnemyObj_Blob(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.SwordKnight    => new EnemyObj_SwordKnight(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Eagle          => new EnemyObj_Eagle(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.ShieldKnight   => new EnemyObj_ShieldKnight(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.FireWizard     => new EnemyObj_FireWizard(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.IceWizard      => new EnemyObj_IceWizard(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.EarthWizard    => new EnemyObj_EarthWizard(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.BouncySpike    => new EnemyObj_BouncySpike(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.SpikeTrap      => new EnemyObj_SpikeTrap(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Plant          => new EnemyObj_Plant(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Energon        => new EnemyObj_Energon(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Spark          => new EnemyObj_Spark(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.SkeletonArcher => new EnemyObj_SkeletonArcher(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Chicken        => new EnemyObj_Chicken(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Platform       => new EnemyObj_Platform(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.HomingTurret   => new EnemyObj_HomingTurret(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.LastBoss       => new EnemyObj_LastBoss(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Dummy          => new EnemyObj_Dummy(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Starburst      => new EnemyObj_Starburst(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Portrait       => new EnemyObj_Portrait(player, physMgr, levelToAttachTo, difficulty),
+            EnemyType.Mimic          => new EnemyObj_Mimic(player, physMgr, levelToAttachTo, difficulty),
+            _                        => throw new NotImplementedException($"Unsupported enemy type: {enemyType}"),
+        };
 
-            if (player == null && doNotInitialize == false)
-                objToReturn.Initialize();
-            return objToReturn;
+        if (player == null && doNotInitialize == false)
+        {
+            objToReturn.Initialize();
         }
+
+        return objToReturn;
     }
 }

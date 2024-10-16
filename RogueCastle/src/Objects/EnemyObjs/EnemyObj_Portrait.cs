@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using InputSystem;
+using RogueCastle.Enumerations;
 
 namespace RogueCastle
 {

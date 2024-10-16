@@ -6,6 +6,8 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Tweener;
 using Microsoft.Xna.Framework.Audio;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -115,7 +117,7 @@ namespace RogueCastle
                     KnockBack = EnemyEV.Eyeball_Miniboss_KnockBack;
                     #endregion
                     PupilOffset = 0;
-                    if (LevelEV.WEAKEN_BOSSES == true)
+                    if (LevelEV.WeakenBosses == true)
                         this.MaxHealth = 1;
                     break;
 

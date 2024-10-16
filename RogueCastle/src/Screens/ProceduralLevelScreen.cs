@@ -11,6 +11,8 @@ using SpriteSystem;
 using Microsoft.Xna.Framework.Graphics;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 using RogueCastle.Objects;
 using Tweener;
 using Tweener.Ease;
@@ -955,7 +957,7 @@ namespace RogueCastle
                     }
                 }
 
-                if (LevelEV.RUN_TESTROOM == true && loadContent == true)
+                if (LevelEV.RunTestRoom == true && loadContent == true)
                 {
                     foreach (GameObj obj in room.GameObjList)
                     {
@@ -1410,7 +1412,7 @@ namespace RogueCastle
                             m_enemyPauseDuration = 0; // Resets the enemy pause counter. Don't unpause all enemies because they will unpause when Enemy.ResetState() is called.
 
 
-                            if (LevelEV.SHOW_ENEMY_RADII == true)
+                            if (LevelEV.ShowEnemyRadii == true)
                             {
                                 foreach (EnemyObj enemy in roomObj.EnemyList)
                                 {
@@ -1549,7 +1551,7 @@ namespace RogueCastle
                 if (DisableRoomTransitioning == false && CollisionMath.Intersects(new Rectangle((int)m_player.X, (int)m_player.Y, 1,1), Camera.Bounds) == false)
                     CheckForRoomTransition();
 
-                if ((m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.RUN_DEMO_VERSION == true || LevelEV.CREATE_RETAIL_VERSION == true))) && CameraLockedToPlayer == true)
+                if ((m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.RunDemoVersion == true || LevelEV.CreateRetailVersion == true))) && CameraLockedToPlayer == true)
                     UpdateCamera(); // Must be called AFTER the PhysicsManager Update() because the PhysicsManager changes the player's position depending on what he/she is colliding with.
 
                 if (Game.PlayerStats.SpecialItem == SpecialItemType.Compass && CurrentRoom.Name != "Start" && CurrentRoom.Name !="Tutorial" && CurrentRoom.Name != "Boss" && CurrentRoom.Name != "Throne" && CurrentRoom.Name != "ChallengeBoss")
@@ -1659,10 +1661,10 @@ namespace RogueCastle
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_PAUSE) && CurrentRoom.Name != "Ending")
                 (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Pause, true);
 
-            if (LevelEV.ENABLE_DEBUG_INPUT == true)
+            if (LevelEV.EnableDebugInput == true)
                 HandleDebugInput();
 
-            if (m_player != null && (m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.RUN_DEMO_VERSION == true || LevelEV.CREATE_RETAIL_VERSION == true))) && m_player.IsKilled == false)
+            if (m_player != null && (m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.RunDemoVersion == true || LevelEV.CreateRetailVersion == true))) && m_player.IsKilled == false)
                 m_player.HandleInput();
 
             base.HandleInput();
@@ -1688,7 +1690,7 @@ namespace RogueCastle
             }
 
             if (m_inputMap.JustPressed(INPUT_DISPLAYROOMINFO))
-                LevelEV.SHOW_DEBUG_TEXT = !LevelEV.SHOW_DEBUG_TEXT;
+                LevelEV.ShowDebugText = !LevelEV.ShowDebugText;
 
             if (m_inputMap.JustPressed(INPUT_TOGGLEZOOM))
             {
@@ -1885,7 +1887,7 @@ namespace RogueCastle
             int screenWidth = GlobalEV.ScreenWidth;
             int screenHeight = GlobalEV.ScreenHeight;
 
-            if (LevelEV.SAVE_FRAMES == true)
+            if (LevelEV.SaveFrames == true)
             {
                 screenWidth /= 2;
                 screenHeight /= 2;
@@ -2065,7 +2067,7 @@ namespace RogueCastle
             Camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camera.GetTransformation());
             m_backgroundSprite.Draw(Camera);
 
-            if (CurrentRoom != null && Camera.Zoom == 1 && (m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.RUN_DEMO_VERSION == true || LevelEV.CREATE_RETAIL_VERSION == true))))
+            if (CurrentRoom != null && Camera.Zoom == 1 && (m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.RunDemoVersion == true || LevelEV.CreateRetailVersion == true))))
             {
                 CurrentRoom.DrawBGObjs(Camera);
                 // This line isn't being drawn anyway for some reason.
@@ -2107,7 +2109,7 @@ namespace RogueCastle
             ////////////////////////////////////////
 
             ////// DRAWING ACTUAL LEVEL ///////////////////////////////////
-            if (LevelEV.SHOW_ENEMY_RADII == false)
+            if (LevelEV.ShowEnemyRadii == false)
                 Camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camera.GetTransformation()); // Set SpriteSortMode to immediate to allow instant changes to samplerstates.
             else
                 Camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camera.GetTransformation());
@@ -2121,7 +2123,7 @@ namespace RogueCastle
             //}
              
 
-            if (LevelEV.SHOW_ENEMY_RADII == true)
+            if (LevelEV.ShowEnemyRadii == true)
             {
                 foreach (EnemyObj enemy in m_currentRoom.EnemyList)
                 {
@@ -2166,7 +2168,7 @@ namespace RogueCastle
             if (m_player.IsKilled == false)
                 m_player.Draw(Camera);
 
-            if (LevelEV.CREATE_RETAIL_VERSION == false)
+            if (LevelEV.CreateRetailVersion == false)
             {
                 DebugTextObj.Position = new Vector2(Camera.X, Camera.Y - 300);
                 DebugTextObj.Draw(Camera);
@@ -2208,7 +2210,7 @@ namespace RogueCastle
                 Camera.GraphicsDevice.Textures[1] = m_lightSourceRenderTarget;
                 Camera.GraphicsDevice.Textures[1].GraphicsDevice.SamplerStates[1] = SamplerState.LinearClamp;
                 Camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, null, null, Game.ShadowEffect);
-                if (LevelEV.SAVE_FRAMES == true)
+                if (LevelEV.SaveFrames == true)
                     Camera.Draw(m_shadowRenderTarget, Vector2.Zero, null, Color.White, 0, Vector2.Zero, new Vector2(2, 2), SpriteEffects.None, 1);
                 else
                     Camera.Draw(m_shadowRenderTarget, Vector2.Zero, Color.White);
@@ -2394,12 +2396,12 @@ namespace RogueCastle
             if (enemyObjList.Count > 0)
             {
                 EnemyObj enemy = enemyObjList[CDGMath.RandomInt(0, enemyObjList.Count - 1)];
-                byte[] enemyList = null;
+                EnemyType[] enemyList = null;
 
                 if (enemy.IsWeighted == true)
-                    enemyList = LevelEV.DEMENTIA_GROUND_LIST;
+                    enemyList = LevelEV.DementiaGroundList;
                 else
-                    enemyList = LevelEV.DEMENTIA_FLIGHT_LIST;
+                    enemyList = LevelEV.DementiaFlightList;
 
                 EnemyObj newEnemy = EnemyBuilder.BuildEnemy(enemyList[CDGMath.RandomInt(0, enemyList.Length - 1)], null, null, null, GameTypes.EnemyDifficulty.BASIC, true);
                 newEnemy.Position = enemy.Position; // Make sure this is set before calling AddEnemyToCurrentRoom()
@@ -2980,7 +2982,7 @@ namespace RogueCastle
             m_player.CurrentHealth = Game.PlayerStats.CurrentHealth;
             m_player.CurrentMana = Game.PlayerStats.CurrentMana;
 
-            if (LevelEV.RUN_TESTROOM == true)
+            if (LevelEV.RunTestRoom == true)
             {
                 Game.ScreenManager.Player.CurrentHealth = Game.ScreenManager.Player.MaxHealth;
                 Game.ScreenManager.Player.CurrentMana = Game.ScreenManager.Player.MaxMana;
@@ -3040,15 +3042,15 @@ namespace RogueCastle
             bool paintingMBKilled = false;
             bool knightMBKilled = false;
             bool wizardMBKilled = false;
-            if (Game.PlayerStats.EnemiesKilledList[EnemyType.Skeleton].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.Skeleton].W > 0)
                 skeletonMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[EnemyType.Plant].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.Plant].W > 0)
                 plantMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[EnemyType.Portrait].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.Portrait].W > 0)
                 paintingMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[EnemyType.Knight].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.Knight].W > 0)
                 knightMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[EnemyType.EarthWizard].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.EarthWizard].W > 0)
                 wizardMBKilled = true;
 
             if (skeletonMBKilled && plantMBKilled && paintingMBKilled && knightMBKilled && wizardMBKilled)

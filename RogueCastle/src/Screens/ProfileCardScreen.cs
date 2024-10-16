@@ -10,6 +10,7 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using System.Text.RegularExpressions;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -764,7 +765,7 @@ namespace RogueCastle
                  ExitScreenTransition();
             }
 
-            if (LevelEV.ENABLE_DEBUG_INPUT == true)
+            if (LevelEV.EnableDebugInput == true)
                 HandleDebugInput();
 
             base.HandleInput();

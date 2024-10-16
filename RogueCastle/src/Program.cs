@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using RogueCastle.EVs;
 using SteamWorksWrapper;
 using SDL3;
 
@@ -16,7 +17,7 @@ namespace RogueCastle
 
             bool loadGame = true;
 
-            if (LevelEV.CREATE_RETAIL_VERSION == true)// && LevelEV.CREATE_INSTALLABLE == false)
+            if (LevelEV.CreateRetailVersion == true)// && LevelEV.CREATE_INSTALLABLE == false)
             {
                 Steamworks.Init();
                 loadGame = Steamworks.WasInit;
@@ -33,45 +34,45 @@ namespace RogueCastle
                 //LevelEV.SHOW_DEBUG_TEXT = false; // true;
 #endif
 
-                if (LevelEV.CREATE_RETAIL_VERSION == true)
+                if (LevelEV.CreateRetailVersion == true)
                 {
-                    LevelEV.SHOW_ENEMY_RADII = false;
-                    LevelEV.ENABLE_DEBUG_INPUT = false;
-                    LevelEV.UNLOCK_ALL_ABILITIES = false;
-                    LevelEV.TESTROOM_LEVELTYPE = GameTypes.LevelType.CASTLE;
-                    LevelEV.TESTROOM_REVERSE = false;
-                    LevelEV.RUN_TESTROOM = false;
-                    LevelEV.SHOW_DEBUG_TEXT = false;
-                    LevelEV.LOAD_TITLE_SCREEN = false;
-                    LevelEV.LOAD_SPLASH_SCREEN = true;
-                    LevelEV.SHOW_SAVELOAD_DEBUG_TEXT = false;
-                    LevelEV.DELETE_SAVEFILE = false;
-                    LevelEV.CLOSE_TESTROOM_DOORS = false;
-                    LevelEV.RUN_TUTORIAL = false;
-                    LevelEV.RUN_DEMO_VERSION = false;
-                    LevelEV.DISABLE_SAVING = false;
-                    LevelEV.RUN_CRASH_LOGS = true;
-                    LevelEV.WEAKEN_BOSSES = false;
-                    LevelEV.ENABLE_BACKUP_SAVING = true;
-                    LevelEV.ENABLE_OFFSCREEN_CONTROL = false;
-                    LevelEV.SHOW_FPS = false;
-                    LevelEV.SAVE_FRAMES = false;
-                    LevelEV.UNLOCK_ALL_DIARY_ENTRIES = false;
-                    LevelEV.ENABLE_BLITWORKS_SPLASH = false;
+                    LevelEV.ShowEnemyRadii = false;
+                    LevelEV.EnableDebugInput = false;
+                    LevelEV.UnlockAllAbilities = false;
+                    LevelEV.TestRoomLevelType = GameTypes.LevelType.CASTLE;
+                    LevelEV.TestRoomReverse = false;
+                    LevelEV.RunTestRoom = false;
+                    LevelEV.ShowDebugText = false;
+                    LevelEV.LoadTitleScreen = false;
+                    LevelEV.LoadSplashScreen = true;
+                    LevelEV.ShowSaveLoadDebugText = false;
+                    LevelEV.DeleteSaveFile = false;
+                    LevelEV.CloseTestRoomDoors = false;
+                    LevelEV.RunTutorial = false;
+                    LevelEV.RunDemoVersion = false;
+                    LevelEV.DisableSaving = false;
+                    LevelEV.RunCrashLogs = true;
+                    LevelEV.WeakenBosses = false;
+                    LevelEV.EnableBackupSaving = true;
+                    LevelEV.EnableOffscreenControl = false;
+                    LevelEV.ShowFps = false;
+                    LevelEV.SaveFrames = false;
+                    LevelEV.UnlockAllDiaryEntries = false;
+                    LevelEV.EnableBlitworksSplash = false;
                 }
 
-                if (args.Length == 1 && LevelEV.CREATE_RETAIL_VERSION == false)
+                if (args.Length == 1 && LevelEV.CreateRetailVersion == false)
                 {
                     using (Game game = new Game(args[0]))
                     {
-                        LevelEV.RUN_TESTROOM = true;
-                        LevelEV.DISABLE_SAVING = true;
+                        LevelEV.RunTestRoom = true;
+                        LevelEV.DisableSaving = true;
                         game.Run();
                     }
                 }
                 else
                 {
-                    if (LevelEV.RUN_CRASH_LOGS == true)
+                    if (LevelEV.RunCrashLogs == true)
                     {
                         try
                         {

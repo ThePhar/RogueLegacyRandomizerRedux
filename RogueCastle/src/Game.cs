@@ -15,6 +15,8 @@ using DS2DEngine;
 using System.IO;
 using System.Globalization;
 using System.Threading;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -87,17 +89,17 @@ namespace RogueCastle
 
             if (filePath.Contains("-t"))
             {
-                LevelEV.TESTROOM_LEVELTYPE = GameTypes.LevelType.TOWER;
+                LevelEV.TestRoomLevelType = GameTypes.LevelType.TOWER;
                 filePath = filePath.Replace("-t", "");
             }
             else if (filePath.Contains("-d"))
             {
-                LevelEV.TESTROOM_LEVELTYPE = GameTypes.LevelType.DUNGEON;
+                LevelEV.TestRoomLevelType = GameTypes.LevelType.DUNGEON;
                 filePath = filePath.Replace("-d", "");
             }
             else if (filePath.Contains("-g"))
             {
-                LevelEV.TESTROOM_LEVELTYPE = GameTypes.LevelType.GARDEN;
+                LevelEV.TestRoomLevelType = GameTypes.LevelType.GARDEN;
                 filePath = filePath.Replace("-g", "");    
             }
 
@@ -127,12 +129,12 @@ namespace RogueCastle
 
             // Set first to false and last to true for targetelapsedtime to work.
             this.IsFixedTimeStep = false; // Sets game to slow down instead of frame skip if set to false.
-            this.graphics.SynchronizeWithVerticalRetrace = !LevelEV.SHOW_FPS; // Disables setting the FPS to your screen's refresh rate.
+            this.graphics.SynchronizeWithVerticalRetrace = !LevelEV.ShowFps; // Disables setting the FPS to your screen's refresh rate.
             // WARNING, if you turn off frame limiting, if the framerate goes over 1000 then the elapsed time will be too small a number for a float to carry and things will break.
             //this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 60.0f);// Sets the frame rate to 30 fps.
             this.Window.AllowUserResizing = false;
             
-            if (LevelEV.ENABLE_OFFSCREEN_CONTROL == false)
+            if (LevelEV.EnableOffscreenControl == false)
                 InactiveSleepTime = new TimeSpan(); // Overrides sleep time, which disables the lag when losing focus.
 
             m_physicsManager = new PhysicsManager();
@@ -226,7 +228,7 @@ namespace RogueCastle
             InitializeMaleNameArray(false);
             InitializeFemaleNameArray(false);
 
-            if (LevelEV.SHOW_FPS == true)
+            if (LevelEV.ShowFps == true)
             {
                 FrameRateCounter fpsCounter = new FrameRateCounter(this);
                 Components.Add(fpsCounter);
@@ -245,7 +247,7 @@ namespace RogueCastle
 
             // Everything below this line can be disabled for release.
 
-            if (LevelEV.CREATE_RETAIL_VERSION == false)
+            if (LevelEV.CreateRetailVersion == false)
             {
                 //Steps for adding enemies to editor.
                 //1. Add a new EnemyEditorData object to enemyList with the name of the enemy class as the constructor (right below).
@@ -412,7 +414,7 @@ namespace RogueCastle
                 Game.GenericTexture.SetData(new Color[] { Color.White });
 
                 // This causes massive slowdown on load.
-                if (LevelEV.LOAD_SPLASH_SCREEN == false)
+                if (LevelEV.LoadSplashScreen == false)
                 {
                     LevelBuilder2.Initialize();
                     LevelParser.ParseRooms("Map_1x1", this.Content);
@@ -521,7 +523,7 @@ namespace RogueCastle
 
                 Area1List = new AreaStruct[] { CastleZone, GardenZone, TowerZone, DungeonZone }; //DUNGEON IS LAST AREA
 
-                if (LevelEV.RUN_DEMO_VERSION == true)
+                if (LevelEV.RunDemoVersion == true)
                     Area1List = new AreaStruct[] { CastleZoneDemo }; //DUNGEON IS LAST AREA
                 //Area1List = new AreaStruct[] { CastleZoneDemo, GardenZoneDemo, TowerZoneDemo, DungeonZoneDemo }; //DUNGEON IS LAST AREA
 
@@ -686,7 +688,7 @@ namespace RogueCastle
             if (m_gameLoaded == false)
             {
                 m_gameLoaded = true;
-                if (LevelEV.DELETE_SAVEFILE == true)
+                if (LevelEV.DeleteSaveFile == true)
                 {
                     SaveManager.ClearAllFileTypes(true);
                     SaveManager.ClearAllFileTypes(false);
@@ -779,22 +781,22 @@ namespace RogueCastle
                 // Title screen
                 //ScreenManager.DisplayScreen(ScreenType.Title, true, null);
 #else
-                if (LevelEV.LOAD_SPLASH_SCREEN == true)
+                if (LevelEV.LoadSplashScreen == true)
                 {
-                    if (LevelEV.RUN_DEMO_VERSION == true)
+                    if (LevelEV.RunDemoVersion == true)
                         ScreenManager.DisplayScreen(ScreenType.DemoStart, true, null);
                     else
                         ScreenManager.DisplayScreen(ScreenType.CDGSplash, true, null);
                 }
                 else
                 {
-                    if (LevelEV.LOAD_TITLE_SCREEN == false)
+                    if (LevelEV.LoadTitleScreen == false)
                     {
-                        if (LevelEV.RUN_TESTROOM == true)
+                        if (LevelEV.RunTestRoom == true)
                             ScreenManager.DisplayScreen(ScreenType.Level, true, null);
                         else
                         {
-                            if (LevelEV.RUN_TUTORIAL == true)
+                            if (LevelEV.RunTutorial == true)
                                 ScreenManager.DisplayScreen(ScreenType.TutorialRoom, true, null);
                             else
                                 //ScreenManager.DisplayScreen(ScreenType.Lineage, true, null); // Just for testing lineages.
@@ -843,9 +845,9 @@ namespace RogueCastle
 
             // The screenmanager is updated via the Components.Add call in the game constructor. It is called after this Update() call.
             SoundManager.Update(gameTimeToUse);
-            if ((m_previouslyActiveCounter <= 0 && IsActive == true) || LevelEV.ENABLE_OFFSCREEN_CONTROL == true) // Only accept input if you have screen focus.
+            if ((m_previouslyActiveCounter <= 0 && IsActive == true) || LevelEV.EnableOffscreenControl == true) // Only accept input if you have screen focus.
                 InputManager.Update(gameTimeToUse);
-            if (LevelEV.ENABLE_DEBUG_INPUT == true)
+            if (LevelEV.EnableDebugInput == true)
                 HandleDebugInput();
             Tween.Update(gameTimeToUse);
             ScreenManager.Update(gameTimeToUse);
@@ -1435,7 +1437,7 @@ namespace RogueCastle
                                     break;
                                 case ("ReduceQuality"):
                                     Game.GameConfig.ReduceQuality = bool.Parse(lineValue);
-                                    LevelEV.SAVE_FRAMES = Game.GameConfig.ReduceQuality;
+                                    LevelEV.SaveFrames = Game.GameConfig.ReduceQuality;
                                     break;
                                 case ("EnableSteamCloud"):
                                     Game.GameConfig.EnableSteamCloud = bool.Parse(lineValue);

@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Tweener.Ease;
 using Tweener;
 using Microsoft.Xna.Framework.Audio;
+using RogueCastle.EVs;
 using RogueCastle.Objects;
 
 namespace RogueCastle
@@ -160,7 +161,7 @@ namespace RogueCastle
 
             m_rainFG = new List<RaindropObj>();
             int numRainDrops = 400;
-            if (LevelEV.SAVE_FRAMES == true)
+            if (LevelEV.SaveFrames == true)
                 numRainDrops /= 2;
 
             for (int i = 0; i < numRainDrops; i++)

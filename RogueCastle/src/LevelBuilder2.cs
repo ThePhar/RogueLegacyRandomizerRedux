@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using DS2DEngine;
 using System.Globalization;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -148,7 +150,7 @@ namespace RogueCastle
             if (storeDebug == true)
             {
                 m_testRoom = room.Clone() as RoomObj;
-                m_testRoom.LevelType = LevelEV.TESTROOM_LEVELTYPE;
+                m_testRoom.LevelType = LevelEV.TestRoomLevelType;
             }
             //else
             {
@@ -1243,26 +1245,26 @@ namespace RogueCastle
             foreach (RoomObj room in roomList)
             {
                 // Setting the pool of the types of the enemies the room can select from.
-                byte[] enemyPool = null;
+                EnemyType[] enemyPool = null;
                 byte[] enemyDifficultyPool = null;
                 switch (room.LevelType)
                 {
                     default:
                     case (GameTypes.LevelType.CASTLE):
-                        enemyPool = LevelEV.CASTLE_ENEMY_LIST;
-                        enemyDifficultyPool = LevelEV.CASTLE_ENEMY_DIFFICULTY_LIST;
+                        enemyPool = LevelEV.CastleEnemyList;
+                        enemyDifficultyPool = LevelEV.CastleEnemyDifficultyList;
                         break;
                     case (GameTypes.LevelType.GARDEN):
-                        enemyPool = LevelEV.GARDEN_ENEMY_LIST;
-                        enemyDifficultyPool = LevelEV.GARDEN_ENEMY_DIFFICULTY_LIST;
+                        enemyPool = LevelEV.GardenEnemyList;
+                        enemyDifficultyPool = LevelEV.GardenEnemyDifficultyList;
                         break;
                     case (GameTypes.LevelType.TOWER):
-                        enemyPool = LevelEV.TOWER_ENEMY_LIST;
-                        enemyDifficultyPool = LevelEV.TOWER_ENEMY_DIFFICULTY_LIST;
+                        enemyPool = LevelEV.TowerEnemyList;
+                        enemyDifficultyPool = LevelEV.TowerEnemyDifficultyList;
                         break;
                     case (GameTypes.LevelType.DUNGEON):
-                        enemyPool = LevelEV.DUNGEON_ENEMY_LIST;
-                        enemyDifficultyPool = LevelEV.DUNGEON_ENEMY_DIFFICULTY_LIST;
+                        enemyPool = LevelEV.DungeonEnemyList;
+                        enemyDifficultyPool = LevelEV.DungeonEnemyDifficultyList;
                         break;
                 }
 
@@ -1274,7 +1276,7 @@ namespace RogueCastle
                 int storedEnemyIndex = randomEnemyOrbIndex;
 
                 // Storing red enemy type.
-                byte redEnemyType = enemyPool[randomEnemyOrbIndex];
+                EnemyType redEnemyType = enemyPool[randomEnemyOrbIndex];
                 byte redEnemyDifficulty = enemyDifficultyPool[randomEnemyOrbIndex];
              
                 //Shuffling to get a new enemy type.
@@ -1283,7 +1285,7 @@ namespace RogueCastle
                 storedEnemyIndex = randomEnemyOrbIndex;
 
                 // Storing blue enemy type.
-                byte blueEnemyType = enemyPool[randomEnemyOrbIndex];
+                EnemyType blueEnemyType = enemyPool[randomEnemyOrbIndex];
                 byte blueEnemyDifficulty = enemyDifficultyPool[randomEnemyOrbIndex];
                 
                 // Shuffling to get a new enemy type.
@@ -1292,7 +1294,7 @@ namespace RogueCastle
                 storedEnemyIndex = randomEnemyOrbIndex;
 
                 // Storing green enemy type.
-                byte greenEnemyType = enemyPool[randomEnemyOrbIndex];
+                EnemyType greenEnemyType = enemyPool[randomEnemyOrbIndex];
                 byte greenEnemyDifficulty = enemyDifficultyPool[randomEnemyOrbIndex];
 
                 // Shuffling to get a new enemy type.
@@ -1301,7 +1303,7 @@ namespace RogueCastle
                 storedEnemyIndex = randomEnemyOrbIndex;
 
                 // Storing white enemy type.
-                byte whiteEnemyType = enemyPool[randomEnemyOrbIndex];
+                EnemyType whiteEnemyType = enemyPool[randomEnemyOrbIndex];
                 byte whiteEnemyDifficulty = enemyDifficultyPool[randomEnemyOrbIndex];
 
                 // Shuffling to get a new enemy type.
@@ -1310,13 +1312,13 @@ namespace RogueCastle
                 storedEnemyIndex = randomEnemyOrbIndex;
 
                 // Storing black enemy type.
-                byte blackEnemyType = enemyPool[randomEnemyOrbIndex];
+                EnemyType blackEnemyType = enemyPool[randomEnemyOrbIndex];
                 byte blackEnemyDifficulty = enemyDifficultyPool[randomEnemyOrbIndex];
 
                 // Shuffling to get new boss type. No need to prevent two of the same enemy types of appearing.
                 randomEnemyOrbIndex = CDGMath.RandomInt(0, enemyPool.Length - 1);
                 // Storing yellow enemy type.
-                byte yellowEnemyType = enemyPool[randomEnemyOrbIndex];
+                EnemyType yellowEnemyType = enemyPool[randomEnemyOrbIndex];
                 while (yellowEnemyType == EnemyType.BouncySpike) // Prevent expert enemy from being bouncy spike
                 {
                     randomEnemyOrbIndex = CDGMath.RandomInt(0, enemyPool.Length - 1);
@@ -1434,7 +1436,7 @@ namespace RogueCastle
             }
         }
 
-        public static void OverrideProceduralEnemies(ProceduralLevelScreen level, byte[] enemyTypeData, byte[] enemyDifficultyData)
+        public static void OverrideProceduralEnemies(ProceduralLevelScreen level, EnemyType[] enemyTypeData, byte[] enemyDifficultyData)
         {
             Console.WriteLine("////////////////// OVERRIDING CREATED ENEMIES. LOADING PRE-CONSTRUCTED ENEMY LIST ////////");
 
@@ -1658,16 +1660,16 @@ namespace RogueCastle
 
         public static ProceduralLevelScreen CreateLevel(RoomObj startingRoom = null, params AreaStruct[] areaStructs)
         {
-            if (m_testRoom != null && LevelEV.RUN_TESTROOM == true)
+            if (m_testRoom != null && LevelEV.RunTestRoom == true)
             {
                 Console.WriteLine("OVERRIDING ROOM CREATION. RUNNING TEST ROOM");
                 ProceduralLevelScreen debugLevel = new ProceduralLevelScreen();
                 RoomObj debugRoom = m_testRoom.Clone() as RoomObj;
-                if (LevelEV.TESTROOM_REVERSE == true)
+                if (LevelEV.TestRoomReverse == true)
                     debugRoom.Reverse();
                 MoveRoom(debugRoom, Vector2.Zero);
                 debugLevel.AddRoom(debugRoom);
-                if (LevelEV.CLOSE_TESTROOM_DOORS == true)
+                if (LevelEV.CloseTestRoomDoors == true)
                     CloseRemainingDoors(debugLevel.RoomList);
                 AddDoorBorders(debugLevel.RoomList);
                 AddBottomPlatforms(debugLevel.RoomList);
@@ -1680,7 +1682,7 @@ namespace RogueCastle
                 ConvertChallengeBossRooms(debugLevel.RoomList);
                 InitializeRooms(debugLevel.RoomList);
 
-                debugLevel.RoomList[0].LevelType = LevelEV.TESTROOM_LEVELTYPE; // A hack for special rooms, since they're set to none level type.
+                debugLevel.RoomList[0].LevelType = LevelEV.TestRoomLevelType; // A hack for special rooms, since they're set to none level type.
 
                 return debugLevel;
             }

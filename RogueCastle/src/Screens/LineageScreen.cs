@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using InputSystem;
 using System.Text.RegularExpressions;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -726,7 +727,7 @@ namespace RogueCastle
                     base.HandleInput();
                 }
 
-                if (LevelEV.ENABLE_DEBUG_INPUT == true)
+                if (LevelEV.EnableDebugInput == true)
                     HandleDebugInput();
             }
         }

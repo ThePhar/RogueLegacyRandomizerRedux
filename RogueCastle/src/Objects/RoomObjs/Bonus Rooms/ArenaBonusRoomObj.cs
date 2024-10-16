@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.Enumerations;
 using Tweener;
 
 namespace RogueCastle
@@ -154,15 +155,15 @@ namespace RogueCastle
             bool paintingMBKilled = false;
             bool knightMBKilled = false;
             bool wizardMBKilled = false;
-            if (Game.PlayerStats.EnemiesKilledList[EnemyType.Skeleton].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.Skeleton].W > 0)
                 skeletonMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[EnemyType.Plant].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.Plant].W > 0)
                 plantMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[EnemyType.Portrait].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.Portrait].W > 0)
                 paintingMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[EnemyType.Knight].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.Knight].W > 0)
                 knightMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[EnemyType.EarthWizard].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.EarthWizard].W > 0)
                 wizardMBKilled = true;
 
             if (skeletonMBKilled && plantMBKilled && paintingMBKilled && knightMBKilled && wizardMBKilled)

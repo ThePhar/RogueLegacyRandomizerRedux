@@ -6,6 +6,8 @@ using Microsoft.Xna.Framework.Content;
 using System.Globalization;
 using System.Xml;
 using DS2DEngine;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 using RogueCastle.Objects;
 
 namespace RogueCastle
@@ -105,7 +107,7 @@ namespace RogueCastle
                                 if (isProcedural == false) // The enemy is not procedural so create him now and add him to the room.
                                 {
                                     reader.MoveToAttribute("EnemyType");
-                                    byte enemyType = byte.Parse(reader.Value, NumberStyles.Any, ci);
+                                    EnemyType enemyType = (EnemyType)byte.Parse(reader.Value, NumberStyles.Any, ci);
 
                                     reader.MoveToAttribute("Difficulty");
                                     GameTypes.EnemyDifficulty difficulty = (GameTypes.EnemyDifficulty)Enum.Parse(typeof(GameTypes.EnemyDifficulty), reader.Value, true);
@@ -221,12 +223,12 @@ namespace RogueCastle
 
                         // Extra debug code so that when testing a room, the correct LevelType objects will appear in that room.
                         // Removing this code doesn't hurt the game. It just turns Test Rooms into generic rooms.
-                        if (LevelEV.RUN_TESTROOM == true && (levelType == LevelEV.TESTROOM_LEVELTYPE || levelType == GameTypes.LevelType.CASTLE))
+                        if (LevelEV.RunTestRoom == true && (levelType == LevelEV.TestRoomLevelType || levelType == GameTypes.LevelType.CASTLE))
                         {
-                            if (levelType == LevelEV.TESTROOM_LEVELTYPE)
+                            if (levelType == LevelEV.TestRoomLevelType)
                                 StoreObj(obj, currentRoom);
                             else if (levelType == GameTypes.LevelType.CASTLE)
-                                StoreSwappedObj(obj, LevelEV.TESTROOM_LEVELTYPE, currentRoom);
+                                StoreSwappedObj(obj, LevelEV.TestRoomLevelType, currentRoom);
                         }
 
                         // Special handling for test rooms.
@@ -266,9 +268,9 @@ namespace RogueCastle
                         if (currentRoom.Name.Contains("DEBUG_ROOM"))
                         {
                             currentRoom.Name = currentRoom.Name.Replace("DEBUG_ROOM", "");
-                            if (LevelEV.TESTROOM_LEVELTYPE != GameTypes.LevelType.CASTLE)
+                            if (LevelEV.TestRoomLevelType != GameTypes.LevelType.CASTLE)
                                 LevelBuilder2.StoreSpecialRoom(currentRoom, GameTypes.LevelType.CASTLE, true); // Store a castle version because SequencedRoomList in LevelBuilder2 checks for the castle version.
-                            LevelBuilder2.StoreSpecialRoom(currentRoom, LevelEV.TESTROOM_LEVELTYPE, true);
+                            LevelBuilder2.StoreSpecialRoom(currentRoom, LevelEV.TestRoomLevelType, true);
 
                             //RoomObj testRoom = currentRoom.Clone() as RoomObj;
                             //testRoom.Name = "DEBUG_ROOM";
@@ -314,13 +316,13 @@ namespace RogueCastle
             switch (levelType)
             {
                 case (GameTypes.LevelType.DUNGEON):
-                    swapList = LevelEV.DUNGEON_ASSETSWAP_LIST;
+                    swapList = LevelEV.DungeonAssetSwapList;
                     break;
                 case(GameTypes.LevelType.TOWER):
-                    swapList = LevelEV.TOWER_ASSETSWAP_LIST;
+                    swapList = LevelEV.TowerAssetSwapList;
                     break;
                 case (GameTypes.LevelType.GARDEN):
-                    swapList = LevelEV.GARDEN_ASSETSWAP_LIST;
+                    swapList = LevelEV.GardenAssetSwapList;
                     break;
                 default:
                     throw new Exception("Cannot find asset swaplist for leveltype " + levelType);
@@ -335,9 +337,9 @@ namespace RogueCastle
             IAnimateableObj clone = obj.Clone() as IAnimateableObj;
             if (clone != null)
             {
-                for (int i = 0; i < LevelEV.CASTLE_ASSETSWAP_LIST.Length; i++)
+                for (int i = 0; i < LevelEV.CastleAssetSwapList.Length; i++)
                 {
-                    if (clone.SpriteName == LevelEV.CASTLE_ASSETSWAP_LIST[i])
+                    if (clone.SpriteName == LevelEV.CastleAssetSwapList[i])
                     {
                         string newSprite = swapList[i];
                         if (newSprite.Contains("RANDOM"))

@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -34,7 +35,7 @@ namespace RogueCastle
 
             m_moon = new SpriteObj("ParallaxMoon_Sprite");
             m_moon.Position = new Vector2(900, 200);
-            if (LevelEV.SAVE_FRAMES == true)
+            if (LevelEV.SaveFrames == true)
             {
                 m_moon.Position /= 2;
                 rtScale = Vector2.One;
@@ -76,7 +77,7 @@ namespace RogueCastle
         public void ReinitializeRT(Camera2D camera)
         {
             Vector2 rtScale = new Vector2(2, 2);
-            if (LevelEV.SAVE_FRAMES == true)
+            if (LevelEV.SaveFrames == true)
             {
                 m_moon.Position /= 2;
                 rtScale = Vector2.One;

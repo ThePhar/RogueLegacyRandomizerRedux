@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Tweener;
 using Tweener.Ease;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -176,7 +177,7 @@ namespace RogueCastle
             m_bossDivider.ScaleX = 0;
             m_bossDivider.Opacity = 0;
 
-            if (LevelEV.WEAKEN_BOSSES == true)
+            if (LevelEV.WeakenBosses == true)
             {
                 foreach (EnemyObj enemy in this.EnemyList)
                     enemy.CurrentHealth = 1;
@@ -309,7 +310,7 @@ namespace RogueCastle
             else if (m_bossChest.Visible == true && m_bossChest.IsOpen == true && BossKilled == true && m_teleportingOut == false)
             {
                 m_teleportingOut = true;
-                if (LevelEV.RUN_DEMO_VERSION == true)
+                if (LevelEV.RunDemoVersion == true)
                     (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DemoEnd, true);
                 else
                     TeleportPlayer();

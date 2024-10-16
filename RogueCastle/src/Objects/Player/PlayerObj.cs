@@ -7,6 +7,7 @@ using InputSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.EVs;
 using Tweener;
 
 namespace RogueCastle
@@ -591,7 +592,7 @@ namespace RogueCastle
                 }
             }
 
-            if (LevelEV.ENABLE_DEBUG_INPUT == true)
+            if (LevelEV.EnableDebugInput == true)
                 HandleDebugInput();
         }
 

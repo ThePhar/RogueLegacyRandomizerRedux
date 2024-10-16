@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 using Tweener;
 
 namespace RogueCastle
@@ -121,7 +123,7 @@ namespace RogueCastle
                     ProjectileDamage = Damage;
                     KnockBack = EnemyEV.Fireball_Miniboss_KnockBack;
                     #endregion
-                    if (LevelEV.WEAKEN_BOSSES == true)
+                    if (LevelEV.WeakenBosses == true)
                         this.MaxHealth = 1;
                     break;
 

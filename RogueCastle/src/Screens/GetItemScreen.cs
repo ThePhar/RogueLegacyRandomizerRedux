@@ -10,6 +10,7 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using RogueCastle.EVs;
 
 namespace RogueCastle
 {
@@ -377,7 +378,7 @@ namespace RogueCastle
                      || Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM3) || Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL3))
                     ExitScreenTransition();
 
-                if (LevelEV.ENABLE_DEBUG_INPUT == true)
+                if (LevelEV.EnableDebugInput == true)
                     HandleDebugInput();
             }
 

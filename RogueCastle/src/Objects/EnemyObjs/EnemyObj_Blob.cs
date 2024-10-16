@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 using Tweener;
 
 namespace RogueCastle
@@ -130,7 +132,7 @@ namespace RogueCastle
 					ProjectileDamage = Damage;
 					KnockBack = EnemyEV.Blob_Miniboss_KnockBack;
 					#endregion
-                    if (LevelEV.WEAKEN_BOSSES == true)
+                    if (LevelEV.WeakenBosses == true)
                     {
                         this.MaxHealth = 1;
                         SetNumberOfHits(1);
@@ -600,7 +602,7 @@ namespace RogueCastle
             else
                 blob.ChangeSprite("EnemyBlobAir_Character");
             blob.PlayAnimation(true);
-            if (LevelEV.SHOW_ENEMY_RADII == true)
+            if (LevelEV.ShowEnemyRadii == true)
                 blob.InitializeDebugRadii();
             blob.SaveToFile = false;
             blob.SpawnRoom = m_levelScreen.CurrentRoom;
@@ -645,7 +647,7 @@ namespace RogueCastle
             wizard.AccelerationY += -(m_target.EnemyKnockBack.Y + randYKnockback);
 
             wizard.PlayAnimation(true);
-            if (LevelEV.SHOW_ENEMY_RADII == true)
+            if (LevelEV.ShowEnemyRadii == true)
                 wizard.InitializeDebugRadii();
             wizard.SaveToFile = false;
             wizard.SpawnRoom = m_levelScreen.CurrentRoom;

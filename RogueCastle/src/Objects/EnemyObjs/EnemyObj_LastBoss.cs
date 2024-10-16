@@ -6,6 +6,8 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Tweener;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.Enumerations;
+using RogueCastle.EVs;
 using Tweener.Ease;
 
 namespace RogueCastle
@@ -233,7 +235,7 @@ namespace RogueCastle
                 case (GameTypes.EnemyDifficulty.BASIC):
                 default:
                     this.AnimationDelay = 1 / 10f;
-                    if (LevelEV.WEAKEN_BOSSES == true)
+                    if (LevelEV.WeakenBosses == true)
                         this.MaxHealth = 1;
                     break;
             }		
@@ -1517,7 +1519,7 @@ namespace RogueCastle
             this.Damage = EnemyEV.LastBoss_Advanced_Damage;
             this.CurrentHealth = MaxHealth;
             Name = EnemyEV.LastBoss_Advanced_Name;
-            if (LevelEV.WEAKEN_BOSSES == true)
+            if (LevelEV.WeakenBosses == true)
                 this.CurrentHealth = 1;
             this.MinMoneyDropAmount = EnemyEV.LastBoss_Advanced_MinDropAmount;
             this.MaxMoneyDropAmount = EnemyEV.LastBoss_Advanced_MaxDropAmount;

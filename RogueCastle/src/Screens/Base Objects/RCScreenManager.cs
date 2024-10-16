@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.EVs;
 using Tweener;
 using Tweener.Ease;
 
@@ -498,7 +499,7 @@ namespace RogueCastle
             m_blackScreen.Draw(Camera);
             Camera.End();
 
-            if (LevelEV.ENABLE_DEBUG_INPUT == true)
+            if (LevelEV.EnableDebugInput == true)
             {
                 Camera.Begin();
                 string forcedGenderString = "None";
