@@ -55,14 +55,14 @@ namespace RogueCastle
                 entry.Position = new Vector2(xPosition, yPosition);
 
                 TextObj entryTitle = new TextObj(Game.JunicodeFont);
-                switch (LocaleBuilder.languageType)
+                switch (LocaleBuilder.LanguageType)
                 {
                     case(LanguageType.Russian):
                     case(LanguageType.Polish):
-                        entryTitle.Text = LocaleBuilder.getString("LOC_ID_DIARY_ENTRY_SCREEN_1", entryTitle) /*"Entry #"*/ + " " + (i + 1);
+                        entryTitle.Text = LocaleBuilder.GetString("LOC_ID_DIARY_ENTRY_SCREEN_1", entryTitle) /*"Entry #"*/ + " " + (i + 1);
                         break;
                     default:
-                        entryTitle.Text = LocaleBuilder.getString("LOC_ID_DIARY_ENTRY_SCREEN_1", entryTitle) /*"Entry #"*/ + (i + 1);
+                        entryTitle.Text = LocaleBuilder.GetString("LOC_ID_DIARY_ENTRY_SCREEN_1", entryTitle) /*"Entry #"*/ + (i + 1);
                         break;
                 }
                 entryTitle.OverrideParentScale = true;
@@ -297,14 +297,14 @@ namespace RogueCastle
             {
                 if (obj.GetChildAt(obj.NumChildren - 1) is TextObj)
                 {
-                    switch (LocaleBuilder.languageType)
+                    switch (LocaleBuilder.LanguageType)
                     {
                         case (LanguageType.Russian):
                         case (LanguageType.Polish):
-                            (obj.GetChildAt(obj.NumChildren - 1) as TextObj).Text = LocaleBuilder.getResourceString("LOC_ID_DIARY_ENTRY_SCREEN_1") /*"Entry #"*/ + " " + (i + 1);
+                            (obj.GetChildAt(obj.NumChildren - 1) as TextObj).Text = LocaleBuilder.GetResourceString("LOC_ID_DIARY_ENTRY_SCREEN_1") /*"Entry #"*/ + " " + (i + 1);
                             break;
                         default:
-                            (obj.GetChildAt(obj.NumChildren - 1) as TextObj).Text = LocaleBuilder.getResourceString("LOC_ID_DIARY_ENTRY_SCREEN_1") /*"Entry #"*/ + (i + 1);
+                            (obj.GetChildAt(obj.NumChildren - 1) as TextObj).Text = LocaleBuilder.GetResourceString("LOC_ID_DIARY_ENTRY_SCREEN_1") /*"Entry #"*/ + (i + 1);
                             break;
                     }
                 }

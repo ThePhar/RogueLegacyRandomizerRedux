@@ -92,7 +92,7 @@ namespace RogueCastle
             m_spellIcon.ForceDraw = true;
 
             m_cancelText = new KeyIconTextObj(Game.JunicodeFont);
-            m_cancelText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_cancelText); // dummy locID to add TextObj to language refresh list
+            m_cancelText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_cancelText); // dummy locID to add TextObj to language refresh list
             m_cancelText.Align = Types.TextAlign.Right;
             m_cancelText.DropShadow = new Vector2(2, 2);
             m_cancelText.FontSize = 12;
@@ -122,7 +122,7 @@ namespace RogueCastle
             m_frontCard.AddChild(m_money);
 
             m_levelClass = templateText.Clone() as TextObj;
-            m_levelClass.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_levelClass); // dummy locID to add TextObj to language refresh list
+            m_levelClass.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_levelClass); // dummy locID to add TextObj to language refresh list
             //m_levelClass.Position = new Vector2(m_playerName.X, 370);
             m_levelClass.Position = new Vector2(m_playerName.X, 260);
             m_frontCard.AddChild(m_levelClass);
@@ -146,18 +146,18 @@ namespace RogueCastle
             m_frontTrait1.TextureColor = Color.Black;
             //m_frontTrait1.Position = new Vector2(50, 550);
             m_frontTrait1.Position = new Vector2(50, 550 - 320);
-            m_frontTrait1.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_frontTrait1); // dummy locID to add TextObj to language refresh list
+            m_frontTrait1.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_frontTrait1); // dummy locID to add TextObj to language refresh list
             m_frontCard.AddChild(m_frontTrait1);
 
             m_frontTrait2 = m_frontTrait1.Clone() as TextObj;
             m_frontTrait2.Y -= 20;
-            m_frontTrait2.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_frontTrait2); // dummy locID to add TextObj to language refresh list
+            m_frontTrait2.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_frontTrait2); // dummy locID to add TextObj to language refresh list
             m_frontCard.AddChild(m_frontTrait2);
 
             m_classDescription = new TextObj(Game.JunicodeFont);
             m_classDescription.FontSize = 8;
             m_classDescription.TextureColor = Color.Black;
-            m_classDescription.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_classDescription); // dummy locID to add TextObj to language refresh list
+            m_classDescription.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_classDescription); // dummy locID to add TextObj to language refresh list
             //m_classDescription.Position = new Vector2(50, 410);
             m_classDescription.Position = new Vector2(50, 410 - 320);
             m_frontCard.AddChild(m_classDescription);
@@ -196,7 +196,7 @@ namespace RogueCastle
             {
                 TextObj listTitle = templateText.Clone() as TextObj;
                 listTitle.Align = Types.TextAlign.Right;
-                listTitle.Text = LocaleBuilder.getString(list1LocIds[i], listTitle);
+                listTitle.Text = LocaleBuilder.GetString(list1LocIds[i], listTitle);
                 listTitle.Position = new Vector2(120, startingY);
                 m_backCard.AddChild(listTitle);
 
@@ -208,7 +208,7 @@ namespace RogueCastle
 
                 TextObj listTitle2 = templateText.Clone() as TextObj;
                 listTitle2.Align = Types.TextAlign.Right;
-                listTitle2.Text = LocaleBuilder.getString(list2LocIds[i], listTitle2);
+                listTitle2.Text = LocaleBuilder.GetString(list2LocIds[i], listTitle2);
                 listTitle2.Position = new Vector2(350, startingY);
                 m_backCard.AddChild(listTitle2);
 
@@ -223,20 +223,20 @@ namespace RogueCastle
 
             m_equipmentTitle = templateText.Clone() as TextObj;
             m_equipmentTitle.FontSize = 12;
-            m_equipmentTitle.Text = LocaleBuilder.getString("LOC_ID_PROFILE_CARD_SCREEN_9", m_equipmentTitle) + ":";
+            m_equipmentTitle.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_CARD_SCREEN_9", m_equipmentTitle) + ":";
             m_equipmentTitle.Position = new Vector2(50, 180);
             m_backCard.AddChild(m_equipmentTitle);
 
             m_runesTitle = templateText.Clone() as TextObj;
             m_runesTitle.FontSize = 12;
-            m_runesTitle.Text = LocaleBuilder.getString("LOC_ID_PROFILE_CARD_SCREEN_10", m_runesTitle) + ":";
+            m_runesTitle.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_CARD_SCREEN_10", m_runesTitle) + ":";
             m_runesTitle.Position = new Vector2(m_equipmentTitle.X, 330);
             m_backCard.AddChild(m_runesTitle);
 
             for (int i = 0; i < Game.PlayerStats.GetEquippedArray.Length; i++)
             {
                 TextObj equipment = templateText.Clone() as TextObj;
-                equipment.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", equipment); // dummy locID to add TextObj to language refresh list
+                equipment.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", equipment); // dummy locID to add TextObj to language refresh list
                 equipment.Position = new Vector2(80, m_equipmentTitle.Y + 50);
                 m_equipmentList.Add(equipment);
                 m_backCard.AddChild(equipment);
@@ -248,14 +248,14 @@ namespace RogueCastle
             {
                 TextObj runeTitle = templateText.Clone() as TextObj;
                 runeTitle.X = 60;
-                runeTitle.Text = LocaleBuilder.getString(EquipmentAbilityType.ToStringID2(i), runeTitle);
+                runeTitle.Text = LocaleBuilder.GetString(EquipmentAbilityType.ToStringID2(i), runeTitle);
                 runeTitle.FontSize = 7;
                 m_runeBackTitleList.Add(runeTitle);
                 m_backCard.AddChild(runeTitle);
 
                 TextObj runeDescription = templateText.Clone() as TextObj;
                 runeDescription.X = runeTitle.Bounds.Right + 10;
-                runeDescription.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", runeDescription); // dummy locID to add TextObj to language refresh list
+                runeDescription.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", runeDescription); // dummy locID to add TextObj to language refresh list
                 runeDescription.FontSize = 7;
                 m_runeBackDescriptionList.Add(runeDescription);
                 m_backCard.AddChild(runeDescription);
@@ -264,7 +264,7 @@ namespace RogueCastle
             // Special architect's fee rune.
             TextObj architectFeeTitle = templateText.Clone() as TextObj;
             architectFeeTitle.X = 60;
-            architectFeeTitle.Text = LocaleBuilder.getString(EquipmentAbilityType.ToStringID2(EquipmentAbilityType.ArchitectFee), architectFeeTitle);
+            architectFeeTitle.Text = LocaleBuilder.GetString(EquipmentAbilityType.ToStringID2(EquipmentAbilityType.ArchitectFee), architectFeeTitle);
             architectFeeTitle.FontSize = 7;
             m_runeBackTitleList.Add(architectFeeTitle);
             m_backCard.AddChild(architectFeeTitle);
@@ -278,7 +278,7 @@ namespace RogueCastle
             // Special architect's fee rune.
             TextObj newGamePlusGoldTitle = templateText.Clone() as TextObj;
             newGamePlusGoldTitle.X = 60;
-            newGamePlusGoldTitle.Text = LocaleBuilder.getString(EquipmentAbilityType.ToStringID2(EquipmentAbilityType.NewGamePlusGoldBonus), newGamePlusGoldTitle);
+            newGamePlusGoldTitle.Text = LocaleBuilder.GetString(EquipmentAbilityType.ToStringID2(EquipmentAbilityType.NewGamePlusGoldBonus), newGamePlusGoldTitle);
             newGamePlusGoldTitle.FontSize = 7;
             m_runeBackTitleList.Add(newGamePlusGoldTitle);
             m_backCard.AddChild(newGamePlusGoldTitle);
@@ -322,7 +322,7 @@ namespace RogueCastle
             else
                 m_cancelText.ForcedScale = new Vector2(1f, 1f);
 
-            m_cancelText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_CARD_SCREEN_11_NEW", m_cancelText);
+            m_cancelText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_CARD_SCREEN_11_NEW", m_cancelText);
             //m_cancelText.Text = "[Input:" + InputMapType.MENU_CANCEL1 + "] " + LocaleBuilder.getString("LOC_ID_PROFILE_CARD_SCREEN_11", m_cancelText);
             m_cancelText.Opacity = 0;
             Tween.To(m_cancelText, 0.2f, Tween.EaseNone, "Opacity", "1");
@@ -575,7 +575,7 @@ namespace RogueCastle
             byte trait1Data = (byte)(Game.PlayerStats.Traits.X + m_traitsDebugCounter.X);
             if (trait1Data != TraitType.None)
             {
-                m_frontTrait1.Text = LocaleBuilder.getResourceString(TraitType.ToStringID(trait1Data)) + ": " + LocaleBuilder.getResourceString(TraitType.ProfileCardDescriptionID(trait1Data));
+                m_frontTrait1.Text = LocaleBuilder.GetResourceString(TraitType.ToStringID(trait1Data)) + ": " + LocaleBuilder.GetResourceString(TraitType.ProfileCardDescriptionID(trait1Data));
                 m_frontTrait1.Visible = true;
             }
 
@@ -585,7 +585,7 @@ namespace RogueCastle
                 m_frontTrait2.Y = m_frontTrait1.Y;
                 if (trait1Data != TraitType.None)
                     m_frontTrait2.Y -= 20;
-                m_frontTrait2.Text = LocaleBuilder.getResourceString(TraitType.ToStringID(trait2Data)) + ": " + LocaleBuilder.getResourceString(TraitType.ProfileCardDescriptionID(trait2Data));
+                m_frontTrait2.Text = LocaleBuilder.GetResourceString(TraitType.ToStringID(trait2Data)) + ": " + LocaleBuilder.GetResourceString(TraitType.ProfileCardDescriptionID(trait2Data));
                 m_frontTrait2.Visible = true;
             }
 
@@ -593,7 +593,7 @@ namespace RogueCastle
             {
                 m_playerName.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_playerName));
                 m_playerName.Text = Game.NameHelper();
-                if (LocaleBuilder.languageType != LanguageType.Chinese_Simp && Regex.IsMatch(m_playerName.Text, @"\p{IsCyrillic}"))
+                if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(m_playerName.Text, @"\p{IsCyrillic}"))
                     m_playerName.ChangeFontNoDefault(Game.RobotoSlabFont);
             }
             catch
@@ -603,7 +603,7 @@ namespace RogueCastle
             }
             //m_playerStats.Text = (int)(player.Damage / 10f) + "/" + (int)(player.MaxHealth / 100f);
             m_playerStats.Text = (int)(player.Damage / 20f) + "/" + (int)(player.MaxHealth / 50f);
-            m_levelClass.Text = LocaleBuilder.getResourceString("LOC_ID_PROFILE_CARD_SCREEN_12") + " " + Game.PlayerStats.CurrentLevel + " - " + LocaleBuilder.getResourceString(ClassType.ToStringID((byte)(Game.PlayerStats.Class + m_classDebugCounter), Game.PlayerStats.IsFemale));
+            m_levelClass.Text = LocaleBuilder.GetResourceString("LOC_ID_PROFILE_CARD_SCREEN_12") + " " + Game.PlayerStats.CurrentLevel + " - " + LocaleBuilder.GetResourceString(ClassType.ToStringID((byte)(Game.PlayerStats.Class + m_classDebugCounter), Game.PlayerStats.IsFemale));
             m_money.Text = Game.PlayerStats.Gold.ToString();
             m_classDescription.Text = ClassType.ProfileCardDescription((byte)(Game.PlayerStats.Class + m_classDebugCounter));
         }
@@ -644,7 +644,7 @@ namespace RogueCastle
                 m_equipmentList[i].Y = startingY;
                 if (playerEquipment[i] != -1)
                 {
-                    m_equipmentList[i].Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_BASE_FORMAT", true), LocaleBuilder.getResourceString(EquipmentBaseType.ToStringID(playerEquipment[i]), true), LocaleBuilder.getResourceString(EquipmentCategoryType.ToStringID(i), true));
+                    m_equipmentList[i].Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_BASE_FORMAT", true), LocaleBuilder.GetResourceString(EquipmentBaseType.ToStringID(playerEquipment[i]), true), LocaleBuilder.GetResourceString(EquipmentCategoryType.ToStringID(i), true));
                     m_equipmentList[i].Visible = true;
                     startingY += 20;
                 }
@@ -745,7 +745,7 @@ namespace RogueCastle
             {
                 (m_backCard.GetChildAt(3) as TextObj).ChangeFontNoDefault(LocaleBuilder.GetLanguageFont((m_backCard.GetChildAt(3) as TextObj)));
                 (m_backCard.GetChildAt(3) as TextObj).Text = Game.NameHelper();
-                if (LocaleBuilder.languageType != LanguageType.Chinese_Simp && Regex.IsMatch((m_backCard.GetChildAt(3) as TextObj).Text, @"\p{IsCyrillic}"))
+                if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch((m_backCard.GetChildAt(3) as TextObj).Text, @"\p{IsCyrillic}"))
                     (m_backCard.GetChildAt(3) as TextObj).ChangeFontNoDefault(Game.RobotoSlabFont);
             }
             catch
@@ -798,7 +798,7 @@ namespace RogueCastle
             if (previousDebugClass != currentDebugClass)
             {
                 m_classDescription.Text = ClassType.ProfileCardDescription((byte)currentDebugClass);
-                m_levelClass.Text = LocaleBuilder.getResourceString("LOC_ID_PROFILE_CARD_SCREEN_12") + " " + Game.PlayerStats.CurrentLevel + " - " + LocaleBuilder.getResourceString(ClassType.ToStringID((byte)currentDebugClass, Game.PlayerStats.IsFemale));
+                m_levelClass.Text = LocaleBuilder.GetResourceString("LOC_ID_PROFILE_CARD_SCREEN_12") + " " + Game.PlayerStats.CurrentLevel + " - " + LocaleBuilder.GetResourceString(ClassType.ToStringID((byte)currentDebugClass, Game.PlayerStats.IsFemale));
             }
 
             // Debug testing for traits localization.
@@ -860,7 +860,7 @@ namespace RogueCastle
                 byte trait1Data = (byte)currentDebugTraits.X;
                 if (trait1Data != TraitType.None)
                 {
-                    m_frontTrait1.Text = LocaleBuilder.getResourceString(TraitType.ToStringID(trait1Data)) + ": " + LocaleBuilder.getResourceString(TraitType.ProfileCardDescriptionID(trait1Data));
+                    m_frontTrait1.Text = LocaleBuilder.GetResourceString(TraitType.ToStringID(trait1Data)) + ": " + LocaleBuilder.GetResourceString(TraitType.ProfileCardDescriptionID(trait1Data));
                     m_frontTrait1.Visible = true;
                 }
 
@@ -870,7 +870,7 @@ namespace RogueCastle
                     m_frontTrait2.Y = m_frontTrait1.Y;
                     if (trait1Data != TraitType.None)
                         m_frontTrait2.Y -= 20;
-                    m_frontTrait2.Text = LocaleBuilder.getResourceString(TraitType.ToStringID(trait2Data)) + ": " + LocaleBuilder.getResourceString(TraitType.ProfileCardDescriptionID(trait2Data));
+                    m_frontTrait2.Text = LocaleBuilder.GetResourceString(TraitType.ToStringID(trait2Data)) + ": " + LocaleBuilder.GetResourceString(TraitType.ProfileCardDescriptionID(trait2Data));
                     m_frontTrait2.Visible = true;
                 }
             }
@@ -1008,8 +1008,8 @@ namespace RogueCastle
 
         public override void RefreshTextObjs()
         {
-            m_equipmentTitle.Text = LocaleBuilder.getResourceString("LOC_ID_PROFILE_CARD_SCREEN_9") + ":";
-            m_runesTitle.Text = LocaleBuilder.getResourceString("LOC_ID_PROFILE_CARD_SCREEN_10") + ":";
+            m_equipmentTitle.Text = LocaleBuilder.GetResourceString("LOC_ID_PROFILE_CARD_SCREEN_9") + ":";
+            m_runesTitle.Text = LocaleBuilder.GetResourceString("LOC_ID_PROFILE_CARD_SCREEN_10") + ":";
             //m_cancelText.Text = "[Input:" + InputMapType.MENU_CANCEL1 + "] " + LocaleBuilder.getResourceString("LOC_ID_PROFILE_CARD_SCREEN_11");
 
             PlayerObj player = (ScreenManager as RCScreenManager).Player;
@@ -1018,7 +1018,7 @@ namespace RogueCastle
 
             // Massive hack.  14 is the index of a text line that is too long in russian.
             m_backCard.GetChildAt(14).ScaleX = 1;
-            switch (LocaleBuilder.languageType)
+            switch (LocaleBuilder.LanguageType)
             {
                 case (LanguageType.Russian):
                     m_backCard.GetChildAt(14).ScaleX = 0.9f;

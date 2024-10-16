@@ -246,7 +246,7 @@ namespace RogueCastle
                 PlayerObj player = (ScreenManager as RCScreenManager).Player;
                 PauseInfoObj playerInfo = m_infoObjList[0];
                 playerInfo.Visible = true;
-                (playerInfo.GetChildAt(2) as TextObj).Text = LocaleBuilder.getString(ClassType.ToStringID((byte)currentDebugClass, Game.PlayerStats.IsFemale), (playerInfo.GetChildAt(2) as TextObj));
+                (playerInfo.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetString(ClassType.ToStringID((byte)currentDebugClass, Game.PlayerStats.IsFemale), (playerInfo.GetChildAt(2) as TextObj));
                 playerInfo.ResizePlate();
 
                 playerInfo.X = player.X - Camera.TopLeftCorner.X;
@@ -366,14 +366,14 @@ namespace RogueCastle
                     try
                     {
                         m_name.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_name));
-                        m_name.Text = LocaleBuilder.getString(name, m_name);
-                        if (LocaleBuilder.languageType != LanguageType.Chinese_Simp && Regex.IsMatch(m_name.Text, @"\p{IsCyrillic}"))
+                        m_name.Text = LocaleBuilder.GetString(name, m_name);
+                        if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(m_name.Text, @"\p{IsCyrillic}"))
                             m_name.ChangeFontNoDefault(Game.RobotoSlabFont);
                     }
                     catch
                     {
                         m_name.ChangeFontNoDefault(Game.NotoSansSCFont);
-                        m_name.Text = LocaleBuilder.getString(name, m_name);
+                        m_name.Text = LocaleBuilder.GetString(name, m_name);
                     }
                 }
                 else
@@ -382,7 +382,7 @@ namespace RogueCastle
                     {
                         m_name.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_name));
                         m_name.Text = name;
-                        if (LocaleBuilder.languageType != LanguageType.Chinese_Simp && Regex.IsMatch(m_name.Text, @"\p{IsCyrillic}"))
+                        if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(m_name.Text, @"\p{IsCyrillic}"))
                             m_name.ChangeFontNoDefault(Game.RobotoSlabFont);
                     }
                     catch
@@ -409,7 +409,7 @@ namespace RogueCastle
                     titleText = m_textList[m_arrayIndex];
 
                 titleText.FontSize = 8;
-                titleText.Text = LocaleBuilder.getString(title, titleText);
+                titleText.Text = LocaleBuilder.GetString(title, titleText);
                 titleText.Align = Types.TextAlign.Right;
                 titleText.Y = _objectList[0].Bounds.Top + titleText.Height + (m_arrayIndex * 20);
                 titleText.DropShadow = new Vector2(2,2);
@@ -426,7 +426,7 @@ namespace RogueCastle
                     dataText = m_textDataList[m_arrayIndex];
                 dataText.FontSize = 8;
                 if (localizedData)
-                    dataText.Text = LocaleBuilder.getString(data, dataText);
+                    dataText.Text = LocaleBuilder.GetString(data, dataText);
                 else
                     dataText.Text = data;
                 dataText.Y = titleText.Y;

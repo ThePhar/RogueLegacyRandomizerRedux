@@ -76,16 +76,16 @@ namespace RogueCastle
             m_itemFoundText = new TextObj(Game.JunicodeFont);
             m_itemFoundText.FontSize = 18;
             m_itemFoundText.Align = Types.TextAlign.Centre;
-            m_itemFoundText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_itemFoundText); // dummy locID to add TextObj to language refresh list
+            m_itemFoundText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_itemFoundText); // dummy locID to add TextObj to language refresh list
             m_itemFoundText.Position = m_itemEndPos;
             m_itemFoundText.Y += 70;
             m_itemFoundText.ForceDraw = true;
             m_itemFoundText.OutlineWidth = 2;
 
             m_tripStat1FoundText = m_itemFoundText.Clone() as TextObj;
-            m_tripStat1FoundText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_tripStat1FoundText); // dummy locID to add TextObj to language refresh list
+            m_tripStat1FoundText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_tripStat1FoundText); // dummy locID to add TextObj to language refresh list
             m_tripStat2FoundText = m_itemFoundText.Clone() as TextObj;
-            m_tripStat2FoundText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_tripStat2FoundText); // dummy locID to add TextObj to language refresh list
+            m_tripStat2FoundText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_tripStat2FoundText); // dummy locID to add TextObj to language refresh list
 
             m_itemFoundSprite = new SpriteObj("BlueprintFoundText_Sprite");
             m_itemFoundSprite.ForceDraw = true;
@@ -93,7 +93,7 @@ namespace RogueCastle
 
             m_continueText = new KeyIconTextObj(Game.JunicodeFont);
             m_continueText.FontSize = 14;
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
             //m_continueText.Align = Types.TextAlign.Centre;
             //m_continueText.Position = new Vector2(1320 - m_continueText.Width, 720 - m_continueText.Height - 10);
             m_continueText.Align = Types.TextAlign.Right;
@@ -134,7 +134,7 @@ namespace RogueCastle
             m_lockControls = true;
             m_continueText.Opacity = 0;
 
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_GET_ITEM_SCREEN_1_NEW", m_continueText);
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_GET_ITEM_SCREEN_1_NEW", m_continueText);
 
             m_itemFoundText.Position = m_itemEndPos;
             m_itemFoundText.Y += 70;
@@ -154,7 +154,7 @@ namespace RogueCastle
                     m_itemSpinning = true;
                     m_itemSprite.ChangeSprite("BlueprintIcon_Sprite");
                     m_itemFoundSprite.ChangeSprite("BlueprintFoundText_Sprite");
-                    m_itemFoundText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_BASE_FORMAT", true), LocaleBuilder.getResourceString(EquipmentBaseType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.getResourceString(EquipmentCategoryType.ToStringID((int)m_itemInfo.X), true));
+                    m_itemFoundText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_BASE_FORMAT", true), LocaleBuilder.GetResourceString(EquipmentBaseType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.GetResourceString(EquipmentCategoryType.ToStringID((int)m_itemInfo.X), true));
 
                     break;
                 case (GetItemType.Rune):
@@ -162,7 +162,7 @@ namespace RogueCastle
                     m_itemSprite.ChangeSprite("RuneIcon_Sprite");
                     m_itemFoundSprite.ChangeSprite("RuneFoundText_Sprite");
                     //m_itemFoundText.Text = LocaleBuilder.getResourceString(EquipmentAbilityType.ToStringID((int)m_itemInfo.Y)) + " " + LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_13") /* Rune */ + " (" + LocaleBuilder.getResourceString(EquipmentCategoryType.ToStringID2((int)m_itemInfo.X)) + ")";
-                    m_itemFoundText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_RUNE_BASE_FORMAT", true), LocaleBuilder.getResourceString(EquipmentAbilityType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_13"), true) /*"Rune"*/ + "\n(" + LocaleBuilder.getResourceString(EquipmentCategoryType.ToStringID2((int)m_itemInfo.X), true) + ")";
+                    m_itemFoundText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_RUNE_BASE_FORMAT", true), LocaleBuilder.GetResourceString(EquipmentAbilityType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.GetResourceString("LOC_ID_ENCHANTRESS_SCREEN_13"), true) /*"Rune"*/ + "\n(" + LocaleBuilder.GetResourceString(EquipmentCategoryType.ToStringID2((int)m_itemInfo.X), true) + ")";
                     m_itemSprite.AnimationDelay = 1 / 20f;
 
                     GameUtil.UnlockAchievement("LOVE_OF_MAGIC");
@@ -199,20 +199,20 @@ namespace RogueCastle
                 case (GetItemType.SpecialItem):
                     m_itemSprite.ChangeSprite(SpecialItemType.SpriteName((byte)m_itemInfo.X));
                     m_itemFoundSprite.ChangeSprite("ItemFoundText_Sprite");
-                    m_itemFoundText.Text = LocaleBuilder.getString(SpecialItemType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
+                    m_itemFoundText.Text = LocaleBuilder.GetString(SpecialItemType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.Spell):
                     m_itemSprite.ChangeSprite(SpellType.Icon((byte)m_itemInfo.X));
                     m_itemFoundSprite.ChangeSprite("SpellFoundText_Sprite");
-                    m_itemFoundText.Text = LocaleBuilder.getString(SpellType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
+                    m_itemFoundText.Text = LocaleBuilder.GetString(SpellType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.FountainPiece):
                     m_itemSprite.ChangeSprite(GetMedallionImage((int)m_itemInfo.X)); // This needs to change to reflect the stat stored in m_itemInfo.X
                     m_itemFoundSprite.ChangeSprite("ItemFoundText_Sprite");
                     if (m_itemInfo.X == ItemDropType.FountainPiece5)
-                        m_itemFoundText.Text = LocaleBuilder.getString("LOC_ID_GET_ITEM_SCREEN_8", m_itemFoundText);
+                        m_itemFoundText.Text = LocaleBuilder.GetString("LOC_ID_GET_ITEM_SCREEN_8", m_itemFoundText);
                     else
-                        m_itemFoundText.Text = LocaleBuilder.getString("LOC_ID_GET_ITEM_SCREEN_9", m_itemFoundText);
+                        m_itemFoundText.Text = LocaleBuilder.GetString("LOC_ID_GET_ITEM_SCREEN_9", m_itemFoundText);
                     break;
             }
 
@@ -413,7 +413,7 @@ namespace RogueCastle
                         }
                     }
                     if (previousItemInfo != m_itemInfo)
-                        m_itemFoundText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_BASE_FORMAT", true), LocaleBuilder.getResourceString(EquipmentBaseType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.getResourceString(EquipmentCategoryType.ToStringID((int)m_itemInfo.X), true));
+                        m_itemFoundText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_BASE_FORMAT", true), LocaleBuilder.GetResourceString(EquipmentBaseType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.GetResourceString(EquipmentCategoryType.ToStringID((int)m_itemInfo.X), true));
                     break;
                 case (GetItemType.Rune):
                     if (InputManager.JustPressed(Keys.OemOpenBrackets, null))
@@ -439,7 +439,7 @@ namespace RogueCastle
                         }
                     }
                     if (previousItemInfo != m_itemInfo)
-                        m_itemFoundText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_RUNE_BASE_FORMAT", true), LocaleBuilder.getResourceString(EquipmentAbilityType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_13"), true) /*"Rune"*/ + " (" + LocaleBuilder.getResourceString(EquipmentCategoryType.ToStringID2((int)m_itemInfo.X), true) + ")";
+                        m_itemFoundText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_RUNE_BASE_FORMAT", true), LocaleBuilder.GetResourceString(EquipmentAbilityType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.GetResourceString("LOC_ID_ENCHANTRESS_SCREEN_13"), true) /*"Rune"*/ + " (" + LocaleBuilder.GetResourceString(EquipmentCategoryType.ToStringID2((int)m_itemInfo.X), true) + ")";
                     break;
                 case (GetItemType.StatDrop):
                     if (InputManager.JustPressed(Keys.OemOpenBrackets, null))
@@ -477,7 +477,7 @@ namespace RogueCastle
                     }
 
                     if (previousItemInfo != m_itemInfo)
-                        m_itemFoundText.Text = LocaleBuilder.getString(SpecialItemType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
+                        m_itemFoundText.Text = LocaleBuilder.GetString(SpecialItemType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.Spell):
                     if (InputManager.JustPressed(Keys.OemOpenBrackets, null))
@@ -494,7 +494,7 @@ namespace RogueCastle
                     }
 
                     if (previousItemInfo != m_itemInfo)
-                        m_itemFoundText.Text = LocaleBuilder.getString(SpellType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
+                        m_itemFoundText.Text = LocaleBuilder.GetString(SpellType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
 
                     break;
                 case (GetItemType.FountainPiece):
@@ -509,9 +509,9 @@ namespace RogueCastle
                     if (previousItemInfo != m_itemInfo)
                     {
                         if (m_itemInfo.X == ItemDropType.FountainPiece5)
-                            m_itemFoundText.Text = LocaleBuilder.getString("LOC_ID_GET_ITEM_SCREEN_8", m_itemFoundText);
+                            m_itemFoundText.Text = LocaleBuilder.GetString("LOC_ID_GET_ITEM_SCREEN_8", m_itemFoundText);
                         else
-                            m_itemFoundText.Text = LocaleBuilder.getString("LOC_ID_GET_ITEM_SCREEN_9", m_itemFoundText);
+                            m_itemFoundText.Text = LocaleBuilder.GetString("LOC_ID_GET_ITEM_SCREEN_9", m_itemFoundText);
                     }
                     break;
             }
@@ -567,17 +567,17 @@ namespace RogueCastle
             switch (type)
             {
                 case (ItemDropType.Stat_MaxHealth):
-                    return LocaleBuilder.getResourceString("LOC_ID_GET_ITEM_SCREEN_2") + ": +" + (GameEV.ITEM_STAT_MAXHP_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
+                    return LocaleBuilder.GetResourceString("LOC_ID_GET_ITEM_SCREEN_2") + ": +" + (GameEV.ITEM_STAT_MAXHP_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
                 case (ItemDropType.Stat_MaxMana):
-                    return LocaleBuilder.getResourceString("LOC_ID_GET_ITEM_SCREEN_3") + ": +" + (GameEV.ITEM_STAT_MAXMP_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
+                    return LocaleBuilder.GetResourceString("LOC_ID_GET_ITEM_SCREEN_3") + ": +" + (GameEV.ITEM_STAT_MAXMP_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
                 case (ItemDropType.Stat_Strength):
-                    return LocaleBuilder.getResourceString("LOC_ID_GET_ITEM_SCREEN_4") + ": +" + (GameEV.ITEM_STAT_STRENGTH_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
+                    return LocaleBuilder.GetResourceString("LOC_ID_GET_ITEM_SCREEN_4") + ": +" + (GameEV.ITEM_STAT_STRENGTH_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
                 case (ItemDropType.Stat_Magic):
-                    return LocaleBuilder.getResourceString("LOC_ID_GET_ITEM_SCREEN_5") + ": +" + (GameEV.ITEM_STAT_MAGIC_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
+                    return LocaleBuilder.GetResourceString("LOC_ID_GET_ITEM_SCREEN_5") + ": +" + (GameEV.ITEM_STAT_MAGIC_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
                 case (ItemDropType.Stat_Defense):
-                    return LocaleBuilder.getResourceString("LOC_ID_GET_ITEM_SCREEN_6") + ": +" + (GameEV.ITEM_STAT_ARMOR_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
+                    return LocaleBuilder.GetResourceString("LOC_ID_GET_ITEM_SCREEN_6") + ": +" + (GameEV.ITEM_STAT_ARMOR_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
                 case (ItemDropType.Stat_Weight):
-                    return LocaleBuilder.getResourceString("LOC_ID_GET_ITEM_SCREEN_7") + ": +" + (GameEV.ITEM_STAT_WEIGHT_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
+                    return LocaleBuilder.GetResourceString("LOC_ID_GET_ITEM_SCREEN_7") + ": +" + (GameEV.ITEM_STAT_WEIGHT_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten));
             }
             return "";
         }
@@ -643,10 +643,10 @@ namespace RogueCastle
             switch (m_itemType)
             {
                 case (GetItemType.Blueprint):
-                    m_itemFoundText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_BASE_FORMAT", true), LocaleBuilder.getResourceString(EquipmentBaseType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.getResourceString(EquipmentCategoryType.ToStringID((int)m_itemInfo.X), true));
+                    m_itemFoundText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_BASE_FORMAT", true), LocaleBuilder.GetResourceString(EquipmentBaseType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.GetResourceString(EquipmentCategoryType.ToStringID((int)m_itemInfo.X), true));
                     break;
                 case (GetItemType.Rune):
-                    m_itemFoundText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_RUNE_BASE_FORMAT", true), LocaleBuilder.getResourceString(EquipmentAbilityType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_13"), true) /*"Rune"*/ + " (" + LocaleBuilder.getResourceString(EquipmentCategoryType.ToStringID2((int)m_itemInfo.X), true) + ")";
+                    m_itemFoundText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_RUNE_BASE_FORMAT", true), LocaleBuilder.GetResourceString(EquipmentAbilityType.ToStringID((int)m_itemInfo.Y), true), LocaleBuilder.GetResourceString("LOC_ID_ENCHANTRESS_SCREEN_13"), true) /*"Rune"*/ + " (" + LocaleBuilder.GetResourceString(EquipmentCategoryType.ToStringID2((int)m_itemInfo.X), true) + ")";
                     //m_itemFoundText.Text = LocaleBuilder.getResourceString(EquipmentAbilityType.ToStringID((int)m_itemInfo.Y)) + " " + LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_13") /* Rune */ + " (" + LocaleBuilder.getResourceString(EquipmentCategoryType.ToStringID2((int)m_itemInfo.X)) + ")";
                     break;
                 case (GetItemType.StatDrop):
@@ -659,16 +659,16 @@ namespace RogueCastle
                     }
                     break;
                 case (GetItemType.SpecialItem):
-                    m_itemFoundText.Text = LocaleBuilder.getString(SpecialItemType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
+                    m_itemFoundText.Text = LocaleBuilder.GetString(SpecialItemType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.Spell):
-                    m_itemFoundText.Text = LocaleBuilder.getString(SpellType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
+                    m_itemFoundText.Text = LocaleBuilder.GetString(SpellType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.FountainPiece):
                     if (m_itemInfo.X == ItemDropType.FountainPiece5)
-                        m_itemFoundText.Text = LocaleBuilder.getString("LOC_ID_GET_ITEM_SCREEN_8", m_itemFoundText);
+                        m_itemFoundText.Text = LocaleBuilder.GetString("LOC_ID_GET_ITEM_SCREEN_8", m_itemFoundText);
                     else
-                        m_itemFoundText.Text = LocaleBuilder.getString("LOC_ID_GET_ITEM_SCREEN_9", m_itemFoundText);
+                        m_itemFoundText.Text = LocaleBuilder.GetString("LOC_ID_GET_ITEM_SCREEN_9", m_itemFoundText);
                     break;
             }
 

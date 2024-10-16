@@ -91,7 +91,7 @@ namespace RogueCastle
             TextObj legendTitle = new TextObj(Game.JunicodeFont);
             legendTitle.Align = Types.TextAlign.Centre;
             legendTitle.Position = new Vector2(m_legend.Width/2 * legendBG.ScaleX, m_legend.Bounds.Top + 10);
-            legendTitle.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_5", legendTitle); //"Legend"
+            legendTitle.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_5", legendTitle); //"Legend"
             legendTitle.FontSize = 12;
             legendTitle.DropShadow = new Vector2(2, 2);
             legendTitle.TextureColor = new Color(213, 213, 173);
@@ -139,49 +139,49 @@ namespace RogueCastle
 
             legendText = new TextObj(Game.JunicodeFont);
             legendText.Position = new Vector2(playerIcon.X + 40, 55);
-            legendText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_6", legendText); //"You are here"
+            legendText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_6", legendText); //"You are here"
             legendText.FontSize = 10;
             legendText.DropShadow = new Vector2(2, 2);
             m_legend.AddChild(legendText);
 
             legendText = new TextObj(Game.JunicodeFont);
             legendText.Position = new Vector2(playerIcon.X + 40, 55 + iconYOffset);
-            legendText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_7", legendText); //"Boss location"
+            legendText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_7", legendText); //"Boss location"
             legendText.FontSize = 10;
             legendText.DropShadow = new Vector2(2, 2);
             m_legend.AddChild(legendText);
 
             legendText = new TextObj(Game.JunicodeFont);
             legendText.Position = new Vector2(playerIcon.X + 40, 55 + iconYOffset + iconYOffset);
-            legendText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_8", legendText); //"Unopened chest"
+            legendText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_8", legendText); //"Unopened chest"
             legendText.FontSize = 10;
             legendText.DropShadow = new Vector2(2, 2);
             m_legend.AddChild(legendText);
 
             legendText = new TextObj(Game.JunicodeFont);
             legendText.Position = new Vector2(playerIcon.X + 40, 55 + iconYOffset + iconYOffset + iconYOffset);
-            legendText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_9", legendText); //"Fairy chest"
+            legendText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_9", legendText); //"Fairy chest"
             legendText.FontSize = 10;
             legendText.DropShadow = new Vector2(2, 2);
             m_legend.AddChild(legendText);
 
             legendText = new TextObj(Game.JunicodeFont);
             legendText.Position = new Vector2(playerIcon.X + 40, 55 + iconYOffset + iconYOffset + iconYOffset + iconYOffset);
-            legendText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_10", legendText); //"Opened chest"
+            legendText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_10", legendText); //"Opened chest"
             legendText.FontSize = 10;
             legendText.DropShadow = new Vector2(2, 2);
             m_legend.AddChild(legendText);
 
             legendText = new TextObj(Game.JunicodeFont);
             legendText.Position = new Vector2(playerIcon.X + 40, 55 + iconYOffset + iconYOffset + iconYOffset + iconYOffset + iconYOffset);
-            legendText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_11", legendText); //"Teleporter"
+            legendText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_11", legendText); //"Teleporter"
             legendText.FontSize = 10;
             legendText.DropShadow = new Vector2(2, 2);
             m_legend.AddChild(legendText);
 
             legendText = new TextObj(Game.JunicodeFont);
             legendText.Position = new Vector2(playerIcon.X + 40, 55 + iconYOffset + iconYOffset + iconYOffset + iconYOffset + iconYOffset + iconYOffset);
-            legendText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_12", legendText); //"Bonus Room"
+            legendText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_12", legendText); //"Bonus Room"
             legendText.FontSize = 10;
             legendText.DropShadow = new Vector2(2, 2);
             m_legend.AddChild(legendText);
@@ -213,20 +213,20 @@ namespace RogueCastle
             m_playerIcon.GetChildAt(PlayerPart.Glasses).Visible = false;
 
             m_continueText = new KeyIconTextObj(Game.JunicodeFont);
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
             m_continueText.FontSize = 12;
             m_continueText.ForceDraw = true;
             m_continueText.Position = new Vector2(50, 200 - m_continueText.Height - 40);
             //m_continueText.ForcedScale = new Vector2(0.5f, 0.5f); // Added for PS3
 
             m_recentreText = new KeyIconTextObj(Game.JunicodeFont);
-            m_recentreText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_recentreText); // dummy locID to add TextObj to language refresh list
+            m_recentreText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_recentreText); // dummy locID to add TextObj to language refresh list
             m_recentreText.FontSize = 12;
             m_recentreText.Position = new Vector2(m_continueText.X, 200 - m_continueText.Height - 80);
             m_recentreText.ForceDraw = true;
 
             m_navigationText = new KeyIconTextObj(Game.JunicodeFont);
-            m_navigationText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_navigationText); // dummy locID to add TextObj to language refresh list
+            m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_navigationText); // dummy locID to add TextObj to language refresh list
             m_navigationText.FontSize = 12;
             m_navigationText.Position = new Vector2(m_continueText.X, 200 - m_continueText.Height - 120);
             m_navigationText.ForceDraw = true;
@@ -261,12 +261,12 @@ namespace RogueCastle
             else
                 m_mapDisplay.DrawNothing = false;
 
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_1_NEW", m_continueText); //"to close map"
-            m_recentreText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_2_NEW", m_recentreText); //"to center on player"
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_1_NEW", m_continueText); //"to close map"
+            m_recentreText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_2_NEW", m_recentreText); //"to center on player"
             if (InputManager.GamePadIsConnected(PlayerIndex.One) == false)
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_3", m_navigationText); //"Use arrow keys to move map"
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_3", m_navigationText); //"Use arrow keys to move map"
             else
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_MAP_SCREEN_4_NEW", m_navigationText); //"to move map"
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_MAP_SCREEN_4_NEW", m_navigationText); //"to move map"
 
             if (IsTeleporter && m_teleporterList.Length > 0)
             {

@@ -28,7 +28,7 @@ namespace RogueCastle
             m_loadingText = new TextObj(Game.JunicodeFont);
             m_loadingText.FontSize = 18;
             m_loadingText.Align = Types.TextAlign.Right;
-            m_loadingText.Text = LocaleBuilder.getString("LOC_ID_SPLASH_SCREEN_1", m_loadingText);
+            m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_SPLASH_SCREEN_1", m_loadingText);
             m_loadingText.TextureColor = new Color(100, 100, 100);
             m_loadingText.Position = new Vector2(1320 - 40, 720 - 90);
             m_loadingText.ForceDraw = true;

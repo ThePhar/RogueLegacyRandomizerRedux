@@ -109,7 +109,7 @@ namespace RogueCastle
             m_optionsBar.Position = new Vector2(m_optionsArray[0].X - 20, m_optionsArray[0].Y);
 
             m_confirmText = new KeyIconTextObj(Game.JunicodeFont);
-            m_confirmText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_confirmText); // dummy locID to add TextObj to language refresh list
+            m_confirmText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_confirmText); // dummy locID to add TextObj to language refresh list
             m_confirmText.DropShadow = new Vector2(2, 2);
             m_confirmText.FontSize = 12;
             m_confirmText.Align = Types.TextAlign.Right;
@@ -117,7 +117,7 @@ namespace RogueCastle
             m_confirmText.ForceDraw = true;
 
             m_cancelText = new KeyIconTextObj(Game.JunicodeFont);
-            m_cancelText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_cancelText); // dummy locID to add TextObj to language refresh list
+            m_cancelText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_cancelText); // dummy locID to add TextObj to language refresh list
             m_cancelText.Align = Types.TextAlign.Right;
             m_cancelText.DropShadow = new Vector2(2, 2);
             m_cancelText.FontSize = 12;
@@ -125,7 +125,7 @@ namespace RogueCastle
             m_cancelText.ForceDraw = true;
 
             m_navigationText = new KeyIconTextObj(Game.JunicodeFont);
-            m_navigationText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_navigationText); // dummy locID to add TextObj to language refresh list
+            m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_navigationText); // dummy locID to add TextObj to language refresh list
             m_navigationText.Align = Types.TextAlign.Right;
             m_navigationText.DropShadow = new Vector2(2, 2);
             m_navigationText.FontSize = 12;
@@ -157,16 +157,16 @@ namespace RogueCastle
             {
                 m_confirmText.ForcedScale = new Vector2(0.7f, 0.7f);
                 m_cancelText.ForcedScale = new Vector2(0.7f, 0.7f);
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_OPTIONS_SCREEN_2_NEW", m_navigationText);
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_SCREEN_2_NEW", m_navigationText);
             }
             else
             {
                 m_confirmText.ForcedScale = new Vector2(1f, 1f);
                 m_cancelText.ForcedScale = new Vector2(1f, 1f);
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_OPTIONS_SCREEN_3", m_navigationText);
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_SCREEN_3", m_navigationText);
             }
-            m_confirmText.Text = LocaleBuilder.getString("LOC_ID_OPTIONS_SCREEN_4_NEW", m_confirmText);
-            m_cancelText.Text = LocaleBuilder.getString("LOC_ID_OPTIONS_SCREEN_5_NEW", m_cancelText);
+            m_confirmText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_SCREEN_4_NEW", m_confirmText);
+            m_cancelText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_SCREEN_5_NEW", m_cancelText);
 
             m_confirmText.Opacity = 0;
             m_cancelText.Opacity = 0;
@@ -327,17 +327,17 @@ namespace RogueCastle
                 if (m_selectedOption == m_quickDropObj)
                 {
                     m_quickDropText.Visible = true;
-                    m_quickDropText.Text = LocaleBuilder.getString("LOC_ID_OPTIONS_SCREEN_1", m_quickDropText, true);
+                    m_quickDropText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_SCREEN_1", m_quickDropText, true);
                 }
                 else if (m_selectedOption == m_reduceQualityObj)
                 {
                     m_quickDropText.Visible = true;
-                    m_quickDropText.Text = LocaleBuilder.getString("LOC_ID_OPTIONS_SCREEN_8", m_quickDropText, true);
+                    m_quickDropText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_SCREEN_8", m_quickDropText, true);
                 }
                 else if (m_selectedOption == m_enableSteamCloudObj)
                 {
                     m_quickDropText.Visible = true;
-                    m_quickDropText.Text = LocaleBuilder.getString("LOC_ID_OPTIONS_SCREEN_9", m_quickDropText, true);
+                    m_quickDropText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_SCREEN_9", m_quickDropText, true);
                 }
                 else
                     m_quickDropText.Visible = false;
@@ -455,7 +455,7 @@ namespace RogueCastle
             Game.ChangeBitmapLanguage(m_changeControlsTitle, "OptionsScreenChangeControls_Sprite");
 
             m_quickDropText.ScaleX = 1;
-            switch (LocaleBuilder.languageType)
+            switch (LocaleBuilder.LanguageType)
             {
                 case(LanguageType.Russian):
                 case(LanguageType.German):

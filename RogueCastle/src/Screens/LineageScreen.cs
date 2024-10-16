@@ -79,7 +79,7 @@ namespace RogueCastle
             playerTitle.Align = Types.TextAlign.Centre;
             playerTitle.OutlineColour = new Color(181, 142, 39);
             playerTitle.OutlineWidth = 2;
-            playerTitle.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", playerTitle); // dummy locID to add TextObj to language refresh list
+            playerTitle.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", playerTitle); // dummy locID to add TextObj to language refresh list
             playerTitle.OverrideParentScale = true;
             playerTitle.Position = new Vector2(m_descriptionPlate.Width / 2f, 15);
             playerTitle.LimitCorners = true;
@@ -87,7 +87,7 @@ namespace RogueCastle
 
             TextObj className = playerTitle.Clone() as TextObj;
             className.FontSize = 10;
-            className.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", className); // dummy locID to add TextObj to language refresh list
+            className.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", className); // dummy locID to add TextObj to language refresh list
             className.Align = Types.TextAlign.Left;
             className.X = xPlatePos;
             className.Y += 40;
@@ -99,7 +99,7 @@ namespace RogueCastle
             classDescription.OutlineWidth = 2;
             classDescription.OverrideParentScale = true;
             classDescription.Position = className.Position;
-            classDescription.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", classDescription); // dummy locID to add TextObj to language refresh list
+            classDescription.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", classDescription); // dummy locID to add TextObj to language refresh list
             classDescription.Align = Types.TextAlign.Left;
             classDescription.Y += 30;
             classDescription.X = xPlatePos + 20;
@@ -109,7 +109,7 @@ namespace RogueCastle
             for (int i = 0; i < 2; i++)
             {
                 TextObj traitName = className.Clone() as TextObj;
-                traitName.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", traitName); // dummy locID to add TextObj to language refresh list
+                traitName.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", traitName); // dummy locID to add TextObj to language refresh list
                 traitName.X = xPlatePos;
                 traitName.Align = Types.TextAlign.Left;
                 if (i > 0)
@@ -117,7 +117,7 @@ namespace RogueCastle
                 m_descriptionPlate.AddChild(traitName);
 
                 TextObj traitDescription = className.Clone() as TextObj;
-                traitDescription.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", traitDescription); // dummy locID to add TextObj to language refresh list
+                traitDescription.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", traitDescription); // dummy locID to add TextObj to language refresh list
                 traitDescription.X = xPlatePos + 20;
                 traitDescription.FontSize = 8;
                 traitDescription.Align = Types.TextAlign.Left;
@@ -125,7 +125,7 @@ namespace RogueCastle
             }
 
             TextObj spellName = className.Clone() as TextObj;
-            spellName.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", spellName); // dummy locID to add TextObj to language refresh list
+            spellName.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", spellName); // dummy locID to add TextObj to language refresh list
             spellName.FontSize = 10;
             spellName.X = xPlatePos;
             spellName.Align = Types.TextAlign.Left;
@@ -138,7 +138,7 @@ namespace RogueCastle
             spellDescription.OverrideParentScale = true;
             spellDescription.Position = new Vector2(m_descriptionPlate.Width / 2f, 15);
             spellDescription.Y += 40;
-            spellDescription.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", spellDescription); // dummy locID to add TextObj to language refresh list
+            spellDescription.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", spellDescription); // dummy locID to add TextObj to language refresh list
             spellDescription.X = xPlatePos + 20;
             spellDescription.FontSize = 8;
             spellDescription.Align = Types.TextAlign.Left;
@@ -157,7 +157,7 @@ namespace RogueCastle
             m_confirmText.DropShadow = new Vector2(2, 2);
             m_confirmText.Position = new Vector2(1320 - 40, 630);
             m_confirmText.Align = Types.TextAlign.Right;
-            m_confirmText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_confirmText); // dummy locID to add TextObj to language refresh list
+            m_confirmText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_confirmText); // dummy locID to add TextObj to language refresh list
 
             m_navigationText = new KeyIconTextObj(Game.JunicodeFont);
             m_navigationText.Align = Types.TextAlign.Right;
@@ -165,7 +165,7 @@ namespace RogueCastle
             m_navigationText.DropShadow = new Vector2(2, 2);
             m_navigationText.Position = new Vector2(m_confirmText.X, m_confirmText.Y + 40);
             m_navigationText.ForceDraw = true;
-            m_navigationText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_navigationText); // dummy locID to add TextObj to language refresh list
+            m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_navigationText); // dummy locID to add TextObj to language refresh list
 
             m_rerollText = new KeyIconTextObj(Game.JunicodeFont);
             m_rerollText.Align = Types.TextAlign.Left;
@@ -173,7 +173,7 @@ namespace RogueCastle
             m_rerollText.DropShadow = new Vector2(2, 2);
             m_rerollText.ForceDraw = true;
             m_rerollText.Position = new Vector2(0 + 30, GlobalEV.ScreenHeight - 50);
-            m_rerollText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_rerollText); // dummy locID to add TextObj to language refresh list
+            m_rerollText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_rerollText); // dummy locID to add TextObj to language refresh list
 
             base.LoadContent();
         }
@@ -193,7 +193,7 @@ namespace RogueCastle
             {
                 knightName.ChangeFontNoDefault(knightName.defaultFont);
                 knightName.Text = Game.NameHelper(selectedObj.PlayerName, selectedObj.RomanNumeral, selectedObj.IsFemale);
-                if (LocaleBuilder.languageType != LanguageType.Chinese_Simp && Regex.IsMatch(knightName.Text, @"\p{IsCyrillic}"))
+                if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(knightName.Text, @"\p{IsCyrillic}"))
                     knightName.ChangeFontNoDefault(Game.RobotoSlabFont);
             }
             catch
@@ -203,9 +203,9 @@ namespace RogueCastle
             }
 
             TextObj className = m_descriptionPlate.GetChildAt(2) as TextObj;
-            className.Text = LocaleBuilder.getResourceString("LOC_ID_LINEAGE_SCREEN_5") + " - " + LocaleBuilder.getResourceString(ClassType.ToStringID(selectedObj.Class, selectedObj.IsFemale)); // "Class - ???"
+            className.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_5") + " - " + LocaleBuilder.GetResourceString(ClassType.ToStringID(selectedObj.Class, selectedObj.IsFemale)); // "Class - ???"
             KeyIconTextObj classDescription = m_descriptionPlate.GetChildAt(3) as KeyIconTextObj;
-            classDescription.Text = LocaleBuilder.getResourceStringCustomFemale(ClassType.DescriptionID(selectedObj.Class), selectedObj.IsFemale);
+            classDescription.Text = LocaleBuilder.GetResourceStringCustomFemale(ClassType.DescriptionID(selectedObj.Class), selectedObj.IsFemale);
             classDescription.WordWrap(340);
 
             TextObj trait1Name = m_descriptionPlate.GetChildAt(4) as TextObj;
@@ -217,8 +217,8 @@ namespace RogueCastle
 
             if (selectedObj.Traits.X > 0)
             {
-                trait1Name.Text = LocaleBuilder.getResourceString("LOC_ID_LINEAGE_SCREEN_6") + " - " + LocaleBuilder.getResourceString(TraitType.ToStringID((byte)selectedObj.Traits.X));
-                trait1Description.Text = LocaleBuilder.getResourceString(TraitType.DescriptionID((byte)selectedObj.Traits.X, selectedObj.IsFemale));
+                trait1Name.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_6") + " - " + LocaleBuilder.GetResourceString(TraitType.ToStringID((byte)selectedObj.Traits.X));
+                trait1Description.Text = LocaleBuilder.GetResourceString(TraitType.DescriptionID((byte)selectedObj.Traits.X, selectedObj.IsFemale));
                 trait1Description.WordWrap(340);
 
                 spellY = (int)trait1Description.Y + trait1Description.Height + 5;
@@ -226,7 +226,7 @@ namespace RogueCastle
             else
             {
                 spellY = (int)trait1Name.Y + trait1Name.Height + 5;
-                trait1Name.Text = LocaleBuilder.getResourceString("LOC_ID_LINEAGE_SCREEN_7");
+                trait1Name.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_7");
                 trait1Description.Text = "";
             }
 
@@ -237,8 +237,8 @@ namespace RogueCastle
 
             if (selectedObj.Traits.Y > 0)
             {
-                trait2Name.Text = LocaleBuilder.getResourceString("LOC_ID_LINEAGE_SCREEN_6") + " - " + LocaleBuilder.getResourceString(TraitType.ToStringID((byte)selectedObj.Traits.Y));
-                trait2Description.Text = LocaleBuilder.getResourceString(TraitType.DescriptionID((byte)selectedObj.Traits.Y, selectedObj.IsFemale));
+                trait2Name.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_6") + " - " + LocaleBuilder.GetResourceString(TraitType.ToStringID((byte)selectedObj.Traits.Y));
+                trait2Description.Text = LocaleBuilder.GetResourceString(TraitType.DescriptionID((byte)selectedObj.Traits.Y, selectedObj.IsFemale));
                 trait2Description.WordWrap(340);
 
                 spellY = (int)trait2Description.Y + trait2Description.Height + 5;
@@ -267,10 +267,10 @@ namespace RogueCastle
             }
 
             TextObj spellName = m_descriptionPlate.GetChildAt(8) as TextObj;
-            spellName.Text = LocaleBuilder.getResourceString("LOC_ID_LINEAGE_SCREEN_8") + " - " + LocaleBuilder.getResourceString(SpellType.ToStringID(selectedObj.Spell));
+            spellName.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_8") + " - " + LocaleBuilder.GetResourceString(SpellType.ToStringID(selectedObj.Spell));
             spellName.Y = spellY;
             KeyIconTextObj spellDescription = m_descriptionPlate.GetChildAt(9) as KeyIconTextObj;
-            spellDescription.Text = "[Input:" + InputMapType.PLAYER_SPELL1 + "]  " + LocaleBuilder.getResourceString(SpellType.DescriptionID(selectedObj.Spell));
+            spellDescription.Text = "[Input:" + InputMapType.PLAYER_SPELL1 + "]  " + LocaleBuilder.GetResourceString(SpellType.DescriptionID(selectedObj.Spell));
             spellDescription.Y = spellName.Y + 30;
             spellDescription.WordWrap(340);
         }
@@ -370,14 +370,14 @@ namespace RogueCastle
             Camera.Position = m_selectedLineageObj.Position;
             UpdateDescriptionPlate();
 
-            m_confirmText.Text = LocaleBuilder.getString("LOC_ID_LINEAGE_SCREEN_1_NEW", m_confirmText);
+            m_confirmText.Text = LocaleBuilder.GetString("LOC_ID_LINEAGE_SCREEN_1_NEW", m_confirmText);
 
             if (InputManager.GamePadIsConnected(PlayerIndex.One) == true)
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_LINEAGE_SCREEN_2_NEW", m_navigationText);
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_LINEAGE_SCREEN_2_NEW", m_navigationText);
             else
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_LINEAGE_SCREEN_3", m_navigationText);
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_LINEAGE_SCREEN_3", m_navigationText);
 
-            m_rerollText.Text = LocaleBuilder.getString("LOC_ID_LINEAGE_SCREEN_4_NEW", m_rerollText);
+            m_rerollText.Text = LocaleBuilder.GetString("LOC_ID_LINEAGE_SCREEN_4_NEW", m_rerollText);
             if (SkillSystem.GetSkill(SkillType.Randomize_Children).ModifierAmount > 0 && Game.PlayerStats.RerolledChildren == false)
                 m_rerollText.Visible = true;
             else

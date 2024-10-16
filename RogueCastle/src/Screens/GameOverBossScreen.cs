@@ -53,7 +53,7 @@ namespace RogueCastle
             m_continueText.Opacity = 0;
             m_continueText.Position = new Vector2(1320 - 50, 30);
             m_continueText.ForceDraw = true;
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
 
             Vector2 shadowOffset = new Vector2(2, 2);
             Color textColour = new Color(255, 254, 128);
@@ -64,7 +64,7 @@ namespace RogueCastle
 
             TextObj deathDescription = new TextObj(Game.JunicodeFont);
             deathDescription.Align = Types.TextAlign.Centre;
-            deathDescription.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", deathDescription); // dummy locID to add TextObj to language refresh list
+            deathDescription.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", deathDescription); // dummy locID to add TextObj to language refresh list
             deathDescription.FontSize = 18;
             deathDescription.DropShadow = shadowOffset;
             deathDescription.Position = new Vector2(0, -m_dialoguePlate.Height / 2 + 25);
@@ -73,7 +73,7 @@ namespace RogueCastle
             KeyIconTextObj partingWords = new KeyIconTextObj(Game.JunicodeFont);
             partingWords.FontSize = 12;
             partingWords.Align = Types.TextAlign.Centre;
-            partingWords.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", partingWords); // dummy locID to add TextObj to language refresh list
+            partingWords.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", partingWords); // dummy locID to add TextObj to language refresh list
             partingWords.DropShadow = shadowOffset;
             partingWords.Y = 10;
             partingWords.TextureColor = textColour;
@@ -81,7 +81,7 @@ namespace RogueCastle
 
             TextObj partingWordsTitle = new TextObj(Game.JunicodeFont);
             partingWordsTitle.FontSize = 8;
-            partingWordsTitle.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", partingWordsTitle); // dummy locID to add TextObj to language refresh list
+            partingWordsTitle.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", partingWordsTitle); // dummy locID to add TextObj to language refresh list
             partingWordsTitle.Y = partingWords.Y;
             partingWordsTitle.Y += 40;
             partingWordsTitle.X += 20;
@@ -128,7 +128,7 @@ namespace RogueCastle
             SoundManager.StopMusic(0.5f);
             m_lockControls = false;
             SoundManager.PlaySound("Player_Death_FadeToBlack");
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_GAME_OVER_BOSS_SCREEN_1_NEW", m_continueText);
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_GAME_OVER_BOSS_SCREEN_1_NEW", m_continueText);
 
             m_lastBoss.Visible = true;
             m_lastBoss.Opacity = 1;
@@ -164,8 +164,8 @@ namespace RogueCastle
             //2 = parting words
             //3 = parting words title.
 
-            (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_BOSS_SCREEN_3"); //"The sun... I had forgotten how it feels..."
-            (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), LocaleBuilder.getResourceString(m_lastBoss.LocStringID)); //"'s Parting Words"
+            (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_BOSS_SCREEN_3"); //"The sun... I had forgotten how it feels..."
+            (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), LocaleBuilder.GetResourceString(m_lastBoss.LocStringID)); //"'s Parting Words"
             //(m_dialoguePlate.GetChildAt(3) as TextObj).Text = "-" + LocaleBuilder.getResourceString(m_lastBoss.LocStringID) + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_8"); //"'s Parting Words"
 
             Tween.To(m_dialoguePlate, 0.5f, Tween.EaseNone, "delay", "2", "Opacity", "1");
@@ -196,7 +196,7 @@ namespace RogueCastle
         private void SetObjectKilledPlayerText()
         {
             TextObj playerSlainText = m_dialoguePlate.GetChildAt(1) as TextObj;
-            playerSlainText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_BOSS_SCREEN_5_NEW"), LocaleBuilder.getResourceString(m_lastBoss.LocStringID), Game.NameHelper());
+            playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_BOSS_SCREEN_5_NEW"), LocaleBuilder.GetResourceString(m_lastBoss.LocStringID), Game.NameHelper());
             //playerSlainText.Text = m_lastBoss.Name + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_BOSS_SCREEN_5") + " " + Game.PlayerStats.PlayerName;
         }
 
@@ -336,8 +336,8 @@ namespace RogueCastle
         {
             //m_continueText.Text = LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_BOSS_SCREEN_1") + " [Input:" + InputMapType.MENU_CONFIRM1 + "] " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_BOSS_SCREEN_2");
             SetObjectKilledPlayerText();
-            (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_BOSS_SCREEN_3"); //"The sun... I had forgotten how it feels..."
-            (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), LocaleBuilder.getResourceString(m_lastBoss.LocStringID)); //"'s Parting Words"
+            (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_BOSS_SCREEN_3"); //"The sun... I had forgotten how it feels..."
+            (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), LocaleBuilder.GetResourceString(m_lastBoss.LocStringID)); //"'s Parting Words"
             //(m_dialoguePlate.GetChildAt(3) as TextObj).Text = "-" + m_lastBoss.Name + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_8"); //"'s Parting Words"
             base.RefreshTextObjs();
         }

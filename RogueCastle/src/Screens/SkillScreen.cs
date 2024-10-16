@@ -98,7 +98,7 @@ namespace RogueCastle
             m_dialoguePlate.AddChild(m_skillIcon);
 
             m_skillTitle = new TextObj(Game.JunicodeFont);
-            m_skillTitle.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_skillTitle); // dummy locID to add TextObj to language refresh list
+            m_skillTitle.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_skillTitle); // dummy locID to add TextObj to language refresh list
             m_skillTitle.DropShadow = new Vector2(2, 2);
             m_skillTitle.TextureColor = new Color(236, 197, 132);
             m_skillTitle.Position = new Vector2(m_skillIcon.Bounds.Right + 15, m_skillIcon.Y);
@@ -106,7 +106,7 @@ namespace RogueCastle
             m_dialoguePlate.AddChild(m_skillTitle);
 
             m_skillDescription = new TextObj(Game.JunicodeFont);
-            m_skillDescription.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_skillDescription); // dummy locID to add TextObj to language refresh list
+            m_skillDescription.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_skillDescription); // dummy locID to add TextObj to language refresh list
             m_skillDescription.Position = new Vector2(m_dialoguePlate.GetChildAt(1).X - 30, m_dialoguePlate.GetChildAt(1).Bounds.Bottom + 20);
             m_skillDescription.FontSize = 10;
             m_skillDescription.DropShadow = new Vector2(2, 2);
@@ -115,7 +115,7 @@ namespace RogueCastle
             m_dialoguePlate.AddChild(m_skillDescription);
 
             m_inputDescription = new KeyIconTextObj(Game.JunicodeFont);
-            m_inputDescription.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_inputDescription); // dummy locID to add TextObj to language refresh list
+            m_inputDescription.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_inputDescription); // dummy locID to add TextObj to language refresh list
             m_inputDescription.Position = new Vector2(m_skillIcon.X - 30, m_skillDescription.Bounds.Bottom + 20);
             m_inputDescription.FontSize = 10;
             m_inputDescription.DropShadow = new Vector2(2, 2);
@@ -130,7 +130,7 @@ namespace RogueCastle
             m_descriptionDivider.DropShadow = new Vector2(2, 2);
 
             m_skillCurrent = new TextObj(Game.JunicodeFont);
-            m_skillCurrent.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_skillCurrent); // dummy locID to add TextObj to language refresh list
+            m_skillCurrent.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_skillCurrent); // dummy locID to add TextObj to language refresh list
             m_skillCurrent.Position = new Vector2(m_inputDescription.X, m_inputDescription.Bounds.Bottom + 10);
             m_skillCurrent.FontSize = 10;
             m_skillCurrent.DropShadow = new Vector2(2, 2);
@@ -139,19 +139,19 @@ namespace RogueCastle
             m_dialoguePlate.AddChild(m_skillCurrent);
 
             m_skillUpgrade = m_skillCurrent.Clone() as TextObj;
-            m_skillUpgrade.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_skillUpgrade); // dummy locID to add TextObj to language refresh list
+            m_skillUpgrade.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_skillUpgrade); // dummy locID to add TextObj to language refresh list
             m_skillUpgrade.Y += 15;
             //m_skillUpgrade.TextureColor = Color.Yellow;
             m_dialoguePlate.AddChild(m_skillUpgrade);
 
             m_skillLevel = m_skillUpgrade.Clone() as TextObj;
-            m_skillLevel.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_skillLevel); // dummy locID to add TextObj to language refresh list
+            m_skillLevel.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_skillLevel); // dummy locID to add TextObj to language refresh list
             m_skillLevel.Y += 15;
             //m_skillLevel.TextureColor = new Color(228, 218, 208);
             m_dialoguePlate.AddChild(m_skillLevel);
 
             m_skillCost = new TextObj(Game.JunicodeFont);
-            m_skillCost.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_skillCost); // dummy locID to add TextObj to language refresh list
+            m_skillCost.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_skillCost); // dummy locID to add TextObj to language refresh list
             //skillCost.Position = new Vector2(skillIcon.X, m_dialoguePlate.Bounds.Bottom - 20);
             m_skillCost.X = m_skillIcon.X;
             m_skillCost.Y = 182;
@@ -206,7 +206,7 @@ namespace RogueCastle
             m_continueText.DropShadow = new Vector2(2, 2);
             m_continueText.Position = new Vector2(1320 - 20, 630);
             m_continueText.Align = Types.TextAlign.Right;
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
 
             m_toggleIconsText = new KeyIconTextObj(Game.JunicodeFont);
             m_toggleIconsText.ForceDraw = true;
@@ -214,7 +214,7 @@ namespace RogueCastle
             m_toggleIconsText.DropShadow = new Vector2(2, 2);
             m_toggleIconsText.Position = new Vector2(m_continueText.X, m_continueText.Y + 40);
             m_toggleIconsText.Align = Types.TextAlign.Right;
-            m_toggleIconsText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_toggleIconsText); // dummy locID to add TextObj to language refresh list
+            m_toggleIconsText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_toggleIconsText); // dummy locID to add TextObj to language refresh list
 
             m_confirmText = new KeyIconTextObj(Game.JunicodeFont);
             m_confirmText.Align = Types.TextAlign.Right;
@@ -222,7 +222,7 @@ namespace RogueCastle
             m_confirmText.DropShadow = new Vector2(2, 2);
             m_confirmText.Position = new Vector2(1320 - 20, 10);
             m_confirmText.ForceDraw = true;
-            m_confirmText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_confirmText); // dummy locID to add TextObj to language refresh list
+            m_confirmText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_confirmText); // dummy locID to add TextObj to language refresh list
 
             m_navigationText = new KeyIconTextObj(Game.JunicodeFont);
             m_navigationText.Align = Types.TextAlign.Right;
@@ -230,7 +230,7 @@ namespace RogueCastle
             m_navigationText.DropShadow = new Vector2(2, 2);
             m_navigationText.Position = new Vector2(m_confirmText.X, m_confirmText.Y + 40);
             m_navigationText.ForceDraw = true;
-            m_navigationText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_navigationText); // dummy locID to add TextObj to language refresh list
+            m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_navigationText); // dummy locID to add TextObj to language refresh list
 
             m_coinIcon = new SpriteObj("CoinIcon_Sprite");
             m_coinIcon.Position = new Vector2(1100, 585);
@@ -288,18 +288,18 @@ namespace RogueCastle
             UpdateDescriptionPlate(skill);
 
             m_dialoguePlate.Visible = true;
-            m_confirmText.Text = LocaleBuilder.getString("LOC_ID_SKILL_SCREEN_1_NEW", m_confirmText);
+            m_confirmText.Text = LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_1_NEW", m_confirmText);
             //m_confirmText.Text = "[Input:" + InputMapType.MENU_CONFIRM1 + "] " + LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_1");
-            m_toggleIconsText.Text = LocaleBuilder.getString("LOC_ID_SKILL_SCREEN_2_NEW", m_toggleIconsText);
+            m_toggleIconsText.Text = LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_2_NEW", m_toggleIconsText);
             //m_toggleIconsText.Text = "[Input:" + InputMapType.MENU_MAP + "] " + LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_2");
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_SKILL_SCREEN_3_NEW", m_continueText);
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_3_NEW", m_continueText);
             //m_continueText.Text = "[Input:" + InputMapType.MENU_CANCEL1 + "] " + LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_3");
 
             if (InputManager.GamePadIsConnected(PlayerIndex.One) == true)
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_SKILL_SCREEN_4_NEW", m_navigationText);
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_4_NEW", m_navigationText);
                 //m_navigationText.Text = "[Button:LeftStick] " + LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_4");
             else
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_SKILL_SCREEN_5", m_navigationText);
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_5", m_navigationText);
 
             SkillSystem.UpdateAllTraitSprites();
 
@@ -726,7 +726,7 @@ namespace RogueCastle
                 {
                     if (SkillSystem.IconsVisible == true)
                     {
-                        m_toggleIconsText.Text = LocaleBuilder.getString("LOC_ID_SKILL_SCREEN_6_NEW", m_toggleIconsText);
+                        m_toggleIconsText.Text = LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_6_NEW", m_toggleIconsText);
                         //m_toggleIconsText.Text = "[Input:" + InputMapType.MENU_MAP + "] " + LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_6");
                         m_confirmText.Visible = false;
                         m_continueText.Visible = false;
@@ -742,7 +742,7 @@ namespace RogueCastle
                     }
                     else
                     {
-                        m_toggleIconsText.Text = LocaleBuilder.getString("LOC_ID_SKILL_SCREEN_2_NEW", m_toggleIconsText);
+                        m_toggleIconsText.Text = LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_2_NEW", m_toggleIconsText);
                         //m_toggleIconsText.Text = "[Input:" + InputMapType.MENU_MAP + "] " + LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_2");
                         m_confirmText.Visible = true;
                         m_continueText.Visible = true;
@@ -911,10 +911,10 @@ namespace RogueCastle
             spriteName = spriteName.Replace("Max", "");
 
             m_skillIcon.ChangeSprite(spriteName);
-            m_skillTitle.Text = LocaleBuilder.getResourceString(trait.NameLocID);
-            m_skillDescription.Text = LocaleBuilder.getResourceString(trait.DescLocID);
+            m_skillTitle.Text = LocaleBuilder.GetResourceString(trait.NameLocID);
+            m_skillDescription.Text = LocaleBuilder.GetResourceString(trait.DescLocID);
             m_skillDescription.WordWrap(280);
-            m_inputDescription.Text = LocaleBuilder.getResourceString(trait.InputDescLocID);
+            m_inputDescription.Text = LocaleBuilder.GetResourceString(trait.InputDescLocID);
             //m_inputDescription.Text = LocaleBuilder.getResourceString(trait.InputDescLocIDs[0]) + trait.InputDescLocIDs[1] + LocaleBuilder.getResourceString(trait.InputDescLocIDs[2]);
             m_inputDescription.WordWrap(280);
             m_inputDescription.Y = m_skillDescription.Bounds.Bottom + 10;
@@ -943,13 +943,13 @@ namespace RogueCastle
                 }
 
                 string colon = ": ";
-                switch (LocaleBuilder.languageType)
+                switch (LocaleBuilder.LanguageType)
                 {
                     case(LanguageType.French):
                         colon = " : ";
                         break;
                 }
-                m_skillCurrent.Text = LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_7") + colon + statBaseAmount + trait.UnitLocIDs[0] + LocaleBuilder.getResourceString(trait.UnitLocIDs[1]);
+                m_skillCurrent.Text = LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_7") + colon + statBaseAmount + trait.UnitLocIDs[0] + LocaleBuilder.GetResourceString(trait.UnitLocIDs[1]);
 
                 // Setting the text for the upgrade data for the skill.
                 if (trait.CurrentLevel < trait.MaxLevel)
@@ -961,16 +961,16 @@ namespace RogueCastle
                         if (trait.TraitType != SkillType.Death_Dodge)
                             traitPerLevelModifier = (int)(Math.Round(traitPerLevelModifier, MidpointRounding.AwayFromZero));
                     }
-                    m_skillUpgrade.Text = LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_8") + colon + "+" + traitPerLevelModifier + trait.UnitLocIDs[0] + LocaleBuilder.getResourceString(trait.UnitLocIDs[1]);
+                    m_skillUpgrade.Text = LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_8") + colon + "+" + traitPerLevelModifier + trait.UnitLocIDs[0] + LocaleBuilder.GetResourceString(trait.UnitLocIDs[1]);
                 }
                 else
-                    m_skillUpgrade.Text = LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_8") + colon + "--";
+                    m_skillUpgrade.Text = LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_8") + colon + "--";
 
                 // Setting current skill level text.
-                m_skillLevel.Text = LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_9") + colon + trait.CurrentLevel + "/" + trait.MaxLevel;
+                m_skillLevel.Text = LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_9") + colon + trait.CurrentLevel + "/" + trait.MaxLevel;
 
                 // Changeds periods to commas for decimal values in certain languages (i.e. 1.5 = 1,5).
-                switch (LocaleBuilder.languageType)
+                switch (LocaleBuilder.LanguageType)
                 {
                     case(LanguageType.French):
                         m_skillCurrent.Text = m_skillCurrent.Text.Replace('.', ',');
@@ -979,10 +979,10 @@ namespace RogueCastle
                 }
 
                 // Setting skill cost
-                string upgrade = LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_11"); //unlock
+                string upgrade = LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_11"); //unlock
                 if (trait.CurrentLevel > 0)
-                    upgrade = LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_12"); //upgrade
-                m_skillCost.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_10_NEW"), trait.TotalCost.ToString(), upgrade);
+                    upgrade = LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_12"); //upgrade
+                m_skillCost.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_10_NEW"), trait.TotalCost.ToString(), upgrade);
 
                 // Positioning the text.
                 if (m_inputDescription.Text != " " && m_inputDescription.Text != "")
@@ -1001,10 +1001,10 @@ namespace RogueCastle
                 m_skillLevel.Text = "";
                 m_descriptionDivider.Visible = false;
 
-                string upgrade = LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_11"); //unlock
+                string upgrade = LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_11"); //unlock
                 if (trait.CurrentLevel > 0)
-                    upgrade = LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_12"); //upgrade
-                m_skillCost.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_SKILL_SCREEN_10_NEW"), trait.TotalCost.ToString(), upgrade);
+                    upgrade = LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_12"); //upgrade
+                m_skillCost.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_10_NEW"), trait.TotalCost.ToString(), upgrade);
 
             }
 
@@ -1043,7 +1043,7 @@ namespace RogueCastle
         {
             m_skillTitle.ScaleX = 1;
             m_skillTitle.FontSize = 12;
-            switch (LocaleBuilder.languageType)
+            switch (LocaleBuilder.LanguageType)
             {
                 case (LanguageType.French):
                     switch (m_lastSkillObj.TraitType)

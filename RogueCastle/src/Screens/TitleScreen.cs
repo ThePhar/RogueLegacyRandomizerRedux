@@ -136,7 +136,7 @@ namespace RogueCastle
 
             m_pressStartText2 = new TextObj(Game.JunicodeFont);
             m_pressStartText2.FontSize = 20;
-            m_pressStartText2.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_pressStartText2); // dummy locID to add TextObj to language refresh list
+            m_pressStartText2.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_pressStartText2); // dummy locID to add TextObj to language refresh list
             m_pressStartText2.Align = Types.TextAlign.Centre;
             m_pressStartText2.Position = m_pressStartText.Position;
             m_pressStartText2.Y -= m_pressStartText.Height - 5;
@@ -184,7 +184,7 @@ namespace RogueCastle
             m_profileSelectKey = new KeyIconTextObj(Game.JunicodeFont);
             m_profileSelectKey.Align = Types.TextAlign.Left;
             m_profileSelectKey.FontSize = 10;
-            m_profileSelectKey.Text = string.Format(LocaleBuilder.getString("LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW", m_profileSelectKey), Game.GameConfig.ProfileSlot);
+            m_profileSelectKey.Text = string.Format(LocaleBuilder.GetString("LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW", m_profileSelectKey), Game.GameConfig.ProfileSlot);
             //m_profileSelectKey.Text = "[Input:" + InputMapType.MENU_PROFILESELECT + "] " + LocaleBuilder.getString("LOC_ID_BACK_TO_MENU_OPTIONS_3", m_profileSelectKey) + " (" + Game.GameConfig.ProfileSlot + ")";
             m_profileSelectKey.Position = new Vector2(30, 15);
             m_profileSelectKey.ForceDraw = true;
@@ -210,7 +210,7 @@ namespace RogueCastle
             Game.HoursPlayedSinceLastSave = 0;
 
             Camera.Zoom = 1;
-            m_profileSelectKey.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW"), Game.GameConfig.ProfileSlot);
+            m_profileSelectKey.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW"), Game.GameConfig.ProfileSlot);
             //m_profileSelectKey.Text = "[Input:" + InputMapType.MENU_PROFILESELECT + "] " + LocaleBuilder.getResourceString("LOC_ID_BACK_TO_MENU_OPTIONS_3") + " (" + Game.GameConfig.ProfileSlot + ")";
 
             // Setting initial data.
@@ -276,7 +276,7 @@ namespace RogueCastle
         public void UpdateCopyrightText()
         {
             m_copyrightText.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_copyrightText));
-            m_copyrightText.Text = LocaleBuilder.getResourceString("LOC_ID_COPYRIGHT_GENERIC", true) + " " + string.Format(LocaleBuilder.getResourceString("LOC_ID_TRADEMARK_GENERIC", true), "Rogue Legacy");
+            m_copyrightText.Text = LocaleBuilder.GetResourceString("LOC_ID_COPYRIGHT_GENERIC", true) + " " + string.Format(LocaleBuilder.GetResourceString("LOC_ID_TRADEMARK_GENERIC", true), "Rogue Legacy");
         }
 
         public override void OnExit()
@@ -311,33 +311,33 @@ namespace RogueCastle
                 if (m_heroIsDead == false)
                 {
                     if (Game.PlayerStats.TimesCastleBeaten == 1)
-                        m_pressStartText2.Text = LocaleBuilder.getResourceString("LOC_ID_TITLE_SCREEN_2") + " +";
+                        m_pressStartText2.Text = LocaleBuilder.GetResourceString("LOC_ID_TITLE_SCREEN_2") + " +";
                     else if (Game.PlayerStats.TimesCastleBeaten > 1)
-                        m_pressStartText2.Text = LocaleBuilder.getResourceString("LOC_ID_TITLE_SCREEN_2") + " +" + Game.PlayerStats.TimesCastleBeaten;
+                        m_pressStartText2.Text = LocaleBuilder.GetResourceString("LOC_ID_TITLE_SCREEN_2") + " +" + Game.PlayerStats.TimesCastleBeaten;
                     else
-                        m_pressStartText2.Text = LocaleBuilder.getResourceString("LOC_ID_TITLE_SCREEN_2");
+                        m_pressStartText2.Text = LocaleBuilder.GetResourceString("LOC_ID_TITLE_SCREEN_2");
                 }
                 else // You have an active character but he died. Go to legacy screen.
                 {
                     if (Game.PlayerStats.TimesCastleBeaten == 1)
-                        m_pressStartText2.Text = LocaleBuilder.getResourceString("LOC_ID_TITLE_SCREEN_3", true) + " +";
+                        m_pressStartText2.Text = LocaleBuilder.GetResourceString("LOC_ID_TITLE_SCREEN_3", true) + " +";
                     else if (Game.PlayerStats.TimesCastleBeaten > 1)
-                        m_pressStartText2.Text = LocaleBuilder.getResourceString("LOC_ID_TITLE_SCREEN_3", true) + " +" + Game.PlayerStats.TimesCastleBeaten;
+                        m_pressStartText2.Text = LocaleBuilder.GetResourceString("LOC_ID_TITLE_SCREEN_3", true) + " +" + Game.PlayerStats.TimesCastleBeaten;
                     else
-                        m_pressStartText2.Text = LocaleBuilder.getResourceString("LOC_ID_TITLE_SCREEN_3", true);
+                        m_pressStartText2.Text = LocaleBuilder.GetResourceString("LOC_ID_TITLE_SCREEN_3", true);
                 }
             }
             else
             {
                 // No character was found, and the castle was never beaten. Therefore you are starting a new game.
                 if (m_startNewGamePlus == false)
-                    m_pressStartText2.Text = LocaleBuilder.getResourceString("LOC_ID_TITLE_SCREEN_4", true);
+                    m_pressStartText2.Text = LocaleBuilder.GetResourceString("LOC_ID_TITLE_SCREEN_4", true);
                 else // You've beaten the castle at least once, which means it's new game plus.
                 {
                     if (Game.PlayerStats.TimesCastleBeaten == 1)
-                        m_pressStartText2.Text = LocaleBuilder.getResourceString("LOC_ID_TITLE_SCREEN_4", true) + " +";
+                        m_pressStartText2.Text = LocaleBuilder.GetResourceString("LOC_ID_TITLE_SCREEN_4", true) + " +";
                     else
-                        m_pressStartText2.Text = LocaleBuilder.getResourceString("LOC_ID_TITLE_SCREEN_4", true) + " +" + Game.PlayerStats.TimesCastleBeaten;
+                        m_pressStartText2.Text = LocaleBuilder.GetResourceString("LOC_ID_TITLE_SCREEN_4", true) + " +" + Game.PlayerStats.TimesCastleBeaten;
                 }
             }
         }
@@ -451,7 +451,7 @@ namespace RogueCastle
                 m_optionsKey.Text = "[Input:" + InputMapType.MENU_OPTIONS + "]";
                 m_profileCardKey.Text = "[Input:" + InputMapType.MENU_PROFILECARD + "]";
                 m_creditsKey.Text = "[Input:" + InputMapType.MENU_CREDITS + "]";
-                m_profileSelectKey.Text = string.Format(LocaleBuilder.getString("LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW", m_profileSelectKey), Game.GameConfig.ProfileSlot);
+                m_profileSelectKey.Text = string.Format(LocaleBuilder.GetString("LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW", m_profileSelectKey), Game.GameConfig.ProfileSlot);
                 //m_profileSelectKey.Text = "[Input:" + InputMapType.MENU_PROFILESELECT + "] " + LocaleBuilder.getString("LOC_ID_BACK_TO_MENU_OPTIONS_3", m_profileSelectKey) + " (" + Game.GameConfig.ProfileSlot + ")";
 
                 // Recheck save data. This might not be needed any longer. Not sure.
@@ -754,7 +754,7 @@ namespace RogueCastle
         public override void RefreshTextObjs() 
         {
             UpdateCopyrightText();
-            m_profileSelectKey.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW"), Game.GameConfig.ProfileSlot);
+            m_profileSelectKey.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW"), Game.GameConfig.ProfileSlot);
             //m_profileSelectKey.Text = "[Input:" + InputMapType.MENU_PROFILESELECT + "] " + LocaleBuilder.getResourceString("LOC_ID_BACK_TO_MENU_OPTIONS_3") + " (" + Game.GameConfig.ProfileSlot + ")";
             InitializeStartingText(); // refreshes m_pressStartText2
             base.RefreshTextObjs();

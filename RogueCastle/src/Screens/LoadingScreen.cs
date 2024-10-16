@@ -42,7 +42,7 @@ namespace RogueCastle
         {
             m_loadingText = new TextObj();
             m_loadingText.Font = Game.JunicodeLargeFont;
-            m_loadingText.Text = LocaleBuilder.getString("LOC_ID_LOADING_SCREEN_1", m_loadingText); //"Building"
+            m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_LOADING_SCREEN_1", m_loadingText); //"Building"
             m_loadingText.Align = Types.TextAlign.Centre;
             m_loadingText.FontSize = 40;
             m_loadingText.OutlineWidth = 4;
@@ -85,13 +85,13 @@ namespace RogueCastle
             m_gameCrashed = false;
 
             if (Game.PlayerStats.Traits.X == TraitType.TheOne || Game.PlayerStats.Traits.Y == TraitType.TheOne)
-                m_loadingText.Text = LocaleBuilder.getString("LOC_ID_LOADING_SCREEN_4", m_loadingText); //"Jacking In"
+                m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_LOADING_SCREEN_4", m_loadingText); //"Jacking In"
             else if (Game.PlayerStats.Traits.X == TraitType.Nostalgic || Game.PlayerStats.Traits.Y == TraitType.Nostalgic)
-                m_loadingText.Text = LocaleBuilder.getString("LOC_ID_LOADING_SCREEN_3", m_loadingText); //"Reminiscing"
+                m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_LOADING_SCREEN_3", m_loadingText); //"Reminiscing"
             else if (Game.PlayerStats.Traits.X == TraitType.Baldness || Game.PlayerStats.Traits.Y == TraitType.Baldness)
-                m_loadingText.Text = LocaleBuilder.getString("LOC_ID_LOADING_SCREEN_2", m_loadingText); //"Balding"
+                m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_LOADING_SCREEN_2", m_loadingText); //"Balding"
             else
-                m_loadingText.Text = LocaleBuilder.getString("LOC_ID_LOADING_SCREEN_1", m_loadingText); //"Building"
+                m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_LOADING_SCREEN_1", m_loadingText); //"Building"
 
             if (m_loadingComplete == false)
             {

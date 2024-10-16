@@ -131,51 +131,51 @@ namespace RogueCastle
             switch (classType)
             {
                 case (Knight):
-                    return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_1");
+                    return LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_1");
                 case (Knight2):
-                    return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_2");
+                    return LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_2");
                 case (Assassin):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_3_NEW"), (PlayerEV.ASSASSIN_CRITCHANCE_MOD * 100), (PlayerEV.ASSASSIN_CRITDAMAGE_MOD * 100));
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_3_NEW"), (PlayerEV.ASSASSIN_CRITCHANCE_MOD * 100), (PlayerEV.ASSASSIN_CRITDAMAGE_MOD * 100));
                     //return "+" + (PlayerEV.ASSASSIN_CRITCHANCE_MOD * 100) + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_3") + ", +" + (PlayerEV.ASSASSIN_CRITDAMAGE_MOD * 100) + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_3b");
                 case (Assassin2):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_4_NEW"), (PlayerEV.ASSASSIN_CRITCHANCE_MOD * 100), (PlayerEV.ASSASSIN_CRITDAMAGE_MOD * 100));
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_4_NEW"), (PlayerEV.ASSASSIN_CRITCHANCE_MOD * 100), (PlayerEV.ASSASSIN_CRITDAMAGE_MOD * 100));
                     //return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_4") + "\n+" + (PlayerEV.ASSASSIN_CRITCHANCE_MOD * 100) + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_4b") + ", +" + (PlayerEV.ASSASSIN_CRITDAMAGE_MOD * 100) + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_4c");
                 case (Banker):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_5_NEW"), (PlayerEV.BANKER_GOLDGAIN_MOD * 100));
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_5_NEW"), (PlayerEV.BANKER_GOLDGAIN_MOD * 100));
                     //return "+" + (PlayerEV.BANKER_GOLDGAIN_MOD * 100) + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_5");
                 case (Banker2):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_6_NEW"), (PlayerEV.BANKER_GOLDGAIN_MOD * 100));
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_6_NEW"), (PlayerEV.BANKER_GOLDGAIN_MOD * 100));
                     //return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_6") + "\n+" + (PlayerEV.BANKER_GOLDGAIN_MOD * 100) + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_6b");
                 case (Wizard):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_7_NEW"), GameEV.MAGE_MANA_GAIN);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_7_NEW"), GameEV.MAGE_MANA_GAIN);
                     //return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_7") + " " + GameEV.MAGE_MANA_GAIN + " " + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_7b");
                 case (Wizard2):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_8_NEW"), GameEV.MAGE_MANA_GAIN);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_8_NEW"), GameEV.MAGE_MANA_GAIN);
                     //return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_8") + " " + GameEV.MAGE_MANA_GAIN + " " + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_8b");
                 case (Barbarian):
-                    return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_9");
+                    return LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_9");
                 case (Barbarian2):
-                    return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_10");
+                    return LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_10");
                 case (Ninja):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_11_NEW"), (PlayerEV.NINJA_MOVESPEED_MOD * 100));
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_11_NEW"), (PlayerEV.NINJA_MOVESPEED_MOD * 100));
                     //return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_11") + "\n +" + (PlayerEV.NINJA_MOVESPEED_MOD * 100) + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_11b");
                 case (Ninja2):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_12_NEW"), (PlayerEV.NINJA_MOVESPEED_MOD * 100));
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_12_NEW"), (PlayerEV.NINJA_MOVESPEED_MOD * 100));
                     //return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_12") + "\n +" + (PlayerEV.NINJA_MOVESPEED_MOD * 100) + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_12b");
                 case (SpellSword):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_13_NEW"), (GameEV.SPELLSWORD_ATTACK_MANA_CONVERSION * 100));
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_13_NEW"), (GameEV.SPELLSWORD_ATTACK_MANA_CONVERSION * 100));
                     //return (GameEV.SPELLSWORD_ATTACK_MANA_CONVERSION * 100) + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_13");
                 case (SpellSword2):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_14_NEW"), (GameEV.SPELLSWORD_ATTACK_MANA_CONVERSION * 100));
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_14_NEW"), (GameEV.SPELLSWORD_ATTACK_MANA_CONVERSION * 100));
                     //return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_14") + "\n" + (GameEV.SPELLSWORD_ATTACK_MANA_CONVERSION * 100) + LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_14b");
                 case (Lich):
-                    return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_15");
+                    return LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_15");
                 case (Lich2):
-                    return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_16");
+                    return LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_16");
                 case (Dragon):
-                    return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_17");
+                    return LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_17");
                 case (Traitor):
-                    return LocaleBuilder.getResourceString("LOC_ID_PROFILE_DESC_18");
+                    return LocaleBuilder.GetResourceString("LOC_ID_PROFILE_DESC_18");
             }
             return "";
         }

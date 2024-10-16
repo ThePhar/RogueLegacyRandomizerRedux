@@ -217,52 +217,52 @@ namespace RogueCastle
             {
                 case (DoubleJump):
                     if (amount > 1)
-                        return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_1_NEW_A"), amount);
+                        return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_1_NEW_A"), amount);
                         //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_1") + " " + amount + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_1b");
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_1_NEW_B"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_1_NEW_B"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_1") + " " + amount + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_1c");
                 case (Dash):
                     if (amount > 1)
-                        return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_2_NEW_A"), amount);
+                        return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_2_NEW_A"), amount);
                         //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_2") + " " + amount + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_2b");
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_2_NEW_B"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_2_NEW_B"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_2") + " " + amount + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_2c");
                 case (Vampirism):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_3_NEW"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_3_NEW"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_3") + " " + amount + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_3b");
                 case (Flight):
                     if (amount > 1)
-                        return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_4_NEW_A"), amount);
+                        return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_4_NEW_A"), amount);
                         //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_4") + " " + amount + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_4b");
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_4_NEW_B"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_4_NEW_B"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_4") + " " + amount + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_4c");
                 case (ManaGain):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_5_NEW"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_5_NEW"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_5") + " " + amount + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_5b");
                 case (ManaHPGain):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_6");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_6");
                 case (DamageReturn):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_7_NEW"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_7_NEW"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_7") + " " + amount + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_7b");
                 case (GoldGain):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_8_NEW"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_8_NEW"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_8") + " " + amount + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_8b");
                 case (MovementSpeed):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_9_NEW"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_9_NEW"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_9") + " " + amount + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_9b");
                 case (ArchitectFee):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_10");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_10");
                 case (NewGamePlusGoldBonus):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_11_NEW"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_11_NEW"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_11") + " " + amount + "%";
                 case (RoomLevelUp):
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_12_NEW"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_12_NEW"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_12") + " " + (int)((amount / LevelEV.ROOM_LEVEL_MOD) * LevelEV.ENEMY_LEVEL_FAKE_MULTIPLIER) + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_12b");
                 case (RoomLevelDown):
                     if (amount > 1)
-                        return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_13_NEW_A"), amount);
+                        return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_13_NEW_A"), amount);
                         //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_13") + " " + amount + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_13b");
-                    return string.Format(LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_13_NEW_B"), amount);
+                    return string.Format(LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_SHORT_13_NEW_B"), amount);
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_13") + " " + amount + " " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_SHORT_13c");
             }
 
@@ -276,32 +276,32 @@ namespace RogueCastle
             switch (type)
             {
                 case (DoubleJump):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_1_NEW");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_1_NEW");
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_1") + " [Input:" + InputMapType.PLAYER_JUMP1 + "] " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_1b");
                     //return "[Input:" + InputMapType.PLAYER_JUMP1 + "] " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_1b");
                 case (Dash):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_2_NEW");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_2_NEW");
                     //return "[Input:" + InputMapType.PLAYER_DASHLEFT + "] " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_2") + " [Input:" + InputMapType.PLAYER_DASHRIGHT + "] " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_2b");
                     //return "[Input:" + InputMapType.PLAYER_DASHLEFT + "] or [Input:" + InputMapType.PLAYER_DASHRIGHT + "] to blah blah blah";
                 case (Vampirism):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_3");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_3");
                 case (Flight):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_4_NEW");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_4_NEW");
                     //return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_4") + " [Input:" + InputMapType.PLAYER_JUMP1 + "] " + LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_4b");
                 case (ManaGain):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_5");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_5");
                 case (ManaHPGain):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_6");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_6");
                 case (DamageReturn):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_7");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_7");
                 case (GoldGain):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_8");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_8");
                 case (MovementSpeed):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_9");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_9");
                 case (RoomLevelUp):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_10");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_10");
                 case (RoomLevelDown):
-                    return LocaleBuilder.getResourceString("LOC_ID_EQUIPMENT_INST_11");
+                    return LocaleBuilder.GetResourceString("LOC_ID_EQUIPMENT_INST_11");
             }
 
             return "";

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using System.Globalization;
 using System.Xml;
 using DS2DEngine;
+using RogueCastle.Objects;
 
 namespace RogueCastle
 {

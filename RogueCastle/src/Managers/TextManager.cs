@@ -48,7 +48,7 @@ namespace RogueCastle
             TextObj fullTextCheck = m_resourcePool.CheckOut();
             fullTextCheck.Font = Game.JunicodeFont;
             fullTextCheck.FontSize = 14;
-            fullTextCheck.Text = amount + " " + LocaleBuilder.getString(textLocID, fullTextCheck);
+            fullTextCheck.Text = amount + " " + LocaleBuilder.GetString(textLocID, fullTextCheck);
 
             int textWidth = fullTextCheck.Width;
             m_resourcePool.CheckIn(fullTextCheck);
@@ -66,7 +66,7 @@ namespace RogueCastle
 
             TextObj regularText = m_resourcePool.CheckOut();
             regularText.Font = Game.JunicodeFont;
-            regularText.Text = " " + LocaleBuilder.getString(textLocID, regularText);
+            regularText.Text = " " + LocaleBuilder.GetString(textLocID, regularText);
             regularText.FontSize = 14;
             regularText.Align = Types.TextAlign.Left;
             regularText.TextureColor = color;
@@ -90,7 +90,7 @@ namespace RogueCastle
             TextObj fullTextCheck = m_resourcePool.CheckOut();
             fullTextCheck.Font = Game.JunicodeFont;
             fullTextCheck.FontSize = 14;
-            fullTextCheck.Text = LocaleBuilder.getString(textLocID, fullTextCheck) + " " + amount;
+            fullTextCheck.Text = LocaleBuilder.GetString(textLocID, fullTextCheck) + " " + amount;
 
             int textWidth = fullTextCheck.Width;
             m_resourcePool.CheckIn(fullTextCheck);
@@ -98,7 +98,7 @@ namespace RogueCastle
             // Changing text settings
             TextObj regularText = m_resourcePool.CheckOut();
             regularText.Font = Game.JunicodeFont;
-            regularText.Text = LocaleBuilder.getString(textLocID, regularText) + " ";
+            regularText.Text = LocaleBuilder.GetString(textLocID, regularText) + " ";
             regularText.FontSize = 14;
             regularText.TextureColor = color;
             regularText.Position = new Vector2(position.X - textWidth / 2f, position.Y - regularText.Height / 2f);
@@ -145,7 +145,7 @@ namespace RogueCastle
         {
             TextObj regularText = m_resourcePool.CheckOut();
             regularText.Font = Game.JunicodeFont;
-            regularText.Text = LocaleBuilder.getString(textLocID, regularText);
+            regularText.Text = LocaleBuilder.GetString(textLocID, regularText);
             regularText.Align = Types.TextAlign.Centre;
             regularText.FontSize = 14;
             regularText.TextureColor = color;

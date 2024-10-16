@@ -79,7 +79,7 @@ namespace RogueCastle
                     //trait.InputDescLocIDs = new string[] { "", " ", "" };
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "%";
-                    switch (LocaleBuilder.languageType)
+                    switch (LocaleBuilder.LanguageType)
                     {
                         case(LanguageType.French):
                             trait.UnitLocIDs = new string[] { " %", "" };
@@ -125,7 +125,7 @@ namespace RogueCastle
                     //trait.InputDescLocIDs = new string[] { "", " ", "" };
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "%";
-                    switch (LocaleBuilder.languageType)
+                    switch (LocaleBuilder.LanguageType)
                     {
                         case (LanguageType.French):
                             trait.UnitLocIDs = new string[] { " %", "" };
@@ -152,7 +152,7 @@ namespace RogueCastle
                     //trait.InputDescLocIDs = new string[] { "", " ", "" };
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "%";
-                    switch (LocaleBuilder.languageType)
+                    switch (LocaleBuilder.LanguageType)
                     {
                         case (LanguageType.French):
                             trait.UnitLocIDs = new string[] { " %", "" };
@@ -179,7 +179,7 @@ namespace RogueCastle
                     //trait.InputDescLocIDs = new string[] { "", " ", "" };
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "%";
-                    switch (LocaleBuilder.languageType)
+                    switch (LocaleBuilder.LanguageType)
                     {
                         case (LanguageType.French):
                             trait.UnitLocIDs = new string[] { " %", "" };
@@ -336,7 +336,7 @@ namespace RogueCastle
                     //trait.InputDescLocIDs = new string[] { "", " ", "" };
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "%";
-                    switch (LocaleBuilder.languageType)
+                    switch (LocaleBuilder.LanguageType)
                     {
                         case (LanguageType.French):
                             trait.UnitLocIDs = new string[] { " %", "" };
@@ -363,7 +363,7 @@ namespace RogueCastle
                     //trait.InputDescLocIDs = new string[] { "", " ", "" };
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "%";
-                    switch (LocaleBuilder.languageType)
+                    switch (LocaleBuilder.LanguageType)
                     {
                         case (LanguageType.French):
                             trait.UnitLocIDs = new string[] { " %", "" };
@@ -390,7 +390,7 @@ namespace RogueCastle
                     //trait.InputDescLocIDs = new string[] { "", " ", "" };
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "% hp/mp";
-                    switch (LocaleBuilder.languageType)
+                    switch (LocaleBuilder.LanguageType)
                     {
                         case (LanguageType.French):
                             trait.UnitLocIDs = new string[] { " % ", "LOC_ID_SKILL_SCREEN_18" };
@@ -417,7 +417,7 @@ namespace RogueCastle
                     //trait.InputDescLocIDs = new string[] { "LOC_ID_SKILL_INPUT_1", " [Input:" + InputMapType.MENU_MAP + "] ", "LOC_ID_SKILL_INPUT_2" };
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_18";
                     trait.UnitOfMeasurement = "%";
-                    switch (LocaleBuilder.languageType)
+                    switch (LocaleBuilder.LanguageType)
                     {
                         case (LanguageType.French):
                             trait.UnitLocIDs = new string[] { " %", "" };
@@ -520,7 +520,7 @@ namespace RogueCastle
                     //trait.InputDescLocIDs = new string[] { "", " ", "" };
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "%";
-                    switch (LocaleBuilder.languageType)
+                    switch (LocaleBuilder.LanguageType)
                     {
                         case (LanguageType.French):
                             trait.UnitLocIDs = new string[] { " %", "" };

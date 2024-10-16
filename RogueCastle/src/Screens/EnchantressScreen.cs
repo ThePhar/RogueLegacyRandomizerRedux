@@ -94,7 +94,7 @@ namespace RogueCastle
             m_equipmentDescriptionText.Align = Types.TextAlign.Centre;
             m_equipmentDescriptionText.FontSize = 12;
             m_equipmentDescriptionText.Position = new Vector2(230, -20);
-            m_equipmentDescriptionText.Text = LocaleBuilder.getString("LOC_ID_ENCHANTRESS_SCREEN_1", m_equipmentDescriptionText); //"Select a category"
+            m_equipmentDescriptionText.Text = LocaleBuilder.GetString("LOC_ID_ENCHANTRESS_SCREEN_1", m_equipmentDescriptionText); //"Select a category"
             m_equipmentDescriptionText.WordWrap(190);
             m_equipmentDescriptionText.Scale = Vector2.Zero;
             m_enchantressUI.AddChild(m_equipmentDescriptionText);
@@ -128,19 +128,19 @@ namespace RogueCastle
             m_equippedIcon = new SpriteObj("BlacksmithUI_EquippedIcon_Sprite");
 
             m_confirmText = new KeyIconTextObj(Game.JunicodeFont);
-            m_confirmText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_confirmText); // dummy locID to add TextObj to language refresh list
+            m_confirmText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_confirmText); // dummy locID to add TextObj to language refresh list
             m_confirmText.FontSize = 12;
             m_confirmText.Position = new Vector2(50, 550);
             m_confirmText.ForceDraw = true;
 
             m_cancelText = new KeyIconTextObj(Game.JunicodeFont);
-            m_cancelText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_cancelText); // dummy locID to add TextObj to language refresh list
+            m_cancelText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_cancelText); // dummy locID to add TextObj to language refresh list
             m_cancelText.FontSize = 12;
             m_cancelText.Position = new Vector2(m_confirmText.X, m_confirmText.Y + 40);
             m_cancelText.ForceDraw = true;
 
             m_navigationText = new KeyIconTextObj(Game.JunicodeFont);
-            m_navigationText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_navigationText); // dummy locID to add TextObj to language refresh list
+            m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_navigationText); // dummy locID to add TextObj to language refresh list
             m_navigationText.FontSize = 12;
             m_navigationText.Position = new Vector2(m_confirmText.X, m_confirmText.Y + 80);
             m_navigationText.ForceDraw = true;
@@ -161,25 +161,25 @@ namespace RogueCastle
         {
             m_descriptionText = new TextObj(Game.JunicodeFont);
             m_descriptionText.FontSize = 9;
-            m_descriptionText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_descriptionText); // dummy locID to add TextObj to language refresh list
+            m_descriptionText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_descriptionText); // dummy locID to add TextObj to language refresh list
             //m_descriptionText.DropShadow = new Vector2(2, 2);
 
             m_instructionsTitleText = new TextObj();
             m_instructionsTitleText.Font = Game.JunicodeFont;
             m_instructionsTitleText.FontSize = 10;
             m_instructionsTitleText.TextureColor = new Color(237, 202, 138);
-            m_instructionsTitleText.Text = LocaleBuilder.getString("LOC_ID_ENCHANTRESS_SCREEN_5", m_instructionsTitleText) + ":"; //"Instructions:"
+            m_instructionsTitleText.Text = LocaleBuilder.GetString("LOC_ID_ENCHANTRESS_SCREEN_5", m_instructionsTitleText) + ":"; //"Instructions:"
 
             m_instructionsText = new KeyIconTextObj();
             m_instructionsText.Font = Game.JunicodeFont;
             m_instructionsText.FontSize = 10;
-            m_instructionsText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_instructionsText); // dummy locID to add TextObj to language refresh list
+            m_instructionsText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_instructionsText); // dummy locID to add TextObj to language refresh list
 
             m_unlockCostContainer = new ObjContainer();
             TextObj coinText = new TextObj();
             coinText.Font = Game.JunicodeFont;
             coinText.FontSize = 10;
-            coinText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", coinText); // dummy locID to add TextObj to language refresh list
+            coinText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", coinText); // dummy locID to add TextObj to language refresh list
             coinText.TextureColor = Color.Yellow;
             coinText.Position = new Vector2(50, 9);
             m_unlockCostContainer.AddChild(new SpriteObj("BlacksmithUI_CoinBG_Sprite"));
@@ -196,7 +196,7 @@ namespace RogueCastle
             m_equipmentTitleText.DropShadow = new Vector2(2, 2);
             m_equipmentTitleText.TextureColor = new Color(237, 202, 138);
             m_equipmentTitleText.Position = new Vector2(m_enchantressUI.X + 140, m_descriptionText.Y - 50);
-            m_equipmentTitleText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_equipmentTitleText); // dummy locID to add TextObj to language refresh list
+            m_equipmentTitleText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_equipmentTitleText); // dummy locID to add TextObj to language refresh list
 
             m_descriptionText.Visible = false;
             m_instructionsTitleText.Visible = false;
@@ -364,13 +364,13 @@ namespace RogueCastle
             Tween.To(m_cancelText, 0.2f, Linear.EaseNone, "Opacity", "1");
             Tween.To(m_navigationText, 0.2f, Linear.EaseNone, "Opacity", "1");
 
-            m_confirmText.Text = LocaleBuilder.getString("LOC_ID_ENCHANTRESS_SCREEN_6_NEW", m_confirmText); //"select/equip"
-            m_cancelText.Text = LocaleBuilder.getString("LOC_ID_ENCHANTRESS_SCREEN_7_NEW", m_cancelText); //"cancel/close menu"
+            m_confirmText.Text = LocaleBuilder.GetString("LOC_ID_ENCHANTRESS_SCREEN_6_NEW", m_confirmText); //"select/equip"
+            m_cancelText.Text = LocaleBuilder.GetString("LOC_ID_ENCHANTRESS_SCREEN_7_NEW", m_cancelText); //"cancel/close menu"
 
             if (InputManager.GamePadIsConnected(PlayerIndex.One) == false)
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_ENCHANTRESS_SCREEN_8", m_navigationText); //"Arrow keys to navigate"
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_ENCHANTRESS_SCREEN_8", m_navigationText); //"Arrow keys to navigate"
             else
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_ENCHANTRESS_SCREEN_9_NEW", m_navigationText); //"to navigate"
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_ENCHANTRESS_SCREEN_9_NEW", m_navigationText); //"to navigate"
 
             m_currentEquipmentIndex = 0;
             m_inCategoryMenu = true;
@@ -607,19 +607,19 @@ namespace RogueCastle
 
             if (m_inCategoryMenu == true)
             {
-                m_equipmentDescriptionText.Text = LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_1"); //"Select a category"
+                m_equipmentDescriptionText.Text = LocaleBuilder.GetResourceString("LOC_ID_ENCHANTRESS_SCREEN_1"); //"Select a category"
             }
             else
             {
                 if (Game.PlayerStats.GetRuneArray[m_currentCategoryIndex - m_startingCategoryIndex][m_currentEquipmentIndex] == EquipmentState.NotFound)
                 {
                     m_equipmentDescriptionText.Position = new Vector2(230, -20);
-                    m_equipmentDescriptionText.Text = LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_10"); //"Rune needed"
+                    m_equipmentDescriptionText.Text = LocaleBuilder.GetResourceString("LOC_ID_ENCHANTRESS_SCREEN_10"); //"Rune needed"
                 }
                 else if (Game.PlayerStats.GetRuneArray[m_currentCategoryIndex - m_startingCategoryIndex][m_currentEquipmentIndex] < EquipmentState.Purchased)
                 {
-                    m_equipmentDescriptionText.Text = LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_11"); //"Purchase Info Here"
-                    (m_unlockCostContainer.GetChildAt(1) as TextObj).Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_12_NEW"), Game.EquipmentSystem.GetAbilityCost(m_currentCategoryIndex - m_startingCategoryIndex, m_currentEquipmentIndex).ToString());
+                    m_equipmentDescriptionText.Text = LocaleBuilder.GetResourceString("LOC_ID_ENCHANTRESS_SCREEN_11"); //"Purchase Info Here"
+                    (m_unlockCostContainer.GetChildAt(1) as TextObj).Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_ENCHANTRESS_SCREEN_12_NEW"), Game.EquipmentSystem.GetAbilityCost(m_currentCategoryIndex - m_startingCategoryIndex, m_currentEquipmentIndex).ToString());
                     //(m_unlockCostContainer.GetChildAt(1) as TextObj).Text = Game.EquipmentSystem.GetAbilityCost(m_currentCategoryIndex - m_startingCategoryIndex, m_currentEquipmentIndex).ToString() + " " + LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_12"); //"to unlock"
 
                     m_unlockCostContainer.Visible = true;
@@ -657,9 +657,9 @@ namespace RogueCastle
         // Updates the base player stats text and the bonus attribute text that a piece of equipment gives you.
         private void UpdateEquipmentDataText()
         {
-            m_equipmentTitleText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_RUNE_BASE_FORMAT", true), LocaleBuilder.getResourceString(EquipmentAbilityType.ToStringID(m_currentEquipmentIndex), true), LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_13"), true) /*"Rune"*/ + "\n(" + LocaleBuilder.getResourceString(EquipmentCategoryType.ToStringID2(m_currentCategoryIndex - m_startingCategoryIndex), true) + ")";
+            m_equipmentTitleText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_RUNE_BASE_FORMAT", true), LocaleBuilder.GetResourceString(EquipmentAbilityType.ToStringID(m_currentEquipmentIndex), true), LocaleBuilder.GetResourceString("LOC_ID_ENCHANTRESS_SCREEN_13"), true) /*"Rune"*/ + "\n(" + LocaleBuilder.GetResourceString(EquipmentCategoryType.ToStringID2(m_currentCategoryIndex - m_startingCategoryIndex), true) + ")";
 
-            m_descriptionText.Text = LocaleBuilder.getResourceString(EquipmentAbilityType.DescriptionID(m_currentEquipmentIndex));
+            m_descriptionText.Text = LocaleBuilder.GetResourceString(EquipmentAbilityType.DescriptionID(m_currentEquipmentIndex));
             m_descriptionText.WordWrap(195);
             m_descriptionText.Y = m_equipmentTitleText.Y + 60;
 
@@ -822,7 +822,7 @@ namespace RogueCastle
 
         public override void RefreshTextObjs()
         {
-            m_instructionsTitleText.Text = LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_5") + ":"; //"Instructions:"
+            m_instructionsTitleText.Text = LocaleBuilder.GetResourceString("LOC_ID_ENCHANTRESS_SCREEN_5") + ":"; //"Instructions:"
 
             /*
             m_confirmText.Text = "[Input:" + InputMapType.MENU_CONFIRM1 + "]  " + LocaleBuilder.getResourceString("LOC_ID_ENCHANTRESS_SCREEN_6"); //"select/equip"
@@ -835,7 +835,7 @@ namespace RogueCastle
              */
 
             (m_unlockCostContainer.GetChildAt(1) as TextObj).ScaleX = 1;
-            switch (LocaleBuilder.languageType)
+            switch (LocaleBuilder.LanguageType)
             {
                 case (LanguageType.French):
                 case (LanguageType.Spanish_Spain):

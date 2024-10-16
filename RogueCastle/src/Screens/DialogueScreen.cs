@@ -196,8 +196,8 @@ namespace RogueCastle
         public void SetDialogueChoice(string dialogueObjName)
         {
             DialogueObj choiceDialogue = DialogueManager.GetText(dialogueObjName);
-            (m_dialogChoiceContainer.GetChildAt(2) as TextObj).Text = LocaleBuilder.getString(choiceDialogue.Speakers[0], m_dialogChoiceContainer.GetChildAt(2) as TextObj);
-            (m_dialogChoiceContainer.GetChildAt(3) as TextObj).Text = LocaleBuilder.getString(choiceDialogue.Dialogue[0], m_dialogChoiceContainer.GetChildAt(3) as TextObj);
+            (m_dialogChoiceContainer.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetString(choiceDialogue.Speakers[0], m_dialogChoiceContainer.GetChildAt(2) as TextObj);
+            (m_dialogChoiceContainer.GetChildAt(3) as TextObj).Text = LocaleBuilder.GetString(choiceDialogue.Dialogue[0], m_dialogChoiceContainer.GetChildAt(3) as TextObj);
 
             if (Game.PlayerStats.Traits.X == TraitType.Dyslexia || Game.PlayerStats.Traits.Y == TraitType.Dyslexia)
             {
@@ -239,11 +239,11 @@ namespace RogueCastle
                             if (dialogueText.IsTypewriting == false)
                             {
                                 m_dialogCounter++;
-                                dialogueTitle.Text = LocaleBuilder.getString(m_dialogTitles[m_dialogCounter], dialogueTitle, m_forceMaleDialogue);
+                                dialogueTitle.Text = LocaleBuilder.GetString(m_dialogTitles[m_dialogCounter], dialogueTitle, m_forceMaleDialogue);
                                 if (m_stringFormatArgs != null)
-                                    dialogueText.Text = string.Format(LocaleBuilder.getString(m_dialogText[m_dialogCounter], dialogueText, m_forceMaleDialogue), m_stringFormatArgs);
+                                    dialogueText.Text = string.Format(LocaleBuilder.GetString(m_dialogText[m_dialogCounter], dialogueText, m_forceMaleDialogue), m_stringFormatArgs);
                                 else
-                                    dialogueText.Text = LocaleBuilder.getString(m_dialogText[m_dialogCounter], dialogueText, m_forceMaleDialogue);
+                                    dialogueText.Text = LocaleBuilder.GetString(m_dialogText[m_dialogCounter], dialogueText, m_forceMaleDialogue);
                                 if (Game.PlayerStats.Traits.X == TraitType.Dyslexia || Game.PlayerStats.Traits.Y == TraitType.Dyslexia)
                                 {
                                     dialogueTitle.RandomizeSentence(false);
@@ -420,11 +420,11 @@ namespace RogueCastle
             //m_dialogContainer.Y -= 100;
 
             if (m_stringFormatArgs != null)
-                (m_dialogContainer.GetChildAt(2) as TextObj).Text = string.Format(LocaleBuilder.getString(text[m_dialogCounter], m_dialogContainer.GetChildAt(2) as TextObj, m_forceMaleDialogue), m_stringFormatArgs);
+                (m_dialogContainer.GetChildAt(2) as TextObj).Text = string.Format(LocaleBuilder.GetString(text[m_dialogCounter], m_dialogContainer.GetChildAt(2) as TextObj, m_forceMaleDialogue), m_stringFormatArgs);
             else
-                (m_dialogContainer.GetChildAt(2) as TextObj).Text = LocaleBuilder.getString(text[m_dialogCounter], m_dialogContainer.GetChildAt(2) as TextObj, m_forceMaleDialogue);
+                (m_dialogContainer.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetString(text[m_dialogCounter], m_dialogContainer.GetChildAt(2) as TextObj, m_forceMaleDialogue);
             (m_dialogContainer.GetChildAt(2) as TextObj).WordWrap(850);
-            (m_dialogContainer.GetChildAt(1) as TextObj).Text = LocaleBuilder.getString(names[m_dialogCounter], m_dialogContainer.GetChildAt(1) as TextObj, m_forceMaleDialogue);
+            (m_dialogContainer.GetChildAt(1) as TextObj).Text = LocaleBuilder.GetString(names[m_dialogCounter], m_dialogContainer.GetChildAt(1) as TextObj, m_forceMaleDialogue);
             if (Game.PlayerStats.Traits.X == TraitType.Dyslexia || Game.PlayerStats.Traits.Y == TraitType.Dyslexia)
             {
                 (m_dialogContainer.GetChildAt(2) as TextObj).RandomizeSentence(false);

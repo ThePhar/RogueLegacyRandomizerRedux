@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework;
 using System.IO;
 using DS2DEngine;
+using RogueCastle.Objects;
 
 namespace RogueCastle
 {
@@ -1079,7 +1080,7 @@ namespace RogueCastle
                                         FairyChestObj fairyChest = chest as FairyChestObj;
                                         if (fairyChest != null)
                                         {
-                                            if (fairyChest.State == ChestConditionChecker.STATE_FAILED)
+                                            if (fairyChest.State == ChestState.Failed)
                                                 fairyChestFailed.Add(true);
                                             else
                                                 fairyChestFailed.Add(false);

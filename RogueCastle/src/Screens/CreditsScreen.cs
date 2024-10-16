@@ -192,7 +192,7 @@ namespace RogueCastle
             m_thanksForPlayingText = new TextObj(Game.JunicodeLargeFont);
             m_thanksForPlayingText.FontSize = 32;
             m_thanksForPlayingText.Align = Types.TextAlign.Centre;
-            m_thanksForPlayingText.Text = LocaleBuilder.getString("LOC_ID_CREDITS_SCREEN_1", m_thanksForPlayingText); //"Thanks for playing!"
+            m_thanksForPlayingText.Text = LocaleBuilder.GetString("LOC_ID_CREDITS_SCREEN_1", m_thanksForPlayingText); //"Thanks for playing!"
             //m_thanksForPlayingText.OutlineWidth = 2;
             m_thanksForPlayingText.DropShadow = new Vector2(2, 2);
             m_thanksForPlayingText.Position = new Vector2(1320 / 2f, 480);
@@ -203,13 +203,13 @@ namespace RogueCastle
             m_totalDeaths.Position = m_thanksForPlayingText.Position;
             m_totalDeaths.Y += 90;
             m_totalDeaths.Opacity = 0;
-            m_totalDeaths.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_totalDeaths); // dummy locID to add TextObj to language refresh list
+            m_totalDeaths.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_totalDeaths); // dummy locID to add TextObj to language refresh list
             m_totalPlayTime = m_thanksForPlayingText.Clone() as TextObj;
             m_totalPlayTime.FontSize = 20;
             m_totalPlayTime.Position = m_totalDeaths.Position;
             m_totalPlayTime.Y += 50;
             m_totalPlayTime.Opacity = 0;
-            m_totalPlayTime.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_totalPlayTime); // dummy locID to add TextObj to language refresh list
+            m_totalPlayTime.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_totalPlayTime); // dummy locID to add TextObj to language refresh list
 
             m_continueText = new KeyIconTextObj(Game.JunicodeFont);
             m_continueText.FontSize = 14;
@@ -217,7 +217,7 @@ namespace RogueCastle
             m_continueText.Position = new Vector2(1320 - 50, 650);
             m_continueText.ForceDraw = true;
             m_continueText.Opacity = 0;
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
 
             int teamXPos = 200;
             Vector2 teamScale = new Vector2(1.5f, 1.5f);
@@ -371,8 +371,8 @@ namespace RogueCastle
                     "[@LOC_ID_CREDITS_SCREEN_23" /*"Primary Localization by"*/, "Babel Media",
                     "","",
                     "[@LOC_ID_CREDITS_SCREEN_24" /*"Chinese & Add'l Localization by"*/, "Universally Speaking", 
-                    "Tobias Gut (" + LocaleBuilder.getResourceString("LOC_ID_OPTIONS_LANGUAGE_GERMAN") + ")", 
-                    "Virtualname (" + LocaleBuilder.getResourceString("LOC_ID_OPTIONS_LANGUAGE_CHINESE") + ")",
+                    "Tobias Gut (" + LocaleBuilder.GetResourceString("LOC_ID_OPTIONS_LANGUAGE_GERMAN") + ")", 
+                    "Virtualname (" + LocaleBuilder.GetResourceString("LOC_ID_OPTIONS_LANGUAGE_CHINESE") + ")",
 #if XBOX_CREDITS
                     "","",
                     "","",
@@ -420,7 +420,7 @@ namespace RogueCastle
                     if (text.Length > 0 && text.StartsWith("@"))
                     {
                         text = text.Remove(0, 1);
-                        textObj.Text = LocaleBuilder.getString(text, textObj);
+                        textObj.Text = LocaleBuilder.GetString(text, textObj);
                     }
                     else
                         textObj.Text = text;
@@ -431,7 +431,7 @@ namespace RogueCastle
                     if (text.Length > 0 && text.StartsWith("@"))
                     {
                         text = text.Remove(0, 1);
-                        textObj.Text = LocaleBuilder.getString(text, textObj);
+                        textObj.Text = LocaleBuilder.GetString(text, textObj);
                     }
                     else
                         textObj.Text = text;
@@ -511,15 +511,15 @@ namespace RogueCastle
             int minutes = (int)((hoursPlayed - (int)(hoursPlayed)) * 60f);
             Console.WriteLine("Hours played: " + hoursPlayed + " minutes: " + minutes);
 
-            m_totalDeaths.Text = LocaleBuilder.getResourceString("LOC_ID_CREDITS_SCREEN_2") /*"Total Children"*/ + ": " + Game.PlayerStats.TimesDead.ToString();
+            m_totalDeaths.Text = LocaleBuilder.GetResourceString("LOC_ID_CREDITS_SCREEN_2") /*"Total Children"*/ + ": " + Game.PlayerStats.TimesDead.ToString();
             if (minutes < 10)
-                m_totalPlayTime.Text = LocaleBuilder.getResourceString("LOC_ID_CREDITS_SCREEN_3") /*"Time Played"*/ + " - " + (int)hoursPlayed + ":0" + minutes;
+                m_totalPlayTime.Text = LocaleBuilder.GetResourceString("LOC_ID_CREDITS_SCREEN_3") /*"Time Played"*/ + " - " + (int)hoursPlayed + ":0" + minutes;
             else
-                m_totalPlayTime.Text = LocaleBuilder.getResourceString("LOC_ID_CREDITS_SCREEN_3") /*"Time Played"*/ + " - " + (int)hoursPlayed + ":" + minutes;
+                m_totalPlayTime.Text = LocaleBuilder.GetResourceString("LOC_ID_CREDITS_SCREEN_3") /*"Time Played"*/ + " - " + (int)hoursPlayed + ":" + minutes;
 
             Camera.Position = Vector2.Zero;
             m_displayingContinueText = false;
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_CREDITS_SCREEN_4_NEW", m_continueText);
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_CREDITS_SCREEN_4_NEW", m_continueText);
             //Tween.To(m_continueText, 1, Tween.EaseNone, "delay", "2", "Opacity", "1");
 
             if (m_sky == null) // Hack
@@ -1425,11 +1425,11 @@ namespace RogueCastle
         {
             float hoursPlayed = (Game.PlayerStats.TotalHoursPlayed + Game.HoursPlayedSinceLastSave);
             int minutes = (int)((hoursPlayed - (int)(hoursPlayed)) * 60f);
-            m_totalDeaths.Text = LocaleBuilder.getResourceString("LOC_ID_CREDITS_SCREEN_2") /*"Total Children"*/ + ": " + Game.PlayerStats.TimesDead.ToString();
+            m_totalDeaths.Text = LocaleBuilder.GetResourceString("LOC_ID_CREDITS_SCREEN_2") /*"Total Children"*/ + ": " + Game.PlayerStats.TimesDead.ToString();
             if (minutes < 10)
-                m_totalPlayTime.Text = LocaleBuilder.getResourceString("LOC_ID_CREDITS_SCREEN_3") /*"Time Played"*/ + " - " + (int)hoursPlayed + ":0" + minutes;
+                m_totalPlayTime.Text = LocaleBuilder.GetResourceString("LOC_ID_CREDITS_SCREEN_3") /*"Time Played"*/ + " - " + (int)hoursPlayed + ":0" + minutes;
             else
-                m_totalPlayTime.Text = LocaleBuilder.getResourceString("LOC_ID_CREDITS_SCREEN_3") /*"Time Played"*/ + " - " + (int)hoursPlayed + ":" + minutes;
+                m_totalPlayTime.Text = LocaleBuilder.GetResourceString("LOC_ID_CREDITS_SCREEN_3") /*"Time Played"*/ + " - " + (int)hoursPlayed + ":" + minutes;
             //m_continueText.Text = LocaleBuilder.getResourceString("LOC_ID_CREDITS_SCREEN_4") + " [Input:" + InputMapType.MENU_CONFIRM1 + "] " + LocaleBuilder.getResourceString("LOC_ID_CREDITS_SCREEN_5");
             base.RefreshTextObjs();
         }

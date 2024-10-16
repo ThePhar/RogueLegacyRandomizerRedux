@@ -11,6 +11,7 @@ using SpriteSystem;
 using Microsoft.Xna.Framework.Graphics;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.Objects;
 using Tweener;
 using Tweener.Ease;
 
@@ -157,7 +158,7 @@ namespace RogueCastle
             //m_roomTitle.DropShadow = new Vector2(4, 4);
 
             m_roomEnteringTitle = m_roomTitle.Clone() as TextObj;
-            m_roomEnteringTitle.Text = LocaleBuilder.getString("LOC_ID_LEVEL_SCREEN_1", m_roomEnteringTitle); //"Now Entering"
+            m_roomEnteringTitle.Text = LocaleBuilder.GetString("LOC_ID_LEVEL_SCREEN_1", m_roomEnteringTitle); //"Now Entering"
             m_roomEnteringTitle.FontSize = 24;
             m_roomEnteringTitle.Y -= 50;
 
@@ -246,7 +247,7 @@ namespace RogueCastle
             objTitle.Position = new Vector2(-400, -60);
             objTitle.OverrideParentScale = true;
             objTitle.FontSize = 10;
-            objTitle.Text = LocaleBuilder.getString("LOC_ID_LEVEL_SCREEN_2", objTitle); //"Fairy Chest Objective:"
+            objTitle.Text = LocaleBuilder.GetString("LOC_ID_LEVEL_SCREEN_2", objTitle); //"Fairy Chest Objective:"
             objTitle.TextureColor = Color.Red;
             objTitle.OutlineWidth = 2;
             m_objectivePlate.AddChild(objTitle);
@@ -256,7 +257,7 @@ namespace RogueCastle
             objDescription.Position = new Vector2(objTitle.X, objTitle.Y + 40);
             objDescription.ForceDraw = true;
             objDescription.FontSize = 9;
-            objDescription.Text = LocaleBuilder.getString("LOC_ID_LEVEL_SCREEN_3", objDescription); //"Reach the chest in 15 seconds:"
+            objDescription.Text = LocaleBuilder.GetString("LOC_ID_LEVEL_SCREEN_3", objDescription); //"Reach the chest in 15 seconds:"
             objDescription.WordWrap(250);
             objDescription.OutlineWidth = 2;
             m_objectivePlate.AddChild(objDescription);
@@ -266,7 +267,7 @@ namespace RogueCastle
             objProgress.Position = new Vector2(objDescription.X, objDescription.Y + 35);
             objProgress.ForceDraw = true;
             objProgress.FontSize = 9;
-            objProgress.Text = LocaleBuilder.getString("LOC_ID_LEVEL_SCREEN_4", objProgress); //"Time Remaining:"
+            objProgress.Text = LocaleBuilder.GetString("LOC_ID_LEVEL_SCREEN_4", objProgress); //"Time Remaining:"
             objProgress.WordWrap(250);
             objProgress.OutlineWidth = 2;
             m_objectivePlate.AddChild(objProgress);
@@ -387,7 +388,7 @@ namespace RogueCastle
                 m_creditsTitleText.Opacity = 0;
                 m_creditsText.Opacity = 0;
 
-                m_creditsTitleText.Text = LocaleBuilder.getString(m_creditsTextTitleList[m_creditsIndex], m_creditsTitleText);
+                m_creditsTitleText.Text = LocaleBuilder.GetString(m_creditsTextTitleList[m_creditsIndex], m_creditsTitleText);
                 m_creditsText.Text = m_creditsTextList[m_creditsIndex];
 
                 // Tween text in.
@@ -1300,7 +1301,7 @@ namespace RogueCastle
                                 //}
 
                                 //m_roomTitle.Text = "Now Entering\n" + WordBuilder.BuildDungeonName(roomObj.LevelType);
-                                m_roomTitle.Text = LocaleBuilder.getString(WordBuilder.BuildDungeonNameLocID(roomObj.LevelType), m_roomTitle);
+                                m_roomTitle.Text = LocaleBuilder.GetString(WordBuilder.BuildDungeonNameLocID(roomObj.LevelType), m_roomTitle);
                                 if (Game.PlayerStats.Traits.X == TraitType.Dyslexia || Game.PlayerStats.Traits.Y == TraitType.Dyslexia)
                                     m_roomTitle.RandomizeSentence(false);
 
@@ -2882,9 +2883,9 @@ namespace RogueCastle
             if (m_objectivePlateTween != null && m_objectivePlateTween.TweenedObject == m_objectivePlate && m_objectivePlateTween.Active == true)
                 m_objectivePlateTween.StopTween(false);
 
-            (m_objectivePlate.GetChildAt(1) as TextObj).Text = LocaleBuilder.getString(objectiveTitleID, m_objectivePlate.GetChildAt(1) as TextObj);
-            (m_objectivePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.getString(objectiveDescriptionID, m_objectivePlate.GetChildAt(2) as TextObj);
-            (m_objectivePlate.GetChildAt(3) as TextObj).Text = LocaleBuilder.getString(objectiveProgressID, m_objectivePlate.GetChildAt(3) as TextObj);
+            (m_objectivePlate.GetChildAt(1) as TextObj).Text = LocaleBuilder.GetString(objectiveTitleID, m_objectivePlate.GetChildAt(1) as TextObj);
+            (m_objectivePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetString(objectiveDescriptionID, m_objectivePlate.GetChildAt(2) as TextObj);
+            (m_objectivePlate.GetChildAt(3) as TextObj).Text = LocaleBuilder.GetString(objectiveProgressID, m_objectivePlate.GetChildAt(3) as TextObj);
 
             if (tween == true)
                 m_objectivePlateTween = Tween.By(m_objectivePlate, 0.5f, Back.EaseOut, "X", "-300");
@@ -2916,7 +2917,7 @@ namespace RogueCastle
 
         public void ObjectiveFailed()
         {
-            (m_objectivePlate.GetChildAt(1) as TextObj).Text = LocaleBuilder.getString("LOC_ID_LEVEL_SCREEN_6", m_objectivePlate.GetChildAt(1) as TextObj); //"Objective Failed"
+            (m_objectivePlate.GetChildAt(1) as TextObj).Text = LocaleBuilder.GetString("LOC_ID_LEVEL_SCREEN_6", m_objectivePlate.GetChildAt(1) as TextObj); //"Objective Failed"
             m_objectivePlate.GetChildAt(2).Opacity = 0.3f;
             m_objectivePlate.GetChildAt(3).Opacity = 0.3f;
         }
@@ -2936,7 +2937,7 @@ namespace RogueCastle
             if (m_objectivePlateTween != null && m_objectivePlateTween.TweenedObject == m_objectivePlate && m_objectivePlateTween.Active == true)
                 m_objectivePlateTween.StopTween(false);
 
-            (m_objectivePlate.GetChildAt(1) as TextObj).Text = LocaleBuilder.getString("LOC_ID_LEVEL_SCREEN_5", m_objectivePlate.GetChildAt(1) as TextObj); //"Objective Complete!"
+            (m_objectivePlate.GetChildAt(1) as TextObj).Text = LocaleBuilder.GetString("LOC_ID_LEVEL_SCREEN_5", m_objectivePlate.GetChildAt(1) as TextObj); //"Objective Complete!"
             //m_objectivePlateTween = Tween.By(m_objectivePlate, 0.5f, Back.EaseIn, "delay", "1", "X", "300");
         }
 

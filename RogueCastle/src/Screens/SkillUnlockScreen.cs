@@ -189,7 +189,7 @@ namespace RogueCastle
                     break;
             }
 
-            m_text.Text = LocaleBuilder.getString(SkillUnlockType.DescriptionID(m_skillUnlockType), m_text);
+            m_text.Text = LocaleBuilder.GetString(SkillUnlockType.DescriptionID(m_skillUnlockType), m_text);
             m_text.WordWrap(340);
         }
 
@@ -263,7 +263,7 @@ namespace RogueCastle
             RefreshBitmaps();
 
             m_text.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_text));
-            m_text.Text = LocaleBuilder.getString(SkillUnlockType.DescriptionID(m_skillUnlockType), null);
+            m_text.Text = LocaleBuilder.GetString(SkillUnlockType.DescriptionID(m_skillUnlockType), null);
             m_text.WordWrap(340);
 
             base.RefreshTextObjs();

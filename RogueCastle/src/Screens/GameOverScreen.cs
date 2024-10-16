@@ -82,7 +82,7 @@ namespace RogueCastle
             m_continueText.Opacity = 0;
             m_continueText.Position = new Vector2(1320 - 50, 30);
             m_continueText.ForceDraw = true;
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list
 
             Vector2 shadowOffset = new Vector2(2, 2);
             Color textColour = new Color(255, 254, 128);
@@ -93,7 +93,7 @@ namespace RogueCastle
 
             TextObj deathDescription = new TextObj(Game.JunicodeFont);
             deathDescription.Align = Types.TextAlign.Centre;
-            deathDescription.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", deathDescription); // dummy locID to add TextObj to language refresh list
+            deathDescription.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", deathDescription); // dummy locID to add TextObj to language refresh list
             deathDescription.FontSize = 17;
             deathDescription.DropShadow = shadowOffset;
             deathDescription.Position = new Vector2(0, -m_dialoguePlate.Height / 2 + 25);
@@ -102,7 +102,7 @@ namespace RogueCastle
             KeyIconTextObj partingWords = new KeyIconTextObj(Game.JunicodeFont);
             partingWords.FontSize = 12;
             partingWords.Align = Types.TextAlign.Centre;
-            partingWords.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", partingWords); // dummy locID to add TextObj to language refresh list
+            partingWords.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", partingWords); // dummy locID to add TextObj to language refresh list
             partingWords.DropShadow = shadowOffset;
             partingWords.Y = 0;
             partingWords.TextureColor = textColour;
@@ -210,7 +210,7 @@ namespace RogueCastle
             m_droppingStats = false;
             m_lockControls = false;
             SoundManager.PlaySound("Player_Death_FadeToBlack");
-            m_continueText.Text = LocaleBuilder.getString("LOC_ID_GAME_OVER_SCREEN_1_NEW", m_continueText);
+            m_continueText.Text = LocaleBuilder.GetString("LOC_ID_GAME_OVER_SCREEN_1_NEW", m_continueText);
 
             m_player.Visible = true;
             m_player.Opacity = 1;
@@ -252,7 +252,7 @@ namespace RogueCastle
             else
             {
                 m_gameHint = CDGMath.RandomInt(0, GameEV.GAME_HINTS.GetLength(0) - 1);
-                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.getResourceString(GameEV.GAME_HINTS[m_gameHint]);
+                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString(GameEV.GAME_HINTS[m_gameHint]);
                 FixHintTextSize();
                 //(m_dialoguePlate.GetChildAt(2) as TextObj).Text =
                 //    LocaleBuilder.getResourceString(GameEV.GAME_HINTS[m_gameHint, 0]) +
@@ -263,14 +263,14 @@ namespace RogueCastle
             try
             {
                 (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault((m_dialoguePlate.GetChildAt(3) as TextObj).defaultFont);
-                (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), Game.NameHelper()); //"'s Parting Words"
-                if (LocaleBuilder.languageType != LanguageType.Chinese_Simp && Regex.IsMatch((m_dialoguePlate.GetChildAt(3) as TextObj).Text, @"\p{IsCyrillic}"))
+                (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), Game.NameHelper()); //"'s Parting Words"
+                if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch((m_dialoguePlate.GetChildAt(3) as TextObj).Text, @"\p{IsCyrillic}"))
                     (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault(Game.RobotoSlabFont);
             }
             catch
             {
                 (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault(Game.NotoSansSCFont);
-                (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), Game.NameHelper()); //"'s Parting Words"
+                (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), Game.NameHelper()); //"'s Parting Words"
             }
             //(m_dialoguePlate.GetChildAt(3) as TextObj).Text = "-" + Game.PlayerStats.PlayerName + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_8");
 
@@ -380,7 +380,7 @@ namespace RogueCastle
             {
                 playerSlainText.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(playerSlainText));
                 playerSlainText.Text = Game.PlayerStats.PlayerName;
-                if (LocaleBuilder.languageType != LanguageType.Chinese_Simp && Regex.IsMatch(playerSlainText.Text, @"\p{IsCyrillic}"))
+                if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(playerSlainText.Text, @"\p{IsCyrillic}"))
                     playerSlainText.ChangeFontNoDefault(Game.RobotoSlabFont);
             }
             catch
@@ -389,7 +389,7 @@ namespace RogueCastle
             }
 
             if (m_debugEnemyLocID > 0)
-                playerSlainText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_4_NEW"), Game.NameHelper(), LocaleBuilder.getResourceString("LOC_ID_ENEMY_NAME_" + m_debugEnemyLocID));
+                playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_4_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString("LOC_ID_ENEMY_NAME_" + m_debugEnemyLocID));
             else
             {
                 if (m_objKilledPlayer != null)
@@ -400,10 +400,10 @@ namespace RogueCastle
                     if (enemy != null)
                     {
                         if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS || enemy is EnemyObj_LastBoss)
-                            playerSlainText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_3_NEW"), Game.NameHelper(), LocaleBuilder.getResourceString(enemy.LocStringID));
+                            playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_3_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString(enemy.LocStringID));
                         //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_3") + " " + LocaleBuilder.getResourceString(enemy.LocStringID);
                         else
-                            playerSlainText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_4_NEW"), Game.NameHelper(), LocaleBuilder.getResourceString(enemy.LocStringID));
+                            playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_4_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString(enemy.LocStringID));
                         //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_4") + " " + LocaleBuilder.getResourceString(enemy.LocStringID);
                     }
                     else if (projectile != null)
@@ -412,24 +412,24 @@ namespace RogueCastle
                         if (enemy != null)
                         {
                             if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS || enemy is EnemyObj_LastBoss)
-                                playerSlainText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_3_NEW"), Game.NameHelper(), LocaleBuilder.getResourceString(enemy.LocStringID));
+                                playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_3_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString(enemy.LocStringID));
                             //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_3") + " " + LocaleBuilder.getResourceString(enemy.LocStringID);
                             else
-                                playerSlainText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_4_NEW"), Game.NameHelper(), LocaleBuilder.getResourceString(enemy.LocStringID));
+                                playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_4_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString(enemy.LocStringID));
                             //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_4") + " " + LocaleBuilder.getResourceString(enemy.LocStringID);
                         }
                         else
-                            playerSlainText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_5_NEW"), Game.NameHelper());
+                            playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_5_NEW"), Game.NameHelper());
                         //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_5");
                     }
 
                     HazardObj hazard = m_objKilledPlayer as HazardObj;
                     if (hazard != null)
-                        playerSlainText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_6_NEW"), Game.NameHelper());
+                        playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_6_NEW"), Game.NameHelper());
                     //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_6");
                 }
                 else
-                    playerSlainText.Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_7_NEW"), Game.NameHelper());
+                    playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_7_NEW"), Game.NameHelper());
                 //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_7");
             }
         }
@@ -490,7 +490,7 @@ namespace RogueCastle
                 m_gameHint = m_debugGameHint;
                 Console.WriteLine("Changing to game hint index: " + m_debugGameHint);
 
-                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.getResourceString(GameEV.GAME_HINTS[m_gameHint]);
+                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString(GameEV.GAME_HINTS[m_gameHint]);
                 //(m_dialoguePlate.GetChildAt(2) as TextObj).Text =
                 //    LocaleBuilder.getString(GameEV.GAME_HINTS[m_gameHint, 0], m_dialoguePlate.GetChildAt(2) as TextObj) +
                 //    GameEV.GAME_HINTS[m_gameHint, 1] +
@@ -592,7 +592,7 @@ namespace RogueCastle
             }
             else
             {
-                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.getResourceString(GameEV.GAME_HINTS[m_gameHint]);
+                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString(GameEV.GAME_HINTS[m_gameHint]);
                 //(m_dialoguePlate.GetChildAt(2) as TextObj).Text =
                 //    LocaleBuilder.getResourceString(GameEV.GAME_HINTS[m_gameHint, 0]) +
                 //    GameEV.GAME_HINTS[m_gameHint, 1] +
@@ -602,14 +602,14 @@ namespace RogueCastle
             try
             {
                 (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault(LocaleBuilder.GetLanguageFont((m_dialoguePlate.GetChildAt(3) as TextObj)));
-                (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), Game.NameHelper()); //"'s Parting Words"
-                if (LocaleBuilder.languageType != LanguageType.Chinese_Simp && Regex.IsMatch((m_dialoguePlate.GetChildAt(3) as TextObj).Text, @"\p{IsCyrillic}"))
+                (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), Game.NameHelper()); //"'s Parting Words"
+                if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch((m_dialoguePlate.GetChildAt(3) as TextObj).Text, @"\p{IsCyrillic}"))
                     (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault(Game.RobotoSlabFont);
             }
             catch
             {
                 (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault(Game.NotoSansSCFont);
-                (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), Game.NameHelper()); //"'s Parting Words"
+                (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), Game.NameHelper()); //"'s Parting Words"
             }
             //(m_dialoguePlate.GetChildAt(3) as TextObj).Text = "-" + Game.PlayerStats.PlayerName + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_8");
 
@@ -624,7 +624,7 @@ namespace RogueCastle
             partingWords.FontSize = 12;
             partingWords.ScaleX = 1;
 
-            switch (LocaleBuilder.languageType)
+            switch (LocaleBuilder.LanguageType)
             {
                 case(LanguageType.Russian):
                     if (m_gameHint == 6)

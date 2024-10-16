@@ -46,7 +46,7 @@ namespace RogueCastle
             // Template for slot text
             TextObj slotText = new TextObj(Game.JunicodeFont);
             slotText.Align = Types.TextAlign.Centre;
-            slotText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_1", slotText);
+            slotText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_1", slotText);
             slotText.TextureColor = Color.White;
             slotText.OutlineWidth = 2;
             slotText.FontSize = 10;
@@ -54,51 +54,51 @@ namespace RogueCastle
 
             m_slot1Container = new ObjContainer("ProfileSlotBG_Container");
             TextObj slot1Text = slotText.Clone() as TextObj;
-            slot1Text.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", slot1Text); // dummy locID to add TextObj to language refresh list
+            slot1Text.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", slot1Text); // dummy locID to add TextObj to language refresh list
             m_slot1Container.AddChild(slot1Text);
             SpriteObj slot1Title = new SpriteObj("ProfileSlot1Text_Sprite");
             slot1Title.Position = new Vector2(-130, -35);
             m_slot1Container.AddChild(slot1Title);
             TextObj slot1LvlText = slotText.Clone() as TextObj;
-            slot1LvlText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", slot1LvlText); // dummy locID to add TextObj to language refresh list
+            slot1LvlText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", slot1LvlText); // dummy locID to add TextObj to language refresh list
             slot1LvlText.Position = new Vector2(120, 15);
             m_slot1Container.AddChild(slot1LvlText);
             TextObj slot1NGText = slotText.Clone() as TextObj;
-            slot1NGText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", slot1NGText); // dummy locID to add TextObj to language refresh list
+            slot1NGText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", slot1NGText); // dummy locID to add TextObj to language refresh list
             slot1NGText.Position = new Vector2(-120, 15);
             m_slot1Container.AddChild(slot1NGText);
             m_slot1Container.ForceDraw = true;
 
             m_slot2Container = new ObjContainer("ProfileSlotBG_Container");
             TextObj slot2Text = slotText.Clone() as TextObj;
-            slot2Text.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", slot2Text); // dummy locID to add TextObj to language refresh list
+            slot2Text.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", slot2Text); // dummy locID to add TextObj to language refresh list
             m_slot2Container.AddChild(slot2Text);
             SpriteObj slot2Title = new SpriteObj("ProfileSlot2Text_Sprite");
             slot2Title.Position = new Vector2(-130, -35);
             m_slot2Container.AddChild(slot2Title);
             TextObj slot2LvlText = slotText.Clone() as TextObj;
-            slot2LvlText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", slot2LvlText); // dummy locID to add TextObj to language refresh list
+            slot2LvlText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", slot2LvlText); // dummy locID to add TextObj to language refresh list
             slot2LvlText.Position = new Vector2(120, 15);
             m_slot2Container.AddChild(slot2LvlText);
             TextObj slot2NGText = slotText.Clone() as TextObj;
-            slot2NGText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", slot2NGText); // dummy locID to add TextObj to language refresh list
+            slot2NGText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", slot2NGText); // dummy locID to add TextObj to language refresh list
             slot2NGText.Position = new Vector2(-120, 15);
             m_slot2Container.AddChild(slot2NGText);
             m_slot2Container.ForceDraw = true;
 
             m_slot3Container = new ObjContainer("ProfileSlotBG_Container");
             TextObj slot3Text = slotText.Clone() as TextObj;
-            slot3Text.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", slot3Text); // dummy locID to add TextObj to language refresh list
+            slot3Text.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", slot3Text); // dummy locID to add TextObj to language refresh list
             m_slot3Container.AddChild(slot3Text);
             SpriteObj slot3Title = new SpriteObj("ProfileSlot3Text_Sprite");
             slot3Title.Position = new Vector2(-130, -35);
             m_slot3Container.AddChild(slot3Title);
             TextObj slot3LvlText = slotText.Clone() as TextObj;
-            slot3LvlText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", slot3LvlText); // dummy locID to add TextObj to language refresh list
+            slot3LvlText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", slot3LvlText); // dummy locID to add TextObj to language refresh list
             slot3LvlText.Position = new Vector2(120, 15);
             m_slot3Container.AddChild(slot3LvlText);
             TextObj slot3NGText = slotText.Clone() as TextObj;
-            slot3NGText.Text = LocaleBuilder.getString("LOC_ID_CLASS_NAME_1_MALE", slot3NGText); // dummy locID to add TextObj to language refresh list
+            slot3NGText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", slot3NGText); // dummy locID to add TextObj to language refresh list
             slot3NGText.Position = new Vector2(-120, 15);
             m_slot3Container.AddChild(slot3NGText);
             m_slot3Container.ForceDraw = true;
@@ -108,7 +108,7 @@ namespace RogueCastle
             m_slotArray.Add(m_slot3Container);
 
             m_confirmText = new KeyIconTextObj(Game.JunicodeFont);
-            m_confirmText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_4", m_confirmText);
+            m_confirmText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_4", m_confirmText);
             m_confirmText.DropShadow = new Vector2(2, 2);
             m_confirmText.FontSize = 12;
             m_confirmText.Align = Types.TextAlign.Right;
@@ -116,7 +116,7 @@ namespace RogueCastle
             m_confirmText.ForceDraw = true;
 
             m_cancelText = new KeyIconTextObj(Game.JunicodeFont);
-            m_cancelText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_5", m_cancelText);
+            m_cancelText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_5", m_cancelText);
             m_cancelText.Align = Types.TextAlign.Right;
             m_cancelText.DropShadow = new Vector2(2, 2);
             m_cancelText.FontSize = 12;
@@ -124,7 +124,7 @@ namespace RogueCastle
             m_cancelText.ForceDraw = true;
 
             m_navigationText = new KeyIconTextObj(Game.JunicodeFont);
-            m_navigationText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_2", m_navigationText);
+            m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_2", m_navigationText);
             m_navigationText.Align = Types.TextAlign.Right;
             m_navigationText.DropShadow = new Vector2(2, 2);
             m_navigationText.FontSize = 12;
@@ -132,7 +132,7 @@ namespace RogueCastle
             m_navigationText.ForceDraw = true;
 
             m_deleteProfileText = new KeyIconTextObj(Game.JunicodeFont);
-            m_deleteProfileText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_6", m_deleteProfileText);
+            m_deleteProfileText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_6", m_deleteProfileText);
             m_deleteProfileText.Align = Types.TextAlign.Left;
             m_deleteProfileText.DropShadow = new Vector2(2, 2);
             m_deleteProfileText.FontSize = 12;
@@ -176,17 +176,17 @@ namespace RogueCastle
             {
                 m_confirmText.ForcedScale = new Vector2(0.7f, 0.7f);
                 m_cancelText.ForcedScale = new Vector2(0.7f, 0.7f);
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_2_NEW", m_navigationText);
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_2_NEW", m_navigationText);
             }
             else
             {
                 m_confirmText.ForcedScale = new Vector2(1f, 1f);
                 m_cancelText.ForcedScale = new Vector2(1f, 1f);
-                m_navigationText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_3", m_navigationText);
+                m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_3", m_navigationText);
             }
-            m_confirmText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_4_NEW", m_confirmText);
-            m_cancelText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_5_NEW", m_cancelText);
-            m_deleteProfileText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_6_NEW", m_deleteProfileText);
+            m_confirmText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_4_NEW", m_confirmText);
+            m_cancelText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_5_NEW", m_cancelText);
+            m_deleteProfileText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_6_NEW", m_deleteProfileText);
 
             m_confirmText.Opacity = 0;
             m_cancelText.Opacity = 0;
@@ -226,7 +226,7 @@ namespace RogueCastle
 
                 if (playerName == null)
                 {
-                    slotText.Text = LocaleBuilder.getResourceString("LOC_ID_PROFILE_SEL_SCREEN_1");
+                    slotText.Text = LocaleBuilder.GetResourceString("LOC_ID_PROFILE_SEL_SCREEN_1");
                     container.ID = 0; // Container with ID == 0 means it has no save file.
                 }
                 else
@@ -239,30 +239,30 @@ namespace RogueCastle
                     {
                         slotText.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(slotText));
                         if (isDead == false)
-                            slotText.Text = string.Format(LocaleBuilder.getResourceString(!isFemale ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW" : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW"), playerName, LocaleBuilder.getResourceString(ClassType.ToStringID(playerClass, isFemale))); // {0} the {1}
+                            slotText.Text = string.Format(LocaleBuilder.GetResourceString(!isFemale ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW" : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW"), playerName, LocaleBuilder.GetResourceString(ClassType.ToStringID(playerClass, isFemale))); // {0} the {1}
                         else
-                            slotText.Text = string.Format(LocaleBuilder.getResourceString(!isFemale ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW" : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW"), playerName); // {0} the deceased
-                        if (LocaleBuilder.languageType != LanguageType.Chinese_Simp && Regex.IsMatch(slotText.Text, @"\p{IsCyrillic}"))
+                            slotText.Text = string.Format(LocaleBuilder.GetResourceString(!isFemale ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW" : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW"), playerName); // {0} the deceased
+                        if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(slotText.Text, @"\p{IsCyrillic}"))
                             slotText.ChangeFontNoDefault(Game.RobotoSlabFont);
                     }
                     catch
                     {
                         slotText.ChangeFontNoDefault(Game.NotoSansSCFont);
                         if (isDead == false)
-                            slotText.Text = string.Format(LocaleBuilder.getResourceString(!isFemale ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW" : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW"), playerName, LocaleBuilder.getResourceString(ClassType.ToStringID(playerClass, isFemale))); // {0} the {1}
+                            slotText.Text = string.Format(LocaleBuilder.GetResourceString(!isFemale ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW" : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW"), playerName, LocaleBuilder.GetResourceString(ClassType.ToStringID(playerClass, isFemale))); // {0} the {1}
                         else
-                            slotText.Text = string.Format(LocaleBuilder.getResourceString(!isFemale ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW" : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW"), playerName); // {0} the deceased
+                            slotText.Text = string.Format(LocaleBuilder.GetResourceString(!isFemale ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW" : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW"), playerName); // {0} the deceased
                     }
 
-                    slotLvlText.Text = LocaleBuilder.getResourceString("LOC_ID_PROFILE_SEL_SCREEN_9") + " " + playerLevel;
+                    slotLvlText.Text = LocaleBuilder.GetResourceString("LOC_ID_PROFILE_SEL_SCREEN_9") + " " + playerLevel;
                     if (timesCastleBeaten > 0)
-                        slotNGText.Text = LocaleBuilder.getResourceString("LOC_ID_PROFILE_SEL_SCREEN_10") + " " + timesCastleBeaten;
+                        slotNGText.Text = LocaleBuilder.GetResourceString("LOC_ID_PROFILE_SEL_SCREEN_10") + " " + timesCastleBeaten;
                     container.ID = 1; // Container with ID == 1 means it has a save file.
                 }
             }
             catch
             {
-                slotText.Text = LocaleBuilder.getString("LOC_ID_PROFILE_SEL_SCREEN_1", slotText);
+                slotText.Text = LocaleBuilder.GetString("LOC_ID_PROFILE_SEL_SCREEN_1", slotText);
                 container.ID = 0; // Container with ID == 0 means it has no save file.
             }
         }
