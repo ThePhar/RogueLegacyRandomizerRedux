@@ -128,7 +128,7 @@ public static class Program
                 return Path.Combine(osDir, ".config", "RogueLegacyRandomizer");
             }
 
-            case "Mac OS X":
+            case "macOS":
             {
                 var osDir = Environment.GetEnvironmentVariable("HOME");
                 if (string.IsNullOrEmpty(osDir))
