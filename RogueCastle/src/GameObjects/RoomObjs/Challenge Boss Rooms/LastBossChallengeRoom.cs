@@ -203,7 +203,7 @@ namespace RogueCastle
             if (Game.GameConfig.UnlockTraitor <= 0 && Player != null)
             {
                 Game.GameConfig.UnlockTraitor = 1;
-                Player.Game.SaveConfig();
+                Game.SaveConfig();
             }
 
             GameUtil.UnlockAchievement("FEAR_OF_RELATIVES");
