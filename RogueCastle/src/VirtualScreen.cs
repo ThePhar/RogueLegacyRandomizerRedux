@@ -93,7 +93,7 @@ namespace RogueCastle
         {
             Console.WriteLine("GraphicsDevice Virtualization failed");
 
-            GraphicsDevice newDevice = (Game.ScreenManager.Game as Game).graphics.GraphicsDevice;
+            GraphicsDevice newDevice = (Game.ScreenManager.Game as Game).Graphics.GraphicsDevice;
             Game.ScreenManager.ReinitializeCamera(newDevice);
             SpriteLibrary.ClearLibrary();
             (Game.ScreenManager.Game as Game).LoadAllSpriteFonts();

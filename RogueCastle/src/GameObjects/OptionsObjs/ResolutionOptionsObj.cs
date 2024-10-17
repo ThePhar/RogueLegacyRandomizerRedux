@@ -86,12 +86,12 @@ namespace RogueCastle
                 Vector2 newRes = m_displayModeList[m_selectedResIndex];
                 if (m_selectedResolution != newRes)
                 {
-                    (m_parentScreen.ScreenManager.Game as Game).graphics.PreferredBackBufferWidth = (int)newRes.X;
-                    (m_parentScreen.ScreenManager.Game as Game).graphics.PreferredBackBufferHeight = (int)newRes.Y;
-                    (m_parentScreen.ScreenManager.Game as Game).graphics.ApplyChanges();
+                    (m_parentScreen.ScreenManager.Game as Game).Graphics.PreferredBackBufferWidth = (int)newRes.X;
+                    (m_parentScreen.ScreenManager.Game as Game).Graphics.PreferredBackBufferHeight = (int)newRes.Y;
+                    (m_parentScreen.ScreenManager.Game as Game).Graphics.ApplyChanges();
                     (m_parentScreen.ScreenManager as RCScreenManager).ForceResolutionChangeCheck();
 
-                    if ((m_parentScreen.ScreenManager.Game as Game).graphics.IsFullScreen == true)
+                    if ((m_parentScreen.ScreenManager.Game as Game).Graphics.IsFullScreen == true)
                     {
                         RCScreenManager manager = m_parentScreen.ScreenManager as RCScreenManager;
                         manager.DialogueScreen.SetDialogue("Resolution Changed");
@@ -143,9 +143,9 @@ namespace RogueCastle
         public void CancelResolution()
         {
             m_resetCounter = 0;
-            (m_parentScreen.ScreenManager.Game as Game).graphics.PreferredBackBufferWidth = (int)m_selectedResolution.X;
-            (m_parentScreen.ScreenManager.Game as Game).graphics.PreferredBackBufferHeight = (int)m_selectedResolution.Y;
-            (m_parentScreen.ScreenManager.Game as Game).graphics.ApplyChanges();
+            (m_parentScreen.ScreenManager.Game as Game).Graphics.PreferredBackBufferWidth = (int)m_selectedResolution.X;
+            (m_parentScreen.ScreenManager.Game as Game).Graphics.PreferredBackBufferHeight = (int)m_selectedResolution.Y;
+            (m_parentScreen.ScreenManager.Game as Game).Graphics.ApplyChanges();
             (m_parentScreen.ScreenManager as RCScreenManager).ForceResolutionChangeCheck();
             m_toggleText.Text = m_selectedResolution.X + "x" + m_selectedResolution.Y;
         }

@@ -65,7 +65,7 @@ namespace RogueCastle
                 m_isActive = value; 
 
                 if (value == false)
-                    (m_parentScreen.ScreenManager.Game as Game).SaveConfig();
+                    Game.SaveConfig();
             }
         }
 

@@ -23,7 +23,7 @@ namespace RogueCastle
 
         public override void Initialize()
         {
-            if ((m_parentScreen.ScreenManager.Game as Game).graphics.IsFullScreen == true)
+            if ((m_parentScreen.ScreenManager.Game as Game).Graphics.IsFullScreen == true)
                 m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_QUICKDROP_OPTIONS_3", m_toggleText); //"Yes"
             else
                 m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_QUICKDROP_OPTIONS_2", m_toggleText); //"No"
@@ -46,7 +46,7 @@ namespace RogueCastle
             {
                 SoundManager.PlaySound("Option_Menu_Select");
 
-                GraphicsDeviceManager graphics = (m_parentScreen.ScreenManager.Game as Game).graphics;
+                GraphicsDeviceManager graphics = (m_parentScreen.ScreenManager.Game as Game).Graphics;
                 if ((m_toggleText.Text == LocaleBuilder.GetResourceString("LOC_ID_QUICKDROP_OPTIONS_2") && graphics.IsFullScreen == true) ||
                     (m_toggleText.Text == LocaleBuilder.GetResourceString("LOC_ID_QUICKDROP_OPTIONS_3") && graphics.IsFullScreen == false))
                 {
@@ -58,7 +58,7 @@ namespace RogueCastle
 
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL1) || Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL2) || Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL3))
             {
-                if ((m_parentScreen.ScreenManager.Game as Game).graphics.IsFullScreen == true)
+                if ((m_parentScreen.ScreenManager.Game as Game).Graphics.IsFullScreen == true)
                     m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_QUICKDROP_OPTIONS_3", m_toggleText); //"Yes"
                 else
                     m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_QUICKDROP_OPTIONS_2", m_toggleText); //"No"

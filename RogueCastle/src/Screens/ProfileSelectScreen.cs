@@ -365,7 +365,7 @@ namespace RogueCastle
 
                     Game.GameConfig.ProfileSlot = (byte)(m_selectedIndex + 1);
                     Game game = (ScreenManager.Game as Game);
-                    game.SaveConfig();
+                    Game.SaveConfig();
 
                     if (game.SaveManager.FileExists(SaveType.PlayerData))
                         (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TITLE, true);

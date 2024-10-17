@@ -265,7 +265,7 @@ namespace RogueCastle
             m_selectedOption.IsActive = false;
             m_selectedOption.IsSelected = false;
             m_selectedOption = null;
-            (ScreenManager.Game as Game).SaveConfig();
+            Game.SaveConfig();
             (ScreenManager as RCScreenManager).UpdatePauseScreenIcons();
 
             // Remove the unlock traitor option.

@@ -145,14 +145,14 @@ public class SaveGameManager(Game game)
                 if (_autosaveLoaded == false)
                 {
                     Game.ScreenManager.DialogueScreen.SetDialogue("Save File Error");
-                    Game.gameIsCorrupt = true;
+                    Game.GameIsCorrupt = true;
                     Game.ScreenManager.DialogueScreen.SetConfirmEndHandler(this, "LoadAutosave");
                 }
                 else
                 {
                     _autosaveLoaded = false;
                     Game.ScreenManager.DialogueScreen.SetDialogue("Save File Error 2");
-                    Game.gameIsCorrupt = true;
+                    Game.GameIsCorrupt = true;
                     Game.ScreenManager.DialogueScreen.SetConfirmEndHandler(game, "Exit");
                 }
 
