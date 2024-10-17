@@ -76,17 +76,17 @@ namespace RogueCastle
             Game.PlayerStats.SpecialItem = SpecialItemType.GLASSES;
             //Player.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
 
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Helm] = EquipmentBaseType.Silver;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Chest] = EquipmentBaseType.Silver;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Cape] = EquipmentBaseType.Silver;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Limbs] = EquipmentBaseType.Silver;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Sword] = EquipmentBaseType.Silver;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.HELM] = EquipmentBaseType.SILVER;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.CHEST] = EquipmentBaseType.SILVER;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.CAPE] = EquipmentBaseType.SILVER;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.LIMBS] = EquipmentBaseType.SILVER;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.SWORD] = EquipmentBaseType.SILVER;
 
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Helm] = EquipmentAbilityType.DoubleJump;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Chest] = EquipmentAbilityType.DoubleJump;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Cape] = EquipmentAbilityType.Dash;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Limbs] = EquipmentAbilityType.Dash;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Sword] = EquipmentAbilityType.MovementSpeed;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.HELM] = EquipmentAbilityType.DOUBLE_JUMP;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.CHEST] = EquipmentAbilityType.DOUBLE_JUMP;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.CAPE] = EquipmentAbilityType.DASH;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.LIMBS] = EquipmentAbilityType.DASH;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.SWORD] = EquipmentAbilityType.MOVEMENT_SPEED;
 
             if (m_boss != null)
                 m_boss.CurrentHealth = m_boss.MaxHealth;

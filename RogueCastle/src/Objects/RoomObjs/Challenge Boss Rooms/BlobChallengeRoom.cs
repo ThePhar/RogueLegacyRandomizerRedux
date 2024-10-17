@@ -128,15 +128,15 @@ namespace RogueCastle
             //Game.PlayerStats.SpecialItem = SpecialItemType.Glasses;
             //Player.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
 
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Sword] = EquipmentBaseType.Dragon;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Helm] = EquipmentBaseType.Dragon;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.SWORD] = EquipmentBaseType.DRAGON;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.HELM] = EquipmentBaseType.DRAGON;
             //Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Cape] = EquipmentBaseType.Dragon;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Limbs] = EquipmentBaseType.Dragon;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Chest] = EquipmentBaseType.Dragon;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.LIMBS] = EquipmentBaseType.DRAGON;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.CHEST] = EquipmentBaseType.DRAGON;
 
 
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Helm] = EquipmentAbilityType.MovementSpeed;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Chest] = EquipmentAbilityType.MovementSpeed;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.HELM] = EquipmentAbilityType.MOVEMENT_SPEED;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.CHEST] = EquipmentAbilityType.MOVEMENT_SPEED;
             //Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Cape] = EquipmentAbilityType.DoubleJump;
             //Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Limbs] = EquipmentAbilityType.DoubleJump;
             //Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Sword] = EquipmentAbilityType.Dash;

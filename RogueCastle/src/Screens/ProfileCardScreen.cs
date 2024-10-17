@@ -246,7 +246,7 @@ namespace RogueCastle
 
             // Loading runes
 
-            for (int i = 0; i < EquipmentAbilityType.Total - 1; i++) // -1 because the last one is ManaHPGain, which don't display since its shown in Vamp and ManaGain seperately.
+            for (int i = 0; i < EquipmentAbilityType.TOTAL - 1; i++) // -1 because the last one is ManaHPGain, which don't display since its shown in Vamp and ManaGain seperately.
             {
                 TextObj runeTitle = templateText.Clone() as TextObj;
                 runeTitle.X = 60;
@@ -266,7 +266,7 @@ namespace RogueCastle
             // Special architect's fee rune.
             TextObj architectFeeTitle = templateText.Clone() as TextObj;
             architectFeeTitle.X = 60;
-            architectFeeTitle.Text = LocaleBuilder.GetString(EquipmentAbilityType.ToStringID2(EquipmentAbilityType.ArchitectFee), architectFeeTitle);
+            architectFeeTitle.Text = LocaleBuilder.GetString(EquipmentAbilityType.ToStringID2(EquipmentAbilityType.ARCHITECT_FEE), architectFeeTitle);
             architectFeeTitle.FontSize = 7;
             m_runeBackTitleList.Add(architectFeeTitle);
             m_backCard.AddChild(architectFeeTitle);
@@ -280,7 +280,7 @@ namespace RogueCastle
             // Special architect's fee rune.
             TextObj newGamePlusGoldTitle = templateText.Clone() as TextObj;
             newGamePlusGoldTitle.X = 60;
-            newGamePlusGoldTitle.Text = LocaleBuilder.GetString(EquipmentAbilityType.ToStringID2(EquipmentAbilityType.NewGamePlusGoldBonus), newGamePlusGoldTitle);
+            newGamePlusGoldTitle.Text = LocaleBuilder.GetString(EquipmentAbilityType.ToStringID2(EquipmentAbilityType.NEW_GAME_PLUS_GOLD_BONUS), newGamePlusGoldTitle);
             newGamePlusGoldTitle.FontSize = 7;
             m_runeBackTitleList.Add(newGamePlusGoldTitle);
             m_backCard.AddChild(newGamePlusGoldTitle);
@@ -666,28 +666,28 @@ namespace RogueCastle
 
                 switch (i)
                 {
-                    case (EquipmentAbilityType.Dash):
+                    case (EquipmentAbilityType.DASH):
                         dataNumber = player.TotalAirDashes;
                         break;
-                    case (EquipmentAbilityType.DoubleJump):
+                    case (EquipmentAbilityType.DOUBLE_JUMP):
                         dataNumber = player.TotalDoubleJumps;
                         break;
-                    case (EquipmentAbilityType.Flight):
+                    case (EquipmentAbilityType.FLIGHT):
                         dataNumber = player.TotalFlightTime;
                         break;
-                    case (EquipmentAbilityType.Vampirism):
+                    case (EquipmentAbilityType.VAMPIRISM):
                         dataNumber = player.TotalVampBonus;
                         break;
-                    case (EquipmentAbilityType.ManaGain):
+                    case (EquipmentAbilityType.MANA_GAIN):
                         dataNumber = player.ManaGain;
                         break;
-                    case (EquipmentAbilityType.DamageReturn):
+                    case (EquipmentAbilityType.DAMAGE_RETURN):
                         dataNumber = player.TotalDamageReturn * 100;
                         break;
-                    case (EquipmentAbilityType.GoldGain):
+                    case (EquipmentAbilityType.GOLD_GAIN):
                         dataNumber = player.TotalGoldBonus * 100;
                         break;
-                    case (EquipmentAbilityType.MovementSpeed):
+                    case (EquipmentAbilityType.MOVEMENT_SPEED):
                         //float traitMod = 0;
                         //if (Game.PlayerStats.HasTrait(TraitType.Hyperactive))
                         //    traitMod = GameEV.TRAIT_MOVESPEED_AMOUNT;
@@ -699,11 +699,11 @@ namespace RogueCastle
                     //case (EquipmentAbilityType.ManaHPGain): // DO NOT ADD. This is replaced by vamp and siphon
                     //    dataNumber = Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaHPGain) * GameEV.RUNE_MANAHPGAIN;
                     //    break;
-                    case (EquipmentAbilityType.RoomLevelDown):
-                        dataNumber = Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.RoomLevelDown) * GameEV.RUNE_GRACE_ROOM_LEVEL_LOSS;
+                    case (EquipmentAbilityType.ROOM_LEVEL_DOWN):
+                        dataNumber = Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ROOM_LEVEL_DOWN) * GameEV.RUNE_GRACE_ROOM_LEVEL_LOSS;
                         break;
-                    case (EquipmentAbilityType.RoomLevelUp):
-                        dataNumber = Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.RoomLevelUp) * GameEV.RUNE_CURSE_ROOM_LEVEL_GAIN;
+                    case (EquipmentAbilityType.ROOM_LEVEL_UP):
+                        dataNumber = Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ROOM_LEVEL_UP) * GameEV.RUNE_CURSE_ROOM_LEVEL_GAIN;
                         break;
                 }
 
@@ -721,7 +721,7 @@ namespace RogueCastle
             if (Game.PlayerStats.HasArchitectFee == true)
             {
                 m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 2].ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 2]));
-                m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 2].Text = "(" + EquipmentAbilityType.ShortDescription(EquipmentAbilityType.ArchitectFee, 0) + ")";
+                m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 2].Text = "(" + EquipmentAbilityType.ShortDescription(EquipmentAbilityType.ARCHITECT_FEE, 0) + ")";
                 m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 2].X = m_runeBackTitleList[m_runeBackDescriptionList.Count - 2].Bounds.Right + 10;
                 m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 2].Visible = true;
                 m_runeBackTitleList[m_runeBackDescriptionList.Count - 2].Visible = true;
@@ -731,7 +731,7 @@ namespace RogueCastle
             if (Game.PlayerStats.TimesCastleBeaten > 0)
             {
                 m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1].ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1]));
-                m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1].Text = "(" + EquipmentAbilityType.ShortDescription(EquipmentAbilityType.NewGamePlusGoldBonus, ((int)(GameEV.NEWGAMEPLUS_GOLD_BOUNTY *100) * Game.PlayerStats.TimesCastleBeaten)) + ")";
+                m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1].Text = "(" + EquipmentAbilityType.ShortDescription(EquipmentAbilityType.NEW_GAME_PLUS_GOLD_BONUS, ((int)(GameEV.NEWGAMEPLUS_GOLD_BOUNTY *100) * Game.PlayerStats.TimesCastleBeaten)) + ")";
                 m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1].X = m_runeBackTitleList[m_runeBackDescriptionList.Count - 1].Bounds.Right + 10;
                 m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1].Visible = true;
                 m_runeBackTitleList[m_runeBackDescriptionList.Count - 1].Visible = true;

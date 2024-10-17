@@ -128,11 +128,11 @@ namespace RogueCastle
             //Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Chest] = EquipmentBaseType.None;
 
 
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Helm] = EquipmentAbilityType.DoubleJump;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Chest] = EquipmentAbilityType.DoubleJump;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Cape] = EquipmentAbilityType.DoubleJump;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Limbs] = EquipmentAbilityType.Dash;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Sword] = EquipmentAbilityType.Dash;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.HELM] = EquipmentAbilityType.DOUBLE_JUMP;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.CHEST] = EquipmentAbilityType.DOUBLE_JUMP;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.CAPE] = EquipmentAbilityType.DOUBLE_JUMP;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.LIMBS] = EquipmentAbilityType.DASH;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.SWORD] = EquipmentAbilityType.DASH;
 
             if (m_boss != null)
             {

@@ -103,7 +103,7 @@ public class FairyChestObj(PhysicsManager physicsManager) : ChestObj(physicsMana
         SoundManager.Play3DSound(this, Game.ScreenManager.Player, "Chest_Open_Large");
 
         // Give gold if all runes have been found
-        if (Game.PlayerStats.TotalRunesFound >= EquipmentCategoryType.Total * EquipmentAbilityType.Total)
+        if (Game.PlayerStats.TotalRunesFound >= EquipmentCategoryType.TOTAL * EquipmentAbilityType.TOTAL)
         {
             GiveStatDrop(itemDropManager, _player, 1, 0);
         }
@@ -118,7 +118,7 @@ public class FairyChestObj(PhysicsManager physicsManager) : ChestObj(physicsMana
                 var itemCounter = 0;
                 foreach (var itemState in itemArray)
                 {
-                    if (itemState == EquipmentState.NotFound)
+                    if (itemState == EquipmentState.NOT_FOUND)
                     {
                         possibleRunes.Add(new Vector2(categoryCounter, itemCounter));
                     }
@@ -132,7 +132,7 @@ public class FairyChestObj(PhysicsManager physicsManager) : ChestObj(physicsMana
             if (possibleRunes.Count > 0)
             {
                 var chosenRune = possibleRunes[CDGMath.RandomInt(0, possibleRunes.Count - 1)];
-                Game.PlayerStats.GetRuneArray[(int)chosenRune.X][(int)chosenRune.Y] = EquipmentState.FoundButNotSeen;
+                Game.PlayerStats.GetRuneArray[(int)chosenRune.X][(int)chosenRune.Y] = EquipmentState.FOUND_BUT_NOT_SEEN;
                 var objectList = new List<object>
                 {
                     new Vector2(X, Y - (Height / 2f)),

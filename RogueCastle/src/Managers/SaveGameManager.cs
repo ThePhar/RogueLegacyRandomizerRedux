@@ -1621,9 +1621,9 @@ namespace RogueCastle
                     }
 
                     List<byte[]> blueprintArray = Game.PlayerStats.GetBlueprintArray;
-                    for (int i = 0; i < EquipmentCategoryType.Total; i++)
+                    for (int i = 0; i < EquipmentCategoryType.TOTAL; i++)
                     {
-                        for (int k = 0; k < EquipmentBaseType.Total; k++)
+                        for (int k = 0; k < EquipmentBaseType.TOTAL; k++)
                         {
                             blueprintArray[i][k] = reader.ReadByte();
                             if (LevelEV.ShowSaveLoadDebugText == true)
@@ -1636,9 +1636,9 @@ namespace RogueCastle
                     if (LevelEV.ShowSaveLoadDebugText == true)
                         Console.WriteLine("\nLoading Ability Blueprints");
                     List<byte[]> abilityBPArray = Game.PlayerStats.GetRuneArray;
-                    for (int i = 0; i < EquipmentCategoryType.Total; i++)
+                    for (int i = 0; i < EquipmentCategoryType.TOTAL; i++)
                     {
-                        for (int k = 0; k < EquipmentAbilityType.Total; k++)
+                        for (int k = 0; k < EquipmentAbilityType.TOTAL; k++)
                         {
                             abilityBPArray[i][k] = reader.ReadByte();
                             if (LevelEV.ShowSaveLoadDebugText == true)
@@ -1651,7 +1651,7 @@ namespace RogueCastle
                     if (LevelEV.ShowSaveLoadDebugText == true)
                         Console.WriteLine("\nLoading Equipped Standard Items");
                     sbyte[] equippedArray = Game.PlayerStats.GetEquippedArray;
-                    for (int i = 0; i < EquipmentCategoryType.Total; i++)
+                    for (int i = 0; i < EquipmentCategoryType.TOTAL; i++)
                     {
                         equippedArray[i] = reader.ReadSByte();
                         if (LevelEV.ShowSaveLoadDebugText == true)
@@ -1661,7 +1661,7 @@ namespace RogueCastle
                     if (LevelEV.ShowSaveLoadDebugText == true)
                         Console.WriteLine("\nLoading Equipped Abilities");
                     sbyte[] equippedAbilityArray = Game.PlayerStats.GetEquippedRuneArray;
-                    for (int i = 0; i < EquipmentCategoryType.Total; i++)
+                    for (int i = 0; i < EquipmentCategoryType.TOTAL; i++)
                     {
                         equippedAbilityArray[i] = reader.ReadSByte();
                         if (LevelEV.ShowSaveLoadDebugText == true)
@@ -2217,22 +2217,22 @@ namespace RogueCastle
                 {
                     using (BinaryReader reader = new BinaryReader(stream))
                     {
-                        for (int i = 0; i < EquipmentCategoryType.Total; i++)
+                        for (int i = 0; i < EquipmentCategoryType.TOTAL; i++)
                         {
-                            for (int k = 0; k < EquipmentBaseType.Total; k++)
+                            for (int k = 0; k < EquipmentBaseType.TOTAL; k++)
                                 reader.ReadByte();
                         }
 
-                        for (int i = 0; i < EquipmentCategoryType.Total; i++)
+                        for (int i = 0; i < EquipmentCategoryType.TOTAL; i++)
                         {
-                            for (int k = 0; k < EquipmentAbilityType.Total; k++)
+                            for (int k = 0; k < EquipmentAbilityType.TOTAL; k++)
                                 reader.ReadByte();
                         }
 
-                        for (int i = 0; i < EquipmentCategoryType.Total; i++)
+                        for (int i = 0; i < EquipmentCategoryType.TOTAL; i++)
                             reader.ReadSByte();
 
-                        for (int i = 0; i < EquipmentCategoryType.Total; i++)
+                        for (int i = 0; i < EquipmentCategoryType.TOTAL; i++)
                             reader.ReadSByte();
 
                         int levelCounter = 0;

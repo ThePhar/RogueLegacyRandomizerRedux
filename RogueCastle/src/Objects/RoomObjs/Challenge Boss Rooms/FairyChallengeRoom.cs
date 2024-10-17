@@ -90,15 +90,15 @@ namespace RogueCastle
             //Game.PlayerStats.SpecialItem = SpecialItemType.Glasses;
             //Player.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
 
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Helm] = EquipmentBaseType.Dark;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Chest] = EquipmentBaseType.Spike;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Cape] = EquipmentBaseType.Sky;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Limbs] = EquipmentBaseType.Spike;
-            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Sword] = EquipmentBaseType.Dark;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.HELM] = EquipmentBaseType.DARK;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.CHEST] = EquipmentBaseType.SPIKE;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.CAPE] = EquipmentBaseType.SKY;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.LIMBS] = EquipmentBaseType.SPIKE;
+            Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.SWORD] = EquipmentBaseType.DARK;
 
             //Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Helm] = EquipmentAbilityType.ManaHPGain;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Chest] = EquipmentAbilityType.DoubleJump;
-            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Cape] = EquipmentAbilityType.DoubleJump;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.CHEST] = EquipmentAbilityType.DOUBLE_JUMP;
+            Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.CAPE] = EquipmentAbilityType.DOUBLE_JUMP;
             //Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Limbs] = EquipmentAbilityType.ManaHPGain;
             //Game.PlayerStats.GetEquippedRuneArray[EquipmentCategoryType.Sword] = EquipmentAbilityType.ManaHPGain;
 

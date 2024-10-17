@@ -34,11 +34,11 @@ public static class PlayerPart
     {
         return category switch
         {
-            EquipmentCategoryType.Cape  => new Vector3(CAPE, NECK, NONE),
-            EquipmentCategoryType.Chest => new Vector3(CHEST, SHOULDER_B, SHOULDER_A),
-            EquipmentCategoryType.Helm  => new Vector3(HEAD, HAIR, NONE),
-            EquipmentCategoryType.Limbs => new Vector3(ARMS, LEGS, NONE),
-            EquipmentCategoryType.Sword => new Vector3(SWORD1, SWORD2, NONE),
+            EquipmentCategoryType.CAPE  => new Vector3(CAPE, NECK, NONE),
+            EquipmentCategoryType.CHEST => new Vector3(CHEST, SHOULDER_B, SHOULDER_A),
+            EquipmentCategoryType.HELM  => new Vector3(HEAD, HAIR, NONE),
+            EquipmentCategoryType.LIMBS => new Vector3(ARMS, LEGS, NONE),
+            EquipmentCategoryType.SWORD => new Vector3(SWORD1, SWORD2, NONE),
             _                           => new Vector3(-1, -1, -1),
         };
     }

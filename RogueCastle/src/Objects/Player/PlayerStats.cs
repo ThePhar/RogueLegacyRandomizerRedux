@@ -180,18 +180,18 @@ namespace RogueCastle
 
             m_blueprintArray = new List<byte[]>();
             m_runeArray = new List<byte[]>();
-            m_equippedArray = new sbyte[EquipmentCategoryType.Total];
-            m_equippedRuneArray = new sbyte[EquipmentCategoryType.Total];
+            m_equippedArray = new sbyte[EquipmentCategoryType.TOTAL];
+            m_equippedRuneArray = new sbyte[EquipmentCategoryType.TOTAL];
 
             FamilyTreeArray = new List<FamilyTreeNode>();
             InitializeFirstChild();
             EnemiesKilledInRun = new List<Vector2>();
             CurrentBranches = null;
 
-            for (int i = 0; i < EquipmentCategoryType.Total; i++)
+            for (int i = 0; i < EquipmentCategoryType.TOTAL; i++)
             {
-                m_blueprintArray.Add(new byte[EquipmentBaseType.Total]);
-                m_runeArray.Add(new byte[EquipmentAbilityType.Total]);
+                m_blueprintArray.Add(new byte[EquipmentBaseType.TOTAL]);
+                m_runeArray.Add(new byte[EquipmentAbilityType.TOTAL]);
                 m_equippedArray[i] = -1;
                 m_equippedRuneArray[i] = -1;
             }
@@ -211,12 +211,12 @@ namespace RogueCastle
             */
             
             // Debug stuff to test items.
-            m_blueprintArray[EquipmentCategoryType.Helm][EquipmentBaseType.Bronze] = EquipmentState.FoundButNotSeen;
-            m_blueprintArray[EquipmentCategoryType.Limbs][EquipmentBaseType.Bronze] = EquipmentState.FoundButNotSeen;
-            m_blueprintArray[EquipmentCategoryType.Sword][EquipmentBaseType.Bronze] = EquipmentState.FoundButNotSeen;
+            m_blueprintArray[EquipmentCategoryType.HELM][EquipmentBaseType.BRONZE] = EquipmentState.FOUND_BUT_NOT_SEEN;
+            m_blueprintArray[EquipmentCategoryType.LIMBS][EquipmentBaseType.BRONZE] = EquipmentState.FOUND_BUT_NOT_SEEN;
+            m_blueprintArray[EquipmentCategoryType.SWORD][EquipmentBaseType.BRONZE] = EquipmentState.FOUND_BUT_NOT_SEEN;
 
-            m_runeArray[EquipmentCategoryType.Helm][EquipmentAbilityType.DoubleJump] = EquipmentState.FoundButNotSeen;
-            m_runeArray[EquipmentCategoryType.Sword][EquipmentAbilityType.Dash] = EquipmentState.FoundButNotSeen;
+            m_runeArray[EquipmentCategoryType.HELM][EquipmentAbilityType.DOUBLE_JUMP] = EquipmentState.FOUND_BUT_NOT_SEEN;
+            m_runeArray[EquipmentCategoryType.SWORD][EquipmentAbilityType.DASH] = EquipmentState.FOUND_BUT_NOT_SEEN;
             //m_blueprintArray[0][0] = EquipmentState.Purchased;
             //m_blueprintArray[0][1] = EquipmentState.NotPurchased;
             //m_blueprintArray[0][2] = EquipmentState.NotPurchased;
@@ -317,7 +317,7 @@ namespace RogueCastle
                 {
                     foreach (byte purchaseState in categoryType)
                     {
-                        if (purchaseState >= EquipmentState.Purchased)
+                        if (purchaseState >= EquipmentState.PURCHASED)
                             total++;
                     }
                 }
@@ -334,7 +334,7 @@ namespace RogueCastle
                 {
                     foreach (byte purchaseState in categoryType)
                     {
-                        if (purchaseState >= EquipmentState.Purchased)
+                        if (purchaseState >= EquipmentState.PURCHASED)
                             total++;
                     }
                 }
@@ -351,7 +351,7 @@ namespace RogueCastle
                 {
                     foreach (byte purchaseState in categoryType)
                     {
-                        if (purchaseState >= EquipmentState.FoundButNotSeen)
+                        if (purchaseState >= EquipmentState.FOUND_BUT_NOT_SEEN)
                             total++;
                     }
                 }
@@ -368,7 +368,7 @@ namespace RogueCastle
                 {
                     foreach (byte purchaseState in categoryType)
                     {
-                        if (purchaseState >= EquipmentState.FoundButNotSeen)
+                        if (purchaseState >= EquipmentState.FOUND_BUT_NOT_SEEN)
                             total++;
                     }
                 }
@@ -390,7 +390,7 @@ namespace RogueCastle
         {
             byte numEquippedAbilities = 0;
             if (LevelEV.UnlockAllAbilities == true)
-                return EquipmentCategoryType.Total;
+                return EquipmentCategoryType.TOTAL;
             foreach (sbyte equippedAbility in m_equippedRuneArray)
             {
                 if (equippedAbility == equipmentAbilityType)

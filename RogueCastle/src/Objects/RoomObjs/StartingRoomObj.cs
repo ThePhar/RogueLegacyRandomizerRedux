@@ -965,7 +965,7 @@ namespace RogueCastle
                 {
                     foreach (byte state in category)
                     {
-                        if (state == EquipmentState.FoundButNotSeen)
+                        if (state == EquipmentState.FOUND_BUT_NOT_SEEN)
                             return true;
                     }
                 }
@@ -981,7 +981,7 @@ namespace RogueCastle
                 {
                     foreach (byte state in category)
                     {
-                        if (state == EquipmentState.FoundButNotSeen)
+                        if (state == EquipmentState.FOUND_BUT_NOT_SEEN)
                             return true;
                     }
                 }

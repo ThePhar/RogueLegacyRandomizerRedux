@@ -58,9 +58,9 @@ namespace RogueCastle
             m_currentCategoryIndex = m_startingCategoryIndex;
 
             m_masterIconArray = new List<ObjContainer[]>();
-            for (int i = 0; i < EquipmentCategoryType.Total; i++)
+            for (int i = 0; i < EquipmentCategoryType.TOTAL; i++)
             {
-                m_masterIconArray.Add(new ObjContainer[EquipmentBaseType.Total]);
+                m_masterIconArray.Add(new ObjContainer[EquipmentBaseType.TOTAL]);
             }
         }
 
@@ -236,7 +236,7 @@ namespace RogueCastle
             // Tween out the current active icon array.
             if (m_activeIconArray != null)
             {
-                for (int i = 0; i < EquipmentBaseType.Total; i++)
+                for (int i = 0; i < EquipmentBaseType.TOTAL; i++)
                 {
                     Tween.StopAllContaining(m_activeIconArray[i], false);
                     Tween.To(m_activeIconArray[i], tweenSpeed, Back.EaseIn, "delay", delay.ToString(), "ScaleX", "0", "ScaleY", "0");
@@ -245,7 +245,7 @@ namespace RogueCastle
 
             m_activeIconArray = m_masterIconArray[equipmentType];
             delay = 0.2f;
-            for (int i = 0; i < EquipmentBaseType.Total; i++)
+            for (int i = 0; i < EquipmentBaseType.TOTAL; i++)
             {
                 Tween.To(m_activeIconArray[i], tweenSpeed, Back.EaseOut, "delay", delay.ToString(), "ScaleX", "1", "ScaleY", "1");
             }
@@ -349,7 +349,7 @@ namespace RogueCastle
                 for (int k = 0; k < Game.PlayerStats.GetBlueprintArray[i].Length; k++)
                 {
                     byte state = Game.PlayerStats.GetBlueprintArray[i][k];
-                    if (state == EquipmentState.NotFound)
+                    if (state == EquipmentState.NOT_FOUND)
                         m_masterIconArray[i][k].ChangeSprite("BlacksmithUI_QuestionMarkIcon_Character");
                     else
                     {
@@ -358,19 +358,19 @@ namespace RogueCastle
                             m_masterIconArray[i][k].GetChildAt(j).Opacity = 0.2f;
                     }
                     
-                    if (state > EquipmentState.FoundAndSeen)
+                    if (state > EquipmentState.FOUND_AND_SEEN)
                     {
                         for (int j = 1; j < m_masterIconArray[i][k].NumChildren; j++)
                             m_masterIconArray[i][k].GetChildAt(j).Opacity = 1f;
 
                         int colourIndex = 1;
-                        if (i == EquipmentCategoryType.Sword)
+                        if (i == EquipmentCategoryType.SWORD)
                             colourIndex = 2;
 
                         EquipmentData equipmentData = Game.EquipmentSystem.GetEquipmentData(i, k);
                         m_masterIconArray[i][k].GetChildAt(colourIndex).TextureColor = equipmentData.FirstColour;
 
-                        if (i != EquipmentCategoryType.Cape)
+                        if (i != EquipmentCategoryType.CAPE)
                         {
                             colourIndex++;
                             m_masterIconArray[i][k].GetChildAt(colourIndex).TextureColor = equipmentData.SecondColour;
@@ -401,7 +401,7 @@ namespace RogueCastle
             {
                 byte state = Game.PlayerStats.GetBlueprintArray[CurrentCategoryIndex][i];
 
-                if (state == EquipmentState.FoundButNotSeen)
+                if (state == EquipmentState.FOUND_BUT_NOT_SEEN)
                 {
                     ObjContainer equipmentIcon = m_masterIconArray[CurrentCategoryIndex][i];
 
@@ -437,7 +437,7 @@ namespace RogueCastle
             else
                 m_rainSound = SoundManager.PlaySound("snowloop_filtered");
 
-            if (Game.PlayerStats.TotalBlueprintsFound >= (EquipmentBaseType.Total * EquipmentCategoryType.Total))
+            if (Game.PlayerStats.TotalBlueprintsFound >= (EquipmentBaseType.TOTAL * EquipmentCategoryType.TOTAL))
                 GameUtil.UnlockAchievement("FEAR_OF_THROWING_STUFF_OUT");
 
             m_lockControls = true;
@@ -464,7 +464,7 @@ namespace RogueCastle
             m_selectionIcon.Position = m_blacksmithUI.GetChildAt(m_startingCategoryIndex).AbsPosition;
             m_currentCategoryIndex = m_startingCategoryIndex;
             UpdateIconStates();
-            DisplayCategory(EquipmentCategoryType.Sword);
+            DisplayCategory(EquipmentCategoryType.SWORD);
             EaseInMenu();
             Tween.To(this, 0.2f, Linear.EaseNone, "BackBufferOpacity", "0.5");
             UpdateIconSelectionText();
@@ -576,8 +576,8 @@ namespace RogueCastle
                 m_currentEquipmentIndex = 0;
                 m_selectionIcon.Position = m_activeIconArray[m_currentEquipmentIndex].AbsPosition;
                 byte state = Game.PlayerStats.GetBlueprintArray[CurrentCategoryIndex][m_currentEquipmentIndex];
-                if (state == EquipmentState.FoundButNotSeen)
-                    Game.PlayerStats.GetBlueprintArray[CurrentCategoryIndex][m_currentEquipmentIndex] = EquipmentState.FoundAndSeen;
+                if (state == EquipmentState.FOUND_BUT_NOT_SEEN)
+                    Game.PlayerStats.GetBlueprintArray[CurrentCategoryIndex][m_currentEquipmentIndex] = EquipmentState.FOUND_AND_SEEN;
                 UpdateNewIcons();
                 UpdateIconSelectionText();
                 SoundManager.PlaySound("ShopMenuConfirm");
@@ -615,8 +615,8 @@ namespace RogueCastle
             if (storedEquipmentIndex != m_currentEquipmentIndex)
             {
                 byte state = Game.PlayerStats.GetBlueprintArray[CurrentCategoryIndex][m_currentEquipmentIndex];
-                if (state == EquipmentState.FoundButNotSeen)
-                    Game.PlayerStats.GetBlueprintArray[CurrentCategoryIndex][m_currentEquipmentIndex] = EquipmentState.FoundAndSeen;
+                if (state == EquipmentState.FOUND_BUT_NOT_SEEN)
+                    Game.PlayerStats.GetBlueprintArray[CurrentCategoryIndex][m_currentEquipmentIndex] = EquipmentState.FOUND_AND_SEEN;
                 UpdateNewIcons();
                 UpdateIconSelectionText();
                 m_selectionIcon.Position = m_activeIconArray[m_currentEquipmentIndex].AbsPosition;
@@ -638,7 +638,7 @@ namespace RogueCastle
                 int equippedIndex = Game.PlayerStats.GetEquippedArray[equipmentCategory];
 
                 // Purchasing a previously locked piece of equipment.
-                if (purchasedState < EquipmentState.Purchased && purchasedState > EquipmentState.NotFound)
+                if (purchasedState < EquipmentState.PURCHASED && purchasedState > EquipmentState.NOT_FOUND)
                 {
                     EquipmentData equipmentData = Game.EquipmentSystem.GetEquipmentData(equipmentCategory, m_currentEquipmentIndex);                    
                     if (Game.PlayerStats.Gold >= equipmentData.Cost)
@@ -646,7 +646,7 @@ namespace RogueCastle
                         SoundManager.PlaySound("ShopMenuUnlock");
                         Game.PlayerStats.Gold -= equipmentData.Cost;
                         UpdateMoneyText(); // flibit added this, purchases didn't update display!
-                        Game.PlayerStats.GetBlueprintArray[equipmentCategory][m_currentEquipmentIndex] = EquipmentState.Purchased;
+                        Game.PlayerStats.GetBlueprintArray[equipmentCategory][m_currentEquipmentIndex] = EquipmentState.PURCHASED;
 
                         ObjContainer icon = m_masterIconArray[equipmentCategory][m_currentEquipmentIndex];
                         icon.ChangeSprite("BlacksmithUI_" + EquipmentCategoryType.ToStringEN(equipmentCategory) + ((m_currentEquipmentIndex % 5) + 1).ToString() + "Icon_Character");
@@ -655,18 +655,18 @@ namespace RogueCastle
                             icon.GetChildAt(j).Opacity = 1f;
 
                         int colourIndex = 1;
-                        if (equipmentCategory == EquipmentCategoryType.Sword)
+                        if (equipmentCategory == EquipmentCategoryType.SWORD)
                             colourIndex = 2;
 
                         icon.GetChildAt(colourIndex).TextureColor = equipmentData.FirstColour;
 
-                        if (equipmentCategory != EquipmentCategoryType.Cape)
+                        if (equipmentCategory != EquipmentCategoryType.CAPE)
                         {
                             colourIndex++;
                             icon.GetChildAt(colourIndex).TextureColor = equipmentData.SecondColour;
                         }
 
-                        purchasedState = EquipmentState.Purchased;
+                        purchasedState = EquipmentState.PURCHASED;
                         UpdateIconSelectionText();
                     }
                     else
@@ -674,7 +674,7 @@ namespace RogueCastle
                 }
 
                 // Changing the currently equipped equipment piece.
-                if (equippedIndex != m_currentEquipmentIndex && purchasedState == EquipmentState.Purchased)
+                if (equippedIndex != m_currentEquipmentIndex && purchasedState == EquipmentState.PURCHASED)
                 {
                     EquipmentData equipmentData = Game.EquipmentSystem.GetEquipmentData(equipmentCategory, m_currentEquipmentIndex);
                     int currentEquippedItem = Game.PlayerStats.GetEquippedArray[equipmentCategory];
@@ -698,7 +698,7 @@ namespace RogueCastle
                             Player.GetChildAt((int)playerPart.Z).TextureColor = equipmentData.SecondColour;
 
                         // Special handling to tint the female's boobs.
-                        if (equipmentCategory == EquipmentCategoryType.Chest && playerPart.X != PlayerPart.NONE)
+                        if (equipmentCategory == EquipmentCategoryType.CHEST && playerPart.X != PlayerPart.NONE)
                             Player.GetChildAt(PlayerPart.BOOBS).TextureColor = equipmentData.FirstColour;
 
                         UpdateNewIcons();
@@ -733,12 +733,12 @@ namespace RogueCastle
             }
             else
             {
-                if (Game.PlayerStats.GetBlueprintArray[m_currentCategoryIndex - m_startingCategoryIndex][m_currentEquipmentIndex] == EquipmentState.NotFound)
+                if (Game.PlayerStats.GetBlueprintArray[m_currentCategoryIndex - m_startingCategoryIndex][m_currentEquipmentIndex] == EquipmentState.NOT_FOUND)
                 {
                     m_equipmentDescriptionText.Position = new Vector2(230, -20);
                     m_equipmentDescriptionText.Text = LocaleBuilder.GetString("LOC_ID_BLACKSMITH_SCREEN_13", m_equipmentDescriptionText);
                 }
-                else if (Game.PlayerStats.GetBlueprintArray[m_currentCategoryIndex - m_startingCategoryIndex][m_currentEquipmentIndex] < EquipmentState.Purchased)
+                else if (Game.PlayerStats.GetBlueprintArray[m_currentCategoryIndex - m_startingCategoryIndex][m_currentEquipmentIndex] < EquipmentState.PURCHASED)
                 {
                     m_equipmentDescriptionText.Text = LocaleBuilder.GetString("LOC_ID_BLACKSMITH_SCREEN_14", m_equipmentDescriptionText);
                     (m_unlockCostContainer.GetChildAt(1) as TextObj).Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_BLACKSMITH_SCREEN_16_NEW"), Game.EquipmentSystem.GetEquipmentData(m_currentCategoryIndex - m_startingCategoryIndex, m_currentEquipmentIndex).Cost.ToString());

@@ -565,12 +565,12 @@ namespace RogueCastle
                     {
                         //int roomLevel = room.LinkedRoom.RoomNumber;
                         roomLevel = room.LinkedRoom.Level;
-                        int bossEnemyLevel = (int)(roomLevel / (LevelEV.ROOM_LEVEL_MOD + Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.RoomLevelDown) * GameEV.RUNE_GRACE_ROOM_LEVEL_LOSS));
+                        int bossEnemyLevel = (int)(roomLevel / (LevelEV.ROOM_LEVEL_MOD + Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ROOM_LEVEL_DOWN) * GameEV.RUNE_GRACE_ROOM_LEVEL_LOSS));
                         enemy.Level = bossEnemyLevel;
                     }
                     else
                     {
-                        int enemyLevel = (int)(roomLevel / (LevelEV.ROOM_LEVEL_MOD + Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.RoomLevelDown) * GameEV.RUNE_GRACE_ROOM_LEVEL_LOSS));
+                        int enemyLevel = (int)(roomLevel / (LevelEV.ROOM_LEVEL_MOD + Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ROOM_LEVEL_DOWN) * GameEV.RUNE_GRACE_ROOM_LEVEL_LOSS));
                         if (enemyLevel < 1) enemyLevel = 1;
                         enemy.Level = enemyLevel; // Call this before Initialize(), since Initialie sets their starting health and so on.
                     }
@@ -759,7 +759,7 @@ namespace RogueCastle
                         if (chest != null && chest.ChestType != ChestType.FAIRY)// && room.Name != "Bonus") // Do not modify chests for bonus rooms or fairy chests.
                         {
                             //chest.Level = chestLevel;  // Setting the chest level.
-                            chest.Level = (int)(room.Level / (LevelEV.ROOM_LEVEL_MOD + Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.RoomLevelDown) * GameEV.RUNE_GRACE_ROOM_LEVEL_LOSS));
+                            chest.Level = (int)(room.Level / (LevelEV.ROOM_LEVEL_MOD + Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ROOM_LEVEL_DOWN) * GameEV.RUNE_GRACE_ROOM_LEVEL_LOSS));
 
                             if (chest.IsProcedural == true) // Ensures chests loaded from a save file are not overwritten.
                             {
@@ -860,7 +860,7 @@ namespace RogueCastle
             // These textures need to be stored and released during dispose().
 
             int roomLevel = 0;
-            roomLevel = Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.RoomLevelUp) * GameEV.RUNE_CURSE_ROOM_LEVEL_GAIN;
+            roomLevel = Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ROOM_LEVEL_UP) * GameEV.RUNE_CURSE_ROOM_LEVEL_GAIN;
 
             if (m_roomBWRenderTarget != null)
                 m_roomBWRenderTarget.Dispose();

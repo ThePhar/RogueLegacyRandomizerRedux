@@ -398,19 +398,19 @@ namespace RogueCastle
                         if (m_itemInfo.Y < 0)
                         {
                             m_itemInfo.X--;
-                            m_itemInfo.Y = EquipmentBaseType.Total - 1;
+                            m_itemInfo.Y = EquipmentBaseType.TOTAL - 1;
                             if (m_itemInfo.X < 0)
-                                m_itemInfo.X = EquipmentCategoryType.Total - 1;
+                                m_itemInfo.X = EquipmentCategoryType.TOTAL - 1;
                         }
                     }
                     else if (InputManager.JustPressed(Keys.OemCloseBrackets, null))
                     {
                         m_itemInfo.Y++;
-                        if (m_itemInfo.Y >= EquipmentBaseType.Total)
+                        if (m_itemInfo.Y >= EquipmentBaseType.TOTAL)
                         {
                             m_itemInfo.X++;
                             m_itemInfo.Y = 0;
-                            if (m_itemInfo.X >= EquipmentCategoryType.Total)
+                            if (m_itemInfo.X >= EquipmentCategoryType.TOTAL)
                                 m_itemInfo.X = 0;
                         }
                     }
@@ -424,19 +424,19 @@ namespace RogueCastle
                         if (m_itemInfo.Y < 0)
                         {
                             m_itemInfo.X--;
-                            m_itemInfo.Y = EquipmentAbilityType.Total - 1;
+                            m_itemInfo.Y = EquipmentAbilityType.TOTAL - 1;
                             if (m_itemInfo.X < 0)
-                                m_itemInfo.X = EquipmentCategoryType.Total - 1;
+                                m_itemInfo.X = EquipmentCategoryType.TOTAL - 1;
                         }
                     }
                     else if (InputManager.JustPressed(Keys.OemCloseBrackets, null))
                     {
                         m_itemInfo.Y++;
-                        if (m_itemInfo.Y >= EquipmentAbilityType.Total)
+                        if (m_itemInfo.Y >= EquipmentAbilityType.TOTAL)
                         {
                             m_itemInfo.X++;
                             m_itemInfo.Y = 0;
-                            if (m_itemInfo.X >= EquipmentCategoryType.Total)
+                            if (m_itemInfo.X >= EquipmentCategoryType.TOTAL)
                                 m_itemInfo.X = 0;
                         }
                     }

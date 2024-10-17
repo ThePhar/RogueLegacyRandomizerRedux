@@ -664,9 +664,9 @@ namespace RogueCastle
                 }
             }
             if (m_debugInputMap.JustPressed(DEBUG_UNLOCK_ALL_BLUEPRINTS))
-                Game.EquipmentSystem.SetBlueprintState(EquipmentState.FoundButNotSeen);
+                Game.EquipmentSystem.SetBlueprintState(EquipmentState.FOUND_BUT_NOT_SEEN);
             if (m_debugInputMap.JustPressed(DEBUG_PURCHASE_ALL_BLUEPRINTS))
-                Game.EquipmentSystem.SetBlueprintState(EquipmentState.Purchased);
+                Game.EquipmentSystem.SetBlueprintState(EquipmentState.PURCHASED);
 
             if ((InputManager.Pressed(Keys.LeftShift, PlayerIndex.One) || InputManager.Pressed(Buttons.LeftShoulder, PlayerIndex.One)) && CanRun == true && m_isTouchingGround == true)
                 this.CurrentSpeed *= RunSpeedMultiplier;
@@ -2575,7 +2575,7 @@ namespace RogueCastle
                             this.GetChildAt((int)playerPart.Z).TextureColor = equipmentData.SecondColour;
 
                         // Special handling to tint the female's boobs.
-                        if (i == EquipmentCategoryType.Chest && playerPart.X != PlayerPart.NONE)
+                        if (i == EquipmentCategoryType.CHEST && playerPart.X != PlayerPart.NONE)
                             this.GetChildAt(PlayerPart.BOOBS).TextureColor = equipmentData.FirstColour;
                     }
                     else // The player is dequipping
@@ -2591,20 +2591,20 @@ namespace RogueCastle
                             this.GetChildAt((int)playerPart.Z).TextureColor = Color.White;
 
                         // Special handling to tint the female's boobs.
-                        if (i == EquipmentCategoryType.Chest)
+                        if (i == EquipmentCategoryType.CHEST)
                             this.GetChildAt(PlayerPart.BOOBS).TextureColor = Color.White;
 
                         // Special handling to make the default player's cape and helm red instead of white.
-                        if (i == EquipmentCategoryType.Helm)
+                        if (i == EquipmentCategoryType.HELM)
                             this.GetChildAt(PlayerPart.HAIR).TextureColor = Color.Red;
-                        else if (i == EquipmentCategoryType.Cape)
+                        else if (i == EquipmentCategoryType.CAPE)
                         {
                             if (playerPart.X != -1)
                                 this.GetChildAt((int)playerPart.X).TextureColor = Color.Red;
                             if (playerPart.Y != -1)
                                 this.GetChildAt((int)playerPart.Y).TextureColor = Color.Red;
                         }
-                        else if (i == EquipmentCategoryType.Sword)
+                        else if (i == EquipmentCategoryType.SWORD)
                         {
                             if (playerPart.Y != -1)
                                 this.GetChildAt((int)playerPart.Y).TextureColor = new Color(11, 172, 239); // Light blue
@@ -3927,8 +3927,8 @@ namespace RogueCastle
                 int classManaGain = 0;
                 if (Game.PlayerStats.Class == ClassType.WIZARD || Game.PlayerStats.Class == ClassType.WIZARD2)
                     classManaGain = GameEV.MAGE_MANA_GAIN;
-                return (int)((m_manaGain + classManaGain + SkillSystem.GetSkill(SkillType.Mana_Regen_Up).ModifierAmount + ((Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaGain) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.ManaDrain)) * GameEV.RUNE_MANA_GAIN)
-                     + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaHPGain) * GameEV.RUNE_MANA_HP_GAIN)) * (1 + Game.PlayerStats.TimesCastleBeaten * 0.5f));
+                return (int)((m_manaGain + classManaGain + SkillSystem.GetSkill(SkillType.Mana_Regen_Up).ModifierAmount + ((Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MANA_GAIN) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.MANA_DRAIN)) * GameEV.RUNE_MANA_GAIN)
+                     + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MANA_HP_GAIN) * GameEV.RUNE_MANA_HP_GAIN)) * (1 + Game.PlayerStats.TimesCastleBeaten * 0.5f));
 
             } //TEDDY MODDING SO MANA GAIN IS AN EV
             set { m_manaGain = value; }
@@ -3936,7 +3936,7 @@ namespace RogueCastle
 
         public float BlockManaDrain
         {
-            get { return m_blockManaDrain - (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.ManaDrain) - (int)SkillSystem.GetSkill(SkillType.Block).ModifierAmount; }
+            get { return m_blockManaDrain - (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.MANA_DRAIN) - (int)SkillSystem.GetSkill(SkillType.Block).ModifierAmount; }
             set { m_blockManaDrain = value; }
         }
 
@@ -3949,7 +3949,7 @@ namespace RogueCastle
         {
             get
             {
-                float CritChanceBonus = BaseCriticalChance + SkillSystem.GetSkill(SkillType.Crit_Chance_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CritChance);
+                float CritChanceBonus = BaseCriticalChance + SkillSystem.GetSkill(SkillType.Crit_Chance_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CRIT_CHANCE);
                 switch (Game.PlayerStats.Class)
                 {
                     case (ClassType.ASSASSIN):
@@ -3969,7 +3969,7 @@ namespace RogueCastle
             {
                 //return BaseCriticalDamageMod + SkillSystem.GetSkill(SkillType.Crit_Damage_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CritDamage);
                 // +Game.TraitSystem.GetModifierAmount(m_traitArray, TraitType.Crit_Damage_Flat);
-                float CritDamageBonus = BaseCriticalDamageMod + SkillSystem.GetSkill(SkillType.Crit_Damage_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CritDamage);
+                float CritDamageBonus = BaseCriticalDamageMod + SkillSystem.GetSkill(SkillType.Crit_Damage_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CRIT_DAMAGE);
 
                 switch (Game.PlayerStats.Class)
                 {
@@ -3985,7 +3985,7 @@ namespace RogueCastle
         {
             get
             {
-                return SkillSystem.GetSkill(SkillType.XP_Gain_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.XpBonus);
+                return SkillSystem.GetSkill(SkillType.XP_Gain_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.XP_BONUS);
                     //+ Game.TraitSystem.GetModifierAmount(m_traitArray, TraitType.XP_Percentage);
             }
         }
@@ -3994,8 +3994,8 @@ namespace RogueCastle
         {
             get
             {
-                float goldBonus = SkillSystem.GetSkill(SkillType.Gold_Gain_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.GoldBonus)
-                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.GoldGain) * GameEV.RUNE_GOLDGAIN_MOD) + (GameEV.NEWGAMEPLUS_GOLD_BOUNTY * Game.PlayerStats.TimesCastleBeaten);
+                float goldBonus = SkillSystem.GetSkill(SkillType.Gold_Gain_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.GOLD_BONUS)
+                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.GOLD_GAIN) * GameEV.RUNE_GOLDGAIN_MOD) + (GameEV.NEWGAMEPLUS_GOLD_BOUNTY * Game.PlayerStats.TimesCastleBeaten);
                    // + Game.TraitSystem.GetModifierAmount(m_traitArray, TraitType.Gold_Percentage);
 
                 switch (Game.PlayerStats.Class)
@@ -4017,26 +4017,26 @@ namespace RogueCastle
 
             get
             {
-                return (int)(((Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.Vampirism) *
+                return (int)(((Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.VAMPIRISM) *
                     GameEV.RUNE_VAMPIRISM_HEALTH_GAIN) +
-                    ((int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.Vampirism) * GameEV.RUNE_VAMPIRISM_HEALTH_GAIN)
-                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaHPGain) * GameEV.RUNE_MANA_HP_GAIN)) * (1 + Game.PlayerStats.TimesCastleBeaten * 0.5f));
+                    ((int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.VAMPIRISM) * GameEV.RUNE_VAMPIRISM_HEALTH_GAIN)
+                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MANA_HP_GAIN) * GameEV.RUNE_MANA_HP_GAIN)) * (1 + Game.PlayerStats.TimesCastleBeaten * 0.5f));
             }
         }
 
         public int TotalAirDashes
         {
-            get { return Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.Dash) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.AirDash); }
+            get { return Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.DASH) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.AIR_DASH); }
         }
 
         public int TotalDoubleJumps
         {
-            get { return Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.DoubleJump) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.DoubleJump); }
+            get { return Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.DOUBLE_JUMP) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.DOUBLE_JUMP); }
         }
 
         public float TotalFlightTime
         {
-            get { return FlightTime * (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.Flight) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.Flight)); }
+            get { return FlightTime * (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.FLIGHT) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.FLIGHT)); }
         }
 
         public float TotalArmor
@@ -4075,8 +4075,8 @@ namespace RogueCastle
                 //    (1 + (GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.MoveSpeed) + traitMod +
                 //    (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MovementSpeed) * GameEV.RUNE_MOVEMENTSPEED_MOD))) *
                 //    ClassMoveSpeedMultiplier);
-                float moveSpeed = (1 + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.MoveSpeed) + traitMod +
-                  (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MovementSpeed) * GameEV.RUNE_MOVEMENT_SPEED_MOD) + ClassMoveSpeedMultiplier);
+                float moveSpeed = (1 + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.MOVE_SPEED) + traitMod +
+                  (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MOVEMENT_SPEED) * GameEV.RUNE_MOVEMENT_SPEED_MOD) + ClassMoveSpeedMultiplier);
                 return moveSpeed;
             }
         }
@@ -4085,8 +4085,8 @@ namespace RogueCastle
         {
             get
             {
-                return (GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.DamageReturn)
-                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.DamageReturn) * GameEV.RUNE_DAMAGE_RETURN_MOD));
+                return (GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.DAMAGE_RETURN)
+                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.DAMAGE_RETURN) * GameEV.RUNE_DAMAGE_RETURN_MOD));
             }
         }
 

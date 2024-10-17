@@ -301,7 +301,7 @@ namespace RogueCastle
         public void GivePrint(ItemDropManager manager, PlayerObj player)
         {
             // Give gold if all blueprints have been found
-            if (Game.PlayerStats.TotalBlueprintsFound >= EquipmentCategoryType.Total * EquipmentBaseType.Total)
+            if (Game.PlayerStats.TotalBlueprintsFound >= EquipmentCategoryType.TOTAL * EquipmentBaseType.TOTAL)
             {
                 if (this.ChestType == GameStructs.ChestType.GOLD)
                     GiveStatDrop(manager, player, 1, 0);
@@ -319,7 +319,7 @@ namespace RogueCastle
                     int itemCounter = 0;
                     foreach (byte itemState in itemArray)
                     {
-                        if (itemState == EquipmentState.NotFound)
+                        if (itemState == EquipmentState.NOT_FOUND)
                         {
                             EquipmentData item = Game.EquipmentSystem.GetEquipmentData(categoryCounter, itemCounter);
                             if (this.Level >= item.LevelRequirement && this.ChestType >= item.ChestColourRequirement)
@@ -333,7 +333,7 @@ namespace RogueCastle
                 if (possibleBlueprints.Count > 0)
                 {
                     Vector2 chosenBlueprint = possibleBlueprints[CDGMath.RandomInt(0, possibleBlueprints.Count - 1)];
-                    Game.PlayerStats.GetBlueprintArray[(int)chosenBlueprint.X][(int)chosenBlueprint.Y] = EquipmentState.FoundButNotSeen;
+                    Game.PlayerStats.GetBlueprintArray[(int)chosenBlueprint.X][(int)chosenBlueprint.Y] = EquipmentState.FOUND_BUT_NOT_SEEN;
                     List<object> objectList = new List<object>();
                     objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
                     objectList.Add(GetItemType.BLUEPRINT);
