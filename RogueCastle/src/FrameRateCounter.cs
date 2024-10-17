@@ -1,70 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
 
-namespace RogueCastle
+namespace RogueCastle;
+
+public class FrameRateCounter : DrawableGameComponent
 {
-    public class FrameRateCounter : DrawableGameComponent
+    private readonly ContentManager _content;
+    private TimeSpan _elapsedTime = TimeSpan.Zero;
+    private int _frameCounter;
+    private int _frameRate;
+    private SpriteBatch _spriteBatch;
+    private SpriteFont _spriteFont;
+
+    public FrameRateCounter(Game game) : base(game)
     {
-        ContentManager content;
-        SpriteBatch spriteBatch;
-        SpriteFont spriteFont;
+        _content = Game.Content;
+    }
 
-        int frameRate = 0;
-        int frameCounter = 0;
-        TimeSpan elapsedTime = TimeSpan.Zero;
+    protected override void LoadContent()
+    {
+        _spriteBatch = new SpriteBatch(GraphicsDevice);
+        _spriteFont = _content.Load<SpriteFont>(@"Fonts\FpsFont");
+    }
 
+    protected override void UnloadContent()
+    {
+        _content.Unload();
+    }
 
-        public FrameRateCounter(Game game)
-            : base(game)
+    public override void Update(GameTime gameTime)
+    {
+        _elapsedTime += gameTime.ElapsedGameTime;
+
+        if (_elapsedTime <= TimeSpan.FromSeconds(1))
         {
-            this.content = Game.Content;
+            return;
         }
 
-        
+        _elapsedTime -= TimeSpan.FromSeconds(1);
+        _frameRate = _frameCounter;
+        _frameCounter = 0;
+    }
 
-        protected override void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            spriteFont = content.Load<SpriteFont>("Fonts\\FpsFont");
-        }
+    public override void Draw(GameTime gameTime)
+    {
+        _frameCounter++;
 
-        protected override void UnloadContent()
-        {
-            content.Unload();
-        }
+        var fps = $"fps: {_frameRate}";
 
+        _spriteBatch.Begin();
 
-        public override void Update(GameTime gameTime)
-        {
-            elapsedTime += gameTime.ElapsedGameTime;
+        _spriteBatch.DrawString(_spriteFont, fps, new Vector2(GlobalEV.SCREEN_WIDTH - 150, 33), Color.Black);
+        _spriteBatch.DrawString(_spriteFont, fps, new Vector2(GlobalEV.SCREEN_WIDTH - 149, 32), Color.White);
 
-            if (elapsedTime > TimeSpan.FromSeconds(1))
-            {
-                elapsedTime -= TimeSpan.FromSeconds(1);
-                frameRate = frameCounter;
-                frameCounter = 0;
-            }
-        }
-
-
-        public override void Draw(GameTime gameTime)
-        {
-            frameCounter++;
-
-            string fps = string.Format("fps: {0}", frameRate);
-
-            spriteBatch.Begin();
-
-            spriteBatch.DrawString(spriteFont, fps, new Vector2(GlobalEV.SCREEN_WIDTH - 150, 33), Color.Black);
-            spriteBatch.DrawString(spriteFont, fps, new Vector2(GlobalEV.SCREEN_WIDTH - 149, 32), Color.White);
-
-            spriteBatch.End();
-        }
+        _spriteBatch.End();
     }
 }
