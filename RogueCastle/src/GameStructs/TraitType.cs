@@ -48,6 +48,8 @@ public static class TraitType
     public const byte GLAUCOMA       = 35; // Done
     public const byte CLONUS         = 36; // Done
     public const byte PROSOPAGNOSIA  = 37; // Done
+
+    // Unimplemented
     public const byte ADOPTED        = 100;
 
     public static string ToStringID(byte traitType)
