@@ -775,7 +775,7 @@ namespace RogueCastle
             foreach (RoomObj room in roomList)
             {
                 // Do not add diary rooms to the procedural generation if you have unlocked all the diaries.
-                if ((Game.PlayerStats.DiaryEntry >= LevelEV.TOTAL_JOURNAL_ENTRIES - 1) && room.Name == "Bonus" && room.Tag == BonusRoomTypes.Diary.ToString())
+                if ((Game.PlayerStats.DiaryEntry >= LevelEV.TOTAL_JOURNAL_ENTRIES - 1) && room.Name == "Bonus" && room.Tag == BonusRoomType.Diary.ToString())
                     continue;
 
                 foreach (DoorObj door in room.DoorList)
@@ -1910,44 +1910,21 @@ namespace RogueCastle
                     if (room.Tag == "")
                         room.Tag = "0";
 
-                    RoomObj roomToAdd = null;
-
-                    switch (int.Parse(room.Tag, NumberStyles.Any, ci))
+                    RoomObj roomToAdd = (BonusRoomType)int.Parse(room.Tag, NumberStyles.Any, ci) switch
                     {
-                        case (BonusRoomTypes.PickChest):
-                            roomToAdd = new ChestBonusRoomObj();
-                            break;
-                        case (BonusRoomTypes.SpecialItem):
-                            roomToAdd = new SpecialItemRoomObj();
-                            break;
-                        case (BonusRoomTypes.RandomTeleport):
-                            roomToAdd = new RandomTeleportRoomObj();
-                            break;
-                        case (BonusRoomTypes.SpellSwap):
-                            roomToAdd = new SpellSwapRoomObj();
-                            break;
-                        case (BonusRoomTypes.VitaChamber):
-                            roomToAdd = new VitaChamberRoomObj();
-                            break;
-                        case (BonusRoomTypes.Diary):
-                            roomToAdd = new DiaryRoomObj();
-                            break;
-                        case (BonusRoomTypes.Portrait):
-                            roomToAdd = new PortraitRoomObj();
-                            break;
-                        case (BonusRoomTypes.CarnivalShoot1):
-                            roomToAdd = new CarnivalShoot1BonusRoom();
-                            break;
-                        case (BonusRoomTypes.CarnivalShoot2):
-                            roomToAdd = new CarnivalShoot2BonusRoom();
-                            break;
-                        case(BonusRoomTypes.Arena):
-                            roomToAdd = new ArenaBonusRoom();
-                            break;
-                        case(BonusRoomTypes.Jukebox):
-                            roomToAdd = new JukeboxBonusRoom();
-                            break;
-                    }
+                        BonusRoomType.PickChest      => new ChestBonusRoomObj(),
+                        BonusRoomType.SpecialItem    => new SpecialItemRoomObj(),
+                        BonusRoomType.RandomTeleport => new RandomTeleportRoomObj(),
+                        BonusRoomType.SpellSwap      => new SpellSwapRoomObj(),
+                        BonusRoomType.VitaChamber    => new VitaChamberRoomObj(),
+                        BonusRoomType.Diary          => new DiaryRoomObj(),
+                        BonusRoomType.Portrait       => new PortraitRoomObj(),
+                        BonusRoomType.CarnivalShoot1 => new CarnivalShoot1BonusRoom(),
+                        BonusRoomType.CarnivalShoot2 => new CarnivalShoot2BonusRoom(),
+                        BonusRoomType.Arena          => new ArenaBonusRoom(),
+                        BonusRoomType.Jukebox        => new JukeboxBonusRoom(),
+                        _                            => null,
+                    };
 
                     if (roomToAdd != null)
                     {
