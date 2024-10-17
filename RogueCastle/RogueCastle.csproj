@@ -33,8 +33,4 @@
       <Name>FNA</Name>
     </ProjectReference>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="src\Game Objects\" />
-  </ItemGroup>
 </Project>
