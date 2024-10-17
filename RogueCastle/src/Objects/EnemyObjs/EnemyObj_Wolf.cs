@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -388,7 +388,7 @@ namespace RogueCastle
         public EnemyObj_Wolf(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemyWargIdle_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.Wolf;
+            this.Type = EnemyType.WOLF;
             m_startDelayCounter = m_startDelay;
             m_runFrameSound = new FrameSoundObj(this, 1, "Wolf_Move01", "Wolf_Move02", "Wolf_Move03");
         }

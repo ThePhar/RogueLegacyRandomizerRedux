@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -312,7 +312,7 @@ namespace RogueCastle
         public EnemyObj_Mimic(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemyMimicIdle_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.Mimic;
+            this.Type = EnemyType.MIMIC;
             this.OutlineWidth = 0;
 
             m_closeSound = new FrameSoundObj(this, m_target, 1, "Chest_Snap");

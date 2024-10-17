@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -415,7 +415,7 @@ namespace RogueCastle
         public EnemyObj_Ninja(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemyNinjaIdle_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.Ninja;
+            this.Type = EnemyType.NINJA;
             m_smoke = new SpriteObj("NinjaSmoke_Sprite");
             m_smoke.AnimationDelay = 1 / 20f;
             m_log = new SpriteObj("Log_Sprite");

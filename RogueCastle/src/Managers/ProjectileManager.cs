@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -162,7 +162,7 @@ namespace RogueCastle
             if (data.Target != null && data.Source.Flip == Microsoft.Xna.Framework.Graphics.SpriteEffects.FlipHorizontally && data.ChaseTarget == true)
                 projectile.Orientation = MathHelper.ToRadians(180);
 
-            if (data.Source is PlayerObj && (Game.PlayerStats.Traits.X == TraitType.Ambilevous ||Game.PlayerStats.Traits.Y == TraitType.Ambilevous))
+            if (data.Source is PlayerObj && Game.PlayerStats.HasTrait(TraitType.AMBILEVOUS))
             {
                 projectile.AccelerationX *= -1;
                 if (data.LockPosition == false)

@@ -5,8 +5,8 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -124,7 +124,7 @@ namespace RogueCastle
             SpriteObj mpBar, hpBar;
             ObjContainer mpContainer, hpContainer;
 
-            if (Game.PlayerStats.Traits.X == TraitType.Dextrocardia || Game.PlayerStats.Traits.Y == TraitType.Dextrocardia)
+            if (Game.PlayerStats.HasTrait(TraitType.DEXTROCARDIA))
             {
                 mpBar = m_hpBar;
                 hpBar = m_mpBar;
@@ -144,7 +144,7 @@ namespace RogueCastle
             hpBar.Position = new Vector2(this.X + 8, this.Y + 29);
             m_playerLevelText.Position = new Vector2(this.X + 30, this.Y - 20);
 
-            if (Game.PlayerStats.Traits.X == TraitType.Dextrocardia || Game.PlayerStats.Traits.Y == TraitType.Dextrocardia)
+            if (Game.PlayerStats.HasTrait(TraitType.DEXTROCARDIA))
             {
                 m_mpText.Position = new Vector2(this.X + 5, this.Y + 16);
                 m_mpText.X += 8;
@@ -322,7 +322,7 @@ namespace RogueCastle
 
                 m_mpBar.Draw(camera);
                 m_mpText.Draw(camera);
-                if (Game.PlayerStats.Traits.X != TraitType.CIP && Game.PlayerStats.Traits.Y != TraitType.CIP)
+                if (!Game.PlayerStats.HasTrait(TraitType.CIP))
                 {
                     m_hpBar.Draw(camera);
                     m_hpText.Draw(camera);

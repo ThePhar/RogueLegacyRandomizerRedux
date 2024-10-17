@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -123,7 +123,7 @@ namespace RogueCastle
         {
             if (IsPaused == false)
             {
-                if (Game.PlayerStats.Traits.X != TraitType.PAD && Game.PlayerStats.Traits.Y != TraitType.PAD)
+                if (!Game.PlayerStats.HasTrait(TraitType.PAD))
                 {
                     if (CollisionMath.Intersects(AbsDetectionRect, m_target.Bounds) == true)
                     {
@@ -154,7 +154,7 @@ namespace RogueCastle
         public EnemyObj_SpikeTrap(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemySpikeTrap_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.SpikeTrap;
+            this.Type = EnemyType.SPIKE_TRAP;
             this.StopAnimation();
             this.PlayAnimationOnRestart = false;
             NonKillable = true;

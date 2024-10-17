@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -437,7 +437,7 @@ namespace RogueCastle
         public EnemyObj_Energon(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemyEnergonIdle_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.Energon;
+            this.Type = EnemyType.ENERGON;
             m_shield = new SpriteObj("EnergonSwordShield_Sprite");
             m_shield.AnimationDelay = 1 / 10f;
             m_shield.PlayAnimation(true);

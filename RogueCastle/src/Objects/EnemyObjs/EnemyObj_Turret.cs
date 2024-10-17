@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -158,7 +158,7 @@ namespace RogueCastle
         {
             this.IsCollidable = false;
             ForceDraw = true;
-            this.Type = EnemyType.Turret;
+            this.Type = EnemyType.TURRET;
             this.StopAnimation();
             this.PlayAnimationOnRestart = false;
             NonKillable = true;

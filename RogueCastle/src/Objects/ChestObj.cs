@@ -57,7 +57,7 @@ namespace RogueCastle
                 if (IsEmpty == true)
                     return;
 
-                if (this.ChestType == RogueCastle.ChestType.Gold)
+                if (this.ChestType == GameStructs.ChestType.GOLD)
                     GameUtil.UnlockAchievement("LOVE_OF_GOLD");
 
                 if (ForcedItemType == 0)
@@ -66,9 +66,9 @@ namespace RogueCastle
                     int dropRoll = CDGMath.RandomInt(1, 100);
                     int itemType = 0;
                     int[] dropChance = null;
-                    if (this.ChestType == RogueCastle.ChestType.Brown)
+                    if (this.ChestType == GameStructs.ChestType.BROWN)
                         dropChance = GameEV.BronzeChestItemdropChance;
-                    else if (this.ChestType == RogueCastle.ChestType.Silver)
+                    else if (this.ChestType == GameStructs.ChestType.SILVER)
                         dropChance = GameEV.SilverChestItemdropChance;
                     else
                         dropChance = GameEV.GoldChestItemdropChance;
@@ -134,9 +134,9 @@ namespace RogueCastle
         public void GiveGold(ItemDropManager itemDropManager, int amount = 0)
         {
             int goldAmount = 0;
-            if (this.ChestType == RogueCastle.ChestType.Brown)
+            if (this.ChestType == GameStructs.ChestType.BROWN)
                 goldAmount = CDGMath.RandomInt((int)BronzeChestGoldRange.X, (int)BronzeChestGoldRange.Y) * 10;
-            else if (this.ChestType == RogueCastle.ChestType.Silver || this.ChestType == RogueCastle.ChestType.Fairy)
+            else if (this.ChestType == GameStructs.ChestType.SILVER || this.ChestType == GameStructs.ChestType.FAIRY)
                 goldAmount = CDGMath.RandomInt((int)SilverChestGoldRange.X, (int)SilverChestGoldRange.Y) * 10;
             else
                 goldAmount = CDGMath.RandomInt((int)GoldChestGoldRange.X, (int)GoldChestGoldRange.Y) * 10; //TEDDY ADDED ELSE IF SO GOLD CHESTS COULD DROP MONEY
@@ -302,7 +302,7 @@ namespace RogueCastle
             // Give gold if all blueprints have been found
             if (Game.PlayerStats.TotalBlueprintsFound >= EquipmentCategoryType.Total * EquipmentBaseType.Total)
             {
-                if (this.ChestType == RogueCastle.ChestType.Gold)
+                if (this.ChestType == GameStructs.ChestType.GOLD)
                     GiveStatDrop(manager, player, 1, 0);
                 else
                     GiveGold(manager);
@@ -413,16 +413,16 @@ namespace RogueCastle
             {
                 m_chestType = value;
                 bool openChest = this.IsOpen;
-                if (m_chestType == RogueCastle.ChestType.Boss)
+                if (m_chestType == GameStructs.ChestType.BOSS)
                 {
                     ForcedItemType = ItemDropType.TripStatDrop;
                     this.ChangeSprite("BossChest_Sprite");
                 }
-                else if (m_chestType == RogueCastle.ChestType.Fairy)
+                else if (m_chestType == GameStructs.ChestType.FAIRY)
                     this.ChangeSprite("Chest4_Sprite");
-                else if (m_chestType == RogueCastle.ChestType.Gold)
+                else if (m_chestType == GameStructs.ChestType.GOLD)
                     this.ChangeSprite("Chest3_Sprite");
-                else if (m_chestType == RogueCastle.ChestType.Silver)
+                else if (m_chestType == GameStructs.ChestType.SILVER)
                     this.ChangeSprite("Chest2_Sprite");
                 else
                     this.ChangeSprite("Chest1_Sprite");

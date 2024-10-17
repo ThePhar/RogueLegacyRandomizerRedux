@@ -10,6 +10,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -257,7 +258,7 @@ namespace RogueCastle
 
             m_mapDisplay.CentreAroundPlayer();
 
-            if (IsTeleporter == false && (Game.PlayerStats.Traits.X == TraitType.Alzheimers || Game.PlayerStats.Traits.Y == TraitType.Alzheimers))
+            if (IsTeleporter == false && (Game.PlayerStats.HasTrait(TraitType.ALZHEIMERS)))
                 m_mapDisplay.DrawNothing = true;
             else
                 m_mapDisplay.DrawNothing = false;
@@ -377,7 +378,7 @@ namespace RogueCastle
                 m_navigationText.Draw(Camera);
             }
 
-            if (IsTeleporter == false && (Game.PlayerStats.Traits.X == TraitType.Alzheimers || Game.PlayerStats.Traits.Y == TraitType.Alzheimers))
+            if (IsTeleporter == false && (Game.PlayerStats.HasTrait(TraitType.ALZHEIMERS)))
                 m_alzheimersQuestionMarks.Draw(Camera);
 
             m_continueText.Draw(Camera);

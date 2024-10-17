@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using Tweener;
 
 namespace RogueCastle
@@ -538,7 +538,7 @@ namespace RogueCastle
             this.TintablePart = _objectList[0];
             this.PlayAnimation(true);
             m_invincibleCounter = 0.5f; // Hack to make sure newly created blobs are invincible for a short period.
-            this.Type = EnemyType.Blob;
+            this.Type = EnemyType.BLOB;
         }
 
 

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -519,7 +519,7 @@ namespace RogueCastle
         public EnemyObj_SkeletonArcher(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemySkeletonArcherIdle_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.SkeletonArcher;
+            this.Type = EnemyType.SKELETON_ARCHER;
             TintablePart = _objectList[0];
         }
     }

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -367,7 +367,7 @@ namespace RogueCastle
         {
             this.PlayAnimation(true);
             this.TintablePart = _objectList[0];
-            this.Type = EnemyType.IceWizard;
+            this.Type = EnemyType.ICE_WIZARD;
         }
 
         public override void Update(GameTime gameTime)

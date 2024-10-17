@@ -5,8 +5,8 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -573,7 +573,7 @@ namespace RogueCastle
         public EnemyObj_Horse(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemyHorseRun_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.Horse;
+            this.Type = EnemyType.HORSE;
             m_fireShieldList = new List<ProjectileObj>();
         }
 

@@ -1,4 +1,4 @@
-﻿using RogueCastle.Enumerations;
+﻿using RogueCastle.GameStructs;
 
 namespace RogueCastle.EnvironmentVariables;
 
@@ -57,11 +57,11 @@ public static class LevelEV
     #endregion
 
     public const bool LINK_TO_CASTLE_ONLY = true;
-    public const byte CASTLE_BOSS_ROOM = BossRoomType.EyeballBossRoom;
-    public const byte TOWER_BOSS_ROOM = BossRoomType.FireballBossRoom;
-    public const byte DUNGEON_BOSS_ROOM = BossRoomType.BlobBossRoom;
-    public const byte GARDEN_BOSS_ROOM = BossRoomType.FairyBossRoom;
-    public const byte LAST_BOSS_ROOM = BossRoomType.LastBossRoom;
+    public const byte CASTLE_BOSS_ROOM = BossRoomType.EYEBALL_BOSS_ROOM;
+    public const byte TOWER_BOSS_ROOM = BossRoomType.FIREBALL_BOSS_ROOM;
+    public const byte DUNGEON_BOSS_ROOM = BossRoomType.BLOB_BOSS_ROOM;
+    public const byte GARDEN_BOSS_ROOM = BossRoomType.FAIRY_BOSS_ROOM;
+    public const byte LAST_BOSS_ROOM = BossRoomType.LAST_BOSS_ROOM;
 
     // Percent chance the door direction will be open or closed when procedurally generating a room.
     public const int LEVEL_CASTLE_LEFTDOOR = 90; //70;
@@ -86,46 +86,46 @@ public static class LevelEV
 
     #region Enemies
 
-    public static readonly EnemyType[] DementiaFlightList =
+    public static readonly byte[] DementiaFlightList =
     [
-        EnemyType.FireWizard, EnemyType.IceWizard, EnemyType.Eyeball, EnemyType.Fairy, EnemyType.BouncySpike,
-        EnemyType.Fireball, EnemyType.Starburst,
+        EnemyType.FIRE_WIZARD, EnemyType.ICE_WIZARD, EnemyType.EYEBALL, EnemyType.FAIRY, EnemyType.BOUNCY_SPIKE,
+        EnemyType.FIREBALL, EnemyType.STARBURST,
     ];
 
-    public static readonly EnemyType[] DementiaGroundList =
+    public static readonly byte[] DementiaGroundList =
     [
-        EnemyType.Skeleton, EnemyType.Knight, EnemyType.Blob, EnemyType.BallAndChain, EnemyType.SwordKnight,
-        EnemyType.Zombie, EnemyType.Ninja, EnemyType.Plant, EnemyType.HomingTurret, EnemyType.Horse,
+        EnemyType.SKELETON, EnemyType.KNIGHT, EnemyType.BLOB, EnemyType.BALL_AND_CHAIN, EnemyType.SWORD_KNIGHT,
+        EnemyType.ZOMBIE, EnemyType.NINJA, EnemyType.PLANT, EnemyType.HOMING_TURRET, EnemyType.HORSE,
     ];
 
-    public static readonly EnemyType[] CastleEnemyList =
+    public static readonly byte[] CastleEnemyList =
     [
-        EnemyType.Skeleton, EnemyType.Knight, EnemyType.FireWizard, EnemyType.IceWizard, EnemyType.Eyeball,
-        EnemyType.BouncySpike, EnemyType.SwordKnight, EnemyType.Zombie, EnemyType.Fireball, EnemyType.Portrait,
-        EnemyType.Starburst, EnemyType.HomingTurret,
+        EnemyType.SKELETON, EnemyType.KNIGHT, EnemyType.FIRE_WIZARD, EnemyType.ICE_WIZARD, EnemyType.EYEBALL,
+        EnemyType.BOUNCY_SPIKE, EnemyType.SWORD_KNIGHT, EnemyType.ZOMBIE, EnemyType.FIREBALL, EnemyType.PORTRAIT,
+        EnemyType.STARBURST, EnemyType.HOMING_TURRET,
     ];
 
-    public static readonly EnemyType[] GardenEnemyList =
+    public static readonly byte[] GardenEnemyList =
     [
-        EnemyType.Skeleton, EnemyType.Blob, EnemyType.BallAndChain, EnemyType.EarthWizard, EnemyType.FireWizard,
-        EnemyType.Eyeball, EnemyType.Fairy, EnemyType.ShieldKnight, EnemyType.BouncySpike, EnemyType.Wolf,
-        EnemyType.Plant, EnemyType.SkeletonArcher, EnemyType.Starburst, EnemyType.Horse,
+        EnemyType.SKELETON, EnemyType.BLOB, EnemyType.BALL_AND_CHAIN, EnemyType.EARTH_WIZARD, EnemyType.FIRE_WIZARD,
+        EnemyType.EYEBALL, EnemyType.FAIRY, EnemyType.SHIELD_KNIGHT, EnemyType.BOUNCY_SPIKE, EnemyType.WOLF,
+        EnemyType.PLANT, EnemyType.SKELETON_ARCHER, EnemyType.STARBURST, EnemyType.HORSE,
     ];
 
-    public static readonly EnemyType[] TowerEnemyList =
+    public static readonly byte[] TowerEnemyList =
     [
-        EnemyType.Knight, EnemyType.BallAndChain, EnemyType.IceWizard, EnemyType.Eyeball, EnemyType.Fairy,
-        EnemyType.ShieldKnight, EnemyType.BouncySpike, EnemyType.Wolf, EnemyType.Ninja, EnemyType.Plant,
-        EnemyType.Fireball, EnemyType.SkeletonArcher, EnemyType.Portrait, EnemyType.Starburst,
-        EnemyType.HomingTurret, EnemyType.Mimic,
+        EnemyType.KNIGHT, EnemyType.BALL_AND_CHAIN, EnemyType.ICE_WIZARD, EnemyType.EYEBALL, EnemyType.FAIRY,
+        EnemyType.SHIELD_KNIGHT, EnemyType.BOUNCY_SPIKE, EnemyType.WOLF, EnemyType.NINJA, EnemyType.PLANT,
+        EnemyType.FIREBALL, EnemyType.SKELETON_ARCHER, EnemyType.PORTRAIT, EnemyType.STARBURST,
+        EnemyType.HOMING_TURRET, EnemyType.MIMIC,
     ];
 
-    public static readonly EnemyType[] DungeonEnemyList =
+    public static readonly byte[] DungeonEnemyList =
     [
-        EnemyType.Skeleton, EnemyType.Knight, EnemyType.Blob, EnemyType.BallAndChain, EnemyType.EarthWizard,
-        EnemyType.FireWizard, EnemyType.IceWizard, EnemyType.Eyeball, EnemyType.Fairy, EnemyType.BouncySpike,
-        EnemyType.SwordKnight, EnemyType.Zombie, EnemyType.Ninja, EnemyType.Plant, EnemyType.Fireball,
-        EnemyType.Starburst, EnemyType.HomingTurret, EnemyType.Horse,
+        EnemyType.SKELETON, EnemyType.KNIGHT, EnemyType.BLOB, EnemyType.BALL_AND_CHAIN, EnemyType.EARTH_WIZARD,
+        EnemyType.FIRE_WIZARD, EnemyType.ICE_WIZARD, EnemyType.EYEBALL, EnemyType.FAIRY, EnemyType.BOUNCY_SPIKE,
+        EnemyType.SWORD_KNIGHT, EnemyType.ZOMBIE, EnemyType.NINJA, EnemyType.PLANT, EnemyType.FIREBALL,
+        EnemyType.STARBURST, EnemyType.HOMING_TURRET, EnemyType.HORSE,
     ];
 
     public static readonly byte[] CastleEnemyDifficultyList = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];

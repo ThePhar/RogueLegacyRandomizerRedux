@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -396,7 +396,7 @@ namespace RogueCastle
             Lowered = true;
             this.ForceDraw = true;
             this.StopAnimation();
-            this.Type = EnemyType.Zombie;
+            this.Type = EnemyType.ZOMBIE;
             this.PlayAnimationOnRestart = false;
         }
     }

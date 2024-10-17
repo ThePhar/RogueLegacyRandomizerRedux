@@ -7,7 +7,7 @@ using DS2DEngine;
 using Tweener.Ease;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -172,7 +172,7 @@ namespace RogueCastle
             }
 
             m_rewardChest = new ChestObj(null);
-            m_rewardChest.ChestType = ChestType.Gold;
+            m_rewardChest.ChestType = ChestType.GOLD;
             if (this.IsReversed == false)
             {
                 m_rewardChest.Flip = Microsoft.Xna.Framework.Graphics.SpriteEffects.FlipHorizontally;
@@ -189,7 +189,7 @@ namespace RogueCastle
         public override void OnEnter()
         {
             // Force this chest to be gold.
-            m_rewardChest.ChestType = ChestType.Gold;
+            m_rewardChest.ChestType = ChestType.GOLD;
 
             if (IsReversed == false)
                 m_axeIcons.Position = new Vector2(this.Bounds.Right - 200 - m_axeIcons.Width, this.Bounds.Bottom -60);

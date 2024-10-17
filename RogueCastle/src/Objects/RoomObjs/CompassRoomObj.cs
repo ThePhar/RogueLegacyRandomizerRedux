@@ -8,6 +8,7 @@ using Tweener;
 using InputSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -33,7 +34,7 @@ namespace RogueCastle
                 if (chest != null)
                 {
                     chest.ResetChest();
-                    chest.ChestType = ChestType.Gold;
+                    chest.ChestType = ChestType.GOLD;
                 }
             }
             base.OnEnter();

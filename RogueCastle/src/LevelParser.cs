@@ -6,8 +6,8 @@ using Microsoft.Xna.Framework.Content;
 using System.Globalization;
 using System.Xml;
 using DS2DEngine;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using RogueCastle.Objects;
 
 namespace RogueCastle
@@ -87,7 +87,7 @@ namespace RogueCastle
                                     if (bool.Parse(reader.Value) == true)
                                     {
                                         obj = new FairyChestObj(null);
-                                        (obj as ChestObj).ChestType = ChestType.Fairy;
+                                        (obj as ChestObj).ChestType = ChestType.FAIRY;
                                     }
                                     else
                                         obj = new ChestObj(null);
@@ -107,7 +107,7 @@ namespace RogueCastle
                                 if (isProcedural == false) // The enemy is not procedural so create him now and add him to the room.
                                 {
                                     reader.MoveToAttribute("EnemyType");
-                                    EnemyType enemyType = (EnemyType)byte.Parse(reader.Value, NumberStyles.Any, ci);
+                                    var enemyType = byte.Parse(reader.Value, NumberStyles.Any, ci);
 
                                     reader.MoveToAttribute("Difficulty");
                                     GameTypes.EnemyDifficulty difficulty = (GameTypes.EnemyDifficulty)Enum.Parse(typeof(GameTypes.EnemyDifficulty), reader.Value, true);

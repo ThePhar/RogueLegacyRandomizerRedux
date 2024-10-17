@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 using Tweener.Ease;
 using Tweener;
 
@@ -123,7 +123,7 @@ namespace RogueCastle
             Game.PlayerStats.BonusMagic += (int)(Game.PlayerStats.BonusMagic * EMPOWER_PWR_AMT * numEmpowered);
             
             Game.PlayerStats.BonusDefense = 230;//40 / 1;
-            Game.PlayerStats.Traits = new Vector2(TraitType.Gay, TraitType.Hypogonadism);
+            Game.PlayerStats.Traits = (TraitType.GAY, TraitType.HYPOGONADISM);
             Player.CanBeKnockedBack = false;
             //Game.PlayerStats.SpecialItem = SpecialItemType.Glasses;
             //Player.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
@@ -403,13 +403,13 @@ namespace RogueCastle
                 int numBlobs = 0;
                 foreach (EnemyObj enemy in EnemyList)
                 {
-                    if (enemy.Type == EnemyType.Blob && enemy.IsKilled == false)
+                    if (enemy.Type == EnemyType.BLOB && enemy.IsKilled == false)
                         numBlobs++;
                 }
 
                 foreach (EnemyObj enemy in TempEnemyList)
                 {
-                    if (enemy.Type == EnemyType.Blob && enemy.IsKilled == false)
+                    if (enemy.Type == EnemyType.BLOB && enemy.IsKilled == false)
                         numBlobs++;
                 }
                 return numBlobs;

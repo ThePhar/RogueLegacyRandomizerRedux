@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using System.Threading;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 using Tweener;
 using Tweener.Ease;
 
@@ -84,11 +85,11 @@ namespace RogueCastle
             BackBufferOpacity = 0;
             m_gameCrashed = false;
 
-            if (Game.PlayerStats.Traits.X == TraitType.TheOne || Game.PlayerStats.Traits.Y == TraitType.TheOne)
+            if (Game.PlayerStats.HasTrait(TraitType.THE_ONE))
                 m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_LOADING_SCREEN_4", m_loadingText); //"Jacking In"
-            else if (Game.PlayerStats.Traits.X == TraitType.Nostalgic || Game.PlayerStats.Traits.Y == TraitType.Nostalgic)
+            else if (Game.PlayerStats.HasTrait(TraitType.NOSTALGIC))
                 m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_LOADING_SCREEN_3", m_loadingText); //"Reminiscing"
-            else if (Game.PlayerStats.Traits.X == TraitType.Baldness || Game.PlayerStats.Traits.Y == TraitType.Baldness)
+            else if (Game.PlayerStats.HasTrait(TraitType.BALDNESS))
                 m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_LOADING_SCREEN_2", m_loadingText); //"Balding"
             else
                 m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_LOADING_SCREEN_1", m_loadingText); //"Building"

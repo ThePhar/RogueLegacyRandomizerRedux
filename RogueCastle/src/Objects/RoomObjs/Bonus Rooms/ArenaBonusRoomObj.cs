@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 using Tweener;
 
 namespace RogueCastle
@@ -26,7 +26,7 @@ namespace RogueCastle
                 }
             }
 
-            m_chest.ChestType = ChestType.Gold;
+            m_chest.ChestType = ChestType.GOLD;
             m_chestStartingY = m_chest.Y - 200 + m_chest.Height + 6;
 
             base.Initialize();
@@ -37,7 +37,7 @@ namespace RogueCastle
             UpdateEnemyNames();
 
             m_chest.Y = m_chestStartingY;
-            m_chest.ChestType = ChestType.Gold;
+            m_chest.ChestType = ChestType.GOLD;
 
             if (RoomCompleted == true)
             {
@@ -155,15 +155,15 @@ namespace RogueCastle
             bool paintingMBKilled = false;
             bool knightMBKilled = false;
             bool wizardMBKilled = false;
-            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.Skeleton].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.SKELETON].W > 0)
                 skeletonMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.Plant].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.PLANT].W > 0)
                 plantMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.Portrait].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.PORTRAIT].W > 0)
                 paintingMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.Knight].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.KNIGHT].W > 0)
                 knightMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.EarthWizard].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(byte)EnemyType.EARTH_WIZARD].W > 0)
                 wizardMBKilled = true;
 
             if (skeletonMBKilled && plantMBKilled && paintingMBKilled && knightMBKilled && wizardMBKilled)

@@ -6,8 +6,8 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Tweener;
 using Microsoft.Xna.Framework.Audio;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -670,7 +670,7 @@ namespace RogueCastle
             this.PlayAnimation(true);
             MainFairy = true;
             TintablePart = _objectList[0];
-            this.Type = EnemyType.Fairy;
+            this.Type = EnemyType.FAIRY;
         }
 
         public override void CollisionResponse(CollisionBox thisBox, CollisionBox otherBox, int collisionResponseType)

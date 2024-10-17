@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -274,7 +274,7 @@ namespace RogueCastle
         public EnemyObj_Chicken(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemyChickenRun_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.Chicken;
+            this.Type = EnemyType.CHICKEN;
         }
 
         public override void HitEnemy(int damage, Vector2 collisionPt, bool isPlayer)

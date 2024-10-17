@@ -6,8 +6,8 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Tweener;
 using Microsoft.Xna.Framework.Audio;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -695,7 +695,7 @@ namespace RogueCastle
             this.AddChild(m_pupil);
             //m_squishSound = new FrameSoundObj(this, 2, "EyeballSquish1", "EyeballSquish2", "EyeballSquish3");
             m_squishSound = new FrameSoundObj(this, m_target, 2, "Eyeball_Prefire");
-            this.Type = EnemyType.Eyeball;
+            this.Type = EnemyType.EYEBALL;
             this.DisableCollisionBoxRotations = false;
         }
 

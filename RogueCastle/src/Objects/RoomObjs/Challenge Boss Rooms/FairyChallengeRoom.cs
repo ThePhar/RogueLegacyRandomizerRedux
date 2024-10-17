@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 using Tweener.Ease;
 using Tweener;
 
@@ -86,7 +86,7 @@ namespace RogueCastle
             Game.PlayerStats.BonusMagic += (int)(Game.PlayerStats.BonusMagic * EMPOWER_PWR_AMT * numEmpowered);
             
             Game.PlayerStats.BonusDefense = 230;//40 / 1;
-            Game.PlayerStats.Traits = new Vector2(TraitType.Tourettes, TraitType.OCD);
+            Game.PlayerStats.Traits = (TraitType.TOURETTES, TraitType.OCD);
             //Game.PlayerStats.SpecialItem = SpecialItemType.Glasses;
             //Player.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
 
@@ -166,7 +166,7 @@ namespace RogueCastle
 
         public override void Draw(Camera2D camera)
         {
-            if (m_boss.IsKilled == true && (Game.PlayerStats.Traits.X != TraitType.ColorBlind && Game.PlayerStats.Traits.Y != TraitType.ColorBlind))
+            if (m_boss.IsKilled == true && (!Game.PlayerStats.HasTrait(TraitType.COLOR_BLIND)))
             {
                 camera.End();
                 m_boss.StopAnimation();

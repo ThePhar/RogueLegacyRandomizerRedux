@@ -11,6 +11,7 @@ using Tweener.Ease;
 using Tweener;
 using Microsoft.Xna.Framework.Audio;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using RogueCastle.Objects;
 
 namespace RogueCastle
@@ -268,7 +269,7 @@ namespace RogueCastle
                 m_blacksmithAnvilSound = new FrameSoundObj(m_blacksmith.GetChildAt(5) as IAnimateableObj, Player, 7, "Anvil1", "Anvil2", "Anvil3");
 
             // Special check for Glaucoma
-            if (Game.PlayerStats.Traits.X == TraitType.Glaucoma || Game.PlayerStats.Traits.Y == TraitType.Glaucoma)
+            if (Game.PlayerStats.HasTrait(TraitType.GLAUCOMA))
                 Game.ShadowEffect.Parameters["ShadowIntensity"].SetValue(0.7f);
             else
                 Game.ShadowEffect.Parameters["ShadowIntensity"].SetValue(0);
@@ -463,7 +464,7 @@ namespace RogueCastle
                 UpdateShake();
 
             // Prevents the player from getting passed the Toll Collector.
-            if (Player.Bounds.Right > m_tollCollector.Bounds.Left && TollCollectorAvailable == true)// && Game.PlayerStats.Traits.X != TraitType.Dwarfism && Game.PlayerStats.Traits.Y != TraitType.Dwarfism)
+            if (Player.Bounds.Right > m_tollCollector.Bounds.Left && TollCollectorAvailable == true)// && !Game.PlayerStats.HasTrait(TraitType.Dwarfism))
             {
                 Player.X = m_tollCollector.Bounds.Left - (Player.Bounds.Right - Player.X);
                 Player.AttachedLevel.UpdateCamera();

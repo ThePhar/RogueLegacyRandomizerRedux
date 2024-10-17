@@ -5,7 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 using RogueCastle.Objects;
 using Tweener;
 
@@ -171,7 +171,7 @@ namespace RogueCastle
                             else if (chest is FairyChestObj)
                             {
                                 chestSprite = new SpriteObj("MapFairyChestIcon_Sprite");
-                                if ((chest as FairyChestObj).ConditionType == ChestConditionType.InvisibleChest)
+                                if ((chest as FairyChestObj).ConditionType == ChestConditionType.INVISIBLE_CHEST)
                                     chestSprite.Opacity = 0.2f;
                             }
                             else
@@ -271,7 +271,7 @@ namespace RogueCastle
                                 else if (chest is FairyChestObj)
                                 {
                                     chestSprite = new SpriteObj("MapFairyChestIcon_Sprite");
-                                    if ((chest as FairyChestObj).ConditionType == ChestConditionType.InvisibleChest)
+                                    if ((chest as FairyChestObj).ConditionType == ChestConditionType.INVISIBLE_CHEST)
                                         chestSprite.Opacity = 0.2f;
                                 }
                                 else
@@ -433,14 +433,14 @@ namespace RogueCastle
                 }
             }
 
-            if (Game.PlayerStats.Traits.X == TraitType.EideticMemory || Game.PlayerStats.Traits.Y == TraitType.EideticMemory)
+            if (Game.PlayerStats.HasTrait(TraitType.EIDETIC_MEMORY))
             {
                 m_playerSprite.TextureColor = Color.Red;
                 foreach (RoomObj room in m_addedRooms)
                 {
                     foreach (EnemyObj enemy in room.EnemyList)
                     {
-                        if (enemy.IsKilled == false && enemy.IsDemented == false && enemy.SaveToFile == true && enemy.Type != EnemyType.SpikeTrap && enemy.Type != EnemyType.Platform && enemy.Type != EnemyType.Turret)
+                        if (enemy.IsKilled == false && enemy.IsDemented == false && enemy.SaveToFile == true && enemy.Type != EnemyType.SPIKE_TRAP && enemy.Type != EnemyType.PLATFORM && enemy.Type != EnemyType.TURRET)
                         {
                             m_playerSprite.Position = new Vector2(enemy.X / m_spriteScale.X - 9, enemy.Y / m_spriteScale.Y - 10) + CameraOffset;
                             m_playerSprite.Draw(camera);

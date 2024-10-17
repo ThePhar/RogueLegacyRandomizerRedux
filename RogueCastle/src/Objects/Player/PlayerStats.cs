@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -29,7 +29,7 @@ namespace RogueCastle
         public SpellType Spell { get; set; }
         public byte Class { get; set; }
         public byte SpecialItem { get; set; }
-        public Vector2 Traits { get; set; }
+        public Traits Traits { get; set; }
         public string PlayerName { get; set; }
 
         private string m_romanNumeral = "";
@@ -145,7 +145,6 @@ namespace RogueCastle
         public sbyte ChallengeLastBossTimesUpgraded { get; set; }
 
         public bool ArchitectUsed { get; set; }
-        /// 
 
         public PlayerStats()
         {
@@ -165,12 +164,12 @@ namespace RogueCastle
             //LastbossBeaten = true;
 
             EnemiesKilledList = new List<Vector4>();
-            for (int i = 0; i < Enum.GetValues(typeof(EnemyType)).Length; i++)
+            for (int i = 0; i < EnemyType.TOTAL; i++)
                 EnemiesKilledList.Add(new Vector4());
 
             WizardSpellList = new Vector3((byte)SpellType.Dagger, (byte)SpellType.Axe, (byte)SpellType.Boomerang);
 
-            Traits = new Vector2(TraitType.None, TraitType.None);
+            Traits = (TraitType.NONE, TraitType.NONE);
             Gold = 0;
             CurrentLevel = 0;
 
@@ -270,7 +269,7 @@ namespace RogueCastle
                 NumEnemiesBeaten = 0,
                 BeatenABoss = true,
                 IsFemale = false,
-                Traits = Vector2.Zero,
+                Traits = (TraitType.NONE, TraitType.NONE),
             };
             FamilyTreeArray.Add(firstNode);
         }
@@ -302,6 +301,11 @@ namespace RogueCastle
         public sbyte[] GetEquippedArray
         {
             get { return m_equippedArray; }
+        }
+
+        public bool HasTrait(byte trait)
+        {
+            return Traits.Trait1 == trait || Traits.Trait2 == trait;
         }
 
         public byte TotalBlueprintsPurchased

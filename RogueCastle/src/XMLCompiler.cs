@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -53,14 +53,14 @@ namespace RogueCastle
 
     public struct EnemyEditorData
     {
-        public EnemyType Type;
+        public byte Type;
         public string SpriteName;
         public Vector2 BasicScale;
         public Vector2 AdvancedScale;
         public Vector2 ExpertScale;
         public Vector2 MinibossScale;
 
-        public EnemyEditorData(EnemyType enemyType)
+        public EnemyEditorData(byte enemyType)
         {
             EnemyObj enemyBasic = EnemyBuilder.BuildEnemy(enemyType, null, null, null, GameTypes.EnemyDifficulty.BASIC);
             EnemyObj enemyAdvanced = EnemyBuilder.BuildEnemy(enemyType, null, null, null, GameTypes.EnemyDifficulty.ADVANCED);

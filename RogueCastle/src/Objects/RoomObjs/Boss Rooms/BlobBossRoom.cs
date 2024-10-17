@@ -7,8 +7,8 @@ using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using Tweener.Ease;
 using Tweener;
 
@@ -144,7 +144,7 @@ namespace RogueCastle
 
             foreach (EnemyObj enemy in EnemyList)
             {
-                if (enemy.Type == EnemyType.Blob && enemy.IsKilled == false)
+                if (enemy.Type == EnemyType.BLOB && enemy.IsKilled == false)
                 {
                     if ((enemy.X > this.Bounds.Right - 20) || (enemy.X < this.Bounds.Left + 20) ||
                         (enemy.Y > this.Bounds.Bottom - 20) || (enemy.Y < this.Bounds.Top + 20))
@@ -154,7 +154,7 @@ namespace RogueCastle
 
             foreach (EnemyObj enemy in TempEnemyList)
             {
-                if (enemy.Type == EnemyType.Blob && enemy.IsKilled == false)
+                if (enemy.Type == EnemyType.BLOB && enemy.IsKilled == false)
                 {
                     if ((enemy.X > this.Bounds.Right - 20) || (enemy.X < this.Bounds.Left + 20) ||
                         (enemy.Y > this.Bounds.Bottom - 20) || (enemy.Y < this.Bounds.Top + 20))
@@ -189,13 +189,13 @@ namespace RogueCastle
                 int numBlobs = 0;
                 foreach (EnemyObj enemy in EnemyList)
                 {
-                    if (enemy.Type == EnemyType.Blob && enemy.IsKilled == false)
+                    if (enemy.Type == EnemyType.BLOB && enemy.IsKilled == false)
                         numBlobs++;
                 }
 
                 foreach (EnemyObj enemy in TempEnemyList)
                 {
-                    if (enemy.Type == EnemyType.Blob && enemy.IsKilled == false)
+                    if (enemy.Type == EnemyType.BLOB && enemy.IsKilled == false)
                         numBlobs++;
                 }
                 return numBlobs;

@@ -12,6 +12,7 @@ using Tweener;
 using Tweener.Ease;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -579,7 +580,7 @@ namespace RogueCastle
             m_playerSprite.GetChildAt(PlayerPart.Light).Visible = false;
             m_playerSprite.Scale = player.Scale;
 
-            if (Game.PlayerStats.Traits.X == TraitType.Baldness || Game.PlayerStats.Traits.Y == TraitType.Baldness)
+            if (Game.PlayerStats.HasTrait(TraitType.BALDNESS))
                 m_playerSprite.GetChildAt(PlayerPart.Hair).Visible = false;
 
             m_playerSprite.GetChildAt(PlayerPart.Glasses).Visible = false;
@@ -637,18 +638,18 @@ namespace RogueCastle
                 m_playerSprite.GetChildAt(PlayerPart.Bowtie).Visible = true;
             }
 
-            if (Game.PlayerStats.Traits.X == TraitType.Gigantism || Game.PlayerStats.Traits.Y == TraitType.Gigantism)
+            if (Game.PlayerStats.HasTrait(TraitType.GIGANTISM))
                 m_playerSprite.Scale = new Vector2(GameEV.TRAIT_GIGANTISM, GameEV.TRAIT_GIGANTISM);
-            if (Game.PlayerStats.Traits.X == TraitType.Dwarfism || Game.PlayerStats.Traits.Y == TraitType.Dwarfism)
+            if (Game.PlayerStats.HasTrait(TraitType.DWARFISM))
                 m_playerSprite.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
 
-            if (Game.PlayerStats.Traits.X == TraitType.Ectomorph || Game.PlayerStats.Traits.Y == TraitType.Ectomorph)
+            if (Game.PlayerStats.HasTrait(TraitType.ECTOMORPH))
             {
                 m_playerSprite.ScaleX *= 0.825f;
                 m_playerSprite.ScaleY *= 1.25f;
             }
 
-            if (Game.PlayerStats.Traits.X == TraitType.Endomorph || Game.PlayerStats.Traits.Y == TraitType.Endomorph)
+            if (Game.PlayerStats.HasTrait(TraitType.ENDOMORPH))
             {
                 m_playerSprite.ScaleX *= 1.25f;
                 m_playerSprite.ScaleY *= 1.175f;
@@ -1009,8 +1010,8 @@ namespace RogueCastle
             m_wifeSprite.GetChildAt(PlayerPart.ShoulderA).ChangeSprite("PlayerWalkingShoulderA" + m_wifeShoulders + "_Sprite");
             m_wifeSprite.GetChildAt(PlayerPart.ShoulderB).ChangeSprite("PlayerWalkingShoulderB" + m_wifeShoulders + "_Sprite");
 
-            if ((Game.PlayerStats.IsFemale == false && (Game.PlayerStats.Traits.X != TraitType.Gay && Game.PlayerStats.Traits.Y != TraitType.Gay)) ||
-                ((Game.PlayerStats.IsFemale == true && (Game.PlayerStats.Traits.X == TraitType.Gay || Game.PlayerStats.Traits.Y == TraitType.Gay))))
+            if ((Game.PlayerStats.IsFemale == false && (!Game.PlayerStats.HasTrait(TraitType.GAY))) ||
+                ((Game.PlayerStats.IsFemale == true && (Game.PlayerStats.HasTrait(TraitType.GAY)))))
             {
                 m_wifeSprite.GetChildAt(PlayerPart.Bowtie).Visible = true;
                 m_wifeSprite.GetChildAt(PlayerPart.Boobs).Visible = true;
@@ -1034,8 +1035,8 @@ namespace RogueCastle
             m_wifeSprite.GetChildAt(PlayerPart.Light).Visible = false;
             m_wifeSprite.GetChildAt(PlayerPart.Wings).Visible = false;
 
-            if ((Game.PlayerStats.IsFemale == false && (Game.PlayerStats.Traits.X != TraitType.Gay && Game.PlayerStats.Traits.Y != TraitType.Gay)) ||
-            ((Game.PlayerStats.IsFemale == true && (Game.PlayerStats.Traits.X == TraitType.Gay || Game.PlayerStats.Traits.Y == TraitType.Gay))))
+            if ((Game.PlayerStats.IsFemale == false && (!Game.PlayerStats.HasTrait(TraitType.GAY))) ||
+            ((Game.PlayerStats.IsFemale == true && (Game.PlayerStats.HasTrait(TraitType.GAY)))))
             {
                 m_wifeSprite.GetChildAt(PlayerPart.Bowtie).Visible = true;
                 m_wifeSprite.GetChildAt(PlayerPart.Boobs).Visible = true;

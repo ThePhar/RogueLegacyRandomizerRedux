@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -66,7 +66,7 @@ namespace RogueCastle
                 do
                 {
                     Spell = spellList[CDGMath.RandomInt(0, spellList.Length - 1)];
-                } while ((Game.PlayerStats.Traits.X == TraitType.Savant || Game.PlayerStats.Traits.Y == TraitType.Savant) &&
+                } while ((Game.PlayerStats.HasTrait(TraitType.SAVANT)) &&
                 (Spell == SpellType.Translocator || Spell == SpellType.TimeStop || Spell == SpellType.DamageShield));
 
                 Array.Clear(spellList, 0, spellList.Length);

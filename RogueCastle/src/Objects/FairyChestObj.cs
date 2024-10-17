@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 using Tweener;
 using Tweener.Ease;
 
@@ -42,7 +43,7 @@ public class FairyChestObj(PhysicsManager physicsManager) : ChestObj(physicsMana
             int.TryParse(Tag, out _conditionType);
         }
 
-        if (_conditionType == ChestConditionType.ReachIn5Seconds)
+        if (_conditionType == ChestConditionType.REACH_IN5_SECONDS)
         {
             Timer = 5;
         }
@@ -50,7 +51,7 @@ public class FairyChestObj(PhysicsManager physicsManager) : ChestObj(physicsMana
 
     public void SetChestUnlocked()
     {
-        if (ConditionType != ChestConditionType.InvisibleChest && ConditionType != ChestConditionType.None)
+        if (ConditionType != ChestConditionType.INVISIBLE_CHEST && ConditionType != ChestConditionType.NONE)
         {
             _player.AttachedLevel.ObjectiveComplete();
         }
@@ -188,7 +189,7 @@ public class FairyChestObj(PhysicsManager physicsManager) : ChestObj(physicsMana
                 }
             }
 
-            if (ConditionType == ChestConditionType.ReachIn5Seconds && State == ChestState.Locked)
+            if (ConditionType == ChestConditionType.REACH_IN5_SECONDS && State == ChestState.Locked)
             {
                 if (_player.AttachedLevel.IsPaused == false)
                 {
@@ -207,7 +208,7 @@ public class FairyChestObj(PhysicsManager physicsManager) : ChestObj(physicsMana
             }
         }
 
-        if (ConditionType == ChestConditionType.InvisibleChest && !IsOpen)
+        if (ConditionType == ChestConditionType.INVISIBLE_CHEST && !IsOpen)
         {
             return;
         }
@@ -252,7 +253,7 @@ public class FairyChestObj(PhysicsManager physicsManager) : ChestObj(physicsMana
         _lockSprite.Opacity = 1;
         _lockSprite.PlayAnimation(1, 1);
 
-        if (ConditionType == ChestConditionType.ReachIn5Seconds)
+        if (ConditionType == ChestConditionType.REACH_IN5_SECONDS)
         {
             Timer = 5;
         }

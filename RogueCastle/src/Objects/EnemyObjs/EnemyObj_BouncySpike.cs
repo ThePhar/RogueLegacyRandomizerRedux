@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -348,7 +348,7 @@ namespace RogueCastle
         public EnemyObj_BouncySpike(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemyBouncySpike_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.BouncySpike;
+            this.Type = EnemyType.BOUNCY_SPIKE;
             NonKillable = true;
         }
 

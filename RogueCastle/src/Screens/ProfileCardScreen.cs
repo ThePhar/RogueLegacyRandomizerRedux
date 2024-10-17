@@ -10,8 +10,8 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using System.Text.RegularExpressions;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -414,7 +414,7 @@ namespace RogueCastle
             m_playerSprite.GetChildAt(PlayerPart.Light).Visible = false;
             m_playerSprite.Scale = player.Scale;
 
-            if (Game.PlayerStats.Traits.X == TraitType.Baldness || Game.PlayerStats.Traits.Y == TraitType.Baldness)
+            if (Game.PlayerStats.HasTrait(TraitType.BALDNESS))
                 m_playerSprite.GetChildAt(PlayerPart.Hair).Visible = false;
 
             m_playerSprite.GetChildAt(PlayerPart.Glasses).Visible = false;
@@ -469,18 +469,18 @@ namespace RogueCastle
                 m_playerSprite.GetChildAt(PlayerPart.Bowtie).Visible = true;
             }
 
-            if (Game.PlayerStats.Traits.X == TraitType.Gigantism || Game.PlayerStats.Traits.Y == TraitType.Gigantism)
+            if (Game.PlayerStats.HasTrait(TraitType.GIGANTISM))
                 m_playerSprite.Scale = new Vector2(GameEV.TRAIT_GIGANTISM, GameEV.TRAIT_GIGANTISM);
-            if (Game.PlayerStats.Traits.X == TraitType.Dwarfism || Game.PlayerStats.Traits.Y == TraitType.Dwarfism)
+            if (Game.PlayerStats.HasTrait(TraitType.DWARFISM))
                 m_playerSprite.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
 
-            if (Game.PlayerStats.Traits.X == TraitType.Ectomorph || Game.PlayerStats.Traits.Y == TraitType.Ectomorph)
+            if (Game.PlayerStats.HasTrait(TraitType.ECTOMORPH))
             {
                 m_playerSprite.ScaleX *= 0.825f;
                 m_playerSprite.ScaleY *= 1.25f;
             }
 
-            if (Game.PlayerStats.Traits.X == TraitType.Endomorph || Game.PlayerStats.Traits.Y == TraitType.Endomorph)
+            if (Game.PlayerStats.HasTrait(TraitType.ENDOMORPH))
             {
                 m_playerSprite.ScaleX *= 1.25f;
                 m_playerSprite.ScaleY *= 1.175f;
@@ -574,18 +574,18 @@ namespace RogueCastle
             m_frontTrait1.Visible = false;
             m_frontTrait2.Visible = false;
 
-            byte trait1Data = (byte)(Game.PlayerStats.Traits.X + m_traitsDebugCounter.X);
-            if (trait1Data != TraitType.None)
+            byte trait1Data = (byte)(Game.PlayerStats.Traits.Trait1 + m_traitsDebugCounter.X);
+            if (trait1Data != TraitType.NONE)
             {
                 m_frontTrait1.Text = LocaleBuilder.GetResourceString(TraitType.ToStringID(trait1Data)) + ": " + LocaleBuilder.GetResourceString(TraitType.ProfileCardDescriptionID(trait1Data));
                 m_frontTrait1.Visible = true;
             }
 
-            byte trait2Data = (byte)(Game.PlayerStats.Traits.Y + m_traitsDebugCounter.Y);
-            if (trait2Data != TraitType.None)
+            byte trait2Data = (byte)(Game.PlayerStats.Traits.Trait2 + m_traitsDebugCounter.Y);
+            if (trait2Data != TraitType.NONE)
             {
                 m_frontTrait2.Y = m_frontTrait1.Y;
-                if (trait1Data != TraitType.None)
+                if (trait1Data != TraitType.NONE)
                     m_frontTrait2.Y -= 20;
                 m_frontTrait2.Text = LocaleBuilder.GetResourceString(TraitType.ToStringID(trait2Data)) + ": " + LocaleBuilder.GetResourceString(TraitType.ProfileCardDescriptionID(trait2Data));
                 m_frontTrait2.Visible = true;
@@ -689,7 +689,7 @@ namespace RogueCastle
                         break;
                     case (EquipmentAbilityType.MovementSpeed):
                         //float traitMod = 0;
-                        //if (Game.PlayerStats.Traits.X == TraitType.Hyperactive || Game.PlayerStats.Traits.Y == TraitType.Hyperactive)
+                        //if (Game.PlayerStats.HasTrait(TraitType.Hyperactive))
                         //    traitMod = GameEV.TRAIT_MOVESPEED_AMOUNT;
                         //dataNumber = (player.GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.MoveSpeed) + traitMod +
                         //(Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MovementSpeed) * GameEV.RUNE_MOVEMENTSPEED_MOD)) *
@@ -804,73 +804,73 @@ namespace RogueCastle
             }
 
             // Debug testing for traits localization.
-            Vector2 currentDebugTraits = Game.PlayerStats.Traits + m_traitsDebugCounter;
-            Vector2 previousTraits = currentDebugTraits;
+            Traits currentDebugTraits = ((byte)(Game.PlayerStats.Traits.Trait1 + m_traitsDebugCounter.X), (byte)(Game.PlayerStats.Traits.Trait2 + m_traitsDebugCounter.Y));
+            var previousTraits = currentDebugTraits;
 
             if (InputManager.JustPressed(Keys.OemPeriod, PlayerIndex.One))
             {
-                if (currentDebugTraits.X == TraitType.None)
-                    m_traitsDebugCounter.X = (TraitType.Total - 1) - Game.PlayerStats.Traits.X;
+                if (currentDebugTraits.Trait1 == TraitType.NONE)
+                    m_traitsDebugCounter.X = (TraitType.TOTAL - 1) - Game.PlayerStats.Traits.Trait1;
                 else
                     m_traitsDebugCounter.X--;
 
-                currentDebugTraits = Game.PlayerStats.Traits + m_traitsDebugCounter;
+                currentDebugTraits = ((byte)(Game.PlayerStats.Traits.Trait1 + m_traitsDebugCounter.X), (byte)(Game.PlayerStats.Traits.Trait2 + m_traitsDebugCounter.Y));
             }
             else if (InputManager.JustPressed(Keys.OemQuestion, PlayerIndex.One))
             {
-                if (currentDebugTraits.X == TraitType.Total - 1)
-                    m_traitsDebugCounter.X = -Game.PlayerStats.Traits.X;
+                if (currentDebugTraits.Trait1 == TraitType.TOTAL - 1)
+                    m_traitsDebugCounter.X = -Game.PlayerStats.Traits.Trait1;
                 else
                     m_traitsDebugCounter.X++;
 
-                currentDebugTraits = Game.PlayerStats.Traits + m_traitsDebugCounter;
+                currentDebugTraits = ((byte)(Game.PlayerStats.Traits.Trait1 + m_traitsDebugCounter.X), (byte)(Game.PlayerStats.Traits.Trait2 + m_traitsDebugCounter.Y));
             }
 
             if (InputManager.JustPressed(Keys.M, PlayerIndex.One))
             {
-                if (currentDebugTraits.Y == TraitType.None)
-                    m_traitsDebugCounter.Y = (TraitType.Total - 1) - Game.PlayerStats.Traits.Y;
+                if (currentDebugTraits.Trait2 == TraitType.NONE)
+                    m_traitsDebugCounter.Y = (TraitType.TOTAL - 1) - Game.PlayerStats.Traits.Trait2;
                 else
                     m_traitsDebugCounter.Y--;
 
-                currentDebugTraits = Game.PlayerStats.Traits + m_traitsDebugCounter;
+                currentDebugTraits = ((byte)(Game.PlayerStats.Traits.Trait1 + m_traitsDebugCounter.X), (byte)(Game.PlayerStats.Traits.Trait2 + m_traitsDebugCounter.Y));
             }
             else if (InputManager.JustPressed(Keys.OemComma, PlayerIndex.One))
             {
-                if (currentDebugTraits.Y == TraitType.Total - 1)
-                    m_traitsDebugCounter.Y = -Game.PlayerStats.Traits.Y;
+                if (currentDebugTraits.Trait2 == TraitType.TOTAL - 1)
+                    m_traitsDebugCounter.Y = -Game.PlayerStats.Traits.Trait2;
                 else
                     m_traitsDebugCounter.Y++;
 
-                currentDebugTraits = Game.PlayerStats.Traits + m_traitsDebugCounter;
+                currentDebugTraits = ((byte)(Game.PlayerStats.Traits.Trait1 + m_traitsDebugCounter.X), (byte)(Game.PlayerStats.Traits.Trait2 + m_traitsDebugCounter.Y));
             }
 
-            if (currentDebugTraits.X >= TraitType.Total)
-                currentDebugTraits.X = TraitType.None;
-            else if (currentDebugTraits.X < TraitType.None)
-                currentDebugTraits.X = TraitType.Total - 1;
-            if (currentDebugTraits.Y >= TraitType.Total)
-                currentDebugTraits.Y = TraitType.None;
-            else if (currentDebugTraits.Y < TraitType.None)
-                currentDebugTraits.Y = TraitType.Total - 1;
+            if (currentDebugTraits.Trait1 >= TraitType.TOTAL)
+                currentDebugTraits.Trait1 = TraitType.NONE;
+            else if (currentDebugTraits.Trait1 < TraitType.NONE)
+                currentDebugTraits.Trait1 = TraitType.TOTAL - 1;
+            if (currentDebugTraits.Trait2 >= TraitType.TOTAL)
+                currentDebugTraits.Trait2 = TraitType.NONE;
+            else if (currentDebugTraits.Trait2 < TraitType.NONE)
+                currentDebugTraits.Trait2 = TraitType.TOTAL - 1;
 
             if (currentDebugTraits != previousTraits)
             {
                 m_frontTrait1.Visible = false;
                 m_frontTrait2.Visible = false;
 
-                byte trait1Data = (byte)currentDebugTraits.X;
-                if (trait1Data != TraitType.None)
+                byte trait1Data = (byte)currentDebugTraits.Trait1;
+                if (trait1Data != TraitType.NONE)
                 {
                     m_frontTrait1.Text = LocaleBuilder.GetResourceString(TraitType.ToStringID(trait1Data)) + ": " + LocaleBuilder.GetResourceString(TraitType.ProfileCardDescriptionID(trait1Data));
                     m_frontTrait1.Visible = true;
                 }
 
-                byte trait2Data = (byte)currentDebugTraits.Y;
-                if (trait2Data != TraitType.None)
+                byte trait2Data = (byte)currentDebugTraits.Trait2;
+                if (trait2Data != TraitType.NONE)
                 {
                     m_frontTrait2.Y = m_frontTrait1.Y;
-                    if (trait1Data != TraitType.None)
+                    if (trait1Data != TraitType.NONE)
                         m_frontTrait2.Y -= 20;
                     m_frontTrait2.Text = LocaleBuilder.GetResourceString(TraitType.ToStringID(trait2Data)) + ": " + LocaleBuilder.GetResourceString(TraitType.ProfileCardDescriptionID(trait2Data));
                     m_frontTrait2.Visible = true;

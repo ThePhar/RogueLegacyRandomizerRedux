@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -49,7 +49,7 @@ namespace RogueCastle
                     break;
             }
 
-            if (Game.PlayerStats.Traits.X == TraitType.PlatformsOpen || Game.PlayerStats.Traits.Y == TraitType.PlatformsOpen)
+            if (Game.PlayerStats.HasTrait(TraitType.PLATFORMS_OPEN))
             {
                 m_isExtended = true;
                 this.PlayAnimation("EndRetract", "EndRetract");
@@ -59,7 +59,7 @@ namespace RogueCastle
         public override void Update(GameTime gameTime)
         {
             bool forceExtract = false;
-            if (Game.PlayerStats.Traits.X == TraitType.PlatformsOpen || Game.PlayerStats.Traits.Y == TraitType.PlatformsOpen)
+            if (Game.PlayerStats.HasTrait(TraitType.PLATFORMS_OPEN))
                 forceExtract = true;
 
             if (forceExtract == false)
@@ -127,7 +127,7 @@ namespace RogueCastle
 
         public override void ResetState()
         {
-            if (Game.PlayerStats.Traits.X == TraitType.PlatformsOpen || Game.PlayerStats.Traits.Y == TraitType.PlatformsOpen)
+            if (Game.PlayerStats.HasTrait(TraitType.PLATFORMS_OPEN))
                 return;
             this.PlayAnimation(1, 1);
             m_isExtended = false;
@@ -138,7 +138,7 @@ namespace RogueCastle
 
         public override void Reset()
         {
-            if (Game.PlayerStats.Traits.X == TraitType.PlatformsOpen || Game.PlayerStats.Traits.Y == TraitType.PlatformsOpen)
+            if (Game.PlayerStats.HasTrait(TraitType.PLATFORMS_OPEN))
                 return;
             this.PlayAnimation(1, 1);
             m_isExtended = false;
@@ -152,7 +152,7 @@ namespace RogueCastle
             : base("EnemyPlatform_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
             this.CollisionTypeTag = GameTypes.CollisionType_WALL;
-            this.Type = EnemyType.Platform;
+            this.Type = EnemyType.PLATFORM;
             this.CollidesBottom = false;
             this.CollidesLeft = false;
             this.CollidesRight = false;

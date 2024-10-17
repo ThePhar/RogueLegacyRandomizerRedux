@@ -15,8 +15,8 @@ using DS2DEngine;
 using System.IO;
 using System.Globalization;
 using System.Threading;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -254,38 +254,38 @@ namespace RogueCastle
                 //2. In the Builder class, add a case statement for the enemy string in BuildEnemy().
                 //3. Press F5 to build and run, which should create the EnemyList.xml file that the map editor reads.
                 List<EnemyEditorData> enemyList = new List<EnemyEditorData>();
-                enemyList.Add(new EnemyEditorData(EnemyType.Skeleton));
-                enemyList.Add(new EnemyEditorData(EnemyType.Knight));
-                enemyList.Add(new EnemyEditorData(EnemyType.Fireball));
-                enemyList.Add(new EnemyEditorData(EnemyType.Fairy));
-                enemyList.Add(new EnemyEditorData(EnemyType.Turret));
-                enemyList.Add(new EnemyEditorData(EnemyType.Ninja));
-                enemyList.Add(new EnemyEditorData(EnemyType.Horse));
-                enemyList.Add(new EnemyEditorData(EnemyType.Zombie));
-                enemyList.Add(new EnemyEditorData(EnemyType.Wolf));
-                enemyList.Add(new EnemyEditorData(EnemyType.BallAndChain));
-                enemyList.Add(new EnemyEditorData(EnemyType.Eyeball));
-                enemyList.Add(new EnemyEditorData(EnemyType.Blob));
-                enemyList.Add(new EnemyEditorData(EnemyType.SwordKnight));
-                enemyList.Add(new EnemyEditorData(EnemyType.Eagle));
-                enemyList.Add(new EnemyEditorData(EnemyType.ShieldKnight));
-                enemyList.Add(new EnemyEditorData(EnemyType.FireWizard));
-                enemyList.Add(new EnemyEditorData(EnemyType.IceWizard));
-                enemyList.Add(new EnemyEditorData(EnemyType.EarthWizard));
-                enemyList.Add(new EnemyEditorData(EnemyType.BouncySpike));
-                enemyList.Add(new EnemyEditorData(EnemyType.SpikeTrap));
-                enemyList.Add(new EnemyEditorData(EnemyType.Plant));
-                enemyList.Add(new EnemyEditorData(EnemyType.Energon));
-                enemyList.Add(new EnemyEditorData(EnemyType.Spark));
-                enemyList.Add(new EnemyEditorData(EnemyType.SkeletonArcher));
-                enemyList.Add(new EnemyEditorData(EnemyType.Chicken));
-                enemyList.Add(new EnemyEditorData(EnemyType.Platform));
-                enemyList.Add(new EnemyEditorData(EnemyType.HomingTurret));
-                enemyList.Add(new EnemyEditorData(EnemyType.LastBoss));
-                enemyList.Add(new EnemyEditorData(EnemyType.Dummy));
-                enemyList.Add(new EnemyEditorData(EnemyType.Starburst));
-                enemyList.Add(new EnemyEditorData(EnemyType.Portrait));
-                enemyList.Add(new EnemyEditorData(EnemyType.Mimic));
+                enemyList.Add(new EnemyEditorData(EnemyType.SKELETON));
+                enemyList.Add(new EnemyEditorData(EnemyType.KNIGHT));
+                enemyList.Add(new EnemyEditorData(EnemyType.FIREBALL));
+                enemyList.Add(new EnemyEditorData(EnemyType.FAIRY));
+                enemyList.Add(new EnemyEditorData(EnemyType.TURRET));
+                enemyList.Add(new EnemyEditorData(EnemyType.NINJA));
+                enemyList.Add(new EnemyEditorData(EnemyType.HORSE));
+                enemyList.Add(new EnemyEditorData(EnemyType.ZOMBIE));
+                enemyList.Add(new EnemyEditorData(EnemyType.WOLF));
+                enemyList.Add(new EnemyEditorData(EnemyType.BALL_AND_CHAIN));
+                enemyList.Add(new EnemyEditorData(EnemyType.EYEBALL));
+                enemyList.Add(new EnemyEditorData(EnemyType.BLOB));
+                enemyList.Add(new EnemyEditorData(EnemyType.SWORD_KNIGHT));
+                enemyList.Add(new EnemyEditorData(EnemyType.EAGLE));
+                enemyList.Add(new EnemyEditorData(EnemyType.SHIELD_KNIGHT));
+                enemyList.Add(new EnemyEditorData(EnemyType.FIRE_WIZARD));
+                enemyList.Add(new EnemyEditorData(EnemyType.ICE_WIZARD));
+                enemyList.Add(new EnemyEditorData(EnemyType.EARTH_WIZARD));
+                enemyList.Add(new EnemyEditorData(EnemyType.BOUNCY_SPIKE));
+                enemyList.Add(new EnemyEditorData(EnemyType.SPIKE_TRAP));
+                enemyList.Add(new EnemyEditorData(EnemyType.PLANT));
+                enemyList.Add(new EnemyEditorData(EnemyType.ENERGON));
+                enemyList.Add(new EnemyEditorData(EnemyType.SPARK));
+                enemyList.Add(new EnemyEditorData(EnemyType.SKELETON_ARCHER));
+                enemyList.Add(new EnemyEditorData(EnemyType.CHICKEN));
+                enemyList.Add(new EnemyEditorData(EnemyType.PLATFORM));
+                enemyList.Add(new EnemyEditorData(EnemyType.HOMING_TURRET));
+                enemyList.Add(new EnemyEditorData(EnemyType.LAST_BOSS));
+                enemyList.Add(new EnemyEditorData(EnemyType.DUMMY));
+                enemyList.Add(new EnemyEditorData(EnemyType.STARBURST));
+                enemyList.Add(new EnemyEditorData(EnemyType.PORTRAIT));
+                enemyList.Add(new EnemyEditorData(EnemyType.MIMIC));
 
                 // Take this out when building release version.
                 XMLCompiler.CompileEnemies(enemyList, Directory.GetCurrentDirectory());
@@ -1223,7 +1223,7 @@ namespace RogueCastle
 
                     // Special check in case the user closes the program while in the game over screen to reset the traits.
                     if (ScreenManager.CurrentScreen is GameOverScreen)
-                        Game.PlayerStats.Traits = Vector2.Zero;
+                        Game.PlayerStats.Traits = (TraitType.NONE, TraitType.NONE);
 
                     if (SaveManager.FileExists(SaveType.PlayerData))
                     {

@@ -9,8 +9,8 @@ using Tweener;
 using Tweener.Ease;
 using Microsoft.Xna.Framework.Graphics;
 using System.Globalization;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -143,7 +143,7 @@ namespace RogueCastle
                 // Some enemy fixes needed here.
                 switch (enemy.Type)
                 {
-                    case (EnemyType.Skeleton):
+                    case (EnemyType.SKELETON):
                         if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
                         {
                             if (enemy.Flip == SpriteEffects.None)
@@ -152,26 +152,26 @@ namespace RogueCastle
                                 enemy.X += 25;
                         }
                         break;
-                    case (EnemyType.Fairy):
+                    case (EnemyType.FAIRY):
                         if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
                         {
                             enemy.X += 30;
                             enemy.Y -= 20;
                         }
                         break;
-                    case (EnemyType.Zombie):
+                    case (EnemyType.ZOMBIE):
                         enemy.ChangeSprite("EnemyZombieWalk_Character");
                         enemy.PlayAnimation(true);
                         break;
-                    case (EnemyType.BallAndChain):
+                    case (EnemyType.BALL_AND_CHAIN):
                         (enemy as EnemyObj_BallAndChain).BallAndChain.Visible = false;
                         (enemy as EnemyObj_BallAndChain).BallAndChain2.Visible = false;
                         break;
-                    case (EnemyType.Portrait):
+                    case (EnemyType.PORTRAIT):
                         if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
                             frame.Visible = false;
                         break;
-                    case (EnemyType.LastBoss):
+                    case (EnemyType.LAST_BOSS):
                         if (enemy.Difficulty == GameTypes.EnemyDifficulty.ADVANCED)
                         {
                             (enemy as EnemyObj_LastBoss).ForceSecondForm(true);
@@ -201,11 +201,11 @@ namespace RogueCastle
         {
             switch (enemy.Type)
             {
-                case (EnemyType.Eyeball):
+                case (EnemyType.EYEBALL):
                     enemy.ChangeSprite("EnemyEyeballBossEye_Character");
                     (enemy as EnemyObj_Eyeball).ChangeToBossPupil();
                     break;
-                case (EnemyType.Blob):
+                case (EnemyType.BLOB):
                     m_blobBoss = enemy as EnemyObj_Blob;
                     enemy.ChangeSprite("EnemyBlobBossIdle_Character");
                     enemy.GetChildAt(0).TextureColor = Color.White;
@@ -214,13 +214,13 @@ namespace RogueCastle
                     (enemy.GetChildAt(1) as SpriteObj).OutlineColour = Color.Black;
                     enemy.GetChildAt(1).TextureColor = Color.Black;
                     break;
-                case (EnemyType.Fireball):
+                case (EnemyType.FIREBALL):
                     enemy.ChangeSprite("EnemyGhostBossIdle_Character");
                     break;
-                case (EnemyType.Fairy):
+                case (EnemyType.FAIRY):
                     enemy.ChangeSprite("EnemyFairyGhostBossIdle_Character");
                     break;
-                case (EnemyType.Skeleton):
+                case (EnemyType.SKELETON):
                     if (enemy.Flip == SpriteEffects.None)
                     {
                         enemy.Name = "Berith";
@@ -232,7 +232,7 @@ namespace RogueCastle
                         enemy.LocStringID = "LOC_ID_ENEMY_NAME_111";
                     }
                     break;
-                case (EnemyType.EarthWizard):
+                case (EnemyType.EARTH_WIZARD):
                     if (enemy.Flip == SpriteEffects.None)
                     {
                         enemy.Name = "Amon";
@@ -244,7 +244,7 @@ namespace RogueCastle
                         enemy.LocStringID = "LOC_ID_ENEMY_NAME_106";
                     }
                     break;
-                case (EnemyType.Plant):
+                case (EnemyType.PLANT):
                     if (enemy.Flip == SpriteEffects.None)
                     {
                         enemy.Name = "Stolas";
@@ -268,7 +268,7 @@ namespace RogueCastle
 
             foreach (EnemyObj enemy in EnemyList)
             {
-                if (enemy.Type == EnemyType.EarthWizard)
+                if (enemy.Type == EnemyType.EARTH_WIZARD)
                     (enemy as EnemyObj_EarthWizard).EarthProjectile.Visible = false;
             }
 

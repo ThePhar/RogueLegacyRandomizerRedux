@@ -1,4 +1,4 @@
-﻿namespace RogueCastle.Enumerations;
+﻿namespace RogueCastle.GameStructs;
 
 public enum SpellType
 {

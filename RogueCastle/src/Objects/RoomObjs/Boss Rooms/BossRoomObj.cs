@@ -8,6 +8,7 @@ using Tweener;
 using Tweener.Ease;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -54,7 +55,7 @@ namespace RogueCastle
         public override void OnEnter()
         {
             Game.ScreenManager.GetLevelScreen().JukeboxEnabled = false; // This code is to override the jukebox.
-            m_bossChest.ChestType = ChestType.Boss;
+            m_bossChest.ChestType = ChestType.BOSS;
             m_bossChest.Visible = false;
             m_bossChest.IsLocked = true;
 

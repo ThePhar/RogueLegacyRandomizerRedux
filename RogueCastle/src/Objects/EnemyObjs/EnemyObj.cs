@@ -7,8 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Tweener;
 using System.Globalization;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -103,7 +103,7 @@ namespace RogueCastle
 
         public bool IsProcedural { get; set; }
         public bool SaveToFile = true;
-        public EnemyType Type;
+        public byte Type;
 
         private bool m_isPaused = false;
         protected bool m_bossVersionKilled = false;
@@ -166,7 +166,7 @@ namespace RogueCastle
             : base(spriteName, physicsManager, levelToAttachTo)
         {
             this.DisableCollisionBoxRotations = true;
-            this.Type = EnemyType.None;
+            this.Type = EnemyType.NONE;
             CollisionTypeTag = GameTypes.CollisionType_ENEMY;
             m_target = target;
             m_walkingLB = new LogicBlock();
@@ -843,13 +843,13 @@ namespace RogueCastle
                     }
                 }
 
-                if (CanBeKnockedBack == true && IsPaused == false && (Game.PlayerStats.Traits.X != TraitType.Hypogonadism && Game.PlayerStats.Traits.Y != TraitType.Hypogonadism))
+                if (CanBeKnockedBack == true && IsPaused == false && (!Game.PlayerStats.HasTrait(TraitType.HYPOGONADISM)))
                 {
                     //Knock the enemy to the left if he's to the left of the player.
                     this.CurrentSpeed = 0;
 
                     float knockbackMod = 1;
-                    if (Game.PlayerStats.Traits.X == TraitType.Hypergonadism || Game.PlayerStats.Traits.Y == TraitType.Hypergonadism)
+                    if (Game.PlayerStats.HasTrait(TraitType.HYPERGONADISM))
                         knockbackMod = GameEV.TRAIT_HYPERGONADISM;
 
                     if (this.KnockBack == Vector2.Zero)
@@ -912,7 +912,7 @@ namespace RogueCastle
             if (DropsItem == true)
             {
                 // Chance of dropping health or mana.  Or in the case of a chicken, health.
-                if (this.Type == EnemyType.Chicken)
+                if (this.Type == EnemyType.CHICKEN)
                     m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.Health, GameEV.ITEM_HEALTHDROP_AMOUNT);
                 else if (CDGMath.RandomInt(1, 100) <= GameEV.ENEMY_ITEMDROP_CHANCE)
                 {
@@ -1008,7 +1008,7 @@ namespace RogueCastle
                 Game.PlayerStats.EnemiesKilledList[(int)this.Type] = enemyData;
             }
 
-            if (giveXP == true && this.Type == EnemyType.Chicken)
+            if (giveXP == true && this.Type == EnemyType.CHICKEN)
                 GameUtil.UnlockAchievement("FEAR_OF_CHICKENS");
 
             base.Kill();
@@ -1123,7 +1123,7 @@ namespace RogueCastle
             this.m_invincibleCounter = 0;
             m_invincibleCounterProjectile = 0;
             this.State = STATE_WANDER;
-            if (this.Type != EnemyType.Portrait) // Hack to make sure portraits don't change their picture.
+            if (this.Type != EnemyType.PORTRAIT) // Hack to make sure portraits don't change their picture.
                 this.ChangeSprite(m_resetSpriteName);
             if (this.PlayAnimationOnRestart == true)
                 this.PlayAnimation(true);
@@ -1254,7 +1254,7 @@ namespace RogueCastle
             get { return base.Flip; }
             set
             {
-                if (Game.PlayerStats.Traits.X == TraitType.StereoBlind || Game.PlayerStats.Traits.Y == TraitType.StereoBlind)
+                if (Game.PlayerStats.HasTrait(TraitType.STEREO_BLIND))
                 {
                     if (Flip != value && m_levelScreen != null)
                     {

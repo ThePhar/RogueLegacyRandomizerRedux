@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using SpriteSystem;
 using DS2DEngine;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -125,7 +126,7 @@ namespace RogueCastle
         {
             if ((Game.ScreenManager.CurrentScreen is SkillScreen == false) && (Game.ScreenManager.CurrentScreen is LineageScreen == false) && 
                 (Game.ScreenManager.CurrentScreen is SkillUnlockScreen == false) && (Game.ScreenManager.GetLevelScreen() != null) &&
-                (Game.PlayerStats.Traits.X == TraitType.Vertigo || Game.PlayerStats.Traits.Y == TraitType.Vertigo) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                (Game.PlayerStats.HasTrait(TraitType.VERTIGO)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
                 spriteBatch.Draw(screen, area, null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipVertically, 0);
             else
                 spriteBatch.Draw(screen, area, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);

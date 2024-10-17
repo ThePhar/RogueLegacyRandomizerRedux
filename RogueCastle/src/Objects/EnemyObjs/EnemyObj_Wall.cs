@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -171,7 +171,7 @@ namespace RogueCastle
             : base("EnemyGhostIdle_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
             CollisionTypeTag = GameTypes.CollisionType_ENEMYWALL;
-            this.Type = EnemyType.Wall;
+            this.Type = EnemyType.WALL;
         }
     }
 }

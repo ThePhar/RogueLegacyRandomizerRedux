@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using System.Text.RegularExpressions;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -164,14 +165,14 @@ namespace RogueCastle
                 RomanNumeral = Game.PlayerStats.RomanNumeral,
             };
 
-            Vector2 storedTraits = Game.PlayerStats.Traits;
+            var storedTraits = Game.PlayerStats.Traits;
             Game.PlayerStats.FamilyTreeArray.Add(newNode);
             if (Game.PlayerStats.CurrentBranches != null)
                 Game.PlayerStats.CurrentBranches.Clear();
 
             // Setting necessary after-death flags and saving.
             Game.PlayerStats.IsDead = true;
-            Game.PlayerStats.Traits = Vector2.Zero;
+            Game.PlayerStats.Traits = (TraitType.NONE, TraitType.NONE);
             Game.PlayerStats.NewBossBeaten = false;
             Game.PlayerStats.RerolledChildren = false;
             Game.PlayerStats.HasArchitectFee = false;
@@ -192,7 +193,7 @@ namespace RogueCastle
                 Game.PlayerStats.SpecialItem = SpecialItemType.None;
 
             // Ensures the prosopagnosia effect kicks in when selecting an heir.
-            if (storedTraits.X == (int)TraitType.Prosopagnosia || storedTraits.Y == (int)TraitType.Prosopagnosia)
+            if (storedTraits.Trait1 == TraitType.PROSOPAGNOSIA || storedTraits.Trait2 == TraitType.PROSOPAGNOSIA)
                 Game.PlayerStats.HasProsopagnosia = true;
 
             (ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Lineage, SaveType.MapData);
@@ -245,7 +246,7 @@ namespace RogueCastle
             //2 = parting words
             //3 = parting words title.
 
-            if (Game.PlayerStats.Traits.X == TraitType.Tourettes || Game.PlayerStats.Traits.Y == TraitType.Tourettes)
+            if (Game.PlayerStats.HasTrait(TraitType.TOURETTES))
             {
                 (m_dialoguePlate.GetChildAt(2) as TextObj).Text = "#)!(%*#@!%^"; // not localized
                 (m_dialoguePlate.GetChildAt(2) as TextObj).RandomizeSentence(true);
@@ -291,7 +292,7 @@ namespace RogueCastle
                 m_enemyList = null;
             }
 
-            Game.PlayerStats.Traits = Vector2.Zero;
+            Game.PlayerStats.Traits = (TraitType.NONE, TraitType.NONE);
 
             BackBufferOpacity = 0;
             
@@ -586,7 +587,7 @@ namespace RogueCastle
             (m_dialoguePlate.GetChildAt(2) as TextObj).ChangeFontNoDefault(LocaleBuilder.GetLanguageFont((m_dialoguePlate.GetChildAt(2) as TextObj)));
             (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault(LocaleBuilder.GetLanguageFont((m_dialoguePlate.GetChildAt(3) as TextObj)));
 
-            if (Game.PlayerStats.Traits.X == TraitType.Tourettes || Game.PlayerStats.Traits.Y == TraitType.Tourettes)
+            if (Game.PlayerStats.HasTrait(TraitType.TOURETTES))
             {
                 (m_dialoguePlate.GetChildAt(2) as TextObj).Text = "#)!(%*#@!%^"; // not localized
                 (m_dialoguePlate.GetChildAt(2) as TextObj).RandomizeSentence(true);

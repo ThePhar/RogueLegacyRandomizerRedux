@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 using Tweener.Ease;
 using Tweener;
 
@@ -72,7 +72,7 @@ namespace RogueCastle
             Game.PlayerStats.BonusMagic = 190 / 1;
             Game.PlayerStats.BonusMagic += (int)(Game.PlayerStats.BonusMagic * EMPOWER_PWR_AMT * numEmpowered);
 
-            Game.PlayerStats.Traits = new Vector2(TraitType.Vertigo, TraitType.Hyperactive);
+            Game.PlayerStats.Traits = (TraitType.VERTIGO, TraitType.HYPERACTIVE);
             Game.PlayerStats.SpecialItem = SpecialItemType.Glasses;
             //Player.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
 

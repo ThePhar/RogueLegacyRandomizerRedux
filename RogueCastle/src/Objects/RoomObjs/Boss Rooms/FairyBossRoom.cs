@@ -8,6 +8,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using Tweener.Ease;
 using Tweener;
 
@@ -100,7 +101,7 @@ namespace RogueCastle
 
         public override void Draw(Camera2D camera)
         {
-            if (m_boss.IsKilled == true && (Game.PlayerStats.Traits.X != TraitType.ColorBlind && Game.PlayerStats.Traits.Y != TraitType.ColorBlind))
+            if (m_boss.IsKilled == true && (!Game.PlayerStats.HasTrait(TraitType.COLOR_BLIND)))
             {
                 camera.End();
                 m_boss.StopAnimation();

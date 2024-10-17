@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -118,7 +119,7 @@ namespace RogueCastle
 
         public void Draw(Camera2D camera)
         {
-            if (Game.PlayerStats.Traits.X != TraitType.TunnelVision && Game.PlayerStats.Traits.Y != TraitType.TunnelVision)
+            if (!Game.PlayerStats.HasTrait(TraitType.TUNNEL_VISION))
             {
                 foreach (ProjectileIconObj projIcon in m_resourcePool.ActiveObjsList)
                     projIcon.Draw(camera);

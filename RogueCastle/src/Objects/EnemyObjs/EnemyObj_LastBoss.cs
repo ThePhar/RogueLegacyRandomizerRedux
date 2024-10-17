@@ -6,8 +6,8 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Tweener;
 using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using Tweener.Ease;
 
 namespace RogueCastle
@@ -1784,7 +1784,7 @@ namespace RogueCastle
             foreach (GameObj obj in _objectList)
                 obj.TextureColor = new Color(100, 100, 100);
 
-            this.Type = EnemyType.LastBoss;
+            this.Type = EnemyType.LAST_BOSS;
 
             m_damageShieldProjectiles = new List<ProjectileObj>();
 

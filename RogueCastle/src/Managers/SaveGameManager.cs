@@ -6,8 +6,8 @@ using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework;
 using System.IO;
 using DS2DEngine;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using RogueCastle.Objects;
 
 namespace RogueCastle
@@ -535,8 +535,8 @@ namespace RogueCastle
                     // Saving player special item (byte)
                     writer.Write(Game.PlayerStats.SpecialItem);
                     // Saving traits. Saved as bytes, but should be loaded into a Vector2.
-                    writer.Write((byte)Game.PlayerStats.Traits.X);
-                    writer.Write((byte)Game.PlayerStats.Traits.Y);
+                    writer.Write(Game.PlayerStats.Traits.Trait1);
+                    writer.Write(Game.PlayerStats.Traits.Trait2);
                     // Saving player name (string)
                     writer.Write(Game.PlayerStats.PlayerName);
 
@@ -614,7 +614,7 @@ namespace RogueCastle
                         Console.WriteLine("Spell: " + Game.PlayerStats.Spell);
                         Console.WriteLine("Class: " + Game.PlayerStats.Class);
                         Console.WriteLine("Special Item: " + Game.PlayerStats.SpecialItem);
-                        Console.WriteLine("Traits: " + Game.PlayerStats.Traits.X + ", " + Game.PlayerStats.Traits.Y);
+                        Console.WriteLine("Traits: " + Game.PlayerStats.Traits.Trait1 + ", " + Game.PlayerStats.Traits.Trait2);
                         Console.WriteLine("Name: " + Game.PlayerStats.PlayerName);
                         Console.WriteLine("---------------");
                         Console.WriteLine("Head Piece: " + Game.PlayerStats.HeadPiece);
@@ -932,7 +932,7 @@ namespace RogueCastle
                         if (LevelEV.ShowSaveLoadDebugText == true)
                             Console.WriteLine("Map size: " + (levelToSave.RoomList.Count - 12)); // Subtracting the 5 boss rooms + the tutorial room + the compass room + 5 challenge rooms.
 
-                        List<EnemyType> enemyTypeList = new List<EnemyType>();
+                        List<byte> enemyTypeList = new List<byte>();
                         List<byte> enemyDifficultyList = new List<byte>();
 
                         // Storing the actual map.
@@ -1193,8 +1193,8 @@ namespace RogueCastle
                             writer.Write(currentBranches[i].Age); // byte
                             writer.Write(currentBranches[i].ChildAge); // byte
 
-                            writer.Write((byte)currentBranches[i].Traits.X); // byte
-                            writer.Write((byte)currentBranches[i].Traits.Y); // byte
+                            writer.Write(currentBranches[i].Traits.Trait1); // byte
+                            writer.Write(currentBranches[i].Traits.Trait2); // byte
                             writer.Write(currentBranches[i].IsFemale); // bool
                             writer.Write(currentBranches[i].RomanNumeral); // string
                         }
@@ -1215,7 +1215,7 @@ namespace RogueCastle
                             Console.WriteLine("Shoulder Piece: " + currentBranches[i].ShoulderPiece);
                             Console.WriteLine("Player Age: " + currentBranches[i].Age);
                             Console.WriteLine("Player Child Age: " + currentBranches[i].ChildAge);
-                            Console.WriteLine("Traits: " + currentBranches[i].Traits.X + ", " + currentBranches[i].Traits.Y);
+                            Console.WriteLine("Traits: " + currentBranches[i].Traits.Trait1 + ", " + currentBranches[i].Traits.Trait2);
                             Console.WriteLine("Is Female: " + currentBranches[i].IsFemale);
                             Console.WriteLine("Roman Numeral: " + currentBranches[i].RomanNumeral);
                         }
@@ -1254,8 +1254,8 @@ namespace RogueCastle
                             writer.Write(familyTreeArray[i].ShoulderPiece); // byte
                             writer.Write(familyTreeArray[i].NumEnemiesBeaten); // int
                             writer.Write(familyTreeArray[i].BeatenABoss); // bool
-                            writer.Write((byte)familyTreeArray[i].Traits.X); // byte
-                            writer.Write((byte)familyTreeArray[i].Traits.Y); // byte
+                            writer.Write(familyTreeArray[i].Traits.Trait1); // byte
+                            writer.Write(familyTreeArray[i].Traits.Trait2); // byte
                             writer.Write(familyTreeArray[i].IsFemale); // bool
                             writer.Write(familyTreeArray[i].RomanNumeral); // string
                         }
@@ -1278,7 +1278,7 @@ namespace RogueCastle
                             Console.WriteLine("Shoulder Piece: " + familyTreeArray[i].ShoulderPiece);
                             Console.WriteLine("Number of Enemies Beaten: " + familyTreeArray[i].NumEnemiesBeaten);
                             Console.WriteLine("Beaten a Boss: " + familyTreeArray[i].BeatenABoss);
-                            Console.WriteLine("Traits: " + familyTreeArray[i].Traits.X + ", " + familyTreeArray[i].Traits.Y);
+                            Console.WriteLine("Traits: " + familyTreeArray[i].Traits.Trait1 + ", " + familyTreeArray[i].Traits.Trait2);
                             Console.WriteLine("Is Female: " + familyTreeArray[i].IsFemale);
                             Console.WriteLine("Roman Numeral: " + familyTreeArray[i].RomanNumeral);
                         }
@@ -1354,7 +1354,7 @@ namespace RogueCastle
                     Game.PlayerStats.Spell = (SpellType)reader.ReadByte();
                     Game.PlayerStats.Class = reader.ReadByte();
                     Game.PlayerStats.SpecialItem = reader.ReadByte();
-                    Game.PlayerStats.Traits = new Vector2(reader.ReadByte(), reader.ReadByte());
+                    Game.PlayerStats.Traits = (reader.ReadByte(), reader.ReadByte());
                     Game.PlayerStats.PlayerName = reader.ReadString();
 
                     // Reading player parts
@@ -1434,7 +1434,7 @@ namespace RogueCastle
                         Console.WriteLine("Spell: " + Game.PlayerStats.Spell);
                         Console.WriteLine("Class: " + Game.PlayerStats.Class);
                         Console.WriteLine("Special Item: " + Game.PlayerStats.SpecialItem);
-                        Console.WriteLine("Traits: " + Game.PlayerStats.Traits.X + ", " + Game.PlayerStats.Traits.Y);
+                        Console.WriteLine("Traits: " + Game.PlayerStats.Traits.Trait1 + ", " + Game.PlayerStats.Traits.Trait2);
                         Console.WriteLine("Name: " + Game.PlayerStats.PlayerName);
                         Console.WriteLine("---------------");
                         Console.WriteLine("Head Piece: " + Game.PlayerStats.HeadPiece);
@@ -1490,7 +1490,7 @@ namespace RogueCastle
 
                     Console.WriteLine("///// ENEMY LIST DATA - BEGIN LOADING /////");
 
-                    for (int i = 0; i < Enum.GetValues(typeof(EnemyType)).Length; i++)
+                    for (int i = 0; i < EnemyType.TOTAL; i++)
                     {
                         Vector4 enemyStats = new Vector4(reader.ReadByte(), reader.ReadByte(), reader.ReadByte(), reader.ReadByte());
                         Game.PlayerStats.EnemiesKilledList[i] = enemyStats;
@@ -1738,9 +1738,9 @@ namespace RogueCastle
                     loadedLevel = LevelBuilder2.CreateLevel(roomList, roomColorList);
 
                     int numEnemies = reader.ReadInt32(); // Reading the number of enemies in the game.
-                    List<EnemyType> enemyList = new List<EnemyType>();
+                    List<byte> enemyList = new List<byte>();
                     for (int i = 0; i < numEnemies; i++)
-                        enemyList.Add((EnemyType)reader.ReadByte()); // Reading the enemy type and storing it into the array.
+                        enemyList.Add(reader.ReadByte()); // Reading the enemy type and storing it into the array.
 
                     List<byte> enemyDifficultyList = new List<byte>();
                     for (int i = 0; i < numEnemies; i++) // Reading the enemy difficulty and storing it in an array.
@@ -1985,7 +1985,7 @@ namespace RogueCastle
                         data.ShoulderPiece = reader.ReadByte();
                         data.Age = reader.ReadByte();
                         data.ChildAge = reader.ReadByte();
-                        data.Traits = new Vector2(reader.ReadByte(), reader.ReadByte());
+                        data.Traits = (reader.ReadByte(), reader.ReadByte());
                         data.IsFemale = reader.ReadBoolean();
 
                         if (Game.PlayerStats.RevisionNumber > 0)
@@ -2013,7 +2013,7 @@ namespace RogueCastle
                                 Console.WriteLine("Shoulder Piece: " + currentBranches[i].ShoulderPiece);
                                 Console.WriteLine("Player Age: " + currentBranches[i].Age);
                                 Console.WriteLine("Player Child Age: " + currentBranches[i].ChildAge);
-                                Console.WriteLine("Traits: " + currentBranches[i].Traits.X + ", " + currentBranches[i].Traits.Y);
+                                Console.WriteLine("Traits: " + currentBranches[i].Traits.Trait1 + ", " + currentBranches[i].Traits.Trait2);
                                 Console.WriteLine("Is Female: " + currentBranches[i].IsFemale);
                                 if (Game.PlayerStats.RevisionNumber > 0)
                                     Console.WriteLine("Roman Number:" + currentBranches[i].RomanNumeral);
@@ -2042,8 +2042,8 @@ namespace RogueCastle
                         data.ShoulderPiece = reader.ReadByte();
                         data.NumEnemiesBeaten = reader.ReadInt32();
                         data.BeatenABoss = reader.ReadBoolean();
-                        data.Traits.X = reader.ReadByte();
-                        data.Traits.Y = reader.ReadByte();
+                        data.Traits.Trait1 = reader.ReadByte();
+                        data.Traits.Trait2 = reader.ReadByte();
                         data.IsFemale = reader.ReadBoolean();
                         if (Game.PlayerStats.RevisionNumber > 0)
                             data.RomanNumeral = reader.ReadString();
@@ -2071,7 +2071,7 @@ namespace RogueCastle
                                 Console.WriteLine("Shoulder Piece: " + familyTreeArray[i].ShoulderPiece);
                                 Console.WriteLine("Number of Enemies Beaten: " + familyTreeArray[i].NumEnemiesBeaten);
                                 Console.WriteLine("Beaten a Boss: " + familyTreeArray[i].BeatenABoss);
-                                Console.WriteLine("Traits: " + familyTreeArray[i].Traits.X + ", " + familyTreeArray[i].Traits.Y);
+                                Console.WriteLine("Traits: " + familyTreeArray[i].Traits.Trait1 + ", " + familyTreeArray[i].Traits.Trait2);
                                 Console.WriteLine("Is Female: " + familyTreeArray[i].IsFemale);
                                 if (Game.PlayerStats.RevisionNumber > 0)
                                     Console.WriteLine("Roman Numeral: " + familyTreeArray[i].RomanNumeral);

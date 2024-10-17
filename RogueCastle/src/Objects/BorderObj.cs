@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Globalization;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -61,7 +62,7 @@ namespace RogueCastle
         public override void Draw(Camera2D camera)
         {
             Texture2D borderTexture = BorderTexture;
-            if (Game.PlayerStats.Traits.X == TraitType.TheOne || Game.PlayerStats.Traits.Y == TraitType.TheOne)
+            if (Game.PlayerStats.HasTrait(TraitType.THE_ONE))
             {
                 TextureOffset = Vector2.Zero;
                 borderTexture = NeoTexture;

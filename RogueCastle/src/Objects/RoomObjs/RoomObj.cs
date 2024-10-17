@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Globalization;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using RogueCastle.Objects;
 using Tweener;
 
@@ -105,7 +106,7 @@ namespace RogueCastle
             foreach (GameObj obj in GameObjList)
             {
                 FairyChestObj fairyChest = obj as FairyChestObj;
-                if (fairyChest != null && fairyChest.State == ChestState.Failed && fairyChest.ConditionType != ChestConditionType.InvisibleChest && fairyChest.ConditionType != ChestConditionType.None)
+                if (fairyChest != null && fairyChest.State == ChestState.Failed && fairyChest.ConditionType != ChestConditionType.INVISIBLE_CHEST && fairyChest.ConditionType != ChestConditionType.NONE)
                     Player.AttachedLevel.ObjectiveFailed();
             }
 
@@ -768,7 +769,7 @@ namespace RogueCastle
                     waypoint = obj as WaypointObj;
             }
 
-            if (fairyChest != null && fairyChest.IsOpen == false && fairyChest.ConditionType != ChestConditionType.None && fairyChest.ConditionType != ChestConditionType.InvisibleChest 
+            if (fairyChest != null && fairyChest.IsOpen == false && fairyChest.ConditionType != ChestConditionType.NONE && fairyChest.ConditionType != ChestConditionType.INVISIBLE_CHEST 
                 && fairyChest.State != ChestState.Free)
             //if (fairyChest != null && fairyChest.IsOpen == false && waypoint != null && fairyChest.ConditionType != 0)
             {

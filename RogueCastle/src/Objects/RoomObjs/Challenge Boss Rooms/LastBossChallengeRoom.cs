@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 using Tweener.Ease;
 using Tweener;
 
@@ -114,7 +114,7 @@ namespace RogueCastle
             Game.PlayerStats.BonusMagic += (int)(Game.PlayerStats.BonusMagic * EMPOWER_PWR_AMT * numEmpowered);
             
             Game.PlayerStats.BonusDefense = 0;//40 / 1;
-            Game.PlayerStats.Traits = new Vector2(TraitType.Hypergonadism, TraitType.None);
+            Game.PlayerStats.Traits = (TraitType.HYPERGONADISM, TraitType.NONE);
             Game.PlayerStats.Spell = SpellType.RapidDagger;
             
             //Player.CanBeKnockedBack = false;

@@ -11,8 +11,8 @@ using SpriteSystem;
 using Microsoft.Xna.Framework.Graphics;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using RogueCastle.Objects;
 using Tweener;
 using Tweener.Ease;
@@ -479,7 +479,7 @@ namespace RogueCastle
                     }
                 }
 
-                if (Game.PlayerStats.Traits.X == TraitType.TheOne || Game.PlayerStats.Traits.Y == TraitType.TheOne)
+                if (Game.PlayerStats.HasTrait(TraitType.THE_ONE))
                 {
                     m_foregroundSprite.Scale = Vector2.One;
                     m_foregroundSprite.ChangeSprite("NeoFG_Sprite", ScreenManager.Camera);
@@ -756,7 +756,7 @@ namespace RogueCastle
                     foreach (GameObj obj in room.GameObjList)
                     {
                         ChestObj chest = obj as ChestObj;
-                        if (chest != null && chest.ChestType != ChestType.Fairy)// && room.Name != "Bonus") // Do not modify chests for bonus rooms or fairy chests.
+                        if (chest != null && chest.ChestType != ChestType.FAIRY)// && room.Name != "Bonus") // Do not modify chests for bonus rooms or fairy chests.
                         {
                             //chest.Level = chestLevel;  // Setting the chest level.
                             chest.Level = (int)(room.Level / (LevelEV.ROOM_LEVEL_MOD + Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.RoomLevelDown) * GameEV.RUNE_GRACE_ROOM_LEVEL_LOSS));
@@ -778,11 +778,11 @@ namespace RogueCastle
                                     if (chestRoll <= chestType)
                                     {
                                         if (i == 0)
-                                            chest.ChestType = ChestType.Brown;
+                                            chest.ChestType = ChestType.BROWN;
                                         else if (i == 1)
-                                            chest.ChestType = ChestType.Silver;
+                                            chest.ChestType = ChestType.SILVER;
                                         else
-                                            chest.ChestType = ChestType.Gold;
+                                            chest.ChestType = ChestType.GOLD;
                                         break;
                                     }
                                 }
@@ -790,7 +790,7 @@ namespace RogueCastle
                             }
                             m_chestList.Add(chest);
                         }
-                        else if (chest != null && chest.ChestType == ChestType.Fairy)
+                        else if (chest != null && chest.ChestType == ChestType.FAIRY)
                         {
                             FairyChestObj fairyChest = chest as FairyChestObj;
                             if (fairyChest != null)
@@ -852,7 +852,7 @@ namespace RogueCastle
             string futureCornerTextureString = "NeoCorner_Sprite";
             string futureCornerLTextureString = "NeoCornerL_Sprite";
 
-            if (Game.PlayerStats.Traits.X == TraitType.TheOne || Game.PlayerStats.Traits.Y == TraitType.TheOne)
+            if (Game.PlayerStats.HasTrait(TraitType.THE_ONE))
             {
                 castleCornerLTextureString = dungeonCornerLTextureString = towerCornerLTextureString = gardenCornerLTextureString = futureCornerLTextureString;
                 castleCornerTextureString = dungeonCornerTextureString = towerCornerTextureString = gardenCornerTextureString = futureCornerTextureString;
@@ -931,7 +931,7 @@ namespace RogueCastle
                 }
 
                 bool addTerrainBoxToBreakables = false;
-                if (Game.PlayerStats.Traits.X == TraitType.NoFurniture || Game.PlayerStats.Traits.Y == TraitType.NoFurniture)
+                if (Game.PlayerStats.HasTrait(TraitType.NO_FURNITURE))
                     addTerrainBoxToBreakables = true;
 
                 foreach (GameObj obj in room.GameObjList)
@@ -1281,7 +1281,7 @@ namespace RogueCastle
                                     }
                                 }
 
-                                if (Game.PlayerStats.Traits.X == TraitType.TheOne || Game.PlayerStats.Traits.Y == TraitType.TheOne)
+                                if (Game.PlayerStats.HasTrait(TraitType.THE_ONE))
                                 {
                                     m_foregroundSprite.Scale = Vector2.One;
                                     m_foregroundSprite.ChangeSprite("NeoFG_Sprite", ScreenManager.Camera);
@@ -1289,7 +1289,7 @@ namespace RogueCastle
                                 }
 
                                 // Setting shadow intensity.
-                                if (roomObj.LevelType == GameTypes.LevelType.DUNGEON  || Game.PlayerStats.Traits.X == TraitType.Glaucoma || Game.PlayerStats.Traits.Y == TraitType.Glaucoma || roomObj.Name == "Compass")
+                                if (roomObj.LevelType == GameTypes.LevelType.DUNGEON  || Game.PlayerStats.HasTrait(TraitType.GLAUCOMA) || roomObj.Name == "Compass")
                                     Game.ShadowEffect.Parameters["ShadowIntensity"].SetValue(0.7f);
                                 else
                                     Game.ShadowEffect.Parameters["ShadowIntensity"].SetValue(0);
@@ -1304,7 +1304,7 @@ namespace RogueCastle
 
                                 //m_roomTitle.Text = "Now Entering\n" + WordBuilder.BuildDungeonName(roomObj.LevelType);
                                 m_roomTitle.Text = LocaleBuilder.GetString(WordBuilder.BuildDungeonNameLocID(roomObj.LevelType), m_roomTitle);
-                                if (Game.PlayerStats.Traits.X == TraitType.Dyslexia || Game.PlayerStats.Traits.Y == TraitType.Dyslexia)
+                                if (Game.PlayerStats.HasTrait(TraitType.DYSLEXIA))
                                     m_roomTitle.RandomizeSentence(false);
 
                                 m_roomTitle.Opacity = 0;
@@ -1386,7 +1386,7 @@ namespace RogueCastle
                                 m_currentRoom.Name != "CastleEntrance" && m_currentRoom.Name != "Bonus" && m_currentRoom.Name != "Throne" &&
                                 m_currentRoom.Name != "Secret" && m_currentRoom.Name != "Boss" && m_currentRoom.LevelType != GameTypes.LevelType.NONE && m_currentRoom.Name != "ChallengeBoss")
                             {
-                                if (Game.PlayerStats.Traits.X == TraitType.Dementia || Game.PlayerStats.Traits.Y == TraitType.Dementia)
+                                if (Game.PlayerStats.HasTrait(TraitType.DEMENTIA))
                                 {
                                     if (CDGMath.RandomFloat(0, 1) < GameEV.TRAIT_DEMENTIA_SPAWN_CHANCE)
                                         SpawnDementiaEnemy();
@@ -1603,7 +1603,7 @@ namespace RogueCastle
                         m_elapsedScreenShake -= elapsed;
                         if (m_elapsedScreenShake <= 0)
                         {
-                            if (Game.PlayerStats.Traits.X == (int)TraitType.Clonus || Game.PlayerStats.Traits.Y == (int)TraitType.Clonus)
+                            if (Game.PlayerStats.HasTrait(TraitType.CLONUS))
                             {
                                 ShakeScreen(1, true, true);
                                 GamePad.SetVibration(PlayerIndex.One, 0.25f, 0.25f);
@@ -1801,7 +1801,7 @@ namespace RogueCastle
                     string gardenCornerTextureString = "GardenCorner_Sprite";
                     string gardenCornerLTextureString = "GardenCornerL_Sprite";
 
-                    if (Game.PlayerStats.Traits.X == TraitType.TheOne || Game.PlayerStats.Traits.Y == TraitType.TheOne)
+                    if (Game.PlayerStats.HasTrait(TraitType.THE_ONE))
                     {
                         string futureCornerTextureString = "NeoCorner_Sprite";
                         string futureCornerLTextureString = "NeoCornerL_Sprite";
@@ -1990,9 +1990,9 @@ namespace RogueCastle
             // Drawing the trait aura onto m_traitAuraRenderTarget (used for trait effects).
             if (m_enemiesPaused == false)
             {
-                if (Game.PlayerStats.Traits.X == TraitType.NearSighted || Game.PlayerStats.Traits.Y == TraitType.NearSighted)
+                if (Game.PlayerStats.HasTrait(TraitType.NEAR_SIGHTED))
                     m_traitAura.Scale = new Vector2(15, 15);
-                else if (Game.PlayerStats.Traits.X == TraitType.FarSighted || Game.PlayerStats.Traits.Y == TraitType.FarSighted)
+                else if (Game.PlayerStats.HasTrait(TraitType.FAR_SIGHTED))
                     m_traitAura.Scale = new Vector2(8, 8);
                 else
                     m_traitAura.Scale = new Vector2(10, 10);
@@ -2200,7 +2200,7 @@ namespace RogueCastle
             Camera.End();
 
             /////////// DRAWING THE SHADOWS & LIGHTING //////////////////////////////
-            if ((CurrentLevelType == GameTypes.LevelType.DUNGEON || Game.PlayerStats.Traits.X == TraitType.Glaucoma || Game.PlayerStats.Traits.Y == TraitType.Glaucoma) 
+            if ((CurrentLevelType == GameTypes.LevelType.DUNGEON || Game.PlayerStats.HasTrait(TraitType.GLAUCOMA))
                 && (Game.PlayerStats.Class != ClassType.Banker2 || (Game.PlayerStats.Class == ClassType.Banker2 && Player.LightOn == false)))
             {
                 // Can't do this because switching from a rendertarget and back is a bug in XNA that causes a purple screen.  Might work with Monogame.
@@ -2220,13 +2220,13 @@ namespace RogueCastle
             // Myopia effect.
             if (CurrentRoom.Name != "Ending")
             {
-                if ((Game.PlayerStats.Traits.X == TraitType.NearSighted || Game.PlayerStats.Traits.Y == TraitType.NearSighted) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                if ((Game.PlayerStats.HasTrait(TraitType.NEAR_SIGHTED)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
                 {
                     Game.GaussianBlur.InvertMask = true;
                     Game.GaussianBlur.Draw(m_finalRenderTarget, Camera, m_traitAuraRenderTarget);
                 }
                 // Hyperopia effect.
-                else if ((Game.PlayerStats.Traits.X == TraitType.FarSighted || Game.PlayerStats.Traits.Y == TraitType.FarSighted) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                else if ((Game.PlayerStats.HasTrait(TraitType.FAR_SIGHTED)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
                 {
                     Game.GaussianBlur.InvertMask = false;
                     Game.GaussianBlur.Draw(m_finalRenderTarget, Camera, m_traitAuraRenderTarget);
@@ -2264,7 +2264,7 @@ namespace RogueCastle
 
             if (CurrentRoom.Name != "Ending")
             {
-                if ((Game.PlayerStats.TutorialComplete == false || Game.PlayerStats.Traits.X == TraitType.Nostalgic || Game.PlayerStats.Traits.Y == TraitType.Nostalgic) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                if ((Game.PlayerStats.TutorialComplete == false || Game.PlayerStats.HasTrait(TraitType.NOSTALGIC)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
                     m_filmGrain.Draw(Camera);
             }
             Camera.End();
@@ -2302,14 +2302,14 @@ namespace RogueCastle
             if (CurrentRoom.Name != "Ending")
             {
                 // Colour blind effect.
-                if ((Game.PlayerStats.Traits.X == TraitType.ColorBlind || Game.PlayerStats.Traits.Y == TraitType.ColorBlind) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                if ((Game.PlayerStats.HasTrait(TraitType.COLOR_BLIND)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
                 {
                     Game.HSVEffect.Parameters["Saturation"].SetValue(0);
                     Game.HSVEffect.Parameters["Brightness"].SetValue(0);
                     Game.HSVEffect.Parameters["Contrast"].SetValue(0);
                     Camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, null, null, Game.HSVEffect);
                 }
-                else if ((Game.PlayerStats.TutorialComplete == false || Game.PlayerStats.Traits.X == TraitType.Nostalgic || Game.PlayerStats.Traits.Y == TraitType.Nostalgic) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                else if ((Game.PlayerStats.TutorialComplete == false || Game.PlayerStats.HasTrait(TraitType.NOSTALGIC)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
                 {
                     Camera.GraphicsDevice.SetRenderTarget(m_finalRenderTarget);
                     Game.HSVEffect.Parameters["Saturation"].SetValue(0.2f);
@@ -2388,15 +2388,15 @@ namespace RogueCastle
 
             foreach (EnemyObj enemy in m_currentRoom.EnemyList)
             {
-                if (enemy.Type !=  EnemyType.Turret && enemy.Type != EnemyType.SpikeTrap && enemy.Type != EnemyType.Platform && 
-                    enemy.Type != EnemyType.Portrait && enemy.Type != EnemyType.Eyeball && enemy.Type != EnemyType.Starburst)
+                if (enemy.Type !=  EnemyType.TURRET && enemy.Type != EnemyType.SPIKE_TRAP && enemy.Type != EnemyType.PLATFORM &&
+                    enemy.Type != EnemyType.PORTRAIT && enemy.Type != EnemyType.EYEBALL && enemy.Type != EnemyType.STARBURST)
                     enemyObjList.Add(enemy);
             }
 
             if (enemyObjList.Count > 0)
             {
                 EnemyObj enemy = enemyObjList[CDGMath.RandomInt(0, enemyObjList.Count - 1)];
-                EnemyType[] enemyList = null;
+                byte[] enemyList = null;
 
                 if (enemy.IsWeighted == true)
                     enemyList = LevelEV.DementiaGroundList;
@@ -2953,28 +2953,28 @@ namespace RogueCastle
             ShoutMagnitude = 3;
 
             // Setting up player.
-            if (Game.PlayerStats.Traits.X == TraitType.Gigantism || Game.PlayerStats.Traits.Y == TraitType.Gigantism)
+            if (Game.PlayerStats.HasTrait(TraitType.GIGANTISM))
                 m_player.Scale = new Vector2(GameEV.TRAIT_GIGANTISM, GameEV.TRAIT_GIGANTISM);//(3.5f, 3.5f);
-            else if (Game.PlayerStats.Traits.X == TraitType.Dwarfism || Game.PlayerStats.Traits.Y == TraitType.Dwarfism)
+            else if (Game.PlayerStats.HasTrait(TraitType.DWARFISM))
                 m_player.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
             else
                 m_player.Scale = new Vector2(2, 2);
 
             // Modifying the player's scale based on traits.
-            if (Game.PlayerStats.Traits.X == TraitType.Ectomorph || Game.PlayerStats.Traits.Y == TraitType.Ectomorph)
+            if (Game.PlayerStats.HasTrait(TraitType.ECTOMORPH))
             {
                 m_player.ScaleX *= 0.825f;
                 m_player.ScaleY *= 1.15f;
                 //m_player.Scale = new Vector2(1.8f, 2.2f);
             }
-            else if (Game.PlayerStats.Traits.X == TraitType.Endomorph || Game.PlayerStats.Traits.Y == TraitType.Endomorph)
+            else if (Game.PlayerStats.HasTrait(TraitType.ENDOMORPH))
             {
                 m_player.ScaleX *= 1.25f;
                 m_player.ScaleY *= 1.175f;
                 //m_player.Scale = new Vector2(2.5f, 2f);
             }
 
-            if (Game.PlayerStats.Traits.X == TraitType.Clonus || Game.PlayerStats.Traits.Y == TraitType.Clonus)
+            if (Game.PlayerStats.HasTrait(TraitType.CLONUS))
             {
                 m_elapsedScreenShake = CDGMath.RandomFloat(GameEV.TRAIT_CLONUS_MIN, GameEV.TRAIT_CLONUS_MAX);
             }
@@ -3042,15 +3042,15 @@ namespace RogueCastle
             bool paintingMBKilled = false;
             bool knightMBKilled = false;
             bool wizardMBKilled = false;
-            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.Skeleton].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.SKELETON].W > 0)
                 skeletonMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.Plant].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.PLANT].W > 0)
                 plantMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.Portrait].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.PORTRAIT].W > 0)
                 paintingMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.Knight].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.KNIGHT].W > 0)
                 knightMBKilled = true;
-            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.EarthWizard].W > 0)
+            if (Game.PlayerStats.EnemiesKilledList[(int)EnemyType.EARTH_WIZARD].W > 0)
                 wizardMBKilled = true;
 
             if (skeletonMBKilled && plantMBKilled && paintingMBKilled && knightMBKilled && wizardMBKilled)

@@ -9,6 +9,7 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -116,7 +117,7 @@ namespace RogueCastle
             // Setting the last boss's frame.  This needs to be done before the stats are erased for the next play.
             m_playerFrame.Opacity = 0;
             m_playerFrame.Position = m_lastBoss.Position;
-            m_playerFrame.SetTraits(Vector2.Zero);
+            m_playerFrame.SetTraits((TraitType.NONE, TraitType.NONE));
 
             m_playerFrame.IsFemale = false;
             m_playerFrame.Class = ClassType.Knight;

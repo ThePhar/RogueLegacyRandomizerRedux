@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -142,7 +142,7 @@ namespace RogueCastle
         public EnemyObj_Eagle(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("Dummy_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.Eagle;
+            this.Type = EnemyType.EAGLE;
         }
     }
 }

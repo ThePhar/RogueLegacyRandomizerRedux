@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -98,7 +99,7 @@ namespace RogueCastle
                     SoundManager.Play3DSound(this, Game.ScreenManager.Player, "EnemyHit1", "EnemyHit2", "EnemyHit3", "EnemyHit4", "EnemyHit5", "EnemyHit6");
                     SoundManager.Play3DSound(this, Game.ScreenManager.Player, "Break1", "Break2", "Break3");
 
-                    if (Game.PlayerStats.Traits.X == TraitType.OCD || Game.PlayerStats.Traits.Y == TraitType.OCD)
+                    if (Game.PlayerStats.HasTrait(TraitType.OCD))
                     {
                         player.CurrentMana += 1;
                         player.AttachedLevel.TextManager.DisplayNumberStringText(1, "LOC_ID_SKILL_SCREEN_15" /*"mp"*/, Color.RoyalBlue, new Vector2(player.X, player.Bounds.Top - 30));
@@ -115,7 +116,7 @@ namespace RogueCastle
                     {
                         if (i == 0)
                         {
-                            if (Game.PlayerStats.Traits.X != TraitType.Alektorophobia && Game.PlayerStats.Traits.Y != TraitType.Alektorophobia)
+                            if (!Game.PlayerStats.HasTrait(TraitType.ALEKTOROPHOBIA))
                                 player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.Health, GameEV.ITEM_HEALTHDROP_AMOUNT);
                             else
                             {
@@ -149,7 +150,7 @@ namespace RogueCastle
             SoundManager.Play3DSound(this, Game.ScreenManager.Player,"EnemyHit1", "EnemyHit2", "EnemyHit3", "EnemyHit4", "EnemyHit5", "EnemyHit6");
             SoundManager.Play3DSound(this, Game.ScreenManager.Player,"Break1", "Break2", "Break3");
 
-            if (Game.PlayerStats.Traits.X == TraitType.OCD || Game.PlayerStats.Traits.Y == TraitType.OCD)
+            if (Game.PlayerStats.HasTrait(TraitType.OCD))
             {
                 player.CurrentMana += 1;
                 player.AttachedLevel.TextManager.DisplayNumberStringText(1, "LOC_ID_SKILL_SCREEN_15" /*"mp"*/, Color.RoyalBlue, new Vector2(player.X, player.Bounds.Top - 30));

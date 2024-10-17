@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using Tweener;
 
 namespace RogueCastle
@@ -685,7 +685,7 @@ namespace RogueCastle
             : base("EnemyGhostIdle_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
             //this.PlayAnimation();
-            this.Type = EnemyType.Fireball;
+            this.Type = EnemyType.FIREBALL;
             TintablePart = _objectList[0];
         }
 

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -640,7 +640,7 @@ namespace RogueCastle
             : base("EnemySpearKnightIdle_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
             TintablePart = _objectList[1];
-            this.Type = EnemyType.Knight;
+            this.Type = EnemyType.KNIGHT;
             m_walkSound = new FrameSoundObj(this, m_target, 1, "KnightWalk1", "KnightWalk2");
             m_walkSound2 = new FrameSoundObj(this, m_target, 6, "KnightWalk1", "KnightWalk2");
         }

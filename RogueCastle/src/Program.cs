@@ -51,8 +51,8 @@ namespace RogueCastle
                     LevelEV.RunTutorial = false;
                     LevelEV.RunDemoVersion = false;
                     LevelEV.DisableSaving = false;
-                    LevelEV.RunCrashLogs = true;
-                    LevelEV.WeakenBosses = false;
+                    LevelEV.RunCrashLogs = false; // todo
+                    LevelEV.WeakenBosses = true; // todo
                     LevelEV.EnableBackupSaving = true;
                     LevelEV.EnableOffscreenControl = false;
                     LevelEV.ShowFps = false;

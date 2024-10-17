@@ -7,8 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Tweener;
 using System.Text.RegularExpressions;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -69,7 +69,7 @@ namespace RogueCastle
 
         public bool DisablePlaque { get; set; }
 
-        public Vector2 Traits { get; internal set; }
+        public Traits Traits { get; internal set; }
 
         private int m_textYPos = 140;
 
@@ -188,11 +188,11 @@ namespace RogueCastle
                 m_classTextObj.Text = classText + LocaleBuilder.GetResourceString(ClassType.ToStringID(this.Class, this.IsFemale));
 
                 // Special check to make sure lich doesn't get dextrocardia.
-                while ((this.Class == ClassType.Lich || this.Class == ClassType.Lich2) && (this.Traits.X == TraitType.Dextrocardia || this.Traits.Y == TraitType.Dextrocardia))
+                while ((this.Class == ClassType.Lich || this.Class == ClassType.Lich2) && (HasTrait(TraitType.DEXTROCARDIA)))
                     this.Traits = TraitType.CreateRandomTraits();
 
                 // Special check to make sure wizard don't get savantism.
-                while ((this.Class == ClassType.Wizard || this.Class == ClassType.Wizard2 || this.Class == ClassType.Dragon) && (this.Traits.X == TraitType.Savant || this.Traits.Y == TraitType.Savant))
+                while ((this.Class == ClassType.Wizard || this.Class == ClassType.Wizard2 || this.Class == ClassType.Dragon) && (HasTrait(TraitType.SAVANT)))
                     this.Traits = TraitType.CreateRandomTraits();
 
                 // Selecting random spell.  There's a check to make sure savants don't get particular spells.
@@ -200,7 +200,7 @@ namespace RogueCastle
                 do
                 {
                     this.Spell = spellList[CDGMath.RandomInt(0, spellList.Length - 1)];
-                } while ((this.Spell == SpellType.DamageShield || this.Spell == SpellType.TimeStop || this.Spell == SpellType.Translocator) && (this.Traits.X == TraitType.Savant || this.Traits.Y == TraitType.Savant));
+                } while ((this.Spell == SpellType.DamageShield || this.Spell == SpellType.TimeStop || this.Spell == SpellType.Translocator) && (HasTrait(TraitType.SAVANT)));
                 Array.Clear(spellList, 0, spellList.Length);
 
                 // Setting age.
@@ -210,6 +210,11 @@ namespace RogueCastle
                 // This call updates the player's graphics.
                 UpdateData();
             }
+        }
+
+        private bool HasTrait(byte trait)
+        {
+            return Traits.Trait1 == trait || Traits.Trait2 == trait;
         }
 
         private string CreateMaleName(LineageScreen screen)
@@ -345,13 +350,13 @@ namespace RogueCastle
             SetTraits(Traits);
 
             m_playerSprite.GetChildAt(PlayerPart.Hair).Visible = true;
-            if (this.Traits.X == TraitType.Baldness || this.Traits.Y == TraitType.Baldness)
+            if (HasTrait(TraitType.BALDNESS))
                 m_playerSprite.GetChildAt(PlayerPart.Hair).Visible = false;
 
             // flibit added this.
             FlipPortrait = false;
             m_playerSprite.Rotation = 0;
-            if (this.Traits.X == TraitType.Vertigo || this.Traits.Y == TraitType.Vertigo)
+            if (HasTrait(TraitType.VERTIGO))
                 FlipPortrait = true;
 
             string classText = "";
@@ -419,18 +424,18 @@ namespace RogueCastle
             }
 
             m_playerSprite.Scale = new Vector2(2);
-            if (Traits.X == TraitType.Gigantism || Traits.Y == TraitType.Gigantism)
+            if (HasTrait(TraitType.GIGANTISM))
                 m_playerSprite.Scale = new Vector2(GameEV.TRAIT_GIGANTISM, GameEV.TRAIT_GIGANTISM);
-            if (Traits.X == TraitType.Dwarfism|| Traits.Y == TraitType.Dwarfism)
+            if (HasTrait(TraitType.DWARFISM))
                 m_playerSprite.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
 
-            if (Traits.X == TraitType.Ectomorph || Traits.Y == TraitType.Ectomorph)
+            if (HasTrait(TraitType.ECTOMORPH))
             {
                 m_playerSprite.ScaleX *= 0.825f;
                 m_playerSprite.ScaleY *= 1.25f;
             }
 
-            if (Traits.X == TraitType.Endomorph || Traits.Y == TraitType.Endomorph)
+            if (HasTrait(TraitType.ENDOMORPH))
             {
                 m_playerSprite.ScaleX *= 1.25f;
                 m_playerSprite.ScaleY *= 1.175f;
@@ -565,21 +570,21 @@ namespace RogueCastle
             }
         }
 
-        public void SetTraits(Vector2 traits)
+        public void SetTraits(Traits traits)
         {
             this.Traits = traits;
             string traitString = "";
-            if (Traits.X != 0)
-                traitString += LocaleBuilder.GetResourceString(TraitType.ToStringID((byte)Traits.X));
+            if (Traits.Trait1 != TraitType.NONE)
+                traitString += LocaleBuilder.GetResourceString(TraitType.ToStringID(Traits.Trait1));
             //m_trait1Title.Text = TraitType.ToString((byte)Traits.X);
             else
                 m_trait1Title.Text = "";
-            if (Traits.Y != 0)
+            if (Traits.Trait2 != TraitType.NONE)
             {
-                if (traits.X != 0)
-                    traitString += ", " + LocaleBuilder.GetResourceString(TraitType.ToStringID((byte)Traits.Y));
+                if (traits.Trait1 != TraitType.NONE)
+                    traitString += ", " + LocaleBuilder.GetResourceString(TraitType.ToStringID(Traits.Trait2));
                 else
-                    traitString += LocaleBuilder.GetResourceString(TraitType.ToStringID((byte)Traits.Y));
+                    traitString += LocaleBuilder.GetResourceString(TraitType.ToStringID(Traits.Trait2));
             }
                 //m_trait2Title.Text = TraitType.ToString((byte)Traits.Y);
 
@@ -589,7 +594,7 @@ namespace RogueCastle
             {
                 m_plaqueSprite.ScaleX = 1.8f;
                 // Auto-scale the plaque if the trait text is too large.
-                if (traits.X != TraitType.None)
+                if (traits.Trait1 != TraitType.NONE)
                 {
                     float maxWidth = m_plaqueSprite.Width;
                     float traitWidth = m_trait1Title.Width + 50;
@@ -602,7 +607,7 @@ namespace RogueCastle
 
         public void ClearTraits()
         {
-            Traits = Vector2.Zero;
+            Traits = (TraitType.NONE, TraitType.NONE);
             m_trait1Title.Text = LocaleBuilder.GetString("LOC_ID_LINEAGE_OBJ_1", m_trait1Title);
             m_trait2Title.Text = "";
         }

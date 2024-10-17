@@ -8,6 +8,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using System.Reflection;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -199,7 +200,7 @@ namespace RogueCastle
             (m_dialogChoiceContainer.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetString(choiceDialogue.Speakers[0], m_dialogChoiceContainer.GetChildAt(2) as TextObj);
             (m_dialogChoiceContainer.GetChildAt(3) as TextObj).Text = LocaleBuilder.GetString(choiceDialogue.Dialogue[0], m_dialogChoiceContainer.GetChildAt(3) as TextObj);
 
-            if (Game.PlayerStats.Traits.X == TraitType.Dyslexia || Game.PlayerStats.Traits.Y == TraitType.Dyslexia)
+            if (Game.PlayerStats.HasTrait(TraitType.DYSLEXIA))
             {
                 (m_dialogChoiceContainer.GetChildAt(2) as TextObj).RandomizeSentence(false);
                 (m_dialogChoiceContainer.GetChildAt(3) as TextObj).RandomizeSentence(false);
@@ -244,7 +245,7 @@ namespace RogueCastle
                                     dialogueText.Text = string.Format(LocaleBuilder.GetString(m_dialogText[m_dialogCounter], dialogueText, m_forceMaleDialogue), m_stringFormatArgs);
                                 else
                                     dialogueText.Text = LocaleBuilder.GetString(m_dialogText[m_dialogCounter], dialogueText, m_forceMaleDialogue);
-                                if (Game.PlayerStats.Traits.X == TraitType.Dyslexia || Game.PlayerStats.Traits.Y == TraitType.Dyslexia)
+                                if (Game.PlayerStats.HasTrait(TraitType.DYSLEXIA))
                                 {
                                     dialogueTitle.RandomizeSentence(false);
                                     dialogueText.RandomizeSentence(false);
@@ -425,7 +426,7 @@ namespace RogueCastle
                 (m_dialogContainer.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetString(text[m_dialogCounter], m_dialogContainer.GetChildAt(2) as TextObj, m_forceMaleDialogue);
             (m_dialogContainer.GetChildAt(2) as TextObj).WordWrap(850);
             (m_dialogContainer.GetChildAt(1) as TextObj).Text = LocaleBuilder.GetString(names[m_dialogCounter], m_dialogContainer.GetChildAt(1) as TextObj, m_forceMaleDialogue);
-            if (Game.PlayerStats.Traits.X == TraitType.Dyslexia || Game.PlayerStats.Traits.Y == TraitType.Dyslexia)
+            if (Game.PlayerStats.HasTrait(TraitType.DYSLEXIA))
             {
                 (m_dialogContainer.GetChildAt(2) as TextObj).RandomizeSentence(false);
                 (m_dialogContainer.GetChildAt(1) as TextObj).RandomizeSentence(false);

@@ -5,8 +5,8 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using InputSystem;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -387,7 +387,7 @@ namespace RogueCastle
         public EnemyObj_Starburst(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemyStarburstIdle_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.Starburst;
+            this.Type = EnemyType.STARBURST;
         }
 
     }

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -431,7 +431,7 @@ namespace RogueCastle
         {
             this.PlayAnimation(true);
             TintablePart = _objectList[0];
-            this.Type = EnemyType.EarthWizard;
+            this.Type = EnemyType.EARTH_WIZARD;
         }
 
         private void InitializeProjectiles()

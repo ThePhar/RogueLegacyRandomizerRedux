@@ -9,8 +9,8 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using InputSystem;
 using System.Text.RegularExpressions;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -217,10 +217,10 @@ namespace RogueCastle
 
             int spellY = (int)trait1Name.Y;
 
-            if (selectedObj.Traits.X > 0)
+            if (selectedObj.Traits.Trait1 > 0)
             {
-                trait1Name.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_6") + " - " + LocaleBuilder.GetResourceString(TraitType.ToStringID((byte)selectedObj.Traits.X));
-                trait1Description.Text = LocaleBuilder.GetResourceString(TraitType.DescriptionID((byte)selectedObj.Traits.X, selectedObj.IsFemale));
+                trait1Name.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_6") + " - " + LocaleBuilder.GetResourceString(TraitType.ToStringID((byte)selectedObj.Traits.Trait1));
+                trait1Description.Text = LocaleBuilder.GetResourceString(TraitType.DescriptionID((byte)selectedObj.Traits.Trait1, selectedObj.IsFemale));
                 trait1Description.WordWrap(340);
 
                 spellY = (int)trait1Description.Y + trait1Description.Height + 5;
@@ -237,10 +237,10 @@ namespace RogueCastle
             TextObj trait2Description = m_descriptionPlate.GetChildAt(7) as TextObj;
             trait2Description.Y = trait2Name.Y + 30;
 
-            if (selectedObj.Traits.Y > 0)
+            if (selectedObj.Traits.Trait2 > 0)
             {
-                trait2Name.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_6") + " - " + LocaleBuilder.GetResourceString(TraitType.ToStringID((byte)selectedObj.Traits.Y));
-                trait2Description.Text = LocaleBuilder.GetResourceString(TraitType.DescriptionID((byte)selectedObj.Traits.Y, selectedObj.IsFemale));
+                trait2Name.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_6") + " - " + LocaleBuilder.GetResourceString(TraitType.ToStringID((byte)selectedObj.Traits.Trait2));
+                trait2Description.Text = LocaleBuilder.GetResourceString(TraitType.DescriptionID((byte)selectedObj.Traits.Trait2, selectedObj.IsFemale));
                 trait2Description.WordWrap(340);
 
                 spellY = (int)trait2Description.Y + trait2Description.Height + 5;
@@ -318,7 +318,7 @@ namespace RogueCastle
 
                 m_currentBranchArray.Add(obj);
 
-                if (obj.Traits.X == TraitType.Vertigo || obj.Traits.Y == TraitType.Vertigo)
+                if (obj.Traits.Trait1 == TraitType.VERTIGO || obj.Traits.Trait2 == TraitType.VERTIGO)
                     obj.FlipPortrait = true;
 
                 obj.HasProsopagnosia = Game.PlayerStats.HasProsopagnosia;
@@ -426,7 +426,7 @@ namespace RogueCastle
 
                     m_masterArray.Add(lineageObj);
 
-                    if (lineageObj.Traits.X == TraitType.Vertigo || lineageObj.Traits.Y == TraitType.Vertigo)
+                    if (lineageObj.Traits.Trait1 == TraitType.VERTIGO || lineageObj.Traits.Trait2 == TraitType.VERTIGO)
                         lineageObj.FlipPortrait = true;
                 }
             }
@@ -454,7 +454,7 @@ namespace RogueCastle
 
                 m_masterArray.Add(lineageObj);
 
-                if (lineageObj.Traits.X == TraitType.Vertigo || lineageObj.Traits.Y == TraitType.Vertigo)
+                if (lineageObj.Traits.Trait1 == TraitType.VERTIGO || lineageObj.Traits.Trait2 == TraitType.VERTIGO)
                     lineageObj.FlipPortrait = true;
             }
         }
@@ -532,7 +532,7 @@ namespace RogueCastle
             if (Game.PlayerStats.Class == ClassType.Dragon)
                 GameUtil.UnlockAchievement("FEAR_OF_GRAVITY");
 
-            if (Game.PlayerStats.Traits == Vector2.Zero)
+            if (Game.PlayerStats.Traits is { Trait1: TraitType.NONE, Trait2: TraitType.NONE })
                 GameUtil.UnlockAchievement("FEAR_OF_IMPERFECTIONS");
 
             base.OnExit();
@@ -744,8 +744,8 @@ namespace RogueCastle
         private void HandleDebugInput()
         {
             // Debug for easier localization testing.
-            Vector2 traits = m_currentBranchArray[m_selectedLineageIndex].Traits;
-            Vector2 previousTraits = traits;
+            var traits = m_currentBranchArray[m_selectedLineageIndex].Traits;
+            var previousTraits = traits;
             bool lineageObjChanged = false;
 
             if (InputManager.JustPressed(Keys.OemQuotes, null) ||InputManager.JustPressed(Keys.OemSemicolon, null))
@@ -776,23 +776,23 @@ namespace RogueCastle
             }
 
             if (InputManager.JustPressed(Keys.M, PlayerIndex.One))
-                traits.X--;
+                traits.Trait1--;
             else if (InputManager.JustPressed(Keys.OemComma, PlayerIndex.One))
-                traits.X++;
+                traits.Trait1++;
 
             if (InputManager.JustPressed(Keys.OemPeriod, PlayerIndex.One))
-                traits.Y--;
+                traits.Trait2--;
             else if (InputManager.JustPressed(Keys.OemQuestion, PlayerIndex.One))
-                traits.Y++;
+                traits.Trait2++;
 
-            if (traits.X >= TraitType.Total)
-                traits.X = TraitType.None;
-            else if (traits.X < TraitType.None)
-                traits.X = TraitType.Total - 1;
-            if (traits.Y >= TraitType.Total)
-                traits.Y = TraitType.None;
-            else if (traits.Y < TraitType.None)
-                traits.Y = TraitType.Total - 1;
+            if (traits.Trait1 >= TraitType.TOTAL)
+                traits.Trait1 = TraitType.NONE;
+            else if (traits.Trait1 < TraitType.NONE)
+                traits.Trait1 = TraitType.TOTAL - 1;
+            if (traits.Trait2 >= TraitType.TOTAL)
+                traits.Trait2 = TraitType.NONE;
+            else if (traits.Trait2 < TraitType.NONE)
+                traits.Trait2 = TraitType.TOTAL - 1;
 
             if (traits != previousTraits)
             {

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.GameStructs;
 using Tweener.Ease;
 using Tweener;
 
@@ -78,7 +79,7 @@ namespace RogueCastle
                 ChestObj chest = obj as ChestObj;
                 if (chest != null)
                 {
-                    chest.ChestType = ChestType.Silver;
+                    chest.ChestType = ChestType.SILVER;
                     //if (ID == 1)
                     //    chest.ChestType = ChestType.Brown;
                     //else if (ID == 2)

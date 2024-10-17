@@ -5,8 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using DS2DEngine;
 using System.Globalization;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -775,7 +775,7 @@ namespace RogueCastle
             foreach (RoomObj room in roomList)
             {
                 // Do not add diary rooms to the procedural generation if you have unlocked all the diaries.
-                if ((Game.PlayerStats.DiaryEntry >= LevelEV.TOTAL_JOURNAL_ENTRIES - 1) && room.Name == "Bonus" && room.Tag == BonusRoomType.Diary.ToString())
+                if ((Game.PlayerStats.DiaryEntry >= LevelEV.TOTAL_JOURNAL_ENTRIES - 1) && room.Name == "Bonus" && room.Tag == BonusRoomType.DIARY.ToString())
                     continue;
 
                 foreach (DoorObj door in room.DoorList)
@@ -1245,7 +1245,7 @@ namespace RogueCastle
             foreach (RoomObj room in roomList)
             {
                 // Setting the pool of the types of the enemies the room can select from.
-                EnemyType[] enemyPool = null;
+                byte[] enemyPool = null;
                 byte[] enemyDifficultyPool = null;
                 switch (room.LevelType)
                 {
@@ -1276,7 +1276,7 @@ namespace RogueCastle
                 int storedEnemyIndex = randomEnemyOrbIndex;
 
                 // Storing red enemy type.
-                EnemyType redEnemyType = enemyPool[randomEnemyOrbIndex];
+                byte redEnemyType = enemyPool[randomEnemyOrbIndex];
                 byte redEnemyDifficulty = enemyDifficultyPool[randomEnemyOrbIndex];
              
                 //Shuffling to get a new enemy type.
@@ -1285,7 +1285,7 @@ namespace RogueCastle
                 storedEnemyIndex = randomEnemyOrbIndex;
 
                 // Storing blue enemy type.
-                EnemyType blueEnemyType = enemyPool[randomEnemyOrbIndex];
+                byte blueEnemyType = enemyPool[randomEnemyOrbIndex];
                 byte blueEnemyDifficulty = enemyDifficultyPool[randomEnemyOrbIndex];
                 
                 // Shuffling to get a new enemy type.
@@ -1294,7 +1294,7 @@ namespace RogueCastle
                 storedEnemyIndex = randomEnemyOrbIndex;
 
                 // Storing green enemy type.
-                EnemyType greenEnemyType = enemyPool[randomEnemyOrbIndex];
+                byte greenEnemyType = enemyPool[randomEnemyOrbIndex];
                 byte greenEnemyDifficulty = enemyDifficultyPool[randomEnemyOrbIndex];
 
                 // Shuffling to get a new enemy type.
@@ -1303,7 +1303,7 @@ namespace RogueCastle
                 storedEnemyIndex = randomEnemyOrbIndex;
 
                 // Storing white enemy type.
-                EnemyType whiteEnemyType = enemyPool[randomEnemyOrbIndex];
+                byte whiteEnemyType = enemyPool[randomEnemyOrbIndex];
                 byte whiteEnemyDifficulty = enemyDifficultyPool[randomEnemyOrbIndex];
 
                 // Shuffling to get a new enemy type.
@@ -1312,14 +1312,14 @@ namespace RogueCastle
                 storedEnemyIndex = randomEnemyOrbIndex;
 
                 // Storing black enemy type.
-                EnemyType blackEnemyType = enemyPool[randomEnemyOrbIndex];
+                byte blackEnemyType = enemyPool[randomEnemyOrbIndex];
                 byte blackEnemyDifficulty = enemyDifficultyPool[randomEnemyOrbIndex];
 
                 // Shuffling to get new boss type. No need to prevent two of the same enemy types of appearing.
                 randomEnemyOrbIndex = CDGMath.RandomInt(0, enemyPool.Length - 1);
                 // Storing yellow enemy type.
-                EnemyType yellowEnemyType = enemyPool[randomEnemyOrbIndex];
-                while (yellowEnemyType == EnemyType.BouncySpike) // Prevent expert enemy from being bouncy spike
+                byte yellowEnemyType = enemyPool[randomEnemyOrbIndex];
+                while (yellowEnemyType == EnemyType.BOUNCY_SPIKE) // Prevent expert enemy from being bouncy spike
                 {
                     randomEnemyOrbIndex = CDGMath.RandomInt(0, enemyPool.Length - 1);
                     yellowEnemyType = enemyPool[randomEnemyOrbIndex];
@@ -1436,7 +1436,7 @@ namespace RogueCastle
             }
         }
 
-        public static void OverrideProceduralEnemies(ProceduralLevelScreen level, EnemyType[] enemyTypeData, byte[] enemyDifficultyData)
+        public static void OverrideProceduralEnemies(ProceduralLevelScreen level, byte[] enemyTypeData, byte[] enemyDifficultyData)
         {
             Console.WriteLine("////////////////// OVERRIDING CREATED ENEMIES. LOADING PRE-CONSTRUCTED ENEMY LIST ////////");
 
@@ -1910,20 +1910,20 @@ namespace RogueCastle
                     if (room.Tag == "")
                         room.Tag = "0";
 
-                    RoomObj roomToAdd = (BonusRoomType)int.Parse(room.Tag, NumberStyles.Any, ci) switch
+                    RoomObj roomToAdd = byte.Parse(room.Tag, NumberStyles.Any, ci) switch
                     {
-                        BonusRoomType.PickChest      => new ChestBonusRoomObj(),
-                        BonusRoomType.SpecialItem    => new SpecialItemRoomObj(),
-                        BonusRoomType.RandomTeleport => new RandomTeleportRoomObj(),
-                        BonusRoomType.SpellSwap      => new SpellSwapRoomObj(),
-                        BonusRoomType.VitaChamber    => new VitaChamberRoomObj(),
-                        BonusRoomType.Diary          => new DiaryRoomObj(),
-                        BonusRoomType.Portrait       => new PortraitRoomObj(),
-                        BonusRoomType.CarnivalShoot1 => new CarnivalShoot1BonusRoom(),
-                        BonusRoomType.CarnivalShoot2 => new CarnivalShoot2BonusRoom(),
-                        BonusRoomType.Arena          => new ArenaBonusRoom(),
-                        BonusRoomType.Jukebox        => new JukeboxBonusRoom(),
-                        _                            => null,
+                        BonusRoomType.PICK_CHEST      => new ChestBonusRoomObj(),
+                        BonusRoomType.SPECIAL_ITEM    => new SpecialItemRoomObj(),
+                        BonusRoomType.RANDOM_TELEPORT => new RandomTeleportRoomObj(),
+                        BonusRoomType.SPELL_SWAP      => new SpellSwapRoomObj(),
+                        BonusRoomType.VITA_CHAMBER    => new VitaChamberRoomObj(),
+                        BonusRoomType.DIARY           => new DiaryRoomObj(),
+                        BonusRoomType.PORTRAIT        => new PortraitRoomObj(),
+                        BonusRoomType.CARNIVAL_SHOOT1 => new CarnivalShoot1BonusRoom(),
+                        BonusRoomType.CARNIVAL_SHOOT2 => new CarnivalShoot2BonusRoom(),
+                        BonusRoomType.ARENA           => new ArenaBonusRoom(),
+                        BonusRoomType.JUKEBOX         => new JukeboxBonusRoom(),
+                        _                             => null,
                     };
 
                     if (roomToAdd != null)
@@ -1957,19 +1957,19 @@ namespace RogueCastle
 
                     switch (bossRoomType)
                     {
-                        case (BossRoomType.EyeballBossRoom):
+                        case (BossRoomType.EYEBALL_BOSS_ROOM):
                             bossRoom = new EyeballBossRoom();
                             break;
-                        case (BossRoomType.LastBossRoom):
+                        case (BossRoomType.LAST_BOSS_ROOM):
                             bossRoom = new LastBossRoom();
                             break;
-                        case (BossRoomType.BlobBossRoom):
+                        case (BossRoomType.BLOB_BOSS_ROOM):
                             bossRoom = new BlobBossRoom();
                             break;
-                        case (BossRoomType.FairyBossRoom):
+                        case (BossRoomType.FAIRY_BOSS_ROOM):
                             bossRoom = new FairyBossRoom();
                             break;
-                        case (BossRoomType.FireballBossRoom):
+                        case (BossRoomType.FIREBALL_BOSS_ROOM):
                             bossRoom = new FireballBossRoom();
                             break;
                     }
@@ -2010,23 +2010,23 @@ namespace RogueCastle
 
                     switch (challengeRoomType)
                     {
-                        case (BossRoomType.EyeballBossRoom):
+                        case (BossRoomType.EYEBALL_BOSS_ROOM):
                             challengeRoom = new EyeballChallengeRoom();
                             MoveRoom(challengeRoom, new Vector2(0, 5000000));
                             break;
-                        case (BossRoomType.FairyBossRoom):
+                        case (BossRoomType.FAIRY_BOSS_ROOM):
                             challengeRoom = new FairyChallengeRoom();
                             MoveRoom(challengeRoom, new Vector2(0, -6000000));
                             break;
-                        case (BossRoomType.FireballBossRoom):
+                        case (BossRoomType.FIREBALL_BOSS_ROOM):
                             challengeRoom = new FireballChallengeRoom();
                             MoveRoom(challengeRoom, new Vector2(0, -7000000));
                             break;
-                        case (BossRoomType.BlobBossRoom):
+                        case (BossRoomType.BLOB_BOSS_ROOM):
                             challengeRoom = new BlobChallengeRoom();
                             MoveRoom(challengeRoom, new Vector2(0, -8000000));
                             break;
-                        case (BossRoomType.LastBossRoom):
+                        case (BossRoomType.LAST_BOSS_ROOM):
                             challengeRoom = new LastBossChallengeRoom();
                             MoveRoom(challengeRoom, new Vector2(0, -9000000));
                             break;
@@ -2192,7 +2192,7 @@ namespace RogueCastle
                 {
                     // Creating tutorial room and boss room.
                     TutorialRoomObj tutorialRoom = m_tutorialRoom.Clone() as TutorialRoomObj;
-                    bossRoom = GetSpecificBossRoom(BossRoomType.LastBossRoom).Clone() as RoomObj;
+                    bossRoom = GetSpecificBossRoom(BossRoomType.LAST_BOSS_ROOM).Clone() as RoomObj;
 
                     // Moving tutorial room and boss room to proper positions.
                     MoveRoom(tutorialRoom, new Vector2(100000, -100000)); // Special positioning for the last boss room. Necessary since CastleEntranceRoomObj blocks you from going past 0.
@@ -2216,7 +2216,7 @@ namespace RogueCastle
             }
 
             // Adding the Last boss challenge room.
-            challengeRoom = GetChallengeRoom(BossRoomType.LastBossRoom);
+            challengeRoom = GetChallengeRoom(BossRoomType.LAST_BOSS_ROOM);
             if (challengeRoom != null)
             {
                 challengeRoom = challengeRoom.Clone() as RoomObj;

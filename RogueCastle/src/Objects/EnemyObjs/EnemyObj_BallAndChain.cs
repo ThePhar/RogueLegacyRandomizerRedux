@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -322,7 +322,7 @@ namespace RogueCastle
             {
                 m_chainLinks2List.Add(new Vector2());
             }
-            this.Type = EnemyType.BallAndChain;
+            this.Type = EnemyType.BALL_AND_CHAIN;
 
             this.TintablePart = _objectList[3];
 

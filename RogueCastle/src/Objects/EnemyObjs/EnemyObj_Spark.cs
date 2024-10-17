@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -396,7 +396,7 @@ namespace RogueCastle
         {
             IsWeighted = false;
             ForceDraw = true;
-            this.Type = EnemyType.Spark;
+            this.Type = EnemyType.SPARK;
             this.NonKillable = true;
         }
 

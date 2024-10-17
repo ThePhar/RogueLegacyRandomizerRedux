@@ -5,8 +5,8 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using InputSystem;
-using RogueCastle.Enumerations;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -492,7 +492,7 @@ namespace RogueCastle
         public EnemyObj_Portrait(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemyPortrait_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            this.Type = EnemyType.Portrait;
+            this.Type = EnemyType.PORTRAIT;
             // Creating the picture frame for the enemy.
             string framePicture = "FramePicture" + CDGMath.RandomInt(1,16) + "_Sprite";
             this.GetChildAt(0).ChangeSprite(framePicture);

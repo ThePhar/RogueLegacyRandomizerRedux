@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Tweener.Ease;
 using Tweener;
 using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.Enumerations;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {

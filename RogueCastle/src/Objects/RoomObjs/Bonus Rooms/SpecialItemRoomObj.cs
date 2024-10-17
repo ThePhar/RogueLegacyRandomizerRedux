@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -56,11 +57,11 @@ namespace RogueCastle
 
         private void RandomizeItem()
         {
-            if (Game.PlayerStats.Traits.X == TraitType.NearSighted || Game.PlayerStats.Traits.Y == TraitType.NearSighted ||
-                Game.PlayerStats.Traits.X == TraitType.FarSighted || Game.PlayerStats.Traits.Y == TraitType.FarSighted ||
-                 Game.PlayerStats.Traits.X == TraitType.Vertigo || Game.PlayerStats.Traits.Y == TraitType.Vertigo ||
-                 Game.PlayerStats.Traits.X == TraitType.ColorBlind || Game.PlayerStats.Traits.Y == TraitType.ColorBlind ||
-                 Game.PlayerStats.Traits.X == TraitType.Nostalgic || Game.PlayerStats.Traits.Y == TraitType.Nostalgic)
+            if (Game.PlayerStats.HasTrait(TraitType.NEAR_SIGHTED) ||
+                Game.PlayerStats.HasTrait(TraitType.FAR_SIGHTED) ||
+                 Game.PlayerStats.HasTrait(TraitType.VERTIGO) ||
+                 Game.PlayerStats.HasTrait(TraitType.COLOR_BLIND) ||
+                 Game.PlayerStats.HasTrait(TraitType.NOSTALGIC))
             {
                 if (CDGMath.RandomInt(1, 100) <= 30) // 30% chance of getting glasses.
                     ItemType = SpecialItemType.Glasses;

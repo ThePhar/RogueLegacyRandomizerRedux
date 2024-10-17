@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 using RogueCastle.Objects;
 
 namespace RogueCastle;
@@ -20,8 +21,8 @@ public static class ChestConditionChecker
     {
         switch (chest.ConditionType)
         {
-            case ChestConditionType.InvisibleChest:
-            case ChestConditionType.None:
+            case ChestConditionType.INVISIBLE_CHEST:
+            case ChestConditionType.NONE:
                 if (Vector2.Distance(chest.AbsPosition, player.AbsPosition) < DistanceThreshold)
                 {
                     chest.SetChestUnlocked();
@@ -29,7 +30,7 @@ public static class ChestConditionChecker
 
                 break;
 
-            case ChestConditionType.KillAllEnemies:
+            case ChestConditionType.KILL_ALL_ENEMIES:
                 if (player.AttachedLevel.CurrentRoom.ActiveEnemies <= 0)
                 {
                     chest.SetChestUnlocked();
@@ -37,7 +38,7 @@ public static class ChestConditionChecker
 
                 break;
 
-            case ChestConditionType.DontLook:
+            case ChestConditionType.DONT_LOOK:
                 var flipCheck = SpriteEffects.None;
                 if (chest.AbsPosition.X < player.AbsPosition.X) // Chest is to the left of the player.
                 {
@@ -57,7 +58,7 @@ public static class ChestConditionChecker
 
                 break;
 
-            case ChestConditionType.NoJumping:
+            case ChestConditionType.NO_JUMPING:
                 if (Vector2.Distance(chest.AbsPosition, player.AbsPosition) < 10000 &&
                     Vector2.Distance(chest.AbsPosition, player.AbsPosition) > DistanceThreshold &&
                     player.IsJumping &&
@@ -72,7 +73,7 @@ public static class ChestConditionChecker
 
                 break;
 
-            case ChestConditionType.NoFloor: // This one isn't being used.
+            case ChestConditionType.NO_FLOOR: // This one isn't being used.
                 if (Vector2.Distance(chest.AbsPosition, player.AbsPosition) > DistanceThreshold &&
                     Vector2.Distance(chest.AbsPosition, player.AbsPosition) < 1000 &&
                     player.IsTouchingGround)
@@ -86,7 +87,7 @@ public static class ChestConditionChecker
 
                 break;
 
-            case ChestConditionType.NoAttackingEnemies:
+            case ChestConditionType.NO_ATTACKING_ENEMIES:
                 if (player.AttachedLevel.CurrentRoom.EnemyList.Any(enemy => enemy.CurrentHealth < enemy.MaxHealth))
                 {
                     chest.SetChestFailed();
@@ -100,7 +101,7 @@ public static class ChestConditionChecker
 
                 break;
 
-            case ChestConditionType.ReachIn5Seconds:
+            case ChestConditionType.REACH_IN5_SECONDS:
                 if (Vector2.Distance(chest.AbsPosition, player.AbsPosition) > DistanceThreshold && chest.Timer <= 0)
                 {
                     chest.SetChestFailed();
@@ -112,7 +113,7 @@ public static class ChestConditionChecker
 
                 break;
 
-            case ChestConditionType.TakeNoDamage:
+            case ChestConditionType.TAKE_NO_DAMAGE:
                 if (player.State == PlayerObj.STATE_HURT)
                 {
                     chest.SetChestFailed();
