@@ -1,18 +1,16 @@
-﻿using System;
-using SteamWorksWrapper;
+﻿using SteamWorksWrapper;
 
-namespace RogueCastle
+namespace RogueCastle;
+
+public static class GameUtil
 {
-    public static class GameUtil
+    public static void UnlockAchievement(string achievementName)
     {
-        public static void UnlockAchievement(string achievementName)
-        {
-            Steamworks.UnlockAchievement(achievementName);
-        }
+        Steamworks.UnlockAchievement(achievementName);
+    }
 
-        public static bool IsAchievementUnlocked(string achievementName)
-        {
-            return Steamworks.IsAchievementUnlocked(achievementName);
-        }
+    public static bool IsAchievementUnlocked(string achievementName)
+    {
+        return Steamworks.IsAchievementUnlocked(achievementName);
     }
 }

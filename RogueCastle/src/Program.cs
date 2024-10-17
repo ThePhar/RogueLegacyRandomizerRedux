@@ -2,174 +2,137 @@ using System;
 using System.IO;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
-using SteamWorksWrapper;
 using SDL3;
+using SteamWorksWrapper;
 
-namespace RogueCastle
+namespace RogueCastle;
+
+public static class Program
 {
-    public static class Program
+    public static readonly string OSDir = GetOSDir();
+
+    /// <summary>
+    ///     The main entry point for the application.
+    /// </summary>
+    private static void Main(string[] args)
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
-        static void Main(string[] args)
+        Environment.SetEnvironmentVariable("FNA_PLATFORM_BACKEND", "SDL3");
+
+        if (LevelEV.CreateRetailVersion)
         {
-            Environment.SetEnvironmentVariable("FNA_PLATFORM_BACKEND", "SDL3");
+            Steamworks.Init();
 
-            bool loadGame = true;
-
-            if (LevelEV.CreateRetailVersion == true)// && LevelEV.CREATE_INSTALLABLE == false)
-            {
-                Steamworks.Init();
-                loadGame = Steamworks.WasInit;
-            }
-
-            // Don't really need this anymore... -flibit
-            //if (loadGame == true)
-            {
-#if true
-                // Dave's custom EV settings for localization testing
-                //LevelEV.RUN_TESTROOM = true;// false; // true; // false;
-                //LevelEV.LOAD_SPLASH_SCREEN = false; // true; // false;
-                //LevelEV.CREATE_RETAIL_VERSION = false;
-                //LevelEV.SHOW_DEBUG_TEXT = false; // true;
-#endif
-
-                if (LevelEV.CreateRetailVersion == true)
-                {
-                    LevelEV.ShowEnemyRadii = false;
-                    LevelEV.EnableDebugInput = false;
-                    LevelEV.UnlockAllAbilities = false;
-                    LevelEV.TestRoomLevelType = GameTypes.LevelType.Castle;
-                    LevelEV.TestRoomReverse = false;
-                    LevelEV.RunTestRoom = false;
-                    LevelEV.ShowDebugText = false;
-                    LevelEV.LoadTitleScreen = false;
-                    LevelEV.LoadSplashScreen = true;
-                    LevelEV.ShowSaveLoadDebugText = false;
-                    LevelEV.DeleteSaveFile = false;
-                    LevelEV.CloseTestRoomDoors = false;
-                    LevelEV.RunTutorial = false;
-                    LevelEV.RunDemoVersion = false;
-                    LevelEV.DisableSaving = false;
-                    LevelEV.RunCrashLogs = false; // todo
-                    LevelEV.WeakenBosses = true; // todo
-                    LevelEV.EnableBackupSaving = true;
-                    LevelEV.EnableOffscreenControl = false;
-                    LevelEV.ShowFps = false;
-                    LevelEV.SaveFrames = false;
-                    LevelEV.UnlockAllDiaryEntries = false;
-                    LevelEV.EnableBlitworksSplash = false;
-                }
-
-                if (args.Length == 1 && LevelEV.CreateRetailVersion == false)
-                {
-                    using (Game game = new Game(args[0]))
-                    {
-                        LevelEV.RunTestRoom = true;
-                        LevelEV.DisableSaving = true;
-                        game.Run();
-                    }
-                }
-                else
-                {
-                    if (LevelEV.RunCrashLogs == true)
-                    {
-                        try
-                        {
-                            using (Game game = new Game())
-                            {
-                                game.Run();
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            string date = DateTime.Now.ToString("dd-mm-yyyy_HH-mm-ss");
-                            if (!Directory.Exists(Program.OSDir))
-                                Directory.CreateDirectory(Program.OSDir);
-                            string configFilePath = Path.Combine(Program.OSDir, "CrashLog_" + date + ".log");
-
-                            //using (StreamWriter writer = new StreamWriter("CrashLog_" + date + ".log", false))
-                            using (StreamWriter writer = new StreamWriter(configFilePath, false))
-                            {
-                                writer.WriteLine(e.ToString());
-                            }
-
-                            Console.WriteLine(e.ToString());
-                            SDL.SDL_ShowSimpleMessageBox(
-                                SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_ERROR,
-                                "SAVE THIS MESSAGE!",
-                                e.ToString(),
-                                IntPtr.Zero
-                            );
-                        }
-                    }
-                    else
-                    {
-                        using (Game game = new Game())
-                        {
-                            game.Run();
-                        }
-                    }
-                }
-            }
-            //else
-            //{
-            //    #if STEAM
-            //    SDL.SDL_ShowSimpleMessageBox(
-            //        SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_ERROR,
-            //        "Launch Error",
-            //        "Please load Rogue Legacy from the Steam client",
-            //        IntPtr.Zero
-            //    );
-            //    #endif
-            //}
-            Steamworks.Shutdown();
+            LevelEV.ShowEnemyRadii = false;
+            LevelEV.EnableDebugInput = false;
+            LevelEV.UnlockAllAbilities = false;
+            LevelEV.TestRoomLevelType = GameTypes.LevelType.Castle;
+            LevelEV.TestRoomReverse = false;
+            LevelEV.RunTestRoom = false;
+            LevelEV.ShowDebugText = false;
+            LevelEV.LoadTitleScreen = false;
+            LevelEV.LoadSplashScreen = true;
+            LevelEV.ShowSaveLoadDebugText = false;
+            LevelEV.DeleteSaveFile = false;
+            LevelEV.CloseTestRoomDoors = false;
+            LevelEV.RunTutorial = false;
+            LevelEV.RunDemoVersion = false;
+            LevelEV.DisableSaving = false;
+            LevelEV.RunCrashLogs = false; // todo
+            LevelEV.WeakenBosses = true; // todo
+            LevelEV.EnableBackupSaving = true;
+            LevelEV.EnableOffscreenControl = false;
+            LevelEV.ShowFps = false;
+            LevelEV.SaveFrames = false;
+            LevelEV.UnlockAllDiaryEntries = false;
+            LevelEV.EnableBlitworksSplash = false;
         }
 
-        public static readonly string OSDir = GetOSDir();
-        private static string GetOSDir()
+        if (args.Length == 1 && LevelEV.CreateRetailVersion == false)
         {
-            string os = SDL.SDL_GetPlatform();
-            if (    os.Equals("Linux") ||
-                    os.Equals("FreeBSD") ||
-                    os.Equals("OpenBSD") ||
-                    os.Equals("NetBSD") )
+            using var game = new Game(args[0]);
+            LevelEV.RunTestRoom = true;
+            LevelEV.DisableSaving = true;
+            game.Run();
+        }
+        else
+        {
+            if (LevelEV.RunCrashLogs)
             {
-                string osDir = Environment.GetEnvironmentVariable("XDG_CONFIG_HOME");
-                if (string.IsNullOrEmpty(osDir))
+                try
                 {
-                    osDir = Environment.GetEnvironmentVariable("HOME");
-                    if (string.IsNullOrEmpty(osDir))
-                    {
-                        return "."; // Oh well.
-                    }
-                    else
-                    {
-                        return Path.Combine(osDir, ".config", "RogueLegacy");
-                    }
+                    using var game = new Game();
+                    game.Run();
                 }
-                return Path.Combine(osDir, "RogueLegacy");
-            }
-            else if (os.Equals("macOS"))
-            {
-                string osDir = Environment.GetEnvironmentVariable("HOME");
-                if (string.IsNullOrEmpty(osDir))
+                catch (Exception e)
                 {
-                    return "."; // Oh well.
+                    var date = DateTime.Now.ToString("dd-mm-yyyy_HH-mm-ss");
+                    if (!Directory.Exists(OSDir))
+                    {
+                        Directory.CreateDirectory(OSDir);
+                    }
+
+                    var configFilePath = Path.Combine(OSDir, "CrashLog_" + date + ".log");
+                    using (var writer = new StreamWriter(configFilePath, false))
+                    {
+                        writer.WriteLine(e.ToString());
+                    }
+
+                    Console.WriteLine(e.ToString());
+                    SDL.SDL_ShowSimpleMessageBox(
+                        SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_ERROR,
+                        "SAVE THIS MESSAGE!",
+                        e.ToString(),
+                        IntPtr.Zero
+                    );
                 }
-                return Path.Combine(osDir, "Library/Application Support/RogueLegacy");
-            }
-            else if (!os.Equals("Windows"))
-            {
-                throw new NotSupportedException("Unhandled SDL3 platform!");
             }
             else
             {
-                string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                return Path.Combine(appdata, "Rogue Legacy");
+                using var game = new Game();
+                game.Run();
             }
+        }
+
+        Steamworks.Shutdown();
+    }
+
+    private static string GetOSDir()
+    {
+        switch (SDL.SDL_GetPlatform())
+        {
+            case "Linux":
+            case "FreeBSD":
+            case "OpenBSD":
+            case "NetBSD":
+            {
+                var osDir = Environment.GetEnvironmentVariable("XDG_CONFIG_HOME");
+                if (!string.IsNullOrEmpty(osDir))
+                {
+                    return Path.Combine(osDir, "RogueLegacy");
+                }
+
+                osDir = Environment.GetEnvironmentVariable("HOME");
+                return string.IsNullOrEmpty(osDir)
+                    ? "." // Oh, well.
+                    : Path.Combine(osDir, ".config", "RogueLegacy");
+
+            }
+            case "macOS":
+            {
+                var osDir = Environment.GetEnvironmentVariable("HOME");
+                return string.IsNullOrEmpty(osDir)
+                    ? "." // Oh, well.
+                    : Path.Combine(osDir, "Library/Application Support/RogueLegacy");
+            }
+
+            case "Windows":
+            {
+                var osDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                return Path.Combine(osDir, "Rogue Legacy");
+            }
+
+            default:
+                throw new NotSupportedException("Unhandled SDL3 platform!");
         }
     }
 }
-
