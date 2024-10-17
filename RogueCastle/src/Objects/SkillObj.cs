@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using DS2DEngine;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {

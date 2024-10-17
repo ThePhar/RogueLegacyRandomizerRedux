@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -22,154 +23,154 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.Skeleton_Basic_Name;
-            LocStringID = EnemyEV.Skeleton_Basic_Name_locID;
+            Name = EnemyEV.SKELETON_BASIC_NAME;
+            LocStringID = EnemyEV.SKELETON_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Skeleton_Basic_MaxHealth;
-            Damage = EnemyEV.Skeleton_Basic_Damage;
-            XPValue = EnemyEV.Skeleton_Basic_XPValue;
+            MaxHealth = EnemyEV.SKELETON_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.SKELETON_BASIC_DAMAGE;
+            XPValue = EnemyEV.SKELETON_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Skeleton_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Skeleton_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Skeleton_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.SKELETON_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.SKELETON_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.SKELETON_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Skeleton_Basic_Speed;
-            TurnSpeed = EnemyEV.Skeleton_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Skeleton_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Skeleton_Basic_Jump;
-            CooldownTime = EnemyEV.Skeleton_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Skeleton_Basic_AnimationDelay;
+            Speed = EnemyEV.SKELETON_BASIC_SPEED;
+            TurnSpeed = EnemyEV.SKELETON_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.SKELETON_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.SKELETON_BASIC_JUMP;
+            CooldownTime = EnemyEV.SKELETON_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.SKELETON_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Skeleton_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Skeleton_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Skeleton_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Skeleton_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.SKELETON_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.SKELETON_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.SKELETON_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.SKELETON_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Skeleton_Basic_Scale;
-            ProjectileScale = EnemyEV.Skeleton_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Skeleton_Basic_Tint;
+            Scale = EnemyEV.SkeletonBasicScale;
+            ProjectileScale = EnemyEV.SkeletonBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.SkeletonBasicTint;
 
-            MeleeRadius = EnemyEV.Skeleton_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Skeleton_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Skeleton_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.SKELETON_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.SKELETON_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.SKELETON_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Skeleton_Basic_KnockBack;
+            KnockBack = EnemyEV.SkeletonBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Skeleton_Miniboss_Name;
-                    LocStringID = EnemyEV.Skeleton_Miniboss_Name_locID;
+                    Name = EnemyEV.SKELETON_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.SKELETON_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Skeleton_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Skeleton_Miniboss_Damage;
-                    XPValue = EnemyEV.Skeleton_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.SKELETON_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.SKELETON_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.SKELETON_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Skeleton_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Skeleton_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Skeleton_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SKELETON_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SKELETON_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SKELETON_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Skeleton_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Skeleton_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Skeleton_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Skeleton_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Skeleton_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Skeleton_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.SKELETON_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.SKELETON_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SKELETON_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SKELETON_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.SKELETON_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SKELETON_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Skeleton_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Skeleton_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Skeleton_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Skeleton_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SKELETON_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SKELETON_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SKELETON_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SKELETON_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Skeleton_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Skeleton_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Skeleton_Miniboss_Tint;
+                    Scale = EnemyEV.SkeletonMinibossScale;
+                    ProjectileScale = EnemyEV.SkeletonMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.SkeletonMinibossTint;
 
-                    MeleeRadius = EnemyEV.Skeleton_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Skeleton_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Skeleton_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.SKELETON_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.SKELETON_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.SKELETON_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Skeleton_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.SkeletonMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Skeleton_Expert_Name;
-                    LocStringID = EnemyEV.Skeleton_Expert_Name_locID;
+                    Name = EnemyEV.SKELETON_EXPERT_NAME;
+                    LocStringID = EnemyEV.SKELETON_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Skeleton_Expert_MaxHealth;
-                    Damage = EnemyEV.Skeleton_Expert_Damage;
-                    XPValue = EnemyEV.Skeleton_Expert_XPValue;
+                    MaxHealth = EnemyEV.SKELETON_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.SKELETON_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.SKELETON_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Skeleton_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Skeleton_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Skeleton_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SKELETON_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SKELETON_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SKELETON_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Skeleton_Expert_Speed;
-                    TurnSpeed = EnemyEV.Skeleton_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Skeleton_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Skeleton_Expert_Jump;
-                    CooldownTime = EnemyEV.Skeleton_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Skeleton_Expert_AnimationDelay;
+                    Speed = EnemyEV.SKELETON_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.SKELETON_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SKELETON_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SKELETON_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.SKELETON_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SKELETON_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Skeleton_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Skeleton_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Skeleton_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Skeleton_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SKELETON_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SKELETON_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SKELETON_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SKELETON_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Skeleton_Expert_Scale;
-                    ProjectileScale = EnemyEV.Skeleton_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Skeleton_Expert_Tint;
+                    Scale = EnemyEV.SkeletonExpertScale;
+                    ProjectileScale = EnemyEV.SkeletonExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.SkeletonExpertTint;
 
-                    MeleeRadius = EnemyEV.Skeleton_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Skeleton_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Skeleton_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.SKELETON_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.SKELETON_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.SKELETON_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Skeleton_Expert_KnockBack;
+                    KnockBack = EnemyEV.SkeletonExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Skeleton_Advanced_Name;
-                    LocStringID = EnemyEV.Skeleton_Advanced_Name_locID;
+                    Name = EnemyEV.SKELETON_ADVANCED_NAME;
+                    LocStringID = EnemyEV.SKELETON_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Skeleton_Advanced_MaxHealth;
-                    Damage = EnemyEV.Skeleton_Advanced_Damage;
-                    XPValue = EnemyEV.Skeleton_Advanced_XPValue;
+                    MaxHealth = EnemyEV.SKELETON_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.SKELETON_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.SKELETON_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Skeleton_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Skeleton_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Skeleton_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SKELETON_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SKELETON_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SKELETON_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Skeleton_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Skeleton_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Skeleton_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Skeleton_Advanced_Jump;
-                    CooldownTime = EnemyEV.Skeleton_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Skeleton_Advanced_AnimationDelay;
+                    Speed = EnemyEV.SKELETON_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.SKELETON_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SKELETON_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SKELETON_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.SKELETON_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SKELETON_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Skeleton_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Skeleton_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Skeleton_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Skeleton_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SKELETON_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SKELETON_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SKELETON_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SKELETON_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Skeleton_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Skeleton_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Skeleton_Advanced_Tint;
+                    Scale = EnemyEV.SkeletonAdvancedScale;
+                    ProjectileScale = EnemyEV.SkeletonAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.SkeletonAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Skeleton_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Skeleton_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Skeleton_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.SKELETON_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.SKELETON_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.SKELETON_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Skeleton_Advanced_KnockBack;
+                    KnockBack = EnemyEV.SkeletonAdvancedKnockBack;
                     #endregion
                     break;
 

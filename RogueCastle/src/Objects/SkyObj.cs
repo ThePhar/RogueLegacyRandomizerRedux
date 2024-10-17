@@ -5,7 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {

@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -19,39 +20,39 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.Zombie_Basic_Name;
-            LocStringID = EnemyEV.Zombie_Basic_Name_locID;
+            Name = EnemyEV.ZOMBIE_BASIC_NAME;
+            LocStringID = EnemyEV.ZOMBIE_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Zombie_Basic_MaxHealth;
-            Damage = EnemyEV.Zombie_Basic_Damage;
-            XPValue = EnemyEV.Zombie_Basic_XPValue;
+            MaxHealth = EnemyEV.ZOMBIE_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.ZOMBIE_BASIC_DAMAGE;
+            XPValue = EnemyEV.ZOMBIE_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Zombie_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Zombie_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Zombie_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.ZOMBIE_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.ZOMBIE_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.ZOMBIE_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Zombie_Basic_Speed;
-            TurnSpeed = EnemyEV.Zombie_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Zombie_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Zombie_Basic_Jump;
-            CooldownTime = EnemyEV.Zombie_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Zombie_Basic_AnimationDelay;
+            Speed = EnemyEV.ZOMBIE_BASIC_SPEED;
+            TurnSpeed = EnemyEV.ZOMBIE_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.ZOMBIE_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.ZOMBIE_BASIC_JUMP;
+            CooldownTime = EnemyEV.ZOMBIE_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.ZOMBIE_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Zombie_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Zombie_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Zombie_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Zombie_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.ZOMBIE_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.ZOMBIE_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.ZOMBIE_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.ZOMBIE_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Zombie_Basic_Scale;
-            ProjectileScale = EnemyEV.Zombie_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Zombie_Basic_Tint;
+            Scale = EnemyEV.ZombieBasicScale;
+            ProjectileScale = EnemyEV.ZombieBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.ZombieBasicTint;
 
-            MeleeRadius = EnemyEV.Zombie_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Zombie_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Zombie_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.ZOMBIE_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.ZOMBIE_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.ZOMBIE_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Zombie_Basic_KnockBack;
+            KnockBack = EnemyEV.ZombieBasicKnockBack;
             #endregion
 
             switch (Difficulty)
@@ -59,117 +60,117 @@ namespace RogueCastle
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
 
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Zombie_Miniboss_Name;
-                    LocStringID = EnemyEV.Zombie_Miniboss_Name_locID;
+                    Name = EnemyEV.ZOMBIE_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.ZOMBIE_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Zombie_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Zombie_Miniboss_Damage;
-                    XPValue = EnemyEV.Zombie_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.ZOMBIE_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.ZOMBIE_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.ZOMBIE_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Zombie_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Zombie_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Zombie_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.ZOMBIE_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.ZOMBIE_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.ZOMBIE_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Zombie_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Zombie_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Zombie_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Zombie_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Zombie_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Zombie_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.ZOMBIE_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.ZOMBIE_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.ZOMBIE_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.ZOMBIE_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.ZOMBIE_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.ZOMBIE_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Zombie_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Zombie_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Zombie_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Zombie_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.ZOMBIE_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.ZOMBIE_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.ZOMBIE_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.ZOMBIE_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Zombie_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Zombie_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Zombie_Miniboss_Tint;
+                    Scale = EnemyEV.ZombieMinibossScale;
+                    ProjectileScale = EnemyEV.ZombieMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.ZombieMinibossTint;
 
-                    MeleeRadius = EnemyEV.Zombie_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Zombie_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Zombie_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.ZOMBIE_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.ZOMBIE_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.ZOMBIE_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Zombie_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.ZombieMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
 
                     #region Expert Variables - General
-                    Name = EnemyEV.Zombie_Expert_Name;
-                    LocStringID = EnemyEV.Zombie_Expert_Name_locID;
+                    Name = EnemyEV.ZOMBIE_EXPERT_NAME;
+                    LocStringID = EnemyEV.ZOMBIE_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Zombie_Expert_MaxHealth;
-                    Damage = EnemyEV.Zombie_Expert_Damage;
-                    XPValue = EnemyEV.Zombie_Expert_XPValue;
+                    MaxHealth = EnemyEV.ZOMBIE_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.ZOMBIE_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.ZOMBIE_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Zombie_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Zombie_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Zombie_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.ZOMBIE_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.ZOMBIE_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.ZOMBIE_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Zombie_Expert_Speed;
-                    TurnSpeed = EnemyEV.Zombie_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Zombie_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Zombie_Expert_Jump;
-                    CooldownTime = EnemyEV.Zombie_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Zombie_Expert_AnimationDelay;
+                    Speed = EnemyEV.ZOMBIE_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.ZOMBIE_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.ZOMBIE_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.ZOMBIE_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.ZOMBIE_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.ZOMBIE_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Zombie_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Zombie_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Zombie_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Zombie_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.ZOMBIE_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.ZOMBIE_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.ZOMBIE_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.ZOMBIE_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Zombie_Expert_Scale;
-                    ProjectileScale = EnemyEV.Zombie_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Zombie_Expert_Tint;
+                    Scale = EnemyEV.ZombieExpertScale;
+                    ProjectileScale = EnemyEV.ZombieExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.ZombieExpertTint;
 
-                    MeleeRadius = EnemyEV.Zombie_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Zombie_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Zombie_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.ZOMBIE_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.ZOMBIE_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.ZOMBIE_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Zombie_Expert_KnockBack;
+                    KnockBack = EnemyEV.ZombieExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
 
                     #region Advanced Variables - General
-                    Name = EnemyEV.Zombie_Advanced_Name;
-                    LocStringID = EnemyEV.Zombie_Advanced_Name_locID;
+                    Name = EnemyEV.ZOMBIE_ADVANCED_NAME;
+                    LocStringID = EnemyEV.ZOMBIE_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Zombie_Advanced_MaxHealth;
-                    Damage = EnemyEV.Zombie_Advanced_Damage;
-                    XPValue = EnemyEV.Zombie_Advanced_XPValue;
+                    MaxHealth = EnemyEV.ZOMBIE_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.ZOMBIE_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.ZOMBIE_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Zombie_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Zombie_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Zombie_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.ZOMBIE_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.ZOMBIE_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.ZOMBIE_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Zombie_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Zombie_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Zombie_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Zombie_Advanced_Jump;
-                    CooldownTime = EnemyEV.Zombie_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Zombie_Advanced_AnimationDelay;
+                    Speed = EnemyEV.ZOMBIE_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.ZOMBIE_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.ZOMBIE_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.ZOMBIE_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.ZOMBIE_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.ZOMBIE_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Zombie_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Zombie_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Zombie_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Zombie_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.ZOMBIE_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.ZOMBIE_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.ZOMBIE_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.ZOMBIE_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Zombie_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Zombie_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Zombie_Advanced_Tint;
+                    Scale = EnemyEV.ZombieAdvancedScale;
+                    ProjectileScale = EnemyEV.ZombieAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.ZombieAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Zombie_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Zombie_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Zombie_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.ZOMBIE_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.ZOMBIE_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.ZOMBIE_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Zombie_Advanced_KnockBack;
+                    KnockBack = EnemyEV.ZombieAdvancedKnockBack;
                     #endregion
                     break;
 

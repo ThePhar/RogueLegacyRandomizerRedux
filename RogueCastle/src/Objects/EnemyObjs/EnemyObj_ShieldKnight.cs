@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -23,39 +24,39 @@ namespace RogueCastle
             LockFlip = true;
 
             #region Basic Variables - General
-            Name = EnemyEV.ShieldKnight_Basic_Name;
-            LocStringID = EnemyEV.ShieldKnight_Basic_Name_locID;
+            Name = EnemyEV.SHIELD_KNIGHT_BASIC_NAME;
+            LocStringID = EnemyEV.SHIELD_KNIGHT_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.ShieldKnight_Basic_MaxHealth;
-            Damage = EnemyEV.ShieldKnight_Basic_Damage;
-            XPValue = EnemyEV.ShieldKnight_Basic_XPValue;
+            MaxHealth = EnemyEV.SHIELD_KNIGHT_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.SHIELD_KNIGHT_BASIC_DAMAGE;
+            XPValue = EnemyEV.SHIELD_KNIGHT_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.ShieldKnight_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.ShieldKnight_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.ShieldKnight_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.SHIELD_KNIGHT_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.SHIELD_KNIGHT_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.SHIELD_KNIGHT_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.ShieldKnight_Basic_Speed;
-            TurnSpeed = EnemyEV.ShieldKnight_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.ShieldKnight_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.ShieldKnight_Basic_Jump;
-            CooldownTime = EnemyEV.ShieldKnight_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.ShieldKnight_Basic_AnimationDelay;
+            Speed = EnemyEV.SHIELD_KNIGHT_BASIC_SPEED;
+            TurnSpeed = EnemyEV.SHIELD_KNIGHT_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.SHIELD_KNIGHT_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.SHIELD_KNIGHT_BASIC_JUMP;
+            CooldownTime = EnemyEV.SHIELD_KNIGHT_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.SHIELD_KNIGHT_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.ShieldKnight_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.ShieldKnight_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.ShieldKnight_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.ShieldKnight_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.SHIELD_KNIGHT_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.SHIELD_KNIGHT_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.SHIELD_KNIGHT_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.SHIELD_KNIGHT_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.ShieldKnight_Basic_Scale;
-            ProjectileScale = EnemyEV.ShieldKnight_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.ShieldKnight_Basic_Tint;
+            Scale = EnemyEV.ShieldKnightBasicScale;
+            ProjectileScale = EnemyEV.ShieldKnightBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.ShieldKnightBasicTint;
 
-            MeleeRadius = EnemyEV.ShieldKnight_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.ShieldKnight_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.ShieldKnight_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.SHIELD_KNIGHT_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.SHIELD_KNIGHT_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.SHIELD_KNIGHT_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.ShieldKnight_Basic_KnockBack;
+            KnockBack = EnemyEV.ShieldKnightBasicKnockBack;
             #endregion
 
             switch (Difficulty)
@@ -64,39 +65,39 @@ namespace RogueCastle
                     ShieldKnockback = new Vector2(1200, 1350);
 
                     #region Miniboss Variables - General
-                    Name = EnemyEV.ShieldKnight_Miniboss_Name;
-                    LocStringID = EnemyEV.ShieldKnight_Miniboss_Name_locID;
+                    Name = EnemyEV.SHIELD_KNIGHT_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.SHIELD_KNIGHT_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.ShieldKnight_Miniboss_MaxHealth;
-                    Damage = EnemyEV.ShieldKnight_Miniboss_Damage;
-                    XPValue = EnemyEV.ShieldKnight_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.SHIELD_KNIGHT_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.SHIELD_KNIGHT_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.SHIELD_KNIGHT_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.ShieldKnight_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.ShieldKnight_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.ShieldKnight_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SHIELD_KNIGHT_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SHIELD_KNIGHT_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SHIELD_KNIGHT_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.ShieldKnight_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.ShieldKnight_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.ShieldKnight_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.ShieldKnight_Miniboss_Jump;
-                    CooldownTime = EnemyEV.ShieldKnight_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.ShieldKnight_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.SHIELD_KNIGHT_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.SHIELD_KNIGHT_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SHIELD_KNIGHT_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SHIELD_KNIGHT_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.SHIELD_KNIGHT_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SHIELD_KNIGHT_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.ShieldKnight_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.ShieldKnight_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.ShieldKnight_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.ShieldKnight_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SHIELD_KNIGHT_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SHIELD_KNIGHT_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SHIELD_KNIGHT_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SHIELD_KNIGHT_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.ShieldKnight_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.ShieldKnight_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.ShieldKnight_Miniboss_Tint;
+                    Scale = EnemyEV.ShieldKnightMinibossScale;
+                    ProjectileScale = EnemyEV.ShieldKnightMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.ShieldKnightMinibossTint;
 
-                    MeleeRadius = EnemyEV.ShieldKnight_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.ShieldKnight_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.ShieldKnight_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.SHIELD_KNIGHT_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.SHIELD_KNIGHT_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.SHIELD_KNIGHT_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.ShieldKnight_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.ShieldKnightMinibossKnockBack;
                     #endregion
                     break;
 
@@ -104,39 +105,39 @@ namespace RogueCastle
                     ShieldKnockback = new Vector2(1550, 1650);
 
                     #region Expert Variables - General
-                    Name = EnemyEV.ShieldKnight_Expert_Name;
-                    LocStringID = EnemyEV.ShieldKnight_Expert_Name_locID;
+                    Name = EnemyEV.SHIELD_KNIGHT_EXPERT_NAME;
+                    LocStringID = EnemyEV.SHIELD_KNIGHT_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.ShieldKnight_Expert_MaxHealth;
-                    Damage = EnemyEV.ShieldKnight_Expert_Damage;
-                    XPValue = EnemyEV.ShieldKnight_Expert_XPValue;
+                    MaxHealth = EnemyEV.SHIELD_KNIGHT_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.SHIELD_KNIGHT_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.SHIELD_KNIGHT_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.ShieldKnight_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.ShieldKnight_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.ShieldKnight_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SHIELD_KNIGHT_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SHIELD_KNIGHT_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SHIELD_KNIGHT_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.ShieldKnight_Expert_Speed;
-                    TurnSpeed = EnemyEV.ShieldKnight_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.ShieldKnight_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.ShieldKnight_Expert_Jump;
-                    CooldownTime = EnemyEV.ShieldKnight_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.ShieldKnight_Expert_AnimationDelay;
+                    Speed = EnemyEV.SHIELD_KNIGHT_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.SHIELD_KNIGHT_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SHIELD_KNIGHT_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SHIELD_KNIGHT_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.SHIELD_KNIGHT_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SHIELD_KNIGHT_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.ShieldKnight_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.ShieldKnight_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.ShieldKnight_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.ShieldKnight_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SHIELD_KNIGHT_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SHIELD_KNIGHT_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SHIELD_KNIGHT_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SHIELD_KNIGHT_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.ShieldKnight_Expert_Scale;
-                    ProjectileScale = EnemyEV.ShieldKnight_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.ShieldKnight_Expert_Tint;
+                    Scale = EnemyEV.ShieldKnightExpertScale;
+                    ProjectileScale = EnemyEV.ShieldKnightExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.ShieldKnightExpertTint;
 
-                    MeleeRadius = EnemyEV.ShieldKnight_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.ShieldKnight_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.ShieldKnight_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.SHIELD_KNIGHT_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.SHIELD_KNIGHT_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.SHIELD_KNIGHT_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.ShieldKnight_Expert_KnockBack;
+                    KnockBack = EnemyEV.ShieldKnightExpertKnockBack;
                     #endregion
                     break;
 
@@ -144,39 +145,39 @@ namespace RogueCastle
                     ShieldKnockback = new Vector2(1050, 1150);
 
                     #region Advanced Variables - General
-                    Name = EnemyEV.ShieldKnight_Advanced_Name;
-                    LocStringID = EnemyEV.ShieldKnight_Advanced_Name_locID;
+                    Name = EnemyEV.SHIELD_KNIGHT_ADVANCED_NAME;
+                    LocStringID = EnemyEV.SHIELD_KNIGHT_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.ShieldKnight_Advanced_MaxHealth;
-                    Damage = EnemyEV.ShieldKnight_Advanced_Damage;
-                    XPValue = EnemyEV.ShieldKnight_Advanced_XPValue;
+                    MaxHealth = EnemyEV.SHIELD_KNIGHT_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.SHIELD_KNIGHT_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.SHIELD_KNIGHT_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.ShieldKnight_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.ShieldKnight_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.ShieldKnight_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SHIELD_KNIGHT_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SHIELD_KNIGHT_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SHIELD_KNIGHT_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.ShieldKnight_Advanced_Speed;
-                    TurnSpeed = EnemyEV.ShieldKnight_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.ShieldKnight_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.ShieldKnight_Advanced_Jump;
-                    CooldownTime = EnemyEV.ShieldKnight_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.ShieldKnight_Advanced_AnimationDelay;
+                    Speed = EnemyEV.SHIELD_KNIGHT_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.SHIELD_KNIGHT_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SHIELD_KNIGHT_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SHIELD_KNIGHT_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.SHIELD_KNIGHT_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SHIELD_KNIGHT_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.ShieldKnight_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.ShieldKnight_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.ShieldKnight_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.ShieldKnight_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SHIELD_KNIGHT_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SHIELD_KNIGHT_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SHIELD_KNIGHT_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SHIELD_KNIGHT_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.ShieldKnight_Advanced_Scale;
-                    ProjectileScale = EnemyEV.ShieldKnight_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.ShieldKnight_Advanced_Tint;
+                    Scale = EnemyEV.ShieldKnightAdvancedScale;
+                    ProjectileScale = EnemyEV.ShieldKnightAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.ShieldKnightAdvancedTint;
 
-                    MeleeRadius = EnemyEV.ShieldKnight_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.ShieldKnight_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.ShieldKnight_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.SHIELD_KNIGHT_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.SHIELD_KNIGHT_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.SHIELD_KNIGHT_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.ShieldKnight_Advanced_KnockBack;
+                    KnockBack = EnemyEV.ShieldKnightAdvancedKnockBack;
                     #endregion
                     break;
 
@@ -230,7 +231,7 @@ namespace RogueCastle
             turnExpertLS.AddAction(new MoveLogicAction(m_target, true, 0));
             turnExpertLS.AddAction(new LockFaceDirectionLogicAction(true));
             turnExpertLS.AddAction(new ChangeSpriteLogicAction("EnemyShieldKnightTurnOut_Character", true, false));
-            turnExpertLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.ShieldKnight_Expert_AnimationDelay));
+            turnExpertLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.SHIELD_KNIGHT_EXPERT_ANIMATION_DELAY));
             turnExpertLS.AddAction(new MoveDirectionLogicAction());
 
             m_generalBasicLB.AddLogicSet(walkStopLS, walkTowardsLS, turnLS);

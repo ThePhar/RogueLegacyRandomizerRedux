@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -27,39 +28,39 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.Wolf_Basic_Name;
-            LocStringID = EnemyEV.Wolf_Basic_Name_locID;
+            Name = EnemyEV.WOLF_BASIC_NAME;
+            LocStringID = EnemyEV.WOLF_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Wolf_Basic_MaxHealth;
-            Damage = EnemyEV.Wolf_Basic_Damage;
-            XPValue = EnemyEV.Wolf_Basic_XPValue;
+            MaxHealth = EnemyEV.WOLF_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.WOLF_BASIC_DAMAGE;
+            XPValue = EnemyEV.WOLF_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Wolf_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Wolf_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Wolf_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.WOLF_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.WOLF_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.WOLF_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Wolf_Basic_Speed;
-            TurnSpeed = EnemyEV.Wolf_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Wolf_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Wolf_Basic_Jump;
-            CooldownTime = EnemyEV.Wolf_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Wolf_Basic_AnimationDelay;
+            Speed = EnemyEV.WOLF_BASIC_SPEED;
+            TurnSpeed = EnemyEV.WOLF_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.WOLF_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.WOLF_BASIC_JUMP;
+            CooldownTime = EnemyEV.WOLF_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.WOLF_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Wolf_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Wolf_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Wolf_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Wolf_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.WOLF_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.WOLF_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.WOLF_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.WOLF_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Wolf_Basic_Scale;
-            ProjectileScale = EnemyEV.Wolf_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Wolf_Basic_Tint;
+            Scale = EnemyEV.WolfBasicScale;
+            ProjectileScale = EnemyEV.WolfBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.WolfBasicTint;
 
-            MeleeRadius = EnemyEV.Wolf_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Wolf_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Wolf_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.WOLF_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.WOLF_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.WOLF_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Wolf_Basic_KnockBack;
+            KnockBack = EnemyEV.WolfBasicKnockBack;
             #endregion
 
             InitialLogicDelay = 1;
@@ -68,115 +69,115 @@ namespace RogueCastle
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Wolf_Miniboss_Name;
-                    LocStringID = EnemyEV.Wolf_Miniboss_Name_locID;
+                    Name = EnemyEV.WOLF_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.WOLF_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Wolf_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Wolf_Miniboss_Damage;
-                    XPValue = EnemyEV.Wolf_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.WOLF_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.WOLF_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.WOLF_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Wolf_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Wolf_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Wolf_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.WOLF_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.WOLF_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.WOLF_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Wolf_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Wolf_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Wolf_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Wolf_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Wolf_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Wolf_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.WOLF_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.WOLF_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.WOLF_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.WOLF_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.WOLF_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.WOLF_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Wolf_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Wolf_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Wolf_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Wolf_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.WOLF_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.WOLF_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.WOLF_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.WOLF_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Wolf_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Wolf_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Wolf_Miniboss_Tint;
+                    Scale = EnemyEV.WolfMinibossScale;
+                    ProjectileScale = EnemyEV.WolfMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.WolfMinibossTint;
 
-                    MeleeRadius = EnemyEV.Wolf_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Wolf_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Wolf_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.WOLF_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.WOLF_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.WOLF_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Wolf_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.WolfMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Wolf_Expert_Name;
-                    LocStringID = EnemyEV.Wolf_Expert_Name_locID;
+                    Name = EnemyEV.WOLF_EXPERT_NAME;
+                    LocStringID = EnemyEV.WOLF_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Wolf_Expert_MaxHealth;
-                    Damage = EnemyEV.Wolf_Expert_Damage;
-                    XPValue = EnemyEV.Wolf_Expert_XPValue;
+                    MaxHealth = EnemyEV.WOLF_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.WOLF_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.WOLF_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Wolf_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Wolf_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Wolf_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.WOLF_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.WOLF_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.WOLF_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Wolf_Expert_Speed;
-                    TurnSpeed = EnemyEV.Wolf_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Wolf_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Wolf_Expert_Jump;
-                    CooldownTime = EnemyEV.Wolf_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Wolf_Expert_AnimationDelay;
+                    Speed = EnemyEV.WOLF_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.WOLF_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.WOLF_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.WOLF_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.WOLF_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.WOLF_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Wolf_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Wolf_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Wolf_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Wolf_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.WOLF_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.WOLF_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.WOLF_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.WOLF_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Wolf_Expert_Scale;
-                    ProjectileScale = EnemyEV.Wolf_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Wolf_Expert_Tint;
+                    Scale = EnemyEV.WolfExpertScale;
+                    ProjectileScale = EnemyEV.WolfExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.WolfExpertTint;
 
-                    MeleeRadius = EnemyEV.Wolf_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Wolf_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Wolf_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.WOLF_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.WOLF_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.WOLF_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Wolf_Expert_KnockBack;
+                    KnockBack = EnemyEV.WolfExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Wolf_Advanced_Name;
-                    LocStringID = EnemyEV.Wolf_Advanced_Name_locID;
+                    Name = EnemyEV.WOLF_ADVANCED_NAME;
+                    LocStringID = EnemyEV.WOLF_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Wolf_Advanced_MaxHealth;
-                    Damage = EnemyEV.Wolf_Advanced_Damage;
-                    XPValue = EnemyEV.Wolf_Advanced_XPValue;
+                    MaxHealth = EnemyEV.WOLF_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.WOLF_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.WOLF_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Wolf_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Wolf_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Wolf_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.WOLF_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.WOLF_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.WOLF_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Wolf_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Wolf_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Wolf_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Wolf_Advanced_Jump;
-                    CooldownTime = EnemyEV.Wolf_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Wolf_Advanced_AnimationDelay;
+                    Speed = EnemyEV.WOLF_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.WOLF_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.WOLF_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.WOLF_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.WOLF_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.WOLF_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Wolf_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Wolf_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Wolf_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Wolf_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.WOLF_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.WOLF_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.WOLF_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.WOLF_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Wolf_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Wolf_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Wolf_Advanced_Tint;
+                    Scale = EnemyEV.WolfAdvancedScale;
+                    ProjectileScale = EnemyEV.WolfAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.WolfAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Wolf_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Wolf_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Wolf_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.WOLF_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.WOLF_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.WOLF_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Wolf_Advanced_KnockBack;
+                    KnockBack = EnemyEV.WolfAdvancedKnockBack;
                     #endregion
                     break;
 

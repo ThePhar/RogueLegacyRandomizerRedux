@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -28,154 +29,154 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.Energon_Basic_Name;
-            LocStringID = EnemyEV.Energon_Basic_Name_locID;
+            Name = EnemyEV.ENERGON_BASIC_NAME;
+            LocStringID = EnemyEV.ENERGON_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Energon_Basic_MaxHealth;
-            Damage = EnemyEV.Energon_Basic_Damage;
-            XPValue = EnemyEV.Energon_Basic_XPValue;
+            MaxHealth = EnemyEV.ENERGON_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.ENERGON_BASIC_DAMAGE;
+            XPValue = EnemyEV.ENERGON_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Energon_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Energon_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Energon_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.ENERGON_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.ENERGON_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.ENERGON_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Energon_Basic_Speed;
-            TurnSpeed = EnemyEV.Energon_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Energon_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Energon_Basic_Jump;
-            CooldownTime = EnemyEV.Energon_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Energon_Basic_AnimationDelay;
+            Speed = EnemyEV.ENERGON_BASIC_SPEED;
+            TurnSpeed = EnemyEV.ENERGON_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.ENERGON_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.ENERGON_BASIC_JUMP;
+            CooldownTime = EnemyEV.ENERGON_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.ENERGON_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Energon_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Energon_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Energon_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Energon_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.ENERGON_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.ENERGON_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.ENERGON_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.ENERGON_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Energon_Basic_Scale;
-            ProjectileScale = EnemyEV.Energon_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Energon_Basic_Tint;
+            Scale = EnemyEV.EnergonBasicScale;
+            ProjectileScale = EnemyEV.EnergonBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.EnergonBasicTint;
 
-            MeleeRadius = EnemyEV.Energon_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Energon_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Energon_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.ENERGON_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.ENERGON_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.ENERGON_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Energon_Basic_KnockBack;
+            KnockBack = EnemyEV.EnergonBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Energon_Miniboss_Name;
-                    LocStringID = EnemyEV.Energon_Miniboss_Name_locID;
+                    Name = EnemyEV.ENERGON_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.ENERGON_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Energon_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Energon_Miniboss_Damage;
-                    XPValue = EnemyEV.Energon_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.ENERGON_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.ENERGON_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.ENERGON_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Energon_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Energon_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Energon_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.ENERGON_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.ENERGON_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.ENERGON_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Energon_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Energon_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Energon_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Energon_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Energon_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Energon_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.ENERGON_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.ENERGON_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.ENERGON_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.ENERGON_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.ENERGON_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.ENERGON_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Energon_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Energon_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Energon_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Energon_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.ENERGON_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.ENERGON_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.ENERGON_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.ENERGON_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Energon_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Energon_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Energon_Miniboss_Tint;
+                    Scale = EnemyEV.EnergonMinibossScale;
+                    ProjectileScale = EnemyEV.EnergonMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.EnergonMinibossTint;
 
-                    MeleeRadius = EnemyEV.Energon_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Energon_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Energon_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.ENERGON_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.ENERGON_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.ENERGON_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Energon_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.EnergonMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Energon_Expert_Name;
-                    LocStringID = EnemyEV.Energon_Expert_Name_locID;
+                    Name = EnemyEV.ENERGON_EXPERT_NAME;
+                    LocStringID = EnemyEV.ENERGON_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Energon_Expert_MaxHealth;
-                    Damage = EnemyEV.Energon_Expert_Damage;
-                    XPValue = EnemyEV.Energon_Expert_XPValue;
+                    MaxHealth = EnemyEV.ENERGON_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.ENERGON_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.ENERGON_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Energon_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Energon_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Energon_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.ENERGON_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.ENERGON_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.ENERGON_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Energon_Expert_Speed;
-                    TurnSpeed = EnemyEV.Energon_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Energon_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Energon_Expert_Jump;
-                    CooldownTime = EnemyEV.Energon_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Energon_Expert_AnimationDelay;
+                    Speed = EnemyEV.ENERGON_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.ENERGON_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.ENERGON_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.ENERGON_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.ENERGON_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.ENERGON_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Energon_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Energon_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Energon_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Energon_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.ENERGON_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.ENERGON_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.ENERGON_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.ENERGON_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Energon_Expert_Scale;
-                    ProjectileScale = EnemyEV.Energon_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Energon_Expert_Tint;
+                    Scale = EnemyEV.EnergonExpertScale;
+                    ProjectileScale = EnemyEV.EnergonExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.EnergonExpertTint;
 
-                    MeleeRadius = EnemyEV.Energon_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Energon_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Energon_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.ENERGON_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.ENERGON_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.ENERGON_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Energon_Expert_KnockBack;
+                    KnockBack = EnemyEV.EnergonExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Energon_Advanced_Name;
-                    LocStringID = EnemyEV.Energon_Advanced_Name_locID;
+                    Name = EnemyEV.ENERGON_ADVANCED_NAME;
+                    LocStringID = EnemyEV.ENERGON_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Energon_Advanced_MaxHealth;
-                    Damage = EnemyEV.Energon_Advanced_Damage;
-                    XPValue = EnemyEV.Energon_Advanced_XPValue;
+                    MaxHealth = EnemyEV.ENERGON_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.ENERGON_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.ENERGON_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Energon_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Energon_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Energon_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.ENERGON_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.ENERGON_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.ENERGON_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Energon_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Energon_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Energon_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Energon_Advanced_Jump;
-                    CooldownTime = EnemyEV.Energon_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Energon_Advanced_AnimationDelay;
+                    Speed = EnemyEV.ENERGON_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.ENERGON_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.ENERGON_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.ENERGON_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.ENERGON_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.ENERGON_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Energon_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Energon_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Energon_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Energon_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.ENERGON_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.ENERGON_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.ENERGON_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.ENERGON_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Energon_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Energon_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Energon_Advanced_Tint;
+                    Scale = EnemyEV.EnergonAdvancedScale;
+                    ProjectileScale = EnemyEV.EnergonAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.EnergonAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Energon_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Energon_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Energon_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.ENERGON_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.ENERGON_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.ENERGON_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Energon_Advanced_KnockBack;
+                    KnockBack = EnemyEV.EnergonAdvancedKnockBack;
                     #endregion
                     break;
 

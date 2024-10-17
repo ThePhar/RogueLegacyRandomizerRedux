@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -41,36 +42,36 @@ namespace RogueCastle
             this.HeadingY = (float)Math.Sin(MathHelper.ToRadians(this.Orientation));
 
             #region Basic Variables - General
-            Name = EnemyEV.BouncySpike_Basic_Name;
-            LocStringID = EnemyEV.BouncySpike_Basic_Name_locID;
+            Name = EnemyEV.BOUNCY_SPIKE_BASIC_NAME;
+            LocStringID = EnemyEV.BOUNCY_SPIKE_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.BouncySpike_Basic_MaxHealth;
-            Damage = EnemyEV.BouncySpike_Basic_Damage;
-            XPValue = EnemyEV.BouncySpike_Basic_XPValue;
+            MaxHealth = EnemyEV.BOUNCY_SPIKE_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.BOUNCY_SPIKE_BASIC_DAMAGE;
+            XPValue = EnemyEV.BOUNCY_SPIKE_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.BouncySpike_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.BouncySpike_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.BouncySpike_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.BOUNCY_SPIKE_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.BOUNCY_SPIKE_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.BOUNCY_SPIKE_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.BouncySpike_Basic_Speed;
-            TurnSpeed = EnemyEV.BouncySpike_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.BouncySpike_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.BouncySpike_Basic_Jump;
-            CooldownTime = EnemyEV.BouncySpike_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.BouncySpike_Basic_AnimationDelay;
+            Speed = EnemyEV.BOUNCY_SPIKE_BASIC_SPEED;
+            TurnSpeed = EnemyEV.BOUNCY_SPIKE_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.BOUNCY_SPIKE_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.BOUNCY_SPIKE_BASIC_JUMP;
+            CooldownTime = EnemyEV.BOUNCY_SPIKE_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.BOUNCY_SPIKE_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.BouncySpike_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.BouncySpike_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.BouncySpike_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.BouncySpike_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.BOUNCY_SPIKE_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.BOUNCY_SPIKE_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.BOUNCY_SPIKE_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.BOUNCY_SPIKE_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.BouncySpike_Basic_Scale;
-            ProjectileScale = EnemyEV.BouncySpike_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.BouncySpike_Basic_Tint;
+            Scale = EnemyEV.BouncySpikeBasicScale;
+            ProjectileScale = EnemyEV.BouncySpikeBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.BouncySpikeBasicTint;
 
-            MeleeRadius = EnemyEV.BouncySpike_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.BouncySpike_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.BouncySpike_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.BOUNCY_SPIKE_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.BOUNCY_SPIKE_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.BOUNCY_SPIKE_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
             KnockBack = new Vector2(1, 2);
@@ -81,36 +82,36 @@ namespace RogueCastle
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.BouncySpike_Miniboss_Name;
-                    LocStringID = EnemyEV.BouncySpike_Miniboss_Name_locID;
+                    Name = EnemyEV.BOUNCY_SPIKE_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.BOUNCY_SPIKE_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.BouncySpike_Miniboss_MaxHealth;
-                    Damage = EnemyEV.BouncySpike_Miniboss_Damage;
-                    XPValue = EnemyEV.BouncySpike_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.BOUNCY_SPIKE_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.BOUNCY_SPIKE_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.BOUNCY_SPIKE_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.BouncySpike_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.BouncySpike_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.BouncySpike_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.BOUNCY_SPIKE_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.BOUNCY_SPIKE_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.BOUNCY_SPIKE_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.BouncySpike_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.BouncySpike_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.BouncySpike_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.BouncySpike_Miniboss_Jump;
-                    CooldownTime = EnemyEV.BouncySpike_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.BouncySpike_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.BOUNCY_SPIKE_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.BOUNCY_SPIKE_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.BOUNCY_SPIKE_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.BOUNCY_SPIKE_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.BOUNCY_SPIKE_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.BOUNCY_SPIKE_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.BouncySpike_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.BouncySpike_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.BouncySpike_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.BouncySpike_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.BOUNCY_SPIKE_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.BOUNCY_SPIKE_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.BOUNCY_SPIKE_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.BOUNCY_SPIKE_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.BouncySpike_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.BouncySpike_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.BouncySpike_Miniboss_Tint;
+                    Scale = EnemyEV.BouncySpikeMinibossScale;
+                    ProjectileScale = EnemyEV.BouncySpikeMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.BouncySpikeMinibossTint;
 
-                    MeleeRadius = EnemyEV.BouncySpike_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.BouncySpike_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.BouncySpike_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.BOUNCY_SPIKE_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.BOUNCY_SPIKE_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.BOUNCY_SPIKE_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
                     KnockBack = new Vector2(1, 2);
@@ -119,36 +120,36 @@ namespace RogueCastle
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.BouncySpike_Expert_Name;
-                    LocStringID = EnemyEV.BouncySpike_Expert_Name_locID;
+                    Name = EnemyEV.BOUNCY_SPIKE_EXPERT_NAME;
+                    LocStringID = EnemyEV.BOUNCY_SPIKE_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.BouncySpike_Expert_MaxHealth;
-                    Damage = EnemyEV.BouncySpike_Expert_Damage;
-                    XPValue = EnemyEV.BouncySpike_Expert_XPValue;
+                    MaxHealth = EnemyEV.BOUNCY_SPIKE_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.BOUNCY_SPIKE_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.BOUNCY_SPIKE_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.BouncySpike_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.BouncySpike_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.BouncySpike_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.BOUNCY_SPIKE_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.BOUNCY_SPIKE_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.BOUNCY_SPIKE_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.BouncySpike_Expert_Speed;
-                    TurnSpeed = EnemyEV.BouncySpike_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.BouncySpike_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.BouncySpike_Expert_Jump;
-                    CooldownTime = EnemyEV.BouncySpike_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.BouncySpike_Expert_AnimationDelay;
+                    Speed = EnemyEV.BOUNCY_SPIKE_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.BOUNCY_SPIKE_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.BOUNCY_SPIKE_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.BOUNCY_SPIKE_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.BOUNCY_SPIKE_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.BOUNCY_SPIKE_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.BouncySpike_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.BouncySpike_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.BouncySpike_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.BouncySpike_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.BOUNCY_SPIKE_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.BOUNCY_SPIKE_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.BOUNCY_SPIKE_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.BOUNCY_SPIKE_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.BouncySpike_Expert_Scale;
-                    ProjectileScale = EnemyEV.BouncySpike_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.BouncySpike_Expert_Tint;
+                    Scale = EnemyEV.BouncySpikeExpertScale;
+                    ProjectileScale = EnemyEV.BouncySpikeExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.BouncySpikeExpertTint;
 
-                    MeleeRadius = EnemyEV.BouncySpike_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.BouncySpike_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.BouncySpike_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.BOUNCY_SPIKE_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.BOUNCY_SPIKE_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.BOUNCY_SPIKE_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
                     KnockBack = new Vector2(1, 2);
@@ -157,36 +158,36 @@ namespace RogueCastle
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.BouncySpike_Advanced_Name;
-                    LocStringID = EnemyEV.BouncySpike_Advanced_Name_locID;
+                    Name = EnemyEV.BOUNCY_SPIKE_ADVANCED_NAME;
+                    LocStringID = EnemyEV.BOUNCY_SPIKE_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.BouncySpike_Advanced_MaxHealth;
-                    Damage = EnemyEV.BouncySpike_Advanced_Damage;
-                    XPValue = EnemyEV.BouncySpike_Advanced_XPValue;
+                    MaxHealth = EnemyEV.BOUNCY_SPIKE_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.BOUNCY_SPIKE_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.BOUNCY_SPIKE_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.BouncySpike_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.BouncySpike_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.BouncySpike_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.BOUNCY_SPIKE_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.BOUNCY_SPIKE_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.BOUNCY_SPIKE_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.BouncySpike_Advanced_Speed;
-                    TurnSpeed = EnemyEV.BouncySpike_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.BouncySpike_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.BouncySpike_Advanced_Jump;
-                    CooldownTime = EnemyEV.BouncySpike_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.BouncySpike_Advanced_AnimationDelay;
+                    Speed = EnemyEV.BOUNCY_SPIKE_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.BOUNCY_SPIKE_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.BOUNCY_SPIKE_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.BOUNCY_SPIKE_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.BOUNCY_SPIKE_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.BOUNCY_SPIKE_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.BouncySpike_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.BouncySpike_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.BouncySpike_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.BouncySpike_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.BOUNCY_SPIKE_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.BOUNCY_SPIKE_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.BOUNCY_SPIKE_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.BOUNCY_SPIKE_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.BouncySpike_Advanced_Scale;
-                    ProjectileScale = EnemyEV.BouncySpike_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.BouncySpike_Advanced_Tint;
+                    Scale = EnemyEV.BouncySpikeAdvancedScale;
+                    ProjectileScale = EnemyEV.BouncySpikeAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.BouncySpikeAdvancedTint;
 
-                    MeleeRadius = EnemyEV.BouncySpike_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.BouncySpike_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.BouncySpike_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.BOUNCY_SPIKE_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.BOUNCY_SPIKE_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.BOUNCY_SPIKE_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
                     KnockBack = new Vector2(1, 2);

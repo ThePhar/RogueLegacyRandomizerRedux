@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -25,154 +26,154 @@ namespace RogueCastle
             //this.Speed = 400;
 
             #region Basic Variables - General
-            Name = EnemyEV.Mimic_Basic_Name;
-            LocStringID = EnemyEV.Mimic_Basic_Name_locID;
+            Name = EnemyEV.MIMIC_BASIC_NAME;
+            LocStringID = EnemyEV.MIMIC_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Mimic_Basic_MaxHealth;
-            Damage = EnemyEV.Mimic_Basic_Damage;
-            XPValue = EnemyEV.Mimic_Basic_XPValue;
+            MaxHealth = EnemyEV.MIMIC_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.MIMIC_BASIC_DAMAGE;
+            XPValue = EnemyEV.MIMIC_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Mimic_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Mimic_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Mimic_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.MIMIC_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.MIMIC_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.MIMIC_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Mimic_Basic_Speed;
-            TurnSpeed = EnemyEV.Mimic_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Mimic_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Mimic_Basic_Jump;
-            CooldownTime = EnemyEV.Mimic_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Mimic_Basic_AnimationDelay;
+            Speed = EnemyEV.MIMIC_BASIC_SPEED;
+            TurnSpeed = EnemyEV.MIMIC_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.MIMIC_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.MIMIC_BASIC_JUMP;
+            CooldownTime = EnemyEV.MIMIC_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.MIMIC_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Mimic_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Mimic_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Mimic_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Mimic_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.MIMIC_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.MIMIC_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.MIMIC_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.MIMIC_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Mimic_Basic_Scale;
-            ProjectileScale = EnemyEV.Mimic_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Mimic_Basic_Tint;
+            Scale = EnemyEV.MimicBasicScale;
+            ProjectileScale = EnemyEV.MimicBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.MimicBasicTint;
 
-            MeleeRadius = EnemyEV.Mimic_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Mimic_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Mimic_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.MIMIC_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.MIMIC_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.MIMIC_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Mimic_Basic_KnockBack;
+            KnockBack = EnemyEV.MimicBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Mimic_Miniboss_Name;
-                    LocStringID = EnemyEV.Mimic_Miniboss_Name_locID;
+                    Name = EnemyEV.MIMIC_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.MIMIC_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Mimic_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Mimic_Miniboss_Damage;
-                    XPValue = EnemyEV.Mimic_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.MIMIC_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.MIMIC_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.MIMIC_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Mimic_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Mimic_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Mimic_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.MIMIC_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.MIMIC_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.MIMIC_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Mimic_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Mimic_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Mimic_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Mimic_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Mimic_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Mimic_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.MIMIC_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.MIMIC_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.MIMIC_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.MIMIC_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.MIMIC_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.MIMIC_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Mimic_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Mimic_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Mimic_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Mimic_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.MIMIC_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.MIMIC_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.MIMIC_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.MIMIC_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Mimic_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Mimic_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Mimic_Miniboss_Tint;
+                    Scale = EnemyEV.MimicMinibossScale;
+                    ProjectileScale = EnemyEV.MimicMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.MimicMinibossTint;
 
-                    MeleeRadius = EnemyEV.Mimic_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Mimic_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Mimic_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.MIMIC_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.MIMIC_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.MIMIC_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Mimic_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.MimicMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Mimic_Expert_Name;
-                    LocStringID = EnemyEV.Mimic_Expert_Name_locID;
+                    Name = EnemyEV.MIMIC_EXPERT_NAME;
+                    LocStringID = EnemyEV.MIMIC_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Mimic_Expert_MaxHealth;
-                    Damage = EnemyEV.Mimic_Expert_Damage;
-                    XPValue = EnemyEV.Mimic_Expert_XPValue;
+                    MaxHealth = EnemyEV.MIMIC_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.MIMIC_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.MIMIC_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Mimic_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Mimic_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Mimic_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.MIMIC_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.MIMIC_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.MIMIC_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Mimic_Expert_Speed;
-                    TurnSpeed = EnemyEV.Mimic_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Mimic_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Mimic_Expert_Jump;
-                    CooldownTime = EnemyEV.Mimic_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Mimic_Expert_AnimationDelay;
+                    Speed = EnemyEV.MIMIC_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.MIMIC_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.MIMIC_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.MIMIC_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.MIMIC_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.MIMIC_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Mimic_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Mimic_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Mimic_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Mimic_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.MIMIC_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.MIMIC_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.MIMIC_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.MIMIC_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Mimic_Expert_Scale;
-                    ProjectileScale = EnemyEV.Mimic_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Mimic_Expert_Tint;
+                    Scale = EnemyEV.MimicExpertScale;
+                    ProjectileScale = EnemyEV.MimicExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.MimicExpertTint;
 
-                    MeleeRadius = EnemyEV.Mimic_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Mimic_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Mimic_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.MIMIC_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.MIMIC_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.MIMIC_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Mimic_Expert_KnockBack;
+                    KnockBack = EnemyEV.MimicExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Mimic_Advanced_Name;
-                    LocStringID = EnemyEV.Mimic_Advanced_Name_locID;
+                    Name = EnemyEV.MIMIC_ADVANCED_NAME;
+                    LocStringID = EnemyEV.MIMIC_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Mimic_Advanced_MaxHealth;
-                    Damage = EnemyEV.Mimic_Advanced_Damage;
-                    XPValue = EnemyEV.Mimic_Advanced_XPValue;
+                    MaxHealth = EnemyEV.MIMIC_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.MIMIC_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.MIMIC_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Mimic_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Mimic_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Mimic_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.MIMIC_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.MIMIC_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.MIMIC_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Mimic_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Mimic_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Mimic_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Mimic_Advanced_Jump;
-                    CooldownTime = EnemyEV.Mimic_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Mimic_Advanced_AnimationDelay;
+                    Speed = EnemyEV.MIMIC_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.MIMIC_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.MIMIC_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.MIMIC_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.MIMIC_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.MIMIC_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Mimic_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Mimic_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Mimic_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Mimic_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.MIMIC_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.MIMIC_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.MIMIC_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.MIMIC_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Mimic_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Mimic_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Mimic_Advanced_Tint;
+                    Scale = EnemyEV.MimicAdvancedScale;
+                    ProjectileScale = EnemyEV.MimicAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.MimicAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Mimic_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Mimic_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Mimic_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.MIMIC_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.MIMIC_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.MIMIC_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Mimic_Advanced_KnockBack;
+                    KnockBack = EnemyEV.MimicAdvancedKnockBack;
                     #endregion
                     break;
 

@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -31,78 +32,78 @@ namespace RogueCastle
             SpellInterval = 0.5f;
 
             #region Basic Variables - General
-            Name = EnemyEV.FireWizard_Basic_Name;
-            LocStringID = EnemyEV.FireWizard_Basic_Name_locID;
+            Name = EnemyEV.FIRE_WIZARD_BASIC_NAME;
+            LocStringID = EnemyEV.FIRE_WIZARD_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.FireWizard_Basic_MaxHealth;
-            Damage = EnemyEV.FireWizard_Basic_Damage;
-            XPValue = EnemyEV.FireWizard_Basic_XPValue;
+            MaxHealth = EnemyEV.FIRE_WIZARD_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.FIRE_WIZARD_BASIC_DAMAGE;
+            XPValue = EnemyEV.FIRE_WIZARD_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.FireWizard_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.FireWizard_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.FireWizard_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.FIRE_WIZARD_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.FIRE_WIZARD_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.FIRE_WIZARD_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.FireWizard_Basic_Speed;
-            TurnSpeed = EnemyEV.FireWizard_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.FireWizard_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.FireWizard_Basic_Jump;
-            CooldownTime = EnemyEV.FireWizard_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.FireWizard_Basic_AnimationDelay;
+            Speed = EnemyEV.FIRE_WIZARD_BASIC_SPEED;
+            TurnSpeed = EnemyEV.FIRE_WIZARD_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.FIRE_WIZARD_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.FIRE_WIZARD_BASIC_JUMP;
+            CooldownTime = EnemyEV.FIRE_WIZARD_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.FIRE_WIZARD_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.FireWizard_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.FireWizard_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.FireWizard_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.FireWizard_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.FIRE_WIZARD_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.FIRE_WIZARD_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.FIRE_WIZARD_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.FIRE_WIZARD_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.FireWizard_Basic_Scale;
-            ProjectileScale = EnemyEV.FireWizard_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.FireWizard_Basic_Tint;
+            Scale = EnemyEV.FireWizardBasicScale;
+            ProjectileScale = EnemyEV.FireWizardBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.FireWizardBasicTint;
 
-            MeleeRadius = EnemyEV.FireWizard_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.FireWizard_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.FireWizard_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.FIRE_WIZARD_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.FIRE_WIZARD_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.FIRE_WIZARD_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.FireWizard_Basic_KnockBack;
+            KnockBack = EnemyEV.FireWizardBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.FireWizard_Miniboss_Name;
-                    LocStringID = EnemyEV.FireWizard_Miniboss_Name_locID;
+                    Name = EnemyEV.FIRE_WIZARD_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.FIRE_WIZARD_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.FireWizard_Miniboss_MaxHealth;
-                    Damage = EnemyEV.FireWizard_Miniboss_Damage;
-                    XPValue = EnemyEV.FireWizard_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.FIRE_WIZARD_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.FIRE_WIZARD_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.FIRE_WIZARD_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.FireWizard_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.FireWizard_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.FireWizard_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.FIRE_WIZARD_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.FIRE_WIZARD_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.FIRE_WIZARD_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.FireWizard_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.FireWizard_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.FireWizard_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.FireWizard_Miniboss_Jump;
-                    CooldownTime = EnemyEV.FireWizard_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.FireWizard_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.FIRE_WIZARD_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.FIRE_WIZARD_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.FIRE_WIZARD_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.FIRE_WIZARD_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.FIRE_WIZARD_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.FIRE_WIZARD_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.FireWizard_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.FireWizard_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.FireWizard_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.FireWizard_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.FIRE_WIZARD_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.FIRE_WIZARD_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.FIRE_WIZARD_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.FIRE_WIZARD_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.FireWizard_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.FireWizard_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.FireWizard_Miniboss_Tint;
+                    Scale = EnemyEV.FireWizardMinibossScale;
+                    ProjectileScale = EnemyEV.FireWizardMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.FireWizardMinibossTint;
 
-                    MeleeRadius = EnemyEV.FireWizard_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.FireWizard_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.FireWizard_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.FIRE_WIZARD_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.FIRE_WIZARD_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.FIRE_WIZARD_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.FireWizard_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.FireWizardMinibossKnockBack;
                     #endregion
                     break;
 
@@ -113,39 +114,39 @@ namespace RogueCastle
                     SpellInterval = 1.0f;//0.5f;
 
 					#region Expert Variables - General
-					Name = EnemyEV.FireWizard_Expert_Name;
-                    LocStringID = EnemyEV.FireWizard_Expert_Name_locID;
+					Name = EnemyEV.FIRE_WIZARD_EXPERT_NAME;
+                    LocStringID = EnemyEV.FIRE_WIZARD_EXPERT_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.FireWizard_Expert_MaxHealth;
-					Damage = EnemyEV.FireWizard_Expert_Damage;
-					XPValue = EnemyEV.FireWizard_Expert_XPValue;
+					MaxHealth = EnemyEV.FIRE_WIZARD_EXPERT_MAX_HEALTH;
+					Damage = EnemyEV.FIRE_WIZARD_EXPERT_DAMAGE;
+					XPValue = EnemyEV.FIRE_WIZARD_EXPERT_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.FireWizard_Expert_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.FireWizard_Expert_MaxDropAmount;
-					MoneyDropChance = EnemyEV.FireWizard_Expert_DropChance;
+					MinMoneyDropAmount = EnemyEV.FIRE_WIZARD_EXPERT_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.FIRE_WIZARD_EXPERT_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.FIRE_WIZARD_EXPERT_DROP_CHANCE;
 					
-					Speed = EnemyEV.FireWizard_Expert_Speed;
-					TurnSpeed = EnemyEV.FireWizard_Expert_TurnSpeed;
-					ProjectileSpeed = EnemyEV.FireWizard_Expert_ProjectileSpeed;
-					JumpHeight = EnemyEV.FireWizard_Expert_Jump;
-					CooldownTime = EnemyEV.FireWizard_Expert_Cooldown;
-					AnimationDelay = 1 / EnemyEV.FireWizard_Expert_AnimationDelay;
+					Speed = EnemyEV.FIRE_WIZARD_EXPERT_SPEED;
+					TurnSpeed = EnemyEV.FIRE_WIZARD_EXPERT_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.FIRE_WIZARD_EXPERT_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.FIRE_WIZARD_EXPERT_JUMP;
+					CooldownTime = EnemyEV.FIRE_WIZARD_EXPERT_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.FIRE_WIZARD_EXPERT_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.FireWizard_Expert_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.FireWizard_Expert_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.FireWizard_Expert_CanBeKnockedBack;
-					IsWeighted = EnemyEV.FireWizard_Expert_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.FIRE_WIZARD_EXPERT_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.FIRE_WIZARD_EXPERT_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.FIRE_WIZARD_EXPERT_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.FIRE_WIZARD_EXPERT_IS_WEIGHTED;
 					
-					Scale = EnemyEV.FireWizard_Expert_Scale;
-					ProjectileScale = EnemyEV.FireWizard_Expert_ProjectileScale;
-					TintablePart.TextureColor = EnemyEV.FireWizard_Expert_Tint;
+					Scale = EnemyEV.FireWizardExpertScale;
+					ProjectileScale = EnemyEV.FireWizardExpertProjectileScale;
+					TintablePart.TextureColor = EnemyEV.FireWizardExpertTint;
 					
-					MeleeRadius = EnemyEV.FireWizard_Expert_MeleeRadius;
-					ProjectileRadius = EnemyEV.FireWizard_Expert_ProjectileRadius;
-					EngageRadius = EnemyEV.FireWizard_Expert_EngageRadius;
+					MeleeRadius = EnemyEV.FIRE_WIZARD_EXPERT_MELEE_RADIUS;
+					ProjectileRadius = EnemyEV.FIRE_WIZARD_EXPERT_PROJECTILE_RADIUS;
+					EngageRadius = EnemyEV.FIRE_WIZARD_EXPERT_ENGAGE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.FireWizard_Expert_KnockBack;
+					KnockBack = EnemyEV.FireWizardExpertKnockBack;
 					#endregion
                     break;
 
@@ -153,39 +154,39 @@ namespace RogueCastle
                     SpellInterval = 0.15f;
 
 					#region Advanced Variables - General
-					Name = EnemyEV.FireWizard_Advanced_Name;
-                    LocStringID = EnemyEV.FireWizard_Advanced_Name_locID;
+					Name = EnemyEV.FIRE_WIZARD_ADVANCED_NAME;
+                    LocStringID = EnemyEV.FIRE_WIZARD_ADVANCED_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.FireWizard_Advanced_MaxHealth;
-					Damage = EnemyEV.FireWizard_Advanced_Damage;
-					XPValue = EnemyEV.FireWizard_Advanced_XPValue;
+					MaxHealth = EnemyEV.FIRE_WIZARD_ADVANCED_MAX_HEALTH;
+					Damage = EnemyEV.FIRE_WIZARD_ADVANCED_DAMAGE;
+					XPValue = EnemyEV.FIRE_WIZARD_ADVANCED_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.FireWizard_Advanced_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.FireWizard_Advanced_MaxDropAmount;
-					MoneyDropChance = EnemyEV.FireWizard_Advanced_DropChance;
+					MinMoneyDropAmount = EnemyEV.FIRE_WIZARD_ADVANCED_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.FIRE_WIZARD_ADVANCED_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.FIRE_WIZARD_ADVANCED_DROP_CHANCE;
 					
-					Speed = EnemyEV.FireWizard_Advanced_Speed;
-					TurnSpeed = EnemyEV.FireWizard_Advanced_TurnSpeed;
-					ProjectileSpeed = EnemyEV.FireWizard_Advanced_ProjectileSpeed;
-					JumpHeight = EnemyEV.FireWizard_Advanced_Jump;
-					CooldownTime = EnemyEV.FireWizard_Advanced_Cooldown;
-					AnimationDelay = 1 / EnemyEV.FireWizard_Advanced_AnimationDelay;
+					Speed = EnemyEV.FIRE_WIZARD_ADVANCED_SPEED;
+					TurnSpeed = EnemyEV.FIRE_WIZARD_ADVANCED_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.FIRE_WIZARD_ADVANCED_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.FIRE_WIZARD_ADVANCED_JUMP;
+					CooldownTime = EnemyEV.FIRE_WIZARD_ADVANCED_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.FIRE_WIZARD_ADVANCED_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.FireWizard_Advanced_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.FireWizard_Advanced_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.FireWizard_Advanced_CanBeKnockedBack;
-					IsWeighted = EnemyEV.FireWizard_Advanced_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.FIRE_WIZARD_ADVANCED_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.FIRE_WIZARD_ADVANCED_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.FIRE_WIZARD_ADVANCED_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.FIRE_WIZARD_ADVANCED_IS_WEIGHTED;
 					
-					Scale = EnemyEV.FireWizard_Advanced_Scale;
-					ProjectileScale = EnemyEV.FireWizard_Advanced_ProjectileScale;
-					TintablePart.TextureColor = EnemyEV.FireWizard_Advanced_Tint;
+					Scale = EnemyEV.FireWizardAdvancedScale;
+					ProjectileScale = EnemyEV.FireWizardAdvancedProjectileScale;
+					TintablePart.TextureColor = EnemyEV.FireWizardAdvancedTint;
 					
-					MeleeRadius = EnemyEV.FireWizard_Advanced_MeleeRadius;
-					EngageRadius = EnemyEV.FireWizard_Advanced_EngageRadius;
-					ProjectileRadius = EnemyEV.FireWizard_Advanced_ProjectileRadius;
+					MeleeRadius = EnemyEV.FIRE_WIZARD_ADVANCED_MELEE_RADIUS;
+					EngageRadius = EnemyEV.FIRE_WIZARD_ADVANCED_ENGAGE_RADIUS;
+					ProjectileRadius = EnemyEV.FIRE_WIZARD_ADVANCED_PROJECTILE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.FireWizard_Advanced_KnockBack;
+					KnockBack = EnemyEV.FireWizardAdvancedKnockBack;
 					#endregion
                     break;
 

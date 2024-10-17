@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -23,39 +24,39 @@ namespace RogueCastle
             FireDelay = 2.0f;//5;
 
             #region Basic Variables - General
-            Name = EnemyEV.HomingTurret_Basic_Name;
-            LocStringID = EnemyEV.HomingTurret_Basic_Name_locID;
+            Name = EnemyEV.HOMING_TURRET_BASIC_NAME;
+            LocStringID = EnemyEV.HOMING_TURRET_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.HomingTurret_Basic_MaxHealth;
-            Damage = EnemyEV.HomingTurret_Basic_Damage;
-            XPValue = EnemyEV.HomingTurret_Basic_XPValue;
+            MaxHealth = EnemyEV.HOMING_TURRET_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.HOMING_TURRET_BASIC_DAMAGE;
+            XPValue = EnemyEV.HOMING_TURRET_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.HomingTurret_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.HomingTurret_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.HomingTurret_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.HOMING_TURRET_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.HOMING_TURRET_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.HOMING_TURRET_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.HomingTurret_Basic_Speed;
-            TurnSpeed = EnemyEV.HomingTurret_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.HomingTurret_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.HomingTurret_Basic_Jump;
-            CooldownTime = EnemyEV.HomingTurret_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.HomingTurret_Basic_AnimationDelay;
+            Speed = EnemyEV.HOMING_TURRET_BASIC_SPEED;
+            TurnSpeed = EnemyEV.HOMING_TURRET_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.HOMING_TURRET_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.HOMING_TURRET_BASIC_JUMP;
+            CooldownTime = EnemyEV.HOMING_TURRET_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.HOMING_TURRET_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.HomingTurret_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.HomingTurret_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.HomingTurret_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.HomingTurret_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.HOMING_TURRET_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.HOMING_TURRET_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.HOMING_TURRET_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.HOMING_TURRET_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.HomingTurret_Basic_Scale;
-            ProjectileScale = EnemyEV.HomingTurret_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.HomingTurret_Basic_Tint;
+            Scale = EnemyEV.HomingTurretBasicScale;
+            ProjectileScale = EnemyEV.HomingTurretBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.HomingTurretBasicTint;
 
-            MeleeRadius = EnemyEV.HomingTurret_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.HomingTurret_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.HomingTurret_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.HOMING_TURRET_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.HOMING_TURRET_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.HOMING_TURRET_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.HomingTurret_Basic_KnockBack;
+            KnockBack = EnemyEV.HomingTurretBasicKnockBack;
             #endregion
 
             InitialLogicDelay = 1;
@@ -64,117 +65,117 @@ namespace RogueCastle
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.HomingTurret_Miniboss_Name;
-                    LocStringID = EnemyEV.HomingTurret_Miniboss_Name_locID;
+                    Name = EnemyEV.HOMING_TURRET_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.HOMING_TURRET_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.HomingTurret_Miniboss_MaxHealth;
-                    Damage = EnemyEV.HomingTurret_Miniboss_Damage;
-                    XPValue = EnemyEV.HomingTurret_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.HOMING_TURRET_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.HOMING_TURRET_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.HOMING_TURRET_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.HomingTurret_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.HomingTurret_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.HomingTurret_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.HOMING_TURRET_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.HOMING_TURRET_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.HOMING_TURRET_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.HomingTurret_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.HomingTurret_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.HomingTurret_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.HomingTurret_Miniboss_Jump;
-                    CooldownTime = EnemyEV.HomingTurret_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.HomingTurret_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.HOMING_TURRET_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.HOMING_TURRET_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.HOMING_TURRET_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.HOMING_TURRET_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.HOMING_TURRET_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.HOMING_TURRET_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.HomingTurret_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.HomingTurret_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.HomingTurret_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.HomingTurret_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.HOMING_TURRET_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.HOMING_TURRET_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.HOMING_TURRET_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.HOMING_TURRET_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.HomingTurret_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.HomingTurret_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.HomingTurret_Miniboss_Tint;
+                    Scale = EnemyEV.HomingTurretMinibossScale;
+                    ProjectileScale = EnemyEV.HomingTurretMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.HomingTurretMinibossTint;
 
-                    MeleeRadius = EnemyEV.HomingTurret_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.HomingTurret_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.HomingTurret_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.HOMING_TURRET_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.HOMING_TURRET_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.HOMING_TURRET_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.HomingTurret_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.HomingTurretMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     FireDelay = 2.25f;//5;
                     #region Expert Variables - General
-                    Name = EnemyEV.HomingTurret_Expert_Name;
-                    LocStringID = EnemyEV.HomingTurret_Expert_Name_locID;
+                    Name = EnemyEV.HOMING_TURRET_EXPERT_NAME;
+                    LocStringID = EnemyEV.HOMING_TURRET_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.HomingTurret_Expert_MaxHealth;
-                    Damage = EnemyEV.HomingTurret_Expert_Damage;
-                    XPValue = EnemyEV.HomingTurret_Expert_XPValue;
+                    MaxHealth = EnemyEV.HOMING_TURRET_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.HOMING_TURRET_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.HOMING_TURRET_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.HomingTurret_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.HomingTurret_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.HomingTurret_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.HOMING_TURRET_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.HOMING_TURRET_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.HOMING_TURRET_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.HomingTurret_Expert_Speed;
-                    TurnSpeed = EnemyEV.HomingTurret_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.HomingTurret_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.HomingTurret_Expert_Jump;
-                    CooldownTime = EnemyEV.HomingTurret_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.HomingTurret_Expert_AnimationDelay;
+                    Speed = EnemyEV.HOMING_TURRET_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.HOMING_TURRET_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.HOMING_TURRET_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.HOMING_TURRET_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.HOMING_TURRET_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.HOMING_TURRET_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.HomingTurret_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.HomingTurret_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.HomingTurret_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.HomingTurret_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.HOMING_TURRET_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.HOMING_TURRET_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.HOMING_TURRET_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.HOMING_TURRET_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.HomingTurret_Expert_Scale;
-                    ProjectileScale = EnemyEV.HomingTurret_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.HomingTurret_Expert_Tint;
+                    Scale = EnemyEV.HomingTurretExpertScale;
+                    ProjectileScale = EnemyEV.HomingTurretExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.HomingTurretExpertTint;
 
-                    MeleeRadius = EnemyEV.HomingTurret_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.HomingTurret_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.HomingTurret_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.HOMING_TURRET_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.HOMING_TURRET_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.HOMING_TURRET_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.HomingTurret_Expert_KnockBack;
+                    KnockBack = EnemyEV.HomingTurretExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     FireDelay = 1.5f;//5;
                     #region Advanced Variables - General
-                    Name = EnemyEV.HomingTurret_Advanced_Name;
-                    LocStringID = EnemyEV.HomingTurret_Advanced_Name_locID;
+                    Name = EnemyEV.HOMING_TURRET_ADVANCED_NAME;
+                    LocStringID = EnemyEV.HOMING_TURRET_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.HomingTurret_Advanced_MaxHealth;
-                    Damage = EnemyEV.HomingTurret_Advanced_Damage;
-                    XPValue = EnemyEV.HomingTurret_Advanced_XPValue;
+                    MaxHealth = EnemyEV.HOMING_TURRET_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.HOMING_TURRET_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.HOMING_TURRET_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.HomingTurret_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.HomingTurret_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.HomingTurret_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.HOMING_TURRET_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.HOMING_TURRET_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.HOMING_TURRET_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.HomingTurret_Advanced_Speed;
-                    TurnSpeed = EnemyEV.HomingTurret_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.HomingTurret_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.HomingTurret_Advanced_Jump;
-                    CooldownTime = EnemyEV.HomingTurret_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.HomingTurret_Advanced_AnimationDelay;
+                    Speed = EnemyEV.HOMING_TURRET_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.HOMING_TURRET_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.HOMING_TURRET_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.HOMING_TURRET_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.HOMING_TURRET_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.HOMING_TURRET_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.HomingTurret_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.HomingTurret_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.HomingTurret_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.HomingTurret_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.HOMING_TURRET_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.HOMING_TURRET_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.HOMING_TURRET_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.HOMING_TURRET_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.HomingTurret_Advanced_Scale;
-                    ProjectileScale = EnemyEV.HomingTurret_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.HomingTurret_Advanced_Tint;
+                    Scale = EnemyEV.HomingTurretAdvancedScale;
+                    ProjectileScale = EnemyEV.HomingTurretAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.HomingTurretAdvancedTint;
 
-                    MeleeRadius = EnemyEV.HomingTurret_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.HomingTurret_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.HomingTurret_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.HOMING_TURRET_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.HOMING_TURRET_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.HOMING_TURRET_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.HomingTurret_Advanced_KnockBack;
+                    KnockBack = EnemyEV.HomingTurretAdvancedKnockBack;
                     #endregion
                     break;
 

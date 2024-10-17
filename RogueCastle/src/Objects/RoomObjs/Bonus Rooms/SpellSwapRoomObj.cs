@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
     public class SpellSwapRoomObj : BonusRoomObj
     {
-        public byte Spell { get; set; }
+        public SpellType Spell { get; set; }
         private SpriteObj m_pedestal;
         private SpriteObj m_icon;
         private float m_iconYPos;
@@ -58,7 +60,7 @@ namespace RogueCastle
             // Selecting random spell.
             if (Game.PlayerStats.Class != ClassType.Dragon && Game.PlayerStats.Class != ClassType.Traitor)
             {
-                byte[] spellList = ClassType.GetSpellList(Game.PlayerStats.Class);
+                SpellType[] spellList = ClassType.GetSpellList(Game.PlayerStats.Class);
 
                 // Code to make sure spell swap doesn't interfere with savantism.
                 do
@@ -68,25 +70,25 @@ namespace RogueCastle
                 (Spell == SpellType.Translocator || Spell == SpellType.TimeStop || Spell == SpellType.DamageShield));
 
                 Array.Clear(spellList, 0, spellList.Length);
-                ID = Spell;
+                ID = (int) Spell;
             }
             else
             {
                 if (Game.PlayerStats.Class == ClassType.Dragon)
                 {
-                    ID = SpellType.DragonFire;
+                    ID = (int) SpellType.DragonFire;
                     Spell = SpellType.DragonFire;
                 }
                 else if (Game.PlayerStats.Class == ClassType.Traitor)
                 {
-                    ID = SpellType.RapidDagger;
+                    ID = (int) SpellType.RapidDagger;
                     Spell = SpellType.RapidDagger;
                 }
             }
                 
             //Spell = ClassType.GetSpellList(Game.PlayerStats.Class)[0];
 
-            m_icon.ChangeSprite(SpellType.Icon(Spell));
+            m_icon.ChangeSprite(Spell.Icon());
             //RoomCompleted = true;
         }
 
@@ -103,8 +105,8 @@ namespace RogueCastle
             }
             else if (ID != -1)
             {
-                Spell = (byte)ID;
-                m_icon.ChangeSprite(SpellType.Icon(Spell));
+                Spell = (SpellType)ID;
+                m_icon.ChangeSprite(Spell.Icon());
 
                 if (RoomCompleted == true)
                 {
@@ -148,7 +150,7 @@ namespace RogueCastle
             Game.PlayerStats.Spell = Spell;
 
             if (Game.PlayerStats.Class == ClassType.Wizard2)
-                Game.PlayerStats.WizardSpellList = SpellType.GetNext3Spells();
+                Game.PlayerStats.WizardSpellList = SpellEV.GetNext3Spells();
 
             Spell = 0;
             m_speechBubble.Visible = false;
@@ -157,7 +159,7 @@ namespace RogueCastle
             List<object> objectList = new List<object>();
             objectList.Add(new Vector2(m_icon.X, m_icon.Y - m_icon.Height / 2f));
             objectList.Add(GetItemType.Spell);
-            objectList.Add(new Vector2(Game.PlayerStats.Spell, 0));
+            objectList.Add(new Vector2((byte)Game.PlayerStats.Spell, 0));
 
             (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
             Tweener.Tween.RunFunction(0, Player, "RunGetItemAnimation"); // Necessary to delay this call by one update.

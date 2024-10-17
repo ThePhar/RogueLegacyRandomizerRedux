@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -60,8 +61,8 @@ namespace RogueCastle
 
             spriteBatch.Begin();
 
-            spriteBatch.DrawString(spriteFont, fps, new Vector2(GlobalEV.ScreenWidth - 150, 33), Color.Black);
-            spriteBatch.DrawString(spriteFont, fps, new Vector2(GlobalEV.ScreenWidth - 149, 32), Color.White);
+            spriteBatch.DrawString(spriteFont, fps, new Vector2(GlobalEV.SCREEN_WIDTH - 150, 33), Color.Black);
+            spriteBatch.DrawString(spriteFont, fps, new Vector2(GlobalEV.SCREEN_WIDTH - 149, 32), Color.White);
 
             spriteBatch.End();
         }

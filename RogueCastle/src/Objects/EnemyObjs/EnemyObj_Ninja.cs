@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -33,78 +34,78 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.Ninja_Basic_Name;
-            LocStringID = EnemyEV.Ninja_Basic_Name_locID;
+            Name = EnemyEV.NINJA_BASIC_NAME;
+            LocStringID = EnemyEV.NINJA_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Ninja_Basic_MaxHealth;
-            Damage = EnemyEV.Ninja_Basic_Damage;
-            XPValue = EnemyEV.Ninja_Basic_XPValue;
+            MaxHealth = EnemyEV.NINJA_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.NINJA_BASIC_DAMAGE;
+            XPValue = EnemyEV.NINJA_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Ninja_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Ninja_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Ninja_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.NINJA_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.NINJA_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.NINJA_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Ninja_Basic_Speed;
-            TurnSpeed = EnemyEV.Ninja_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Ninja_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Ninja_Basic_Jump;
-            CooldownTime = EnemyEV.Ninja_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Ninja_Basic_AnimationDelay;
+            Speed = EnemyEV.NINJA_BASIC_SPEED;
+            TurnSpeed = EnemyEV.NINJA_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.NINJA_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.NINJA_BASIC_JUMP;
+            CooldownTime = EnemyEV.NINJA_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.NINJA_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Ninja_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Ninja_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Ninja_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Ninja_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.NINJA_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.NINJA_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.NINJA_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.NINJA_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Ninja_Basic_Scale;
-            ProjectileScale = EnemyEV.Ninja_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Ninja_Basic_Tint;
+            Scale = EnemyEV.NinjaBasicScale;
+            ProjectileScale = EnemyEV.NinjaBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.NinjaBasicTint;
 
-            MeleeRadius = EnemyEV.Ninja_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Ninja_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Ninja_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.NINJA_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.NINJA_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.NINJA_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Ninja_Basic_KnockBack;
+            KnockBack = EnemyEV.NinjaBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Ninja_Miniboss_Name;
-                    LocStringID = EnemyEV.Ninja_Miniboss_Name_locID;
+                    Name = EnemyEV.NINJA_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.NINJA_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Ninja_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Ninja_Miniboss_Damage;
-                    XPValue = EnemyEV.Ninja_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.NINJA_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.NINJA_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.NINJA_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Ninja_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Ninja_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Ninja_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.NINJA_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.NINJA_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.NINJA_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Ninja_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Ninja_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Ninja_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Ninja_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Ninja_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Ninja_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.NINJA_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.NINJA_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.NINJA_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.NINJA_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.NINJA_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.NINJA_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Ninja_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Ninja_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Ninja_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Ninja_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.NINJA_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.NINJA_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.NINJA_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.NINJA_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Ninja_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Ninja_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Ninja_Miniboss_Tint;
+                    Scale = EnemyEV.NinjaMinibossScale;
+                    ProjectileScale = EnemyEV.NinjaMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.NinjaMinibossTint;
 
-                    MeleeRadius = EnemyEV.Ninja_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Ninja_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Ninja_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.NINJA_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.NINJA_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.NINJA_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Ninja_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.NinjaMinibossKnockBack;
                     #endregion
                     break;
 
@@ -112,39 +113,39 @@ namespace RogueCastle
 
                     ChanceToTeleport = 0.65f;
                     #region Expert Variables - General
-                    Name = EnemyEV.Ninja_Expert_Name;
-                    LocStringID = EnemyEV.Ninja_Expert_Name_locID;
+                    Name = EnemyEV.NINJA_EXPERT_NAME;
+                    LocStringID = EnemyEV.NINJA_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Ninja_Expert_MaxHealth;
-                    Damage = EnemyEV.Ninja_Expert_Damage;
-                    XPValue = EnemyEV.Ninja_Expert_XPValue;
+                    MaxHealth = EnemyEV.NINJA_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.NINJA_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.NINJA_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Ninja_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Ninja_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Ninja_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.NINJA_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.NINJA_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.NINJA_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Ninja_Expert_Speed;
-                    TurnSpeed = EnemyEV.Ninja_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Ninja_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Ninja_Expert_Jump;
-                    CooldownTime = EnemyEV.Ninja_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Ninja_Expert_AnimationDelay;
+                    Speed = EnemyEV.NINJA_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.NINJA_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.NINJA_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.NINJA_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.NINJA_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.NINJA_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Ninja_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Ninja_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Ninja_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Ninja_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.NINJA_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.NINJA_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.NINJA_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.NINJA_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Ninja_Expert_Scale;
-                    ProjectileScale = EnemyEV.Ninja_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Ninja_Expert_Tint;
+                    Scale = EnemyEV.NinjaExpertScale;
+                    ProjectileScale = EnemyEV.NinjaExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.NinjaExpertTint;
 
-                    MeleeRadius = EnemyEV.Ninja_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Ninja_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Ninja_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.NINJA_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.NINJA_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.NINJA_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Ninja_Expert_KnockBack;
+                    KnockBack = EnemyEV.NinjaExpertKnockBack;
                     #endregion
                     break;
 
@@ -152,39 +153,39 @@ namespace RogueCastle
                     ChanceToTeleport = 0.50f;
 
                     #region Advanced Variables - General
-                    Name = EnemyEV.Ninja_Advanced_Name;
-                    LocStringID = EnemyEV.Ninja_Advanced_Name_locID;
+                    Name = EnemyEV.NINJA_ADVANCED_NAME;
+                    LocStringID = EnemyEV.NINJA_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Ninja_Advanced_MaxHealth;
-                    Damage = EnemyEV.Ninja_Advanced_Damage;
-                    XPValue = EnemyEV.Ninja_Advanced_XPValue;
+                    MaxHealth = EnemyEV.NINJA_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.NINJA_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.NINJA_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Ninja_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Ninja_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Ninja_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.NINJA_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.NINJA_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.NINJA_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Ninja_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Ninja_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Ninja_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Ninja_Advanced_Jump;
-                    CooldownTime = EnemyEV.Ninja_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Ninja_Advanced_AnimationDelay;
+                    Speed = EnemyEV.NINJA_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.NINJA_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.NINJA_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.NINJA_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.NINJA_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.NINJA_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Ninja_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Ninja_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Ninja_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Ninja_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.NINJA_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.NINJA_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.NINJA_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.NINJA_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Ninja_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Ninja_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Ninja_Advanced_Tint;
+                    Scale = EnemyEV.NinjaAdvancedScale;
+                    ProjectileScale = EnemyEV.NinjaAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.NinjaAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Ninja_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Ninja_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Ninja_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.NINJA_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.NINJA_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.NINJA_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Ninja_Advanced_KnockBack;
+                    KnockBack = EnemyEV.NinjaAdvancedKnockBack;
                     #endregion
                     break;
 

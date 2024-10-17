@@ -9,6 +9,7 @@ using System.IO;
 using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using InputSystem;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -381,7 +382,7 @@ namespace RogueCastle
         public override void Draw(GameTime gametime)
         {
             Camera.Begin();
-            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight), Color.Black * BackBufferOpacity);
+            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT), Color.Black * BackBufferOpacity);
             m_bgSprite.Draw(Camera);
             foreach (OptionsObj obj in m_optionsArray)
                 obj.Draw(Camera);

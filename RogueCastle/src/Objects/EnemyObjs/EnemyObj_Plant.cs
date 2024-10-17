@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -20,154 +21,154 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.Plant_Basic_Name;
-            LocStringID = EnemyEV.Plant_Basic_Name_locID;
+            Name = EnemyEV.PLANT_BASIC_NAME;
+            LocStringID = EnemyEV.PLANT_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Plant_Basic_MaxHealth;
-            Damage = EnemyEV.Plant_Basic_Damage;
-            XPValue = EnemyEV.Plant_Basic_XPValue;
+            MaxHealth = EnemyEV.PLANT_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.PLANT_BASIC_DAMAGE;
+            XPValue = EnemyEV.PLANT_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Plant_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Plant_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Plant_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.PLANT_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.PLANT_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.PLANT_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Plant_Basic_Speed;
-            TurnSpeed = EnemyEV.Plant_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Plant_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Plant_Basic_Jump;
-            CooldownTime = EnemyEV.Plant_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Plant_Basic_AnimationDelay;
+            Speed = EnemyEV.PLANT_BASIC_SPEED;
+            TurnSpeed = EnemyEV.PLANT_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.PLANT_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.PLANT_BASIC_JUMP;
+            CooldownTime = EnemyEV.PLANT_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.PLANT_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Plant_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Plant_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Plant_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Plant_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.PLANT_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.PLANT_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.PLANT_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.PLANT_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Plant_Basic_Scale;
-            ProjectileScale = EnemyEV.Plant_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Plant_Basic_Tint;
+            Scale = EnemyEV.PlantBasicScale;
+            ProjectileScale = EnemyEV.PlantBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.PlantBasicTint;
 
-            MeleeRadius = EnemyEV.Plant_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Plant_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Plant_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.PLANT_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.PLANT_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.PLANT_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Plant_Basic_KnockBack;
+            KnockBack = EnemyEV.PlantBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Plant_Miniboss_Name;
-                    LocStringID = EnemyEV.Plant_Miniboss_Name_locID;
+                    Name = EnemyEV.PLANT_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.PLANT_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Plant_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Plant_Miniboss_Damage;
-                    XPValue = EnemyEV.Plant_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.PLANT_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.PLANT_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.PLANT_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Plant_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Plant_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Plant_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.PLANT_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.PLANT_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.PLANT_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Plant_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Plant_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Plant_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Plant_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Plant_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Plant_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.PLANT_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.PLANT_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.PLANT_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.PLANT_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.PLANT_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.PLANT_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Plant_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Plant_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Plant_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Plant_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.PLANT_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.PLANT_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.PLANT_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.PLANT_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Plant_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Plant_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Plant_Miniboss_Tint;
+                    Scale = EnemyEV.PlantMinibossScale;
+                    ProjectileScale = EnemyEV.PlantMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.PlantMinibossTint;
 
-                    MeleeRadius = EnemyEV.Plant_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Plant_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Plant_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.PLANT_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.PLANT_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.PLANT_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Plant_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.PlantMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Plant_Expert_Name;
-                    LocStringID = EnemyEV.Plant_Expert_Name_locID;
+                    Name = EnemyEV.PLANT_EXPERT_NAME;
+                    LocStringID = EnemyEV.PLANT_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Plant_Expert_MaxHealth;
-                    Damage = EnemyEV.Plant_Expert_Damage;
-                    XPValue = EnemyEV.Plant_Expert_XPValue;
+                    MaxHealth = EnemyEV.PLANT_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.PLANT_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.PLANT_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Plant_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Plant_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Plant_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.PLANT_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.PLANT_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.PLANT_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Plant_Expert_Speed;
-                    TurnSpeed = EnemyEV.Plant_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Plant_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Plant_Expert_Jump;
-                    CooldownTime = EnemyEV.Plant_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Plant_Expert_AnimationDelay;
+                    Speed = EnemyEV.PLANT_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.PLANT_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.PLANT_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.PLANT_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.PLANT_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.PLANT_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Plant_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Plant_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Plant_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Plant_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.PLANT_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.PLANT_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.PLANT_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.PLANT_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Plant_Expert_Scale;
-                    ProjectileScale = EnemyEV.Plant_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Plant_Expert_Tint;
+                    Scale = EnemyEV.PlantExpertScale;
+                    ProjectileScale = EnemyEV.PlantExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.PlantExpertTint;
 
-                    MeleeRadius = EnemyEV.Plant_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Plant_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Plant_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.PLANT_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.PLANT_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.PLANT_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Plant_Expert_KnockBack;
+                    KnockBack = EnemyEV.PlantExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Plant_Advanced_Name;
-                    LocStringID = EnemyEV.Plant_Advanced_Name_locID;
+                    Name = EnemyEV.PLANT_ADVANCED_NAME;
+                    LocStringID = EnemyEV.PLANT_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Plant_Advanced_MaxHealth;
-                    Damage = EnemyEV.Plant_Advanced_Damage;
-                    XPValue = EnemyEV.Plant_Advanced_XPValue;
+                    MaxHealth = EnemyEV.PLANT_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.PLANT_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.PLANT_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Plant_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Plant_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Plant_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.PLANT_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.PLANT_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.PLANT_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Plant_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Plant_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Plant_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Plant_Advanced_Jump;
-                    CooldownTime = EnemyEV.Plant_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Plant_Advanced_AnimationDelay;
+                    Speed = EnemyEV.PLANT_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.PLANT_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.PLANT_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.PLANT_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.PLANT_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.PLANT_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Plant_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Plant_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Plant_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Plant_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.PLANT_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.PLANT_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.PLANT_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.PLANT_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Plant_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Plant_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Plant_Advanced_Tint;
+                    Scale = EnemyEV.PlantAdvancedScale;
+                    ProjectileScale = EnemyEV.PlantAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.PlantAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Plant_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Plant_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Plant_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.PLANT_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.PLANT_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.PLANT_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Plant_Advanced_KnockBack;
+                    KnockBack = EnemyEV.PlantAdvancedKnockBack;
                     #endregion
                     break;
 

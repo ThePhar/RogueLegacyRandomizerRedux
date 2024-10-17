@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -49,39 +50,39 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.EarthWizard_Basic_Name;
-            LocStringID = EnemyEV.EarthWizard_Basic_Name_locID;
+            Name = EnemyEV.EARTH_WIZARD_BASIC_NAME;
+            LocStringID = EnemyEV.EARTH_WIZARD_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.EarthWizard_Basic_MaxHealth;
-            Damage = EnemyEV.EarthWizard_Basic_Damage;
-            XPValue = EnemyEV.EarthWizard_Basic_XPValue;
+            MaxHealth = EnemyEV.EARTH_WIZARD_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.EARTH_WIZARD_BASIC_DAMAGE;
+            XPValue = EnemyEV.EARTH_WIZARD_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.EarthWizard_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.EarthWizard_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.EarthWizard_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.EARTH_WIZARD_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.EARTH_WIZARD_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.EARTH_WIZARD_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.EarthWizard_Basic_Speed;
-            TurnSpeed = EnemyEV.EarthWizard_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.EarthWizard_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.EarthWizard_Basic_Jump;
-            CooldownTime = EnemyEV.EarthWizard_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.EarthWizard_Basic_AnimationDelay;
+            Speed = EnemyEV.EARTH_WIZARD_BASIC_SPEED;
+            TurnSpeed = EnemyEV.EARTH_WIZARD_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.EARTH_WIZARD_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.EARTH_WIZARD_BASIC_JUMP;
+            CooldownTime = EnemyEV.EARTH_WIZARD_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.EARTH_WIZARD_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.EarthWizard_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.EarthWizard_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.EarthWizard_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.EarthWizard_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.EARTH_WIZARD_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.EARTH_WIZARD_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.EARTH_WIZARD_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.EARTH_WIZARD_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.EarthWizard_Basic_Scale;
-            ProjectileScale = EnemyEV.EarthWizard_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.EarthWizard_Basic_Tint;
+            Scale = EnemyEV.EarthWizardBasicScale;
+            ProjectileScale = EnemyEV.EarthWizardBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.EarthWizardBasicTint;
 
-            MeleeRadius = EnemyEV.EarthWizard_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.EarthWizard_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.EarthWizard_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.EARTH_WIZARD_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.EARTH_WIZARD_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.EARTH_WIZARD_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.EarthWizard_Basic_KnockBack;
+            KnockBack = EnemyEV.EarthWizardBasicKnockBack;
             #endregion
 
             switch (Difficulty)
@@ -91,39 +92,39 @@ namespace RogueCastle
                     SpellDuration = 2.0f;
                     m_spellOffset = new Vector2(40, -140);
                     #region Miniboss Variables - General
-                    Name = EnemyEV.EarthWizard_Miniboss_Name;
-                    LocStringID = EnemyEV.EarthWizard_Miniboss_Name_locID;
+                    Name = EnemyEV.EARTH_WIZARD_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.EARTH_WIZARD_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.EarthWizard_Miniboss_MaxHealth;
-                    Damage = EnemyEV.EarthWizard_Miniboss_Damage;
-                    XPValue = EnemyEV.EarthWizard_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.EARTH_WIZARD_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.EARTH_WIZARD_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.EARTH_WIZARD_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.EarthWizard_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.EarthWizard_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.EarthWizard_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.EARTH_WIZARD_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.EARTH_WIZARD_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.EARTH_WIZARD_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.EarthWizard_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.EarthWizard_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.EarthWizard_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.EarthWizard_Miniboss_Jump;
-                    CooldownTime = EnemyEV.EarthWizard_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.EarthWizard_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.EARTH_WIZARD_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.EARTH_WIZARD_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.EARTH_WIZARD_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.EARTH_WIZARD_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.EARTH_WIZARD_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.EARTH_WIZARD_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.EarthWizard_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.EarthWizard_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.EarthWizard_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.EarthWizard_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.EARTH_WIZARD_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.EARTH_WIZARD_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.EARTH_WIZARD_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.EARTH_WIZARD_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.EarthWizard_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.EarthWizard_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.EarthWizard_Miniboss_Tint;
+                    Scale = EnemyEV.EarthWizardMinibossScale;
+                    ProjectileScale = EnemyEV.EarthWizardMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.EarthWizardMinibossTint;
 
-                    MeleeRadius = EnemyEV.EarthWizard_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.EarthWizard_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.EarthWizard_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.EARTH_WIZARD_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.EARTH_WIZARD_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.EARTH_WIZARD_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.EarthWizard_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.EarthWizardMinibossKnockBack;
                     #endregion
                     break;
 
@@ -132,39 +133,39 @@ namespace RogueCastle
                     SpellDelay = 0.7f;
                     SpellDuration = 3.5f;
 					#region Expert Variables - General
-					Name = EnemyEV.EarthWizard_Expert_Name;
-                    LocStringID = EnemyEV.EarthWizard_Expert_Name_locID;
+					Name = EnemyEV.EARTH_WIZARD_EXPERT_NAME;
+                    LocStringID = EnemyEV.EARTH_WIZARD_EXPERT_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.EarthWizard_Expert_MaxHealth;
-					Damage = EnemyEV.EarthWizard_Expert_Damage;
-					XPValue = EnemyEV.EarthWizard_Expert_XPValue;
+					MaxHealth = EnemyEV.EARTH_WIZARD_EXPERT_MAX_HEALTH;
+					Damage = EnemyEV.EARTH_WIZARD_EXPERT_DAMAGE;
+					XPValue = EnemyEV.EARTH_WIZARD_EXPERT_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.EarthWizard_Expert_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.EarthWizard_Expert_MaxDropAmount;
-					MoneyDropChance = EnemyEV.EarthWizard_Expert_DropChance;
+					MinMoneyDropAmount = EnemyEV.EARTH_WIZARD_EXPERT_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.EARTH_WIZARD_EXPERT_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.EARTH_WIZARD_EXPERT_DROP_CHANCE;
 					
-					Speed = EnemyEV.EarthWizard_Expert_Speed;
-					TurnSpeed = EnemyEV.EarthWizard_Expert_TurnSpeed;
-					ProjectileSpeed = EnemyEV.EarthWizard_Expert_ProjectileSpeed;
-					JumpHeight = EnemyEV.EarthWizard_Expert_Jump;
-					CooldownTime = EnemyEV.EarthWizard_Expert_Cooldown;
-					AnimationDelay = 1 / EnemyEV.EarthWizard_Expert_AnimationDelay;
+					Speed = EnemyEV.EARTH_WIZARD_EXPERT_SPEED;
+					TurnSpeed = EnemyEV.EARTH_WIZARD_EXPERT_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.EARTH_WIZARD_EXPERT_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.EARTH_WIZARD_EXPERT_JUMP;
+					CooldownTime = EnemyEV.EARTH_WIZARD_EXPERT_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.EARTH_WIZARD_EXPERT_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.EarthWizard_Expert_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.EarthWizard_Expert_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.EarthWizard_Expert_CanBeKnockedBack;
-					IsWeighted = EnemyEV.EarthWizard_Expert_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.EARTH_WIZARD_EXPERT_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.EARTH_WIZARD_EXPERT_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.EARTH_WIZARD_EXPERT_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.EARTH_WIZARD_EXPERT_IS_WEIGHTED;
 					
-					Scale = EnemyEV.EarthWizard_Expert_Scale;
-					ProjectileScale = EnemyEV.EarthWizard_Expert_ProjectileScale;
-					TintablePart.TextureColor = EnemyEV.EarthWizard_Expert_Tint;
+					Scale = EnemyEV.EarthWizardExpertScale;
+					ProjectileScale = EnemyEV.EarthWizardExpertProjectileScale;
+					TintablePart.TextureColor = EnemyEV.EarthWizardExpertTint;
 					
-					MeleeRadius = EnemyEV.EarthWizard_Expert_MeleeRadius;
-					ProjectileRadius = EnemyEV.EarthWizard_Expert_ProjectileRadius;
-					EngageRadius = EnemyEV.EarthWizard_Expert_EngageRadius;
+					MeleeRadius = EnemyEV.EARTH_WIZARD_EXPERT_MELEE_RADIUS;
+					ProjectileRadius = EnemyEV.EARTH_WIZARD_EXPERT_PROJECTILE_RADIUS;
+					EngageRadius = EnemyEV.EARTH_WIZARD_EXPERT_ENGAGE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.EarthWizard_Expert_KnockBack;
+					KnockBack = EnemyEV.EarthWizardExpertKnockBack;
 					#endregion
 
                     break;
@@ -174,39 +175,39 @@ namespace RogueCastle
                     SpellDuration = 1.0f;
 
 					#region Advanced Variables - General
-					Name = EnemyEV.EarthWizard_Advanced_Name;
-                    LocStringID = EnemyEV.EarthWizard_Advanced_Name_locID;
+					Name = EnemyEV.EARTH_WIZARD_ADVANCED_NAME;
+                    LocStringID = EnemyEV.EARTH_WIZARD_ADVANCED_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.EarthWizard_Advanced_MaxHealth;
-					Damage = EnemyEV.EarthWizard_Advanced_Damage;
-					XPValue = EnemyEV.EarthWizard_Advanced_XPValue;
+					MaxHealth = EnemyEV.EARTH_WIZARD_ADVANCED_MAX_HEALTH;
+					Damage = EnemyEV.EARTH_WIZARD_ADVANCED_DAMAGE;
+					XPValue = EnemyEV.EARTH_WIZARD_ADVANCED_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.EarthWizard_Advanced_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.EarthWizard_Advanced_MaxDropAmount;
-					MoneyDropChance = EnemyEV.EarthWizard_Advanced_DropChance;
+					MinMoneyDropAmount = EnemyEV.EARTH_WIZARD_ADVANCED_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.EARTH_WIZARD_ADVANCED_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.EARTH_WIZARD_ADVANCED_DROP_CHANCE;
 					
-					Speed = EnemyEV.EarthWizard_Advanced_Speed;
-					TurnSpeed = EnemyEV.EarthWizard_Advanced_TurnSpeed;
-					ProjectileSpeed = EnemyEV.EarthWizard_Advanced_ProjectileSpeed;
-					JumpHeight = EnemyEV.EarthWizard_Advanced_Jump;
-					CooldownTime = EnemyEV.EarthWizard_Advanced_Cooldown;
-					AnimationDelay = 1 / EnemyEV.EarthWizard_Advanced_AnimationDelay;
+					Speed = EnemyEV.EARTH_WIZARD_ADVANCED_SPEED;
+					TurnSpeed = EnemyEV.EARTH_WIZARD_ADVANCED_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.EARTH_WIZARD_ADVANCED_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.EARTH_WIZARD_ADVANCED_JUMP;
+					CooldownTime = EnemyEV.EARTH_WIZARD_ADVANCED_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.EARTH_WIZARD_ADVANCED_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.EarthWizard_Advanced_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.EarthWizard_Advanced_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.EarthWizard_Advanced_CanBeKnockedBack;
-					IsWeighted = EnemyEV.EarthWizard_Advanced_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.EARTH_WIZARD_ADVANCED_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.EARTH_WIZARD_ADVANCED_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.EARTH_WIZARD_ADVANCED_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.EARTH_WIZARD_ADVANCED_IS_WEIGHTED;
 					
-					Scale = EnemyEV.EarthWizard_Advanced_Scale;
-					ProjectileScale = EnemyEV.EarthWizard_Advanced_ProjectileScale;
-					TintablePart.TextureColor = EnemyEV.EarthWizard_Advanced_Tint;
+					Scale = EnemyEV.EarthWizardAdvancedScale;
+					ProjectileScale = EnemyEV.EarthWizardAdvancedProjectileScale;
+					TintablePart.TextureColor = EnemyEV.EarthWizardAdvancedTint;
 					
-					MeleeRadius = EnemyEV.EarthWizard_Advanced_MeleeRadius;
-					EngageRadius = EnemyEV.EarthWizard_Advanced_EngageRadius;
-					ProjectileRadius = EnemyEV.EarthWizard_Advanced_ProjectileRadius;
+					MeleeRadius = EnemyEV.EARTH_WIZARD_ADVANCED_MELEE_RADIUS;
+					EngageRadius = EnemyEV.EARTH_WIZARD_ADVANCED_ENGAGE_RADIUS;
+					ProjectileRadius = EnemyEV.EARTH_WIZARD_ADVANCED_PROJECTILE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.EarthWizard_Advanced_KnockBack;
+					KnockBack = EnemyEV.EarthWizardAdvancedKnockBack;
 					#endregion
 
                     break;

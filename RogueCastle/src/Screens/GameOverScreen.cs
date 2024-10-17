@@ -10,7 +10,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using System.Text.RegularExpressions;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -252,8 +252,8 @@ namespace RogueCastle
             }
             else
             {
-                m_gameHint = CDGMath.RandomInt(0, GameEV.GAME_HINTS.GetLength(0) - 1);
-                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString(GameEV.GAME_HINTS[m_gameHint]);
+                m_gameHint = CDGMath.RandomInt(0, GameEV.GameHints.GetLength(0) - 1);
+                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString(GameEV.GameHints[m_gameHint]);
                 FixHintTextSize();
                 //(m_dialoguePlate.GetChildAt(2) as TextObj).Text =
                 //    LocaleBuilder.getResourceString(GameEV.GAME_HINTS[m_gameHint, 0]) +
@@ -491,13 +491,13 @@ namespace RogueCastle
                 m_gameHint = m_debugGameHint;
                 Console.WriteLine("Changing to game hint index: " + m_debugGameHint);
 
-                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString(GameEV.GAME_HINTS[m_gameHint]);
+                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString(GameEV.GameHints[m_gameHint]);
                 //(m_dialoguePlate.GetChildAt(2) as TextObj).Text =
                 //    LocaleBuilder.getString(GameEV.GAME_HINTS[m_gameHint, 0], m_dialoguePlate.GetChildAt(2) as TextObj) +
                 //    GameEV.GAME_HINTS[m_gameHint, 1] +
                 //    LocaleBuilder.getString(GameEV.GAME_HINTS[m_gameHint, 2], m_dialoguePlate.GetChildAt(2) as TextObj);
                 m_debugGameHint++;
-                if (m_debugGameHint >= GameEV.GAME_HINTS.GetLength(0))
+                if (m_debugGameHint >= GameEV.GameHints.GetLength(0))
                     m_debugGameHint = 0;
             }
 
@@ -593,7 +593,7 @@ namespace RogueCastle
             }
             else
             {
-                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString(GameEV.GAME_HINTS[m_gameHint]);
+                (m_dialoguePlate.GetChildAt(2) as TextObj).Text = LocaleBuilder.GetResourceString(GameEV.GameHints[m_gameHint]);
                 //(m_dialoguePlate.GetChildAt(2) as TextObj).Text =
                 //    LocaleBuilder.getResourceString(GameEV.GAME_HINTS[m_gameHint, 0]) +
                 //    GameEV.GAME_HINTS[m_gameHint, 1] +

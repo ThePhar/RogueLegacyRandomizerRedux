@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -34,78 +35,78 @@ namespace RogueCastle
         {
             SpellProjectileCount = 7;
             #region Basic Variables - General
-            Name = EnemyEV.IceWizard_Basic_Name;
-            LocStringID = EnemyEV.IceWizard_Basic_Name_locID;
+            Name = EnemyEV.ICE_WIZARD_BASIC_NAME;
+            LocStringID = EnemyEV.ICE_WIZARD_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.IceWizard_Basic_MaxHealth;
-            Damage = EnemyEV.IceWizard_Basic_Damage;
-            XPValue = EnemyEV.IceWizard_Basic_XPValue;
+            MaxHealth = EnemyEV.ICE_WIZARD_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.ICE_WIZARD_BASIC_DAMAGE;
+            XPValue = EnemyEV.ICE_WIZARD_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.IceWizard_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.IceWizard_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.IceWizard_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.ICE_WIZARD_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.ICE_WIZARD_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.ICE_WIZARD_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.IceWizard_Basic_Speed;
-            TurnSpeed = EnemyEV.IceWizard_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.IceWizard_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.IceWizard_Basic_Jump;
-            CooldownTime = EnemyEV.IceWizard_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.IceWizard_Basic_AnimationDelay;
+            Speed = EnemyEV.ICE_WIZARD_BASIC_SPEED;
+            TurnSpeed = EnemyEV.ICE_WIZARD_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.ICE_WIZARD_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.ICE_WIZARD_BASIC_JUMP;
+            CooldownTime = EnemyEV.ICE_WIZARD_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.ICE_WIZARD_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.IceWizard_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.IceWizard_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.IceWizard_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.IceWizard_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.ICE_WIZARD_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.ICE_WIZARD_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.ICE_WIZARD_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.ICE_WIZARD_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.IceWizard_Basic_Scale;
-            ProjectileScale = EnemyEV.IceWizard_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.IceWizard_Basic_Tint;
+            Scale = EnemyEV.IceWizardBasicScale;
+            ProjectileScale = EnemyEV.IceWizardBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.IceWizardBasicTint;
 
-            MeleeRadius = EnemyEV.IceWizard_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.IceWizard_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.IceWizard_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.ICE_WIZARD_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.ICE_WIZARD_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.ICE_WIZARD_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.IceWizard_Basic_KnockBack;
+            KnockBack = EnemyEV.IceWizardBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.IceWizard_Miniboss_Name;
-                    LocStringID = EnemyEV.IceWizard_Miniboss_Name_locID;
+                    Name = EnemyEV.ICE_WIZARD_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.ICE_WIZARD_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.IceWizard_Miniboss_MaxHealth;
-                    Damage = EnemyEV.IceWizard_Miniboss_Damage;
-                    XPValue = EnemyEV.IceWizard_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.ICE_WIZARD_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.ICE_WIZARD_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.ICE_WIZARD_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.IceWizard_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.IceWizard_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.IceWizard_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.ICE_WIZARD_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.ICE_WIZARD_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.ICE_WIZARD_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.IceWizard_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.IceWizard_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.IceWizard_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.IceWizard_Miniboss_Jump;
-                    CooldownTime = EnemyEV.IceWizard_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.IceWizard_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.ICE_WIZARD_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.ICE_WIZARD_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.ICE_WIZARD_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.ICE_WIZARD_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.ICE_WIZARD_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.ICE_WIZARD_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.IceWizard_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.IceWizard_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.IceWizard_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.IceWizard_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.ICE_WIZARD_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.ICE_WIZARD_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.ICE_WIZARD_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.ICE_WIZARD_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.IceWizard_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.IceWizard_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.IceWizard_Miniboss_Tint;
+                    Scale = EnemyEV.IceWizardMinibossScale;
+                    ProjectileScale = EnemyEV.IceWizardMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.IceWizardMinibossTint;
 
-                    MeleeRadius = EnemyEV.IceWizard_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.IceWizard_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.IceWizard_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.ICE_WIZARD_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.ICE_WIZARD_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.ICE_WIZARD_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.IceWizard_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.IceWizardMinibossKnockBack;
                     #endregion
 
                     break;
@@ -115,39 +116,39 @@ namespace RogueCastle
                     SpellDelay = 1.0f;
                     m_spellOffset = new Vector2(40, -130);
                     #region Expert Variables - General
-                    Name = EnemyEV.IceWizard_Expert_Name;
-                    LocStringID = EnemyEV.IceWizard_Expert_Name_locID;
+                    Name = EnemyEV.ICE_WIZARD_EXPERT_NAME;
+                    LocStringID = EnemyEV.ICE_WIZARD_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.IceWizard_Expert_MaxHealth;
-                    Damage = EnemyEV.IceWizard_Expert_Damage;
-                    XPValue = EnemyEV.IceWizard_Expert_XPValue;
+                    MaxHealth = EnemyEV.ICE_WIZARD_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.ICE_WIZARD_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.ICE_WIZARD_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.IceWizard_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.IceWizard_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.IceWizard_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.ICE_WIZARD_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.ICE_WIZARD_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.ICE_WIZARD_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.IceWizard_Expert_Speed;
-                    TurnSpeed = EnemyEV.IceWizard_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.IceWizard_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.IceWizard_Expert_Jump;
-                    CooldownTime = EnemyEV.IceWizard_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.IceWizard_Expert_AnimationDelay;
+                    Speed = EnemyEV.ICE_WIZARD_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.ICE_WIZARD_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.ICE_WIZARD_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.ICE_WIZARD_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.ICE_WIZARD_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.ICE_WIZARD_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.IceWizard_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.IceWizard_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.IceWizard_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.IceWizard_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.ICE_WIZARD_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.ICE_WIZARD_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.ICE_WIZARD_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.ICE_WIZARD_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.IceWizard_Expert_Scale;
-                    ProjectileScale = EnemyEV.IceWizard_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.IceWizard_Expert_Tint;
+                    Scale = EnemyEV.IceWizardExpertScale;
+                    ProjectileScale = EnemyEV.IceWizardExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.IceWizardExpertTint;
 
-                    MeleeRadius = EnemyEV.IceWizard_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.IceWizard_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.IceWizard_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.ICE_WIZARD_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.ICE_WIZARD_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.ICE_WIZARD_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.IceWizard_Expert_KnockBack;
+                    KnockBack = EnemyEV.IceWizardExpertKnockBack;
                     #endregion
                     IceScale = new Vector2(2, 2);
                     break;
@@ -156,39 +157,39 @@ namespace RogueCastle
 
                     SpellProjectileCount = 14; //14;
 					#region Advanced Variables - General
-					Name = EnemyEV.IceWizard_Advanced_Name;
-                    LocStringID = EnemyEV.IceWizard_Advanced_Name_locID;
+					Name = EnemyEV.ICE_WIZARD_ADVANCED_NAME;
+                    LocStringID = EnemyEV.ICE_WIZARD_ADVANCED_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.IceWizard_Advanced_MaxHealth;
-					Damage = EnemyEV.IceWizard_Advanced_Damage;
-					XPValue = EnemyEV.IceWizard_Advanced_XPValue;
+					MaxHealth = EnemyEV.ICE_WIZARD_ADVANCED_MAX_HEALTH;
+					Damage = EnemyEV.ICE_WIZARD_ADVANCED_DAMAGE;
+					XPValue = EnemyEV.ICE_WIZARD_ADVANCED_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.IceWizard_Advanced_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.IceWizard_Advanced_MaxDropAmount;
-					MoneyDropChance = EnemyEV.IceWizard_Advanced_DropChance;
+					MinMoneyDropAmount = EnemyEV.ICE_WIZARD_ADVANCED_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.ICE_WIZARD_ADVANCED_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.ICE_WIZARD_ADVANCED_DROP_CHANCE;
 					
-					Speed = EnemyEV.IceWizard_Advanced_Speed;
-					TurnSpeed = EnemyEV.IceWizard_Advanced_TurnSpeed;
-					ProjectileSpeed = EnemyEV.IceWizard_Advanced_ProjectileSpeed;
-					JumpHeight = EnemyEV.IceWizard_Advanced_Jump;
-					CooldownTime = EnemyEV.IceWizard_Advanced_Cooldown;
-					AnimationDelay = 1 / EnemyEV.IceWizard_Advanced_AnimationDelay;
+					Speed = EnemyEV.ICE_WIZARD_ADVANCED_SPEED;
+					TurnSpeed = EnemyEV.ICE_WIZARD_ADVANCED_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.ICE_WIZARD_ADVANCED_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.ICE_WIZARD_ADVANCED_JUMP;
+					CooldownTime = EnemyEV.ICE_WIZARD_ADVANCED_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.ICE_WIZARD_ADVANCED_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.IceWizard_Advanced_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.IceWizard_Advanced_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.IceWizard_Advanced_CanBeKnockedBack;
-					IsWeighted = EnemyEV.IceWizard_Advanced_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.ICE_WIZARD_ADVANCED_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.ICE_WIZARD_ADVANCED_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.ICE_WIZARD_ADVANCED_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.ICE_WIZARD_ADVANCED_IS_WEIGHTED;
 					
-					Scale = EnemyEV.IceWizard_Advanced_Scale;
-					ProjectileScale = EnemyEV.IceWizard_Advanced_ProjectileScale;
-					TintablePart.TextureColor = EnemyEV.IceWizard_Advanced_Tint;
+					Scale = EnemyEV.IceWizardAdvancedScale;
+					ProjectileScale = EnemyEV.IceWizardAdvancedProjectileScale;
+					TintablePart.TextureColor = EnemyEV.IceWizardAdvancedTint;
 					
-					MeleeRadius = EnemyEV.IceWizard_Advanced_MeleeRadius;
-					EngageRadius = EnemyEV.IceWizard_Advanced_EngageRadius;
-					ProjectileRadius = EnemyEV.IceWizard_Advanced_ProjectileRadius;
+					MeleeRadius = EnemyEV.ICE_WIZARD_ADVANCED_MELEE_RADIUS;
+					EngageRadius = EnemyEV.ICE_WIZARD_ADVANCED_ENGAGE_RADIUS;
+					ProjectileRadius = EnemyEV.ICE_WIZARD_ADVANCED_PROJECTILE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.IceWizard_Advanced_KnockBack;
+					KnockBack = EnemyEV.IceWizardAdvancedKnockBack;
 					#endregion
                     m_spellOffset = new Vector2(40, -100);
                     IceScale = new Vector2(1.5f, 1.5f);

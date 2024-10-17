@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Tweener;
 using Microsoft.Xna.Framework.Audio;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -43,78 +43,78 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.Eyeball_Basic_Name;
-            LocStringID = EnemyEV.Eyeball_Basic_Name_locID;
+            Name = EnemyEV.EYEBALL_BASIC_NAME;
+            LocStringID = EnemyEV.EYEBALL_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Eyeball_Basic_MaxHealth;
-            Damage = EnemyEV.Eyeball_Basic_Damage;
-            XPValue = EnemyEV.Eyeball_Basic_XPValue;
+            MaxHealth = EnemyEV.EYEBALL_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.EYEBALL_BASIC_DAMAGE;
+            XPValue = EnemyEV.EYEBALL_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Eyeball_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Eyeball_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Eyeball_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.EYEBALL_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.EYEBALL_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.EYEBALL_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Eyeball_Basic_Speed;
-            TurnSpeed = EnemyEV.Eyeball_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Eyeball_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Eyeball_Basic_Jump;
-            CooldownTime = EnemyEV.Eyeball_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Eyeball_Basic_AnimationDelay;
+            Speed = EnemyEV.EYEBALL_BASIC_SPEED;
+            TurnSpeed = EnemyEV.EYEBALL_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.EYEBALL_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.EYEBALL_BASIC_JUMP;
+            CooldownTime = EnemyEV.EYEBALL_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.EYEBALL_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Eyeball_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Eyeball_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Eyeball_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Eyeball_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.EYEBALL_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.EYEBALL_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.EYEBALL_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.EYEBALL_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Eyeball_Basic_Scale;
-            ProjectileScale = EnemyEV.Eyeball_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Eyeball_Basic_Tint;
+            Scale = EnemyEV.EyeballBasicScale;
+            ProjectileScale = EnemyEV.EyeballBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.EyeballBasicTint;
 
-            MeleeRadius = EnemyEV.Eyeball_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Eyeball_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Eyeball_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.EYEBALL_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.EYEBALL_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.EYEBALL_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Eyeball_Basic_KnockBack;
+            KnockBack = EnemyEV.EyeballBasicKnockBack;
             #endregion
             PupilOffset = 4;
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Eyeball_Miniboss_Name;
-                    LocStringID = EnemyEV.Eyeball_Miniboss_Name_locID;
+                    Name = EnemyEV.EYEBALL_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.EYEBALL_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Eyeball_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Eyeball_Miniboss_Damage;
-                    XPValue = EnemyEV.Eyeball_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.EYEBALL_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.EYEBALL_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.EYEBALL_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Eyeball_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Eyeball_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Eyeball_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.EYEBALL_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.EYEBALL_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.EYEBALL_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Eyeball_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Eyeball_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Eyeball_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Eyeball_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Eyeball_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Eyeball_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.EYEBALL_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.EYEBALL_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.EYEBALL_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.EYEBALL_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.EYEBALL_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.EYEBALL_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Eyeball_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Eyeball_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Eyeball_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Eyeball_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.EYEBALL_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.EYEBALL_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.EYEBALL_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.EYEBALL_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Eyeball_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Eyeball_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Eyeball_Miniboss_Tint;
+                    Scale = EnemyEV.EyeballMinibossScale;
+                    ProjectileScale = EnemyEV.EyeballMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.EyeballMinibossTint;
 
-                    MeleeRadius = EnemyEV.Eyeball_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Eyeball_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Eyeball_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.EYEBALL_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.EYEBALL_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.EYEBALL_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Eyeball_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.EyeballMinibossKnockBack;
                     #endregion
                     PupilOffset = 0;
                     if (LevelEV.WeakenBosses == true)
@@ -123,77 +123,77 @@ namespace RogueCastle
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Eyeball_Expert_Name;
-                    LocStringID = EnemyEV.Eyeball_Expert_Name_locID;
+                    Name = EnemyEV.EYEBALL_EXPERT_NAME;
+                    LocStringID = EnemyEV.EYEBALL_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Eyeball_Expert_MaxHealth;
-                    Damage = EnemyEV.Eyeball_Expert_Damage;
-                    XPValue = EnemyEV.Eyeball_Expert_XPValue;
+                    MaxHealth = EnemyEV.EYEBALL_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.EYEBALL_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.EYEBALL_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Eyeball_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Eyeball_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Eyeball_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.EYEBALL_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.EYEBALL_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.EYEBALL_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Eyeball_Expert_Speed;
-                    TurnSpeed = EnemyEV.Eyeball_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Eyeball_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Eyeball_Expert_Jump;
-                    CooldownTime = EnemyEV.Eyeball_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Eyeball_Expert_AnimationDelay;
+                    Speed = EnemyEV.EYEBALL_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.EYEBALL_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.EYEBALL_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.EYEBALL_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.EYEBALL_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.EYEBALL_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Eyeball_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Eyeball_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Eyeball_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Eyeball_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.EYEBALL_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.EYEBALL_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.EYEBALL_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.EYEBALL_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Eyeball_Expert_Scale;
-                    ProjectileScale = EnemyEV.Eyeball_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Eyeball_Expert_Tint;
+                    Scale = EnemyEV.EyeballExpertScale;
+                    ProjectileScale = EnemyEV.EyeballExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.EyeballExpertTint;
 
-                    MeleeRadius = EnemyEV.Eyeball_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Eyeball_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Eyeball_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.EYEBALL_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.EYEBALL_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.EYEBALL_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Eyeball_Expert_KnockBack;
+                    KnockBack = EnemyEV.EyeballExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Eyeball_Advanced_Name;
-                    LocStringID = EnemyEV.Eyeball_Advanced_Name_locID;
+                    Name = EnemyEV.EYEBALL_ADVANCED_NAME;
+                    LocStringID = EnemyEV.EYEBALL_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Eyeball_Advanced_MaxHealth;
-                    Damage = EnemyEV.Eyeball_Advanced_Damage;
-                    XPValue = EnemyEV.Eyeball_Advanced_XPValue;
+                    MaxHealth = EnemyEV.EYEBALL_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.EYEBALL_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.EYEBALL_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Eyeball_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Eyeball_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Eyeball_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.EYEBALL_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.EYEBALL_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.EYEBALL_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Eyeball_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Eyeball_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Eyeball_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Eyeball_Advanced_Jump;
-                    CooldownTime = EnemyEV.Eyeball_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Eyeball_Advanced_AnimationDelay;
+                    Speed = EnemyEV.EYEBALL_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.EYEBALL_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.EYEBALL_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.EYEBALL_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.EYEBALL_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.EYEBALL_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Eyeball_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Eyeball_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Eyeball_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Eyeball_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.EYEBALL_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.EYEBALL_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.EYEBALL_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.EYEBALL_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Eyeball_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Eyeball_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Eyeball_Advanced_Tint;
+                    Scale = EnemyEV.EyeballAdvancedScale;
+                    ProjectileScale = EnemyEV.EyeballAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.EyeballAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Eyeball_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Eyeball_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Eyeball_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.EYEBALL_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.EYEBALL_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.EYEBALL_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Eyeball_Advanced_KnockBack;
+                    KnockBack = EnemyEV.EyeballAdvancedKnockBack;
                     #endregion
                     break;
 

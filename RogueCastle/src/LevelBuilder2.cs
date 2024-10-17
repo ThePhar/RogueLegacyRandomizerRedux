@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using DS2DEngine;
 using System.Globalization;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -100,14 +100,14 @@ namespace RogueCastle
                 room.Name != "Compass" && room.Name != "DEBUG_ROOM" && room.Name != "ChallengeBoss")
             {
 
-                if (room.Width % GlobalEV.ScreenWidth != 0)
-                    throw new Exception("Room Name: " + room.Name + " is not a width divisible by " + GlobalEV.ScreenWidth + ". Cannot parse the file.");
+                if (room.Width % GlobalEV.SCREEN_WIDTH != 0)
+                    throw new Exception("Room Name: " + room.Name + " is not a width divisible by " + GlobalEV.SCREEN_WIDTH + ". Cannot parse the file.");
 
-                if (room.Height % GlobalEV.ScreenHeight != 0)
-                    throw new Exception("Room Name: " + room.Name + " is not a height divisible by " + GlobalEV.ScreenHeight + ". Cannot parse the file.");
+                if (room.Height % GlobalEV.SCREEN_HEIGHT != 0)
+                    throw new Exception("Room Name: " + room.Name + " is not a height divisible by " + GlobalEV.SCREEN_HEIGHT + ". Cannot parse the file.");
 
-                int i = (int)(room.Width / GlobalEV.ScreenWidth);
-                int k = (int)(room.Height / GlobalEV.ScreenHeight);
+                int i = (int)(room.Width / GlobalEV.SCREEN_WIDTH);
+                int k = (int)(room.Height / GlobalEV.SCREEN_HEIGHT);
 
                 if (room.IsDLCMap == false)
                 {

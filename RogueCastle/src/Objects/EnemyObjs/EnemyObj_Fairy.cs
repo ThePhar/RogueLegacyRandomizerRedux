@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Tweener;
 using Microsoft.Xna.Framework.Audio;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -52,78 +52,78 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.Fairy_Basic_Name;
-            LocStringID = EnemyEV.Fairy_Basic_Name_locID;
+            Name = EnemyEV.FAIRY_BASIC_NAME;
+            LocStringID = EnemyEV.FAIRY_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Fairy_Basic_MaxHealth;
-            Damage = EnemyEV.Fairy_Basic_Damage;
-            XPValue = EnemyEV.Fairy_Basic_XPValue;
+            MaxHealth = EnemyEV.FAIRY_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.FAIRY_BASIC_DAMAGE;
+            XPValue = EnemyEV.FAIRY_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Fairy_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Fairy_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Fairy_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.FAIRY_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.FAIRY_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.FAIRY_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Fairy_Basic_Speed;
-            TurnSpeed = EnemyEV.Fairy_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Fairy_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Fairy_Basic_Jump;
-            CooldownTime = EnemyEV.Fairy_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Fairy_Basic_AnimationDelay;
+            Speed = EnemyEV.FAIRY_BASIC_SPEED;
+            TurnSpeed = EnemyEV.FAIRY_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.FAIRY_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.FAIRY_BASIC_JUMP;
+            CooldownTime = EnemyEV.FAIRY_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.FAIRY_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Fairy_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Fairy_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Fairy_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Fairy_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.FAIRY_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.FAIRY_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.FAIRY_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.FAIRY_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Fairy_Basic_Scale;
-            ProjectileScale = EnemyEV.Fairy_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Fairy_Basic_Tint;
+            Scale = EnemyEV.FairyBasicScale;
+            ProjectileScale = EnemyEV.FairyBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.FairyBasicTint;
 
-            MeleeRadius = EnemyEV.Fairy_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Fairy_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Fairy_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.FAIRY_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.FAIRY_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.FAIRY_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Fairy_Basic_KnockBack;
+            KnockBack = EnemyEV.FairyBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Fairy_Miniboss_Name;
-                    LocStringID = EnemyEV.Fairy_Miniboss_Name_locID;
+                    Name = EnemyEV.FAIRY_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.FAIRY_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Fairy_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Fairy_Miniboss_Damage;
-                    XPValue = EnemyEV.Fairy_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.FAIRY_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.FAIRY_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.FAIRY_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Fairy_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Fairy_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Fairy_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.FAIRY_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.FAIRY_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.FAIRY_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Fairy_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Fairy_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Fairy_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Fairy_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Fairy_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Fairy_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.FAIRY_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.FAIRY_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.FAIRY_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.FAIRY_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.FAIRY_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.FAIRY_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Fairy_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Fairy_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Fairy_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Fairy_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.FAIRY_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.FAIRY_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.FAIRY_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.FAIRY_MINIBOSS_IS_WEIGHTED;
 
                     Scale = new Vector2(2.5f, 2.5f);//EnemyEV.Fairy_Miniboss_Scale;
                     ProjectileScale = new Vector2(2f,2f);//EnemyEV.Fairy_Miniboss_ProjectileScale;
                     //TintablePart.TextureColor = EnemyEV.Fairy_Miniboss_Tint;
 
-                    MeleeRadius = EnemyEV.Fairy_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Fairy_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Fairy_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.FAIRY_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.FAIRY_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.FAIRY_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Fairy_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.FairyMinibossKnockBack;
 
                     NumHits = 1;
                     #endregion
@@ -133,77 +133,77 @@ namespace RogueCastle
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Fairy_Expert_Name;
-                    LocStringID = EnemyEV.Fairy_Expert_Name_locID;
+                    Name = EnemyEV.FAIRY_EXPERT_NAME;
+                    LocStringID = EnemyEV.FAIRY_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Fairy_Expert_MaxHealth;
-                    Damage = EnemyEV.Fairy_Expert_Damage;
-                    XPValue = EnemyEV.Fairy_Expert_XPValue;
+                    MaxHealth = EnemyEV.FAIRY_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.FAIRY_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.FAIRY_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Fairy_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Fairy_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Fairy_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.FAIRY_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.FAIRY_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.FAIRY_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Fairy_Expert_Speed;
-                    TurnSpeed = EnemyEV.Fairy_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Fairy_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Fairy_Expert_Jump;
-                    CooldownTime = EnemyEV.Fairy_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Fairy_Expert_AnimationDelay;
+                    Speed = EnemyEV.FAIRY_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.FAIRY_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.FAIRY_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.FAIRY_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.FAIRY_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.FAIRY_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Fairy_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Fairy_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Fairy_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Fairy_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.FAIRY_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.FAIRY_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.FAIRY_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.FAIRY_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Fairy_Expert_Scale;
-                    ProjectileScale = EnemyEV.Fairy_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Fairy_Expert_Tint;
+                    Scale = EnemyEV.FairyExpertScale;
+                    ProjectileScale = EnemyEV.FairyExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.FairyExpertTint;
 
-                    MeleeRadius = EnemyEV.Fairy_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Fairy_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Fairy_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.FAIRY_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.FAIRY_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.FAIRY_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Fairy_Expert_KnockBack;
+                    KnockBack = EnemyEV.FairyExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Fairy_Advanced_Name;
-                    LocStringID = EnemyEV.Fairy_Advanced_Name_locID;
+                    Name = EnemyEV.FAIRY_ADVANCED_NAME;
+                    LocStringID = EnemyEV.FAIRY_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Fairy_Advanced_MaxHealth;
-                    Damage = EnemyEV.Fairy_Advanced_Damage;
-                    XPValue = EnemyEV.Fairy_Advanced_XPValue;
+                    MaxHealth = EnemyEV.FAIRY_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.FAIRY_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.FAIRY_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Fairy_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Fairy_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Fairy_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.FAIRY_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.FAIRY_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.FAIRY_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Fairy_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Fairy_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Fairy_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Fairy_Advanced_Jump;
-                    CooldownTime = EnemyEV.Fairy_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Fairy_Advanced_AnimationDelay;
+                    Speed = EnemyEV.FAIRY_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.FAIRY_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.FAIRY_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.FAIRY_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.FAIRY_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.FAIRY_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Fairy_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Fairy_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Fairy_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Fairy_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.FAIRY_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.FAIRY_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.FAIRY_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.FAIRY_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Fairy_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Fairy_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Fairy_Advanced_Tint;
+                    Scale = EnemyEV.FairyAdvancedScale;
+                    ProjectileScale = EnemyEV.FairyAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.FairyAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Fairy_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Fairy_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Fairy_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.FAIRY_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.FAIRY_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.FAIRY_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Fairy_Advanced_KnockBack;
+                    KnockBack = EnemyEV.FairyAdvancedKnockBack;
                     #endregion
                     break;
 

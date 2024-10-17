@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using InputSystem;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -21,154 +22,154 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.Starburst_Basic_Name;
-            LocStringID = EnemyEV.Starburst_Basic_Name_locID;
+            Name = EnemyEV.STARBURST_BASIC_NAME;
+            LocStringID = EnemyEV.STARBURST_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Starburst_Basic_MaxHealth;
-            Damage = EnemyEV.Starburst_Basic_Damage;
-            XPValue = EnemyEV.Starburst_Basic_XPValue;
+            MaxHealth = EnemyEV.STARBURST_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.STARBURST_BASIC_DAMAGE;
+            XPValue = EnemyEV.STARBURST_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Starburst_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Starburst_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Starburst_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.STARBURST_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.STARBURST_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.STARBURST_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Starburst_Basic_Speed;
-            TurnSpeed = EnemyEV.Starburst_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Starburst_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Starburst_Basic_Jump;
-            CooldownTime = EnemyEV.Starburst_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Starburst_Basic_AnimationDelay;
+            Speed = EnemyEV.STARBURST_BASIC_SPEED;
+            TurnSpeed = EnemyEV.STARBURST_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.STARBURST_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.STARBURST_BASIC_JUMP;
+            CooldownTime = EnemyEV.STARBURST_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.STARBURST_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Starburst_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Starburst_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Starburst_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Starburst_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.STARBURST_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.STARBURST_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.STARBURST_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.STARBURST_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Starburst_Basic_Scale;
-            ProjectileScale = EnemyEV.Starburst_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Starburst_Basic_Tint;
+            Scale = EnemyEV.StarburstBasicScale;
+            ProjectileScale = EnemyEV.StarburstBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.StarburstBasicTint;
 
-            MeleeRadius = EnemyEV.Starburst_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Starburst_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Starburst_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.STARBURST_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.STARBURST_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.STARBURST_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Starburst_Basic_KnockBack;
+            KnockBack = EnemyEV.StarburstBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Starburst_Miniboss_Name;
-                    LocStringID = EnemyEV.Starburst_Miniboss_Name_locID;
+                    Name = EnemyEV.STARBURST_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.STARBURST_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Starburst_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Starburst_Miniboss_Damage;
-                    XPValue = EnemyEV.Starburst_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.STARBURST_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.STARBURST_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.STARBURST_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Starburst_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Starburst_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Starburst_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.STARBURST_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.STARBURST_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.STARBURST_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Starburst_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Starburst_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Starburst_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Starburst_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Starburst_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Starburst_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.STARBURST_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.STARBURST_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.STARBURST_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.STARBURST_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.STARBURST_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.STARBURST_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Starburst_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Starburst_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Starburst_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Starburst_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.STARBURST_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.STARBURST_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.STARBURST_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.STARBURST_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Starburst_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Starburst_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Starburst_Miniboss_Tint;
+                    Scale = EnemyEV.StarburstMinibossScale;
+                    ProjectileScale = EnemyEV.StarburstMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.StarburstMinibossTint;
 
-                    MeleeRadius = EnemyEV.Starburst_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Starburst_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Starburst_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.STARBURST_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.STARBURST_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.STARBURST_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Starburst_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.StarburstMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Starburst_Expert_Name;
-                    LocStringID = EnemyEV.Starburst_Expert_Name_locID;
+                    Name = EnemyEV.STARBURST_EXPERT_NAME;
+                    LocStringID = EnemyEV.STARBURST_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Starburst_Expert_MaxHealth;
-                    Damage = EnemyEV.Starburst_Expert_Damage;
-                    XPValue = EnemyEV.Starburst_Expert_XPValue;
+                    MaxHealth = EnemyEV.STARBURST_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.STARBURST_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.STARBURST_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Starburst_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Starburst_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Starburst_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.STARBURST_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.STARBURST_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.STARBURST_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Starburst_Expert_Speed;
-                    TurnSpeed = EnemyEV.Starburst_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Starburst_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Starburst_Expert_Jump;
-                    CooldownTime = EnemyEV.Starburst_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Starburst_Expert_AnimationDelay;
+                    Speed = EnemyEV.STARBURST_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.STARBURST_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.STARBURST_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.STARBURST_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.STARBURST_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.STARBURST_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Starburst_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Starburst_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Starburst_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Starburst_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.STARBURST_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.STARBURST_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.STARBURST_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.STARBURST_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Starburst_Expert_Scale;
-                    ProjectileScale = EnemyEV.Starburst_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Starburst_Expert_Tint;
+                    Scale = EnemyEV.StarburstExpertScale;
+                    ProjectileScale = EnemyEV.StarburstExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.StarburstExpertTint;
 
-                    MeleeRadius = EnemyEV.Starburst_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Starburst_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Starburst_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.STARBURST_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.STARBURST_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.STARBURST_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Starburst_Expert_KnockBack;
+                    KnockBack = EnemyEV.StarburstExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Starburst_Advanced_Name;
-                    LocStringID = EnemyEV.Starburst_Advanced_Name_locID;
+                    Name = EnemyEV.STARBURST_ADVANCED_NAME;
+                    LocStringID = EnemyEV.STARBURST_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Starburst_Advanced_MaxHealth;
-                    Damage = EnemyEV.Starburst_Advanced_Damage;
-                    XPValue = EnemyEV.Starburst_Advanced_XPValue;
+                    MaxHealth = EnemyEV.STARBURST_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.STARBURST_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.STARBURST_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Starburst_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Starburst_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Starburst_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.STARBURST_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.STARBURST_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.STARBURST_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Starburst_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Starburst_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Starburst_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Starburst_Advanced_Jump;
-                    CooldownTime = EnemyEV.Starburst_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Starburst_Advanced_AnimationDelay;
+                    Speed = EnemyEV.STARBURST_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.STARBURST_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.STARBURST_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.STARBURST_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.STARBURST_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.STARBURST_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Starburst_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Starburst_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Starburst_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Starburst_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.STARBURST_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.STARBURST_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.STARBURST_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.STARBURST_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Starburst_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Starburst_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Starburst_Advanced_Tint;
+                    Scale = EnemyEV.StarburstAdvancedScale;
+                    ProjectileScale = EnemyEV.StarburstAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.StarburstAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Starburst_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Starburst_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Starburst_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.STARBURST_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.STARBURST_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.STARBURST_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Starburst_Advanced_KnockBack;
+                    KnockBack = EnemyEV.StarburstAdvancedKnockBack;
                     #endregion
                     break;
 

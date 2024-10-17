@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -40,154 +41,154 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.Knight_Basic_Name;
-            LocStringID = EnemyEV.Knight_Basic_Name_locID;
+            Name = EnemyEV.KNIGHT_BASIC_NAME;
+            LocStringID = EnemyEV.KNIGHT_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Knight_Basic_MaxHealth;
-            Damage = EnemyEV.Knight_Basic_Damage;
-            XPValue = EnemyEV.Knight_Basic_XPValue;
+            MaxHealth = EnemyEV.KNIGHT_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.KNIGHT_BASIC_DAMAGE;
+            XPValue = EnemyEV.KNIGHT_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Knight_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Knight_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Knight_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.KNIGHT_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.KNIGHT_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.KNIGHT_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Knight_Basic_Speed;
-            TurnSpeed = EnemyEV.Knight_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Knight_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Knight_Basic_Jump;
-            CooldownTime = EnemyEV.Knight_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Knight_Basic_AnimationDelay;
+            Speed = EnemyEV.KNIGHT_BASIC_SPEED;
+            TurnSpeed = EnemyEV.KNIGHT_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.KNIGHT_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.KNIGHT_BASIC_JUMP;
+            CooldownTime = EnemyEV.KNIGHT_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.KNIGHT_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Knight_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Knight_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Knight_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Knight_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.KNIGHT_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.KNIGHT_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.KNIGHT_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.KNIGHT_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Knight_Basic_Scale;
-            ProjectileScale = EnemyEV.Knight_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Knight_Basic_Tint;
+            Scale = EnemyEV.KnightBasicScale;
+            ProjectileScale = EnemyEV.KnightBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.KnightBasicTint;
 
-            MeleeRadius = EnemyEV.Knight_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Knight_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Knight_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.KNIGHT_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.KNIGHT_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.KNIGHT_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Knight_Basic_KnockBack;
+            KnockBack = EnemyEV.KnightBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Knight_Miniboss_Name;
-                    LocStringID = EnemyEV.Knight_Miniboss_Name_locID;
+                    Name = EnemyEV.KNIGHT_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.KNIGHT_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Knight_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Knight_Miniboss_Damage;
-                    XPValue = EnemyEV.Knight_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.KNIGHT_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.KNIGHT_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.KNIGHT_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Knight_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Knight_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Knight_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.KNIGHT_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.KNIGHT_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.KNIGHT_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Knight_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Knight_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Knight_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Knight_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Knight_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Knight_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.KNIGHT_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.KNIGHT_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.KNIGHT_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.KNIGHT_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.KNIGHT_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.KNIGHT_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Knight_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Knight_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Knight_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Knight_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.KNIGHT_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.KNIGHT_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.KNIGHT_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.KNIGHT_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Knight_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Knight_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Knight_Miniboss_Tint;
+                    Scale = EnemyEV.KnightMinibossScale;
+                    ProjectileScale = EnemyEV.KnightMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.KnightMinibossTint;
 
-                    MeleeRadius = EnemyEV.Knight_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Knight_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Knight_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.KNIGHT_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.KNIGHT_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.KNIGHT_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Knight_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.KnightMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Knight_Expert_Name;
-                    LocStringID = EnemyEV.Knight_Expert_Name_locID;
+                    Name = EnemyEV.KNIGHT_EXPERT_NAME;
+                    LocStringID = EnemyEV.KNIGHT_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Knight_Expert_MaxHealth;
-                    Damage = EnemyEV.Knight_Expert_Damage;
-                    XPValue = EnemyEV.Knight_Expert_XPValue;
+                    MaxHealth = EnemyEV.KNIGHT_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.KNIGHT_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.KNIGHT_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Knight_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Knight_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Knight_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.KNIGHT_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.KNIGHT_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.KNIGHT_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Knight_Expert_Speed;
-                    TurnSpeed = EnemyEV.Knight_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Knight_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Knight_Expert_Jump;
-                    CooldownTime = EnemyEV.Knight_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Knight_Expert_AnimationDelay;
+                    Speed = EnemyEV.KNIGHT_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.KNIGHT_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.KNIGHT_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.KNIGHT_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.KNIGHT_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.KNIGHT_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Knight_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Knight_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Knight_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Knight_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.KNIGHT_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.KNIGHT_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.KNIGHT_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.KNIGHT_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Knight_Expert_Scale;
-                    ProjectileScale = EnemyEV.Knight_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Knight_Expert_Tint;
+                    Scale = EnemyEV.KnightExpertScale;
+                    ProjectileScale = EnemyEV.KnightExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.KnightExpertTint;
 
-                    MeleeRadius = EnemyEV.Knight_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Knight_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Knight_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.KNIGHT_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.KNIGHT_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.KNIGHT_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Knight_Expert_KnockBack;
+                    KnockBack = EnemyEV.KnightExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Knight_Advanced_Name;
-                    LocStringID = EnemyEV.Knight_Advanced_Name_locID;
+                    Name = EnemyEV.KNIGHT_ADVANCED_NAME;
+                    LocStringID = EnemyEV.KNIGHT_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Knight_Advanced_MaxHealth;
-                    Damage = EnemyEV.Knight_Advanced_Damage;
-                    XPValue = EnemyEV.Knight_Advanced_XPValue;
+                    MaxHealth = EnemyEV.KNIGHT_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.KNIGHT_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.KNIGHT_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Knight_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Knight_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Knight_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.KNIGHT_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.KNIGHT_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.KNIGHT_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Knight_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Knight_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Knight_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Knight_Advanced_Jump;
-                    CooldownTime = EnemyEV.Knight_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Knight_Advanced_AnimationDelay;
+                    Speed = EnemyEV.KNIGHT_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.KNIGHT_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.KNIGHT_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.KNIGHT_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.KNIGHT_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.KNIGHT_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Knight_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Knight_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Knight_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Knight_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.KNIGHT_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.KNIGHT_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.KNIGHT_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.KNIGHT_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Knight_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Knight_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Knight_Advanced_Tint;
+                    Scale = EnemyEV.KnightAdvancedScale;
+                    ProjectileScale = EnemyEV.KnightAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.KnightAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Knight_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Knight_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Knight_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.KNIGHT_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.KNIGHT_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.KNIGHT_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Knight_Advanced_KnockBack;
+                    KnockBack = EnemyEV.KnightAdvancedKnockBack;
                     #endregion
                     break;
 
@@ -362,7 +363,7 @@ namespace RogueCastle
             throwSpearMiniBossLS.AddAction(new DelayLogicAction(0.5f));
             //
             throwSpearMiniBossLS.AddAction(new LockFaceDirectionLogicAction(false));
-            throwSpearMiniBossLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.Knight_Miniboss_AnimationDelay));
+            throwSpearMiniBossLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.KNIGHT_MINIBOSS_ANIMATION_DELAY));
             throwSpearMiniBossLS.Tag = GameTypes.LogicSetType_ATTACK;
 
             LogicSet throwSpearMiniBossAltLS = new LogicSet(this);
@@ -388,7 +389,7 @@ namespace RogueCastle
             throwSpearMiniBossAltLS.AddAction(new DelayLogicAction(0.5f));
             //
             throwSpearMiniBossAltLS.AddAction(new LockFaceDirectionLogicAction(false));
-            throwSpearMiniBossAltLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.Knight_Miniboss_AnimationDelay));
+            throwSpearMiniBossAltLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.KNIGHT_MINIBOSS_ANIMATION_DELAY));
             throwSpearMiniBossAltLS.Tag = GameTypes.LogicSetType_ATTACK;
             #region - OLD THROW EXPERT SPEAR CODE
 

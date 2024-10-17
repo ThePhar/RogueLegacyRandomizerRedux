@@ -16,7 +16,7 @@ using System.IO;
 using System.Globalization;
 using System.Threading;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -119,8 +119,8 @@ namespace RogueCastle
             //this.graphics.PreferredBackBufferWidth = 1360;// GlobalEV.ScreenWidth;
             //this.graphics.PreferredBackBufferHeight = 768;//GlobalEV.ScreenHeight;
 
-            EngineEV.ScreenWidth = GlobalEV.ScreenWidth; // Very important. Tells the engine if the game is running at a fixed resolution (which it is).
-            EngineEV.ScreenHeight = GlobalEV.ScreenHeight;
+            EngineEV.ScreenWidth = GlobalEV.SCREEN_WIDTH; // Very important. Tells the engine if the game is running at a fixed resolution (which it is).
+            EngineEV.ScreenHeight = GlobalEV.SCREEN_HEIGHT;
 
             //this.graphics.IsFullScreen = true;
             this.Window.Title = "Rogue Legacy";

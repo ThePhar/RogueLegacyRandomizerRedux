@@ -7,7 +7,8 @@ using InputSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.EVs;
+using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 using Tweener;
 
 namespace RogueCastle
@@ -182,7 +183,7 @@ namespace RogueCastle
         private bool m_lightOn = false;
         private float m_lightDrainCounter = 0;
 
-        private List<byte> m_wizardSpellList; // This is saved because it is accessed often.
+        private List<SpellType> m_wizardSpellList; // This is saved because it is accessed often.
         private float m_wizardSparkleCounter = 0.2f;
 
         private float m_ninjaTeleportDelay = 0;
@@ -398,10 +399,10 @@ namespace RogueCastle
             this.Scale = new Vector2(2, 2);
             m_internalScale = this.Scale;
 
-            m_wizardSpellList = new List<byte>();
-            m_wizardSpellList.Add((byte)Game.PlayerStats.WizardSpellList.X);
-            m_wizardSpellList.Add((byte)Game.PlayerStats.WizardSpellList.Y);
-            m_wizardSpellList.Add((byte)Game.PlayerStats.WizardSpellList.Z);
+            m_wizardSpellList = new List<SpellType>();
+            m_wizardSpellList.Add((SpellType)Game.PlayerStats.WizardSpellList.X);
+            m_wizardSpellList.Add((SpellType)Game.PlayerStats.WizardSpellList.Y);
+            m_wizardSpellList.Add((SpellType)Game.PlayerStats.WizardSpellList.Z);
         }
 
         public void UpdateInternalScale()
@@ -608,8 +609,8 @@ namespace RogueCastle
             if (m_debugInputMap.JustPressed(DEBUG_INPUT_SWAPWEAPON))
             {
                 Game.PlayerStats.Spell++;
-                if (Game.PlayerStats.Spell > SpellType.Total)
-                    Game.PlayerStats.Spell = 1;
+                if (Game.PlayerStats.Spell > SpellType.DragonFireNeo)
+                    Game.PlayerStats.Spell = SpellType.Dagger;
                 m_levelScreen.UpdatePlayerSpellIcon();
             }
             if (m_debugInputMap.JustPressed(DEBUG_INPUT_GIVEHEALTH))
@@ -708,7 +709,7 @@ namespace RogueCastle
                 List<object> objectList = new List<object>();
                 objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
                 objectList.Add(GetItemType.Spell);
-                objectList.Add(new Vector2(SpellType.Axe, 0));
+                objectList.Add(new Vector2((byte)SpellType.Axe, 0));
 
                 (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
                 this.RunGetItemAnimation();
@@ -1416,7 +1417,7 @@ namespace RogueCastle
                     if (m_dragonManaRechargeCounter >= GameEV.MANA_OVER_TIME_TIC_RATE)
                     {
                         m_dragonManaRechargeCounter = 0;
-                        this.CurrentMana += GameEV.DRAGON_MANAGAIN;
+                        this.CurrentMana += GameEV.DRAGON_MANA_GAIN;
                     }
                 }
 
@@ -2621,7 +2622,7 @@ namespace RogueCastle
 
         public void CastSpell(bool activateSecondary, bool megaSpell = false)
         {
-            byte spellType = Game.PlayerStats.Spell;
+            var spellType = Game.PlayerStats.Spell;
 
             Color textureColor = Color.White;
             ProjectileData projData = SpellEV.GetProjData(spellType, this);
@@ -2639,7 +2640,7 @@ namespace RogueCastle
                     {
                         if (Game.PlayerStats.Class != ClassType.Dragon && Game.PlayerStats.Class != ClassType.Traitor)
                         {
-                            byte[] spellList = ClassType.GetSpellList(Game.PlayerStats.Class);
+                            SpellType[] spellList = ClassType.GetSpellList(Game.PlayerStats.Class);
                             do
                             {
                                 Game.PlayerStats.Spell = spellList[CDGMath.RandomInt(0, spellList.Length - 1)];
@@ -2657,7 +2658,7 @@ namespace RogueCastle
             {
                 manaCost = (int)(manaCost * GameEV.SPELLSWORD_MANACOST_MOD);
                 projData.Scale *= GameEV.SPELLSWORD_SPELL_SCALE;//2;
-                projData.Damage = (int)(projData.Damage * GameEV.SPELLSWORD_SPELLDAMAGE_MOD);
+                projData.Damage = (int)(projData.Damage * GameEV.SPELLSWORD_SPELL_DAMAGE_MOD);
             }
 
             if (this.CurrentMana < manaCost)
@@ -2685,7 +2686,7 @@ namespace RogueCastle
                     {
                         if (spellType == SpellType.DragonFireNeo)
                         {
-                            projData.Lifespan = SpellEV.DRAGONFIRENEO_XVal;
+                            projData.Lifespan = spellType.GetXValue();
                             projData.WrapProjectile = true;
                         }
 
@@ -3059,9 +3060,9 @@ namespace RogueCastle
             //if (AttachedLevel.CurrentRoom is CarnivalShoot1BonusRoom == false && AttachedLevel.CurrentRoom is CarnivalShoot2BonusRoom == false)
             {
                 SoundManager.PlaySound("Spell_Switch");
-                m_wizardSpellList[0] = (byte)Game.PlayerStats.WizardSpellList.X;
-                m_wizardSpellList[1] = (byte)Game.PlayerStats.WizardSpellList.Y;
-                m_wizardSpellList[2] = (byte)Game.PlayerStats.WizardSpellList.Z;
+                m_wizardSpellList[0] = (SpellType)Game.PlayerStats.WizardSpellList.X;
+                m_wizardSpellList[1] = (SpellType)Game.PlayerStats.WizardSpellList.Y;
+                m_wizardSpellList[2] = (SpellType)Game.PlayerStats.WizardSpellList.Z;
 
                 int spellIndex = m_wizardSpellList.IndexOf(Game.PlayerStats.Spell);
                 spellIndex++;
@@ -3932,7 +3933,7 @@ namespace RogueCastle
                 if (Game.PlayerStats.Class == ClassType.Wizard || Game.PlayerStats.Class == ClassType.Wizard2)
                     classManaGain = GameEV.MAGE_MANA_GAIN;
                 return (int)((m_manaGain + classManaGain + SkillSystem.GetSkill(SkillType.Mana_Regen_Up).ModifierAmount + ((Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaGain) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.ManaDrain)) * GameEV.RUNE_MANA_GAIN)
-                     + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaHPGain) * GameEV.RUNE_MANAHPGAIN)) * (1 + Game.PlayerStats.TimesCastleBeaten * 0.5f)); 
+                     + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaHPGain) * GameEV.RUNE_MANA_HP_GAIN)) * (1 + Game.PlayerStats.TimesCastleBeaten * 0.5f)); 
                 
             } //TEDDY MODDING SO MANA GAIN IS AN EV
             set { m_manaGain = value; }
@@ -3999,7 +4000,7 @@ namespace RogueCastle
             get
             {
                 float goldBonus = SkillSystem.GetSkill(SkillType.Gold_Gain_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.GoldBonus)
-                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.GoldGain) * GameEV.RUNE_GOLDGAIN_MOD) + (GameEV.NEWGAMEPLUS_GOLDBOUNTY * Game.PlayerStats.TimesCastleBeaten);
+                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.GoldGain) * GameEV.RUNE_GOLDGAIN_MOD) + (GameEV.NEWGAMEPLUS_GOLD_BOUNTY * Game.PlayerStats.TimesCastleBeaten);
                    // + Game.TraitSystem.GetModifierAmount(m_traitArray, TraitType.Gold_Percentage);
 
                 switch (Game.PlayerStats.Class)
@@ -4024,7 +4025,7 @@ namespace RogueCastle
                 return (int)(((Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.Vampirism) *
                     GameEV.RUNE_VAMPIRISM_HEALTH_GAIN) +
                     ((int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.Vampirism) * GameEV.RUNE_VAMPIRISM_HEALTH_GAIN)
-                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaHPGain) * GameEV.RUNE_MANAHPGAIN)) * (1 + Game.PlayerStats.TimesCastleBeaten * 0.5f));
+                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaHPGain) * GameEV.RUNE_MANA_HP_GAIN)) * (1 + Game.PlayerStats.TimesCastleBeaten * 0.5f));
             }
         }
 
@@ -4080,7 +4081,7 @@ namespace RogueCastle
                 //    (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MovementSpeed) * GameEV.RUNE_MOVEMENTSPEED_MOD))) * 
                 //    ClassMoveSpeedMultiplier);
                 float moveSpeed = (1 + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.MoveSpeed) + traitMod +
-                  (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MovementSpeed) * GameEV.RUNE_MOVEMENTSPEED_MOD) + ClassMoveSpeedMultiplier);
+                  (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MovementSpeed) * GameEV.RUNE_MOVEMENT_SPEED_MOD) + ClassMoveSpeedMultiplier);
                 return moveSpeed;
             }
         }
@@ -4090,7 +4091,7 @@ namespace RogueCastle
             get
             {
                 return (GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.DamageReturn)
-                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.DamageReturn) * GameEV.RUNE_DAMAGERETURN_MOD));
+                    + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.DamageReturn) * GameEV.RUNE_DAMAGE_RETURN_MOD));
             }
         } 
 

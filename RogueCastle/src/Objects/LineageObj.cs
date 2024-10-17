@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Tweener;
 using System.Text.RegularExpressions;
+using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -33,7 +35,7 @@ namespace RogueCastle
         public byte Age = 30;
         public byte ChildAge = 4;
         public byte Class = 0;
-        public byte Spell = 0;
+        public SpellType Spell = 0;
         public bool IsFemale = false;
         public bool FlipPortrait = false;
         public string RomanNumeral = "";
@@ -194,7 +196,7 @@ namespace RogueCastle
                     this.Traits = TraitType.CreateRandomTraits();
 
                 // Selecting random spell.  There's a check to make sure savants don't get particular spells.
-                byte[] spellList = ClassType.GetSpellList(this.Class);
+                SpellType[] spellList = ClassType.GetSpellList(this.Class);
                 do
                 {
                     this.Spell = spellList[CDGMath.RandomInt(0, spellList.Length - 1)];
@@ -362,7 +364,7 @@ namespace RogueCastle
             }
             m_classTextObj.Text = classText + LocaleBuilder.GetResourceString(ClassType.ToStringID(this.Class, this.IsFemale));
 
-            m_spellIcon.ChangeSprite(SpellType.Icon(this.Spell));
+            m_spellIcon.ChangeSprite(Spell.Icon());
 
             if (this.Class == ClassType.Knight || this.Class == ClassType.Knight2)
             {

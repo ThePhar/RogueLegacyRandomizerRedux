@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using System.Text.RegularExpressions;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -35,8 +35,8 @@ namespace RogueCastle
         public override void LoadContent()
         {
             m_titleText = new SpriteObj("GamePausedTitleText_Sprite");
-            m_titleText.X = GlobalEV.ScreenWidth / 2;
-            m_titleText.Y = GlobalEV.ScreenHeight * 0.1f;
+            m_titleText.X = GlobalEV.SCREEN_WIDTH / 2;
+            m_titleText.Y = GlobalEV.SCREEN_HEIGHT * 0.1f;
             m_titleText.ForceDraw = true;
 
             m_infoObjList = new List<PauseInfoObj>();

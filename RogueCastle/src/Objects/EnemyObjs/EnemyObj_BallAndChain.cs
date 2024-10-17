@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -35,78 +36,78 @@ namespace RogueCastle
             ChainSpeed2Modifier = 1.5f;
 
             #region Basic Variables - General
-            Name = EnemyEV.BallAndChain_Basic_Name;
-            LocStringID = EnemyEV.BallAndChain_Basic_Name_locID;
+            Name = EnemyEV.BALL_AND_CHAIN_BASIC_NAME;
+            LocStringID = EnemyEV.BALL_AND_CHAIN_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.BallAndChain_Basic_MaxHealth;
-            Damage = EnemyEV.BallAndChain_Basic_Damage;
-            XPValue = EnemyEV.BallAndChain_Basic_XPValue;
+            MaxHealth = EnemyEV.BALL_AND_CHAIN_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.BALL_AND_CHAIN_BASIC_DAMAGE;
+            XPValue = EnemyEV.BALL_AND_CHAIN_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.BallAndChain_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.BallAndChain_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.BallAndChain_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.BALL_AND_CHAIN_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.BALL_AND_CHAIN_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.BALL_AND_CHAIN_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.BallAndChain_Basic_Speed;
-            TurnSpeed = EnemyEV.BallAndChain_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.BallAndChain_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.BallAndChain_Basic_Jump;
-            CooldownTime = EnemyEV.BallAndChain_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.BallAndChain_Basic_AnimationDelay;
+            Speed = EnemyEV.BALL_AND_CHAIN_BASIC_SPEED;
+            TurnSpeed = EnemyEV.BALL_AND_CHAIN_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.BALL_AND_CHAIN_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.BALL_AND_CHAIN_BASIC_JUMP;
+            CooldownTime = EnemyEV.BALL_AND_CHAIN_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.BALL_AND_CHAIN_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.BallAndChain_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.BallAndChain_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.BallAndChain_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.BallAndChain_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.BALL_AND_CHAIN_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.BALL_AND_CHAIN_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.BALL_AND_CHAIN_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.BALL_AND_CHAIN_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.BallAndChain_Basic_Scale;
-            ProjectileScale = EnemyEV.BallAndChain_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.BallAndChain_Basic_Tint;
+            Scale = EnemyEV.BallAndChainBasicScale;
+            ProjectileScale = EnemyEV.BallAndChainBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.BallAndChainBasicTint;
 
-            MeleeRadius = EnemyEV.BallAndChain_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.BallAndChain_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.BallAndChain_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.BALL_AND_CHAIN_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.BALL_AND_CHAIN_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.BALL_AND_CHAIN_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.BallAndChain_Basic_KnockBack;
+            KnockBack = EnemyEV.BallAndChainBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.BallAndChain_Miniboss_Name;
-                    LocStringID = EnemyEV.BallAndChain_Miniboss_Name_locID;
+                    Name = EnemyEV.BALL_AND_CHAIN_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.BALL_AND_CHAIN_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.BallAndChain_Miniboss_MaxHealth;
-                    Damage = EnemyEV.BallAndChain_Miniboss_Damage;
-                    XPValue = EnemyEV.BallAndChain_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.BALL_AND_CHAIN_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.BALL_AND_CHAIN_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.BALL_AND_CHAIN_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.BallAndChain_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.BallAndChain_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.BallAndChain_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.BALL_AND_CHAIN_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.BALL_AND_CHAIN_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.BALL_AND_CHAIN_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.BallAndChain_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.BallAndChain_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.BallAndChain_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.BallAndChain_Miniboss_Jump;
-                    CooldownTime = EnemyEV.BallAndChain_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.BallAndChain_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.BALL_AND_CHAIN_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.BALL_AND_CHAIN_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.BALL_AND_CHAIN_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.BALL_AND_CHAIN_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.BALL_AND_CHAIN_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.BALL_AND_CHAIN_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.BallAndChain_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.BallAndChain_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.BallAndChain_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.BallAndChain_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.BALL_AND_CHAIN_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.BALL_AND_CHAIN_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.BALL_AND_CHAIN_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.BALL_AND_CHAIN_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.BallAndChain_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.BallAndChain_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.BallAndChain_Miniboss_Tint;
+                    Scale = EnemyEV.BallAndChainMinibossScale;
+                    ProjectileScale = EnemyEV.BallAndChainMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.BallAndChainMinibossTint;
 
-                    MeleeRadius = EnemyEV.BallAndChain_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.BallAndChain_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.BallAndChain_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.BALL_AND_CHAIN_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.BALL_AND_CHAIN_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.BALL_AND_CHAIN_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.BallAndChain_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.BallAndChainMinibossKnockBack;
                     #endregion
                     break;
 
@@ -115,78 +116,78 @@ namespace RogueCastle
                     ChainSpeed2Modifier = 1.5f;
 
                     #region Expert Variables - General
-                    Name = EnemyEV.BallAndChain_Expert_Name;
-                    LocStringID = EnemyEV.BallAndChain_Expert_Name_locID;
+                    Name = EnemyEV.BALL_AND_CHAIN_EXPERT_NAME;
+                    LocStringID = EnemyEV.BALL_AND_CHAIN_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.BallAndChain_Expert_MaxHealth;
-                    Damage = EnemyEV.BallAndChain_Expert_Damage;
-                    XPValue = EnemyEV.BallAndChain_Expert_XPValue;
+                    MaxHealth = EnemyEV.BALL_AND_CHAIN_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.BALL_AND_CHAIN_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.BALL_AND_CHAIN_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.BallAndChain_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.BallAndChain_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.BallAndChain_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.BALL_AND_CHAIN_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.BALL_AND_CHAIN_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.BALL_AND_CHAIN_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.BallAndChain_Expert_Speed;
-                    TurnSpeed = EnemyEV.BallAndChain_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.BallAndChain_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.BallAndChain_Expert_Jump;
-                    CooldownTime = EnemyEV.BallAndChain_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.BallAndChain_Expert_AnimationDelay;
+                    Speed = EnemyEV.BALL_AND_CHAIN_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.BALL_AND_CHAIN_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.BALL_AND_CHAIN_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.BALL_AND_CHAIN_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.BALL_AND_CHAIN_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.BALL_AND_CHAIN_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.BallAndChain_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.BallAndChain_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.BallAndChain_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.BallAndChain_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.BALL_AND_CHAIN_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.BALL_AND_CHAIN_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.BALL_AND_CHAIN_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.BALL_AND_CHAIN_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.BallAndChain_Expert_Scale;
-                    ProjectileScale = EnemyEV.BallAndChain_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.BallAndChain_Expert_Tint;
+                    Scale = EnemyEV.BallAndChainExpertScale;
+                    ProjectileScale = EnemyEV.BallAndChainExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.BallAndChainExpertTint;
 
-                    MeleeRadius = EnemyEV.BallAndChain_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.BallAndChain_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.BallAndChain_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.BALL_AND_CHAIN_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.BALL_AND_CHAIN_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.BALL_AND_CHAIN_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.BallAndChain_Expert_KnockBack;
+                    KnockBack = EnemyEV.BallAndChainExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     ChainRadius = 275;
                     #region Advanced Variables - General
-                    Name = EnemyEV.BallAndChain_Advanced_Name;
-                    LocStringID = EnemyEV.BallAndChain_Advanced_Name_locID;
+                    Name = EnemyEV.BALL_AND_CHAIN_ADVANCED_NAME;
+                    LocStringID = EnemyEV.BALL_AND_CHAIN_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.BallAndChain_Advanced_MaxHealth;
-                    Damage = EnemyEV.BallAndChain_Advanced_Damage;
-                    XPValue = EnemyEV.BallAndChain_Advanced_XPValue;
+                    MaxHealth = EnemyEV.BALL_AND_CHAIN_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.BALL_AND_CHAIN_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.BALL_AND_CHAIN_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.BallAndChain_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.BallAndChain_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.BallAndChain_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.BALL_AND_CHAIN_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.BALL_AND_CHAIN_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.BALL_AND_CHAIN_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.BallAndChain_Advanced_Speed;
-                    TurnSpeed = EnemyEV.BallAndChain_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.BallAndChain_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.BallAndChain_Advanced_Jump;
-                    CooldownTime = EnemyEV.BallAndChain_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.BallAndChain_Advanced_AnimationDelay;
+                    Speed = EnemyEV.BALL_AND_CHAIN_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.BALL_AND_CHAIN_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.BALL_AND_CHAIN_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.BALL_AND_CHAIN_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.BALL_AND_CHAIN_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.BALL_AND_CHAIN_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.BallAndChain_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.BallAndChain_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.BallAndChain_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.BallAndChain_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.BALL_AND_CHAIN_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.BALL_AND_CHAIN_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.BALL_AND_CHAIN_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.BALL_AND_CHAIN_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.BallAndChain_Advanced_Scale;
-                    ProjectileScale = EnemyEV.BallAndChain_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.BallAndChain_Advanced_Tint;
+                    Scale = EnemyEV.BallAndChainAdvancedScale;
+                    ProjectileScale = EnemyEV.BallAndChainAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.BallAndChainAdvancedTint;
 
-                    MeleeRadius = EnemyEV.BallAndChain_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.BallAndChain_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.BallAndChain_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.BALL_AND_CHAIN_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.BALL_AND_CHAIN_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.BALL_AND_CHAIN_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.BallAndChain_Advanced_KnockBack;
+                    KnockBack = EnemyEV.BallAndChainAdvancedKnockBack;
                     #endregion
                     break;
 

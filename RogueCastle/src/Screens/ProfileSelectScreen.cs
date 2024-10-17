@@ -10,6 +10,7 @@ using Tweener;
 using Tweener.Ease;
 using InputSystem;
 using System.Text.RegularExpressions;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -391,7 +392,7 @@ namespace RogueCastle
         public override void Draw(GameTime gametime)
         {
             Camera.Begin();
-            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight), Color.Black * BackBufferOpacity);
+            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT), Color.Black * BackBufferOpacity);
 
             m_title.Draw(Camera);
             m_slot1Container.Draw(Camera);

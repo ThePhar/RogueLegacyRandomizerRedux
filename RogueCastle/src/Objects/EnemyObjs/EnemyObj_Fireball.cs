@@ -5,7 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 using Tweener;
 
 namespace RogueCastle
@@ -50,78 +50,78 @@ namespace RogueCastle
             DashSpeed = 900;
 
             #region Basic Variables - General
-            Name = EnemyEV.Fireball_Basic_Name;
-            LocStringID = EnemyEV.Fireball_Basic_Name_locID;
+            Name = EnemyEV.FIREBALL_BASIC_NAME;
+            LocStringID = EnemyEV.FIREBALL_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Fireball_Basic_MaxHealth;
-            Damage = EnemyEV.Fireball_Basic_Damage;
-            XPValue = EnemyEV.Fireball_Basic_XPValue;
+            MaxHealth = EnemyEV.FIREBALL_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.FIREBALL_BASIC_DAMAGE;
+            XPValue = EnemyEV.FIREBALL_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Fireball_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Fireball_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Fireball_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.FIREBALL_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.FIREBALL_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.FIREBALL_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Fireball_Basic_Speed;
-            TurnSpeed = EnemyEV.Fireball_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Fireball_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Fireball_Basic_Jump;
-            CooldownTime = EnemyEV.Fireball_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Fireball_Basic_AnimationDelay;
+            Speed = EnemyEV.FIREBALL_BASIC_SPEED;
+            TurnSpeed = EnemyEV.FIREBALL_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.FIREBALL_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.FIREBALL_BASIC_JUMP;
+            CooldownTime = EnemyEV.FIREBALL_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.FIREBALL_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Fireball_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Fireball_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Fireball_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Fireball_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.FIREBALL_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.FIREBALL_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.FIREBALL_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.FIREBALL_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Fireball_Basic_Scale;
-            ProjectileScale = EnemyEV.Fireball_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Fireball_Basic_Tint;
+            Scale = EnemyEV.FireballBasicScale;
+            ProjectileScale = EnemyEV.FireballBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.FireballBasicTint;
 
-            MeleeRadius = EnemyEV.Fireball_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Fireball_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Fireball_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.FIREBALL_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.FIREBALL_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.FIREBALL_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Fireball_Basic_KnockBack;
+            KnockBack = EnemyEV.FireballBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Fireball_Miniboss_Name;
-                    LocStringID = EnemyEV.Fireball_Miniboss_Name_locID;
+                    Name = EnemyEV.FIREBALL_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.FIREBALL_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Fireball_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Fireball_Miniboss_Damage;
-                    XPValue = EnemyEV.Fireball_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.FIREBALL_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.FIREBALL_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.FIREBALL_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Fireball_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Fireball_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Fireball_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.FIREBALL_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.FIREBALL_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.FIREBALL_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Fireball_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Fireball_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Fireball_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Fireball_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Fireball_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Fireball_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.FIREBALL_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.FIREBALL_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.FIREBALL_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.FIREBALL_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.FIREBALL_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.FIREBALL_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Fireball_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Fireball_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Fireball_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Fireball_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.FIREBALL_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.FIREBALL_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.FIREBALL_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.FIREBALL_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Fireball_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Fireball_Miniboss_ProjectileScale;
+                    Scale = EnemyEV.FireballMinibossScale;
+                    ProjectileScale = EnemyEV.FireballMinibossProjectileScale;
                     //TintablePart.TextureColor = EnemyEV.Fireball_Miniboss_Tint;
 
-                    MeleeRadius = EnemyEV.Fireball_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Fireball_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Fireball_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.FIREBALL_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.FIREBALL_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.FIREBALL_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Fireball_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.FireballMinibossKnockBack;
                     #endregion
                     if (LevelEV.WeakenBosses == true)
                         this.MaxHealth = 1;
@@ -129,77 +129,77 @@ namespace RogueCastle
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Fireball_Expert_Name;
-                    LocStringID = EnemyEV.Fireball_Expert_Name_locID;
+                    Name = EnemyEV.FIREBALL_EXPERT_NAME;
+                    LocStringID = EnemyEV.FIREBALL_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Fireball_Expert_MaxHealth;
-                    Damage = EnemyEV.Fireball_Expert_Damage;
-                    XPValue = EnemyEV.Fireball_Expert_XPValue;
+                    MaxHealth = EnemyEV.FIREBALL_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.FIREBALL_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.FIREBALL_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Fireball_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Fireball_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Fireball_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.FIREBALL_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.FIREBALL_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.FIREBALL_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Fireball_Expert_Speed;
-                    TurnSpeed = EnemyEV.Fireball_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Fireball_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Fireball_Expert_Jump;
-                    CooldownTime = EnemyEV.Fireball_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Fireball_Expert_AnimationDelay;
+                    Speed = EnemyEV.FIREBALL_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.FIREBALL_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.FIREBALL_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.FIREBALL_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.FIREBALL_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.FIREBALL_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Fireball_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Fireball_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Fireball_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Fireball_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.FIREBALL_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.FIREBALL_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.FIREBALL_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.FIREBALL_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Fireball_Expert_Scale;
-                    ProjectileScale = EnemyEV.Fireball_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Fireball_Expert_Tint;
+                    Scale = EnemyEV.FireballExpertScale;
+                    ProjectileScale = EnemyEV.FireballExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.FireballExpertTint;
 
-                    MeleeRadius = EnemyEV.Fireball_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Fireball_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Fireball_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.FIREBALL_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.FIREBALL_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.FIREBALL_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Fireball_Expert_KnockBack;
+                    KnockBack = EnemyEV.FireballExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Fireball_Advanced_Name;
-                    LocStringID = EnemyEV.Fireball_Advanced_Name_locID;
+                    Name = EnemyEV.FIREBALL_ADVANCED_NAME;
+                    LocStringID = EnemyEV.FIREBALL_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Fireball_Advanced_MaxHealth;
-                    Damage = EnemyEV.Fireball_Advanced_Damage;
-                    XPValue = EnemyEV.Fireball_Advanced_XPValue;
+                    MaxHealth = EnemyEV.FIREBALL_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.FIREBALL_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.FIREBALL_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Fireball_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Fireball_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Fireball_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.FIREBALL_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.FIREBALL_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.FIREBALL_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Fireball_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Fireball_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Fireball_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Fireball_Advanced_Jump;
-                    CooldownTime = EnemyEV.Fireball_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Fireball_Advanced_AnimationDelay;
+                    Speed = EnemyEV.FIREBALL_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.FIREBALL_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.FIREBALL_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.FIREBALL_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.FIREBALL_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.FIREBALL_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Fireball_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Fireball_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Fireball_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Fireball_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.FIREBALL_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.FIREBALL_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.FIREBALL_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.FIREBALL_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Fireball_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Fireball_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Fireball_Advanced_Tint;
+                    Scale = EnemyEV.FireballAdvancedScale;
+                    ProjectileScale = EnemyEV.FireballAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.FireballAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Fireball_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Fireball_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Fireball_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.FIREBALL_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.FIREBALL_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.FIREBALL_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Fireball_Advanced_KnockBack;
+                    KnockBack = EnemyEV.FireballAdvancedKnockBack;
                     #endregion
                     break;
 

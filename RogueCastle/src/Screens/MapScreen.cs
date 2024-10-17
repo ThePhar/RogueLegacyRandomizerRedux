@@ -9,6 +9,7 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -192,8 +193,8 @@ namespace RogueCastle
             // Loading Teleporter objects.
             m_titleText = new SpriteObj("TeleporterTitleText_Sprite");
             m_titleText.ForceDraw = true;
-            m_titleText.X = GlobalEV.ScreenWidth / 2;
-            m_titleText.Y = GlobalEV.ScreenHeight * 0.1f;
+            m_titleText.X = GlobalEV.SCREEN_WIDTH / 2;
+            m_titleText.Y = GlobalEV.SCREEN_HEIGHT * 0.1f;
 
             m_playerIcon = new ObjContainer("PlayerWalking_Character");
             m_playerIcon.Scale = new Vector2(0.6f, 0.6f);

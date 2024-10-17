@@ -10,7 +10,7 @@ using System.IO;
 using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -37,8 +37,8 @@ namespace RogueCastle
             // Loading Teleporter objects.
             m_titleText = new SpriteObj("DiaryEntryTitleText_Sprite");
             m_titleText.ForceDraw = true;
-            m_titleText.X = GlobalEV.ScreenWidth / 2;
-            m_titleText.Y = GlobalEV.ScreenHeight * 0.1f;
+            m_titleText.X = GlobalEV.SCREEN_WIDTH / 2;
+            m_titleText.Y = GlobalEV.SCREEN_HEIGHT * 0.1f;
 
             int startingX = 260;//250;//350;
             int startingY = 150;
@@ -262,7 +262,7 @@ namespace RogueCastle
         public override void Draw(GameTime gametime)
         {
             Camera.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null);
-            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight), Color.Black * BackBufferOpacity);
+            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT), Color.Black * BackBufferOpacity);
             Camera.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
 
             m_titleText.Draw(Camera);

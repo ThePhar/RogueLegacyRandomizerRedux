@@ -6,7 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Globalization;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 using RogueCastle.Objects;
 using Tweener;
 

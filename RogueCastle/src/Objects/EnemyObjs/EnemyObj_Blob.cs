@@ -5,7 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 using Tweener;
 
 namespace RogueCastle
@@ -53,39 +53,39 @@ namespace RogueCastle
             BlobSpeedChange = 2.0f;
 
             #region Basic Variables - General
-            Name = EnemyEV.Blob_Basic_Name;
-            LocStringID = EnemyEV.Blob_Basic_Name_locID;
+            Name = EnemyEV.BLOB_BASIC_NAME;
+            LocStringID = EnemyEV.BLOB_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Blob_Basic_MaxHealth;
-            Damage = EnemyEV.Blob_Basic_Damage;
-            XPValue = EnemyEV.Blob_Basic_XPValue;
+            MaxHealth = EnemyEV.BLOB_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.BLOB_BASIC_DAMAGE;
+            XPValue = EnemyEV.BLOB_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Blob_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Blob_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Blob_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.BLOB_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.BLOB_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.BLOB_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Blob_Basic_Speed;
-            TurnSpeed = EnemyEV.Blob_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Blob_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Blob_Basic_Jump;
-            CooldownTime = EnemyEV.Blob_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Blob_Basic_AnimationDelay;
+            Speed = EnemyEV.BLOB_BASIC_SPEED;
+            TurnSpeed = EnemyEV.BLOB_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.BLOB_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.BLOB_BASIC_JUMP;
+            CooldownTime = EnemyEV.BLOB_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.BLOB_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Blob_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Blob_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Blob_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Blob_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.BLOB_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.BLOB_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.BLOB_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.BLOB_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Blob_Basic_Scale;
-            ProjectileScale = EnemyEV.Blob_Basic_ProjectileScale;
+            Scale = EnemyEV.BlobBasicScale;
+            ProjectileScale = EnemyEV.BlobBasicProjectileScale;
             //TintablePart.TextureColor = EnemyEV.Blob_Basic_Tint;
 
-            MeleeRadius = EnemyEV.Blob_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Blob_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Blob_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.BLOB_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.BLOB_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.BLOB_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Blob_Basic_KnockBack;
+            KnockBack = EnemyEV.BlobBasicKnockBack;
             #endregion		
 
 
@@ -98,39 +98,39 @@ namespace RogueCastle
                     BlobSpeedChange = 2.0f;//2.25f;
                     ForceDraw = true;
 					#region Miniboss Variables - General
-					Name = EnemyEV.Blob_Miniboss_Name;
-                    LocStringID = EnemyEV.Blob_Miniboss_Name_locID;
+					Name = EnemyEV.BLOB_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.BLOB_MINIBOSS_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.Blob_Miniboss_MaxHealth;
-					Damage = EnemyEV.Blob_Miniboss_Damage;
-					XPValue = EnemyEV.Blob_Miniboss_XPValue;
+					MaxHealth = EnemyEV.BLOB_MINIBOSS_MAX_HEALTH;
+					Damage = EnemyEV.BLOB_MINIBOSS_DAMAGE;
+					XPValue = EnemyEV.BLOB_MINIBOSS_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.Blob_Miniboss_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.Blob_Miniboss_MaxDropAmount;
-					MoneyDropChance = EnemyEV.Blob_Miniboss_DropChance;
+					MinMoneyDropAmount = EnemyEV.BLOB_MINIBOSS_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.BLOB_MINIBOSS_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.BLOB_MINIBOSS_DROP_CHANCE;
 					
-					Speed = EnemyEV.Blob_Miniboss_Speed;
-					TurnSpeed = EnemyEV.Blob_Miniboss_TurnSpeed;
-					ProjectileSpeed = EnemyEV.Blob_Miniboss_ProjectileSpeed;
-					JumpHeight = EnemyEV.Blob_Miniboss_Jump;
-					CooldownTime = EnemyEV.Blob_Miniboss_Cooldown;
-					AnimationDelay = 1 / EnemyEV.Blob_Miniboss_AnimationDelay;
+					Speed = EnemyEV.BLOB_MINIBOSS_SPEED;
+					TurnSpeed = EnemyEV.BLOB_MINIBOSS_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.BLOB_MINIBOSS_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.BLOB_MINIBOSS_JUMP;
+					CooldownTime = EnemyEV.BLOB_MINIBOSS_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.BLOB_MINIBOSS_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.Blob_Miniboss_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.Blob_Miniboss_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.Blob_Miniboss_CanBeKnockedBack;
-					IsWeighted = EnemyEV.Blob_Miniboss_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.BLOB_MINIBOSS_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.BLOB_MINIBOSS_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.BLOB_MINIBOSS_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.BLOB_MINIBOSS_IS_WEIGHTED;
 					
-					Scale = EnemyEV.Blob_Miniboss_Scale;
-					ProjectileScale = EnemyEV.Blob_Miniboss_ProjectileScale;
+					Scale = EnemyEV.BlobMinibossScale;
+					ProjectileScale = EnemyEV.BlobMinibossProjectileScale;
 					//TintablePart.TextureColor = EnemyEV.Blob_Miniboss_Tint;
 					
-					MeleeRadius = EnemyEV.Blob_Miniboss_MeleeRadius;
-					ProjectileRadius = EnemyEV.Blob_Miniboss_ProjectileRadius;
-					EngageRadius = EnemyEV.Blob_Miniboss_EngageRadius;
+					MeleeRadius = EnemyEV.BLOB_MINIBOSS_MELEE_RADIUS;
+					ProjectileRadius = EnemyEV.BLOB_MINIBOSS_PROJECTILE_RADIUS;
+					EngageRadius = EnemyEV.BLOB_MINIBOSS_ENGAGE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.Blob_Miniboss_KnockBack;
+					KnockBack = EnemyEV.BlobMinibossKnockBack;
 					#endregion
                     if (LevelEV.WeakenBosses == true)
                     {
@@ -145,39 +145,39 @@ namespace RogueCastle
                     BlobSpeedChange = 2.25f;
 
 					#region Expert Variables - General
-					Name = EnemyEV.Blob_Expert_Name;
-                    LocStringID = EnemyEV.Blob_Expert_Name_locID;
+					Name = EnemyEV.BLOB_EXPERT_NAME;
+                    LocStringID = EnemyEV.BLOB_EXPERT_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.Blob_Expert_MaxHealth;
-					Damage = EnemyEV.Blob_Expert_Damage;
-					XPValue = EnemyEV.Blob_Expert_XPValue;
+					MaxHealth = EnemyEV.BLOB_EXPERT_MAX_HEALTH;
+					Damage = EnemyEV.BLOB_EXPERT_DAMAGE;
+					XPValue = EnemyEV.BLOB_EXPERT_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.Blob_Expert_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.Blob_Expert_MaxDropAmount;
-					MoneyDropChance = EnemyEV.Blob_Expert_DropChance;
+					MinMoneyDropAmount = EnemyEV.BLOB_EXPERT_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.BLOB_EXPERT_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.BLOB_EXPERT_DROP_CHANCE;
 					
-					Speed = EnemyEV.Blob_Expert_Speed;
-					TurnSpeed = EnemyEV.Blob_Expert_TurnSpeed;
-					ProjectileSpeed = EnemyEV.Blob_Expert_ProjectileSpeed;
-					JumpHeight = EnemyEV.Blob_Expert_Jump;
-					CooldownTime = EnemyEV.Blob_Expert_Cooldown;
-					AnimationDelay = 1 / EnemyEV.Blob_Expert_AnimationDelay;
+					Speed = EnemyEV.BLOB_EXPERT_SPEED;
+					TurnSpeed = EnemyEV.BLOB_EXPERT_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.BLOB_EXPERT_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.BLOB_EXPERT_JUMP;
+					CooldownTime = EnemyEV.BLOB_EXPERT_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.BLOB_EXPERT_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.Blob_Expert_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.Blob_Expert_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.Blob_Expert_CanBeKnockedBack;
-					IsWeighted = EnemyEV.Blob_Expert_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.BLOB_EXPERT_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.BLOB_EXPERT_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.BLOB_EXPERT_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.BLOB_EXPERT_IS_WEIGHTED;
 					
-					Scale = EnemyEV.Blob_Expert_Scale;
-					ProjectileScale = EnemyEV.Blob_Expert_ProjectileScale;
+					Scale = EnemyEV.BlobExpertScale;
+					ProjectileScale = EnemyEV.BlobExpertProjectileScale;
 					//TintablePart.TextureColor = EnemyEV.Blob_Expert_Tint;
 					
-					MeleeRadius = EnemyEV.Blob_Expert_MeleeRadius;
-					ProjectileRadius = EnemyEV.Blob_Expert_ProjectileRadius;
-					EngageRadius = EnemyEV.Blob_Expert_EngageRadius;
+					MeleeRadius = EnemyEV.BLOB_EXPERT_MELEE_RADIUS;
+					ProjectileRadius = EnemyEV.BLOB_EXPERT_PROJECTILE_RADIUS;
+					EngageRadius = EnemyEV.BLOB_EXPERT_ENGAGE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.Blob_Expert_KnockBack;
+					KnockBack = EnemyEV.BlobExpertKnockBack;
 					#endregion
                     break;
 
@@ -187,39 +187,39 @@ namespace RogueCastle
                     BlobSpeedChange = 2.25f;
 
 					#region Advanced Variables - General
-					Name = EnemyEV.Blob_Advanced_Name;
-                    LocStringID = EnemyEV.Blob_Advanced_Name_locID;
+					Name = EnemyEV.BLOB_ADVANCED_NAME;
+                    LocStringID = EnemyEV.BLOB_ADVANCED_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.Blob_Advanced_MaxHealth;
-					Damage = EnemyEV.Blob_Advanced_Damage;
-					XPValue = EnemyEV.Blob_Advanced_XPValue;
+					MaxHealth = EnemyEV.BLOB_ADVANCED_MAX_HEALTH;
+					Damage = EnemyEV.BLOB_ADVANCED_DAMAGE;
+					XPValue = EnemyEV.BLOB_ADVANCED_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.Blob_Advanced_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.Blob_Advanced_MaxDropAmount;
-					MoneyDropChance = EnemyEV.Blob_Advanced_DropChance;
+					MinMoneyDropAmount = EnemyEV.BLOB_ADVANCED_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.BLOB_ADVANCED_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.BLOB_ADVANCED_DROP_CHANCE;
 					
-					Speed = EnemyEV.Blob_Advanced_Speed;
-					TurnSpeed = EnemyEV.Blob_Advanced_TurnSpeed;
-					ProjectileSpeed = EnemyEV.Blob_Advanced_ProjectileSpeed;
-					JumpHeight = EnemyEV.Blob_Advanced_Jump;
-					CooldownTime = EnemyEV.Blob_Advanced_Cooldown;
-					AnimationDelay = 1 / EnemyEV.Blob_Advanced_AnimationDelay;
+					Speed = EnemyEV.BLOB_ADVANCED_SPEED;
+					TurnSpeed = EnemyEV.BLOB_ADVANCED_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.BLOB_ADVANCED_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.BLOB_ADVANCED_JUMP;
+					CooldownTime = EnemyEV.BLOB_ADVANCED_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.BLOB_ADVANCED_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.Blob_Advanced_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.Blob_Advanced_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.Blob_Advanced_CanBeKnockedBack;
-					IsWeighted = EnemyEV.Blob_Advanced_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.BLOB_ADVANCED_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.BLOB_ADVANCED_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.BLOB_ADVANCED_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.BLOB_ADVANCED_IS_WEIGHTED;
 					
-					Scale = EnemyEV.Blob_Advanced_Scale;
-					ProjectileScale = EnemyEV.Blob_Advanced_ProjectileScale;
+					Scale = EnemyEV.BlobAdvancedScale;
+					ProjectileScale = EnemyEV.BlobAdvancedProjectileScale;
 					//TintablePart.TextureColor = EnemyEV.Blob_Advanced_Tint;
 					
-					MeleeRadius = EnemyEV.Blob_Advanced_MeleeRadius;
-					EngageRadius = EnemyEV.Blob_Advanced_EngageRadius;
-					ProjectileRadius = EnemyEV.Blob_Advanced_ProjectileRadius;
+					MeleeRadius = EnemyEV.BLOB_ADVANCED_MELEE_RADIUS;
+					EngageRadius = EnemyEV.BLOB_ADVANCED_ENGAGE_RADIUS;
+					ProjectileRadius = EnemyEV.BLOB_ADVANCED_PROJECTILE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.Blob_Advanced_KnockBack;
+					KnockBack = EnemyEV.BlobAdvancedKnockBack;
 					#endregion
                     break;
 
@@ -902,22 +902,22 @@ namespace RogueCastle
                 switch (this.Difficulty)
                 {
                     case (GameTypes.EnemyDifficulty.BASIC):
-                        this.Speed = EnemyEV.Blob_Basic_Speed; // Should not be hardcoded.
-                        this.Scale = EnemyEV.Blob_Basic_Scale;
+                        this.Speed = EnemyEV.BLOB_BASIC_SPEED; // Should not be hardcoded.
+                        this.Scale = EnemyEV.BlobBasicScale;
                         this.NumHits = 2;
                         break;
                     case (GameTypes.EnemyDifficulty.ADVANCED):
-                        this.Speed = EnemyEV.Blob_Advanced_Speed; // Should not be hardcoded.
-                        this.Scale = EnemyEV.Blob_Advanced_Scale;
+                        this.Speed = EnemyEV.BLOB_ADVANCED_SPEED; // Should not be hardcoded.
+                        this.Scale = EnemyEV.BlobAdvancedScale;
                         this.NumHits = 3;
                         break;
                     case (GameTypes.EnemyDifficulty.EXPERT):
-                        this.Speed = EnemyEV.Blob_Expert_Speed; // Should not be hardcoded.
-                        this.Scale = EnemyEV.Blob_Expert_Scale;
+                        this.Speed = EnemyEV.BLOB_EXPERT_SPEED; // Should not be hardcoded.
+                        this.Scale = EnemyEV.BlobExpertScale;
                         this.NumHits = 4;
                         break;
                     case (GameTypes.EnemyDifficulty.MINIBOSS):
-                        this.Speed = EnemyEV.Blob_Miniboss_Speed; // Should not be hardcoded.
+                        this.Speed = EnemyEV.BLOB_MINIBOSS_SPEED; // Should not be hardcoded.
                         this.NumHits = 6;
                         break;
                 }

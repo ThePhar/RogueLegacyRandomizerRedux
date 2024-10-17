@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Tweener;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 using Tweener.Ease;
 
 namespace RogueCastle
@@ -81,154 +81,154 @@ namespace RogueCastle
         protected override void InitializeEV()
         {
             #region Basic Variables - General
-            Name = EnemyEV.LastBoss_Basic_Name;
-            LocStringID = EnemyEV.LastBoss_Basic_Name_locID;
+            Name = EnemyEV.LAST_BOSS_BASIC_NAME;
+            LocStringID = EnemyEV.LAST_BOSS_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.LastBoss_Basic_MaxHealth;
-            Damage = EnemyEV.LastBoss_Basic_Damage;
-            XPValue = EnemyEV.LastBoss_Basic_XPValue;
+            MaxHealth = EnemyEV.LAST_BOSS_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.LAST_BOSS_BASIC_DAMAGE;
+            XPValue = EnemyEV.LAST_BOSS_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.LastBoss_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.LastBoss_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.LastBoss_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.LAST_BOSS_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.LAST_BOSS_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.LAST_BOSS_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.LastBoss_Basic_Speed;
-            TurnSpeed = EnemyEV.LastBoss_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.LastBoss_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.LastBoss_Basic_Jump;
-            CooldownTime = EnemyEV.LastBoss_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.LastBoss_Basic_AnimationDelay;
+            Speed = EnemyEV.LAST_BOSS_BASIC_SPEED;
+            TurnSpeed = EnemyEV.LAST_BOSS_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.LAST_BOSS_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.LAST_BOSS_BASIC_JUMP;
+            CooldownTime = EnemyEV.LAST_BOSS_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.LAST_BOSS_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.LastBoss_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.LastBoss_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.LastBoss_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.LastBoss_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.LAST_BOSS_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.LAST_BOSS_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.LAST_BOSS_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.LAST_BOSS_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.LastBoss_Basic_Scale;
-            ProjectileScale = EnemyEV.LastBoss_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.LastBoss_Basic_Tint;
+            Scale = EnemyEV.LastBossBasicScale;
+            ProjectileScale = EnemyEV.LastBossBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.LastBossBasicTint;
 
-            MeleeRadius = EnemyEV.LastBoss_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.LastBoss_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.LastBoss_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.LAST_BOSS_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.LAST_BOSS_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.LAST_BOSS_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.LastBoss_Basic_KnockBack;
+            KnockBack = EnemyEV.LastBossBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.LastBoss_Miniboss_Name;
-                    LocStringID = EnemyEV.LastBoss_Miniboss_Name_locID;
+                    Name = EnemyEV.LAST_BOSS_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.LAST_BOSS_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.LastBoss_Miniboss_MaxHealth;
-                    Damage = EnemyEV.LastBoss_Miniboss_Damage;
-                    XPValue = EnemyEV.LastBoss_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.LAST_BOSS_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.LAST_BOSS_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.LAST_BOSS_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.LastBoss_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.LastBoss_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.LastBoss_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.LAST_BOSS_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.LAST_BOSS_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.LAST_BOSS_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.LastBoss_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.LastBoss_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.LastBoss_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.LastBoss_Miniboss_Jump;
-                    CooldownTime = EnemyEV.LastBoss_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.LastBoss_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.LAST_BOSS_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.LAST_BOSS_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.LAST_BOSS_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.LAST_BOSS_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.LAST_BOSS_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.LAST_BOSS_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.LastBoss_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.LastBoss_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.LastBoss_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.LastBoss_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.LAST_BOSS_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.LAST_BOSS_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.LAST_BOSS_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.LAST_BOSS_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.LastBoss_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.LastBoss_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.LastBoss_Miniboss_Tint;
+                    Scale = EnemyEV.LastBossMinibossScale;
+                    ProjectileScale = EnemyEV.LastBossMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.LastBossMinibossTint;
 
-                    MeleeRadius = EnemyEV.LastBoss_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.LastBoss_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.LastBoss_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.LAST_BOSS_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.LAST_BOSS_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.LAST_BOSS_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.LastBoss_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.LastBossMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.LastBoss_Expert_Name;
-                    LocStringID = EnemyEV.LastBoss_Expert_Name_locID;
+                    Name = EnemyEV.LAST_BOSS_EXPERT_NAME;
+                    LocStringID = EnemyEV.LAST_BOSS_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.LastBoss_Expert_MaxHealth;
-                    Damage = EnemyEV.LastBoss_Expert_Damage;
-                    XPValue = EnemyEV.LastBoss_Expert_XPValue;
+                    MaxHealth = EnemyEV.LAST_BOSS_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.LAST_BOSS_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.LAST_BOSS_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.LastBoss_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.LastBoss_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.LastBoss_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.LAST_BOSS_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.LAST_BOSS_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.LAST_BOSS_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.LastBoss_Expert_Speed;
-                    TurnSpeed = EnemyEV.LastBoss_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.LastBoss_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.LastBoss_Expert_Jump;
-                    CooldownTime = EnemyEV.LastBoss_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.LastBoss_Expert_AnimationDelay;
+                    Speed = EnemyEV.LAST_BOSS_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.LAST_BOSS_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.LAST_BOSS_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.LAST_BOSS_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.LAST_BOSS_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.LAST_BOSS_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.LastBoss_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.LastBoss_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.LastBoss_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.LastBoss_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.LAST_BOSS_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.LAST_BOSS_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.LAST_BOSS_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.LAST_BOSS_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.LastBoss_Expert_Scale;
-                    ProjectileScale = EnemyEV.LastBoss_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.LastBoss_Expert_Tint;
+                    Scale = EnemyEV.LastBossExpertScale;
+                    ProjectileScale = EnemyEV.LastBossExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.LastBossExpertTint;
 
-                    MeleeRadius = EnemyEV.LastBoss_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.LastBoss_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.LastBoss_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.LAST_BOSS_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.LAST_BOSS_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.LAST_BOSS_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.LastBoss_Expert_KnockBack;
+                    KnockBack = EnemyEV.LastBossExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.LastBoss_Advanced_Name;
-                    LocStringID = EnemyEV.LastBoss_Advanced_Name_locID;
+                    Name = EnemyEV.LAST_BOSS_ADVANCED_NAME;
+                    LocStringID = EnemyEV.LAST_BOSS_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.LastBoss_Advanced_MaxHealth;
-                    Damage = EnemyEV.LastBoss_Advanced_Damage;
-                    XPValue = EnemyEV.LastBoss_Advanced_XPValue;
+                    MaxHealth = EnemyEV.LAST_BOSS_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.LAST_BOSS_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.LAST_BOSS_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.LastBoss_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.LastBoss_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.LastBoss_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.LAST_BOSS_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.LAST_BOSS_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.LAST_BOSS_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.LastBoss_Advanced_Speed;
-                    TurnSpeed = EnemyEV.LastBoss_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.LastBoss_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.LastBoss_Advanced_Jump;
-                    CooldownTime = EnemyEV.LastBoss_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.LastBoss_Advanced_AnimationDelay;
+                    Speed = EnemyEV.LAST_BOSS_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.LAST_BOSS_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.LAST_BOSS_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.LAST_BOSS_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.LAST_BOSS_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.LAST_BOSS_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.LastBoss_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.LastBoss_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.LastBoss_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.LastBoss_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.LAST_BOSS_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.LAST_BOSS_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.LAST_BOSS_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.LAST_BOSS_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.LastBoss_Advanced_Scale;
-                    ProjectileScale = EnemyEV.LastBoss_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.LastBoss_Advanced_Tint;
+                    Scale = EnemyEV.LastBossAdvancedScale;
+                    ProjectileScale = EnemyEV.LastBossAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.LastBossAdvancedTint;
 
-                    MeleeRadius = EnemyEV.LastBoss_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.LastBoss_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.LastBoss_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.LAST_BOSS_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.LAST_BOSS_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.LAST_BOSS_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.LastBoss_Advanced_KnockBack;
+                    KnockBack = EnemyEV.LastBossAdvancedKnockBack;
                     #endregion
                     break;
 
@@ -1515,36 +1515,36 @@ namespace RogueCastle
 
             this.Flip = SpriteEffects.FlipHorizontally;
             this.Visible = true;
-            this.MaxHealth = EnemyEV.LastBoss_Advanced_MaxHealth;
-            this.Damage = EnemyEV.LastBoss_Advanced_Damage;
+            this.MaxHealth = EnemyEV.LAST_BOSS_ADVANCED_MAX_HEALTH;
+            this.Damage = EnemyEV.LAST_BOSS_ADVANCED_DAMAGE;
             this.CurrentHealth = MaxHealth;
-            Name = EnemyEV.LastBoss_Advanced_Name;
+            Name = EnemyEV.LAST_BOSS_ADVANCED_NAME;
             if (LevelEV.WeakenBosses == true)
                 this.CurrentHealth = 1;
-            this.MinMoneyDropAmount = EnemyEV.LastBoss_Advanced_MinDropAmount;
-            this.MaxMoneyDropAmount = EnemyEV.LastBoss_Advanced_MaxDropAmount;
-            this.MoneyDropChance = EnemyEV.LastBoss_Advanced_DropChance;
+            this.MinMoneyDropAmount = EnemyEV.LAST_BOSS_ADVANCED_MIN_DROP_AMOUNT;
+            this.MaxMoneyDropAmount = EnemyEV.LAST_BOSS_ADVANCED_MAX_DROP_AMOUNT;
+            this.MoneyDropChance = EnemyEV.LAST_BOSS_ADVANCED_DROP_CHANCE;
 
-            this.Speed = EnemyEV.LastBoss_Advanced_Speed;
-            this.TurnSpeed = EnemyEV.LastBoss_Advanced_TurnSpeed;
-            this.ProjectileSpeed = EnemyEV.LastBoss_Advanced_ProjectileSpeed;
-            this.JumpHeight = EnemyEV.LastBoss_Advanced_Jump;
-            this.CooldownTime = EnemyEV.LastBoss_Advanced_Cooldown;
-            this.AnimationDelay = 1 / EnemyEV.LastBoss_Advanced_AnimationDelay;
+            this.Speed = EnemyEV.LAST_BOSS_ADVANCED_SPEED;
+            this.TurnSpeed = EnemyEV.LAST_BOSS_ADVANCED_TURN_SPEED;
+            this.ProjectileSpeed = EnemyEV.LAST_BOSS_ADVANCED_PROJECTILE_SPEED;
+            this.JumpHeight = EnemyEV.LAST_BOSS_ADVANCED_JUMP;
+            this.CooldownTime = EnemyEV.LAST_BOSS_ADVANCED_COOLDOWN;
+            this.AnimationDelay = 1 / EnemyEV.LAST_BOSS_ADVANCED_ANIMATION_DELAY;
 
-            this.AlwaysFaceTarget = EnemyEV.LastBoss_Advanced_AlwaysFaceTarget;
-            this.CanFallOffLedges = EnemyEV.LastBoss_Advanced_CanFallOffLedges;
-            this.CanBeKnockedBack = EnemyEV.LastBoss_Advanced_CanBeKnockedBack;
+            this.AlwaysFaceTarget = EnemyEV.LAST_BOSS_ADVANCED_ALWAYS_FACE_TARGET;
+            this.CanFallOffLedges = EnemyEV.LAST_BOSS_ADVANCED_CAN_FALL_OFF_LEDGES;
+            this.CanBeKnockedBack = EnemyEV.LAST_BOSS_ADVANCED_CAN_BE_KNOCKED_BACK;
 
-            this.ProjectileScale = EnemyEV.LastBoss_Advanced_ProjectileScale;
-            this.TintablePart.TextureColor = EnemyEV.LastBoss_Advanced_Tint;
+            this.ProjectileScale = EnemyEV.LastBossAdvancedProjectileScale;
+            this.TintablePart.TextureColor = EnemyEV.LastBossAdvancedTint;
 
-            this.MeleeRadius = EnemyEV.LastBoss_Advanced_MeleeRadius;
-            this.EngageRadius = EnemyEV.LastBoss_Advanced_EngageRadius;
-            this.ProjectileRadius = EnemyEV.LastBoss_Advanced_ProjectileRadius;
+            this.MeleeRadius = EnemyEV.LAST_BOSS_ADVANCED_MELEE_RADIUS;
+            this.EngageRadius = EnemyEV.LAST_BOSS_ADVANCED_ENGAGE_RADIUS;
+            this.ProjectileRadius = EnemyEV.LAST_BOSS_ADVANCED_PROJECTILE_RADIUS;
 
             this.ProjectileDamage = Damage;
-            this.KnockBack = EnemyEV.LastBoss_Advanced_KnockBack;
+            this.KnockBack = EnemyEV.LastBossAdvancedKnockBack;
             this.ChangeSprite("EnemyLastBossIdle_Character");
             //TEDDY MEGA BOSS COOLDOWN
             SetCooldownLogicBlock(m_secondFormCooldownLB, 40, 20, 40); //walkTowardsSF, walkAwaySF, walkStopSF

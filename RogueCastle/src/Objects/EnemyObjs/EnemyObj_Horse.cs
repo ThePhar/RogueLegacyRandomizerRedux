@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -40,154 +41,154 @@ namespace RogueCastle
         {
             LockFlip = true;
             #region Basic Variables - General
-            Name = EnemyEV.Horse_Basic_Name;
-            LocStringID = EnemyEV.Horse_Basic_Name_locID;
+            Name = EnemyEV.HORSE_BASIC_NAME;
+            LocStringID = EnemyEV.HORSE_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Horse_Basic_MaxHealth;
-            Damage = EnemyEV.Horse_Basic_Damage;
-            XPValue = EnemyEV.Horse_Basic_XPValue;
+            MaxHealth = EnemyEV.HORSE_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.HORSE_BASIC_DAMAGE;
+            XPValue = EnemyEV.HORSE_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Horse_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Horse_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Horse_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.HORSE_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.HORSE_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.HORSE_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Horse_Basic_Speed;
-            TurnSpeed = EnemyEV.Horse_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Horse_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Horse_Basic_Jump;
-            CooldownTime = EnemyEV.Horse_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Horse_Basic_AnimationDelay;
+            Speed = EnemyEV.HORSE_BASIC_SPEED;
+            TurnSpeed = EnemyEV.HORSE_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.HORSE_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.HORSE_BASIC_JUMP;
+            CooldownTime = EnemyEV.HORSE_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.HORSE_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Horse_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Horse_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Horse_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Horse_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.HORSE_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.HORSE_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.HORSE_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.HORSE_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Horse_Basic_Scale;
-            ProjectileScale = EnemyEV.Horse_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Horse_Basic_Tint;
+            Scale = EnemyEV.HorseBasicScale;
+            ProjectileScale = EnemyEV.HorseBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.HorseBasicTint;
 
-            MeleeRadius = EnemyEV.Horse_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Horse_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Horse_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.HORSE_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.HORSE_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.HORSE_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Horse_Basic_KnockBack;
+            KnockBack = EnemyEV.HorseBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Horse_Miniboss_Name;
-                    LocStringID = EnemyEV.Horse_Miniboss_Name_locID;
+                    Name = EnemyEV.HORSE_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.HORSE_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Horse_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Horse_Miniboss_Damage;
-                    XPValue = EnemyEV.Horse_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.HORSE_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.HORSE_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.HORSE_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Horse_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Horse_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Horse_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.HORSE_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.HORSE_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.HORSE_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Horse_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Horse_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Horse_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Horse_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Horse_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Horse_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.HORSE_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.HORSE_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.HORSE_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.HORSE_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.HORSE_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.HORSE_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Horse_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Horse_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Horse_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Horse_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.HORSE_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.HORSE_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.HORSE_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.HORSE_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Horse_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Horse_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Horse_Miniboss_Tint;
+                    Scale = EnemyEV.HorseMinibossScale;
+                    ProjectileScale = EnemyEV.HorseMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.HorseMinibossTint;
 
-                    MeleeRadius = EnemyEV.Horse_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Horse_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Horse_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.HORSE_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.HORSE_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.HORSE_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Horse_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.HorseMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Horse_Expert_Name;
-                    LocStringID = EnemyEV.Horse_Expert_Name_locID;
+                    Name = EnemyEV.HORSE_EXPERT_NAME;
+                    LocStringID = EnemyEV.HORSE_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Horse_Expert_MaxHealth;
-                    Damage = EnemyEV.Horse_Expert_Damage;
-                    XPValue = EnemyEV.Horse_Expert_XPValue;
+                    MaxHealth = EnemyEV.HORSE_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.HORSE_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.HORSE_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Horse_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Horse_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Horse_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.HORSE_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.HORSE_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.HORSE_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Horse_Expert_Speed;
-                    TurnSpeed = EnemyEV.Horse_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Horse_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Horse_Expert_Jump;
-                    CooldownTime = EnemyEV.Horse_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Horse_Expert_AnimationDelay;
+                    Speed = EnemyEV.HORSE_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.HORSE_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.HORSE_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.HORSE_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.HORSE_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.HORSE_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Horse_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Horse_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Horse_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Horse_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.HORSE_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.HORSE_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.HORSE_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.HORSE_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Horse_Expert_Scale;
-                    ProjectileScale = EnemyEV.Horse_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Horse_Expert_Tint;
+                    Scale = EnemyEV.HorseExpertScale;
+                    ProjectileScale = EnemyEV.HorseExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.HorseExpertTint;
 
-                    MeleeRadius = EnemyEV.Horse_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Horse_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Horse_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.HORSE_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.HORSE_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.HORSE_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Horse_Expert_KnockBack;
+                    KnockBack = EnemyEV.HorseExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Horse_Advanced_Name;
-                    LocStringID = EnemyEV.Horse_Advanced_Name_locID;
+                    Name = EnemyEV.HORSE_ADVANCED_NAME;
+                    LocStringID = EnemyEV.HORSE_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Horse_Advanced_MaxHealth;
-                    Damage = EnemyEV.Horse_Advanced_Damage;
-                    XPValue = EnemyEV.Horse_Advanced_XPValue;
+                    MaxHealth = EnemyEV.HORSE_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.HORSE_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.HORSE_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Horse_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Horse_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Horse_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.HORSE_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.HORSE_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.HORSE_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Horse_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Horse_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Horse_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Horse_Advanced_Jump;
-                    CooldownTime = EnemyEV.Horse_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Horse_Advanced_AnimationDelay;
+                    Speed = EnemyEV.HORSE_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.HORSE_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.HORSE_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.HORSE_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.HORSE_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.HORSE_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Horse_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Horse_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Horse_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Horse_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.HORSE_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.HORSE_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.HORSE_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.HORSE_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Horse_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Horse_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Horse_Advanced_Tint;
+                    Scale = EnemyEV.HorseAdvancedScale;
+                    ProjectileScale = EnemyEV.HorseAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.HorseAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Horse_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Horse_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Horse_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.HORSE_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.HORSE_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.HORSE_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Horse_Advanced_KnockBack;
+                    KnockBack = EnemyEV.HorseAdvancedKnockBack;
                     #endregion
                     break;
 

@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.Enumerations;
 
 namespace RogueCastle
 {
     public struct PlayerLineageData
     {
         public string Name;
-        public byte Spell;
+        public SpellType Spell;
         public byte Class;
         public byte Age;
         public byte ChildAge;

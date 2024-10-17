@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 using RogueCastle.Objects;
 using Tweener;
 using Tweener.Ease;
@@ -208,7 +208,7 @@ namespace RogueCastle
             m_playerHUD.SetPosition(new Vector2(20, 40));
 
             m_enemyHUD = new EnemyHUDObj();
-            m_enemyHUD.Position = new Vector2(GlobalEV.ScreenWidth / 2 - m_enemyHUD.Width / 2, 20);
+            m_enemyHUD.Position = new Vector2(GlobalEV.SCREEN_WIDTH / 2 - m_enemyHUD.Width / 2, 20);
 
             m_miniMapDisplay.SetPlayer(m_player);
             m_miniMapDisplay.InitializeAlphaMap(new Rectangle(1320 - 250, 50, 200, 100), Camera);
@@ -772,9 +772,9 @@ namespace RogueCastle
 
                                 int chestRoll = CDGMath.RandomInt(1, 100);
                                 int chestType = 0;
-                                for (int i = 0; i < GameEV.CHEST_TYPE_CHANCE.Length; i++)
+                                for (int i = 0; i < GameEV.ChestTypeChance.Length; i++)
                                 {
-                                    chestType += GameEV.CHEST_TYPE_CHANCE[i];
+                                    chestType += GameEV.ChestTypeChance[i];
                                     if (chestRoll <= chestType)
                                     {
                                         if (i == 0)
@@ -864,7 +864,7 @@ namespace RogueCastle
 
             if (m_roomBWRenderTarget != null)
                 m_roomBWRenderTarget.Dispose();
-            m_roomBWRenderTarget = new RenderTarget2D(Camera.GraphicsDevice, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+            m_roomBWRenderTarget = new RenderTarget2D(Camera.GraphicsDevice, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
             foreach (RoomObj room in RoomList)
             {
@@ -1625,8 +1625,8 @@ namespace RogueCastle
         {
             if (m_player != null)
             {
-                ScreenManager.Camera.X = (int)(m_player.Position.X + GlobalEV.Camera_XOffset);
-                ScreenManager.Camera.Y = (int)(m_player.Position.Y + GlobalEV.Camera_YOffset);
+                ScreenManager.Camera.X = (int)(m_player.Position.X + GlobalEV.CameraXOffset);
+                ScreenManager.Camera.Y = (int)(m_player.Position.Y + GlobalEV.CameraYOffset);
             }
 
             if (m_currentRoom != null)
@@ -1884,8 +1884,8 @@ namespace RogueCastle
 
         public void InitializeRenderTargets()
         {
-            int screenWidth = GlobalEV.ScreenWidth;
-            int screenHeight = GlobalEV.ScreenHeight;
+            int screenWidth = GlobalEV.SCREEN_WIDTH;
+            int screenHeight = GlobalEV.SCREEN_HEIGHT;
 
             if (LevelEV.SaveFrames == true)
             {
@@ -1910,13 +1910,13 @@ namespace RogueCastle
             m_lightSourceRenderTarget = new RenderTarget2D(Camera.GraphicsDevice, screenWidth, screenHeight, false, effectTargetFormat, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
             if (m_finalRenderTarget != null) m_finalRenderTarget.Dispose();            
-            m_finalRenderTarget = new RenderTarget2D(Camera.GraphicsDevice, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+            m_finalRenderTarget = new RenderTarget2D(Camera.GraphicsDevice, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
             if (m_skyRenderTarget != null) m_skyRenderTarget.Dispose();
             m_skyRenderTarget = new RenderTarget2D(Camera.GraphicsDevice, screenWidth, screenHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
             if (m_bgRenderTarget != null) m_bgRenderTarget.Dispose();
-            m_bgRenderTarget = new RenderTarget2D(Camera.GraphicsDevice, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+            m_bgRenderTarget = new RenderTarget2D(Camera.GraphicsDevice, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
             if (m_traitAuraRenderTarget != null) m_traitAuraRenderTarget.Dispose();
             m_traitAuraRenderTarget = new RenderTarget2D(Camera.GraphicsDevice, screenWidth, screenHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);

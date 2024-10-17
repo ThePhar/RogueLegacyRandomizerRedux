@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -40,7 +41,7 @@ namespace RogueCastle
             ExtractDelay = 0.1f;
             DetectionRect = new Rectangle(0, 0, 120, 30); //(0,0, 200,50);
             Name = "Spike Trap";
-            LocStringID = EnemyEV.SpikeTrap_Basic_Name_locID;
+            LocStringID = EnemyEV.SPIKE_TRAP_BASIC_NAME_LOC_ID;
 
             switch (Difficulty)
             {

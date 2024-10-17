@@ -8,6 +8,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 using Tweener.Ease;
 using Tweener;
 
@@ -121,7 +122,7 @@ namespace RogueCastle
         public void Intro2()
         {
             m_boss1.PlayAnimation(true);
-            Tween.To(Player.AttachedLevel.Camera, 0.5f, Quad.EaseInOut, "delay", "0.5", "X", (Player.X + GlobalEV.Camera_XOffset).ToString(), "Y", (this.Bounds.Bottom - (Player.AttachedLevel.Camera.Bounds.Bottom - Player.AttachedLevel.Camera.Y)).ToString());
+            Tween.To(Player.AttachedLevel.Camera, 0.5f, Quad.EaseInOut, "delay", "0.5", "X", (Player.X + GlobalEV.CameraXOffset).ToString(), "Y", (this.Bounds.Bottom - (Player.AttachedLevel.Camera.Bounds.Bottom - Player.AttachedLevel.Camera.Y)).ToString());
             Tween.AddEndHandlerToLastTween(this, "BeginBattle");
         }
 

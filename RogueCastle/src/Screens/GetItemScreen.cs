@@ -10,7 +10,8 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
-using RogueCastle.EVs;
+using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -203,9 +204,9 @@ namespace RogueCastle
                     m_itemFoundText.Text = LocaleBuilder.GetString(SpecialItemType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.Spell):
-                    m_itemSprite.ChangeSprite(SpellType.Icon((byte)m_itemInfo.X));
+                    m_itemSprite.ChangeSprite(((SpellType)m_itemInfo.X).Icon());
                     m_itemFoundSprite.ChangeSprite("SpellFoundText_Sprite");
-                    m_itemFoundText.Text = LocaleBuilder.GetString(SpellType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
+                    m_itemFoundText.Text = LocaleBuilder.GetString(((SpellType)m_itemInfo.X).ToStringID(), m_itemFoundText);
                     break;
                 case (GetItemType.FountainPiece):
                     m_itemSprite.ChangeSprite(GetMedallionImage((int)m_itemInfo.X)); // This needs to change to reflect the stat stored in m_itemInfo.X
@@ -299,7 +300,7 @@ namespace RogueCastle
                 m_levelUpParticles[i].Visible = true;
                 m_levelUpParticles[i].Scale = new Vector2(0.1f, 0.1f);
                 m_levelUpParticles[i].Opacity = 0;
-                m_levelUpParticles[i].Position = new Vector2(GlobalEV.ScreenWidth / 2f, GlobalEV.ScreenHeight / 2f);
+                m_levelUpParticles[i].Position = new Vector2(GlobalEV.SCREEN_WIDTH / 2f, GlobalEV.SCREEN_HEIGHT / 2f);
                 m_levelUpParticles[i].Position += new Vector2(CDGMath.RandomInt(-100, 100), CDGMath.RandomInt(-50, 50));
                 float randDelay = CDGMath.RandomFloat(0, 0.5f);
                 Tween.To(m_levelUpParticles[i], 0.2f, Tweener.Ease.Linear.EaseNone, "delay", randDelay.ToString(), "Opacity", "1");
@@ -308,7 +309,7 @@ namespace RogueCastle
                 Tween.AddEndHandlerToLastTween(m_levelUpParticles[i], "PlayAnimation", false);
             }
 
-            m_itemFoundSprite.Position = new Vector2(GlobalEV.ScreenWidth / 2f, GlobalEV.ScreenHeight / 2f - 170);
+            m_itemFoundSprite.Position = new Vector2(GlobalEV.SCREEN_WIDTH / 2f, GlobalEV.SCREEN_HEIGHT / 2f - 170);
             m_itemFoundSprite.Scale = Vector2.Zero;
             m_itemFoundSprite.Visible = true;
             Tween.To(m_itemFoundSprite, 0.5f, Tweener.Ease.Back.EaseOut, "delay", "0.05", "ScaleX", "1", "ScaleY", "1");
@@ -484,18 +485,18 @@ namespace RogueCastle
                     if (InputManager.JustPressed(Keys.OemOpenBrackets, null))
                     {
                         m_itemInfo.X--;
-                        if (m_itemInfo.X < SpellType.Dagger)
-                            m_itemInfo.X = SpellType.Total - 1;
+                        if (m_itemInfo.X < (byte) SpellType.Dagger)
+                            m_itemInfo.X = (byte) SpellType.DragonFireNeo;
                     }
                     else if (InputManager.JustPressed(Keys.OemCloseBrackets, null))
                     {
                         m_itemInfo.X++;
-                        if (m_itemInfo.X > SpellType.Total - 1)
-                            m_itemInfo.X = SpellType.Dagger;
+                        if (m_itemInfo.X > (byte) SpellType.DragonFireNeo)
+                            m_itemInfo.X = (byte) SpellType.Dagger;
                     }
 
                     if (previousItemInfo != m_itemInfo)
-                        m_itemFoundText.Text = LocaleBuilder.GetString(SpellType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
+                        m_itemFoundText.Text = LocaleBuilder.GetString(((SpellType)m_itemInfo.X).ToStringID(), m_itemFoundText);
 
                     break;
                 case (GetItemType.FountainPiece):
@@ -521,7 +522,7 @@ namespace RogueCastle
         public override void Draw(GameTime gameTime)
         {
             Camera.Begin(SpriteSortMode.Immediate, null, SamplerState.LinearClamp, null, null);
-            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight), Color.Black * BackBufferOpacity);
+            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT), Color.Black * BackBufferOpacity);
 
             //// Level up animation sprites.
             m_levelUpBGImage.Draw(Camera);
@@ -663,7 +664,7 @@ namespace RogueCastle
                     m_itemFoundText.Text = LocaleBuilder.GetString(SpecialItemType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.Spell):
-                    m_itemFoundText.Text = LocaleBuilder.GetString(SpellType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
+                    m_itemFoundText.Text = LocaleBuilder.GetString(((SpellType)m_itemInfo.X).ToStringID(), m_itemFoundText);
                     break;
                 case (GetItemType.FountainPiece):
                     if (m_itemInfo.X == ItemDropType.FountainPiece5)

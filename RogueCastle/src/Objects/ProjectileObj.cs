@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Tweener.Ease;
 using Tweener;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.Enumerations;
 
 namespace RogueCastle
 {
@@ -35,7 +36,7 @@ namespace RogueCastle
         public bool IsDying { get; internal set; }
 
         // Property used exclusively for player spells.
-        public int Spell { get; set; }
+        public SpellType Spell { get; set; }
         public float AltX { get; set; }
         public float AltY { get; set; }
         public float BlinkTime { get; set; }

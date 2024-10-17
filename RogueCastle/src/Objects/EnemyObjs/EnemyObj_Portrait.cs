@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using InputSystem;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -25,154 +26,154 @@ namespace RogueCastle
             this.LockFlip = true;
 
             #region Basic Variables - General
-            Name = EnemyEV.Portrait_Basic_Name;
-            LocStringID = EnemyEV.Portrait_Basic_Name_locID;
+            Name = EnemyEV.PORTRAIT_BASIC_NAME;
+            LocStringID = EnemyEV.PORTRAIT_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Portrait_Basic_MaxHealth;
-            Damage = EnemyEV.Portrait_Basic_Damage;
-            XPValue = EnemyEV.Portrait_Basic_XPValue;
+            MaxHealth = EnemyEV.PORTRAIT_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.PORTRAIT_BASIC_DAMAGE;
+            XPValue = EnemyEV.PORTRAIT_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Portrait_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Portrait_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Portrait_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.PORTRAIT_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.PORTRAIT_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.PORTRAIT_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Portrait_Basic_Speed;
-            TurnSpeed = EnemyEV.Portrait_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Portrait_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Portrait_Basic_Jump;
-            CooldownTime = EnemyEV.Portrait_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Portrait_Basic_AnimationDelay;
+            Speed = EnemyEV.PORTRAIT_BASIC_SPEED;
+            TurnSpeed = EnemyEV.PORTRAIT_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.PORTRAIT_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.PORTRAIT_BASIC_JUMP;
+            CooldownTime = EnemyEV.PORTRAIT_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.PORTRAIT_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Portrait_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Portrait_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Portrait_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Portrait_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.PORTRAIT_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.PORTRAIT_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.PORTRAIT_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.PORTRAIT_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Portrait_Basic_Scale;
-            ProjectileScale = EnemyEV.Portrait_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Portrait_Basic_Tint;
+            Scale = EnemyEV.PortraitBasicScale;
+            ProjectileScale = EnemyEV.PortraitBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.PortraitBasicTint;
 
-            MeleeRadius = EnemyEV.Portrait_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Portrait_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Portrait_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.PORTRAIT_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.PORTRAIT_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.PORTRAIT_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Portrait_Basic_KnockBack;
+            KnockBack = EnemyEV.PortraitBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Portrait_Miniboss_Name;
-                    LocStringID = EnemyEV.Portrait_Miniboss_Name_locID;
+                    Name = EnemyEV.PORTRAIT_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.PORTRAIT_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Portrait_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Portrait_Miniboss_Damage;
-                    XPValue = EnemyEV.Portrait_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.PORTRAIT_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.PORTRAIT_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.PORTRAIT_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Portrait_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Portrait_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Portrait_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.PORTRAIT_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.PORTRAIT_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.PORTRAIT_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Portrait_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Portrait_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Portrait_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Portrait_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Portrait_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Portrait_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.PORTRAIT_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.PORTRAIT_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.PORTRAIT_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.PORTRAIT_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.PORTRAIT_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.PORTRAIT_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Portrait_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Portrait_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Portrait_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Portrait_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.PORTRAIT_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.PORTRAIT_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.PORTRAIT_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.PORTRAIT_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Portrait_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Portrait_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Portrait_Miniboss_Tint;
+                    Scale = EnemyEV.PortraitMinibossScale;
+                    ProjectileScale = EnemyEV.PortraitMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.PortraitMinibossTint;
 
-                    MeleeRadius = EnemyEV.Portrait_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Portrait_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Portrait_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.PORTRAIT_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.PORTRAIT_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.PORTRAIT_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Portrait_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.PortraitMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Portrait_Expert_Name;
-                    LocStringID = EnemyEV.Portrait_Expert_Name_locID;
+                    Name = EnemyEV.PORTRAIT_EXPERT_NAME;
+                    LocStringID = EnemyEV.PORTRAIT_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Portrait_Expert_MaxHealth;
-                    Damage = EnemyEV.Portrait_Expert_Damage;
-                    XPValue = EnemyEV.Portrait_Expert_XPValue;
+                    MaxHealth = EnemyEV.PORTRAIT_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.PORTRAIT_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.PORTRAIT_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Portrait_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Portrait_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Portrait_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.PORTRAIT_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.PORTRAIT_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.PORTRAIT_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Portrait_Expert_Speed;
-                    TurnSpeed = EnemyEV.Portrait_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Portrait_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Portrait_Expert_Jump;
-                    CooldownTime = EnemyEV.Portrait_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Portrait_Expert_AnimationDelay;
+                    Speed = EnemyEV.PORTRAIT_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.PORTRAIT_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.PORTRAIT_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.PORTRAIT_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.PORTRAIT_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.PORTRAIT_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Portrait_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Portrait_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Portrait_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Portrait_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.PORTRAIT_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.PORTRAIT_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.PORTRAIT_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.PORTRAIT_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Portrait_Expert_Scale;
-                    ProjectileScale = EnemyEV.Portrait_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Portrait_Expert_Tint;
+                    Scale = EnemyEV.PortraitExpertScale;
+                    ProjectileScale = EnemyEV.PortraitExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.PortraitExpertTint;
 
-                    MeleeRadius = EnemyEV.Portrait_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Portrait_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Portrait_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.PORTRAIT_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.PORTRAIT_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.PORTRAIT_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Portrait_Expert_KnockBack;
+                    KnockBack = EnemyEV.PortraitExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Portrait_Advanced_Name;
-                    LocStringID = EnemyEV.Portrait_Advanced_Name_locID;
+                    Name = EnemyEV.PORTRAIT_ADVANCED_NAME;
+                    LocStringID = EnemyEV.PORTRAIT_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Portrait_Advanced_MaxHealth;
-                    Damage = EnemyEV.Portrait_Advanced_Damage;
-                    XPValue = EnemyEV.Portrait_Advanced_XPValue;
+                    MaxHealth = EnemyEV.PORTRAIT_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.PORTRAIT_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.PORTRAIT_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Portrait_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Portrait_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Portrait_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.PORTRAIT_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.PORTRAIT_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.PORTRAIT_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Portrait_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Portrait_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Portrait_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Portrait_Advanced_Jump;
-                    CooldownTime = EnemyEV.Portrait_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Portrait_Advanced_AnimationDelay;
+                    Speed = EnemyEV.PORTRAIT_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.PORTRAIT_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.PORTRAIT_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.PORTRAIT_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.PORTRAIT_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.PORTRAIT_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Portrait_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Portrait_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Portrait_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Portrait_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.PORTRAIT_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.PORTRAIT_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.PORTRAIT_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.PORTRAIT_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Portrait_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Portrait_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Portrait_Advanced_Tint;
+                    Scale = EnemyEV.PortraitAdvancedScale;
+                    ProjectileScale = EnemyEV.PortraitAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.PortraitAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Portrait_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Portrait_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Portrait_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.PORTRAIT_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.PORTRAIT_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.PORTRAIT_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Portrait_Advanced_KnockBack;
+                    KnockBack = EnemyEV.PortraitAdvancedKnockBack;
                     #endregion
                     break;
 

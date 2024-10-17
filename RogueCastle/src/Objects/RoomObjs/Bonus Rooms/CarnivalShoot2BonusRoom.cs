@@ -7,6 +7,7 @@ using DS2DEngine;
 using Tweener.Ease;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.Enumerations;
 
 namespace RogueCastle
 {
@@ -15,7 +16,7 @@ namespace RogueCastle
         private int m_numTries = 5;
 
         private Rectangle m_targetBounds;
-        private byte m_storedPlayerSpell;
+        private SpellType m_storedPlayerSpell;
         private float m_storedPlayerMana;
         private bool m_isPlayingGame;
         private int m_axesThrown;

@@ -5,7 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 using Tweener;
 using Tweener.Ease;
 
@@ -57,7 +57,7 @@ namespace RogueCastle
             InitializeScreens();
             base.Initialize(); // Camera gets initialized here.
 
-            m_virtualScreen = new VirtualScreen(GlobalEV.ScreenWidth, GlobalEV.ScreenHeight, Camera.GraphicsDevice);
+            m_virtualScreen = new VirtualScreen(GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT, Camera.GraphicsDevice);
             Game.Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
             Game.Deactivated += new EventHandler<EventArgs>(PauseGame);
 

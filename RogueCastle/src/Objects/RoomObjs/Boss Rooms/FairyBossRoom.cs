@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.EnvironmentVariables;
 using Tweener.Ease;
 using Tweener;
 
@@ -85,7 +86,7 @@ namespace RogueCastle
 
         public void Intro5()
         {
-            Tween.To(Player.AttachedLevel.Camera, 0.5f, Quad.EaseInOut, "delay", "0.3", "X", (Player.X + GlobalEV.Camera_XOffset).ToString(), "Y", (this.Bounds.Bottom - (Player.AttachedLevel.Camera.Bounds.Bottom - Player.AttachedLevel.Camera.Y)).ToString());
+            Tween.To(Player.AttachedLevel.Camera, 0.5f, Quad.EaseInOut, "delay", "0.3", "X", (Player.X + GlobalEV.CameraXOffset).ToString(), "Y", (this.Bounds.Bottom - (Player.AttachedLevel.Camera.Bounds.Bottom - Player.AttachedLevel.Camera.Y)).ToString());
             Tween.AddEndHandlerToLastTween(this, "BeginFight");
         }
 

@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -19,154 +20,154 @@ namespace RogueCastle
             this.IsWeighted = false;
 
             #region Basic Variables - General
-            Name = EnemyEV.Spark_Basic_Name;
-            LocStringID = EnemyEV.Spark_Basic_Name_locID;
+            Name = EnemyEV.SPARK_BASIC_NAME;
+            LocStringID = EnemyEV.SPARK_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Spark_Basic_MaxHealth;
-            Damage = EnemyEV.Spark_Basic_Damage;
-            XPValue = EnemyEV.Spark_Basic_XPValue;
+            MaxHealth = EnemyEV.SPARK_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.SPARK_BASIC_DAMAGE;
+            XPValue = EnemyEV.SPARK_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Spark_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Spark_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Spark_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.SPARK_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.SPARK_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.SPARK_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Spark_Basic_Speed;
-            TurnSpeed = EnemyEV.Spark_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Spark_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Spark_Basic_Jump;
-            CooldownTime = EnemyEV.Spark_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Spark_Basic_AnimationDelay;
+            Speed = EnemyEV.SPARK_BASIC_SPEED;
+            TurnSpeed = EnemyEV.SPARK_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.SPARK_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.SPARK_BASIC_JUMP;
+            CooldownTime = EnemyEV.SPARK_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.SPARK_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Spark_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Spark_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Spark_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Spark_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.SPARK_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.SPARK_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.SPARK_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.SPARK_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Spark_Basic_Scale;
-            ProjectileScale = EnemyEV.Spark_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Spark_Basic_Tint;
+            Scale = EnemyEV.SparkBasicScale;
+            ProjectileScale = EnemyEV.SparkBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.SparkBasicTint;
 
-            MeleeRadius = EnemyEV.Spark_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Spark_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Spark_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.SPARK_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.SPARK_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.SPARK_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Spark_Basic_KnockBack;
+            KnockBack = EnemyEV.SparkBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Spark_Miniboss_Name;
-                    LocStringID = EnemyEV.Spark_Miniboss_Name_locID;
+                    Name = EnemyEV.SPARK_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.SPARK_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Spark_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Spark_Miniboss_Damage;
-                    XPValue = EnemyEV.Spark_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.SPARK_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.SPARK_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.SPARK_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Spark_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Spark_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Spark_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SPARK_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SPARK_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SPARK_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Spark_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Spark_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Spark_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Spark_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Spark_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Spark_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.SPARK_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.SPARK_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SPARK_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SPARK_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.SPARK_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SPARK_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Spark_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Spark_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Spark_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Spark_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SPARK_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SPARK_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SPARK_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SPARK_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Spark_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Spark_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Spark_Miniboss_Tint;
+                    Scale = EnemyEV.SparkMinibossScale;
+                    ProjectileScale = EnemyEV.SparkMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.SparkMinibossTint;
 
-                    MeleeRadius = EnemyEV.Spark_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Spark_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Spark_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.SPARK_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.SPARK_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.SPARK_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Spark_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.SparkMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Spark_Expert_Name;
-                    LocStringID = EnemyEV.Spark_Expert_Name_locID;
+                    Name = EnemyEV.SPARK_EXPERT_NAME;
+                    LocStringID = EnemyEV.SPARK_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Spark_Expert_MaxHealth;
-                    Damage = EnemyEV.Spark_Expert_Damage;
-                    XPValue = EnemyEV.Spark_Expert_XPValue;
+                    MaxHealth = EnemyEV.SPARK_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.SPARK_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.SPARK_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Spark_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Spark_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Spark_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SPARK_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SPARK_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SPARK_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Spark_Expert_Speed;
-                    TurnSpeed = EnemyEV.Spark_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Spark_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Spark_Expert_Jump;
-                    CooldownTime = EnemyEV.Spark_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Spark_Expert_AnimationDelay;
+                    Speed = EnemyEV.SPARK_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.SPARK_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SPARK_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SPARK_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.SPARK_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SPARK_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Spark_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Spark_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Spark_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Spark_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SPARK_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SPARK_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SPARK_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SPARK_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Spark_Expert_Scale;
-                    ProjectileScale = EnemyEV.Spark_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Spark_Expert_Tint;
+                    Scale = EnemyEV.SparkExpertScale;
+                    ProjectileScale = EnemyEV.SparkExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.SparkExpertTint;
 
-                    MeleeRadius = EnemyEV.Spark_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Spark_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Spark_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.SPARK_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.SPARK_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.SPARK_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Spark_Expert_KnockBack;
+                    KnockBack = EnemyEV.SparkExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Spark_Advanced_Name;
-                    LocStringID = EnemyEV.Spark_Advanced_Name_locID;
+                    Name = EnemyEV.SPARK_ADVANCED_NAME;
+                    LocStringID = EnemyEV.SPARK_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Spark_Advanced_MaxHealth;
-                    Damage = EnemyEV.Spark_Advanced_Damage;
-                    XPValue = EnemyEV.Spark_Advanced_XPValue;
+                    MaxHealth = EnemyEV.SPARK_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.SPARK_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.SPARK_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Spark_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Spark_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Spark_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SPARK_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SPARK_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SPARK_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Spark_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Spark_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Spark_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Spark_Advanced_Jump;
-                    CooldownTime = EnemyEV.Spark_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Spark_Advanced_AnimationDelay;
+                    Speed = EnemyEV.SPARK_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.SPARK_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SPARK_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SPARK_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.SPARK_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SPARK_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Spark_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Spark_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Spark_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Spark_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SPARK_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SPARK_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SPARK_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SPARK_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Spark_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Spark_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Spark_Advanced_Tint;
+                    Scale = EnemyEV.SparkAdvancedScale;
+                    ProjectileScale = EnemyEV.SparkAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.SparkAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Spark_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Spark_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Spark_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.SPARK_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.SPARK_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.SPARK_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Spark_Advanced_KnockBack;
+                    KnockBack = EnemyEV.SparkAdvancedKnockBack;
                     #endregion
                     break;
 

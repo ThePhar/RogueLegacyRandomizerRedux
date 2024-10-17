@@ -9,7 +9,8 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Input;
 using InputSystem;
 using System.Text.RegularExpressions;
-using RogueCastle.EVs;
+using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -66,8 +67,8 @@ namespace RogueCastle
             m_bgShadow.Position = new Vector2(1320 / 2f, 720 / 2f);
 
             m_titleText = new SpriteObj("LineageTitleText_Sprite");
-            m_titleText.X = GlobalEV.ScreenWidth / 2;
-            m_titleText.Y = GlobalEV.ScreenHeight * 0.1f;
+            m_titleText.X = GlobalEV.SCREEN_WIDTH / 2;
+            m_titleText.Y = GlobalEV.SCREEN_HEIGHT * 0.1f;
             m_titleText.ForceDraw = true;
 
             int xPlatePos = 20;
@@ -173,7 +174,7 @@ namespace RogueCastle
             m_rerollText.FontSize = 12;
             m_rerollText.DropShadow = new Vector2(2, 2);
             m_rerollText.ForceDraw = true;
-            m_rerollText.Position = new Vector2(0 + 30, GlobalEV.ScreenHeight - 50);
+            m_rerollText.Position = new Vector2(0 + 30, GlobalEV.SCREEN_HEIGHT - 50);
             m_rerollText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_rerollText); // dummy locID to add TextObj to language refresh list
 
             base.LoadContent();
@@ -268,10 +269,10 @@ namespace RogueCastle
             }
 
             TextObj spellName = m_descriptionPlate.GetChildAt(8) as TextObj;
-            spellName.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_8") + " - " + LocaleBuilder.GetResourceString(SpellType.ToStringID(selectedObj.Spell));
+            spellName.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_8") + " - " + LocaleBuilder.GetResourceString(selectedObj.Spell.ToStringID());
             spellName.Y = spellY;
             KeyIconTextObj spellDescription = m_descriptionPlate.GetChildAt(9) as KeyIconTextObj;
-            spellDescription.Text = "[Input:" + InputMapType.PLAYER_SPELL1 + "]  " + LocaleBuilder.GetResourceString(SpellType.DescriptionID(selectedObj.Spell));
+            spellDescription.Text = "[Input:" + InputMapType.PLAYER_SPELL1 + "]  " + LocaleBuilder.GetResourceString(selectedObj.Spell.DescriptionID());
             spellDescription.Y = spellName.Y + 30;
             spellDescription.WordWrap(340);
         }
@@ -799,12 +800,12 @@ namespace RogueCastle
                 lineageObjChanged = true;
             }
 
-            byte spell = m_currentBranchArray[m_selectedLineageIndex].Spell;
-            byte previousSpell = spell;
+            var spell = m_currentBranchArray[m_selectedLineageIndex].Spell;
+            var previousSpell = spell;
             if (InputManager.JustPressed(Keys.OemOpenBrackets, PlayerIndex.One))
             {
                 if (spell == SpellType.None)
-                    spell = SpellType.Total - 1;
+                    spell = SpellType.DragonFireNeo;
                 else
                     spell--;
             }
@@ -812,8 +813,8 @@ namespace RogueCastle
                 spell++;
 
             if (spell < SpellType.None)
-                spell = SpellType.Total - 1;
-            else if (spell >= SpellType.Total)
+                spell = SpellType.DragonFireNeo;
+            else if (spell > SpellType.DragonFireNeo)
                 spell = SpellType.None;
 
             if (spell != previousSpell)
@@ -903,7 +904,7 @@ namespace RogueCastle
                 //}
 
                 //Game.PlayerStats.WizardSpellList = new Vector3(wizardSpells[0], wizardSpells[1], wizardSpells[2]);
-                Game.PlayerStats.WizardSpellList = SpellType.GetNext3Spells();
+                Game.PlayerStats.WizardSpellList = SpellEV.GetNext3Spells();
             }
 
             // Clear out the saved Branches in PlayerStats.CurrentBranches

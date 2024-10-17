@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -107,9 +108,9 @@ namespace RogueCastle
 
                 int dropRoll = CDGMath.RandomInt(1, 100);
                 int dropChance = 0;
-                for (int i = 0; i < GameEV.BREAKABLE_ITEMDROP_CHANCE.Length; i++)
+                for (int i = 0; i < GameEV.BreakableItemdropChance.Length; i++)
                 {
-                    dropChance += GameEV.BREAKABLE_ITEMDROP_CHANCE[i];
+                    dropChance += GameEV.BreakableItemdropChance[i];
                     if (dropRoll <= dropChance)
                     {
                         if (i == 0)

@@ -6,6 +6,7 @@ using DS2DEngine;
 using Tweener;
 using InputSystem;
 using Microsoft.Xna.Framework;
+using RogueCastle.Enumerations;
 
 namespace RogueCastle
 {
@@ -13,7 +14,7 @@ namespace RogueCastle
     {
         private GameObj m_line;
         private List<BreakableObj> m_targetList;
-        private byte m_storedPlayerSpell;
+        private SpellType m_storedPlayerSpell;
         private int m_daggersThrown = 0;
         private float m_storedPlayerMana;
 

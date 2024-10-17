@@ -5,7 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -26,7 +26,7 @@ namespace RogueCastle
         public int CurrentMana { get; set; }
         public byte Age { get; set; }
         public byte ChildAge { get; set; }
-        public byte Spell { get; set; }
+        public SpellType Spell { get; set; }
         public byte Class { get; set; }
         public byte SpecialItem { get; set; }
         public Vector2 Traits { get; set; }
@@ -168,7 +168,7 @@ namespace RogueCastle
             for (int i = 0; i < Enum.GetValues(typeof(EnemyType)).Length; i++)
                 EnemiesKilledList.Add(new Vector4());
 
-            WizardSpellList = new Vector3(SpellType.Dagger, SpellType.Axe, SpellType.Boomerang);
+            WizardSpellList = new Vector3((byte)SpellType.Dagger, (byte)SpellType.Axe, (byte)SpellType.Boomerang);
 
             Traits = new Vector2(TraitType.None, TraitType.None);
             Gold = 0;

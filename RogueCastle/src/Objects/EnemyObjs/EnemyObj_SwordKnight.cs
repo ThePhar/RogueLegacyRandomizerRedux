@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -24,39 +25,39 @@ namespace RogueCastle
         {
             SlashDelay = 0.25f;
             #region Basic Variables - General
-            Name = EnemyEV.SwordKnight_Basic_Name;
-            LocStringID = EnemyEV.SwordKnight_Basic_Name_locID;
+            Name = EnemyEV.SWORD_KNIGHT_BASIC_NAME;
+            LocStringID = EnemyEV.SWORD_KNIGHT_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.SwordKnight_Basic_MaxHealth;
-            Damage = EnemyEV.SwordKnight_Basic_Damage;
-            XPValue = EnemyEV.SwordKnight_Basic_XPValue;
+            MaxHealth = EnemyEV.SWORD_KNIGHT_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.SWORD_KNIGHT_BASIC_DAMAGE;
+            XPValue = EnemyEV.SWORD_KNIGHT_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.SwordKnight_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.SwordKnight_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.SwordKnight_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.SWORD_KNIGHT_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.SWORD_KNIGHT_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.SWORD_KNIGHT_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.SwordKnight_Basic_Speed;
-            TurnSpeed = EnemyEV.SwordKnight_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.SwordKnight_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.SwordKnight_Basic_Jump;
-            CooldownTime = EnemyEV.SwordKnight_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.SwordKnight_Basic_AnimationDelay;
+            Speed = EnemyEV.SWORD_KNIGHT_BASIC_SPEED;
+            TurnSpeed = EnemyEV.SWORD_KNIGHT_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.SWORD_KNIGHT_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.SWORD_KNIGHT_BASIC_JUMP;
+            CooldownTime = EnemyEV.SWORD_KNIGHT_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.SWORD_KNIGHT_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.SwordKnight_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.SwordKnight_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.SwordKnight_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.SwordKnight_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.SWORD_KNIGHT_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.SWORD_KNIGHT_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.SWORD_KNIGHT_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.SWORD_KNIGHT_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.SwordKnight_Basic_Scale;
-            ProjectileScale = EnemyEV.SwordKnight_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.SwordKnight_Basic_Tint;
+            Scale = EnemyEV.SwordKnightBasicScale;
+            ProjectileScale = EnemyEV.SwordKnightBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.SwordKnightBasicTint;
 
-            MeleeRadius = EnemyEV.SwordKnight_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.SwordKnight_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.SwordKnight_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.SWORD_KNIGHT_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.SWORD_KNIGHT_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.SWORD_KNIGHT_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.SwordKnight_Basic_KnockBack;
+            KnockBack = EnemyEV.SwordKnightBasicKnockBack;
             #endregion
 
 
@@ -66,39 +67,39 @@ namespace RogueCastle
                     ForceDraw = true;
                     SlashDelay = 1.05f;
 					#region Miniboss Variables - General
-					Name = EnemyEV.SwordKnight_Miniboss_Name;
-                    LocStringID = EnemyEV.SwordKnight_Miniboss_Name_locID;
+					Name = EnemyEV.SWORD_KNIGHT_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.SWORD_KNIGHT_MINIBOSS_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.SwordKnight_Miniboss_MaxHealth;
-					Damage = EnemyEV.SwordKnight_Miniboss_Damage;
-					XPValue = EnemyEV.SwordKnight_Miniboss_XPValue;
+					MaxHealth = EnemyEV.SWORD_KNIGHT_MINIBOSS_MAX_HEALTH;
+					Damage = EnemyEV.SWORD_KNIGHT_MINIBOSS_DAMAGE;
+					XPValue = EnemyEV.SWORD_KNIGHT_MINIBOSS_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.SwordKnight_Miniboss_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.SwordKnight_Miniboss_MaxDropAmount;
-					MoneyDropChance = EnemyEV.SwordKnight_Miniboss_DropChance;
+					MinMoneyDropAmount = EnemyEV.SWORD_KNIGHT_MINIBOSS_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.SWORD_KNIGHT_MINIBOSS_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.SWORD_KNIGHT_MINIBOSS_DROP_CHANCE;
 					
-					Speed = EnemyEV.SwordKnight_Miniboss_Speed;
-					TurnSpeed = EnemyEV.SwordKnight_Miniboss_TurnSpeed;
-					ProjectileSpeed = EnemyEV.SwordKnight_Miniboss_ProjectileSpeed;
-					JumpHeight = EnemyEV.SwordKnight_Miniboss_Jump;
-					CooldownTime = EnemyEV.SwordKnight_Miniboss_Cooldown;
-					AnimationDelay = 1 / EnemyEV.SwordKnight_Miniboss_AnimationDelay;
+					Speed = EnemyEV.SWORD_KNIGHT_MINIBOSS_SPEED;
+					TurnSpeed = EnemyEV.SWORD_KNIGHT_MINIBOSS_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.SWORD_KNIGHT_MINIBOSS_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.SWORD_KNIGHT_MINIBOSS_JUMP;
+					CooldownTime = EnemyEV.SWORD_KNIGHT_MINIBOSS_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.SWORD_KNIGHT_MINIBOSS_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.SwordKnight_Miniboss_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.SwordKnight_Miniboss_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.SwordKnight_Miniboss_CanBeKnockedBack;
-					IsWeighted = EnemyEV.SwordKnight_Miniboss_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.SWORD_KNIGHT_MINIBOSS_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.SWORD_KNIGHT_MINIBOSS_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.SWORD_KNIGHT_MINIBOSS_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.SWORD_KNIGHT_MINIBOSS_IS_WEIGHTED;
 					
-					Scale = EnemyEV.SwordKnight_Miniboss_Scale;
-					ProjectileScale = EnemyEV.SwordKnight_Miniboss_ProjectileScale;
-					TintablePart.TextureColor = EnemyEV.SwordKnight_Miniboss_Tint;
+					Scale = EnemyEV.SwordKnightMinibossScale;
+					ProjectileScale = EnemyEV.SwordKnightMinibossProjectileScale;
+					TintablePart.TextureColor = EnemyEV.SwordKnightMinibossTint;
 					
-					MeleeRadius = EnemyEV.SwordKnight_Miniboss_MeleeRadius;
-					ProjectileRadius = EnemyEV.SwordKnight_Miniboss_ProjectileRadius;
-					EngageRadius = EnemyEV.SwordKnight_Miniboss_EngageRadius;
+					MeleeRadius = EnemyEV.SWORD_KNIGHT_MINIBOSS_MELEE_RADIUS;
+					ProjectileRadius = EnemyEV.SWORD_KNIGHT_MINIBOSS_PROJECTILE_RADIUS;
+					EngageRadius = EnemyEV.SWORD_KNIGHT_MINIBOSS_ENGAGE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.SwordKnight_Miniboss_KnockBack;
+					KnockBack = EnemyEV.SwordKnightMinibossKnockBack;
 					#endregion
                     break;
 
@@ -106,78 +107,78 @@ namespace RogueCastle
                     SlashDelay = 0.25f;
                     TripleAttackSpeed = 500f;
 					#region Expert Variables - General
-					Name = EnemyEV.SwordKnight_Expert_Name;
-                    LocStringID = EnemyEV.SwordKnight_Expert_Name_locID;
+					Name = EnemyEV.SWORD_KNIGHT_EXPERT_NAME;
+                    LocStringID = EnemyEV.SWORD_KNIGHT_EXPERT_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.SwordKnight_Expert_MaxHealth;
-					Damage = EnemyEV.SwordKnight_Expert_Damage;
-					XPValue = EnemyEV.SwordKnight_Expert_XPValue;
+					MaxHealth = EnemyEV.SWORD_KNIGHT_EXPERT_MAX_HEALTH;
+					Damage = EnemyEV.SWORD_KNIGHT_EXPERT_DAMAGE;
+					XPValue = EnemyEV.SWORD_KNIGHT_EXPERT_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.SwordKnight_Expert_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.SwordKnight_Expert_MaxDropAmount;
-					MoneyDropChance = EnemyEV.SwordKnight_Expert_DropChance;
+					MinMoneyDropAmount = EnemyEV.SWORD_KNIGHT_EXPERT_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.SWORD_KNIGHT_EXPERT_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.SWORD_KNIGHT_EXPERT_DROP_CHANCE;
 					
-					Speed = EnemyEV.SwordKnight_Expert_Speed;
-					TurnSpeed = EnemyEV.SwordKnight_Expert_TurnSpeed;
-					ProjectileSpeed = EnemyEV.SwordKnight_Expert_ProjectileSpeed;
-					JumpHeight = EnemyEV.SwordKnight_Expert_Jump;
-					CooldownTime = EnemyEV.SwordKnight_Expert_Cooldown;
-					AnimationDelay = 1 / EnemyEV.SwordKnight_Expert_AnimationDelay;
+					Speed = EnemyEV.SWORD_KNIGHT_EXPERT_SPEED;
+					TurnSpeed = EnemyEV.SWORD_KNIGHT_EXPERT_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.SWORD_KNIGHT_EXPERT_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.SWORD_KNIGHT_EXPERT_JUMP;
+					CooldownTime = EnemyEV.SWORD_KNIGHT_EXPERT_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.SWORD_KNIGHT_EXPERT_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.SwordKnight_Expert_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.SwordKnight_Expert_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.SwordKnight_Expert_CanBeKnockedBack;
-					IsWeighted = EnemyEV.SwordKnight_Expert_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.SWORD_KNIGHT_EXPERT_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.SWORD_KNIGHT_EXPERT_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.SWORD_KNIGHT_EXPERT_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.SWORD_KNIGHT_EXPERT_IS_WEIGHTED;
 					
-					Scale = EnemyEV.SwordKnight_Expert_Scale;
-					ProjectileScale = EnemyEV.SwordKnight_Expert_ProjectileScale;
-					TintablePart.TextureColor = EnemyEV.SwordKnight_Expert_Tint;
+					Scale = EnemyEV.SwordKnightExpertScale;
+					ProjectileScale = EnemyEV.SwordKnightExpertProjectileScale;
+					TintablePart.TextureColor = EnemyEV.SwordKnightExpertTint;
 					
-					MeleeRadius = EnemyEV.SwordKnight_Expert_MeleeRadius;
-					ProjectileRadius = EnemyEV.SwordKnight_Expert_ProjectileRadius;
-					EngageRadius = EnemyEV.SwordKnight_Expert_EngageRadius;
+					MeleeRadius = EnemyEV.SWORD_KNIGHT_EXPERT_MELEE_RADIUS;
+					ProjectileRadius = EnemyEV.SWORD_KNIGHT_EXPERT_PROJECTILE_RADIUS;
+					EngageRadius = EnemyEV.SWORD_KNIGHT_EXPERT_ENGAGE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.SwordKnight_Expert_KnockBack;
+					KnockBack = EnemyEV.SwordKnightExpertKnockBack;
 					#endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     SlashDelay = 0.25f;
 					#region Advanced Variables - General
-					Name = EnemyEV.SwordKnight_Advanced_Name;
-                    LocStringID = EnemyEV.SwordKnight_Advanced_Name_locID;
+					Name = EnemyEV.SWORD_KNIGHT_ADVANCED_NAME;
+                    LocStringID = EnemyEV.SWORD_KNIGHT_ADVANCED_NAME_LOC_ID;
 					
-					MaxHealth = EnemyEV.SwordKnight_Advanced_MaxHealth;
-					Damage = EnemyEV.SwordKnight_Advanced_Damage;
-					XPValue = EnemyEV.SwordKnight_Advanced_XPValue;
+					MaxHealth = EnemyEV.SWORD_KNIGHT_ADVANCED_MAX_HEALTH;
+					Damage = EnemyEV.SWORD_KNIGHT_ADVANCED_DAMAGE;
+					XPValue = EnemyEV.SWORD_KNIGHT_ADVANCED_XP_VALUE;
 					
-					MinMoneyDropAmount = EnemyEV.SwordKnight_Advanced_MinDropAmount;
-					MaxMoneyDropAmount = EnemyEV.SwordKnight_Advanced_MaxDropAmount;
-					MoneyDropChance = EnemyEV.SwordKnight_Advanced_DropChance;
+					MinMoneyDropAmount = EnemyEV.SWORD_KNIGHT_ADVANCED_MIN_DROP_AMOUNT;
+					MaxMoneyDropAmount = EnemyEV.SWORD_KNIGHT_ADVANCED_MAX_DROP_AMOUNT;
+					MoneyDropChance = EnemyEV.SWORD_KNIGHT_ADVANCED_DROP_CHANCE;
 					
-					Speed = EnemyEV.SwordKnight_Advanced_Speed;
-					TurnSpeed = EnemyEV.SwordKnight_Advanced_TurnSpeed;
-					ProjectileSpeed = EnemyEV.SwordKnight_Advanced_ProjectileSpeed;
-					JumpHeight = EnemyEV.SwordKnight_Advanced_Jump;
-					CooldownTime = EnemyEV.SwordKnight_Advanced_Cooldown;
-					AnimationDelay = 1 / EnemyEV.SwordKnight_Advanced_AnimationDelay;
+					Speed = EnemyEV.SWORD_KNIGHT_ADVANCED_SPEED;
+					TurnSpeed = EnemyEV.SWORD_KNIGHT_ADVANCED_TURN_SPEED;
+					ProjectileSpeed = EnemyEV.SWORD_KNIGHT_ADVANCED_PROJECTILE_SPEED;
+					JumpHeight = EnemyEV.SWORD_KNIGHT_ADVANCED_JUMP;
+					CooldownTime = EnemyEV.SWORD_KNIGHT_ADVANCED_COOLDOWN;
+					AnimationDelay = 1 / EnemyEV.SWORD_KNIGHT_ADVANCED_ANIMATION_DELAY;
 					
-					AlwaysFaceTarget = EnemyEV.SwordKnight_Advanced_AlwaysFaceTarget;
-					CanFallOffLedges = EnemyEV.SwordKnight_Advanced_CanFallOffLedges;
-					CanBeKnockedBack = EnemyEV.SwordKnight_Advanced_CanBeKnockedBack;
-					IsWeighted = EnemyEV.SwordKnight_Advanced_IsWeighted;
+					AlwaysFaceTarget = EnemyEV.SWORD_KNIGHT_ADVANCED_ALWAYS_FACE_TARGET;
+					CanFallOffLedges = EnemyEV.SWORD_KNIGHT_ADVANCED_CAN_FALL_OFF_LEDGES;
+					CanBeKnockedBack = EnemyEV.SWORD_KNIGHT_ADVANCED_CAN_BE_KNOCKED_BACK;
+					IsWeighted = EnemyEV.SWORD_KNIGHT_ADVANCED_IS_WEIGHTED;
 					
-					Scale = EnemyEV.SwordKnight_Advanced_Scale;
-					ProjectileScale = EnemyEV.SwordKnight_Advanced_ProjectileScale;
-					TintablePart.TextureColor = EnemyEV.SwordKnight_Advanced_Tint;
+					Scale = EnemyEV.SwordKnightAdvancedScale;
+					ProjectileScale = EnemyEV.SwordKnightAdvancedProjectileScale;
+					TintablePart.TextureColor = EnemyEV.SwordKnightAdvancedTint;
 					
-					MeleeRadius = EnemyEV.SwordKnight_Advanced_MeleeRadius;
-					EngageRadius = EnemyEV.SwordKnight_Advanced_EngageRadius;
-					ProjectileRadius = EnemyEV.SwordKnight_Advanced_ProjectileRadius;
+					MeleeRadius = EnemyEV.SWORD_KNIGHT_ADVANCED_MELEE_RADIUS;
+					EngageRadius = EnemyEV.SWORD_KNIGHT_ADVANCED_ENGAGE_RADIUS;
+					ProjectileRadius = EnemyEV.SWORD_KNIGHT_ADVANCED_PROJECTILE_RADIUS;
 					
 					ProjectileDamage = Damage;
-					KnockBack = EnemyEV.SwordKnight_Advanced_KnockBack;
+					KnockBack = EnemyEV.SwordKnightAdvancedKnockBack;
 					#endregion
                     break;
 
@@ -240,7 +241,7 @@ namespace RogueCastle
             //attackTripleLS.AddAction(new PlayAnimationLogicAction("Attack", "End", false));
 
             attackTripleLS.AddAction(new MoveLogicAction(null, true, 0));
-            attackTripleLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.SwordKnight_Advanced_AnimationDelay));
+            attackTripleLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.SWORD_KNIGHT_ADVANCED_ANIMATION_DELAY));
             attackTripleLS.AddAction(new ChangeSpriteLogicAction("EnemySwordKnightIdle_Character", false, false));
             attackTripleLS.AddAction(new LockFaceDirectionLogicAction(false));
             attackTripleLS.Tag = GameTypes.LogicSetType_ATTACK;
@@ -296,7 +297,7 @@ namespace RogueCastle
             attackTripleExpertLS.AddAction(new PlayAnimationLogicAction("Attack", "End", false));
 
             attackTripleExpertLS.AddAction(new MoveLogicAction(null, true, 0));
-            attackTripleExpertLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.SwordKnight_Advanced_AnimationDelay));
+            attackTripleExpertLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.SWORD_KNIGHT_ADVANCED_ANIMATION_DELAY));
             attackTripleExpertLS.AddAction(new Play3DSoundLogicAction(this, Game.ScreenManager.Player, "SpearKnightAttack1"));
             attackTripleExpertLS.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
             attackTripleExpertLS.AddAction(new PlayAnimationLogicAction("Attack", "End", false));

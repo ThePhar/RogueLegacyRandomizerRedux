@@ -5,6 +5,8 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -95,7 +97,7 @@ namespace RogueCastle
             m_specialItemIcon.Scale = new Vector2(1.7f, 1.7f);
             m_specialItemIcon.Visible = false;
 
-            m_spellIcon = new SpriteObj(SpellType.Icon(SpellType.None));
+            m_spellIcon = new SpriteObj(SpellType.None.Icon());
             m_spellIcon.ForceDraw = true;
             m_spellIcon.OutlineWidth = 1;
             m_spellIcon.Visible = false;
@@ -284,7 +286,7 @@ namespace RogueCastle
 
             if (Game.PlayerStats.Spell != SpellType.None)
             {
-                m_spellIcon.ChangeSprite(SpellType.Icon(Game.PlayerStats.Spell));
+                m_spellIcon.ChangeSprite(Game.PlayerStats.Spell.Icon());
                 m_spellIcon.Visible = true;
                 m_iconHolder1.Opacity = 1;
                 m_spellCost.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_spellCost));

@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -17,154 +18,154 @@ namespace RogueCastle
             this.LockFlip = true;
 
             #region Basic Variables - General
-            Name = EnemyEV.Chicken_Basic_Name;
-            LocStringID = EnemyEV.Chicken_Basic_Name_locID;
+            Name = EnemyEV.CHICKEN_BASIC_NAME;
+            LocStringID = EnemyEV.CHICKEN_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.Chicken_Basic_MaxHealth;
-            Damage = EnemyEV.Chicken_Basic_Damage;
-            XPValue = EnemyEV.Chicken_Basic_XPValue;
+            MaxHealth = EnemyEV.CHICKEN_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.CHICKEN_BASIC_DAMAGE;
+            XPValue = EnemyEV.CHICKEN_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.Chicken_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.Chicken_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.Chicken_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.CHICKEN_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.CHICKEN_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.CHICKEN_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.Chicken_Basic_Speed;
-            TurnSpeed = EnemyEV.Chicken_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.Chicken_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.Chicken_Basic_Jump;
-            CooldownTime = EnemyEV.Chicken_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.Chicken_Basic_AnimationDelay;
+            Speed = EnemyEV.CHICKEN_BASIC_SPEED;
+            TurnSpeed = EnemyEV.CHICKEN_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.CHICKEN_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.CHICKEN_BASIC_JUMP;
+            CooldownTime = EnemyEV.CHICKEN_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.CHICKEN_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.Chicken_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.Chicken_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.Chicken_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.Chicken_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.CHICKEN_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.CHICKEN_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.CHICKEN_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.CHICKEN_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.Chicken_Basic_Scale;
-            ProjectileScale = EnemyEV.Chicken_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.Chicken_Basic_Tint;
+            Scale = EnemyEV.ChickenBasicScale;
+            ProjectileScale = EnemyEV.ChickenBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.ChickenBasicTint;
 
-            MeleeRadius = EnemyEV.Chicken_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.Chicken_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.Chicken_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.CHICKEN_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.CHICKEN_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.CHICKEN_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.Chicken_Basic_KnockBack;
+            KnockBack = EnemyEV.ChickenBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.Chicken_Miniboss_Name;
-                    LocStringID = EnemyEV.Chicken_Miniboss_Name_locID;
+                    Name = EnemyEV.CHICKEN_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.CHICKEN_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Chicken_Miniboss_MaxHealth;
-                    Damage = EnemyEV.Chicken_Miniboss_Damage;
-                    XPValue = EnemyEV.Chicken_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.CHICKEN_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.CHICKEN_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.CHICKEN_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Chicken_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Chicken_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Chicken_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.CHICKEN_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.CHICKEN_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.CHICKEN_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.Chicken_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.Chicken_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Chicken_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Chicken_Miniboss_Jump;
-                    CooldownTime = EnemyEV.Chicken_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Chicken_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.CHICKEN_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.CHICKEN_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.CHICKEN_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.CHICKEN_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.CHICKEN_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.CHICKEN_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Chicken_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Chicken_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Chicken_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Chicken_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.CHICKEN_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.CHICKEN_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.CHICKEN_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.CHICKEN_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Chicken_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.Chicken_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Chicken_Miniboss_Tint;
+                    Scale = EnemyEV.ChickenMinibossScale;
+                    ProjectileScale = EnemyEV.ChickenMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.ChickenMinibossTint;
 
-                    MeleeRadius = EnemyEV.Chicken_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Chicken_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.Chicken_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.CHICKEN_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.CHICKEN_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.CHICKEN_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Chicken_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.ChickenMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.Chicken_Expert_Name;
-                    LocStringID = EnemyEV.Chicken_Expert_Name_locID;
+                    Name = EnemyEV.CHICKEN_EXPERT_NAME;
+                    LocStringID = EnemyEV.CHICKEN_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Chicken_Expert_MaxHealth;
-                    Damage = EnemyEV.Chicken_Expert_Damage;
-                    XPValue = EnemyEV.Chicken_Expert_XPValue;
+                    MaxHealth = EnemyEV.CHICKEN_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.CHICKEN_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.CHICKEN_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Chicken_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Chicken_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Chicken_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.CHICKEN_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.CHICKEN_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.CHICKEN_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.Chicken_Expert_Speed;
-                    TurnSpeed = EnemyEV.Chicken_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Chicken_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Chicken_Expert_Jump;
-                    CooldownTime = EnemyEV.Chicken_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Chicken_Expert_AnimationDelay;
+                    Speed = EnemyEV.CHICKEN_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.CHICKEN_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.CHICKEN_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.CHICKEN_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.CHICKEN_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.CHICKEN_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Chicken_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Chicken_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Chicken_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Chicken_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.CHICKEN_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.CHICKEN_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.CHICKEN_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.CHICKEN_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Chicken_Expert_Scale;
-                    ProjectileScale = EnemyEV.Chicken_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Chicken_Expert_Tint;
+                    Scale = EnemyEV.ChickenExpertScale;
+                    ProjectileScale = EnemyEV.ChickenExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.ChickenExpertTint;
 
-                    MeleeRadius = EnemyEV.Chicken_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.Chicken_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.Chicken_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.CHICKEN_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.CHICKEN_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.CHICKEN_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Chicken_Expert_KnockBack;
+                    KnockBack = EnemyEV.ChickenExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.Chicken_Advanced_Name;
-                    LocStringID = EnemyEV.Chicken_Advanced_Name_locID;
+                    Name = EnemyEV.CHICKEN_ADVANCED_NAME;
+                    LocStringID = EnemyEV.CHICKEN_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.Chicken_Advanced_MaxHealth;
-                    Damage = EnemyEV.Chicken_Advanced_Damage;
-                    XPValue = EnemyEV.Chicken_Advanced_XPValue;
+                    MaxHealth = EnemyEV.CHICKEN_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.CHICKEN_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.CHICKEN_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.Chicken_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.Chicken_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.Chicken_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.CHICKEN_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.CHICKEN_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.CHICKEN_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.Chicken_Advanced_Speed;
-                    TurnSpeed = EnemyEV.Chicken_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.Chicken_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.Chicken_Advanced_Jump;
-                    CooldownTime = EnemyEV.Chicken_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.Chicken_Advanced_AnimationDelay;
+                    Speed = EnemyEV.CHICKEN_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.CHICKEN_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.CHICKEN_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.CHICKEN_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.CHICKEN_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.CHICKEN_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.Chicken_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.Chicken_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.Chicken_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.Chicken_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.CHICKEN_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.CHICKEN_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.CHICKEN_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.CHICKEN_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.Chicken_Advanced_Scale;
-                    ProjectileScale = EnemyEV.Chicken_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.Chicken_Advanced_Tint;
+                    Scale = EnemyEV.ChickenAdvancedScale;
+                    ProjectileScale = EnemyEV.ChickenAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.ChickenAdvancedTint;
 
-                    MeleeRadius = EnemyEV.Chicken_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.Chicken_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.Chicken_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.CHICKEN_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.CHICKEN_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.CHICKEN_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.Chicken_Advanced_KnockBack;
+                    KnockBack = EnemyEV.ChickenAdvancedKnockBack;
                     #endregion
                     break;
 

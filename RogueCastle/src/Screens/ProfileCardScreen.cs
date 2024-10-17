@@ -10,7 +10,8 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using System.Text.RegularExpressions;
-using RogueCastle.EVs;
+using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -87,7 +88,7 @@ namespace RogueCastle
             m_tombStoneSprite.Scale = new Vector2(3, 3);
             m_tombStoneSprite.OutlineWidth = 2;
 
-            m_spellIcon = new SpriteObj(SpellType.Icon(12));
+            m_spellIcon = new SpriteObj(SpellType.Bounce.Icon());
             m_spellIcon.Position = new Vector2(350, 295);
             m_spellIcon.OutlineWidth = 2;
             m_spellIcon.ForceDraw = true;
@@ -299,7 +300,7 @@ namespace RogueCastle
             SoundManager.PlaySound("StatCard_In");
             LoadCardColour();
 
-            m_spellIcon.ChangeSprite(SpellType.Icon(Game.PlayerStats.Spell));
+            m_spellIcon.ChangeSprite(Game.PlayerStats.Spell.Icon());
             string[] randBG = new string[] { "CardCastleBG_Sprite", "CardGardenBG_Sprite", "CardDungeonBG_Sprite", "CardTowerBG_Sprite" };
             m_playerBG.ChangeSprite(randBG[CDGMath.RandomInt(0, 3)]);
             randBG = null;
@@ -730,7 +731,7 @@ namespace RogueCastle
             if (Game.PlayerStats.TimesCastleBeaten > 0)
             {
                 m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1].ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1]));
-                m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1].Text = "(" + EquipmentAbilityType.ShortDescription(EquipmentAbilityType.NewGamePlusGoldBonus, ((int)(GameEV.NEWGAMEPLUS_GOLDBOUNTY *100) * Game.PlayerStats.TimesCastleBeaten)) + ")";
+                m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1].Text = "(" + EquipmentAbilityType.ShortDescription(EquipmentAbilityType.NewGamePlusGoldBonus, ((int)(GameEV.NEWGAMEPLUS_GOLD_BOUNTY *100) * Game.PlayerStats.TimesCastleBeaten)) + ")";
                 m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1].X = m_runeBackTitleList[m_runeBackDescriptionList.Count - 1].Bounds.Right + 10;
                 m_runeBackDescriptionList[m_runeBackDescriptionList.Count - 1].Visible = true;
                 m_runeBackTitleList[m_runeBackDescriptionList.Count - 1].Visible = true;
@@ -882,7 +883,7 @@ namespace RogueCastle
             m_playerHUD.SetPosition(new Vector2(m_frontCard.X + 46, m_frontCard.Y + 220 + 64));
 
             Camera.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, null, null);
-            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight), Color.Black * BackBufferOpacity);
+            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT), Color.Black * BackBufferOpacity);
             m_frontCard.Draw(Camera);
             m_backCard.Draw(Camera);
 

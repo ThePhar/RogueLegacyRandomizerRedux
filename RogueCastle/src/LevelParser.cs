@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Xml;
 using DS2DEngine;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 using RogueCastle.Objects;
 
 namespace RogueCastle

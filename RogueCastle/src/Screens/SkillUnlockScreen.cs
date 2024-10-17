@@ -10,6 +10,7 @@ using System.IO;
 using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -224,7 +225,7 @@ namespace RogueCastle
         public override void Draw(GameTime gametime)
         {
             Camera.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null);
-            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.ScreenWidth, GlobalEV.ScreenHeight), Color.Black * BackBufferOpacity);
+            Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT), Color.Black * BackBufferOpacity);
             Camera.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
             m_plate.Draw(Camera);
             m_titlePlate.Draw(Camera);

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 using Tweener.Ease;
 using Tweener;
 

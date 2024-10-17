@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.Enumerations;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -23,154 +24,154 @@ namespace RogueCastle
             IsCollidable = true;
 
             #region Basic Variables - General
-            Name = EnemyEV.SkeletonArcher_Basic_Name;
-            LocStringID = EnemyEV.SkeletonArcher_Basic_Name_locID;
+            Name = EnemyEV.SKELETON_ARCHER_BASIC_NAME;
+            LocStringID = EnemyEV.SKELETON_ARCHER_BASIC_NAME_LOC_ID;
 
-            MaxHealth = EnemyEV.SkeletonArcher_Basic_MaxHealth;
-            Damage = EnemyEV.SkeletonArcher_Basic_Damage;
-            XPValue = EnemyEV.SkeletonArcher_Basic_XPValue;
+            MaxHealth = EnemyEV.SKELETON_ARCHER_BASIC_MAX_HEALTH;
+            Damage = EnemyEV.SKELETON_ARCHER_BASIC_DAMAGE;
+            XPValue = EnemyEV.SKELETON_ARCHER_BASIC_XP_VALUE;
 
-            MinMoneyDropAmount = EnemyEV.SkeletonArcher_Basic_MinDropAmount;
-            MaxMoneyDropAmount = EnemyEV.SkeletonArcher_Basic_MaxDropAmount;
-            MoneyDropChance = EnemyEV.SkeletonArcher_Basic_DropChance;
+            MinMoneyDropAmount = EnemyEV.SKELETON_ARCHER_BASIC_MIN_DROP_AMOUNT;
+            MaxMoneyDropAmount = EnemyEV.SKELETON_ARCHER_BASIC_MAX_DROP_AMOUNT;
+            MoneyDropChance = EnemyEV.SKELETON_ARCHER_BASIC_DROP_CHANCE;
 
-            Speed = EnemyEV.SkeletonArcher_Basic_Speed;
-            TurnSpeed = EnemyEV.SkeletonArcher_Basic_TurnSpeed;
-            ProjectileSpeed = EnemyEV.SkeletonArcher_Basic_ProjectileSpeed;
-            JumpHeight = EnemyEV.SkeletonArcher_Basic_Jump;
-            CooldownTime = EnemyEV.SkeletonArcher_Basic_Cooldown;
-            AnimationDelay = 1 / EnemyEV.SkeletonArcher_Basic_AnimationDelay;
+            Speed = EnemyEV.SKELETON_ARCHER_BASIC_SPEED;
+            TurnSpeed = EnemyEV.SKELETON_ARCHER_BASIC_TURN_SPEED;
+            ProjectileSpeed = EnemyEV.SKELETON_ARCHER_BASIC_PROJECTILE_SPEED;
+            JumpHeight = EnemyEV.SKELETON_ARCHER_BASIC_JUMP;
+            CooldownTime = EnemyEV.SKELETON_ARCHER_BASIC_COOLDOWN;
+            AnimationDelay = 1 / EnemyEV.SKELETON_ARCHER_BASIC_ANIMATION_DELAY;
 
-            AlwaysFaceTarget = EnemyEV.SkeletonArcher_Basic_AlwaysFaceTarget;
-            CanFallOffLedges = EnemyEV.SkeletonArcher_Basic_CanFallOffLedges;
-            CanBeKnockedBack = EnemyEV.SkeletonArcher_Basic_CanBeKnockedBack;
-            IsWeighted = EnemyEV.SkeletonArcher_Basic_IsWeighted;
+            AlwaysFaceTarget = EnemyEV.SKELETON_ARCHER_BASIC_ALWAYS_FACE_TARGET;
+            CanFallOffLedges = EnemyEV.SKELETON_ARCHER_BASIC_CAN_FALL_OFF_LEDGES;
+            CanBeKnockedBack = EnemyEV.SKELETON_ARCHER_BASIC_CAN_BE_KNOCKED_BACK;
+            IsWeighted = EnemyEV.SKELETON_ARCHER_BASIC_IS_WEIGHTED;
 
-            Scale = EnemyEV.SkeletonArcher_Basic_Scale;
-            ProjectileScale = EnemyEV.SkeletonArcher_Basic_ProjectileScale;
-            TintablePart.TextureColor = EnemyEV.SkeletonArcher_Basic_Tint;
+            Scale = EnemyEV.SkeletonArcherBasicScale;
+            ProjectileScale = EnemyEV.SkeletonArcherBasicProjectileScale;
+            TintablePart.TextureColor = EnemyEV.SkeletonArcherBasicTint;
 
-            MeleeRadius = EnemyEV.SkeletonArcher_Basic_MeleeRadius;
-            ProjectileRadius = EnemyEV.SkeletonArcher_Basic_ProjectileRadius;
-            EngageRadius = EnemyEV.SkeletonArcher_Basic_EngageRadius;
+            MeleeRadius = EnemyEV.SKELETON_ARCHER_BASIC_MELEE_RADIUS;
+            ProjectileRadius = EnemyEV.SKELETON_ARCHER_BASIC_PROJECTILE_RADIUS;
+            EngageRadius = EnemyEV.SKELETON_ARCHER_BASIC_ENGAGE_RADIUS;
 
             ProjectileDamage = Damage;
-            KnockBack = EnemyEV.SkeletonArcher_Basic_KnockBack;
+            KnockBack = EnemyEV.SkeletonArcherBasicKnockBack;
             #endregion
 
             switch (Difficulty)
             {
                 case (GameTypes.EnemyDifficulty.MINIBOSS):
                     #region Miniboss Variables - General
-                    Name = EnemyEV.SkeletonArcher_Miniboss_Name;
-                    LocStringID = EnemyEV.SkeletonArcher_Miniboss_Name_locID;
+                    Name = EnemyEV.SKELETON_ARCHER_MINIBOSS_NAME;
+                    LocStringID = EnemyEV.SKELETON_ARCHER_MINIBOSS_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.SkeletonArcher_Miniboss_MaxHealth;
-                    Damage = EnemyEV.SkeletonArcher_Miniboss_Damage;
-                    XPValue = EnemyEV.SkeletonArcher_Miniboss_XPValue;
+                    MaxHealth = EnemyEV.SKELETON_ARCHER_MINIBOSS_MAX_HEALTH;
+                    Damage = EnemyEV.SKELETON_ARCHER_MINIBOSS_DAMAGE;
+                    XPValue = EnemyEV.SKELETON_ARCHER_MINIBOSS_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.SkeletonArcher_Miniboss_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.SkeletonArcher_Miniboss_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.SkeletonArcher_Miniboss_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SKELETON_ARCHER_MINIBOSS_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SKELETON_ARCHER_MINIBOSS_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SKELETON_ARCHER_MINIBOSS_DROP_CHANCE;
 
-                    Speed = EnemyEV.SkeletonArcher_Miniboss_Speed;
-                    TurnSpeed = EnemyEV.SkeletonArcher_Miniboss_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.SkeletonArcher_Miniboss_ProjectileSpeed;
-                    JumpHeight = EnemyEV.SkeletonArcher_Miniboss_Jump;
-                    CooldownTime = EnemyEV.SkeletonArcher_Miniboss_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.SkeletonArcher_Miniboss_AnimationDelay;
+                    Speed = EnemyEV.SKELETON_ARCHER_MINIBOSS_SPEED;
+                    TurnSpeed = EnemyEV.SKELETON_ARCHER_MINIBOSS_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SKELETON_ARCHER_MINIBOSS_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SKELETON_ARCHER_MINIBOSS_JUMP;
+                    CooldownTime = EnemyEV.SKELETON_ARCHER_MINIBOSS_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SKELETON_ARCHER_MINIBOSS_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.SkeletonArcher_Miniboss_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.SkeletonArcher_Miniboss_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.SkeletonArcher_Miniboss_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.SkeletonArcher_Miniboss_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SKELETON_ARCHER_MINIBOSS_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SKELETON_ARCHER_MINIBOSS_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SKELETON_ARCHER_MINIBOSS_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SKELETON_ARCHER_MINIBOSS_IS_WEIGHTED;
 
-                    Scale = EnemyEV.SkeletonArcher_Miniboss_Scale;
-                    ProjectileScale = EnemyEV.SkeletonArcher_Miniboss_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.SkeletonArcher_Miniboss_Tint;
+                    Scale = EnemyEV.SkeletonArcherMinibossScale;
+                    ProjectileScale = EnemyEV.SkeletonArcherMinibossProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.SkeletonArcherMinibossTint;
 
-                    MeleeRadius = EnemyEV.SkeletonArcher_Miniboss_MeleeRadius;
-                    ProjectileRadius = EnemyEV.SkeletonArcher_Miniboss_ProjectileRadius;
-                    EngageRadius = EnemyEV.SkeletonArcher_Miniboss_EngageRadius;
+                    MeleeRadius = EnemyEV.SKELETON_ARCHER_MINIBOSS_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.SKELETON_ARCHER_MINIBOSS_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.SKELETON_ARCHER_MINIBOSS_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.SkeletonArcher_Miniboss_KnockBack;
+                    KnockBack = EnemyEV.SkeletonArcherMinibossKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.EXPERT):
                     #region Expert Variables - General
-                    Name = EnemyEV.SkeletonArcher_Expert_Name;
-                    LocStringID = EnemyEV.SkeletonArcher_Expert_Name_locID;
+                    Name = EnemyEV.SKELETON_ARCHER_EXPERT_NAME;
+                    LocStringID = EnemyEV.SKELETON_ARCHER_EXPERT_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.SkeletonArcher_Expert_MaxHealth;
-                    Damage = EnemyEV.SkeletonArcher_Expert_Damage;
-                    XPValue = EnemyEV.SkeletonArcher_Expert_XPValue;
+                    MaxHealth = EnemyEV.SKELETON_ARCHER_EXPERT_MAX_HEALTH;
+                    Damage = EnemyEV.SKELETON_ARCHER_EXPERT_DAMAGE;
+                    XPValue = EnemyEV.SKELETON_ARCHER_EXPERT_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.SkeletonArcher_Expert_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.SkeletonArcher_Expert_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.SkeletonArcher_Expert_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SKELETON_ARCHER_EXPERT_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SKELETON_ARCHER_EXPERT_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SKELETON_ARCHER_EXPERT_DROP_CHANCE;
 
-                    Speed = EnemyEV.SkeletonArcher_Expert_Speed;
-                    TurnSpeed = EnemyEV.SkeletonArcher_Expert_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.SkeletonArcher_Expert_ProjectileSpeed;
-                    JumpHeight = EnemyEV.SkeletonArcher_Expert_Jump;
-                    CooldownTime = EnemyEV.SkeletonArcher_Expert_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.SkeletonArcher_Expert_AnimationDelay;
+                    Speed = EnemyEV.SKELETON_ARCHER_EXPERT_SPEED;
+                    TurnSpeed = EnemyEV.SKELETON_ARCHER_EXPERT_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SKELETON_ARCHER_EXPERT_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SKELETON_ARCHER_EXPERT_JUMP;
+                    CooldownTime = EnemyEV.SKELETON_ARCHER_EXPERT_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SKELETON_ARCHER_EXPERT_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.SkeletonArcher_Expert_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.SkeletonArcher_Expert_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.SkeletonArcher_Expert_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.SkeletonArcher_Expert_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SKELETON_ARCHER_EXPERT_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SKELETON_ARCHER_EXPERT_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SKELETON_ARCHER_EXPERT_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SKELETON_ARCHER_EXPERT_IS_WEIGHTED;
 
-                    Scale = EnemyEV.SkeletonArcher_Expert_Scale;
-                    ProjectileScale = EnemyEV.SkeletonArcher_Expert_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.SkeletonArcher_Expert_Tint;
+                    Scale = EnemyEV.SkeletonArcherExpertScale;
+                    ProjectileScale = EnemyEV.SkeletonArcherExpertProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.SkeletonArcherExpertTint;
 
-                    MeleeRadius = EnemyEV.SkeletonArcher_Expert_MeleeRadius;
-                    ProjectileRadius = EnemyEV.SkeletonArcher_Expert_ProjectileRadius;
-                    EngageRadius = EnemyEV.SkeletonArcher_Expert_EngageRadius;
+                    MeleeRadius = EnemyEV.SKELETON_ARCHER_EXPERT_MELEE_RADIUS;
+                    ProjectileRadius = EnemyEV.SKELETON_ARCHER_EXPERT_PROJECTILE_RADIUS;
+                    EngageRadius = EnemyEV.SKELETON_ARCHER_EXPERT_ENGAGE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.SkeletonArcher_Expert_KnockBack;
+                    KnockBack = EnemyEV.SkeletonArcherExpertKnockBack;
                     #endregion
                     break;
 
                 case (GameTypes.EnemyDifficulty.ADVANCED):
                     #region Advanced Variables - General
-                    Name = EnemyEV.SkeletonArcher_Advanced_Name;
-                    LocStringID = EnemyEV.SkeletonArcher_Advanced_Name_locID;
+                    Name = EnemyEV.SKELETON_ARCHER_ADVANCED_NAME;
+                    LocStringID = EnemyEV.SKELETON_ARCHER_ADVANCED_NAME_LOC_ID;
 
-                    MaxHealth = EnemyEV.SkeletonArcher_Advanced_MaxHealth;
-                    Damage = EnemyEV.SkeletonArcher_Advanced_Damage;
-                    XPValue = EnemyEV.SkeletonArcher_Advanced_XPValue;
+                    MaxHealth = EnemyEV.SKELETON_ARCHER_ADVANCED_MAX_HEALTH;
+                    Damage = EnemyEV.SKELETON_ARCHER_ADVANCED_DAMAGE;
+                    XPValue = EnemyEV.SKELETON_ARCHER_ADVANCED_XP_VALUE;
 
-                    MinMoneyDropAmount = EnemyEV.SkeletonArcher_Advanced_MinDropAmount;
-                    MaxMoneyDropAmount = EnemyEV.SkeletonArcher_Advanced_MaxDropAmount;
-                    MoneyDropChance = EnemyEV.SkeletonArcher_Advanced_DropChance;
+                    MinMoneyDropAmount = EnemyEV.SKELETON_ARCHER_ADVANCED_MIN_DROP_AMOUNT;
+                    MaxMoneyDropAmount = EnemyEV.SKELETON_ARCHER_ADVANCED_MAX_DROP_AMOUNT;
+                    MoneyDropChance = EnemyEV.SKELETON_ARCHER_ADVANCED_DROP_CHANCE;
 
-                    Speed = EnemyEV.SkeletonArcher_Advanced_Speed;
-                    TurnSpeed = EnemyEV.SkeletonArcher_Advanced_TurnSpeed;
-                    ProjectileSpeed = EnemyEV.SkeletonArcher_Advanced_ProjectileSpeed;
-                    JumpHeight = EnemyEV.SkeletonArcher_Advanced_Jump;
-                    CooldownTime = EnemyEV.SkeletonArcher_Advanced_Cooldown;
-                    AnimationDelay = 1 / EnemyEV.SkeletonArcher_Advanced_AnimationDelay;
+                    Speed = EnemyEV.SKELETON_ARCHER_ADVANCED_SPEED;
+                    TurnSpeed = EnemyEV.SKELETON_ARCHER_ADVANCED_TURN_SPEED;
+                    ProjectileSpeed = EnemyEV.SKELETON_ARCHER_ADVANCED_PROJECTILE_SPEED;
+                    JumpHeight = EnemyEV.SKELETON_ARCHER_ADVANCED_JUMP;
+                    CooldownTime = EnemyEV.SKELETON_ARCHER_ADVANCED_COOLDOWN;
+                    AnimationDelay = 1 / EnemyEV.SKELETON_ARCHER_ADVANCED_ANIMATION_DELAY;
 
-                    AlwaysFaceTarget = EnemyEV.SkeletonArcher_Advanced_AlwaysFaceTarget;
-                    CanFallOffLedges = EnemyEV.SkeletonArcher_Advanced_CanFallOffLedges;
-                    CanBeKnockedBack = EnemyEV.SkeletonArcher_Advanced_CanBeKnockedBack;
-                    IsWeighted = EnemyEV.SkeletonArcher_Advanced_IsWeighted;
+                    AlwaysFaceTarget = EnemyEV.SKELETON_ARCHER_ADVANCED_ALWAYS_FACE_TARGET;
+                    CanFallOffLedges = EnemyEV.SKELETON_ARCHER_ADVANCED_CAN_FALL_OFF_LEDGES;
+                    CanBeKnockedBack = EnemyEV.SKELETON_ARCHER_ADVANCED_CAN_BE_KNOCKED_BACK;
+                    IsWeighted = EnemyEV.SKELETON_ARCHER_ADVANCED_IS_WEIGHTED;
 
-                    Scale = EnemyEV.SkeletonArcher_Advanced_Scale;
-                    ProjectileScale = EnemyEV.SkeletonArcher_Advanced_ProjectileScale;
-                    TintablePart.TextureColor = EnemyEV.SkeletonArcher_Advanced_Tint;
+                    Scale = EnemyEV.SkeletonArcherAdvancedScale;
+                    ProjectileScale = EnemyEV.SkeletonArcherAdvancedProjectileScale;
+                    TintablePart.TextureColor = EnemyEV.SkeletonArcherAdvancedTint;
 
-                    MeleeRadius = EnemyEV.SkeletonArcher_Advanced_MeleeRadius;
-                    EngageRadius = EnemyEV.SkeletonArcher_Advanced_EngageRadius;
-                    ProjectileRadius = EnemyEV.SkeletonArcher_Advanced_ProjectileRadius;
+                    MeleeRadius = EnemyEV.SKELETON_ARCHER_ADVANCED_MELEE_RADIUS;
+                    EngageRadius = EnemyEV.SKELETON_ARCHER_ADVANCED_ENGAGE_RADIUS;
+                    ProjectileRadius = EnemyEV.SKELETON_ARCHER_ADVANCED_PROJECTILE_RADIUS;
 
                     ProjectileDamage = Damage;
-                    KnockBack = EnemyEV.SkeletonArcher_Advanced_KnockBack;
+                    KnockBack = EnemyEV.SkeletonArcherAdvancedKnockBack;
                     #endregion
                     break;
 

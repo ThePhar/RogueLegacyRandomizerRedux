@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Tweener.Ease;
 using Tweener;
 using Microsoft.Xna.Framework.Audio;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 using RogueCastle.Objects;
 
 namespace RogueCastle

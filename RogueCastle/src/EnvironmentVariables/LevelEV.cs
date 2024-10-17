@@ -1,6 +1,6 @@
 ﻿using RogueCastle.Enumerations;
 
-namespace RogueCastle.EVs;
+namespace RogueCastle.EnvironmentVariables;
 
 public static class LevelEV
 {
@@ -41,8 +41,7 @@ public static class LevelEV
     /// <remarks>ADDS DIRECTLY TO THE LEVEL, IGNORING ROOM_LEVEL_MOD.</remarks>
     public const int LAST_BOSS_MODE2_LEVEL_MOD = 10;
 
-    // New Game +
-    ////////////////////////////////////////////////////////////////////////////////
+    #region New Game +
 
     // These are room levels prior to dividing by ROOM_LEVEL_MOD.
     public const int CASTLE_ROOM_LEVEL_BOOST = 0;
@@ -55,7 +54,7 @@ public static class LevelEV
     public const int NEWGAMEPLUS_MINIBOSS_LEVEL_BASE = 0;
     public const int NEWGAMEPLUS_MINIBOSS_LEVEL_APPRECIATION = 0;
 
-    ////////////////////////////////////////////////////////////////////////////////
+    #endregion
 
     public const bool LINK_TO_CASTLE_ONLY = true;
     public const byte CASTLE_BOSS_ROOM = BossRoomType.EyeballBossRoom;
@@ -63,8 +62,6 @@ public static class LevelEV
     public const byte DUNGEON_BOSS_ROOM = BossRoomType.BlobBossRoom;
     public const byte GARDEN_BOSS_ROOM = BossRoomType.FairyBossRoom;
     public const byte LAST_BOSS_ROOM = BossRoomType.LastBossRoom;
-
-    ////////////////////////////////////////////////////////////////////////////////
 
     // Percent chance the door direction will be open or closed when procedurally generating a room.
     public const int LEVEL_CASTLE_LEFTDOOR = 90; //70;
@@ -87,8 +84,7 @@ public static class LevelEV
     public const int LEVEL_DUNGEON_TOPDOOR = 45; //40;
     public const int LEVEL_DUNGEON_BOTTOMDOOR = 100; //75; //100;
 
-    // The list of enemies that each area will randomly add enemies to.
-    ////////////////////////////////////////////////////////////////////////////////
+    #region Enemies
 
     public static readonly EnemyType[] DementiaFlightList =
     [
@@ -146,6 +142,10 @@ public static class LevelEV
     //     EnemyType.SpikeTrap, EnemyType.SwordKnight, EnemyType.Wolf, EnemyType.Zombie,
     // };
 
+    #endregion
+
+    #region Assets
+
     public static readonly string[] CastleAssetSwapList =
     [
         "BreakableBarrel1_Character", "BreakableBarrel2_Character", "CastleAssetKnightStatue_Character",
@@ -191,8 +191,9 @@ public static class LevelEV
         "DungeonTable2_Character", "DungeonDoorOpen_Sprite", "",
     ];
 
-    // Debugging EVs
-    ////////////////////////////////////////////////////////////////////////////////
+    #endregion
+
+    #region Debug
 
     public static bool ShowEnemyRadii = false;
     public static bool EnableDebugInput = true;
@@ -228,4 +229,6 @@ public static class LevelEV
     ///     Setting this true also turns vsync off (so that you can get an FPS greater than 60).
     /// </summary>
     public static bool ShowFps = false;
+
+    #endregion
 }

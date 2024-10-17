@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Tweener;
 using Tweener.Ease;
 using Microsoft.Xna.Framework.Audio;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -19,11 +20,11 @@ namespace RogueCastle
         public override void LoadContent()
         {
             m_logo = new SpriteObj("Blitworks_FullLogo");
-            m_logo.Position = new Vector2(GlobalEV.ScreenWidth / 2, GlobalEV.ScreenHeight / 2);
+            m_logo.Position = new Vector2(GlobalEV.SCREEN_WIDTH / 2, GlobalEV.SCREEN_HEIGHT / 2);
             m_logo.ForceDraw = true;
 
             m_logoIcon = new SpriteObj("Blitworks_IconOnly");
-            m_logoIcon.Position = new Vector2(GlobalEV.ScreenWidth / 2, GlobalEV.ScreenHeight / 2 - (40 * m_logo.ScaleX));
+            m_logoIcon.Position = new Vector2(GlobalEV.SCREEN_WIDTH / 2, GlobalEV.SCREEN_HEIGHT / 2 - (40 * m_logo.ScaleX));
             m_logoIcon.ForceDraw = true;
 
             m_blitSFX = ScreenManager.Game.Content.Load<SoundEffect>("Audio/sfx_blitworks_logo");

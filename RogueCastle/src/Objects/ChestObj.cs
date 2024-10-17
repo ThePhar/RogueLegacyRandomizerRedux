@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
@@ -66,11 +67,11 @@ namespace RogueCastle
                     int itemType = 0;
                     int[] dropChance = null;
                     if (this.ChestType == RogueCastle.ChestType.Brown)
-                        dropChance = GameEV.BRONZECHEST_ITEMDROP_CHANCE;
+                        dropChance = GameEV.BronzeChestItemdropChance;
                     else if (this.ChestType == RogueCastle.ChestType.Silver)
-                        dropChance = GameEV.SILVERCHEST_ITEMDROP_CHANCE;
+                        dropChance = GameEV.SilverChestItemdropChance;
                     else
-                        dropChance = GameEV.GOLDCHEST_ITEMDROP_CHANCE;
+                        dropChance = GameEV.GoldChestItemdropChance;
 
                     int itemChance = 0;
                     for (int i = 0; i < dropChance.Length; i++)
@@ -199,9 +200,9 @@ namespace RogueCastle
                     int dropRoll = CDGMath.RandomInt(1, 100);
                     int dropType = 0;
 
-                    for (int i = 0; i < GameEV.STATDROP_CHANCE.Length; i++)
+                    for (int i = 0; i < GameEV.StatDropChance.Length; i++)
                     {
-                        dropType += GameEV.STATDROP_CHANCE[i];
+                        dropType += GameEV.StatDropChance[i];
                         if (dropRoll <= dropType)
                         {
                             if (i == 0)

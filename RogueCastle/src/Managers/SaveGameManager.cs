@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using System.IO;
 using DS2DEngine;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 using RogueCastle.Objects;
 
 namespace RogueCastle
@@ -529,7 +529,7 @@ namespace RogueCastle
                     // Saving player's Child Age (byte)
                     writer.Write(Game.PlayerStats.ChildAge);
                     // Saving player spell (byte)
-                    writer.Write(Game.PlayerStats.Spell);
+                    writer.Write((byte)Game.PlayerStats.Spell);
                     // Saving player class (byte)
                     writer.Write(Game.PlayerStats.Class);
                     // Saving player special item (byte)
@@ -1184,7 +1184,7 @@ namespace RogueCastle
                             }
 
                             writer.Write(currentBranches[i].Name); // string
-                            writer.Write(currentBranches[i].Spell); // byte
+                            writer.Write((byte)currentBranches[i].Spell); // byte
                             writer.Write(currentBranches[i].Class); // byte
                             writer.Write(currentBranches[i].HeadPiece); // byte
                             writer.Write(currentBranches[i].ChestPiece); // byte
@@ -1351,7 +1351,7 @@ namespace RogueCastle
                     Game.PlayerStats.CurrentMana = reader.ReadInt32();
                     Game.PlayerStats.Age = reader.ReadByte();
                     Game.PlayerStats.ChildAge = reader.ReadByte();
-                    Game.PlayerStats.Spell = reader.ReadByte();
+                    Game.PlayerStats.Spell = (SpellType)reader.ReadByte();
                     Game.PlayerStats.Class = reader.ReadByte();
                     Game.PlayerStats.SpecialItem = reader.ReadByte();
                     Game.PlayerStats.Traits = new Vector2(reader.ReadByte(), reader.ReadByte());
@@ -1978,7 +1978,7 @@ namespace RogueCastle
                         PlayerLineageData data = new PlayerLineageData();
 
                         data.Name = reader.ReadString();
-                        data.Spell = reader.ReadByte();
+                        data.Spell = (SpellType)reader.ReadByte();
                         data.Class = reader.ReadByte();
                         data.HeadPiece = reader.ReadByte();
                         data.ChestPiece = reader.ReadByte();

@@ -10,7 +10,7 @@ using Tweener.Ease;
 using Microsoft.Xna.Framework.Graphics;
 using System.Globalization;
 using RogueCastle.Enumerations;
-using RogueCastle.EVs;
+using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle
 {
