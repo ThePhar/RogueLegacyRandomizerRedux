@@ -1,39 +1,34 @@
-# Rogue Legacy 1 Source Code
+# Rogue Legacy Randomizer _Redux_
 
-This is the source code for Rogue Legacy - more specifically, it is _only_ the
-code, and only the FNA build. The assets and contentproj are _not_ included.
+**Rogue Legacy Randomizer** makes quality of life improvements and adds a spin to the core game mechanics by adding
+randomization elements, transforming the rogue-lite into a metroidvania-style randomizer.
 
-## License
+**Rogue Legacy Randomizer _Redux_** is a complete rewrite and continuation of the original
+[Rogue Legacy Randomizer](https://github.com/RogueLegacyRandomizer) project (which was based on decompiled source) and
+is based on the [FNA-fork source-available code](https://github.com/flibitijibibo/RogueLegacy1) for Rogue Legacy by
+Cellar Door Games.
 
-Rogue Legacy's source code is released under a specialized, non-commercial-use
-license. See
-[LICENSE.md](https://github.com/flibitijibibo/RogueLegacy1/blob/main/LICENSE.md)
-for details.
+This project also works with the [Archipelago](https://archipelago.gg) framework to add multi-world randomizer support.
 
-## Build Environment
+## Features / Changes
 
-The build environment for Rogue Legacy matches the one recommended by the FNA
-project:
+`// Coming Soon`
 
-https://fna-xna.github.io/docs/1%3A-Setting-Up-FNA/
+## Build from Source
 
-## Build Instructions
+`// Coming Soon`
 
-First, download this repository, FNA, and the native FNA libraries:
+Likely to be based on the instructions [here](https://github.com/flibitijibibo/RogueLegacy1/blob/main/README.md).
 
-```
-git clone --recursive https://github.com/FNA-XNA/FNA.git
-git clone --recursive https://github.com/flibitijibibo/RogueLegacy1.git
-curl -O https://fna.flibitijibibo.com/archive/fnalibs3.tar.bz2
-tar xvfj fnalibs3.tar.bz2 --one-top-level
-```
+## Disclaimer / License & Copyright
 
-From here you should be able to `dotnet build RogueLegacy.sln`. The output
-should be at `RogueCastle/bin/x64/Debug/net40/`.
+This repository only contains the base source code for Rogue Legacy and Rogue Legacy Randomizer additions. To comply
+with the [Rogue Legacy](https://github.com/flibitijibibo/RogueLegacy1/blob/main/LICENSE.md) license, no assets (icons,
+art, graphics, or music) is included with distributions of this project. See
+[License.md](https://github.com/flibitijibibo/RogueLegacy1/blob/main/LICENSE.md) for more details.
 
-Lastly, you'll need to copy a few files to the output folder manually:
+**In short: You are required to have a legally obtained copy of Rogue Legacy to provide the assets required to run this
+mod.**
 
-- Copy the Content folder from your personal copy of the game
-- Depending on your OS/architecture, copy the appropriate native libraries from fnalibs (for example, on Windows you would copy `fnalibs/x64/*.dll` next to RogueLegacy.exe)
-
-The game should now start!
+Rogue Legacy was developed by Cellar Door Games and all copyrights regarding Rogue Legacy belong to them. I just created
+this mod based on their work and do not take credit for any of the base code.
