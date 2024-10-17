@@ -66,7 +66,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.ENERGON_MINIBOSS_NAME;
                     LocStringID = EnemyEV.ENERGON_MINIBOSS_NAME_LOC_ID;
@@ -104,7 +104,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.ENERGON_EXPERT_NAME;
                     LocStringID = EnemyEV.ENERGON_EXPERT_NAME_LOC_ID;
@@ -142,7 +142,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.ENERGON_ADVANCED_NAME;
                     LocStringID = EnemyEV.ENERGON_ADVANCED_NAME_LOC_ID;
@@ -180,7 +180,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }		
@@ -212,7 +212,7 @@ namespace RogueCastle
             fireProjectile.AddAction(new RunFunctionLogicAction(this, "FireCurrentTypeProjectile"));
             fireProjectile.AddAction(new PlayAnimationLogicAction("Attack", "End"));
             fireProjectile.AddAction(new ChangeSpriteLogicAction("EnemyEnergonIdle_Character", true, true));
-            fireProjectile.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectile.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet changeAttackType = new LogicSet(this);
             changeAttackType.AddAction(new ChangePropertyLogicAction(this, "CurrentSpeed", 0));
@@ -319,7 +319,7 @@ namespace RogueCastle
             {
                 projectile.Visible = false;
                 projectile.Scale = new Vector2(1, 1);
-                projectile.CollisionTypeTag = GameTypes.CollisionType_ENEMY;
+                projectile.CollisionTypeTag = GameTypes.COLLISION_TYPE_ENEMY;
                 PhysicsMngr.RemoveObject(projectile); // Might be better to keep them in the physics manager and just turn off their collision detection.
                 m_projectilePool.CheckIn(projectile);
             }

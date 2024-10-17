@@ -245,7 +245,7 @@ namespace RogueCastle
             MaxDamage = 25; //10;//25;
             ComboDelay = 1.5f;
 
-            AttackAnimationDelay = 1 / (20f + SkillSystem.GetSkill(SkillType.Attack_Speed_Up).ModifierAmount);//1 / 22f;
+            AttackAnimationDelay = 1 / (20f + SkillSystem.GetSkill(SkillType.AttackSpeedUp).ModifierAmount);//1 / 22f;
             StrongDamage = 25; //(int)(MaxDamage * 3.0f);//1.5f);
             StrongEnemyKnockBack = new Vector2(300f, 360f);//(5.0f, 6.0f);//(8.0f, 8.0f);//(10.0f, 15.5f);
 
@@ -317,7 +317,7 @@ namespace RogueCastle
             m_currentLogicSet = new LogicSet(null);
 
             State = STATE_IDLE;
-            CollisionTypeTag = GameTypes.CollisionType_PLAYER;
+            CollisionTypeTag = GameTypes.COLLISION_TYPE_PLAYER;
 
             m_debugInputMap = new InputMap(PlayerIndex.Two, false);
             InitializeInputMap();
@@ -1617,10 +1617,10 @@ namespace RogueCastle
                     }
 
                     if (collisionObj != this && collisionObj.Visible == true && collisionObj.IsCollidable == true && (collisionObj.CollidesTop == true || collisionObj.CollidesLeft == true || collisionObj.CollidesRight == true) && collisionObj.HasTerrainHitBox == true &&
-                        (collisionObj.CollisionTypeTag == GameTypes.CollisionType_WALL ||
-                        collisionObj.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL ||
-                        collisionObj.CollisionTypeTag == GameTypes.CollisionType_WALL_FOR_PLAYER ||
-                        collisionObj.CollisionTypeTag == GameTypes.CollisionType_ENEMYWALL))
+                        (collisionObj.CollisionTypeTag == GameTypes.COLLISION_TYPE_WALL ||
+                        collisionObj.CollisionTypeTag == GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL ||
+                        collisionObj.CollisionTypeTag == GameTypes.COLLISION_TYPE_WALL_FOR_PLAYER ||
+                        collisionObj.CollisionTypeTag == GameTypes.COLLISION_TYPE_ENEMY_WALL))
                     {
                         // This code prevents dragon or flight from landing on one ways.
                         if (collisionObj.CollidesTop == true && collisionObj.CollidesBottom == false && (State == STATE_FLYING || State == STATE_DRAGON))
@@ -1971,8 +1971,8 @@ namespace RogueCastle
 
             // Check to see if the terrain collision is with a wall, not with another enemy's terrain hitbox.
             if (collisionResponseType == Consts.COLLISIONRESPONSE_TERRAIN &&
-                (otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_WALL || otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_WALL_FOR_PLAYER || otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_ENEMYWALL
-                || otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL))
+                (otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_WALL || otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_WALL_FOR_PLAYER || otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_ENEMY_WALL
+                || otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL))
             {
                 //if (otherBoxParent.CollidesBottom == false)
                 //    m_lastPlatform = otherBoxParent;
@@ -2047,7 +2047,7 @@ namespace RogueCastle
             }
 
             if (thisBox.Type == Consts.BODY_HITBOX && otherBox.Type == Consts.WEAPON_HITBOX &&
-                (otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_ENEMY || otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_ENEMYWALL || otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL) && State != STATE_HURT && m_invincibleCounter <= 0)
+                (otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_ENEMY || otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_ENEMY_WALL || otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL) && State != STATE_HURT && m_invincibleCounter <= 0)
             {
                 EnemyObj enemy = otherBoxParent as EnemyObj;
                 if (enemy != null && enemy.IsDemented == true)
@@ -2271,7 +2271,7 @@ namespace RogueCastle
 
                 // Check to make sure you don't die at the same time as a boss if you are hit by the boss's projectile the moment you kill him.
                 EnemyObj projectileSource = projectile.Source as EnemyObj;
-                if (projectileSource != null && (projectileSource.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS || projectileSource is EnemyObj_LastBoss) && projectileSource.CurrentHealth <= 0)
+                if (projectileSource != null && (projectileSource.Difficulty == GameTypes.EnemyDifficulty.Miniboss || projectileSource is EnemyObj_LastBoss) && projectileSource.CurrentHealth <= 0)
                     hitPlayer = false;
             }
 
@@ -2280,7 +2280,7 @@ namespace RogueCastle
                 hitPlayer = false;
 
             // A check to make sure player's that die to enemies at the same time as hitting back, won't screw things up.
-            if (dementedEnemy != null && (dementedEnemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS || dementedEnemy is EnemyObj_LastBoss) && dementedEnemy.CurrentHealth <= 0)
+            if (dementedEnemy != null && (dementedEnemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss || dementedEnemy is EnemyObj_LastBoss) && dementedEnemy.CurrentHealth <= 0)
                 hitPlayer = false;
 
             // Disable force invincibility on spikes
@@ -2311,7 +2311,7 @@ namespace RogueCastle
                 }
 
                 // projectile is defined up top.
-                if (projectile != null && projectile.CollisionTypeTag == GameTypes.CollisionType_ENEMY)
+                if (projectile != null && projectile.CollisionTypeTag == GameTypes.COLLISION_TYPE_ENEMY)
                 {
                     EnemyObj enemy = projectile.Source as EnemyObj;
                     if (enemy != null && enemy.IsKilled == false && enemy.IsDemented == false && CurrentHealth > 0)
@@ -2378,7 +2378,7 @@ namespace RogueCastle
                     else
                     {
                         int chanceToSurvive = CDGMath.RandomInt(1, 100);
-                        if (chanceToSurvive <= SkillSystem.GetSkill(SkillType.Death_Dodge).ModifierAmount * 100)
+                        if (chanceToSurvive <= SkillSystem.GetSkill(SkillType.DeathDodge).ModifierAmount * 100)
                         {
                             //this.CurrentHealth = 1;
                             this.CurrentHealth = (int)(MaxHealth * 0.1f);
@@ -2627,7 +2627,7 @@ namespace RogueCastle
             float damageMult = SpellEV.GetDamageMultiplier(spellType);
             projData.Damage = (int)(TotalMagicDamage * damageMult);
 
-            int manaCost = (int)(SpellEV.GetManaCost(spellType) * (1 - SkillSystem.GetSkill(SkillType.Mana_Cost_Down).ModifierAmount));
+            int manaCost = (int)(SpellEV.GetManaCost(spellType) * (1 - SkillSystem.GetSkill(SkillType.ManaCostDown).ModifierAmount));
             if (CurrentMana >= manaCost)
             {
                 m_spellCastDelay = 0.5f;
@@ -2824,7 +2824,7 @@ namespace RogueCastle
                                 proj.TurnSpeed = 0.075f;//0.065f;//0.05f;
                                 proj.IgnoreBoundsCheck = true;
                                 proj.Target = enemy;
-                                proj.CollisionTypeTag = GameTypes.CollisionType_WALL;
+                                proj.CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL;
                                 proj.Position = CDGMath.GetCirclePosition(startingAngle, projectileDistance, this.Position);
                                 m_levelScreen.ImpactEffectPool.SpellCastEffect(proj.Position, proj.Rotation, megaSpell);
                                 startingAngle += angle;
@@ -2848,7 +2848,7 @@ namespace RogueCastle
                                 proj.TurnSpeed = 0.05f;
                                 proj.IgnoreBoundsCheck = true;
                                 proj.Target = enemy;
-                                proj.CollisionTypeTag = GameTypes.CollisionType_WALL;
+                                proj.CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL;
                                 proj.Position = CDGMath.GetCirclePosition(startingAngle, projectileDistance, this.Position);
                                 m_levelScreen.ImpactEffectPool.SpellCastEffect(proj.Position, proj.Rotation, megaSpell);
                                 startingAngle += angle;
@@ -3005,8 +3005,8 @@ namespace RogueCastle
 
                 int maxMana = (int)((BaseMana +
                             GetEquipmentMana() + (Game.PlayerStats.BonusMana * GameEV.ITEM_STAT_MAXMP_AMOUNT) +
-                            SkillSystem.GetSkill(SkillType.Mana_Up).ModifierAmount +
-                            SkillSystem.GetSkill(SkillType.Mana_Up_Final).ModifierAmount) * GameEV.LICH_MAX_MP_OFF_BASE);
+                            SkillSystem.GetSkill(SkillType.ManaUp).ModifierAmount +
+                            SkillSystem.GetSkill(SkillType.ManaUpFinal).ModifierAmount) * GameEV.LICH_MAX_MP_OFF_BASE);
 
                 if (MaxMana + baseHealthLost + lichHealthLost < maxMana)
                 {
@@ -3243,7 +3243,7 @@ namespace RogueCastle
 
                 ProjectileObj proj = m_levelScreen.ProjectileManager.FireProjectile(spellData);
                 proj.Opacity = 0;
-                proj.CollisionTypeTag = GameTypes.CollisionType_PLAYER;
+                proj.CollisionTypeTag = GameTypes.COLLISION_TYPE_PLAYER;
                 proj.Spell = SpellType.SHOUT;
                 proj.IgnoreBoundsCheck = true;
 
@@ -3560,7 +3560,7 @@ namespace RogueCastle
             get
             {
                 int damageDealt = 0;
-                damageDealt = (int)((RandomDamage + SkillSystem.GetSkill(SkillType.Attack_Up).ModifierAmount + SkillSystem.GetSkill(SkillType.Damage_Up_Final).ModifierAmount) * ClassDamageGivenMultiplier);
+                damageDealt = (int)((RandomDamage + SkillSystem.GetSkill(SkillType.AttackUp).ModifierAmount + SkillSystem.GetSkill(SkillType.DamageUpFinal).ModifierAmount) * ClassDamageGivenMultiplier);
                 //+ Game.TraitSystem.GetModifierAmount(m_traitArray, TraitType.Attack_Damage_Flat)) * ClassDamageGivenMultiplier);
                 if (IsAirAttacking)
                     damageDealt = (int)(damageDealt * TotalAirAttackDamageMod);
@@ -3575,7 +3575,7 @@ namespace RogueCastle
         {
             get
             {
-                float skillModAmount = SkillSystem.GetSkill(SkillType.Down_Strike_Up).ModifierAmount * NumAirBounces;
+                float skillModAmount = SkillSystem.GetSkill(SkillType.DownStrikeUp).ModifierAmount * NumAirBounces;
                 float airAttackMod = AirAttackDamageMod + skillModAmount;
                 if (airAttackMod > 1)
                     airAttackMod = 1;
@@ -3587,7 +3587,7 @@ namespace RogueCastle
         {
             get
             {
-                int intelligence = (int)((BaseMagicDamage + SkillSystem.GetSkill(SkillType.Magic_Damage_Up).ModifierAmount + GetEquipmentMagicDamage() + (Game.PlayerStats.BonusMagic * GameEV.ITEM_STAT_MAGIC_AMOUNT)) * ClassMagicDamageGivenMultiplier);
+                int intelligence = (int)((BaseMagicDamage + SkillSystem.GetSkill(SkillType.MagicDamageUp).ModifierAmount + GetEquipmentMagicDamage() + (Game.PlayerStats.BonusMagic * GameEV.ITEM_STAT_MAGIC_AMOUNT)) * ClassMagicDamageGivenMultiplier);
                 if (intelligence < 1)
                     intelligence = 1;
                 return intelligence;
@@ -3598,8 +3598,8 @@ namespace RogueCastle
         {
             get
             {
-                return (int)(RandomDamage * (1 + SkillSystem.GetSkill(SkillType.Invuln_Attack_Up).ModifierAmount) + SkillSystem.GetSkill(SkillType.Attack_Up).ModifierAmount +
-                            SkillSystem.GetSkill(SkillType.Damage_Up_Final).ModifierAmount);
+                return (int)(RandomDamage * (1 + SkillSystem.GetSkill(SkillType.InvulnAttackUp).ModifierAmount) + SkillSystem.GetSkill(SkillType.AttackUp).ModifierAmount +
+                            SkillSystem.GetSkill(SkillType.DamageUpFinal).ModifierAmount);
             }
         }
 
@@ -3635,8 +3635,8 @@ namespace RogueCastle
                     int maxMana = (int)Math.Round(((BaseHealth + GetEquipmentHealth() +
                    (HealthGainPerLevel * Game.PlayerStats.CurrentLevel) +
                      (Game.PlayerStats.BonusHealth * GameEV.ITEM_STAT_MAXHP_AMOUNT) +
-                      SkillSystem.GetSkill(SkillType.Health_Up).ModifierAmount +
-                         SkillSystem.GetSkill(SkillType.Health_Up_Final).ModifierAmount) * ClassTotalHPMultiplier * Game.PlayerStats.LichHealthMod), MidpointRounding.AwayFromZero) + Game.PlayerStats.LichHealth; // Lich health is separate from modifiers.
+                      SkillSystem.GetSkill(SkillType.HealthUp).ModifierAmount +
+                         SkillSystem.GetSkill(SkillType.HealthUpFinal).ModifierAmount) * ClassTotalHPMultiplier * Game.PlayerStats.LichHealthMod), MidpointRounding.AwayFromZero) + Game.PlayerStats.LichHealth; // Lich health is separate from modifiers.
 
                     if (maxMana < 1)
                         maxMana = 1;
@@ -3648,8 +3648,8 @@ namespace RogueCastle
                         GetEquipmentMana() +
                         (ManaGainPerLevel * Game.PlayerStats.CurrentLevel) +
                         (Game.PlayerStats.BonusMana * GameEV.ITEM_STAT_MAXMP_AMOUNT) +
-                        SkillSystem.GetSkill(SkillType.Mana_Up).ModifierAmount +
-                        SkillSystem.GetSkill(SkillType.Mana_Up_Final).ModifierAmount) * ClassTotalMPMultiplier) + Game.PlayerStats.LichMana; // Lich mana is separate from modifiers.
+                        SkillSystem.GetSkill(SkillType.ManaUp).ModifierAmount +
+                        SkillSystem.GetSkill(SkillType.ManaUpFinal).ModifierAmount) * ClassTotalMPMultiplier) + Game.PlayerStats.LichMana; // Lich mana is separate from modifiers.
 
                     if (maxMana < 1)
                         maxMana = 1;
@@ -3669,8 +3669,8 @@ namespace RogueCastle
                         GetEquipmentMana() +
                         (ManaGainPerLevel * Game.PlayerStats.CurrentLevel) +
                         (Game.PlayerStats.BonusMana * GameEV.ITEM_STAT_MAXMP_AMOUNT) +
-                        SkillSystem.GetSkill(SkillType.Mana_Up).ModifierAmount +
-                        SkillSystem.GetSkill(SkillType.Mana_Up_Final).ModifierAmount) * ClassTotalMPMultiplier) + Game.PlayerStats.LichMana; // Lich mana is separate from modifiers.
+                        SkillSystem.GetSkill(SkillType.ManaUp).ModifierAmount +
+                        SkillSystem.GetSkill(SkillType.ManaUpFinal).ModifierAmount) * ClassTotalMPMultiplier) + Game.PlayerStats.LichMana; // Lich mana is separate from modifiers.
 
                     if (maxHealth < 1)
                         maxHealth = 1;
@@ -3681,8 +3681,8 @@ namespace RogueCastle
                     int maxHealth = (int)Math.Round(((BaseHealth + GetEquipmentHealth() +
                         (HealthGainPerLevel * Game.PlayerStats.CurrentLevel) +
                         (Game.PlayerStats.BonusHealth * GameEV.ITEM_STAT_MAXHP_AMOUNT) +
-                        SkillSystem.GetSkill(SkillType.Health_Up).ModifierAmount +
-                        SkillSystem.GetSkill(SkillType.Health_Up_Final).ModifierAmount) * ClassTotalHPMultiplier * Game.PlayerStats.LichHealthMod), MidpointRounding.AwayFromZero) + Game.PlayerStats.LichHealth; // Lich health is separate from modifiers.
+                        SkillSystem.GetSkill(SkillType.HealthUp).ModifierAmount +
+                        SkillSystem.GetSkill(SkillType.HealthUpFinal).ModifierAmount) * ClassTotalHPMultiplier * Game.PlayerStats.LichHealthMod), MidpointRounding.AwayFromZero) + Game.PlayerStats.LichHealth; // Lich health is separate from modifiers.
 
                     if (maxHealth < 1)
                         maxHealth = 1;
@@ -3695,7 +3695,7 @@ namespace RogueCastle
         {
             get
             {
-                return BaseInvincibilityTime + SkillSystem.GetSkill(SkillType.Invuln_Time_Up).ModifierAmount;
+                return BaseInvincibilityTime + SkillSystem.GetSkill(SkillType.InvulnTimeUp).ModifierAmount;
                 // + Game.TraitSystem.GetModifierAmount(m_traitArray, TraitType.Invuln_Flat_Up);
             }
         }
@@ -3836,7 +3836,7 @@ namespace RogueCastle
         {
             get
             {
-                return (int)(BaseWeight + SkillSystem.GetSkill(SkillType.Equip_Up).ModifierAmount + SkillSystem.GetSkill(SkillType.Equip_Up_Final).ModifierAmount)
+                return (int)(BaseWeight + SkillSystem.GetSkill(SkillType.EquipUp).ModifierAmount + SkillSystem.GetSkill(SkillType.EquipUpFinal).ModifierAmount)
                   + (Game.PlayerStats.BonusWeight * GameEV.ITEM_STAT_WEIGHT_AMOUNT);
             }
         }
@@ -3927,7 +3927,7 @@ namespace RogueCastle
                 int classManaGain = 0;
                 if (Game.PlayerStats.Class == ClassType.WIZARD || Game.PlayerStats.Class == ClassType.WIZARD2)
                     classManaGain = GameEV.MAGE_MANA_GAIN;
-                return (int)((m_manaGain + classManaGain + SkillSystem.GetSkill(SkillType.Mana_Regen_Up).ModifierAmount + ((Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MANA_GAIN) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.MANA_DRAIN)) * GameEV.RUNE_MANA_GAIN)
+                return (int)((m_manaGain + classManaGain + SkillSystem.GetSkill(SkillType.ManaRegenUp).ModifierAmount + ((Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MANA_GAIN) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.MANA_DRAIN)) * GameEV.RUNE_MANA_GAIN)
                      + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.MANA_HP_GAIN) * GameEV.RUNE_MANA_HP_GAIN)) * (1 + Game.PlayerStats.TimesCastleBeaten * 0.5f));
 
             } //TEDDY MODDING SO MANA GAIN IS AN EV
@@ -3949,7 +3949,7 @@ namespace RogueCastle
         {
             get
             {
-                float CritChanceBonus = BaseCriticalChance + SkillSystem.GetSkill(SkillType.Crit_Chance_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CRIT_CHANCE);
+                float CritChanceBonus = BaseCriticalChance + SkillSystem.GetSkill(SkillType.CritChanceUp).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CRIT_CHANCE);
                 switch (Game.PlayerStats.Class)
                 {
                     case (ClassType.ASSASSIN):
@@ -3969,7 +3969,7 @@ namespace RogueCastle
             {
                 //return BaseCriticalDamageMod + SkillSystem.GetSkill(SkillType.Crit_Damage_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CritDamage);
                 // +Game.TraitSystem.GetModifierAmount(m_traitArray, TraitType.Crit_Damage_Flat);
-                float CritDamageBonus = BaseCriticalDamageMod + SkillSystem.GetSkill(SkillType.Crit_Damage_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CRIT_DAMAGE);
+                float CritDamageBonus = BaseCriticalDamageMod + SkillSystem.GetSkill(SkillType.CritDamageUp).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CRIT_DAMAGE);
 
                 switch (Game.PlayerStats.Class)
                 {
@@ -3985,7 +3985,7 @@ namespace RogueCastle
         {
             get
             {
-                return SkillSystem.GetSkill(SkillType.XP_Gain_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.XP_BONUS);
+                return SkillSystem.GetSkill(SkillType.XPGainUp).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.XP_BONUS);
                     //+ Game.TraitSystem.GetModifierAmount(m_traitArray, TraitType.XP_Percentage);
             }
         }
@@ -3994,7 +3994,7 @@ namespace RogueCastle
         {
             get
             {
-                float goldBonus = SkillSystem.GetSkill(SkillType.Gold_Gain_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.GOLD_BONUS)
+                float goldBonus = SkillSystem.GetSkill(SkillType.GoldGainUp).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.GOLD_BONUS)
                     + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.GOLD_GAIN) * GameEV.RUNE_GOLDGAIN_MOD) + (GameEV.NEWGAMEPLUS_GOLD_BOUNTY * Game.PlayerStats.TimesCastleBeaten);
                    // + Game.TraitSystem.GetModifierAmount(m_traitArray, TraitType.Gold_Percentage);
 
@@ -4041,7 +4041,7 @@ namespace RogueCastle
 
         public float TotalArmor
         {
-            get { return (SkillSystem.GetSkill(SkillType.Armor_Up).ModifierAmount + (Game.PlayerStats.BonusDefense * GameEV.ITEM_STAT_ARMOR_AMOUNT)) + GetEquipmentArmor(); }
+            get { return (SkillSystem.GetSkill(SkillType.ArmorUp).ModifierAmount + (Game.PlayerStats.BonusDefense * GameEV.ITEM_STAT_ARMOR_AMOUNT)) + GetEquipmentArmor(); }
         }
 
         public float TotalDamageReduc

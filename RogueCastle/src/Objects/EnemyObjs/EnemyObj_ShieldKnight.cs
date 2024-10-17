@@ -61,7 +61,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     ShieldKnockback = new Vector2(1200, 1350);
 
                     #region Miniboss Variables - General
@@ -101,7 +101,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     ShieldKnockback = new Vector2(1550, 1650);
 
                     #region Expert Variables - General
@@ -141,7 +141,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     ShieldKnockback = new Vector2(1050, 1150);
 
                     #region Advanced Variables - General
@@ -181,7 +181,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }		

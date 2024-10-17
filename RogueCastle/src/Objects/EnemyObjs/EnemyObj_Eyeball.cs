@@ -80,7 +80,7 @@ namespace RogueCastle
             PupilOffset = 4;
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.EYEBALL_MINIBOSS_NAME;
                     LocStringID = EnemyEV.EYEBALL_MINIBOSS_NAME_LOC_ID;
@@ -121,7 +121,7 @@ namespace RogueCastle
                         this.MaxHealth = 1;
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.EYEBALL_EXPERT_NAME;
                     LocStringID = EnemyEV.EYEBALL_EXPERT_NAME_LOC_ID;
@@ -159,7 +159,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.EYEBALL_ADVANCED_NAME;
                     LocStringID = EnemyEV.EYEBALL_ADVANCED_NAME_LOC_ID;
@@ -197,12 +197,12 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }
 
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                 m_resetSpriteName = "EnemyEyeballBossEye_Character";
         }
 
@@ -230,7 +230,7 @@ namespace RogueCastle
             fireProjectileBasicLS.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
             fireProjectileBasicLS.AddAction(new ChangeSpriteLogicAction("EnemyEyeballIdle_Character", false, false));            
             fireProjectileBasicLS.AddAction(new DelayLogicAction(1.0f, 3.0f));
-            fireProjectileBasicLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectileBasicLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
 
             LogicSet fireProjectileAdvancedLS = new LogicSet(this);
@@ -248,7 +248,7 @@ namespace RogueCastle
             //fireProjectileAdvancedLS.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
             fireProjectileAdvancedLS.AddAction(new ChangeSpriteLogicAction("EnemyEyeballIdle_Character", false, false));
             fireProjectileAdvancedLS.AddAction(new DelayLogicAction(0.75f, 2.0f));
-            fireProjectileAdvancedLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectileAdvancedLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet fireProjectileExpertLS = new LogicSet(this);
             fireProjectileExpertLS.AddAction(new ChangeSpriteLogicAction("EnemyEyeballFire_Character", true, true));
@@ -258,7 +258,7 @@ namespace RogueCastle
             ThrowThreeProjectiles(fireProjectileExpertLS);
             fireProjectileExpertLS.AddAction(new ChangeSpriteLogicAction("EnemyEyeballIdle_Character", false, false));
             fireProjectileExpertLS.AddAction(new DelayLogicAction(1.0f, 3.0f));
-            fireProjectileExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectileExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
 
             ////////////////// MINI BOSS LOGIC //////////////////////////////
@@ -276,7 +276,7 @@ namespace RogueCastle
             fireProjectileCardinalSpinLS.AddAction(new RunFunctionLogicAction(m_pupil, "ChangeSprite", "EnemyEyeballBossPupil_Sprite"));
             fireProjectileCardinalSpinLS.AddAction(new RunFunctionLogicAction(this, "UnlockEyeball"));
             //fireProjectileCardinalSpinLS.AddAction(new DelayLogicAction(2.5f, 3.5f));
-            fireProjectileCardinalSpinLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectileCardinalSpinLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             #region Neo Version
             LogicSet fireProjectileCardinalSpinNeoLS = new LogicSet(this);
@@ -293,7 +293,7 @@ namespace RogueCastle
             fireProjectileCardinalSpinNeoLS.AddAction(new RunFunctionLogicAction(m_pupil, "ChangeSprite", "EnemyEyeballBossPupil_Sprite"));
             fireProjectileCardinalSpinNeoLS.AddAction(new RunFunctionLogicAction(this, "UnlockEyeball"));
             //fireProjectileCardinalSpinLS.AddAction(new DelayLogicAction(2.5f, 3.5f));
-            fireProjectileCardinalSpinNeoLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectileCardinalSpinNeoLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             #endregion
 
@@ -313,7 +313,7 @@ namespace RogueCastle
             fireProjectileSprayLS.AddAction(new ChangeSpriteLogicAction("EnemyEyeballBossEye_Character", false, false));
             fireProjectileSprayLS.AddAction(new RunFunctionLogicAction(m_pupil, "ChangeSprite", "EnemyEyeballBossPupil_Sprite"));
             fireProjectileSprayLS.AddAction(new RunFunctionLogicAction(this, "UnlockEyeball"));
-            fireProjectileSprayLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectileSprayLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet fireProjectileRandomLS = new LogicSet(this);
             fireProjectileRandomLS.AddAction(new ChangeSpriteLogicAction("EnemyEyeballBossFire_Character", true, true));
@@ -336,7 +336,7 @@ namespace RogueCastle
             fireProjectileRandomLS.AddAction(new ChangeSpriteLogicAction("EnemyEyeballBossEye_Character", false, false));
             fireProjectileRandomLS.AddAction(new RunFunctionLogicAction(m_pupil, "ChangeSprite", "EnemyEyeballBossPupil_Sprite"));
             fireProjectileRandomLS.AddAction(new RunFunctionLogicAction(this, "UnlockEyeball"));
-            fireProjectileRandomLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectileRandomLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
 
             LogicSet doNothing = new LogicSet(this);
@@ -744,7 +744,7 @@ namespace RogueCastle
         public override void CollisionResponse(CollisionBox thisBox, CollisionBox otherBox, int collisionResponseType)
         {
             // Hits the player in Tanooki mode.
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS && m_bossVersionKilled == false)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss && m_bossVersionKilled == false)
             {
                 PlayerObj player = otherBox.AbsParent as PlayerObj;
                 if (player != null && otherBox.Type == Consts.WEAPON_HITBOX && player.IsInvincible == false && player.State == PlayerObj.STATE_TANOOKI)
@@ -765,7 +765,7 @@ namespace RogueCastle
 
         public override void Kill(bool giveXP = true)
         {
-            if (Difficulty != GameTypes.EnemyDifficulty.MINIBOSS)
+            if (Difficulty != GameTypes.EnemyDifficulty.Miniboss)
             {
                 //SoundManager.PlaySound("EyeballDeath1", "EyeballDeath2");
                 base.Kill(giveXP);

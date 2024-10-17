@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using DS2DEngine;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -15,7 +16,7 @@ namespace RogueCastle
         public TeleporterObj()
             : base("TeleporterBase_Sprite")
         {
-            this.CollisionTypeTag = GameTypes.CollisionType_WALL;
+            this.CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL;
             SetCollision(false);
             this.IsWeighted = false;
             Activated = false;

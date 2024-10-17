@@ -73,7 +73,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.BALL_AND_CHAIN_MINIBOSS_NAME;
                     LocStringID = EnemyEV.BALL_AND_CHAIN_MINIBOSS_NAME_LOC_ID;
@@ -111,7 +111,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     ChainRadius = 350;
                     ChainSpeed2Modifier = 1.5f;
 
@@ -152,7 +152,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     ChainRadius = 275;
                     #region Advanced Variables - General
                     Name = EnemyEV.BALL_AND_CHAIN_ADVANCED_NAME;
@@ -191,7 +191,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }
@@ -353,15 +353,15 @@ namespace RogueCastle
                     }
 
                     distance = 0;
-                    if (Difficulty == GameTypes.EnemyDifficulty.ADVANCED)
+                    if (Difficulty == GameTypes.EnemyDifficulty.Advanced)
                         m_ballAndChain2.Position = CDGMath.GetCirclePosition(m_ballAngle * ChainSpeed2Modifier, m_actualChainRadius / 2, new Vector2(this.X, this.Bounds.Top));
-                    else if (Difficulty == GameTypes.EnemyDifficulty.EXPERT)
+                    else if (Difficulty == GameTypes.EnemyDifficulty.Expert)
                         m_ballAndChain2.Position = CDGMath.GetCirclePosition(-m_ballAngle * ChainSpeed2Modifier, -m_actualChainRadius / 2, new Vector2(this.X, this.Bounds.Top));
                     for (int i = 0; i < m_chainLinks2List.Count; i++)
                     {
-                        if (Difficulty == GameTypes.EnemyDifficulty.ADVANCED)
+                        if (Difficulty == GameTypes.EnemyDifficulty.Advanced)
                             m_chainLinks2List[i] = CDGMath.GetCirclePosition(m_ballAngle * ChainSpeed2Modifier, distance, new Vector2(this.X, this.Bounds.Top));
-                        else if (Difficulty == GameTypes.EnemyDifficulty.EXPERT)
+                        else if (Difficulty == GameTypes.EnemyDifficulty.Expert)
                             m_chainLinks2List[i] = CDGMath.GetCirclePosition(-m_ballAngle * ChainSpeed2Modifier, -distance, new Vector2(this.X, this.Bounds.Top));
                         distance += m_chainLinkDistance;
                     }
@@ -392,7 +392,7 @@ namespace RogueCastle
                 }
                 m_ballAndChain.Draw(camera);
 
-                if (Difficulty > GameTypes.EnemyDifficulty.BASIC)
+                if (Difficulty > GameTypes.EnemyDifficulty.Basic)
                 {
                     foreach (Vector2 chain in m_chainLinks2List)
                     {
@@ -420,7 +420,7 @@ namespace RogueCastle
             spike.HeadingX = (float)Math.Cos(MathHelper.WrapAngle(MathHelper.ToRadians(m_ballAngle + 90)));
             spike.HeadingY = (float)Math.Sin(MathHelper.WrapAngle(MathHelper.ToRadians(m_ballAngle + 90)));
 
-            if (Difficulty > GameTypes.EnemyDifficulty.BASIC)
+            if (Difficulty > GameTypes.EnemyDifficulty.Basic)
             {
                 m_levelScreen.PhysicsManager.RemoveObject(m_ballAndChain2);
 
@@ -431,12 +431,12 @@ namespace RogueCastle
                 spike2.Position = m_ballAndChain2.Position;
                 spike2.Speed = ChainSpeed * 200 * ChainSpeed2Modifier / m_BallSpeedDivider;
 
-                if (Difficulty == GameTypes.EnemyDifficulty.ADVANCED)
+                if (Difficulty == GameTypes.EnemyDifficulty.Advanced)
                 {
                     spike2.HeadingX = (float)Math.Cos(MathHelper.WrapAngle(MathHelper.ToRadians(m_ballAngle * ChainSpeed2Modifier + 90)));
                     spike2.HeadingY = (float)Math.Sin(MathHelper.WrapAngle(MathHelper.ToRadians(m_ballAngle * ChainSpeed2Modifier + 90)));
                 }
-                else if (Difficulty == GameTypes.EnemyDifficulty.EXPERT)
+                else if (Difficulty == GameTypes.EnemyDifficulty.Expert)
                 {
                     spike2.HeadingX = (float)Math.Cos(MathHelper.WrapAngle(MathHelper.ToRadians(-m_ballAngle * ChainSpeed2Modifier + 90)));
                     spike2.HeadingY = (float)Math.Sin(MathHelper.WrapAngle(MathHelper.ToRadians(-m_ballAngle * ChainSpeed2Modifier + 90)));
@@ -474,15 +474,15 @@ namespace RogueCastle
             }
 
             distance = 0;
-            if (Difficulty == GameTypes.EnemyDifficulty.ADVANCED)
+            if (Difficulty == GameTypes.EnemyDifficulty.Advanced)
                 m_ballAndChain2.Position = CDGMath.GetCirclePosition(m_ballAngle * ChainSpeed2Modifier, m_actualChainRadius / 2, new Vector2(this.X, this.Bounds.Top));
-            else if (Difficulty == GameTypes.EnemyDifficulty.EXPERT)
+            else if (Difficulty == GameTypes.EnemyDifficulty.Expert)
                 m_ballAndChain2.Position = CDGMath.GetCirclePosition(-m_ballAngle * ChainSpeed2Modifier, -m_actualChainRadius / 2, new Vector2(this.X, this.Bounds.Top));
             for (int i = 0; i < m_chainLinks2List.Count; i++)
             {
-                if (Difficulty == GameTypes.EnemyDifficulty.ADVANCED)
+                if (Difficulty == GameTypes.EnemyDifficulty.Advanced)
                     m_chainLinks2List[i] = CDGMath.GetCirclePosition(m_ballAngle * ChainSpeed2Modifier, distance, new Vector2(this.X, this.Bounds.Top));
-                else if (Difficulty == GameTypes.EnemyDifficulty.EXPERT)
+                else if (Difficulty == GameTypes.EnemyDifficulty.Expert)
                     m_chainLinks2List[i] = CDGMath.GetCirclePosition(-m_ballAngle * ChainSpeed2Modifier, -distance, new Vector2(this.X, this.Bounds.Top));
                 distance += m_chainLinkDistance;
             }

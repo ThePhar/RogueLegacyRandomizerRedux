@@ -61,7 +61,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.SKELETON_ARCHER_MINIBOSS_NAME;
                     LocStringID = EnemyEV.SKELETON_ARCHER_MINIBOSS_NAME_LOC_ID;
@@ -99,7 +99,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.SKELETON_ARCHER_EXPERT_NAME;
                     LocStringID = EnemyEV.SKELETON_ARCHER_EXPERT_NAME_LOC_ID;
@@ -137,7 +137,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.SKELETON_ARCHER_ADVANCED_NAME;
                     LocStringID = EnemyEV.SKELETON_ARCHER_ADVANCED_NAME_LOC_ID;
@@ -175,7 +175,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }		

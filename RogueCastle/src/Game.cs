@@ -89,17 +89,17 @@ namespace RogueCastle
 
             if (filePath.Contains("-t"))
             {
-                LevelEV.TestRoomLevelType = GameTypes.LevelType.TOWER;
+                LevelEV.TestRoomLevelType = GameTypes.LevelType.Tower;
                 filePath = filePath.Replace("-t", "");
             }
             else if (filePath.Contains("-d"))
             {
-                LevelEV.TestRoomLevelType = GameTypes.LevelType.DUNGEON;
+                LevelEV.TestRoomLevelType = GameTypes.LevelType.Dungeon;
                 filePath = filePath.Replace("-d", "");
             }
             else if (filePath.Contains("-g"))
             {
-                LevelEV.TestRoomLevelType = GameTypes.LevelType.GARDEN;
+                LevelEV.TestRoomLevelType = GameTypes.LevelType.Garden;
                 filePath = filePath.Replace("-g", "");    
             }
 
@@ -435,7 +435,7 @@ namespace RogueCastle
                 AreaStruct CastleZone = new AreaStruct()
                 {
                     Name = "The Grand Entrance",
-                    LevelType = GameTypes.LevelType.CASTLE,
+                    LevelType = GameTypes.LevelType.Castle,
                     TotalRooms = new Vector2(24, 28),//(17,19),//(20, 22),//(25,35),//(20,25),//(15, 25),
                     BossInArea = true,
                     SecretRooms = new Vector2(1, 3),//(2, 3),
@@ -445,7 +445,7 @@ namespace RogueCastle
 
                 AreaStruct GardenZone = new AreaStruct()
                 {
-                    LevelType = GameTypes.LevelType.GARDEN,
+                    LevelType = GameTypes.LevelType.Garden,
                     TotalRooms = new Vector2(23, 27),//(25,29),//(25, 35),//(15, 25),
                     BossInArea = true,
                     SecretRooms = new Vector2(1, 3),
@@ -455,7 +455,7 @@ namespace RogueCastle
 
                 AreaStruct TowerZone = new AreaStruct()
                 {
-                    LevelType = GameTypes.LevelType.TOWER,
+                    LevelType = GameTypes.LevelType.Tower,
                     TotalRooms = new Vector2(23, 27),//(27,31),//(25,29),//(25, 35),//(15, 25),
                     BossInArea = true,
                     SecretRooms = new Vector2(1, 3),
@@ -465,7 +465,7 @@ namespace RogueCastle
 
                 AreaStruct DungeonZone = new AreaStruct()
                 {
-                    LevelType = GameTypes.LevelType.DUNGEON,
+                    LevelType = GameTypes.LevelType.Dungeon,
                     TotalRooms = new Vector2(23, 27),//(29,33),//(25, 29),//(25, 35),//(15, 25),
                     BossInArea = true,
                     SecretRooms = new Vector2(1, 3),
@@ -478,7 +478,7 @@ namespace RogueCastle
                 AreaStruct CastleZoneDemo = new AreaStruct()
                 {
                     Name = "The Grand Entrance",
-                    LevelType = GameTypes.LevelType.CASTLE,
+                    LevelType = GameTypes.LevelType.Castle,
                     TotalRooms = new Vector2(24, 27),//(25,35),//(20,25),//(15, 25),
                     BossInArea = true,
                     SecretRooms = new Vector2(2, 3),
@@ -489,7 +489,7 @@ namespace RogueCastle
                 AreaStruct GardenZoneDemo = new AreaStruct()
                 {
                     Name = "The Grand Entrance",
-                    LevelType = GameTypes.LevelType.GARDEN,
+                    LevelType = GameTypes.LevelType.Garden,
                     TotalRooms = new Vector2(12, 14),//(25, 35),//(15, 25),
                     BossInArea = true,
                     SecretRooms = new Vector2(2, 3),
@@ -500,7 +500,7 @@ namespace RogueCastle
                 AreaStruct DungeonZoneDemo = new AreaStruct()
                 {
                     Name = "The Grand Entrance",
-                    LevelType = GameTypes.LevelType.DUNGEON,
+                    LevelType = GameTypes.LevelType.Dungeon,
                     TotalRooms = new Vector2(12, 14),//(25, 35),//(15, 25),
                     BossInArea = true,
                     SecretRooms = new Vector2(2, 3),
@@ -511,7 +511,7 @@ namespace RogueCastle
                 AreaStruct TowerZoneDemo = new AreaStruct()
                 {
                     Name = "The Grand Entrance",
-                    LevelType = GameTypes.LevelType.TOWER,
+                    LevelType = GameTypes.LevelType.Tower,
                     TotalRooms = new Vector2(12, 14),//(25, 35),//(15, 25),
                     BossInArea = true,
                     SecretRooms = new Vector2(2, 3),

@@ -78,7 +78,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.HORSE_MINIBOSS_NAME;
                     LocStringID = EnemyEV.HORSE_MINIBOSS_NAME_LOC_ID;
@@ -116,7 +116,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.HORSE_EXPERT_NAME;
                     LocStringID = EnemyEV.HORSE_EXPERT_NAME_LOC_ID;
@@ -154,7 +154,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.HORSE_ADVANCED_NAME;
                     LocStringID = EnemyEV.HORSE_ADVANCED_NAME_LOC_ID;
@@ -192,7 +192,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }				
@@ -389,7 +389,7 @@ namespace RogueCastle
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (this.Difficulty >= GameTypes.EnemyDifficulty.ADVANCED)
+            if (this.Difficulty >= GameTypes.EnemyDifficulty.Advanced)
             {
                 if (m_fireDropTimer > 0)
                 {
@@ -402,7 +402,7 @@ namespace RogueCastle
                 }
             }
             
-            if (this.Difficulty == GameTypes.EnemyDifficulty.EXPERT && this.IsPaused == false)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Expert && this.IsPaused == false)
             {
                 if (m_fireShieldList.Count < 1)
                     CastFireShield(m_numFireShieldObjs);

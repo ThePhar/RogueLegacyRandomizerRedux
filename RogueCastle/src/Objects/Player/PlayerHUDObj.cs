@@ -290,7 +290,7 @@ namespace RogueCastle
                 m_spellIcon.Visible = true;
                 m_iconHolder1.Opacity = 1;
                 m_spellCost.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_spellCost));
-                m_spellCost.Text = (int)(SpellEV.GetManaCost(Game.PlayerStats.Spell) * (1 - SkillSystem.GetSkill(SkillType.Mana_Cost_Down).ModifierAmount)) + " " + LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_15", null);
+                m_spellCost.Text = (int)(SpellEV.GetManaCost(Game.PlayerStats.Spell) * (1 - SkillSystem.GetSkill(SkillType.ManaCostDown).ModifierAmount)) + " " + LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_15", null);
                 m_spellCost.Visible = true;
             }
         }
@@ -338,7 +338,7 @@ namespace RogueCastle
             if (Game.PlayerStats.Spell != SpellType.NONE)
             {
                 m_spellCost.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_spellCost));
-                m_spellCost.Text = (int)(SpellEV.GetManaCost(Game.PlayerStats.Spell) * (1 - SkillSystem.GetSkill(SkillType.Mana_Cost_Down).ModifierAmount)) + " " + LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_15", null);
+                m_spellCost.Text = (int)(SpellEV.GetManaCost(Game.PlayerStats.Spell) * (1 - SkillSystem.GetSkill(SkillType.ManaCostDown).ModifierAmount)) + " " + LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_15", null);
             }
         }
 

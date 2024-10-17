@@ -36,7 +36,7 @@ namespace RogueCastle
             m_castleGate = new PhysicsObj("CastleEntranceGate_Sprite");
             m_castleGate.IsWeighted = false;
             m_castleGate.IsCollidable = true;
-            m_castleGate.CollisionTypeTag = GameTypes.CollisionType_WALL;
+            m_castleGate.CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL;
             m_castleGate.Layer = -1;
             m_castleGate.OutlineWidth = 2;
             this.GameObjList.Add(m_castleGate);
@@ -119,22 +119,22 @@ namespace RogueCastle
             // index layers are completely arbitrary and determined by their layers in the spritesheet.
             switch (levelType)
             {
-                case (GameTypes.LevelType.CASTLE):
+                case (GameTypes.LevelType.Castle):
                     index = 1; // Eyeball symbol.
                     if (Game.PlayerStats.ChallengeEyeballBeaten == true)
                         changeColour = true;
                     break;
-                case (GameTypes.LevelType.DUNGEON):
+                case (GameTypes.LevelType.Dungeon):
                     index = 4; // Blob symbol.
                     if (Game.PlayerStats.ChallengeBlobBeaten == true)
                         changeColour = true;
                     break;
-                case (GameTypes.LevelType.GARDEN):
+                case (GameTypes.LevelType.Garden):
                     index = 3; // Fairy symbol.
                     if (Game.PlayerStats.ChallengeSkullBeaten == true)
                         changeColour = true;
                     break;
-                case (GameTypes.LevelType.TOWER):
+                case (GameTypes.LevelType.Tower):
                     index = 2; // Fireball symbol.
                     if (Game.PlayerStats.ChallengeFireballBeaten == true)
                         changeColour = true;
@@ -193,13 +193,13 @@ namespace RogueCastle
 
             // Setting all boss states.
             if (Game.PlayerStats.EyeballBossBeaten == true)
-                RevealSymbol(GameTypes.LevelType.CASTLE, false);
+                RevealSymbol(GameTypes.LevelType.Castle, false);
             if (Game.PlayerStats.FairyBossBeaten == true)
-                RevealSymbol(GameTypes.LevelType.GARDEN, false);
+                RevealSymbol(GameTypes.LevelType.Garden, false);
             if (Game.PlayerStats.BlobBossBeaten == true)
-                RevealSymbol(GameTypes.LevelType.DUNGEON, false);
+                RevealSymbol(GameTypes.LevelType.Dungeon, false);
             if (Game.PlayerStats.FireballBossBeaten == true)
-                RevealSymbol(GameTypes.LevelType.TOWER, false);
+                RevealSymbol(GameTypes.LevelType.Tower, false);
 
             if (Game.PlayerStats.EyeballBossBeaten == true && Game.PlayerStats.FairyBossBeaten == true && Game.PlayerStats.BlobBossBeaten == true && Game.PlayerStats.FireballBossBeaten == true
                 && Game.PlayerStats.FinalDoorOpened == false && Player.ScaleX > 0.1f) // only run the animation if the player is actually in there.
@@ -233,7 +233,7 @@ namespace RogueCastle
             m_bossDoorOpening = true;
             m_bossDoor.Locked = false;
             Player.AttachedLevel.UpdateCamera();
-            RevealSymbol(GameTypes.LevelType.NONE, true);
+            RevealSymbol(GameTypes.LevelType.None, true);
             Player.CurrentSpeed = 0;
             Player.LockControls();
             Player.AttachedLevel.CameraLockedToPlayer = false;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -13,10 +14,10 @@ namespace RogueCastle
         {
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
-                case (GameTypes.EnemyDifficulty.EXPERT):
-                case (GameTypes.EnemyDifficulty.ADVANCED):
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Miniboss):
+                case (GameTypes.EnemyDifficulty.Expert):
+                case (GameTypes.EnemyDifficulty.Advanced):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }

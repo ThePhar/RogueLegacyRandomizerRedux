@@ -96,7 +96,7 @@ namespace RogueCastle
             m_gate = new PhysicsObj("CastleEntranceGate_Sprite");
             m_gate.IsWeighted = false;
             m_gate.IsCollidable = true;
-            m_gate.CollisionTypeTag = GameTypes.CollisionType_WALL;
+            m_gate.CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL;
             m_gate.Layer = -1;
             m_gate.OutlineWidth = 2;
             this.GameObjList.Add(m_gate);

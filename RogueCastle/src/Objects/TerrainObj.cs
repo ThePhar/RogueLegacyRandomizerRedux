@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System.Globalization;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -16,7 +17,7 @@ namespace RogueCastle
         public TerrainObj(int width, int height)
             : base(width, height)
         {
-            this.CollisionTypeTag = GameTypes.CollisionType_WALL;
+            this.CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL;
             this.IsCollidable = true;
             this.IsWeighted = false;
         }

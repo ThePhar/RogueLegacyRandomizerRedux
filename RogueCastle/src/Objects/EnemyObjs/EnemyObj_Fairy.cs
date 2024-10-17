@@ -89,7 +89,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.FAIRY_MINIBOSS_NAME;
                     LocStringID = EnemyEV.FAIRY_MINIBOSS_NAME_LOC_ID;
@@ -131,7 +131,7 @@ namespace RogueCastle
                         this.MaxHealth = 1;
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.FAIRY_EXPERT_NAME;
                     LocStringID = EnemyEV.FAIRY_EXPERT_NAME_LOC_ID;
@@ -169,7 +169,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.FAIRY_ADVANCED_NAME;
                     LocStringID = EnemyEV.FAIRY_ADVANCED_NAME_LOC_ID;
@@ -207,12 +207,12 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }
 
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                 m_resetSpriteName = "EnemyFairyGhostBossIdle_Character";
         }
 
@@ -243,7 +243,7 @@ namespace RogueCastle
             fireProjectilesLS.AddAction(new ChangeSpriteLogicAction("EnemyFairyGhostIdle_Character", true, true));
             fireProjectilesLS.AddAction(new DelayLogicAction(0.25f));
             fireProjectilesLS.AddAction(new LockFaceDirectionLogicAction(false));
-            fireProjectilesLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectilesLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet fireProjectilesAdvancedLS = new LogicSet(this);
             fireProjectilesAdvancedLS.AddAction(new ChangeSpriteLogicAction("EnemyFairyGhostIdle_Character", true, true));
@@ -261,7 +261,7 @@ namespace RogueCastle
             fireProjectilesAdvancedLS.AddAction(new ChangeSpriteLogicAction("EnemyFairyGhostIdle_Character", true, true));
             fireProjectilesAdvancedLS.AddAction(new DelayLogicAction(0.25f));
             fireProjectilesAdvancedLS.AddAction(new LockFaceDirectionLogicAction(false));
-            fireProjectilesAdvancedLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectilesAdvancedLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet fireProjectilesExpertLS = new LogicSet(this);
             fireProjectilesExpertLS.AddAction(new ChangeSpriteLogicAction("EnemyFairyGhostIdle_Character", true, true));
@@ -282,7 +282,7 @@ namespace RogueCastle
             fireProjectilesExpertLS.AddAction(new ChangeSpriteLogicAction("EnemyFairyGhostIdle_Character", true, true));
             fireProjectilesExpertLS.AddAction(new DelayLogicAction(0.25f));
             fireProjectilesExpertLS.AddAction(new LockFaceDirectionLogicAction(false));
-            fireProjectilesExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectilesExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             // MINIBOSS CODE
 
@@ -324,7 +324,7 @@ namespace RogueCastle
             fireProjectilesMinibossLS.AddAction(new ChangeSpriteLogicAction("EnemyFairyGhostBossIdle_Character", true, true));
             fireProjectilesMinibossLS.AddAction(new DelayLogicAction(0.25f));
             fireProjectilesMinibossLS.AddAction(new LockFaceDirectionLogicAction(false));
-            fireProjectilesMinibossLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectilesMinibossLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             m_generalBasicLB.AddLogicSet(walkTowardsLS, walkAwayLS, walkStopLS, fireProjectilesLS);
             m_generalAdvancedLB.AddLogicSet(walkTowardsLS, walkAwayLS, walkStopLS, fireProjectilesAdvancedLS);
@@ -333,7 +333,7 @@ namespace RogueCastle
 
             m_generalNeoLB.AddLogicSet(walkTowardsMinibossLS, walkAwayMinibossLS, walkStopMinibossLS, fireProjectilesMinibossLS);
 
-            if (Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                 m_generalCooldownLB.AddLogicSet(walkTowardsMinibossLS, walkAwayMinibossLS, walkStopMinibossLS);
             else
                 m_generalCooldownLB.AddLogicSet(walkTowardsLS, walkAwayLS, walkStopLS);
@@ -371,7 +371,7 @@ namespace RogueCastle
             if (useBossProjectile == true)
                 projData.SpriteName = "GhostProjectileBoss_Sprite";
 
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                 SoundManager.Play3DSound(this, Game.ScreenManager.Player, "Boss_Flameskull_Roar_01", "Boss_Flameskull_Roar_02", "Boss_Flameskull_Roar_03");
             else
                 SoundManager.Play3DSound(this, Game.ScreenManager.Player, "FairyAttack1");
@@ -567,7 +567,7 @@ namespace RogueCastle
         {
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (Difficulty == GameTypes.EnemyDifficulty.MINIBOSS && IsPaused == false)
+            if (Difficulty == GameTypes.EnemyDifficulty.Miniboss && IsPaused == false)
             {
                 if (m_summonCounter > 0)
                 {
@@ -582,13 +582,13 @@ namespace RogueCastle
                         {
                             if (Game.PlayerStats.TimesCastleBeaten <= 0 || this.IsNeo == true)
                             {
-                                CreateFairy(GameTypes.EnemyDifficulty.BASIC);
-                                CreateFairy(GameTypes.EnemyDifficulty.BASIC);
+                                CreateFairy(GameTypes.EnemyDifficulty.Basic);
+                                CreateFairy(GameTypes.EnemyDifficulty.Basic);
                             }
                             else
                             {
-                                CreateFairy(GameTypes.EnemyDifficulty.ADVANCED);
-                                CreateFairy(GameTypes.EnemyDifficulty.ADVANCED);
+                                CreateFairy(GameTypes.EnemyDifficulty.Advanced);
+                                CreateFairy(GameTypes.EnemyDifficulty.Advanced);
                             }
                             NumHits = 1;
                         }
@@ -676,7 +676,7 @@ namespace RogueCastle
         public override void CollisionResponse(CollisionBox thisBox, CollisionBox otherBox, int collisionResponseType)
         {
             // Hits the player in Tanooki mode.
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS && m_bossVersionKilled == false)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss && m_bossVersionKilled == false)
             {
                 PlayerObj player = otherBox.AbsParent as PlayerObj;
                 if (player != null && otherBox.Type == Consts.WEAPON_HITBOX && player.IsInvincible == false && player.State == PlayerObj.STATE_TANOOKI)
@@ -744,7 +744,7 @@ namespace RogueCastle
 
         public override void Kill(bool giveXP = true)
         {
-            if (Difficulty != GameTypes.EnemyDifficulty.MINIBOSS)
+            if (Difficulty != GameTypes.EnemyDifficulty.Miniboss)
             {
                 //SoundManager.Play3DSound(this, Game.ScreenManager.Player,"EyeballDeath1", "EyeballDeath2");
                 base.Kill(giveXP);

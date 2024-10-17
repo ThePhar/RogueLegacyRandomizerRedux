@@ -63,7 +63,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.PORTRAIT_MINIBOSS_NAME;
                     LocStringID = EnemyEV.PORTRAIT_MINIBOSS_NAME_LOC_ID;
@@ -101,7 +101,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.PORTRAIT_EXPERT_NAME;
                     LocStringID = EnemyEV.PORTRAIT_EXPERT_NAME_LOC_ID;
@@ -139,7 +139,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.PORTRAIT_ADVANCED_NAME;
                     LocStringID = EnemyEV.PORTRAIT_ADVANCED_NAME_LOC_ID;
@@ -177,7 +177,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }
@@ -226,7 +226,7 @@ namespace RogueCastle
             this.CollisionBoxes.Add(new CollisionBox((int)(-18 * this.ScaleX), (int)(-24 * this.ScaleY), (int)(36 * this.ScaleX), (int)(48 * this.ScaleY), 2, this));
             this.CollisionBoxes.Add(new CollisionBox((int)(-15 * this.ScaleX), (int)(-21 * this.ScaleY), (int)(31 * this.ScaleX), (int)(44 * this.ScaleY), 1, this));
 
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
             {
                 (GetChildAt(0) as SpriteObj).ChangeSprite("GiantPortrait_Sprite");
                 this.Scale = new Vector2(2, 2);
@@ -430,7 +430,7 @@ namespace RogueCastle
 
             if (Chasing == false)
             {
-                if (this.Difficulty != GameTypes.EnemyDifficulty.MINIBOSS)
+                if (this.Difficulty != GameTypes.EnemyDifficulty.Miniboss)
                 {
                     if (Shake == true)
                         this.Rotation = (float)Math.Sin(Game.TotalGameTime * 15) * 2;
@@ -440,7 +440,7 @@ namespace RogueCastle
             }
             else
             {
-                if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+                if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                     this.Rotation += (420 * elapsedSeconds);
                 //this.Rotation += 7;
                 else
@@ -505,7 +505,7 @@ namespace RogueCastle
             SoundManager.PlaySound("FinalBoss_St2_BlockLaugh");
             SpriteObj portrait = this.GetChildAt(0) as SpriteObj;
             portrait.ChangeSprite("EnemyPortrait" + (int)this.Difficulty + "_Sprite");
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                 this.GetChildAt(1).Visible = false;
         }
     }

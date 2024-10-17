@@ -72,7 +72,7 @@ namespace RogueCastle
             BorderList = new List<BorderObj>();
             TempEnemyList = new List<EnemyObj>();
 
-            LevelType = GameTypes.LevelType.NONE;
+            LevelType = GameTypes.LevelType.None;
 
             m_indexText = new TextObj(Game.PixelArtFontBold);
             m_indexText.FontSize = 150;

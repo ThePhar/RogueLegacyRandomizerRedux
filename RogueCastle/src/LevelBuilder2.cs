@@ -114,16 +114,16 @@ namespace RogueCastle
                     List<RoomObj>[,] roomArray = null;
                     switch (levelType)
                     {
-                        case (GameTypes.LevelType.CASTLE):
+                        case (GameTypes.LevelType.Castle):
                             roomArray = m_castleRoomArray;
                             break;
-                        case (GameTypes.LevelType.DUNGEON):
+                        case (GameTypes.LevelType.Dungeon):
                             roomArray = m_dungeonRoomArray;
                             break;
-                        case (GameTypes.LevelType.TOWER):
+                        case (GameTypes.LevelType.Tower):
                             roomArray = m_towerRoomArray;
                             break;
-                        case (GameTypes.LevelType.GARDEN):
+                        case (GameTypes.LevelType.Garden):
                             roomArray = m_gardenRoomArray;
                             break;
                     }
@@ -171,16 +171,16 @@ namespace RogueCastle
                         
                         switch (levelType)
                         {
-                            case (GameTypes.LevelType.CASTLE):
+                            case (GameTypes.LevelType.Castle):
                                 m_linkerCastleRoom = linkerRoom;
                                 break;
-                            case (GameTypes.LevelType.DUNGEON):
+                            case (GameTypes.LevelType.Dungeon):
                                 m_linkerDungeonRoom = linkerRoom;
                                 break;
-                            case (GameTypes.LevelType.TOWER):
+                            case (GameTypes.LevelType.Tower):
                                 m_linkerTowerRoom = linkerRoom;
                                break;
-                            case (GameTypes.LevelType.GARDEN):
+                            case (GameTypes.LevelType.Garden):
                                 m_linkerGardenRoom = linkerRoom;
                                break;
                         }
@@ -224,16 +224,16 @@ namespace RogueCastle
 
                         switch (levelType)
                         {
-                            case (GameTypes.LevelType.CASTLE):
+                            case (GameTypes.LevelType.Castle):
                                 m_bossCastleEntranceRoom = bossEntranceRoom;
                                 break;
-                            case (GameTypes.LevelType.DUNGEON):
+                            case (GameTypes.LevelType.Dungeon):
                                 m_bossDungeonEntranceRoom = bossEntranceRoom;
                                 break;
-                            case (GameTypes.LevelType.TOWER):
+                            case (GameTypes.LevelType.Tower):
                                 m_bossTowerEntranceRoom = bossEntranceRoom;
                                 break;
-                            case (GameTypes.LevelType.GARDEN):
+                            case (GameTypes.LevelType.Garden):
                                 m_bossGardenEntranceRoom = bossEntranceRoom;
                                 break;
                         }
@@ -246,7 +246,7 @@ namespace RogueCastle
                             m_castleEntranceRoom = new CastleEntranceRoomObj();
                             m_castleEntranceRoom.CopyRoomProperties(room);
                             m_castleEntranceRoom.CopyRoomObjects(room);
-                            m_castleEntranceRoom.LevelType = GameTypes.LevelType.CASTLE;
+                            m_castleEntranceRoom.LevelType = GameTypes.LevelType.Castle;
                         }
                         break;
                     case ("Compass"):
@@ -262,16 +262,16 @@ namespace RogueCastle
 
                         switch (levelType)
                         {
-                            case (GameTypes.LevelType.CASTLE):
+                            case (GameTypes.LevelType.Castle):
                                 secretRoomArray = m_secretCastleRoomArray;
                                 break;
-                            case (GameTypes.LevelType.DUNGEON):
+                            case (GameTypes.LevelType.Dungeon):
                                 secretRoomArray = m_secretDungeonRoomArray;
                                 break;
-                            case (GameTypes.LevelType.TOWER):
+                            case (GameTypes.LevelType.Tower):
                                 secretRoomArray = m_secretTowerRoomArray;
                                 break;
-                            case (GameTypes.LevelType.GARDEN):
+                            case (GameTypes.LevelType.Garden):
                                 secretRoomArray = m_secretGardenRoomArray;
                                 break;
                         }
@@ -286,16 +286,16 @@ namespace RogueCastle
 
                         switch (levelType)
                         {
-                            case (GameTypes.LevelType.CASTLE):
+                            case (GameTypes.LevelType.Castle):
                                 bonusRoomArray = m_bonusCastleRoomArray;
                                 break;
-                            case (GameTypes.LevelType.DUNGEON):
+                            case (GameTypes.LevelType.Dungeon):
                                 bonusRoomArray = m_bonusDungeonRoomArray;
                                 break;
-                            case (GameTypes.LevelType.TOWER):
+                            case (GameTypes.LevelType.Tower):
                                 bonusRoomArray = m_bonusTowerRoomArray;
                                 break;
-                            case (GameTypes.LevelType.GARDEN):
+                            case (GameTypes.LevelType.Garden):
                                 bonusRoomArray = m_bonusGardenRoomArray;
                                 break;
                         }
@@ -363,19 +363,19 @@ namespace RogueCastle
             List<RoomObj> bonusRoomArray = null;
             switch (areaInfo.LevelType)
             {
-                case(GameTypes.LevelType.CASTLE):
+                case(GameTypes.LevelType.Castle):
                     secretRoomArray = m_secretCastleRoomArray;
                     bonusRoomArray = m_bonusCastleRoomArray;
                     break;
-                case (GameTypes.LevelType.DUNGEON):
+                case (GameTypes.LevelType.Dungeon):
                     secretRoomArray = m_secretDungeonRoomArray;
                     bonusRoomArray = m_bonusDungeonRoomArray;
                     break;
-                case (GameTypes.LevelType.GARDEN):
+                case (GameTypes.LevelType.Garden):
                     secretRoomArray = m_secretGardenRoomArray;
                     bonusRoomArray = m_bonusGardenRoomArray;
                     break;
-                case (GameTypes.LevelType.TOWER):
+                case (GameTypes.LevelType.Tower):
                     secretRoomArray = m_secretTowerRoomArray;
                     bonusRoomArray = m_bonusTowerRoomArray;
                     break;
@@ -414,28 +414,28 @@ namespace RogueCastle
 
             switch (levelType)
             {
-                case (GameTypes.LevelType.CASTLE):
+                case (GameTypes.LevelType.Castle):
                     leftDoorPercent = LevelEV.LEVEL_CASTLE_LEFTDOOR;
                     rightDoorPercent = LevelEV.LEVEL_CASTLE_RIGHTDOOR;
                     topDoorPercent = LevelEV.LEVEL_CASTLE_TOPDOOR;
                     bottomDoorPercent = LevelEV.LEVEL_CASTLE_BOTTOMDOOR;
                     startingDoorPosition = "Right";
                     break;
-                case (GameTypes.LevelType.GARDEN):
+                case (GameTypes.LevelType.Garden):
                     leftDoorPercent = LevelEV.LEVEL_GARDEN_LEFTDOOR;
                     rightDoorPercent = LevelEV.LEVEL_GARDEN_RIGHTDOOR;
                     topDoorPercent = LevelEV.LEVEL_GARDEN_TOPDOOR;
                     bottomDoorPercent = LevelEV.LEVEL_GARDEN_BOTTOMDOOR;
                     startingDoorPosition = "Right"; //"Right"; TEDDY - SO GARDEN CAN CONNECT TOP
                     break;
-                case (GameTypes.LevelType.TOWER):
+                case (GameTypes.LevelType.Tower):
                     leftDoorPercent = LevelEV.LEVEL_TOWER_LEFTDOOR;
                     rightDoorPercent = LevelEV.LEVEL_TOWER_RIGHTDOOR;
                     topDoorPercent = LevelEV.LEVEL_TOWER_TOPDOOR;
                     bottomDoorPercent = LevelEV.LEVEL_TOWER_BOTTOMDOOR;
                     startingDoorPosition = "Top";
                     break;
-                case (GameTypes.LevelType.DUNGEON):
+                case (GameTypes.LevelType.Dungeon):
                     leftDoorPercent = LevelEV.LEVEL_DUNGEON_LEFTDOOR;
                     rightDoorPercent = LevelEV.LEVEL_DUNGEON_RIGHTDOOR;
                     topDoorPercent = LevelEV.LEVEL_DUNGEON_TOPDOOR;
@@ -450,7 +450,7 @@ namespace RogueCastle
                 roomList.Add(startingRoom);
                 tempRoomsToCheckCollisionsList.Add(startingRoom);
 
-                startingRoom.LevelType = GameTypes.LevelType.NONE;
+                startingRoom.LevelType = GameTypes.LevelType.None;
                 numRoomsLeftToCreate--; // Because the starting room is added to the list so reduce the number of rooms that need to be made by 1.
                 MoveRoom(startingRoom, Vector2.Zero);// Sets the starting room to position (0,0) for simplicity.
 
@@ -544,16 +544,16 @@ namespace RogueCastle
 
                     switch (areaInfo.LevelType)
                     {
-                        case (GameTypes.LevelType.CASTLE):
+                        case (GameTypes.LevelType.Castle):
                             bossEntranceRoom = m_bossCastleEntranceRoom;
                             break;
-                        case (GameTypes.LevelType.DUNGEON):
+                        case (GameTypes.LevelType.Dungeon):
                             bossEntranceRoom = m_bossDungeonEntranceRoom;
                             break;
-                        case (GameTypes.LevelType.GARDEN):
+                        case (GameTypes.LevelType.Garden):
                             bossEntranceRoom = m_bossGardenEntranceRoom;
                             break;
-                        case (GameTypes.LevelType.TOWER):
+                        case (GameTypes.LevelType.Tower):
                             bossEntranceRoom = m_bossTowerEntranceRoom;
                             break;
                     }
@@ -956,7 +956,7 @@ namespace RogueCastle
 
             foreach (RoomObj room in roomList)
             {
-                if (room != startingRoom && ((room.LevelType == GameTypes.LevelType.CASTLE && castleOnly == true) || castleOnly == false))
+                if (room != startingRoom && ((room.LevelType == GameTypes.LevelType.Castle && castleOnly == true) || castleOnly == false))
                 {
                     float distance = 0;
                     switch (furthestRoomDirection)
@@ -1050,16 +1050,16 @@ namespace RogueCastle
             RoomObj linkerRoom = null;
             switch (needsLinking.Room.LevelType)
             {
-                case (GameTypes.LevelType.CASTLE):
+                case (GameTypes.LevelType.Castle):
                     linkerRoom = m_linkerCastleRoom.Clone() as RoomObj;
                     break;
-                case (GameTypes.LevelType.DUNGEON):
+                case (GameTypes.LevelType.Dungeon):
                     linkerRoom = m_linkerDungeonRoom.Clone() as RoomObj;
                     break;
-                case (GameTypes.LevelType.TOWER):
+                case (GameTypes.LevelType.Tower):
                     linkerRoom = m_linkerTowerRoom.Clone() as RoomObj;
                     break;
-                case (GameTypes.LevelType.GARDEN):
+                case (GameTypes.LevelType.Garden):
                     linkerRoom = m_linkerGardenRoom.Clone() as RoomObj;
                     break;
             }
@@ -1250,19 +1250,19 @@ namespace RogueCastle
                 switch (room.LevelType)
                 {
                     default:
-                    case (GameTypes.LevelType.CASTLE):
+                    case (GameTypes.LevelType.Castle):
                         enemyPool = LevelEV.CastleEnemyList;
                         enemyDifficultyPool = LevelEV.CastleEnemyDifficultyList;
                         break;
-                    case (GameTypes.LevelType.GARDEN):
+                    case (GameTypes.LevelType.Garden):
                         enemyPool = LevelEV.GardenEnemyList;
                         enemyDifficultyPool = LevelEV.GardenEnemyDifficultyList;
                         break;
-                    case (GameTypes.LevelType.TOWER):
+                    case (GameTypes.LevelType.Tower):
                         enemyPool = LevelEV.TowerEnemyList;
                         enemyDifficultyPool = LevelEV.TowerEnemyDifficultyList;
                         break;
-                    case (GameTypes.LevelType.DUNGEON):
+                    case (GameTypes.LevelType.Dungeon):
                         enemyPool = LevelEV.DungeonEnemyList;
                         enemyDifficultyPool = LevelEV.DungeonEnemyDifficultyList;
                         break;
@@ -1345,7 +1345,7 @@ namespace RogueCastle
                             else if (enemyOrb.OrbType == 4) // Black orb.
                                 newEnemy = EnemyBuilder.BuildEnemy(blackEnemyType, null, null, null, (GameTypes.EnemyDifficulty)blackEnemyDifficulty);
                             else
-                                newEnemy = EnemyBuilder.BuildEnemy(yellowEnemyType, null, null, null, GameTypes.EnemyDifficulty.EXPERT); // In procedurallevelscreen, expert enemies will be given +10 levels.
+                                newEnemy = EnemyBuilder.BuildEnemy(yellowEnemyType, null, null, null, GameTypes.EnemyDifficulty.Expert); // In procedurallevelscreen, expert enemies will be given +10 levels.
 
                             // A check to ensure a forceflying orb selects a flying enemy.
                             while (enemyOrb.ForceFlying == true && newEnemy.IsWeighted == true)
@@ -1392,7 +1392,7 @@ namespace RogueCastle
                                 {
                                     randomEnemyOrbIndex = CDGMath.RandomInt(0, enemyPool.Length - 1);
                                     yellowEnemyType = enemyPool[randomEnemyOrbIndex];
-                                    newEnemy = EnemyBuilder.BuildEnemy(yellowEnemyType, null, null, null, GameTypes.EnemyDifficulty.EXPERT);
+                                    newEnemy = EnemyBuilder.BuildEnemy(yellowEnemyType, null, null, null, GameTypes.EnemyDifficulty.Expert);
                                 }
                             }
 
@@ -1415,7 +1415,7 @@ namespace RogueCastle
                         //if (CDGMath.RandomInt(1, 100) <= 100) // Currently 100% chance of spawning the enemy.
                         {
                             int randomEnemyIndex = CDGMath.RandomInt(0, enemyPool.Length - 1);
-                            EnemyObj newEnemy = EnemyBuilder.BuildEnemy(enemyPool[randomEnemyIndex], null, null, null, GameTypes.EnemyDifficulty.BASIC);
+                            EnemyObj newEnemy = EnemyBuilder.BuildEnemy(enemyPool[randomEnemyIndex], null, null, null, GameTypes.EnemyDifficulty.Basic);
                             newEnemy.Position = tag.Position;
                             newEnemy.IsProcedural = true;
                             room.EnemyList.Add(newEnemy);
@@ -1463,7 +1463,7 @@ namespace RogueCastle
                         EnemyObj enemyToOverride = room.EnemyList[i];
                         if (enemyToOverride.IsProcedural == true) // Only replace procedural enemies.
                         {
-                            EnemyObj newEnemy = EnemyBuilder.BuildEnemy(enemyTypeData[indexCounter], level.Player, null, level, GameTypes.EnemyDifficulty.BASIC, true);
+                            EnemyObj newEnemy = EnemyBuilder.BuildEnemy(enemyTypeData[indexCounter], level.Player, null, level, GameTypes.EnemyDifficulty.Basic, true);
                             newEnemy.IsProcedural = true;
                             newEnemy.Position = enemyToOverride.Position;
 
@@ -1604,10 +1604,10 @@ namespace RogueCastle
         {
             Console.WriteLine("///////////// LOADING PRE-CONSTRUCTED LEVEL //////");
             List<RoomObj> sequencedRoomList = SequencedRoomList;
-            List<RoomObj> dlcCastleRoomList = GetSequencedDLCRoomList(GameTypes.LevelType.CASTLE);
-            List<RoomObj> dlcGardenRoomList = GetSequencedDLCRoomList(GameTypes.LevelType.GARDEN);
-            List<RoomObj> dlcTowerRoomList = GetSequencedDLCRoomList(GameTypes.LevelType.TOWER);
-            List<RoomObj> dlcDungeonRoomList = GetSequencedDLCRoomList(GameTypes.LevelType.DUNGEON);
+            List<RoomObj> dlcCastleRoomList = GetSequencedDLCRoomList(GameTypes.LevelType.Castle);
+            List<RoomObj> dlcGardenRoomList = GetSequencedDLCRoomList(GameTypes.LevelType.Garden);
+            List<RoomObj> dlcTowerRoomList = GetSequencedDLCRoomList(GameTypes.LevelType.Tower);
+            List<RoomObj> dlcDungeonRoomList = GetSequencedDLCRoomList(GameTypes.LevelType.Dungeon);
 
             ProceduralLevelScreen createdLevel = new ProceduralLevelScreen();
             List<RoomObj> roomList = new List<RoomObj>();
@@ -1696,7 +1696,7 @@ namespace RogueCastle
             // Separating the level structs into sequentially attached and non-sequentially attached ones.
             foreach (AreaStruct areaStruct in areaStructs)
             {
-                if (areaStruct.LevelType == GameTypes.LevelType.CASTLE || areaStruct.LevelType == GameTypes.LevelType.GARDEN) //TEDDY COMMENT THIS OUT TO DISABLE OUT GARDEN CONNECT RIGHT
+                if (areaStruct.LevelType == GameTypes.LevelType.Castle || areaStruct.LevelType == GameTypes.LevelType.Garden) //TEDDY COMMENT THIS OUT TO DISABLE OUT GARDEN CONNECT RIGHT
                     sequentialStructs.Add(areaStruct);
                 else
                     nonSequentialStructs.Add(areaStruct);
@@ -1802,13 +1802,13 @@ namespace RogueCastle
                 string furthestDoorDirection = "";
                 switch (areaInfo.LevelType)
                 {
-                    case (GameTypes.LevelType.TOWER):
+                    case (GameTypes.LevelType.Tower):
                         furthestDoorDirection = "Top";
                         break;
-                    case (GameTypes.LevelType.DUNGEON):
+                    case (GameTypes.LevelType.Dungeon):
                         furthestDoorDirection = "Bottom";//"Bottom";
                         break;
-                    case (GameTypes.LevelType.GARDEN):
+                    case (GameTypes.LevelType.Garden):
                         furthestDoorDirection = "Right"; //TEDDY - COMMENTED OUT DUNGEON CONNECT TOP, AND ADDED GARDEN CONNECT TOP
                         break;
                     default:
@@ -1861,9 +1861,9 @@ namespace RogueCastle
                 masterRoomList.Add(linkerDoorAdded.Room);
 
                 // Making sure each area has a top, bottom, and rightmost exit door.  If not, recreate all sequential areas.
-                if ((areaInfo.LevelType == GameTypes.LevelType.TOWER && (LevelBuilder2.FindFurthestDoor(nonSequentialAreas[i], "Right", "Right", false, false) == null || 
+                if ((areaInfo.LevelType == GameTypes.LevelType.Tower && (LevelBuilder2.FindFurthestDoor(nonSequentialAreas[i], "Right", "Right", false, false) == null || 
                     LevelBuilder2.FindFurthestDoor(nonSequentialAreas[i], "Top", "Top", false, false) == null)) ||
-                    (areaInfo.LevelType == GameTypes.LevelType.DUNGEON && (LevelBuilder2.FindFurthestDoor(nonSequentialAreas[i], "Right", "Right", false, false) == null || 
+                    (areaInfo.LevelType == GameTypes.LevelType.Dungeon && (LevelBuilder2.FindFurthestDoor(nonSequentialAreas[i], "Right", "Right", false, false) == null || 
                     LevelBuilder2.FindFurthestDoor(nonSequentialAreas[i], "Bottom", "Bottom", false, false) == null)))
                 {
                     bool removedLinkedRoom = false;
@@ -2145,16 +2145,16 @@ namespace RogueCastle
                 byte bossRoomType = 0;
                 switch(room.LevelType)
                 {
-                    case (GameTypes.LevelType.CASTLE):
+                    case (GameTypes.LevelType.Castle):
                         bossRoomType = LevelEV.CASTLE_BOSS_ROOM;
                         break;
-                    case(GameTypes.LevelType.TOWER):
+                    case(GameTypes.LevelType.Tower):
                         bossRoomType = LevelEV.TOWER_BOSS_ROOM;
                         break;
-                    case(GameTypes.LevelType.DUNGEON):
+                    case(GameTypes.LevelType.Dungeon):
                         bossRoomType = LevelEV.DUNGEON_BOSS_ROOM;
                         break;
-                    case(GameTypes.LevelType.GARDEN):
+                    case(GameTypes.LevelType.Garden):
                         bossRoomType = LevelEV.GARDEN_BOSS_ROOM;
                         break;
                 }
@@ -2220,7 +2220,7 @@ namespace RogueCastle
             if (challengeRoom != null)
             {
                 challengeRoom = challengeRoom.Clone() as RoomObj;
-                challengeRoom.LevelType = GameTypes.LevelType.CASTLE;
+                challengeRoom.LevelType = GameTypes.LevelType.Castle;
                 challengeRoom.LinkedRoom = null;
 
                 challengeRoomsToAdd.Add(challengeRoom);
@@ -2284,15 +2284,15 @@ namespace RogueCastle
             switch (levelType)
             {
                 default:
-                case (GameTypes.LevelType.NONE):
+                case (GameTypes.LevelType.None):
                     throw new Exception("Cannot create level of type NONE");
-                case (GameTypes.LevelType.CASTLE):
+                case (GameTypes.LevelType.Castle):
                     return m_castleRoomArray;
-                case (GameTypes.LevelType.GARDEN):
+                case (GameTypes.LevelType.Garden):
                     return m_gardenRoomArray;
-                case (GameTypes.LevelType.TOWER):
+                case (GameTypes.LevelType.Tower):
                     return m_towerRoomArray;
-                case (GameTypes.LevelType.DUNGEON):
+                case (GameTypes.LevelType.Dungeon):
                     return m_dungeonRoomArray;
             }
         }
@@ -2313,7 +2313,7 @@ namespace RogueCastle
             // 40000 is for Dungeon areas.
 
             index = 10000;
-            List<RoomObj> roomList = GetSequencedDLCRoomList(GameTypes.LevelType.CASTLE);
+            List<RoomObj> roomList = GetSequencedDLCRoomList(GameTypes.LevelType.Castle);
             foreach (RoomObj room in roomList)
             {
                 room.PoolIndex = index;
@@ -2321,7 +2321,7 @@ namespace RogueCastle
             }
 
             index = 20000;
-            roomList = GetSequencedDLCRoomList(GameTypes.LevelType.GARDEN);
+            roomList = GetSequencedDLCRoomList(GameTypes.LevelType.Garden);
             foreach (RoomObj room in roomList)
             {
                 room.PoolIndex = index;
@@ -2329,7 +2329,7 @@ namespace RogueCastle
             }
 
             index = 30000;
-            roomList = GetSequencedDLCRoomList(GameTypes.LevelType.TOWER);
+            roomList = GetSequencedDLCRoomList(GameTypes.LevelType.Tower);
             foreach (RoomObj room in roomList)
             {
                 room.PoolIndex = index;
@@ -2337,7 +2337,7 @@ namespace RogueCastle
             }
 
             index = 40000;
-            roomList = GetSequencedDLCRoomList(GameTypes.LevelType.DUNGEON);
+            roomList = GetSequencedDLCRoomList(GameTypes.LevelType.Dungeon);
             foreach (RoomObj room in roomList)
             {
                 room.PoolIndex = index;
@@ -2416,13 +2416,13 @@ namespace RogueCastle
         {
             switch (levelType)
             {
-                case GameTypes.LevelType.CASTLE:
+                case GameTypes.LevelType.Castle:
                     return m_dlcCastleRoomArray;
-                case GameTypes.LevelType.DUNGEON:
+                case GameTypes.LevelType.Dungeon:
                     return m_dlcDungeonRoomArray;
-                case GameTypes.LevelType.GARDEN:
+                case GameTypes.LevelType.Garden:
                     return m_dlcGardenRoomArray;
-                case GameTypes.LevelType.TOWER:
+                case GameTypes.LevelType.Tower:
                     return m_dlcTowerRoomArray;
             }
             return null;

@@ -59,7 +59,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.STARBURST_MINIBOSS_NAME;
                     LocStringID = EnemyEV.STARBURST_MINIBOSS_NAME_LOC_ID;
@@ -97,7 +97,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.STARBURST_EXPERT_NAME;
                     LocStringID = EnemyEV.STARBURST_EXPERT_NAME_LOC_ID;
@@ -135,7 +135,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.STARBURST_ADVANCED_NAME;
                     LocStringID = EnemyEV.STARBURST_ADVANCED_NAME_LOC_ID;
@@ -173,7 +173,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }			
@@ -209,7 +209,7 @@ namespace RogueCastle
             fireProjectileBasicLS.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
             fireProjectileBasicLS.AddAction(new ChangeSpriteLogicAction("EnemyStarburstIdle_Character", true, true));
             fireProjectileBasicLS.AddAction(new DelayLogicAction(1.0f, 1.0f));
-            fireProjectileBasicLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectileBasicLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet fireProjectileAdvancedLS = new LogicSet(this);
             projData.Angle = new Vector2(45, 45);
@@ -236,7 +236,7 @@ namespace RogueCastle
             fireProjectileAdvancedLS.AddAction(new ChangeSpriteLogicAction("EnemyStarburstIdle_Character", true, true));
             fireProjectileAdvancedLS.AddAction(new ChangePropertyLogicAction(_objectList[1], "Rotation", 45));
             fireProjectileAdvancedLS.AddAction(new DelayLogicAction(1.0f, 1.0f));
-            fireProjectileAdvancedLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectileAdvancedLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             //TEDDY - Just like Advanced projetiles but made so the bullets go through terrain.
             #region EXPERT
@@ -288,7 +288,7 @@ namespace RogueCastle
             fireProjectileExpertLS.AddAction(new ChangeSpriteLogicAction("EnemyStarburstIdle_Character", true, true));
             fireProjectileExpertLS.AddAction(new ChangePropertyLogicAction(_objectList[1], "Rotation", 45));
             fireProjectileExpertLS.AddAction(new DelayLogicAction(1.25f, 1.25f));
-            fireProjectileExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            fireProjectileExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             #endregion
 

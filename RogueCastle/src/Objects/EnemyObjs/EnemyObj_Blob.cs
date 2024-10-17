@@ -91,7 +91,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
 
                     SetNumberOfHits(5); //6
                     BlobSizeChange = new Vector2(0.6f, 0.6f);
@@ -139,7 +139,7 @@ namespace RogueCastle
                     }
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     SetNumberOfHits(4); //5
                     BlobSizeChange = new Vector2(0.65f, 0.65f);
                     BlobSpeedChange = 2.25f;
@@ -181,7 +181,7 @@ namespace RogueCastle
 					#endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     SetNumberOfHits(3); //4;
                     BlobSizeChange = new Vector2(0.6f, 0.6f);
                     BlobSpeedChange = 2.25f;
@@ -223,14 +223,14 @@ namespace RogueCastle
 					#endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                     //this.Scale = new Vector2(2.4f, 2.4f);
                     break;
                 default:
                     break;
             }
 
-            if (this.Difficulty == GameTypes.EnemyDifficulty.BASIC)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Basic)
             {
                 _objectList[0].TextureColor = Color.Green;
                 _objectList[2].TextureColor = Color.LightGreen;
@@ -239,7 +239,7 @@ namespace RogueCastle
                 _objectList[1].TextureColor = Color.Red;
             }
 
-            else if (this.Difficulty == GameTypes.EnemyDifficulty.ADVANCED)
+            else if (this.Difficulty == GameTypes.EnemyDifficulty.Advanced)
             {
                 _objectList[0].TextureColor = Color.Yellow;
                 _objectList[2].TextureColor = Color.LightYellow;
@@ -247,7 +247,7 @@ namespace RogueCastle
                 (_objectList[1] as SpriteObj).OutlineColour = Color.Pink;
                 _objectList[1].TextureColor = Color.Pink;
             }
-            else if (this.Difficulty == GameTypes.EnemyDifficulty.EXPERT)
+            else if (this.Difficulty == GameTypes.EnemyDifficulty.Expert)
             {
                 _objectList[0].TextureColor = Color.Red;
                 _objectList[2].TextureColor = Color.Pink;
@@ -256,7 +256,7 @@ namespace RogueCastle
                 _objectList[1].TextureColor = Color.Yellow;
             }
 
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                 m_resetSpriteName = "EnemyBlobBossIdle_Character";
         }
 
@@ -297,7 +297,7 @@ namespace RogueCastle
             jumpLS.AddAction(new ChangeSpriteLogicAction("EnemyBlobIdle_Character", true, true));
             jumpLS.AddAction(new DelayLogicAction(0.2f));
             jumpLS.AddAction(new LockFaceDirectionLogicAction(false));
-            jumpLS.Tag = GameTypes.LogicSetType_ATTACK;
+            jumpLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             ProjectileData projData = new ProjectileData(this)
             {
@@ -338,7 +338,7 @@ namespace RogueCastle
             jumpAdvancedLS.AddAction(new ChangeSpriteLogicAction("EnemyBlobIdle_Character", true, true));
             jumpAdvancedLS.AddAction(new DelayLogicAction(0.2f));
             jumpAdvancedLS.AddAction(new LockFaceDirectionLogicAction(false));
-            jumpAdvancedLS.Tag = GameTypes.LogicSetType_ATTACK;
+            jumpAdvancedLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet jumpExpertLS = new LogicSet(this);
             jumpExpertLS.AddAction(new LockFaceDirectionLogicAction(false));
@@ -366,7 +366,7 @@ namespace RogueCastle
             jumpExpertLS.AddAction(new ChangeSpriteLogicAction("EnemyBlobIdle_Character", true, true));
             jumpExpertLS.AddAction(new DelayLogicAction(0.2f));
             jumpExpertLS.AddAction(new LockFaceDirectionLogicAction(false));
-            jumpExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            jumpExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             ///////////////// BOSS LOGIC SETS /////////////////////////
 
@@ -405,7 +405,7 @@ namespace RogueCastle
             jumpBossLS.AddAction(new ChangeSpriteLogicAction("EnemyBlobBossIdle_Character", true, true));
             jumpBossLS.AddAction(new DelayLogicAction(0.2f));
             jumpBossLS.AddAction(new LockFaceDirectionLogicAction(false));
-            jumpBossLS.Tag = GameTypes.LogicSetType_ATTACK;
+            jumpBossLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet neoChaseLB = new LogicSet(this);
             neoChaseLB.AddAction(new ChangeSpriteLogicAction("EnemyBlobBossAir_Character", true, true));
@@ -432,7 +432,7 @@ namespace RogueCastle
             logicBlocksToDispose.Add(m_generalMiniBossLB);
             logicBlocksToDispose.Add(m_generalBossCooldownLB);
 
-            if (Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (Difficulty == GameTypes.EnemyDifficulty.Miniboss)
             {
                 SetCooldownLogicBlock(m_generalBossCooldownLB, 40, 40, 20); //walkTowardsLS, walkAwayLS, walkStopLS
                 this.ChangeSprite("EnemyBlobBossIdle_Character");
@@ -590,7 +590,7 @@ namespace RogueCastle
                 blob.AccelerationX += (m_target.EnemyKnockBack.X + randXKnockback);
             blob.AccelerationY += -(m_target.EnemyKnockBack.Y + randYKnockback);
 
-            if (blob.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (blob.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
             {
                 for (int i = 0; i < this.NumChildren; i++)
                 {
@@ -614,7 +614,7 @@ namespace RogueCastle
 
         public void CreateWizard()
         {
-            EnemyObj_EarthWizard wizard = new EnemyObj_EarthWizard(null, null, null, GameTypes.EnemyDifficulty.ADVANCED);
+            EnemyObj_EarthWizard wizard = new EnemyObj_EarthWizard(null, null, null, GameTypes.EnemyDifficulty.Advanced);
 
             //int randomUnit = CDGMath.RandomInt(1, 3);
             //if (randomUnit == 1)
@@ -679,7 +679,7 @@ namespace RogueCastle
         public override void Update(GameTime gameTime)
         {
             // Maintains the enemy's speed in the air so that he can jump onto platforms.
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
             {
                 if (m_isTouchingGround == false && IsWeighted == true && CurrentSpeed == 0 && this.SpriteName == "EnemyBlobBossAir_Character")
                     this.CurrentSpeed = this.Speed;
@@ -759,7 +759,7 @@ namespace RogueCastle
                                 this.Scale = new Vector2(ScaleX * BlobSizeChange.X, ScaleY * BlobSizeChange.Y);
                                 this.Speed *= BlobSpeedChange;
 
-                                if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+                                if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                                     CreateWizard();
                             }
                             else
@@ -784,7 +784,7 @@ namespace RogueCastle
         public override void CollisionResponse(CollisionBox thisBox, CollisionBox otherBox, int collisionResponseType)
         {
             // Hits the player in Tanooki mode.
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS && m_bossVersionKilled == false)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss && m_bossVersionKilled == false)
             {
                 PlayerObj player = otherBox.AbsParent as PlayerObj;
                 if (player != null && otherBox.Type == Consts.WEAPON_HITBOX && player.IsInvincible == false && player.State == PlayerObj.STATE_TANOOKI)
@@ -796,7 +796,7 @@ namespace RogueCastle
 
         public override void Kill(bool giveXP = true)
         {
-            if (Difficulty != GameTypes.EnemyDifficulty.MINIBOSS)
+            if (Difficulty != GameTypes.EnemyDifficulty.Miniboss)
                 base.Kill(giveXP);
             else
             {
@@ -901,22 +901,22 @@ namespace RogueCastle
                 //this.Scale = new Vector2(1, 1);
                 switch (this.Difficulty)
                 {
-                    case (GameTypes.EnemyDifficulty.BASIC):
+                    case (GameTypes.EnemyDifficulty.Basic):
                         this.Speed = EnemyEV.BLOB_BASIC_SPEED; // Should not be hardcoded.
                         this.Scale = EnemyEV.BlobBasicScale;
                         this.NumHits = 2;
                         break;
-                    case (GameTypes.EnemyDifficulty.ADVANCED):
+                    case (GameTypes.EnemyDifficulty.Advanced):
                         this.Speed = EnemyEV.BLOB_ADVANCED_SPEED; // Should not be hardcoded.
                         this.Scale = EnemyEV.BlobAdvancedScale;
                         this.NumHits = 3;
                         break;
-                    case (GameTypes.EnemyDifficulty.EXPERT):
+                    case (GameTypes.EnemyDifficulty.Expert):
                         this.Speed = EnemyEV.BLOB_EXPERT_SPEED; // Should not be hardcoded.
                         this.Scale = EnemyEV.BlobExpertScale;
                         this.NumHits = 4;
                         break;
-                    case (GameTypes.EnemyDifficulty.MINIBOSS):
+                    case (GameTypes.EnemyDifficulty.Miniboss):
                         this.Speed = EnemyEV.BLOB_MINIBOSS_SPEED; // Should not be hardcoded.
                         this.NumHits = 6;
                         break;

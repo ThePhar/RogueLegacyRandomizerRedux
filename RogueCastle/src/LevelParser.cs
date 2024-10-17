@@ -79,7 +79,7 @@ namespace RogueCastle
                                 obj = new TerrainObj(0, 0);
                                 break;
                             case ("DoorObj"):
-                                obj = new DoorObj(currentRoom, 0, 0, GameTypes.DoorType.OPEN); // The door type needs to be saved via editor and placed here.
+                                obj = new DoorObj(currentRoom, 0, 0, GameTypes.DoorType.Open); // The door type needs to be saved via editor and placed here.
                                 break;
                             case ("ChestObj"):
                                 if (reader.MoveToAttribute("Fairy"))
@@ -163,7 +163,7 @@ namespace RogueCastle
                                 obj = new PhysicsObj(reader.Value);
                                 PhysicsObj physObj = obj as PhysicsObj;
                                 //physObj.CollisionTypeTag = GameTypes.CollisionType_WALL;
-                                physObj.CollisionTypeTag = GameTypes.CollisionType_WALL_FOR_PLAYER;
+                                physObj.CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL_FOR_PLAYER;
                                 physObj.CollidesBottom = false;
                                 physObj.CollidesLeft = false;
                                 physObj.CollidesRight = false;
@@ -189,27 +189,27 @@ namespace RogueCastle
 
                         ParseGenericXML(reader, obj);
 
-                        GameTypes.LevelType levelType = GameTypes.LevelType.NONE;
+                        GameTypes.LevelType levelType = GameTypes.LevelType.None;
                         if (reader.MoveToAttribute("LevelType"))
                             levelType = (GameTypes.LevelType)int.Parse(reader.Value, NumberStyles.Any, ci);
 
-                        if (levelType == GameTypes.LevelType.CASTLE)
+                        if (levelType == GameTypes.LevelType.Castle)
                         {
                             StoreObj(obj, castleRoom);
-                            StoreSwappedObj(obj, GameTypes.LevelType.DUNGEON, dungeonRoom);
-                            StoreSwappedObj(obj, GameTypes.LevelType.TOWER, towerRoom);
-                            StoreSwappedObj(obj, GameTypes.LevelType.GARDEN, gardenRoom);
+                            StoreSwappedObj(obj, GameTypes.LevelType.Dungeon, dungeonRoom);
+                            StoreSwappedObj(obj, GameTypes.LevelType.Tower, towerRoom);
+                            StoreSwappedObj(obj, GameTypes.LevelType.Garden, gardenRoom);
 
                             // Special code to change the pictures in the picture frames.
                             SpriteObj sprite = obj as SpriteObj;
                             if (sprite != null && sprite.SpriteName == "CastleAssetFrame_Sprite")
                                 sprite.ChangeSprite("FramePicture" + CDGMath.RandomInt(1, 16) + "_Sprite");
                         }
-                        else if (levelType == GameTypes.LevelType.DUNGEON)
+                        else if (levelType == GameTypes.LevelType.Dungeon)
                             StoreObj(obj, dungeonRoom);
-                        else if (levelType == GameTypes.LevelType.TOWER)
+                        else if (levelType == GameTypes.LevelType.Tower)
                             StoreObj(obj, towerRoom);
-                        else if (levelType == GameTypes.LevelType.GARDEN)
+                        else if (levelType == GameTypes.LevelType.Garden)
                             StoreObj(obj, gardenRoom);
                         else
                         {
@@ -223,11 +223,11 @@ namespace RogueCastle
 
                         // Extra debug code so that when testing a room, the correct LevelType objects will appear in that room.
                         // Removing this code doesn't hurt the game. It just turns Test Rooms into generic rooms.
-                        if (LevelEV.RunTestRoom == true && (levelType == LevelEV.TestRoomLevelType || levelType == GameTypes.LevelType.CASTLE))
+                        if (LevelEV.RunTestRoom == true && (levelType == LevelEV.TestRoomLevelType || levelType == GameTypes.LevelType.Castle))
                         {
                             if (levelType == LevelEV.TestRoomLevelType)
                                 StoreObj(obj, currentRoom);
-                            else if (levelType == GameTypes.LevelType.CASTLE)
+                            else if (levelType == GameTypes.LevelType.Castle)
                                 StoreSwappedObj(obj, LevelEV.TestRoomLevelType, currentRoom);
                         }
 
@@ -244,23 +244,23 @@ namespace RogueCastle
                         {
                             if (currentRoom.AddToCastlePool == true)
                             {
-                                LevelBuilder2.StoreRoom(castleRoom, GameTypes.LevelType.CASTLE);
-                                LevelBuilder2.StoreSpecialRoom(castleRoom, GameTypes.LevelType.CASTLE);
+                                LevelBuilder2.StoreRoom(castleRoom, GameTypes.LevelType.Castle);
+                                LevelBuilder2.StoreSpecialRoom(castleRoom, GameTypes.LevelType.Castle);
                             }
                             if (currentRoom.AddToDungeonPool == true)
                             {
-                                LevelBuilder2.StoreRoom(dungeonRoom, GameTypes.LevelType.DUNGEON);
-                                LevelBuilder2.StoreSpecialRoom(dungeonRoom, GameTypes.LevelType.DUNGEON);
+                                LevelBuilder2.StoreRoom(dungeonRoom, GameTypes.LevelType.Dungeon);
+                                LevelBuilder2.StoreSpecialRoom(dungeonRoom, GameTypes.LevelType.Dungeon);
                             }
                             if (currentRoom.AddToGardenPool == true)
                             {
-                                LevelBuilder2.StoreRoom(gardenRoom, GameTypes.LevelType.GARDEN);
-                                LevelBuilder2.StoreSpecialRoom(gardenRoom, GameTypes.LevelType.GARDEN);
+                                LevelBuilder2.StoreRoom(gardenRoom, GameTypes.LevelType.Garden);
+                                LevelBuilder2.StoreSpecialRoom(gardenRoom, GameTypes.LevelType.Garden);
                             }
                             if (currentRoom.AddToTowerPool == true)
                             {
-                                LevelBuilder2.StoreRoom(towerRoom, GameTypes.LevelType.TOWER);
-                                LevelBuilder2.StoreSpecialRoom(towerRoom, GameTypes.LevelType.TOWER);
+                                LevelBuilder2.StoreRoom(towerRoom, GameTypes.LevelType.Tower);
+                                LevelBuilder2.StoreSpecialRoom(towerRoom, GameTypes.LevelType.Tower);
                             }
                         }
 
@@ -268,8 +268,8 @@ namespace RogueCastle
                         if (currentRoom.Name.Contains("DEBUG_ROOM"))
                         {
                             currentRoom.Name = currentRoom.Name.Replace("DEBUG_ROOM", "");
-                            if (LevelEV.TestRoomLevelType != GameTypes.LevelType.CASTLE)
-                                LevelBuilder2.StoreSpecialRoom(currentRoom, GameTypes.LevelType.CASTLE, true); // Store a castle version because SequencedRoomList in LevelBuilder2 checks for the castle version.
+                            if (LevelEV.TestRoomLevelType != GameTypes.LevelType.Castle)
+                                LevelBuilder2.StoreSpecialRoom(currentRoom, GameTypes.LevelType.Castle, true); // Store a castle version because SequencedRoomList in LevelBuilder2 checks for the castle version.
                             LevelBuilder2.StoreSpecialRoom(currentRoom, LevelEV.TestRoomLevelType, true);
 
                             //RoomObj testRoom = currentRoom.Clone() as RoomObj;
@@ -283,7 +283,7 @@ namespace RogueCastle
                     }
 
                     if (currentRoom.X < 10000 && (currentRoom.Name == "Boss" || currentRoom.Name == "ChallengeBoss")) // Special handling for storing boss rooms.
-                        LevelBuilder2.StoreSpecialRoom(currentRoom, GameTypes.LevelType.CASTLE);
+                        LevelBuilder2.StoreSpecialRoom(currentRoom, GameTypes.LevelType.Castle);
                 }
             }
         }
@@ -315,13 +315,13 @@ namespace RogueCastle
             string[] swapList = null;
             switch (levelType)
             {
-                case (GameTypes.LevelType.DUNGEON):
+                case (GameTypes.LevelType.Dungeon):
                     swapList = LevelEV.DungeonAssetSwapList;
                     break;
-                case(GameTypes.LevelType.TOWER):
+                case(GameTypes.LevelType.Tower):
                     swapList = LevelEV.TowerAssetSwapList;
                     break;
-                case (GameTypes.LevelType.GARDEN):
+                case (GameTypes.LevelType.Garden):
                     swapList = LevelEV.GardenAssetSwapList;
                     break;
                 default:

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using DS2DEngine;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -37,7 +38,7 @@ namespace RogueCastle
         public SkillObj(string spriteName)
             : base(spriteName)
         {
-            StatType = TraitStatType.PlayerMaxHealth;
+            StatType = TraitStatType.PLAYER_MAX_HEALTH;
             DisplayStat = false;
             this.Visible = false;
             this.ForceDraw = true;

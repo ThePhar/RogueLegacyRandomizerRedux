@@ -151,7 +151,7 @@ namespace RogueCastle
             m_tollCollector.PlayAnimation(true);
             m_tollCollector.AnimationDelay = 1 / 10f;
             m_tollCollector.OutlineWidth = 2;
-            m_tollCollector.CollisionTypeTag = GameTypes.CollisionType_WALL;
+            m_tollCollector.CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL;
 
             //m_tollCollectorIcon = new SpriteObj("TalkBubbleUpArrow_Sprite");
             m_tollCollectorIcon = new SpriteObj("UpArrowBubble_Sprite");
@@ -564,7 +564,7 @@ namespace RogueCastle
                             manager.DialogueScreen.SetDialogue("Meet Toll Collector 1");
                         else
                         {
-                            float amount = SkillSystem.GetSkill(SkillType.Prices_Down).ModifierAmount * 100;
+                            float amount = SkillSystem.GetSkill(SkillType.PricesDown).ModifierAmount * 100;
                             manager.DialogueScreen.SetDialogue("Meet Toll Collector Skip" + (int)Math.Round(amount, MidpointRounding.AwayFromZero));
                         }
 
@@ -649,7 +649,7 @@ namespace RogueCastle
         {
             if (chargeFee == true)
             {
-                float goldLost = Game.PlayerStats.Gold * (GameEV.GATEKEEPER_TOLL_COST - SkillSystem.GetSkill(SkillType.Prices_Down).ModifierAmount);
+                float goldLost = Game.PlayerStats.Gold * (GameEV.GATEKEEPER_TOLL_COST - SkillSystem.GetSkill(SkillType.PricesDown).ModifierAmount);
                 Game.PlayerStats.Gold -= (int)(goldLost);
                 if (goldLost > 0)
                     Player.AttachedLevel.TextManager.DisplayNumberStringText(-(int)goldLost, "LOC_ID_PLAYER_OBJ_1" /*"gold"*/, Color.Yellow, new Vector2(Player.X, Player.Bounds.Top));

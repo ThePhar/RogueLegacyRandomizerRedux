@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -20,7 +21,7 @@ namespace RogueCastle
         {
             this.IsWeighted = false;
             this.IsCollidable = true;
-            CollisionTypeTag = GameTypes.CollisionType_GLOBAL_DAMAGE_WALL; //GameTypes.CollisionType_ENEMYWALL;
+            CollisionTypeTag = GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL; //GameTypes.CollisionType_ENEMYWALL;
             //Damage = 25;//10;
             this.DisableHitboxUpdating = true;
         }
@@ -130,8 +131,8 @@ namespace RogueCastle
 
                 int playerHealth = (int)Math.Round(((player.BaseHealth + player.GetEquipmentHealth() +
            (Game.PlayerStats.BonusHealth * GameEV.ITEM_STAT_MAXHP_AMOUNT) +
-           SkillSystem.GetSkill(SkillType.Health_Up).ModifierAmount +
-           SkillSystem.GetSkill(SkillType.Health_Up_Final).ModifierAmount)), MidpointRounding.AwayFromZero);
+           SkillSystem.GetSkill(SkillType.HealthUp).ModifierAmount +
+           SkillSystem.GetSkill(SkillType.HealthUpFinal).ModifierAmount)), MidpointRounding.AwayFromZero);
 
                 int damage = (int)(playerHealth * GameEV.HAZARD_DAMAGE_PERCENT);
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -53,7 +54,7 @@ namespace RogueCastle
                     (this.AttackType == TYPE_DOWNSWORD && otherBox.Type == Consts.WEAPON_HITBOX && player.IsAirAttacking == true))
                 {
                     Target = m_parent;
-                    this.CollisionTypeTag = GameTypes.CollisionType_PLAYER;
+                    this.CollisionTypeTag = GameTypes.COLLISION_TYPE_PLAYER;
                     this.CurrentSpeed *= 2;
                     player.AttachedLevel.ImpactEffectPool.DisplayEnemyImpactEffect(this.Position);
                 }

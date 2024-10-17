@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DS2DEngine;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -16,13 +17,13 @@ namespace RogueCastle
         {
             switch (levelType)
             {
-                case GameTypes.LevelType.CASTLE:
+                case GameTypes.LevelType.Castle:
                     return "LOC_ID_DUNGEON_NAME_1"; //"Castle Hamson"; //"The Keep"; //TEDDY - CHANGING NAME
-                case GameTypes.LevelType.DUNGEON:
+                case GameTypes.LevelType.Dungeon:
                     return "LOC_ID_DUNGEON_NAME_2"; //"The Land of Darkness"; //"The Dungeon"; //TEDDY - CHANGING NAME
-                case GameTypes.LevelType.GARDEN:
+                case GameTypes.LevelType.Garden:
                     return "LOC_ID_DUNGEON_NAME_3"; //"Forest Abkhazia";//"The Dungeon"; //TEDDY - CHANGING NAME
-                case GameTypes.LevelType.TOWER:
+                case GameTypes.LevelType.Tower:
                     return "LOC_ID_DUNGEON_NAME_4"; //"The Maya";//"The Tower"; //TEDDY - CHANGING NAME
             }
 

@@ -148,14 +148,14 @@ namespace RogueCastle
             {
                 if (projectile.LifeSpan == 0)
                     projectile.LifeSpan = (source as PlayerObj).ProjectileLifeSpan;
-                projectile.CollisionTypeTag = GameTypes.CollisionType_PLAYER;
+                projectile.CollisionTypeTag = GameTypes.COLLISION_TYPE_PLAYER;
                 projectile.Scale = data.Scale;
             }
             else
             {
                 if (projectile.LifeSpan == 0)
                     projectile.LifeSpan = 15; // All projectiles are given an arbitrary lifespan of 15 seconds (unless they die earlier than that).
-                projectile.CollisionTypeTag = GameTypes.CollisionType_ENEMY;
+                projectile.CollisionTypeTag = GameTypes.COLLISION_TYPE_ENEMY;
                 projectile.Scale = data.Scale;
             }
 
@@ -215,11 +215,11 @@ namespace RogueCastle
         {
             foreach (ProjectileObj projectile in m_projectilePool.ActiveObjsList)
             {
-                if (projectile.CollisionTypeTag != GameTypes.CollisionType_PLAYER || pausePlayerProjectiles == true)
+                if (projectile.CollisionTypeTag != GameTypes.COLLISION_TYPE_PLAYER || pausePlayerProjectiles == true)
                 {
                     projectile.GamePaused = true;
                     projectile.PauseAnimation();
-                    if (projectile.Spell != SpellType.DAMAGE_SHIELD || (projectile.Spell == SpellType.DAMAGE_SHIELD && projectile.CollisionTypeTag == GameTypes.CollisionType_ENEMY))
+                    if (projectile.Spell != SpellType.DAMAGE_SHIELD || (projectile.Spell == SpellType.DAMAGE_SHIELD && projectile.CollisionTypeTag == GameTypes.COLLISION_TYPE_ENEMY))
                     {
                         projectile.AccelerationXEnabled = false;
                         projectile.AccelerationYEnabled = false;
@@ -238,7 +238,7 @@ namespace RogueCastle
                 {
                     projectile.GamePaused = false;
                     projectile.ResumeAnimation();
-                    if (projectile.Spell != SpellType.DAMAGE_SHIELD || (projectile.Spell == SpellType.DAMAGE_SHIELD && projectile.CollisionTypeTag == GameTypes.CollisionType_ENEMY))
+                    if (projectile.Spell != SpellType.DAMAGE_SHIELD || (projectile.Spell == SpellType.DAMAGE_SHIELD && projectile.CollisionTypeTag == GameTypes.COLLISION_TYPE_ENEMY))
                     {
                         projectile.AccelerationXEnabled = true;
                         projectile.AccelerationYEnabled = true;

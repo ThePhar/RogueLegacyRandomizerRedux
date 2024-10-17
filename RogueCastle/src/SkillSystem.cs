@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -50,16 +51,16 @@ namespace RogueCastle
         //Remember: m_skillTypeArray is compiled as follows int[rows,cols].
         private static SkillType[,] m_skillTypeArray =
         {
-            {	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Randomize_Children,	SkillType.Null, 	},
-            {	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.SuperSecret,	SkillType.Mana_Cost_Down,	SkillType.Null, 	},
-            {	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Invuln_Time_Up,	SkillType.SpellSword_Up,	SkillType.Null, 	},
-            {	SkillType.Null, 	SkillType.Null, 	SkillType.Down_Strike_Up,	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Spellsword_Unlock,	SkillType.Null, 	},
-            {	SkillType.Null, 	SkillType.Null, 	SkillType.Ninja_Up,	SkillType.Armor_Up,	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Potion_Up,	SkillType.Null, 	},
-            {	SkillType.Lich_Up,	SkillType.Lich_Unlock,	SkillType.Prices_Down,	SkillType.Null, 	SkillType.Attack_Up,	SkillType.Null, 	SkillType.Magic_Damage_Up,	SkillType.Null, 	SkillType.Assassin_Up,	SkillType.Null, 	},
-            {	SkillType.Death_Dodge,	SkillType.Null, 	SkillType.Ninja_Unlock,	SkillType.Barbarian_Up,	SkillType.Architect,	SkillType.Equip_Up,	SkillType.Enchanter,	SkillType.Mage_Up,	SkillType.Banker_Unlock,	SkillType.Banker_Up,	},
-            {	SkillType.Null, 	SkillType.Null, 	SkillType.Crit_Chance_Up,	SkillType.Null, 	SkillType.Null, 	SkillType.Knight_Up,	SkillType.Null, 	SkillType.Null, 	SkillType.Gold_Gain_Up,	SkillType.Null, 	},
-            {	SkillType.Null, 	SkillType.Null, 	SkillType.Crit_Damage_Up,	SkillType.Null, 	SkillType.Null, 	SkillType.Health_Up,	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	},
-            {	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Smithy,	SkillType.Mana_Up,	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	},
+            {	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.RandomizeChildren,	SkillType.Null, 	},
+            {	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.SuperSecret,	SkillType.ManaCostDown,	SkillType.Null, 	},
+            {	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.InvulnTimeUp,	SkillType.SpellSwordUp,	SkillType.Null, 	},
+            {	SkillType.Null, 	SkillType.Null, 	SkillType.DownStrikeUp,	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.SpellswordUnlock,	SkillType.Null, 	},
+            {	SkillType.Null, 	SkillType.Null, 	SkillType.NinjaUp,	SkillType.ArmorUp,	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.PotionUp,	SkillType.Null, 	},
+            {	SkillType.LichUp,	SkillType.LichUnlock,	SkillType.PricesDown,	SkillType.Null, 	SkillType.AttackUp,	SkillType.Null, 	SkillType.MagicDamageUp,	SkillType.Null, 	SkillType.AssassinUp,	SkillType.Null, 	},
+            {	SkillType.DeathDodge,	SkillType.Null, 	SkillType.NinjaUnlock,	SkillType.BarbarianUp,	SkillType.Architect,	SkillType.EquipUp,	SkillType.Enchanter,	SkillType.MageUp,	SkillType.BankerUnlock,	SkillType.BankerUp,	},
+            {	SkillType.Null, 	SkillType.Null, 	SkillType.CritChanceUp,	SkillType.Null, 	SkillType.Null, 	SkillType.KnightUp,	SkillType.Null, 	SkillType.Null, 	SkillType.GoldGainUp,	SkillType.Null, 	},
+            {	SkillType.Null, 	SkillType.Null, 	SkillType.CritDamageUp,	SkillType.Null, 	SkillType.Null, 	SkillType.HealthUp,	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	},
+            {	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	SkillType.Smithy,	SkillType.ManaUp,	SkillType.Null, 	SkillType.Null, 	SkillType.Null, 	},
         };
 
         private static Vector2[,] m_skillPositionArray = 
@@ -107,7 +108,7 @@ namespace RogueCastle
             // Loading all traits into the trait array.
             m_skillArray = new List<SkillObj>();
 
-            for (int i = 2; i < (int)SkillType.DIVIDER; i++) // The starting 2 traits are null and filler.
+            for (int i = 2; i < (int)SkillType.Divider; i++) // The starting 2 traits are null and filler.
             {
                 SkillObj skill = SkillBuilder.BuildSkill((SkillType)i);
                 skill.Position = GetSkillPosition(skill);
@@ -134,7 +135,7 @@ namespace RogueCastle
             trait.CurrentLevel++;
             UpdateTraitSprite(trait);
 
-            if (trait.TraitType == SkillType.Gold_Flat_Bonus && giveGoldBonus == true)
+            if (trait.TraitType == SkillType.GoldFlatBonus && giveGoldBonus == true)
                 Game.PlayerStats.Gold += (int)trait.ModifierAmount;
 
             bool unlockAchievement = true;
@@ -308,7 +309,7 @@ namespace RogueCastle
 
         public static void RefreshTextObjs()
         {
-            for (int i = 2; i < (int)SkillType.DIVIDER; i++) // The starting 2 traits are null and filler.
+            for (int i = 2; i < (int)SkillType.Divider; i++) // The starting 2 traits are null and filler.
             {
                 SkillObj skill = m_skillArray[i - 2];
                 SkillBuilder.BuildSkill((SkillType)i, skill);

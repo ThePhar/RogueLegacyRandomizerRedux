@@ -380,7 +380,7 @@ namespace RogueCastle
                 m_navigationText.Text = LocaleBuilder.GetString("LOC_ID_LINEAGE_SCREEN_3", m_navigationText);
 
             m_rerollText.Text = LocaleBuilder.GetString("LOC_ID_LINEAGE_SCREEN_4_NEW", m_rerollText);
-            if (SkillSystem.GetSkill(SkillType.Randomize_Children).ModifierAmount > 0 && Game.PlayerStats.RerolledChildren == false)
+            if (SkillSystem.GetSkill(SkillType.RandomizeChildren).ModifierAmount > 0 && Game.PlayerStats.RerolledChildren == false)
                 m_rerollText.Visible = true;
             else
                 m_rerollText.Visible = false;
@@ -591,7 +591,7 @@ namespace RogueCastle
                     LineageObj previousLineageObj = m_selectedLineageObj;
                     int previousLineageIndex = m_selectedLineageIndex;
 
-                    if (Game.GlobalInput.JustPressed(InputMapType.MENU_MAP) && SkillSystem.GetSkill(SkillType.Randomize_Children).ModifierAmount > 0 && Game.PlayerStats.RerolledChildren == false)
+                    if (Game.GlobalInput.JustPressed(InputMapType.MENU_MAP) && SkillSystem.GetSkill(SkillType.RandomizeChildren).ModifierAmount > 0 && Game.PlayerStats.RerolledChildren == false)
                     {
                         m_lockControls = true;
                         SoundManager.PlaySound("frame_woosh_01", "frame_woosh_02");

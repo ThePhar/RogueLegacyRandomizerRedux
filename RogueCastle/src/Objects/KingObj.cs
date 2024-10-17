@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -20,7 +21,7 @@ namespace RogueCastle
         {
             IPhysicsObj otherBoxParent = otherBox.AbsParent as IPhysicsObj;
 
-            if (collisionResponseType == Consts.COLLISIONRESPONSE_FIRSTBOXHIT && otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_PLAYER && m_wasHit == false)
+            if (collisionResponseType == Consts.COLLISIONRESPONSE_FIRSTBOXHIT && otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_PLAYER && m_wasHit == false)
             {
                 SoundManager.Play3DSound(this, Game.ScreenManager.Player,"EnemyHit1", "EnemyHit2", "EnemyHit3", "EnemyHit4", "EnemyHit5", "EnemyHit6");
                 //SoundManager.PlaySound("Player_Male_Injury_01", "Player_Male_Injury_02", "Player_Male_Injury_03", "Player_Male_Injury_04", "Player_Male_Injury_05",

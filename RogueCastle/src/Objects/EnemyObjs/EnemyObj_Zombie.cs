@@ -57,7 +57,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
 
                     #region Miniboss Variables - General
                     Name = EnemyEV.ZOMBIE_MINIBOSS_NAME;
@@ -96,7 +96,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
 
                     #region Expert Variables - General
                     Name = EnemyEV.ZOMBIE_EXPERT_NAME;
@@ -135,7 +135,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
 
                     #region Advanced Variables - General
                     Name = EnemyEV.ZOMBIE_ADVANCED_NAME;
@@ -174,7 +174,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }		

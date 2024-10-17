@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using SteamWorksWrapper;
 using SDL3;
 
@@ -39,7 +40,7 @@ namespace RogueCastle
                     LevelEV.ShowEnemyRadii = false;
                     LevelEV.EnableDebugInput = false;
                     LevelEV.UnlockAllAbilities = false;
-                    LevelEV.TestRoomLevelType = GameTypes.LevelType.CASTLE;
+                    LevelEV.TestRoomLevelType = GameTypes.LevelType.Castle;
                     LevelEV.TestRoomReverse = false;
                     LevelEV.RunTestRoom = false;
                     LevelEV.ShowDebugText = false;

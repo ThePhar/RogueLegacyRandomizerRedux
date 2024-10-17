@@ -573,47 +573,47 @@ namespace RogueCastle
                 case (SkillType.Architect):
                     skillUnlockType = SkillUnlockType.ARCHITECT;
                     break;
-                case (SkillType.Ninja_Unlock):
+                case (SkillType.NinjaUnlock):
                     skillUnlockType = SkillUnlockType.NINJA;
                     break;
-                case (SkillType.Banker_Unlock):
+                case (SkillType.BankerUnlock):
                     skillUnlockType = SkillUnlockType.BANKER;
                     break;
-                case (SkillType.Lich_Unlock):
+                case (SkillType.LichUnlock):
                     skillUnlockType = SkillUnlockType.LICH;
                     break;
-                case (SkillType.Spellsword_Unlock):
+                case (SkillType.SpellswordUnlock):
                     skillUnlockType = SkillUnlockType.SPELL_SWORD;
                     break;
-                case (SkillType.Knight_Up):
+                case (SkillType.KnightUp):
                     skillUnlockType = SkillUnlockType.KNIGHT_UP;
                     if (Game.PlayerStats.Class == ClassType.KNIGHT) Game.PlayerStats.Class = ClassType.KNIGHT2;
                     break;
-                case (SkillType.Barbarian_Up):
+                case (SkillType.BarbarianUp):
                     skillUnlockType = SkillUnlockType.BARBARIAN_UP;
                     if (Game.PlayerStats.Class == ClassType.BARBARIAN) Game.PlayerStats.Class = ClassType.BARBARIAN2;
                     break;
-                case (SkillType.Mage_Up):
+                case (SkillType.MageUp):
                     skillUnlockType = SkillUnlockType.WIZARD_UP;
                     if (Game.PlayerStats.Class == ClassType.WIZARD) Game.PlayerStats.Class = ClassType.WIZARD2;
                     break;
-                case (SkillType.Ninja_Up):
+                case (SkillType.NinjaUp):
                     skillUnlockType = SkillUnlockType.NINJA_UP;
                     if (Game.PlayerStats.Class == ClassType.NINJA) Game.PlayerStats.Class = ClassType.NINJA2;
                     break;
-                case (SkillType.Assassin_Up):
+                case (SkillType.AssassinUp):
                     skillUnlockType = SkillUnlockType.ASSASSIN_UP;
                     if (Game.PlayerStats.Class == ClassType.ASSASSIN) Game.PlayerStats.Class = ClassType.ASSASSIN2;
                     break;
-                case (SkillType.Banker_Up):
+                case (SkillType.BankerUp):
                     skillUnlockType = SkillUnlockType.BANKER_UP;
                     if (Game.PlayerStats.Class == ClassType.BANKER) Game.PlayerStats.Class = ClassType.BANKER2;
                     break;
-                case (SkillType.SpellSword_Up):
+                case (SkillType.SpellSwordUp):
                     skillUnlockType = SkillUnlockType.SPELL_SWORD_UP;
                     if (Game.PlayerStats.Class == ClassType.SPELL_SWORD) Game.PlayerStats.Class = ClassType.SPELL_SWORD2;
                     break;
-                case (SkillType.Lich_Up):
+                case (SkillType.LichUp):
                     skillUnlockType = SkillUnlockType.LICH_UP;
                     if (Game.PlayerStats.Class == ClassType.LICH) Game.PlayerStats.Class = ClassType.LICH2;
                     break;
@@ -926,7 +926,7 @@ namespace RogueCastle
             {
                 // Setting the text for the current base data for the skil
                 // Hack added to make sure crit chance up and gold gain up stats are displayed correctly.
-                if (statBaseAmount < 1 || trait.TraitType == SkillType.Gold_Gain_Up || trait.TraitType == SkillType.Crit_Chance_Up) // Converting statBaseAmount to a percentage.
+                if (statBaseAmount < 1 || trait.TraitType == SkillType.GoldGainUp || trait.TraitType == SkillType.CritChanceUp) // Converting statBaseAmount to a percentage.
                 {
                     statBaseAmount *= 100;
                     statBaseAmount = (int)(Math.Round(statBaseAmount, MidpointRounding.AwayFromZero));
@@ -937,7 +937,7 @@ namespace RogueCastle
                     statBaseAmount = trait.ModifierAmount;
 
                     // Special handling for crit chance up.
-                    if (trait.TraitType == SkillType.Crit_Chance_Up)
+                    if (trait.TraitType == SkillType.CritChanceUp)
                     {
                         statBaseAmount *= 100;
                         statBaseAmount = (int)(Math.Round(statBaseAmount, MidpointRounding.AwayFromZero));
@@ -957,10 +957,10 @@ namespace RogueCastle
                 if (trait.CurrentLevel < trait.MaxLevel)
                 {
                     float traitPerLevelModifier = trait.PerLevelModifier;
-                    if (traitPerLevelModifier < 1 && trait.TraitType != SkillType.Invuln_Time_Up) // Converting trait's per level modifier to percentage.
+                    if (traitPerLevelModifier < 1 && trait.TraitType != SkillType.InvulnTimeUp) // Converting trait's per level modifier to percentage.
                     {
                         traitPerLevelModifier *= 100;
-                        if (trait.TraitType != SkillType.Death_Dodge)
+                        if (trait.TraitType != SkillType.DeathDodge)
                             traitPerLevelModifier = (int)(Math.Round(traitPerLevelModifier, MidpointRounding.AwayFromZero));
                     }
                     m_skillUpgrade.Text = LocaleBuilder.GetResourceString("LOC_ID_SKILL_SCREEN_8") + colon + "+" + traitPerLevelModifier + trait.UnitLocIDs[0] + LocaleBuilder.GetResourceString(trait.UnitLocIDs[1]);
@@ -1050,52 +1050,52 @@ namespace RogueCastle
                 case (LanguageType.French):
                     switch (m_lastSkillObj.TraitType)
                     {
-                        case (SkillType.Spellsword_Unlock):
-                        case (SkillType.SpellSword_Up):
+                        case (SkillType.SpellswordUnlock):
+                        case (SkillType.SpellSwordUp):
                             m_skillTitle.ScaleX = 0.9f;
                             m_skillTitle.FontSize = 11;
                             break;
-                        case (SkillType.Banker_Unlock):
-                        case (SkillType.Banker_Up):
-                        case (SkillType.Knight_Up):
-                        case (SkillType.Assassin_Up):
-                        case (SkillType.Barbarian_Up):
+                        case (SkillType.BankerUnlock):
+                        case (SkillType.BankerUp):
+                        case (SkillType.KnightUp):
+                        case (SkillType.AssassinUp):
+                        case (SkillType.BarbarianUp):
                             m_skillTitle.ScaleX = 0.9f;
                             break;
                     }
                     break;
                 case (LanguageType.German):
-                    if (m_lastSkillObj.TraitType == SkillType.Banker_Unlock || m_lastSkillObj.TraitType == SkillType.Invuln_Time_Up)
+                    if (m_lastSkillObj.TraitType == SkillType.BankerUnlock || m_lastSkillObj.TraitType == SkillType.InvulnTimeUp)
                         m_skillTitle.ScaleX = 0.9f;
                     break;
                 case (LanguageType.SpanishSpain):
-                    if (m_lastSkillObj.TraitType == SkillType.Equip_Up || m_lastSkillObj.TraitType == SkillType.Spellsword_Unlock || m_lastSkillObj.TraitType == SkillType.SpellSword_Up)
+                    if (m_lastSkillObj.TraitType == SkillType.EquipUp || m_lastSkillObj.TraitType == SkillType.SpellswordUnlock || m_lastSkillObj.TraitType == SkillType.SpellSwordUp)
                         m_skillTitle.ScaleX = 0.9f;
                     break;
                 case (LanguageType.PortugueseBrazil):
                     switch (m_lastSkillObj.TraitType)
                     {
-                        case (SkillType.Spellsword_Unlock):
-                        case (SkillType.SpellSword_Up):
+                        case (SkillType.SpellswordUnlock):
+                        case (SkillType.SpellSwordUp):
                             m_skillTitle.ScaleX = 0.9f;
                             m_skillTitle.FontSize = 11;
                             break;
-                        case (SkillType.Banker_Up):
-                        case (SkillType.Mana_Cost_Down):
-                        case (SkillType.Down_Strike_Up):
+                        case (SkillType.BankerUp):
+                        case (SkillType.ManaCostDown):
+                        case (SkillType.DownStrikeUp):
                             m_skillTitle.ScaleX = 0.9f;
                             break;
                     }
                     break;
                 case (LanguageType.Polish):
-                    if (m_lastSkillObj.TraitType == SkillType.Spellsword_Unlock || m_lastSkillObj.TraitType == SkillType.SpellSword_Up)
+                    if (m_lastSkillObj.TraitType == SkillType.SpellswordUnlock || m_lastSkillObj.TraitType == SkillType.SpellSwordUp)
                         m_skillTitle.ScaleX = 0.9f;
                     break;
                 case (LanguageType.Russian):
-                    if (m_lastSkillObj.TraitType == SkillType.Crit_Chance_Up)
+                    if (m_lastSkillObj.TraitType == SkillType.CritChanceUp)
                         m_skillTitle.ScaleX = 0.9f;
 
-                    if (m_lastSkillObj.TraitType == SkillType.Crit_Damage_Up)
+                    if (m_lastSkillObj.TraitType == SkillType.CritDamageUp)
                         m_skillTitle.ScaleX = 0.8f;
 
                     break;

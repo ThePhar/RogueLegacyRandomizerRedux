@@ -167,7 +167,7 @@ namespace RogueCastle
         {
             this.DisableCollisionBoxRotations = true;
             this.Type = EnemyType.NONE;
-            CollisionTypeTag = GameTypes.CollisionType_ENEMY;
+            CollisionTypeTag = GameTypes.COLLISION_TYPE_ENEMY;
             m_target = target;
             m_walkingLB = new LogicBlock();
             m_currentActiveLB = new LogicBlock();
@@ -323,22 +323,22 @@ namespace RogueCastle
                     {
                         switch (Difficulty)
                         {
-                            case (GameTypes.EnemyDifficulty.BASIC):
+                            case (GameTypes.EnemyDifficulty.Basic):
                                 RunBasicLogic();
                                 break;
-                            case (GameTypes.EnemyDifficulty.ADVANCED):
+                            case (GameTypes.EnemyDifficulty.Advanced):
                                 RunAdvancedLogic();
                                 break;
-                            case (GameTypes.EnemyDifficulty.EXPERT):
+                            case (GameTypes.EnemyDifficulty.Expert):
                                 RunExpertLogic();
                                 break;
-                            case (GameTypes.EnemyDifficulty.MINIBOSS):
+                            case (GameTypes.EnemyDifficulty.Miniboss):
                                 RunMinibossLogic();
                                 break;
                         }
 
                         // Starts the timer.
-                        if (m_runCooldown == true && m_currentActiveLB.ActiveLS.Tag == GameTypes.LogicSetType_ATTACK) // The tag makes sure that the current Logic set executed was an attack.
+                        if (m_runCooldown == true && m_currentActiveLB.ActiveLS.Tag == GameTypes.LOGIC_SET_TYPE_ATTACK) // The tag makes sure that the current Logic set executed was an attack.
                             m_cooldownTimer = CooldownTime; // Convert to milliseconds.
                     }
 
@@ -410,8 +410,8 @@ namespace RogueCastle
             foreach (IPhysicsObj obj in m_levelScreen.PhysicsManager.ObjectList)
             {
                 if (obj != this && obj.CollidesTop == true &&
-                    (obj.CollisionTypeTag == GameTypes.CollisionType_WALL || obj.CollisionTypeTag == GameTypes.CollisionType_WALL_FOR_PLAYER || obj.CollisionTypeTag == GameTypes.CollisionType_ENEMYWALL
-                    || obj.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL)) // only check walls below the player.
+                    (obj.CollisionTypeTag == GameTypes.COLLISION_TYPE_WALL || obj.CollisionTypeTag == GameTypes.COLLISION_TYPE_WALL_FOR_PLAYER || obj.CollisionTypeTag == GameTypes.COLLISION_TYPE_ENEMY_WALL
+                    || obj.CollisionTypeTag == GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL)) // only check walls below the player.
                 {
                     //if ((obj.Rotation != 0) || //&& obj.Rotation >= -SlopeClimbRotation && obj.Rotation <= SlopeClimbRotation) || // Disabled because turrets go beyond slope rotation.
                     //  (obj.Bounds.Top >= this.Bounds.Bottom - 5 && // -5 margin of error
@@ -477,10 +477,10 @@ namespace RogueCastle
                 foreach (TerrainObj collisionObj in m_levelScreen.CurrentRoom.TerrainObjList)
                 {
                     if (collisionObj.Visible == true && collisionObj.IsCollidable == true && collisionObj.CollidesTop == true && collisionObj.HasTerrainHitBox == true &&
-                        (collisionObj.CollisionTypeTag == GameTypes.CollisionType_WALL ||
-                        collisionObj.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL ||
-                        collisionObj.CollisionTypeTag == GameTypes.CollisionType_WALL_FOR_ENEMY ||
-                        collisionObj.CollisionTypeTag == GameTypes.CollisionType_ENEMYWALL))
+                        (collisionObj.CollisionTypeTag == GameTypes.COLLISION_TYPE_WALL ||
+                        collisionObj.CollisionTypeTag == GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL ||
+                        collisionObj.CollisionTypeTag == GameTypes.COLLISION_TYPE_WALL_FOR_ENEMY ||
+                        collisionObj.CollisionTypeTag == GameTypes.COLLISION_TYPE_ENEMY_WALL))
                     {
                         // Do separate checks for sloped and non-sloped terrain.
                         if (collisionObj.Rotation == 0)
@@ -655,7 +655,7 @@ namespace RogueCastle
             IPhysicsObj otherBoxParent = otherBox.AbsParent as IPhysicsObj;
             Vector2 mtd = CollisionMath.CalculateMTD(thisBox.AbsRect, otherBox.AbsRect);
 
-            if (collisionResponseType == Consts.COLLISIONRESPONSE_FIRSTBOXHIT && (otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_PLAYER || otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL || (otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL && this.IsWeighted == true))
+            if (collisionResponseType == Consts.COLLISIONRESPONSE_FIRSTBOXHIT && (otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_PLAYER || otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL || (otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL && this.IsWeighted == true))
                 && ((otherBox.AbsParent is ProjectileObj == false && m_invincibleCounter <= 0) || (otherBox.AbsParent is ProjectileObj && (m_invincibleCounterProjectile <= 0 || (otherBox.AbsParent as ProjectileObj).IgnoreInvincibleCounter == true))))
             {
                 // Don't do anything if the enemy is demented
@@ -700,8 +700,8 @@ namespace RogueCastle
 
                 if (projectile == null || (projectile != null && projectile.Spell != SpellType.SHOUT))
                 {
-                    if (projectile != null || (otherBoxParent.CollisionTypeTag != GameTypes.CollisionType_GLOBAL_DAMAGE_WALL ||
-                        (otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL && this.IsWeighted == true))) // Make sure flying enemies don't hit global damage walls.
+                    if (projectile != null || (otherBoxParent.CollisionTypeTag != GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL ||
+                        (otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL && this.IsWeighted == true))) // Make sure flying enemies don't hit global damage walls.
                     HitEnemy(damage, impactPosition, isPlayer);
                 }
                 else if (projectile != null && projectile.Spell == SpellType.SHOUT) // Fus roh dah logic.
@@ -740,10 +740,10 @@ namespace RogueCastle
 
             // Only do terrain collision with actual terrain, since the player also has a terrain collision box.
             if (collisionResponseType == Consts.COLLISIONRESPONSE_TERRAIN && 
-                (otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_WALL || 
-                otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_WALL_FOR_ENEMY || 
-                otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL) 
-                && this.CollisionTypeTag != GameTypes.CollisionType_ENEMYWALL)
+                (otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_WALL || 
+                otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_WALL_FOR_ENEMY || 
+                otherBoxParent.CollisionTypeTag == GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL) 
+                && this.CollisionTypeTag != GameTypes.COLLISION_TYPE_ENEMY_WALL)
             {
                 // Enemy is colliding with a wall, so stop animating it.
                 if (this.CurrentSpeed != 0 && mtd.X != 0)
@@ -968,8 +968,8 @@ namespace RogueCastle
 
                 int maxPlayerHealth = (int)Math.Round(((m_target.BaseHealth + m_target.GetEquipmentHealth() +
                         (Game.PlayerStats.BonusHealth * GameEV.ITEM_STAT_MAXHP_AMOUNT) +
-                        SkillSystem.GetSkill(SkillType.Health_Up).ModifierAmount +
-                        SkillSystem.GetSkill(SkillType.Health_Up_Final).ModifierAmount)) * GameEV.LICH_MAX_HP_OFF_BASE, MidpointRounding.AwayFromZero);
+                        SkillSystem.GetSkill(SkillType.HealthUp).ModifierAmount +
+                        SkillSystem.GetSkill(SkillType.HealthUpFinal).ModifierAmount)) * GameEV.LICH_MAX_HP_OFF_BASE, MidpointRounding.AwayFromZero);
 
                 // Only give health if the lich hasn't reach max health allowed.
                 if (m_target.MaxHealth + lichHealthGain < maxPlayerHealth)
@@ -992,16 +992,16 @@ namespace RogueCastle
                 Vector4 enemyData = Game.PlayerStats.EnemiesKilledList[(int)this.Type];
                 switch (this.Difficulty)
                 {
-                    case (GameTypes.EnemyDifficulty.BASIC):
+                    case (GameTypes.EnemyDifficulty.Basic):
                         enemyData.X += 1;
                         break;
-                    case (GameTypes.EnemyDifficulty.ADVANCED):
+                    case (GameTypes.EnemyDifficulty.Advanced):
                         enemyData.Y += 1;
                         break;
-                    case (GameTypes.EnemyDifficulty.EXPERT):
+                    case (GameTypes.EnemyDifficulty.Expert):
                         enemyData.Z += 1;
                         break;
-                    case (GameTypes.EnemyDifficulty.MINIBOSS):
+                    case (GameTypes.EnemyDifficulty.Miniboss):
                         enemyData.W += 1;
                         break;
                 }

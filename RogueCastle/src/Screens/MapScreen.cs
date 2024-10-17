@@ -54,7 +54,7 @@ namespace RogueCastle
             {
                 if (room.Name != "Boss")
                 {
-                    if (room.LevelType == levelType || (room.LevelType == GameTypes.LevelType.CASTLE && (room.Name == "Start" || room.Name == "CastleEntrance")))
+                    if (room.LevelType == levelType || (room.LevelType == GameTypes.LevelType.Castle && (room.Name == "Start" || room.Name == "CastleEntrance")))
                     {
                         if (room.X < leftMost)
                             leftMost = room.X;

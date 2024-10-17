@@ -124,22 +124,22 @@ public static class ClassType
             ASSASSIN,
         };
 
-        if (SkillSystem.GetSkill(SkillType.Ninja_Unlock).ModifierAmount > 0)
+        if (SkillSystem.GetSkill(SkillType.NinjaUnlock).ModifierAmount > 0)
         {
             randomClassList.Add(NINJA);
         }
 
-        if (SkillSystem.GetSkill(SkillType.Banker_Unlock).ModifierAmount > 0)
+        if (SkillSystem.GetSkill(SkillType.BankerUnlock).ModifierAmount > 0)
         {
             randomClassList.Add(BANKER);
         }
 
-        if (SkillSystem.GetSkill(SkillType.Spellsword_Unlock).ModifierAmount > 0)
+        if (SkillSystem.GetSkill(SkillType.SpellswordUnlock).ModifierAmount > 0)
         {
             randomClassList.Add(SPELL_SWORD);
         }
 
-        if (SkillSystem.GetSkill(SkillType.Lich_Unlock).ModifierAmount > 0)
+        if (SkillSystem.GetSkill(SkillType.LichUnlock).ModifierAmount > 0)
         {
             randomClassList.Add(LICH);
         }
@@ -168,14 +168,14 @@ public static class ClassType
     {
         return classType switch
         {
-            KNIGHT      => SkillSystem.GetSkill(SkillType.Knight_Up).ModifierAmount > 0,
-            WIZARD      => SkillSystem.GetSkill(SkillType.Mage_Up).ModifierAmount > 0,
-            BARBARIAN   => SkillSystem.GetSkill(SkillType.Barbarian_Up).ModifierAmount > 0,
-            NINJA       => SkillSystem.GetSkill(SkillType.Ninja_Up).ModifierAmount > 0,
-            ASSASSIN    => SkillSystem.GetSkill(SkillType.Assassin_Up).ModifierAmount > 0,
-            BANKER      => SkillSystem.GetSkill(SkillType.Banker_Up).ModifierAmount > 0,
-            SPELL_SWORD => SkillSystem.GetSkill(SkillType.SpellSword_Up).ModifierAmount > 0,
-            LICH        => SkillSystem.GetSkill(SkillType.Lich_Up).ModifierAmount > 0,
+            KNIGHT      => SkillSystem.GetSkill(SkillType.KnightUp).ModifierAmount > 0,
+            WIZARD      => SkillSystem.GetSkill(SkillType.MageUp).ModifierAmount > 0,
+            BARBARIAN   => SkillSystem.GetSkill(SkillType.BarbarianUp).ModifierAmount > 0,
+            NINJA       => SkillSystem.GetSkill(SkillType.NinjaUp).ModifierAmount > 0,
+            ASSASSIN    => SkillSystem.GetSkill(SkillType.AssassinUp).ModifierAmount > 0,
+            BANKER      => SkillSystem.GetSkill(SkillType.BankerUp).ModifierAmount > 0,
+            SPELL_SWORD => SkillSystem.GetSkill(SkillType.SpellSwordUp).ModifierAmount > 0,
+            LICH        => SkillSystem.GetSkill(SkillType.LichUp).ModifierAmount > 0,
             _           => false,
         };
     }

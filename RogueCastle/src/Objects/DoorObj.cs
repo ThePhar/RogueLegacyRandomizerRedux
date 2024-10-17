@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
     public class DoorObj : TerrainObj
     {
-        private GameTypes.DoorType m_doorType = GameTypes.DoorType.OPEN;
+        private GameTypes.DoorType m_doorType = GameTypes.DoorType.Open;
         public string DoorPosition = "NONE";
         public RoomObj Room { get; set; } // Stores a reference to the room it is in.
         public bool Attached = false; // Keeps track of whether a door is attached to another door or not.
@@ -23,7 +24,7 @@ namespace RogueCastle
         {
             m_doorType = doorType;
             Room = roomRef;
-            CollisionTypeTag = GameTypes.CollisionType_NULL;
+            CollisionTypeTag = GameTypes.COLLISION_TYPE_NULL;
             DisableHitboxUpdating = true;
 
             m_arrowIcon = new SpriteObj("UpArrowSquare_Sprite");

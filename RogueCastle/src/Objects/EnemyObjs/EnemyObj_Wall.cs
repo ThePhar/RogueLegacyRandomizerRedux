@@ -39,10 +39,10 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
-                case (GameTypes.EnemyDifficulty.EXPERT):
-                case (GameTypes.EnemyDifficulty.ADVANCED):
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Miniboss):
+                case (GameTypes.EnemyDifficulty.Expert):
+                case (GameTypes.EnemyDifficulty.Advanced):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }
@@ -170,7 +170,7 @@ namespace RogueCastle
         public EnemyObj_Wall(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
             : base("EnemyGhostIdle_Character", target, physicsManager, levelToAttachTo, difficulty)
         {
-            CollisionTypeTag = GameTypes.CollisionType_ENEMYWALL;
+            CollisionTypeTag = GameTypes.COLLISION_TYPE_ENEMY_WALL;
             this.Type = EnemyType.WALL;
         }
     }

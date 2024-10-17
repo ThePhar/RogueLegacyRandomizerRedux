@@ -118,7 +118,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.LAST_BOSS_MINIBOSS_NAME;
                     LocStringID = EnemyEV.LAST_BOSS_MINIBOSS_NAME_LOC_ID;
@@ -156,7 +156,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.LAST_BOSS_EXPERT_NAME;
                     LocStringID = EnemyEV.LAST_BOSS_EXPERT_NAME_LOC_ID;
@@ -194,7 +194,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.LAST_BOSS_ADVANCED_NAME;
                     LocStringID = EnemyEV.LAST_BOSS_ADVANCED_NAME_LOC_ID;
@@ -232,7 +232,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     this.AnimationDelay = 1 / 10f;
                     if (LevelEV.WeakenBosses == true)
@@ -288,7 +288,7 @@ namespace RogueCastle
             attackLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / 10f));
             attackLS.AddAction(new ChangeSpriteLogicAction("PlayerIdle_Character", true, true));
             attackLS.AddAction(new LockFaceDirectionLogicAction(false));
-            attackLS.Tag = GameTypes.LogicSetType_ATTACK;
+            attackLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet moveAttackLS = new LogicSet(this);
             moveAttackLS.AddAction(new DebugTraceLogicAction("moveattack"));
@@ -303,7 +303,7 @@ namespace RogueCastle
             moveAttackLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / 10f));
             moveAttackLS.AddAction(new ChangeSpriteLogicAction("PlayerIdle_Character", true, true));
             moveAttackLS.AddAction(new LockFaceDirectionLogicAction(false));
-            moveAttackLS.Tag = GameTypes.LogicSetType_ATTACK;
+            moveAttackLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet throwShieldLS = new LogicSet(this);
             throwShieldLS.AddAction(new DebugTraceLogicAction("Throwing Daggers"));
@@ -314,7 +314,7 @@ namespace RogueCastle
             //CastCloseShield(throwShieldLS);
             throwShieldLS.AddAction(new RunFunctionLogicAction(this, "CastCloseShield"));
             throwShieldLS.AddAction(new LockFaceDirectionLogicAction(false));
-            throwShieldLS.Tag = GameTypes.LogicSetType_ATTACK;
+            throwShieldLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet throwDaggerLS = new LogicSet(this);
             throwDaggerLS.AddAction(new DebugTraceLogicAction("Throwing Daggers"));
@@ -330,7 +330,7 @@ namespace RogueCastle
             throwDaggerLS.AddAction(new ChangePropertyLogicAction(this, "CanBeKnockedBack", true));
             throwDaggerLS.AddAction(new LockFaceDirectionLogicAction(false));
             throwDaggerLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / 10f));
-            throwDaggerLS.Tag = GameTypes.LogicSetType_ATTACK;
+            throwDaggerLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             #region NEODaggers
             LogicSet throwDaggerNeoLS = new LogicSet(this);
@@ -347,7 +347,7 @@ namespace RogueCastle
             throwDaggerNeoLS.AddAction(new ChangePropertyLogicAction(this, "CanBeKnockedBack", true));
             throwDaggerNeoLS.AddAction(new LockFaceDirectionLogicAction(false));
             throwDaggerNeoLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / 10f));
-            throwDaggerNeoLS.Tag = GameTypes.LogicSetType_ATTACK;
+            throwDaggerNeoLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
             #endregion
 
             LogicSet jumpLS = new LogicSet(this);

@@ -1674,7 +1674,7 @@ namespace RogueCastle
 
                     SkillSystem.ResetAllTraits(); // Reset all traits first.
                     Game.PlayerStats.CurrentLevel = 0; // Reset player level.
-                    for (int i = 0; i < (int)SkillType.DIVIDER - 2; i++)  //The starting 2 traits are null and filler.
+                    for (int i = 0; i < (int)SkillType.Divider - 2; i++)  //The starting 2 traits are null and filler.
                     {
                         int traitLevel = reader.ReadInt32();
                         for (int k = 0; k < traitLevel; k++)
@@ -2236,7 +2236,7 @@ namespace RogueCastle
                             reader.ReadSByte();
 
                         int levelCounter = 0;
-                        for (int i = 0; i < (int)SkillType.DIVIDER - 2; i++)  //The starting 2 traits are null and filler.
+                        for (int i = 0; i < (int)SkillType.Divider - 2; i++)  //The starting 2 traits are null and filler.
                         {
                             int traitLevel = reader.ReadInt32();
                             for (int k = 0; k < traitLevel; k++)

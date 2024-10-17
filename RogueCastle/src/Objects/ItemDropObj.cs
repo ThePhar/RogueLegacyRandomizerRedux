@@ -20,7 +20,7 @@ namespace RogueCastle
         {
             this.IsCollidable = true;
             this.IsWeighted = true;
-            this.CollisionTypeTag = GameTypes.CollisionType_ENEMY;
+            this.CollisionTypeTag = GameTypes.COLLISION_TYPE_ENEMY;
             this.StopAnimation();
             this.OutlineWidth = 2;
         }
@@ -108,13 +108,13 @@ namespace RogueCastle
                         this.PlayAnimation(1, 1, false);
                     break;
                 case (ItemDropType.HEALTH):
-                    int healthAmount = (int)(player.MaxHealth * (m_amount + SkillSystem.GetSkill(SkillType.Potion_Up).ModifierAmount));
+                    int healthAmount = (int)(player.MaxHealth * (m_amount + SkillSystem.GetSkill(SkillType.PotionUp).ModifierAmount));
                     player.CurrentHealth += healthAmount;
                     textManager.DisplayNumberStringText(healthAmount, "LOC_ID_ITEM_DROP_OBJ_2" /*"hp recovered"*/, Color.LawnGreen, new Vector2(this.X, this.Bounds.Top));
                     SoundManager.Play3DSound(this, Game.ScreenManager.Player,"Collect_Health");
                     break;
                 case (ItemDropType.MANA):
-                    int manaAmount = (int)(player.MaxMana * (m_amount + SkillSystem.GetSkill(SkillType.Potion_Up).ModifierAmount));
+                    int manaAmount = (int)(player.MaxMana * (m_amount + SkillSystem.GetSkill(SkillType.PotionUp).ModifierAmount));
                     player.CurrentMana += manaAmount;
                     textManager.DisplayNumberStringText(manaAmount, "LOC_ID_ITEM_DROP_OBJ_3" /*"mp recovered"*/, Color.LawnGreen, new Vector2(this.X, this.Bounds.Top));
                     SoundManager.Play3DSound(this, Game.ScreenManager.Player,"Collect_Mana");

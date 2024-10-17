@@ -107,7 +107,7 @@ namespace RogueCastle
                 SpriteObj frame = new SpriteObj("LineageScreenFrame_Sprite");
                 frame.DropShadow = new Vector2(4, 6);
                 //if (enemy.Width > 150 || enemy.Height > 150)
-                if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+                if (enemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                 {
                     frame.ChangeSprite("GiantPortrait_Sprite");
                          FixMiniboss(enemy);
@@ -144,7 +144,7 @@ namespace RogueCastle
                 switch (enemy.Type)
                 {
                     case (EnemyType.SKELETON):
-                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                         {
                             if (enemy.Flip == SpriteEffects.None)
                                 enemy.X -= 25;
@@ -153,7 +153,7 @@ namespace RogueCastle
                         }
                         break;
                     case (EnemyType.FAIRY):
-                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                         {
                             enemy.X += 30;
                             enemy.Y -= 20;
@@ -168,11 +168,11 @@ namespace RogueCastle
                         (enemy as EnemyObj_BallAndChain).BallAndChain2.Visible = false;
                         break;
                     case (EnemyType.PORTRAIT):
-                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                             frame.Visible = false;
                         break;
                     case (EnemyType.LAST_BOSS):
-                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.ADVANCED)
+                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.Advanced)
                         {
                             (enemy as EnemyObj_LastBoss).ForceSecondForm(true);
                             enemy.ChangeSprite("EnemyLastBossIdle_Character");
@@ -344,7 +344,7 @@ namespace RogueCastle
 
         public void ChangeLevelType()
         {
-            this.LevelType = GameTypes.LevelType.DUNGEON;
+            this.LevelType = GameTypes.LevelType.Dungeon;
             Player.AttachedLevel.UpdateLevel(this.LevelType);
         }
 

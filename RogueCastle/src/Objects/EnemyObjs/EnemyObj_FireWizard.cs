@@ -69,7 +69,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.FIRE_WIZARD_MINIBOSS_NAME;
                     LocStringID = EnemyEV.FIRE_WIZARD_MINIBOSS_NAME_LOC_ID;
@@ -108,7 +108,7 @@ namespace RogueCastle
                     break;
 
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     m_spellOffset = new Vector2(40, -130);
                     SpellDelay = 1.0f;
                     SpellInterval = 1.0f;//0.5f;
@@ -150,7 +150,7 @@ namespace RogueCastle
 					#endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     SpellInterval = 0.15f;
 
 					#region Advanced Variables - General
@@ -190,7 +190,7 @@ namespace RogueCastle
 					#endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }		
@@ -227,7 +227,7 @@ namespace RogueCastle
             castSpellLS.AddAction(new RunFunctionLogicAction(this, "CastFireball"));
             castSpellLS.AddAction(new DelayLogicAction(0.5f));
             castSpellLS.AddAction(new LockFaceDirectionLogicAction(false));
-            castSpellLS.Tag = GameTypes.LogicSetType_ATTACK;
+            castSpellLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet castAdvancedSpellLS = new LogicSet(this);
             castAdvancedSpellLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -248,7 +248,7 @@ namespace RogueCastle
             castAdvancedSpellLS.AddAction(new RunFunctionLogicAction(this, "CastFireball"));
             castAdvancedSpellLS.AddAction(new DelayLogicAction(0.5f));
             castAdvancedSpellLS.AddAction(new LockFaceDirectionLogicAction(false));
-            castAdvancedSpellLS.Tag = GameTypes.LogicSetType_ATTACK;
+            castAdvancedSpellLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet castExpertSpellLS = new LogicSet(this);
             castExpertSpellLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -265,7 +265,7 @@ namespace RogueCastle
             castExpertSpellLS.AddAction(new RunFunctionLogicAction(this, "CastFireball"));            
             castExpertSpellLS.AddAction(new DelayLogicAction(0.5f));
             castExpertSpellLS.AddAction(new LockFaceDirectionLogicAction(false));
-            castExpertSpellLS.Tag = GameTypes.LogicSetType_ATTACK;
+            castExpertSpellLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet teleportLS = new LogicSet(this);
             teleportLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -415,10 +415,10 @@ namespace RogueCastle
                 Scale = ProjectileScale,
             };
 
-            if (this.Difficulty == GameTypes.EnemyDifficulty.ADVANCED)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Advanced)
                 projData.AngleOffset = CDGMath.RandomInt(-25, 25);
 
-            if (this.Difficulty == GameTypes.EnemyDifficulty.EXPERT)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Expert)
             {
                 projData.SpriteName = "GhostBossProjectile_Sprite";
                 projData.CollidesWithTerrain = false;
@@ -427,7 +427,7 @@ namespace RogueCastle
             SoundManager.Play3DSound(this, m_target, "FireWizard_Attack_01", "FireWizard_Attack_02", "FireWizard_Attack_03", "FireWizard_Attack_04");
             ProjectileObj fireball = m_levelScreen.ProjectileManager.FireProjectile(projData);
             fireball.Rotation = 0;
-            if (this.Difficulty != GameTypes.EnemyDifficulty.EXPERT)
+            if (this.Difficulty != GameTypes.EnemyDifficulty.Expert)
                 Tweener.Tween.RunFunction(0.15f, this, "ChangeFireballState", fireball);
         }
 
@@ -455,7 +455,7 @@ namespace RogueCastle
                 Scale = ProjectileScale,
             };
 
-            if (this.Difficulty == GameTypes.EnemyDifficulty.EXPERT)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Expert)
             {
                 projData.SpriteName = "GhostBossProjectile_Sprite";
                 projData.CollidesWithTerrain = false;

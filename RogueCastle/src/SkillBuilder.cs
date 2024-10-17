@@ -28,7 +28,7 @@ namespace RogueCastle
 
                 #region Skills
 
-                case (SkillType.Health_Up):
+                case (SkillType.HealthUp):
                     trait.Name = "Health Up";
                     //trait.Description = "Improve your cardio workout. A better heart means better health.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_1";
@@ -44,10 +44,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Invuln_Time_Up):
+                case (SkillType.InvulnTimeUp):
                     trait.Name = "Invuln Time Up";
                     //trait.Description = "Strengthen your adrenal glands and be invulnerable  like Bane. Let the games begin!";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_2";
@@ -63,10 +63,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " sec";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_21" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Death_Dodge):
+                case (SkillType.DeathDodge):
                     trait.Name = "Death Defy";
                     //trait.Description = "Release your inner cat, and avoid death. Sometimes.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_3";
@@ -90,10 +90,10 @@ namespace RogueCastle
                             break;
                     }
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Attack_Up):
+                case (SkillType.AttackUp):
                     trait.Name = "Attack Up";
                     //trait.Description = "A proper gym will allow you to really  strengthen your arms and butt muscles.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_4";
@@ -109,10 +109,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " str";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_16" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Down_Strike_Up):
+                case (SkillType.DownStrikeUp):
                     trait.Name = "Down Strike Up";
                     //trait.Description = "A pogo practice room has its benefits. Deal more damage with consecutive down strikes.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_5";
@@ -136,10 +136,10 @@ namespace RogueCastle
                             break;
                     }
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Crit_Chance_Up):
+                case (SkillType.CritChanceUp):
                     trait.Name = "Crit Chance Up";
                     //trait.Description = "Teaching yourself about the weaknesses of enemies allows you to strike with deadly efficiency.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_6";
@@ -163,10 +163,10 @@ namespace RogueCastle
                             break;
                     }
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Crit_Damage_Up):
+                case (SkillType.CritDamageUp):
                     trait.Name = "Crit Damage Up";
                     //trait.Description = "Practice the deadly strikes to be even deadlier. Enemies will be so dead.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_7";
@@ -190,10 +190,10 @@ namespace RogueCastle
                             break;
                     }
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Magic_Damage_Up):
+                case (SkillType.MagicDamageUp):
                     trait.Name = "Magic Damage Up";
                     //trait.Description = "Learn the secrets of the universe, so you can use it to kill with spells better.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_8";
@@ -209,10 +209,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " int";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_17" };
                     trait.DisplayStat = false;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Mana_Up):
+                case (SkillType.ManaUp):
                     trait.Name = "Mana Up";
                     //trait.Description = "Increase your mental fortitude in order to increase your mana pool. ";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_9";
@@ -228,7 +228,7 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " mp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_15" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
                 case (SkillType.Smithy):
@@ -246,7 +246,7 @@ namespace RogueCastle
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "0";
                     trait.DisplayStat = false;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
                 case (SkillType.Enchanter):
@@ -264,7 +264,7 @@ namespace RogueCastle
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "0";
                     trait.DisplayStat = false;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
                 case (SkillType.Architect):
@@ -282,10 +282,10 @@ namespace RogueCastle
                     trait.InputDescLocID = "LOC_ID_SKILL_INPUT_SPACE";
                     trait.UnitOfMeasurement = "0";
                     trait.DisplayStat = false;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Equip_Up):
+                case (SkillType.EquipUp):
                     trait.Name = "Equip Up";
                     //trait.Description = "Upgrading your carry capacity will allow you to wear better and heavier armor.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_13";
@@ -301,10 +301,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " weight";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_13" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Armor_Up):
+                case (SkillType.ArmorUp):
                     trait.Name = "Armor Up";
                     //trait.Description = "Strengthen your innards through natural means to reduce incoming damage.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_14";
@@ -320,10 +320,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " armor";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_20" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Gold_Gain_Up):
+                case (SkillType.GoldGainUp):
                     trait.Name = "Gold Gain Up";
                     //trait.Description = "Improve your looting skills, and get more bang for your buck.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_15";
@@ -347,10 +347,10 @@ namespace RogueCastle
                             break;
                     }
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Prices_Down):
+                case (SkillType.PricesDown):
                     trait.Name = "Haggle";
                     //trait.Description = "Lower Charon's toll by learning how to barter with death itself.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_16";
@@ -374,10 +374,10 @@ namespace RogueCastle
                             break;
                     }
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Potion_Up):
+                case (SkillType.PotionUp):
                     trait.Name = "Potion Up";
                     //trait.Description = "Gut cleansing leads to noticable improvements from both potions and meat.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_17";
@@ -401,10 +401,10 @@ namespace RogueCastle
                             break;
                     }
                     trait.DisplayStat = false;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Randomize_Children):
+                case (SkillType.RandomizeChildren):
                     trait.Name = "Randomize Children";
                     //trait.Description = "Use the power of science to make a whole new batch of babies. Just... don't ask.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_18";
@@ -428,10 +428,10 @@ namespace RogueCastle
                             break;
                     }
                     trait.DisplayStat = false;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Lich_Unlock):
+                case (SkillType.LichUnlock):
                     trait.Name = "Unlock Lich";
                     //trait.Description = "Release the power of the Lich! A being of massive potential.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_19";
@@ -447,10 +447,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Banker_Unlock):
+                case (SkillType.BankerUnlock):
                     trait.Name = "Unlock Miner";
                     //trait.Description = "Unlock the skills of the Miner and raise your family fortune.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_20";
@@ -466,10 +466,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Spellsword_Unlock):
+                case (SkillType.SpellswordUnlock):
                     trait.Name = "Unlock Spell Thief";
                     //trait.Description = "Unlock the Spellthief, and become a martial  mage.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_21";
@@ -485,10 +485,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Ninja_Unlock):
+                case (SkillType.NinjaUnlock):
                     trait.Name = "Unlock Shinobi";
                     //trait.Description = "Unlock the Shinobi, the fleetest of fighters.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_22";
@@ -504,10 +504,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Mana_Cost_Down):
+                case (SkillType.ManaCostDown):
                     trait.Name = "Mana Cost Down";
                     //trait.Description = "Practice your basics to reduce mana costs when casting spells.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_23";
@@ -531,10 +531,10 @@ namespace RogueCastle
                             break;
                     }
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Knight_Up):
+                case (SkillType.KnightUp):
                     trait.Name = "Upgrade Knight";
                     //trait.Description = "Turn your knights into Paladins. A ferocious forefront fighter.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_24";
@@ -550,10 +550,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Mage_Up):
+                case (SkillType.MageUp):
                     trait.Name = "Upgrade Mage";
                     //trait.Description = "Unlock the latent powers of the Mage and transform them into the all powerful Archmage";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_25";
@@ -569,10 +569,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Assassin_Up):
+                case (SkillType.AssassinUp):
                     trait.Name = "Upgrade Knave";
                     //trait.Description = "Learn the dark arts, and turn the Knave into an Assassin";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_26";
@@ -588,10 +588,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Banker_Up):
+                case (SkillType.BankerUp):
                     trait.Name = "Upgrade Miner";
                     //trait.Description = "Earn your geology degree and go from Miner to Spelunker. Spiffy.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_27";
@@ -607,10 +607,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Barbarian_Up):
+                case (SkillType.BarbarianUp):
                     trait.Name = "Upgrade Barbarian";
                     //trait.Description = "Become a Barbarian King.  The king of freemen. That makes no sense.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_28";
@@ -626,10 +626,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Lich_Up):
+                case (SkillType.LichUp):
                     trait.Name = "Upgrade Lich";
                     //trait.Description = "Royalize your all-powerful Liches, and turn them into Lich Kings.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_29";
@@ -645,10 +645,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.Ninja_Up):
+                case (SkillType.NinjaUp):
                     trait.Name = "Upgrade Shinobi";
                     //trait.Description = "Become the leader of your village, and turn your Shinobi into a Hokage. Believe it!";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_30";
@@ -664,10 +664,10 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
-                case (SkillType.SpellSword_Up):
+                case (SkillType.SpellSwordUp):
                     trait.Name = "Upgrade Spell Thief";
                     //trait.Description = "Ride the vortexes of magic, and turn your Spellthiefs into Spellswords.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_31";
@@ -683,7 +683,7 @@ namespace RogueCastle
                     trait.UnitOfMeasurement = " hp";
                     trait.UnitLocIDs = new string[] { " ", "LOC_ID_SKILL_SCREEN_14" };
                     trait.DisplayStat = true;
-                    trait.StatType = TraitStatType.PlayerMaxHealth;
+                    trait.StatType = TraitStatType.PLAYER_MAX_HEALTH;
                     break;
 
                 # endregion	
@@ -769,7 +769,7 @@ namespace RogueCastle
 
 
 
-                case (SkillType.Quick_of_Breath):
+                case (SkillType.QuickOfBreath):
                     trait.Name = "Quick of Breath";
                     //trait.Description = "QUICK OF BREATH \nYou're a heavy breather.  Bad for stalking, good for walking! \n\nIncrease your natural endurance regeneration.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_33";
@@ -782,7 +782,7 @@ namespace RogueCastle
                     break;
 
 
-                case (SkillType.Born_to_Run):
+                case (SkillType.BornToRun):
                     trait.Name = "Born to Run";
                     //trait.Description = "You were infused with tiger blood at a young age.  You have now been infused with the power to release tiger blood when stabbed. \nRunning drains less endurance.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_34";
@@ -795,7 +795,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Stout_Heart):
+                case (SkillType.StoutHeart):
                     trait.Name = "Stout Heart";
                     //trait.Description = "Your have viking ancestry.  \n\nIncrease your starting endurance.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_35";
@@ -810,7 +810,7 @@ namespace RogueCastle
 
 
 
-                case (SkillType.Out_the_Gate):
+                case (SkillType.OutTheGate):
                     trait.Name = "Out the Gate";
                     //trait.Description = "You're an early waker. If leveling was like waking up.\n Gain bonus HP and MP every time you level.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_36";
@@ -831,7 +831,7 @@ namespace RogueCastle
 
 
 
-                case (SkillType.Spell_Sword):
+                case (SkillType.SpellSword):
                     trait.Name = "Spellsword";
                     //trait.Description = "You were born with absolute power in your fingertips. \nAll spells deal more damage.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_37";
@@ -873,7 +873,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Well_Endowed):
+                case (SkillType.WellEndowed):
                     trait.Name = "Well Endowed";
                     //trait.Description = "By law, you are now the best man. \nGive birth to more children.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_40";
@@ -892,7 +892,7 @@ namespace RogueCastle
 
 
 
-                case (SkillType.Treasure_Hunter):
+                case (SkillType.TreasureHunter):
                     trait.Name = "Treasure Hunter";
                     //trait.Description = "Your parents said learning how to sift for gold was useless for a farmer.  Whose laughing now? \n Display treasure rooms at the start of the game.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_41";
@@ -905,7 +905,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Mortar_Master):
+                case (SkillType.MortarMaster):
                     trait.Name = "Mortar Master";
                     //trait.Description = "War is hell.  Luckily you were never in one. \n Fire more mortars.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_42";
@@ -918,7 +918,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Explosive_Expert):
+                case (SkillType.ExplosiveExpert):
                     trait.Name = "Explosive Expert";
                     //trait.Description = "As a child, you showed an affinity for blowing things up. \n Bombs have a larger radius.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_43";
@@ -957,7 +957,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Iron_Lung):
+                case (SkillType.IronLung):
                     trait.Name = "Iron Lung";
                     //trait.Description = "Generic SKILL.  Increase total Endurance.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_46";
@@ -970,7 +970,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Sword_Master):
+                case (SkillType.SwordMaster):
                     trait.Name = "Sword Master";
                     //trait.Description = "You fight with finesse \n Attacks Drain X% less endurance.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_47";
@@ -1009,7 +1009,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Second_Chance):
+                case (SkillType.SecondChance):
                     trait.Name = "Second Chance";
                     //trait.Description = "Come back to life, just like Jesus. But you're still not jesus. \n Revive once after dying.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_50";
@@ -1022,7 +1022,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Peace_of_Mind):
+                case (SkillType.PeaceOfMind):
                     trait.Name = "Peace of Mind";
                     //trait.Description = "Clearing a room is like clearing your mind.  I don't know how. \nRegain helath for every room fully cleared.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_51";
@@ -1035,7 +1035,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Cartography_Ninja):
+                case (SkillType.CartographyNinja):
                     trait.Name = "Cartography Ninja";
                     //trait.Description = "Cartography /n Each percentage of map revealed adds 0.1 damage.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_52";
@@ -1048,7 +1048,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Strong_Man):
+                case (SkillType.StrongMan):
                     trait.Name = "Strong Man";
                     //trait.Description = "Generic SKILL.  Increase Attack Damage.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_53";
@@ -1074,7 +1074,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Crit_Barbarian):
+                case (SkillType.CritBarbarian):
                     trait.Name = "Crit Barbarian";
                     //trait.Description = "You have learned that hitting the balls deals massive damage. \n Crits deal more damage.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_55";
@@ -1113,7 +1113,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.One_Time_Only):
+                case (SkillType.OneTimeOnly):
                     trait.Name = "One Time Only";
                     //trait.Description = "Like a pheonix you are reborn from your crappy ashes. \n Regain all HP and MP.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_58";
@@ -1126,7 +1126,7 @@ namespace RogueCastle
                     trait.IconName = "IconBootLocked_Sprite";
                     break;
 
-                case (SkillType.Cutting_Out_Early):
+                case (SkillType.CuttingOutEarly):
                     trait.Name = "Cutting Out Early";
                     //trait.Description = "Retire, and invest your money wisely.  End your game early, and gain a bonus to gold found.";
                     trait.NameLocID = "LOC_ID_SKILL_NAME_59";

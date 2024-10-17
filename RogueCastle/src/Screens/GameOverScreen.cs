@@ -354,7 +354,7 @@ namespace RogueCastle
 
                     // Special handling for the eyeball boss's pupil.
                     EnemyObj_Eyeball eyeBoss = enemy as EnemyObj_Eyeball;
-                    if (eyeBoss != null && eyeBoss.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+                    if (eyeBoss != null && eyeBoss.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                         eyeBoss.ChangeToBossPupil();
 
                     Tween.To(enemy, 0f, Tween.EaseNone, "delay", delay.ToString(), "Opacity", "1");
@@ -401,7 +401,7 @@ namespace RogueCastle
 
                     if (enemy != null)
                     {
-                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS || enemy is EnemyObj_LastBoss)
+                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss || enemy is EnemyObj_LastBoss)
                             playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_3_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString(enemy.LocStringID));
                         //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_3") + " " + LocaleBuilder.getResourceString(enemy.LocStringID);
                         else
@@ -413,7 +413,7 @@ namespace RogueCastle
                         enemy = projectile.Source as EnemyObj;
                         if (enemy != null)
                         {
-                            if (enemy.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS || enemy is EnemyObj_LastBoss)
+                            if (enemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss || enemy is EnemyObj_LastBoss)
                                 playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_3_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString(enemy.LocStringID));
                             //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_3") + " " + LocaleBuilder.getResourceString(enemy.LocStringID);
                             else

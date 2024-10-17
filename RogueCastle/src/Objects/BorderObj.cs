@@ -17,7 +17,7 @@ namespace RogueCastle
         public bool BorderLeft = false;
         public bool BorderRight = false;
 
-        public GameTypes.LevelType LevelType = GameTypes.LevelType.CASTLE;
+        public GameTypes.LevelType LevelType = GameTypes.LevelType.Castle;
         public Texture2D BorderTexture { get; internal set; }
         public SpriteObj CornerTexture { get; internal set; }
         public SpriteObj CornerLTexture { get; internal set; }

@@ -63,7 +63,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     ForceDraw = true;
                     SlashDelay = 1.05f;
 					#region Miniboss Variables - General
@@ -103,7 +103,7 @@ namespace RogueCastle
 					#endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     SlashDelay = 0.25f;
                     TripleAttackSpeed = 500f;
 					#region Expert Variables - General
@@ -143,7 +143,7 @@ namespace RogueCastle
 					#endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     SlashDelay = 0.25f;
 					#region Advanced Variables - General
 					Name = EnemyEV.SWORD_KNIGHT_ADVANCED_NAME;
@@ -182,7 +182,7 @@ namespace RogueCastle
 					#endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }		
@@ -216,7 +216,7 @@ namespace RogueCastle
             attackLS.AddAction(new PlayAnimationLogicAction("Attack", "End", false));
             attackLS.AddAction(new ChangeSpriteLogicAction("EnemySwordKnightIdle_Character", false, false));
             attackLS.AddAction(new LockFaceDirectionLogicAction(false));
-            attackLS.Tag = GameTypes.LogicSetType_ATTACK;
+            attackLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet attackTripleLS = new LogicSet(this);
             attackTripleLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -244,7 +244,7 @@ namespace RogueCastle
             attackTripleLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.SWORD_KNIGHT_ADVANCED_ANIMATION_DELAY));
             attackTripleLS.AddAction(new ChangeSpriteLogicAction("EnemySwordKnightIdle_Character", false, false));
             attackTripleLS.AddAction(new LockFaceDirectionLogicAction(false));
-            attackTripleLS.Tag = GameTypes.LogicSetType_ATTACK;
+            attackTripleLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             ProjectileData projData = new ProjectileData(this)
             {
@@ -272,7 +272,7 @@ namespace RogueCastle
             attackAdvancedLS.AddAction(new PlayAnimationLogicAction("Attack", "End", false));
             attackAdvancedLS.AddAction(new ChangeSpriteLogicAction("EnemySwordKnightIdle_Character", false, false));
             attackAdvancedLS.AddAction(new LockFaceDirectionLogicAction(false));
-            attackAdvancedLS.Tag = GameTypes.LogicSetType_ATTACK;
+            attackAdvancedLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet attackTripleExpertLS = new LogicSet(this);
             attackTripleExpertLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -303,7 +303,7 @@ namespace RogueCastle
             attackTripleExpertLS.AddAction(new PlayAnimationLogicAction("Attack", "End", false));
             attackTripleExpertLS.AddAction(new ChangeSpriteLogicAction("EnemySwordKnightIdle_Character", false, false));
             attackTripleExpertLS.AddAction(new LockFaceDirectionLogicAction(false));
-            attackTripleExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            attackTripleExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet attackExpertLS = new LogicSet(this);
             attackExpertLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -317,7 +317,7 @@ namespace RogueCastle
             //
             attackExpertLS.AddAction(new ChangeSpriteLogicAction("EnemySwordKnightIdle_Character", false, false));
             attackExpertLS.AddAction(new LockFaceDirectionLogicAction(false));
-            attackExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            attackExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             m_generalBasicLB.AddLogicSet(walkTowardsLS, walkAwayLS, walkStopLS, attackLS);
             m_generalAdvancedLB.AddLogicSet(walkTowardsLS, walkAwayLS, walkStopLS, attackLS, attackTripleLS);
@@ -332,14 +332,14 @@ namespace RogueCastle
             //SetCooldownLogicBlock(m_generalCooldownLB, 0, 0, 100); //walkTowardsLS, walkAwayLS, walkStopLS
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                      SetCooldownLogicBlock(m_generalCooldownLB, 14, 11, 75); //walkTowardsLS, walkAwayLS, walkStopLS
                     break;
-                case (GameTypes.EnemyDifficulty.ADVANCED):
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Advanced):
+                case (GameTypes.EnemyDifficulty.Expert):
                     SetCooldownLogicBlock(m_generalCooldownLB, 40, 30, 30); //walkTowardsLS, walkAwayLS, walkStopLS
                     break;
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     SetCooldownLogicBlock(m_generalCooldownLB, 100, 0, 0); //walkTowardsLS, walkAwayLS, walkStopLS
                     break;
                 default:

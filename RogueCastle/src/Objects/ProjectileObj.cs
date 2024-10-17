@@ -50,7 +50,7 @@ namespace RogueCastle
         public ProjectileObj(string spriteName)
             : base(spriteName)
         {
-            CollisionTypeTag = GameTypes.CollisionType_ENEMY;
+            CollisionTypeTag = GameTypes.COLLISION_TYPE_ENEMY;
             CollidesWithTerrain = true;
             ChaseTarget = false;
             IsDying = false;
@@ -292,7 +292,7 @@ namespace RogueCastle
             if (this.Spell == SpellType.SHOUT)
             {
                 ProjectileObj proj = otherBox.AbsParent as ProjectileObj;
-                if (proj != null && proj.CollisionTypeTag != GameTypes.CollisionType_PLAYER && proj.CanBeFusRohDahed == true)
+                if (proj != null && proj.CollisionTypeTag != GameTypes.COLLISION_TYPE_PLAYER && proj.CanBeFusRohDahed == true)
                     proj.RunDestroyAnimation(false);
             }
 
@@ -367,7 +367,7 @@ namespace RogueCastle
                 {
                     case (SpellType.NUKE):
                         if (otherBox.AbsParent == this.Target) // Ensures each crow only hits its target.
-                            this.CollisionTypeTag = GameTypes.CollisionType_PLAYER;
+                            this.CollisionTypeTag = GameTypes.COLLISION_TYPE_PLAYER;
                         break;
                     default:
                         base.CollisionResponse(thisBox, otherBox, collisionResponseType);
@@ -570,7 +570,7 @@ namespace RogueCastle
                     this.ChangeSprite("SpellTimeBombExplosion_Sprite");
                     this.PlayAnimation(false);
                     this.IsDying = true;
-                    this.CollisionTypeTag = GameTypes.CollisionType_GLOBAL_DAMAGE_WALL;
+                    this.CollisionTypeTag = GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL;
                     this.AnimationDelay = 1 / 30f;
                     this.Scale = new Vector2(4, 4);
                     Tweener.Tween.RunFunction(0.5f, this, "KillProjectile");
@@ -589,10 +589,10 @@ namespace RogueCastle
                     break;
                 case (SpellType.BOOMERANG):
                 case (SpellType.BOUNCE):
-                    this.CollisionTypeTag = GameTypes.CollisionType_GLOBAL_DAMAGE_WALL;
+                    this.CollisionTypeTag = GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL;
                     break;
                 case (SpellType.LASER):
-                    this.CollisionTypeTag = GameTypes.CollisionType_GLOBAL_DAMAGE_WALL;
+                    this.CollisionTypeTag = GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL;
                     this.LifeSpan = AltY;
                     m_elapsedLifeSpan = 0;
                     this.IsCollidable = true;

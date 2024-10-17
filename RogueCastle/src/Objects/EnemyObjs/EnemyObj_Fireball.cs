@@ -87,7 +87,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.FIREBALL_MINIBOSS_NAME;
                     LocStringID = EnemyEV.FIREBALL_MINIBOSS_NAME_LOC_ID;
@@ -127,7 +127,7 @@ namespace RogueCastle
                         this.MaxHealth = 1;
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.FIREBALL_EXPERT_NAME;
                     LocStringID = EnemyEV.FIREBALL_EXPERT_NAME_LOC_ID;
@@ -165,7 +165,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.FIREBALL_ADVANCED_NAME;
                     LocStringID = EnemyEV.FIREBALL_ADVANCED_NAME_LOC_ID;
@@ -203,12 +203,12 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }
 
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                 m_resetSpriteName = "EnemyGhostBossIdle_Character";
         }
 
@@ -230,7 +230,7 @@ namespace RogueCastle
 
             LogicSet autoCoolDownLS = new LogicSet(this);
             autoCoolDownLS.AddAction(new MoveLogicAction(m_target, true));
-            autoCoolDownLS.Tag = GameTypes.LogicSetType_ATTACK;
+            autoCoolDownLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet dashTowardsLS = new LogicSet(this);
             dashTowardsLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -247,7 +247,7 @@ namespace RogueCastle
             dashTowardsLS.AddAction(new MoveLogicAction(m_target, true, 0));
             dashTowardsLS.AddAction(new LockFaceDirectionLogicAction(false));
             dashTowardsLS.AddAction(new DelayLogicAction(0.75f));
-            dashTowardsLS.Tag = GameTypes.LogicSetType_ATTACK;
+            dashTowardsLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
 
             LogicSet dashTowardsFourProjectilesLS = new LogicSet(this);
@@ -264,7 +264,7 @@ namespace RogueCastle
             dashTowardsFourProjectilesLS.AddAction(new MoveLogicAction(m_target, true, 0));
             dashTowardsFourProjectilesLS.AddAction(new LockFaceDirectionLogicAction(false));
             dashTowardsFourProjectilesLS.AddAction(new DelayLogicAction(0.75f));
-            dashTowardsFourProjectilesLS.Tag = GameTypes.LogicSetType_ATTACK;
+            dashTowardsFourProjectilesLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
 
             ////////////// MINIBOSS LOGIC //////////////////
@@ -293,7 +293,7 @@ namespace RogueCastle
             dashTowardsBossLS.AddAction(new MoveLogicAction(m_target, true, 0));
             dashTowardsBossLS.AddAction(new LockFaceDirectionLogicAction(false));
             dashTowardsBossLS.AddAction(new DelayLogicAction(0.75f));
-            dashTowardsLS.Tag = GameTypes.LogicSetType_ATTACK;
+            dashTowardsLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
 
 
@@ -494,7 +494,7 @@ namespace RogueCastle
 
         public override void Update(GameTime gameTime)
         {
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS && this.IsPaused == false)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss && this.IsPaused == false)
             {
                 if (m_minibossFireTimeCounter > 0 && m_bossVersionKilled == false)
                 {
@@ -558,7 +558,7 @@ namespace RogueCastle
         public override void CollisionResponse(CollisionBox thisBox, CollisionBox otherBox, int collisionResponseType)
         {
             // Hits the player in Tanooki mode.
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS && m_bossVersionKilled == false)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss && m_bossVersionKilled == false)
             {
                 PlayerObj player = otherBox.AbsParent as PlayerObj;
                 if (player != null && otherBox.Type == Consts.WEAPON_HITBOX && player.IsInvincible == false && player.State == PlayerObj.STATE_TANOOKI)
@@ -588,7 +588,7 @@ namespace RogueCastle
 
         public override void Kill(bool giveXP = true)
         {
-            if (Difficulty != GameTypes.EnemyDifficulty.MINIBOSS)
+            if (Difficulty != GameTypes.EnemyDifficulty.Miniboss)
             {
                 base.Kill(giveXP);
             }

@@ -23,7 +23,7 @@ namespace RogueCastle
             Broken = false;
             this.OutlineWidth = 2;
             this.SameTypesCollide = true;
-            CollisionTypeTag = GameTypes.CollisionType_WALL_FOR_PLAYER;
+            CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL_FOR_PLAYER;
             this.CollidesLeft = false;
             this.CollidesRight = false;
             this.CollidesBottom = false;
@@ -46,7 +46,7 @@ namespace RogueCastle
             }
 
             ProjectileObj projectile = otherBox.AbsParent as ProjectileObj;
-            if (projectile != null && (projectile.CollisionTypeTag == GameTypes.CollisionType_PLAYER || projectile.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL) && otherBox.Type == Consts.WEAPON_HITBOX)
+            if (projectile != null && (projectile.CollisionTypeTag == GameTypes.COLLISION_TYPE_PLAYER || projectile.CollisionTypeTag == GameTypes.COLLISION_TYPE_GLOBAL_DAMAGE_WALL) && otherBox.Type == Consts.WEAPON_HITBOX)
             {
                 if (Broken == false)
                     Break();
@@ -120,7 +120,7 @@ namespace RogueCastle
                                 player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
                             else
                             {
-                                EnemyObj_Chicken chicken = new EnemyObj_Chicken(null, null, null, GameTypes.EnemyDifficulty.BASIC);
+                                EnemyObj_Chicken chicken = new EnemyObj_Chicken(null, null, null, GameTypes.EnemyDifficulty.Basic);
                                 chicken.AccelerationY = -500;
                                 chicken.Position = this.Position;
                                 chicken.Y -= 50;

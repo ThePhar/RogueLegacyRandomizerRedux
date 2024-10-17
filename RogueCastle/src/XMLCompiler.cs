@@ -62,10 +62,10 @@ namespace RogueCastle
 
         public EnemyEditorData(byte enemyType)
         {
-            EnemyObj enemyBasic = EnemyBuilder.BuildEnemy(enemyType, null, null, null, GameTypes.EnemyDifficulty.BASIC);
-            EnemyObj enemyAdvanced = EnemyBuilder.BuildEnemy(enemyType, null, null, null, GameTypes.EnemyDifficulty.ADVANCED);
-            EnemyObj enemyExpert = EnemyBuilder.BuildEnemy(enemyType, null, null, null, GameTypes.EnemyDifficulty.EXPERT);
-            EnemyObj enemyMiniboss = EnemyBuilder.BuildEnemy(enemyType, null, null, null, GameTypes.EnemyDifficulty.MINIBOSS);
+            EnemyObj enemyBasic = EnemyBuilder.BuildEnemy(enemyType, null, null, null, GameTypes.EnemyDifficulty.Basic);
+            EnemyObj enemyAdvanced = EnemyBuilder.BuildEnemy(enemyType, null, null, null, GameTypes.EnemyDifficulty.Advanced);
+            EnemyObj enemyExpert = EnemyBuilder.BuildEnemy(enemyType, null, null, null, GameTypes.EnemyDifficulty.Expert);
+            EnemyObj enemyMiniboss = EnemyBuilder.BuildEnemy(enemyType, null, null, null, GameTypes.EnemyDifficulty.Miniboss);
 
             Type = enemyType;
             SpriteName =     enemyBasic.SpriteName;

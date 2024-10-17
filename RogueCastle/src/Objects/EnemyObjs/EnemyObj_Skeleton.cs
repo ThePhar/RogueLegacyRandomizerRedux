@@ -60,7 +60,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.SKELETON_MINIBOSS_NAME;
                     LocStringID = EnemyEV.SKELETON_MINIBOSS_NAME_LOC_ID;
@@ -98,7 +98,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.SKELETON_EXPERT_NAME;
                     LocStringID = EnemyEV.SKELETON_EXPERT_NAME_LOC_ID;
@@ -136,7 +136,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.SKELETON_ADVANCED_NAME;
                     LocStringID = EnemyEV.SKELETON_ADVANCED_NAME_LOC_ID;
@@ -174,7 +174,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }		
@@ -231,7 +231,7 @@ namespace RogueCastle
             throwBoneFarLS.AddAction(new PlayAnimationLogicAction("Attack", "End"));
             throwBoneFarLS.AddAction(new DelayLogicAction(0.2f, 0.4f));
             throwBoneFarLS.AddAction(new LockFaceDirectionLogicAction(false));
-            throwBoneFarLS.Tag = GameTypes.LogicSetType_ATTACK;
+            throwBoneFarLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet throwBoneHighLS = new LogicSet(this);
             throwBoneHighLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -245,7 +245,7 @@ namespace RogueCastle
             throwBoneHighLS.AddAction(new PlayAnimationLogicAction("Attack", "End"));
             throwBoneHighLS.AddAction(new DelayLogicAction(0.2f, 0.4f));
             throwBoneHighLS.AddAction(new LockFaceDirectionLogicAction(false));
-            throwBoneHighLS.Tag = GameTypes.LogicSetType_ATTACK;
+            throwBoneHighLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet jumpBoneFarLS = new LogicSet(this);
             jumpBoneFarLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -262,7 +262,7 @@ namespace RogueCastle
             jumpBoneFarLS.AddAction(new PlayAnimationLogicAction("Attack", "End"));
             jumpBoneFarLS.AddAction(new DelayLogicAction(0.2f, 0.4f));
             jumpBoneFarLS.AddAction(new LockFaceDirectionLogicAction(false));
-            jumpBoneFarLS.Tag = GameTypes.LogicSetType_ATTACK;
+            jumpBoneFarLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet jumpBoneHighLS = new LogicSet(this);
             jumpBoneHighLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -279,7 +279,7 @@ namespace RogueCastle
             jumpBoneHighLS.AddAction(new PlayAnimationLogicAction("Attack", "End"));
             jumpBoneHighLS.AddAction(new DelayLogicAction(0.2f, 0.4f));
             jumpBoneHighLS.AddAction(new LockFaceDirectionLogicAction(false));
-            jumpBoneHighLS.Tag = GameTypes.LogicSetType_ATTACK;
+            jumpBoneHighLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet throwBoneExpertLS = new LogicSet(this);
             throwBoneExpertLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -296,7 +296,7 @@ namespace RogueCastle
             ThrowThreeProjectiles(throwBoneExpertLS);
             throwBoneExpertLS.AddAction(new DelayLogicAction(0.2f, 0.4f));
             throwBoneExpertLS.AddAction(new LockFaceDirectionLogicAction(false));
-            throwBoneExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            throwBoneExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet jumpBoneExpertLS = new LogicSet(this);
             jumpBoneExpertLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -316,7 +316,7 @@ namespace RogueCastle
             ThrowThreeProjectiles(jumpBoneExpertLS);
             jumpBoneExpertLS.AddAction(new DelayLogicAction(0.2f, 0.4f));
             jumpBoneExpertLS.AddAction(new LockFaceDirectionLogicAction(false));
-            jumpBoneExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            jumpBoneExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet throwBoneMiniBossLS = new LogicSet(this);
             throwBoneMiniBossLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -481,7 +481,7 @@ namespace RogueCastle
 
         public override void Update(GameTime gameTime)
         {
-            if (this.Difficulty == GameTypes.EnemyDifficulty.MINIBOSS && m_levelScreen.CurrentRoom.ActiveEnemies == 1)
+            if (this.Difficulty == GameTypes.EnemyDifficulty.Miniboss && m_levelScreen.CurrentRoom.ActiveEnemies == 1)
                 this.TintablePart.TextureColor = new Color(185, 0, 15);
 
             base.Update(gameTime);

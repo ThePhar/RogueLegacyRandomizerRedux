@@ -72,7 +72,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.ICE_WIZARD_MINIBOSS_NAME;
                     LocStringID = EnemyEV.ICE_WIZARD_MINIBOSS_NAME_LOC_ID;
@@ -111,7 +111,7 @@ namespace RogueCastle
 
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     SpellProjectileCount = 8;//14;
                     SpellDelay = 1.0f;
                     m_spellOffset = new Vector2(40, -130);
@@ -153,7 +153,7 @@ namespace RogueCastle
                     IceScale = new Vector2(2, 2);
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
 
                     SpellProjectileCount = 14; //14;
 					#region Advanced Variables - General
@@ -195,7 +195,7 @@ namespace RogueCastle
                     IceScale = new Vector2(1.5f, 1.5f);
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }		
@@ -230,7 +230,7 @@ namespace RogueCastle
             castSpellLS.AddAction(new RunFunctionLogicAction(this, "ResetIceball", null));
             castSpellLS.AddAction(new DelayLogicAction(0.5f));
             castSpellLS.AddAction(new LockFaceDirectionLogicAction(false));
-            castSpellLS.Tag = GameTypes.LogicSetType_ATTACK;
+            castSpellLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet castSpellExpertLS = new LogicSet(this);
             castSpellExpertLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -257,7 +257,7 @@ namespace RogueCastle
             castSpellExpertLS.AddAction(new RunFunctionLogicAction(this, "ResetIceball", null));
             castSpellExpertLS.AddAction(new DelayLogicAction(0.5f));
             castSpellExpertLS.AddAction(new LockFaceDirectionLogicAction(false));
-            castSpellExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            castSpellExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet teleportLS = new LogicSet(this);
             teleportLS.AddAction(new MoveLogicAction(m_target, true, 0));

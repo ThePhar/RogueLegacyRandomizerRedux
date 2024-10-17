@@ -71,7 +71,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.NINJA_MINIBOSS_NAME;
                     LocStringID = EnemyEV.NINJA_MINIBOSS_NAME_LOC_ID;
@@ -109,7 +109,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
 
                     ChanceToTeleport = 0.65f;
                     #region Expert Variables - General
@@ -149,7 +149,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     ChanceToTeleport = 0.50f;
 
                     #region Advanced Variables - General
@@ -189,7 +189,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }
@@ -239,7 +239,7 @@ namespace RogueCastle
             basicThrowShurikenLS.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
             basicThrowShurikenLS.AddAction(new PlayAnimationLogicAction(4, 5, false));
             basicThrowShurikenLS.AddAction(new DelayLogicAction(PauseAfterProjectile));                     
-            basicThrowShurikenLS.Tag = GameTypes.LogicSetType_ATTACK;
+            basicThrowShurikenLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet advancedThrowShurikenLS = new LogicSet(this);
             advancedThrowShurikenLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -255,7 +255,7 @@ namespace RogueCastle
             advancedThrowShurikenLS.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
             advancedThrowShurikenLS.AddAction(new PlayAnimationLogicAction(4, 5, false));
             advancedThrowShurikenLS.AddAction(new DelayLogicAction(PauseAfterProjectile));
-            advancedThrowShurikenLS.Tag = GameTypes.LogicSetType_ATTACK;
+            advancedThrowShurikenLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet expertThrowShurikenLS = new LogicSet(this);
             expertThrowShurikenLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -276,7 +276,7 @@ namespace RogueCastle
             expertThrowShurikenLS.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
             expertThrowShurikenLS.AddAction(new PlayAnimationLogicAction(4, 5, false));
             expertThrowShurikenLS.AddAction(new DelayLogicAction(PauseAfterProjectile));
-            expertThrowShurikenLS.Tag = GameTypes.LogicSetType_ATTACK;
+            expertThrowShurikenLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet teleportAttackLS = new LogicSet(this);
             teleportAttackLS.AddAction(new LockFaceDirectionLogicAction(true));
@@ -289,7 +289,7 @@ namespace RogueCastle
             teleportAttackLS.AddAction(new GroundCheckLogicAction());
             teleportAttackLS.AddAction(new DelayLogicAction(0.15f));
             teleportAttackLS.AddAction(new LockFaceDirectionLogicAction(false));
-            teleportAttackLS.Tag = GameTypes.LogicSetType_ATTACK;
+            teleportAttackLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet teleportExpertAttackLS = new LogicSet(this);
             teleportExpertAttackLS.AddAction(new LockFaceDirectionLogicAction(true));
@@ -312,7 +312,7 @@ namespace RogueCastle
             teleportExpertAttackLS.AddAction(new GroundCheckLogicAction());
             teleportExpertAttackLS.AddAction(new DelayLogicAction(0.15f));
             teleportExpertAttackLS.AddAction(new LockFaceDirectionLogicAction(false));
-            teleportExpertAttackLS.Tag = GameTypes.LogicSetType_ATTACK;
+            teleportExpertAttackLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             m_basicTeleportAttackLB.AddLogicSet(teleportAttackLS);
             m_expertTeleportAttackLB.AddLogicSet(teleportExpertAttackLS);
@@ -445,7 +445,7 @@ namespace RogueCastle
                         if (m_closestCeiling != null && distance > 150 && distance < 700)
                         {
                             m_currentActiveLB.StopLogicBlock();
-                            if (this.Difficulty == GameTypes.EnemyDifficulty.EXPERT)
+                            if (this.Difficulty == GameTypes.EnemyDifficulty.Expert)
                                 RunLogicBlock(false, m_expertTeleportAttackLB, 100);
                             else
                                 RunLogicBlock(false, m_basicTeleportAttackLB, 100);

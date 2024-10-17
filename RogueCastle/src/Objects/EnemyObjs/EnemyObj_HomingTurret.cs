@@ -63,7 +63,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.HOMING_TURRET_MINIBOSS_NAME;
                     LocStringID = EnemyEV.HOMING_TURRET_MINIBOSS_NAME_LOC_ID;
@@ -101,7 +101,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     FireDelay = 2.25f;//5;
                     #region Expert Variables - General
                     Name = EnemyEV.HOMING_TURRET_EXPERT_NAME;
@@ -140,7 +140,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     FireDelay = 1.5f;//5;
                     #region Advanced Variables - General
                     Name = EnemyEV.HOMING_TURRET_ADVANCED_NAME;
@@ -179,7 +179,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }							

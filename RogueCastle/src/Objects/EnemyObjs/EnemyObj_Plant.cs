@@ -58,7 +58,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.PLANT_MINIBOSS_NAME;
                     LocStringID = EnemyEV.PLANT_MINIBOSS_NAME_LOC_ID;
@@ -96,7 +96,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.PLANT_EXPERT_NAME;
                     LocStringID = EnemyEV.PLANT_EXPERT_NAME_LOC_ID;
@@ -134,7 +134,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.PLANT_ADVANCED_NAME;
                     LocStringID = EnemyEV.PLANT_ADVANCED_NAME_LOC_ID;
@@ -172,7 +172,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }
@@ -211,7 +211,7 @@ namespace RogueCastle
             spitProjectileLS.AddAction(new PlayAnimationLogicAction(this.TotalFrames - 1, TotalFrames));
             spitProjectileLS.AddAction(new ChangeSpriteLogicAction("EnemyPlantIdle_Character", true, true));
             //spitProjectileLS.AddAction(new DelayLogicAction(2.0f));
-            spitProjectileLS.Tag = GameTypes.LogicSetType_ATTACK;
+            spitProjectileLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
 
 
@@ -232,7 +232,7 @@ namespace RogueCastle
             spitAdvancedProjectileLS.AddAction(new PlayAnimationLogicAction(this.TotalFrames - 1, TotalFrames));
             spitAdvancedProjectileLS.AddAction(new ChangeSpriteLogicAction("EnemyPlantIdle_Character", true, true));
             //spitAdvancedProjectileLS.AddAction(new DelayLogicAction(2.0f));
-            spitAdvancedProjectileLS.Tag = GameTypes.LogicSetType_ATTACK;
+            spitAdvancedProjectileLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
 
             LogicSet spitExpertProjectileLS = new LogicSet(this);
@@ -261,7 +261,7 @@ namespace RogueCastle
             spitExpertProjectileLS.AddAction(new PlayAnimationLogicAction(this.TotalFrames - 1, TotalFrames));
             spitExpertProjectileLS.AddAction(new ChangeSpriteLogicAction("EnemyPlantIdle_Character", true, true));
             //spitExpertProjectileLS.AddAction(new DelayLogicAction(2.0f));
-            spitExpertProjectileLS.Tag = GameTypes.LogicSetType_ATTACK;
+            spitExpertProjectileLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet spitMinibossProjectileLS = new LogicSet(this);
             spitMinibossProjectileLS.AddAction(new ChangeSpriteLogicAction("EnemyPlantAttack_Character", false, false));
@@ -285,7 +285,7 @@ namespace RogueCastle
             spitMinibossProjectileLS.AddAction(new PlayAnimationLogicAction(this.TotalFrames - 1, TotalFrames));
             spitMinibossProjectileLS.AddAction(new ChangeSpriteLogicAction("EnemyPlantIdle_Character", true, true));
             //spitExpertProjectileLS.AddAction(new DelayLogicAction(2.0f));
-            spitMinibossProjectileLS.Tag = GameTypes.LogicSetType_ATTACK;
+            spitMinibossProjectileLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet walkStopLS = new LogicSet(this);
             walkStopLS.AddAction(new ChangeSpriteLogicAction("EnemyPlantIdle_Character", true, true));
@@ -326,7 +326,7 @@ namespace RogueCastle
             logicBlocksToDispose.Add(m_generalCooldownExpertLB);
 
             SetCooldownLogicBlock(m_generalCooldownLB, 100); //walkStopLS
-            if (Difficulty == GameTypes.EnemyDifficulty.MINIBOSS)
+            if (Difficulty == GameTypes.EnemyDifficulty.Miniboss)
                 SetCooldownLogicBlock(m_generalCooldownExpertLB, 50, 50, 0); //walkTowardsLS, walkAwayLS, walkStopLS
 
             projData.Dispose();

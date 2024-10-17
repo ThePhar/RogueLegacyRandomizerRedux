@@ -199,7 +199,7 @@ public static class LevelEV
     public static bool EnableDebugInput = true;
     public static bool UnlockAllAbilities = false;
     public static bool UnlockAllDiaryEntries = false;
-    public static GameTypes.LevelType TestRoomLevelType = GameTypes.LevelType.CASTLE;
+    public static GameTypes.LevelType TestRoomLevelType = GameTypes.LevelType.Castle;
     public static bool TestRoomReverse = false;
     public static bool RunTestRoom = false;
     public static bool ShowDebugText = false;

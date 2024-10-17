@@ -78,7 +78,7 @@ namespace RogueCastle
 
             switch (Difficulty)
             {
-                case (GameTypes.EnemyDifficulty.MINIBOSS):
+                case (GameTypes.EnemyDifficulty.Miniboss):
                     #region Miniboss Variables - General
                     Name = EnemyEV.KNIGHT_MINIBOSS_NAME;
                     LocStringID = EnemyEV.KNIGHT_MINIBOSS_NAME_LOC_ID;
@@ -116,7 +116,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.EXPERT):
+                case (GameTypes.EnemyDifficulty.Expert):
                     #region Expert Variables - General
                     Name = EnemyEV.KNIGHT_EXPERT_NAME;
                     LocStringID = EnemyEV.KNIGHT_EXPERT_NAME_LOC_ID;
@@ -154,7 +154,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.ADVANCED):
+                case (GameTypes.EnemyDifficulty.Advanced):
                     #region Advanced Variables - General
                     Name = EnemyEV.KNIGHT_ADVANCED_NAME;
                     LocStringID = EnemyEV.KNIGHT_ADVANCED_NAME_LOC_ID;
@@ -192,7 +192,7 @@ namespace RogueCastle
                     #endregion
                     break;
 
-                case (GameTypes.EnemyDifficulty.BASIC):
+                case (GameTypes.EnemyDifficulty.Basic):
                 default:
                     break;
             }		
@@ -234,7 +234,7 @@ namespace RogueCastle
             attackThrustLS.AddAction(new ChangeSpriteLogicAction("EnemySpearKnightIdle_Character", true, true));
             attackThrustLS.AddAction(new DelayLogicAction(0.3f));
             attackThrustLS.AddAction(new LockFaceDirectionLogicAction(false));
-            attackThrustLS.Tag = GameTypes.LogicSetType_ATTACK;
+            attackThrustLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet attackThrustExpertLS = new LogicSet(this);
             attackThrustExpertLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -251,7 +251,7 @@ namespace RogueCastle
             attackThrustExpertLS.AddAction(new ChangeSpriteLogicAction("EnemySpearKnightIdle_Character", true, true));
             attackThrustExpertLS.AddAction(new DelayLogicAction(0.3f));
             attackThrustExpertLS.AddAction(new LockFaceDirectionLogicAction(false));
-            attackThrustExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            attackThrustExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet attackThrustMinibossLS = new LogicSet(this);
             attackThrustMinibossLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -296,7 +296,7 @@ namespace RogueCastle
             attackThrustMinibossLS.AddAction(new ChangeSpriteLogicAction("EnemySpearKnightIdle_Character", true, true));
             attackThrustMinibossLS.AddAction(new DelayLogicAction(0.3f));
             attackThrustMinibossLS.AddAction(new LockFaceDirectionLogicAction(false));
-            attackThrustMinibossLS.Tag = GameTypes.LogicSetType_ATTACK;
+            attackThrustMinibossLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             ProjectileData projData = new ProjectileData(this)
             {
@@ -325,7 +325,7 @@ namespace RogueCastle
             throwSpearLS.AddAction(new PlayAnimationLogicAction("Attack", "End", false));
             throwSpearLS.AddAction(new DelayLogicAction(0.3f));
             throwSpearLS.AddAction(new LockFaceDirectionLogicAction(false));
-            throwSpearLS.Tag = GameTypes.LogicSetType_ATTACK;
+            throwSpearLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
 
 
@@ -338,7 +338,7 @@ namespace RogueCastle
             ThrowThreeProjectiles(throwSpearExpertLS);
             throwSpearExpertLS.AddAction(new DelayLogicAction(0.3f));
             throwSpearExpertLS.AddAction(new LockFaceDirectionLogicAction(false));
-            throwSpearExpertLS.Tag = GameTypes.LogicSetType_ATTACK;
+            throwSpearExpertLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet throwSpearMiniBossLS = new LogicSet(this);
             throwSpearMiniBossLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -364,7 +364,7 @@ namespace RogueCastle
             //
             throwSpearMiniBossLS.AddAction(new LockFaceDirectionLogicAction(false));
             throwSpearMiniBossLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.KNIGHT_MINIBOSS_ANIMATION_DELAY));
-            throwSpearMiniBossLS.Tag = GameTypes.LogicSetType_ATTACK;
+            throwSpearMiniBossLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
 
             LogicSet throwSpearMiniBossAltLS = new LogicSet(this);
             throwSpearMiniBossAltLS.AddAction(new MoveLogicAction(m_target, true, 0));
@@ -390,7 +390,7 @@ namespace RogueCastle
             //
             throwSpearMiniBossAltLS.AddAction(new LockFaceDirectionLogicAction(false));
             throwSpearMiniBossAltLS.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / EnemyEV.KNIGHT_MINIBOSS_ANIMATION_DELAY));
-            throwSpearMiniBossAltLS.Tag = GameTypes.LogicSetType_ATTACK;
+            throwSpearMiniBossAltLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
             #region - OLD THROW EXPERT SPEAR CODE
 
             /*
@@ -435,7 +435,7 @@ namespace RogueCastle
             jumpSpearMany.AddAction(new GroundCheckLogicAction());
             jumpSpearMany.AddAction(new MoveLogicAction(m_target, true, 0));
             //jumpSpearMany.AddAction(new DelayLogicAction(1.0f));
-            jumpSpearMany.Tag = GameTypes.LogicSetType_ATTACK;
+            jumpSpearMany.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
             #endregion
 
 
