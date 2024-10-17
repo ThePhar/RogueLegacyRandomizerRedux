@@ -188,11 +188,11 @@ namespace RogueCastle
                 m_classTextObj.Text = classText + LocaleBuilder.GetResourceString(ClassType.ToStringID(this.Class, this.IsFemale));
 
                 // Special check to make sure lich doesn't get dextrocardia.
-                while ((this.Class == ClassType.Lich || this.Class == ClassType.Lich2) && (HasTrait(TraitType.DEXTROCARDIA)))
+                while ((this.Class == ClassType.LICH || this.Class == ClassType.LICH2) && (HasTrait(TraitType.DEXTROCARDIA)))
                     this.Traits = TraitType.CreateRandomTraits();
 
                 // Special check to make sure wizard don't get savantism.
-                while ((this.Class == ClassType.Wizard || this.Class == ClassType.Wizard2 || this.Class == ClassType.Dragon) && (HasTrait(TraitType.SAVANT)))
+                while ((this.Class == ClassType.WIZARD || this.Class == ClassType.WIZARD2 || this.Class == ClassType.DRAGON) && (HasTrait(TraitType.SAVANT)))
                     this.Traits = TraitType.CreateRandomTraits();
 
                 // Selecting random spell.  There's a check to make sure savants don't get particular spells.
@@ -299,9 +299,9 @@ namespace RogueCastle
             int randShoulderPiece = CDGMath.RandomInt(1, PlayerPart.NUM_SHOULDER_PIECES);
             int randChestPiece = CDGMath.RandomInt(1, PlayerPart.NUM_CHEST_PIECES);
 
-            if (this.Class == ClassType.Traitor)
+            if (this.Class == ClassType.TRAITOR)
                 randHeadPiece = PlayerPart.INTRO_HELM; // Force the head piece to be Johanne's headpiece if you are playing as the fountain.
-            else if (this.Class == ClassType.Dragon)
+            else if (this.Class == ClassType.DRAGON)
                 randHeadPiece = PlayerPart.DRAGON_HELM;
 
             SetPortrait((byte)randHeadPiece, (byte)randShoulderPiece, (byte)randChestPiece);
@@ -371,27 +371,27 @@ namespace RogueCastle
 
             m_spellIcon.ChangeSprite(SpellEV.Icon(Spell));
 
-            if (this.Class == ClassType.Knight || this.Class == ClassType.Knight2)
+            if (this.Class == ClassType.KNIGHT || this.Class == ClassType.KNIGHT2)
             {
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).ChangeSprite("PlayerIdleShield_Sprite");
             }
-            else if (this.Class == ClassType.Banker || this.Class == ClassType.Banker2)
+            else if (this.Class == ClassType.BANKER || this.Class == ClassType.BANKER2)
             {
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).ChangeSprite("PlayerIdleLamp_Sprite");
             }
-            else if (this.Class == ClassType.Wizard || this.Class == ClassType.Wizard2)
+            else if (this.Class == ClassType.WIZARD || this.Class == ClassType.WIZARD2)
             {
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).ChangeSprite("PlayerIdleBeard_Sprite");
             }
-            else if (this.Class == ClassType.Ninja || this.Class == ClassType.Ninja2)
+            else if (this.Class == ClassType.NINJA || this.Class == ClassType.NINJA2)
             {
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).ChangeSprite("PlayerIdleHeadband_Sprite");
             }
-            else if (this.Class == ClassType.Barbarian || this.Class == ClassType.Barbarian2)
+            else if (this.Class == ClassType.BARBARIAN || this.Class == ClassType.BARBARIAN2)
             {
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).ChangeSprite("PlayerIdleHorns_Sprite");
@@ -401,14 +401,14 @@ namespace RogueCastle
 
             // Special code for dragon.
             m_playerSprite.GetChildAt(PlayerPart.WINGS).Visible = false;
-            if (this.Class == ClassType.Dragon)
+            if (this.Class == ClassType.DRAGON)
             {
                 m_playerSprite.GetChildAt(PlayerPart.WINGS).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.HEAD).ChangeSprite("PlayerIdleHead" + PlayerPart.DRAGON_HELM + "_Sprite");
             }
 
             //Special code for traitor.
-            if (this.Class == ClassType.Traitor)
+            if (this.Class == ClassType.TRAITOR)
                 m_playerSprite.GetChildAt(PlayerPart.HEAD).ChangeSprite("PlayerIdleHead" + PlayerPart.INTRO_HELM + "_Sprite");
 
             // This is for male/female counterparts
@@ -441,7 +441,7 @@ namespace RogueCastle
                 m_playerSprite.ScaleY *= 1.175f;
             }
 
-            if (this.Class == ClassType.SpellSword || this.Class == ClassType.SpellSword2)
+            if (this.Class == ClassType.SPELL_SWORD || this.Class == ClassType.SPELL_SWORD2)
                 m_playerSprite.OutlineColour = Color.White;
             else
                 m_playerSprite.OutlineColour = Color.Black;
@@ -504,7 +504,7 @@ namespace RogueCastle
             // only apply the lich effect if the lineageObj is being drawn.
             if (CollisionMath.Intersects(this.Bounds, camera.Bounds))
             {
-                if (this.Class == ClassType.Lich || this.Class == ClassType.Lich2)
+                if (this.Class == ClassType.LICH || this.Class == ClassType.LICH2)
                 {
                     // This is the Tint Removal effect, that removes the tint from his face.
                     Game.ColourSwapShader.Parameters["desiredTint"].SetValue(Color.White.ToVector4());
@@ -525,7 +525,7 @@ namespace RogueCastle
                         m_playerSprite.GetChildAt(PlayerPart.BOWTIE).Draw(camera);
                     m_playerSprite.GetChildAt(PlayerPart.EXTRA).Draw(camera);
                 }
-                else if (this.Class == ClassType.Assassin || this.Class == ClassType.Assassin2)
+                else if (this.Class == ClassType.ASSASSIN || this.Class == ClassType.ASSASSIN2)
                 {
                     // This is the Tint Removal effect, that removes the tint from his face.
                     Game.ColourSwapShader.Parameters["desiredTint"].SetValue(Color.White.ToVector4());

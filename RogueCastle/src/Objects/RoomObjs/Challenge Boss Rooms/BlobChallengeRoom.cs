@@ -107,7 +107,7 @@ namespace RogueCastle
             Player.AttachedLevel.ForcePlayerHUDLevel(numEmpowered);
 
             Game.PlayerStats.PlayerName = "Echidna";
-            Game.PlayerStats.Class = ClassType.Dragon;
+            Game.PlayerStats.Class = ClassType.DRAGON;
             Game.PlayerStats.Spell = SpellType.DRAGON_FIRE_NEO;
             Game.PlayerStats.IsFemale = true;
            

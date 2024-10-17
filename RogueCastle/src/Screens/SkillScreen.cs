@@ -587,35 +587,35 @@ namespace RogueCastle
                     break;
                 case (SkillType.Knight_Up):
                     skillUnlockType = SkillUnlockType.KNIGHT_UP;
-                    if (Game.PlayerStats.Class == ClassType.Knight) Game.PlayerStats.Class = ClassType.Knight2;
+                    if (Game.PlayerStats.Class == ClassType.KNIGHT) Game.PlayerStats.Class = ClassType.KNIGHT2;
                     break;
                 case (SkillType.Barbarian_Up):
                     skillUnlockType = SkillUnlockType.BARBARIAN_UP;
-                    if (Game.PlayerStats.Class == ClassType.Barbarian) Game.PlayerStats.Class = ClassType.Barbarian2;
+                    if (Game.PlayerStats.Class == ClassType.BARBARIAN) Game.PlayerStats.Class = ClassType.BARBARIAN2;
                     break;
                 case (SkillType.Mage_Up):
                     skillUnlockType = SkillUnlockType.WIZARD_UP;
-                    if (Game.PlayerStats.Class == ClassType.Wizard) Game.PlayerStats.Class = ClassType.Wizard2;
+                    if (Game.PlayerStats.Class == ClassType.WIZARD) Game.PlayerStats.Class = ClassType.WIZARD2;
                     break;
                 case (SkillType.Ninja_Up):
                     skillUnlockType = SkillUnlockType.NINJA_UP;
-                    if (Game.PlayerStats.Class == ClassType.Ninja) Game.PlayerStats.Class = ClassType.Ninja2;
+                    if (Game.PlayerStats.Class == ClassType.NINJA) Game.PlayerStats.Class = ClassType.NINJA2;
                     break;
                 case (SkillType.Assassin_Up):
                     skillUnlockType = SkillUnlockType.ASSASSIN_UP;
-                    if (Game.PlayerStats.Class == ClassType.Assassin) Game.PlayerStats.Class = ClassType.Assassin2;
+                    if (Game.PlayerStats.Class == ClassType.ASSASSIN) Game.PlayerStats.Class = ClassType.ASSASSIN2;
                     break;
                 case (SkillType.Banker_Up):
                     skillUnlockType = SkillUnlockType.BANKER_UP;
-                    if (Game.PlayerStats.Class == ClassType.Banker) Game.PlayerStats.Class = ClassType.Banker2;
+                    if (Game.PlayerStats.Class == ClassType.BANKER) Game.PlayerStats.Class = ClassType.BANKER2;
                     break;
                 case (SkillType.SpellSword_Up):
                     skillUnlockType = SkillUnlockType.SPELL_SWORD_UP;
-                    if (Game.PlayerStats.Class == ClassType.SpellSword) Game.PlayerStats.Class = ClassType.SpellSword2;
+                    if (Game.PlayerStats.Class == ClassType.SPELL_SWORD) Game.PlayerStats.Class = ClassType.SPELL_SWORD2;
                     break;
                 case (SkillType.Lich_Up):
                     skillUnlockType = SkillUnlockType.LICH_UP;
-                    if (Game.PlayerStats.Class == ClassType.Lich) Game.PlayerStats.Class = ClassType.Lich2;
+                    if (Game.PlayerStats.Class == ClassType.LICH) Game.PlayerStats.Class = ClassType.LICH2;
                     break;
                 case (SkillType.SuperSecret):
                     skillUnlockType = SkillUnlockType.DRAGON;

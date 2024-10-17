@@ -99,7 +99,7 @@ namespace RogueCastle
             Player.AttachedLevel.ForcePlayerHUDLevel(numEmpowered);
 
             Game.PlayerStats.PlayerName = "Johannes";
-            Game.PlayerStats.Class = ClassType.Traitor;
+            Game.PlayerStats.Class = ClassType.TRAITOR;
             Game.PlayerStats.IsFemale = false;
             
             Game.PlayerStats.BonusHealth = 900 / 5;//266 / 5;

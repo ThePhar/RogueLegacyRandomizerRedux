@@ -818,7 +818,7 @@ namespace RogueCastle
                 Blink(Color.Red, 0.1f);
                 this.m_levelScreen.ImpactEffectPool.DisplayEnemyImpactEffect(collisionPt);
 
-                if (isPlayer == true && (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2))
+                if (isPlayer == true && (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2))
                 {
                     this.CurrentHealth -= damage;
                     m_target.CurrentMana += (int)(damage * GameEV.SPELLSWORD_ATTACK_MANA_CONVERSION);
@@ -955,7 +955,7 @@ namespace RogueCastle
                 m_currentActiveLB.StopLogicBlock();
             m_levelScreen.ImpactEffectPool.DisplayDeathEffect(this.Position);
 
-            if ((Game.PlayerStats.Class == ClassType.Lich || Game.PlayerStats.Class == ClassType.Lich2) && this.GivesLichHealth == true)
+            if ((Game.PlayerStats.Class == ClassType.LICH || Game.PlayerStats.Class == ClassType.LICH2) && this.GivesLichHealth == true)
             {
                 int lichHealthGain = 0;
                 int playerLevel = Game.PlayerStats.CurrentLevel;

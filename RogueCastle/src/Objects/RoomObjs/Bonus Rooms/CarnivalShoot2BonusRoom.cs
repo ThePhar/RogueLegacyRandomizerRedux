@@ -464,7 +464,7 @@ namespace RogueCastle
         {
             if (m_isPlayingGame == true)
             {
-                if ((Game.GlobalInput.JustPressed(InputMapType.PLAYER_SPELL1) || (Game.GlobalInput.JustPressed(InputMapType.PLAYER_ATTACK) && Game.PlayerStats.Class== ClassType.Dragon)) 
+                if ((Game.GlobalInput.JustPressed(InputMapType.PLAYER_SPELL1) || (Game.GlobalInput.JustPressed(InputMapType.PLAYER_ATTACK) && Game.PlayerStats.Class== ClassType.DRAGON)) 
                     && Player.SpellCastDelay <= 0 && m_gateClosed == true)
                 {
                     m_axesThrown++;

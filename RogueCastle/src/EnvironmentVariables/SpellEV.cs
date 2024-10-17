@@ -424,7 +424,7 @@ public static class SpellEV
     // TODO: Should be moved to a more relevant section?
     public static byte[] GetNext3Spells()
     {
-        var spellArray = ClassType.GetSpellList(ClassType.Wizard2);
+        var spellArray = ClassType.GetSpellList(ClassType.WIZARD2);
         List<byte> spellList = spellArray.ToList();
 
         var spellIndex = spellList.IndexOf(Game.PlayerStats.Spell);

@@ -2201,7 +2201,7 @@ namespace RogueCastle
 
             /////////// DRAWING THE SHADOWS & LIGHTING //////////////////////////////
             if ((CurrentLevelType == GameTypes.LevelType.DUNGEON || Game.PlayerStats.HasTrait(TraitType.GLAUCOMA))
-                && (Game.PlayerStats.Class != ClassType.Banker2 || (Game.PlayerStats.Class == ClassType.Banker2 && Player.LightOn == false)))
+                && (Game.PlayerStats.Class != ClassType.BANKER2 || (Game.PlayerStats.Class == ClassType.BANKER2 && Player.LightOn == false)))
             {
                 // Can't do this because switching from a rendertarget and back is a bug in XNA that causes a purple screen.  Might work with Monogame.
                 //Camera.GraphicsDevice.SetRenderTarget(m_bgRenderTarget);
@@ -2284,7 +2284,7 @@ namespace RogueCastle
             Game.RippleEffect.Parameters["width"].SetValue(ShoutMagnitude);
 
             Vector2 playerPos = m_player.Position - Camera.TopLeftCorner;
-            if (Game.PlayerStats.Class == ClassType.Barbarian || Game.PlayerStats.Class == ClassType.Barbarian2)
+            if (Game.PlayerStats.Class == ClassType.BARBARIAN || Game.PlayerStats.Class == ClassType.BARBARIAN2)
             {
                 Game.RippleEffect.Parameters["xcenter"].SetValue(playerPos.X / 1320f);
                 Game.RippleEffect.Parameters["ycenter"].SetValue(playerPos.Y / 720f);
@@ -2997,7 +2997,7 @@ namespace RogueCastle
             m_player.StopAllSpells();
 
             // Adding treasure chest icons to map for Spelunker.
-            if (Game.PlayerStats.Class == ClassType.Banker2)
+            if (Game.PlayerStats.Class == ClassType.BANKER2)
             {
                 m_miniMapDisplay.AddAllIcons(this.RoomList);
                 (ScreenManager as RCScreenManager).AddIconsToMap(this.RoomList);

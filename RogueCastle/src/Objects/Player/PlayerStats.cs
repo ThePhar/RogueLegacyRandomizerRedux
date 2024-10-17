@@ -153,7 +153,7 @@ namespace RogueCastle
 
             PlayerName = "Lee";//"Sir Johannes";
             SpecialItem = SpecialItemType.NONE;
-            Class = ClassType.Knight;
+            Class = ClassType.KNIGHT;
             Spell = SpellType.DAGGER;
             Age = 30;
             ChildAge = 5;
@@ -262,7 +262,7 @@ namespace RogueCastle
                 Name = "Johannes",
                 Age = 30,
                 ChildAge = 20,
-                Class = ClassType.Knight,
+                Class = ClassType.KNIGHT,
                 HeadPiece = 8,
                 ChestPiece = 1,
                 ShoulderPiece = 1,

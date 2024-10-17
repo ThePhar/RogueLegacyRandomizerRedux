@@ -120,7 +120,7 @@ namespace RogueCastle
             m_playerFrame.SetTraits((TraitType.NONE, TraitType.NONE));
 
             m_playerFrame.IsFemale = false;
-            m_playerFrame.Class = ClassType.Knight;
+            m_playerFrame.Class = ClassType.KNIGHT;
             m_playerFrame.Y -= 120;
             m_playerFrame.SetPortrait(8, 1, 1); // 8 is the special intro open helm.
             m_playerFrame.UpdateData();

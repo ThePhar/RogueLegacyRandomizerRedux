@@ -123,7 +123,7 @@ namespace RogueCastle
 
             // Must be called first so that the tween is paused when the dialogue screen is displayed.
             RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
-            if (Game.PlayerStats.Class == ClassType.Traitor)
+            if (Game.PlayerStats.Class == ClassType.TRAITOR)
             {
                 manager.DialogueScreen.SetDialogue("FinalBossTalk01_Special");
                 GameUtil.UnlockAchievement("LOVE_OF_LAUGHING_AT_OTHERS");

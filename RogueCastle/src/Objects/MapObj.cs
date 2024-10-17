@@ -158,7 +158,7 @@ namespace RogueCastle
                 }
 
                 // Don't add these if you're the spelunker (banker2) because it's already added at the start of the game.
-                if (room.Name != "Bonus" && Game.PlayerStats.Class != ClassType.Banker2) // Some bonus rooms have tons of chests. Don't litter it with chest icons.
+                if (room.Name != "Bonus" && Game.PlayerStats.Class != ClassType.BANKER2) // Some bonus rooms have tons of chests. Don't litter it with chest icons.
                 {
                     foreach (GameObj obj in room.GameObjList)
                     {
@@ -228,7 +228,7 @@ namespace RogueCastle
                     m_teleporterPosList.Add(teleporter.Position);
                 }
 
-                if (Game.PlayerStats.Class != ClassType.Banker2) // Don't add bonus room icon if you're the spelunker for the same reason you don't add chests.
+                if (Game.PlayerStats.Class != ClassType.BANKER2) // Don't add bonus room icon if you're the spelunker for the same reason you don't add chests.
                 {
                     if (room.Name == "Bonus")
                     {

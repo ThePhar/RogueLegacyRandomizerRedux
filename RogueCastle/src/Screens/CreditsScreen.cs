@@ -587,27 +587,27 @@ namespace RogueCastle
             if (Game.PlayerStats.SpecialItem == SpecialItemType.GLASSES)
                 m_playerSprite.GetChildAt(PlayerPart.GLASSES).Visible = true;
 
-            if (Game.PlayerStats.Class == ClassType.Knight || Game.PlayerStats.Class == ClassType.Knight2)
+            if (Game.PlayerStats.Class == ClassType.KNIGHT || Game.PlayerStats.Class == ClassType.KNIGHT2)
             {
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).ChangeSprite("Player" + animationType + "Shield_Sprite");
             }
-            else if (Game.PlayerStats.Class == ClassType.Banker || Game.PlayerStats.Class == ClassType.Banker2)
+            else if (Game.PlayerStats.Class == ClassType.BANKER || Game.PlayerStats.Class == ClassType.BANKER2)
             {
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).ChangeSprite("Player" + animationType + "Lamp_Sprite");
             }
-            else if (Game.PlayerStats.Class == ClassType.Wizard || Game.PlayerStats.Class == ClassType.Wizard2)
+            else if (Game.PlayerStats.Class == ClassType.WIZARD || Game.PlayerStats.Class == ClassType.WIZARD2)
             {
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).ChangeSprite("Player" + animationType + "Beard_Sprite");
             }
-            else if (Game.PlayerStats.Class == ClassType.Ninja || Game.PlayerStats.Class == ClassType.Ninja2)
+            else if (Game.PlayerStats.Class == ClassType.NINJA || Game.PlayerStats.Class == ClassType.NINJA2)
             {
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).ChangeSprite("Player" + animationType + "Headband_Sprite");
             }
-            else if (Game.PlayerStats.Class == ClassType.Barbarian || Game.PlayerStats.Class == ClassType.Barbarian2)
+            else if (Game.PlayerStats.Class == ClassType.BARBARIAN || Game.PlayerStats.Class == ClassType.BARBARIAN2)
             {
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.EXTRA).ChangeSprite("Player" + animationType + "Horns_Sprite");
@@ -617,13 +617,13 @@ namespace RogueCastle
 
             // Special code for dragon.
             m_playerSprite.GetChildAt(PlayerPart.WINGS).Visible = false;
-            if (Game.PlayerStats.Class == ClassType.Dragon)
+            if (Game.PlayerStats.Class == ClassType.DRAGON)
             {
                 m_playerSprite.GetChildAt(PlayerPart.WINGS).Visible = true;
                 m_playerSprite.GetChildAt(PlayerPart.HEAD).ChangeSprite("Player" + animationType + "Head" + PlayerPart.DRAGON_HELM + "_Sprite");
             }
 
-            if (Game.PlayerStats.Class == ClassType.Traitor)
+            if (Game.PlayerStats.Class == ClassType.TRAITOR)
                 m_playerSprite.GetChildAt(PlayerPart.HEAD).ChangeSprite("Player" + animationType + "Head" + PlayerPart.INTRO_HELM + "_Sprite");
 
             // This is for male/female counterparts
@@ -655,7 +655,7 @@ namespace RogueCastle
                 m_playerSprite.ScaleY *= 1.175f;
             }
 
-            if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
+            if (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2)
             {
                 m_playerSprite.OutlineColour = Color.White;
                 m_playerSprite.GetChildAt(PlayerPart.SWORD1).Visible = false;
@@ -672,9 +672,9 @@ namespace RogueCastle
             string headPart = (m_playerSprite.GetChildAt(PlayerPart.HEAD) as IAnimateableObj).SpriteName;
             int numberIndex = headPart.IndexOf("_") - 1;
             headPart = headPart.Remove(numberIndex, 1);
-            if (Game.PlayerStats.Class == ClassType.Dragon)
+            if (Game.PlayerStats.Class == ClassType.DRAGON)
                 headPart = headPart.Replace("_", PlayerPart.DRAGON_HELM + "_");
-            else if (Game.PlayerStats.Class == ClassType.Traitor)
+            else if (Game.PlayerStats.Class == ClassType.TRAITOR)
                 headPart = headPart.Replace("_", PlayerPart.INTRO_HELM + "_");
             else
                 headPart = headPart.Replace("_", Game.PlayerStats.HeadPiece + "_");
@@ -1214,7 +1214,7 @@ namespace RogueCastle
             m_playerSprite.Draw(Camera);
             Game.ColourSwapShader.Parameters["desiredTint"].SetValue(m_playerSprite.GetChildAt(PlayerPart.HEAD).TextureColor.ToVector4());
 
-            if (Game.PlayerStats.Class == ClassType.Lich || Game.PlayerStats.Class == ClassType.Lich2)
+            if (Game.PlayerStats.Class == ClassType.LICH || Game.PlayerStats.Class == ClassType.LICH2)
             {
                 // This is the Tint Removal effect, that removes the tint from his face.
                 Game.ColourSwapShader.Parameters["Opacity"].SetValue(m_playerSprite.Opacity);
@@ -1224,7 +1224,7 @@ namespace RogueCastle
                 Game.ColourSwapShader.Parameters["ColourSwappedOut2"].SetValue(m_skinColour2.ToVector4());
                 Game.ColourSwapShader.Parameters["ColourSwappedIn2"].SetValue(m_lichColour2.ToVector4());
             }
-            else if (Game.PlayerStats.Class == ClassType.Assassin || Game.PlayerStats.Class == ClassType.Assassin2)
+            else if (Game.PlayerStats.Class == ClassType.ASSASSIN || Game.PlayerStats.Class == ClassType.ASSASSIN2)
             {
                 // This is the Tint Removal effect, that removes the tint from his face.
                 Game.ColourSwapShader.Parameters["Opacity"].SetValue(m_playerSprite.Opacity);

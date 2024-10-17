@@ -57,7 +57,7 @@ namespace RogueCastle
 
             //Game.PlayerStats.PlayerName = "Lady Sol the Sword";
             Game.PlayerStats.PlayerName = "McSwordy";
-            Game.PlayerStats.Class = ClassType.SpellSword2;
+            Game.PlayerStats.Class = ClassType.SPELL_SWORD2;
             Game.PlayerStats.Spell = SpellType.CLOSE;
             Game.PlayerStats.IsFemale = true;
 

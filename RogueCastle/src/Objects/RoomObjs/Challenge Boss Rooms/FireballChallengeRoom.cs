@@ -56,7 +56,7 @@ namespace RogueCastle
             Player.AttachedLevel.ForcePlayerHUDLevel(numEmpowered);
 
             Game.PlayerStats.PlayerName = "Dovahkiin";
-            Game.PlayerStats.Class = ClassType.Barbarian2;
+            Game.PlayerStats.Class = ClassType.BARBARIAN2;
             Game.PlayerStats.Spell = SpellType.NONE;
             Game.PlayerStats.IsFemale = false;
             

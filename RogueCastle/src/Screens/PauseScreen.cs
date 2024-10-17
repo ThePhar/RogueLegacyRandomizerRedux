@@ -227,8 +227,8 @@ namespace RogueCastle
 
             if (InputManager.JustPressed(Keys.OemOpenBrackets, PlayerIndex.One))
             {
-                if (currentDebugClass == ClassType.Knight)
-                    m_classDebugCounter = (sbyte)(ClassType.Traitor - Game.PlayerStats.Class);
+                if (currentDebugClass == ClassType.KNIGHT)
+                    m_classDebugCounter = (sbyte)(ClassType.TRAITOR - Game.PlayerStats.Class);
                 else
                     m_classDebugCounter--;
 
@@ -236,7 +236,7 @@ namespace RogueCastle
             }
             else if (InputManager.JustPressed(Keys.OemCloseBrackets, PlayerIndex.One))
             {
-                if (currentDebugClass == ClassType.Traitor)
+                if (currentDebugClass == ClassType.TRAITOR)
                     m_classDebugCounter = (sbyte)(-Game.PlayerStats.Class);
                 else
                     m_classDebugCounter++;

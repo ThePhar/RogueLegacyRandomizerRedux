@@ -52,6 +52,11 @@ internal static class LocaleBuilder
         }
     }
 
+    public static string FormatResourceString(this string stringID, params object[] args)
+    {
+        return string.Format(stringID, args);
+    }
+
     public static string GetResourceString(this string stringID, bool forceMale = false)
     {
         return GetResourceStringCustomFemale(stringID, Game.PlayerStats.IsFemale, forceMale);

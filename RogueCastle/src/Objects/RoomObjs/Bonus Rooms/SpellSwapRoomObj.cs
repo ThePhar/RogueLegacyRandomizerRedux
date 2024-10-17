@@ -58,7 +58,7 @@ namespace RogueCastle
         private void RandomizeItem()
         {
             // Selecting random spell.
-            if (Game.PlayerStats.Class != ClassType.Dragon && Game.PlayerStats.Class != ClassType.Traitor)
+            if (Game.PlayerStats.Class != ClassType.DRAGON && Game.PlayerStats.Class != ClassType.TRAITOR)
             {
                 byte[] spellList = ClassType.GetSpellList(Game.PlayerStats.Class);
 
@@ -74,12 +74,12 @@ namespace RogueCastle
             }
             else
             {
-                if (Game.PlayerStats.Class == ClassType.Dragon)
+                if (Game.PlayerStats.Class == ClassType.DRAGON)
                 {
                     ID = (int) SpellType.DRAGON_FIRE;
                     Spell = SpellType.DRAGON_FIRE;
                 }
-                else if (Game.PlayerStats.Class == ClassType.Traitor)
+                else if (Game.PlayerStats.Class == ClassType.TRAITOR)
                 {
                     ID = (int) SpellType.RAPID_DAGGER;
                     Spell = SpellType.RAPID_DAGGER;
@@ -99,9 +99,9 @@ namespace RogueCastle
                 do
                 {
                     RandomizeItem();
-                } while ((Spell == Game.PlayerStats.Spell && Game.PlayerStats.Class != ClassType.Dragon && Game.PlayerStats.Class != ClassType.Traitor) // Make sure the room doesn't randomize to the item the player already has.
-                    || (Spell == SpellType.DRAGON_FIRE && Game.PlayerStats.Class != ClassType.Dragon) // Make sure Dragon fire is not set as the spell for a locked castle and changed class.
-                    || (Spell == SpellType.RAPID_DAGGER && Game.PlayerStats.Class != ClassType.Traitor)); // Make sure rapid dagger is not set as the spell for a locked castle and changed class.
+                } while ((Spell == Game.PlayerStats.Spell && Game.PlayerStats.Class != ClassType.DRAGON && Game.PlayerStats.Class != ClassType.TRAITOR) // Make sure the room doesn't randomize to the item the player already has.
+                    || (Spell == SpellType.DRAGON_FIRE && Game.PlayerStats.Class != ClassType.DRAGON) // Make sure Dragon fire is not set as the spell for a locked castle and changed class.
+                    || (Spell == SpellType.RAPID_DAGGER && Game.PlayerStats.Class != ClassType.TRAITOR)); // Make sure rapid dagger is not set as the spell for a locked castle and changed class.
             }
             else if (ID != -1)
             {
@@ -149,7 +149,7 @@ namespace RogueCastle
             RoomCompleted = true;
             Game.PlayerStats.Spell = Spell;
 
-            if (Game.PlayerStats.Class == ClassType.Wizard2)
+            if (Game.PlayerStats.Class == ClassType.WIZARD2)
                 Game.PlayerStats.WizardSpellList = SpellEV.GetNext3Spells();
 
             Spell = 0;

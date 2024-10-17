@@ -70,7 +70,7 @@ namespace RogueCastle
             Player.AttachedLevel.ForcePlayerHUDLevel(numEmpowered);
 
             Game.PlayerStats.PlayerName = "Wagner";
-            Game.PlayerStats.Class = ClassType.Ninja2;
+            Game.PlayerStats.Class = ClassType.NINJA2;
             Game.PlayerStats.Spell = SpellType.TRANSLOCATOR;
             Game.PlayerStats.IsFemale = false;
 

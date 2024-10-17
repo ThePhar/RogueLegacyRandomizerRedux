@@ -439,7 +439,7 @@ namespace RogueCastle
                 lineageObj.IsDead = true;
                 lineageObj.Age = 30;
                 lineageObj.ChildAge = 5;
-                lineageObj.Class = ClassType.Knight;
+                lineageObj.Class = ClassType.KNIGHT;
                 lineageObj.PlayerName = "Johannes";
                 lineageObj.SetPortrait(1, 1, 1);
                 lineageObj.NumEnemiesKilled = 50;
@@ -529,7 +529,7 @@ namespace RogueCastle
             // Save the current lineage stats.
             //(ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.Lineage);
 
-            if (Game.PlayerStats.Class == ClassType.Dragon)
+            if (Game.PlayerStats.Class == ClassType.DRAGON)
                 GameUtil.UnlockAchievement("FEAR_OF_GRAVITY");
 
             if (Game.PlayerStats.Traits is { Trait1: TraitType.NONE, Trait2: TraitType.NONE })
@@ -827,18 +827,18 @@ namespace RogueCastle
             byte previousClass = currentClass;
             if (InputManager.JustPressed(Keys.OemMinus, PlayerIndex.One))
             {
-                if (currentClass == ClassType.Knight)
-                    currentClass = ClassType.Traitor;
+                if (currentClass == ClassType.KNIGHT)
+                    currentClass = ClassType.TRAITOR;
                 else
                     currentClass--;
             }
             else if (InputManager.JustPressed(Keys.OemPlus, PlayerIndex.One))
                 currentClass++;
 
-            if (currentClass < ClassType.Knight)
-                currentClass = ClassType.Traitor;
-            else if (currentClass > ClassType.Traitor)
-                currentClass = ClassType.Knight;
+            if (currentClass < ClassType.KNIGHT)
+                currentClass = ClassType.TRAITOR;
+            else if (currentClass > ClassType.TRAITOR)
+                currentClass = ClassType.KNIGHT;
 
             if (currentClass != previousClass)
             {
@@ -884,7 +884,7 @@ namespace RogueCastle
             Game.PlayerStats.HasProsopagnosia = false;
 
             // Save the next 3 spells for regular wizard in case you level up with wizard class in the next run.
-            if (Game.PlayerStats.Class == ClassType.Wizard || Game.PlayerStats.Class == ClassType.Wizard2)
+            if (Game.PlayerStats.Class == ClassType.WIZARD || Game.PlayerStats.Class == ClassType.WIZARD2)
             {
                 //byte[] spellArray = ClassType.GetSpellList(ClassType.Wizard2);
                 //List<byte> spellList = new List<byte>();

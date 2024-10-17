@@ -430,9 +430,9 @@ namespace RogueCastle
                 string headPart = (_objectList[PlayerPart.HEAD] as IAnimateableObj).SpriteName;
                 int numberIndex = headPart.IndexOf("_") - 1;
                 headPart = headPart.Remove(numberIndex, 1);
-                if (Game.PlayerStats.Class == ClassType.Dragon)
+                if (Game.PlayerStats.Class == ClassType.DRAGON)
                     headPart = headPart.Replace("_", PlayerPart.DRAGON_HELM + "_");
-                else if (Game.PlayerStats.Class == ClassType.Traitor)
+                else if (Game.PlayerStats.Class == ClassType.TRAITOR)
                     headPart = headPart.Replace("_", PlayerPart.INTRO_HELM + "_");
                 else
                     headPart = headPart.Replace("_", Game.PlayerStats.HeadPiece + "_");
@@ -457,7 +457,7 @@ namespace RogueCastle
                 _objectList[PlayerPart.SHOULDER_B].ChangeSprite(shoulderBPart);
 
                 // This is giving the SpellSword special arms and changing his sword opacity.
-                if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
+                if (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2)
                 {
                     if (this.State == STATE_WALKING && (m_currentLogicSet != m_standingAttack3LogicSet || (m_currentLogicSet == m_standingAttack3LogicSet && m_currentLogicSet.IsActive == false)))
                         _objectList[PlayerPart.ARMS].ChangeSprite("PlayerWalkingArmsSpellSword_Sprite");
@@ -481,38 +481,38 @@ namespace RogueCastle
                 _objectList[PlayerPart.LIGHT].Opacity = 0.3f;
                 _objectList[PlayerPart.LIGHT].Visible = false;
 
-                if (Game.PlayerStats.Class == ClassType.Banker2 && spriteName != "PlayerDeath_Character" && m_lightOn == true) // turn off the light if the player is dead.
+                if (Game.PlayerStats.Class == ClassType.BANKER2 && spriteName != "PlayerDeath_Character" && m_lightOn == true) // turn off the light if the player is dead.
                     _objectList[PlayerPart.LIGHT].Visible = true;
 
                 // This gives the player a shield in case he is the knight class.
-                if (Game.PlayerStats.Class == ClassType.Knight || Game.PlayerStats.Class == ClassType.Knight2)
+                if (Game.PlayerStats.Class == ClassType.KNIGHT || Game.PlayerStats.Class == ClassType.KNIGHT2)
                 {
                     string partName = spriteName.Replace("_Character", "Shield_Sprite");
                     _objectList[PlayerPart.EXTRA].Visible = true;
                     _objectList[PlayerPart.EXTRA].ChangeSprite(partName);
                 }
                 // This gives the player a headlamp in case he is the banker (spelunker) class.
-                else if (Game.PlayerStats.Class == ClassType.Banker || Game.PlayerStats.Class == ClassType.Banker2)
+                else if (Game.PlayerStats.Class == ClassType.BANKER || Game.PlayerStats.Class == ClassType.BANKER2)
                 {
                     string partName = spriteName.Replace("_Character", "Lamp_Sprite");
                     _objectList[PlayerPart.EXTRA].Visible = true;
                     _objectList[PlayerPart.EXTRA].ChangeSprite(partName);
                 }
                 // This gives the player a headlamp in case he is the ninja.
-                else if (Game.PlayerStats.Class == ClassType.Ninja || Game.PlayerStats.Class == ClassType.Ninja2)
+                else if (Game.PlayerStats.Class == ClassType.NINJA || Game.PlayerStats.Class == ClassType.NINJA2)
                 {
                     string partName = spriteName.Replace("_Character", "Headband_Sprite");
                     _objectList[PlayerPart.EXTRA].Visible = true;
                     _objectList[PlayerPart.EXTRA].ChangeSprite(partName);
                 }
                 // This gives the player a headlamp in case he is the wizard.
-                else if (Game.PlayerStats.Class == ClassType.Wizard || Game.PlayerStats.Class == ClassType.Wizard2)
+                else if (Game.PlayerStats.Class == ClassType.WIZARD || Game.PlayerStats.Class == ClassType.WIZARD2)
                 {
                     string partName = spriteName.Replace("_Character", "Beard_Sprite");
                     _objectList[PlayerPart.EXTRA].Visible = true;
                     _objectList[PlayerPart.EXTRA].ChangeSprite(partName);
                 }
-                else if (Game.PlayerStats.Class == ClassType.Barbarian || Game.PlayerStats.Class == ClassType.Barbarian2)
+                else if (Game.PlayerStats.Class == ClassType.BARBARIAN || Game.PlayerStats.Class == ClassType.BARBARIAN2)
                 {
                     string partName = spriteName.Replace("_Character", "Horns_Sprite");
                     _objectList[PlayerPart.EXTRA].Visible = true;
@@ -546,12 +546,12 @@ namespace RogueCastle
                 // Dragon wings.
                 _objectList[PlayerPart.WINGS].Visible = false;
                 _objectList[PlayerPart.WINGS].Opacity = 1;
-                if (Game.PlayerStats.Class == ClassType.Dragon)
+                if (Game.PlayerStats.Class == ClassType.DRAGON)
                     _objectList[PlayerPart.WINGS].Visible = true;
 
                 //_objectList[PlayerPart.Sword2].Visible = false; // This is needed until the sword is properly separated.
 
-                if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
+                if (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2)
                     this.OutlineColour = Color.White;
                 else
                     this.OutlineColour = Color.Black;
@@ -577,7 +577,7 @@ namespace RogueCastle
                     InputControls();
             }
 
-            if (Game.PlayerStats.Class == ClassType.Traitor && (AttachedLevel.CurrentRoom is CarnivalShoot1BonusRoom) == false && (AttachedLevel.CurrentRoom is CarnivalShoot2BonusRoom) == false)
+            if (Game.PlayerStats.Class == ClassType.TRAITOR && (AttachedLevel.CurrentRoom is CarnivalShoot1BonusRoom) == false && (AttachedLevel.CurrentRoom is CarnivalShoot2BonusRoom) == false)
             {
                 if (IsKilled == false && State == STATE_DASHING) // Special controls only for the fountain class.
                 {
@@ -843,7 +843,7 @@ namespace RogueCastle
 
             bool justJumped = false; // Bool for detect a jump and a flight call.
             // Code for jumping and double jumping.  Also, dragons cannot jump.
-            if (State != STATE_BLOCKING && State != STATE_FLYING && State != STATE_TANOOKI && Game.PlayerStats.Class != ClassType.Dragon)
+            if (State != STATE_BLOCKING && State != STATE_FLYING && State != STATE_TANOOKI && Game.PlayerStats.Class != ClassType.DRAGON)
             {
                 if ((Game.GlobalInput.JustPressed(InputMapType.PLAYER_JUMP1)|| Game.GlobalInput.JustPressed(InputMapType.PLAYER_JUMP2)) && m_isTouchingGround == true && m_dropThroughGroundTimer <= 0)
                 {
@@ -922,13 +922,13 @@ namespace RogueCastle
 
             // Code for attacking.
             // Dragons cannot attack. They only shoot spells.
-            if (m_currentLogicSet.IsActive == false && State != STATE_BLOCKING && State != STATE_TANOOKI && Game.PlayerStats.Class != ClassType.Dragon) // Only attack when you're not doing an animation.
+            if (m_currentLogicSet.IsActive == false && State != STATE_BLOCKING && State != STATE_TANOOKI && Game.PlayerStats.Class != ClassType.DRAGON) // Only attack when you're not doing an animation.
             {
                 if ((Game.GlobalInput.JustPressed(InputMapType.PLAYER_DOWN1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_DOWN2)) && CanAirAttackDownward == true
                     && Game.GameConfig.QuickDrop == true && State == STATE_JUMPING && m_dropThroughGroundTimer <= 0)
                 {
                     m_currentLogicSet = m_airAttackLS;
-                    if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
+                    if (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2)
                         FadeSword();
 
                     if (m_assassinSpecialActive == true)
@@ -949,7 +949,7 @@ namespace RogueCastle
                             //if (this.AccelerationY > 0)
                             //    this.AccelerationY = -250;
                         }
-                        if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
+                        if (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2)
                             FadeSword();
 
                         if (m_assassinSpecialActive == true)
@@ -975,7 +975,7 @@ namespace RogueCastle
                             m_attackCounter = 0;
                         }
 
-                        if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
+                        if (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2)
                             FadeSword();
 
                         if (m_assassinSpecialActive == true)
@@ -998,11 +998,11 @@ namespace RogueCastle
                     fireballCasted = true;
                 }
 
-                if (m_spellCastDelay <= 0 || Game.PlayerStats.Class == ClassType.Dragon)
+                if (m_spellCastDelay <= 0 || Game.PlayerStats.Class == ClassType.DRAGON)
                 {
-                    if (Game.GlobalInput.JustPressed(InputMapType.PLAYER_SPELL1) || (Game.PlayerStats.Class == ClassType.Dragon && Game.GlobalInput.JustPressed(InputMapType.PLAYER_ATTACK)))
+                    if (Game.GlobalInput.JustPressed(InputMapType.PLAYER_SPELL1) || (Game.PlayerStats.Class == ClassType.DRAGON && Game.GlobalInput.JustPressed(InputMapType.PLAYER_ATTACK)))
                     {
-                        if ((Game.PlayerStats.Class == ClassType.Dragon && fireballCasted == true) == false) // Prevents casting the spell twice.
+                        if ((Game.PlayerStats.Class == ClassType.DRAGON && fireballCasted == true) == false) // Prevents casting the spell twice.
                         CastSpell(false);
                     }
                 }
@@ -1012,31 +1012,31 @@ namespace RogueCastle
                     RoomObj room = m_levelScreen.CurrentRoom;
                     if (room is CarnivalShoot1BonusRoom == false && room is CarnivalShoot2BonusRoom == false && room is ChestBonusRoomObj == false)
                     {
-                        if (Game.PlayerStats.Class == ClassType.SpellSword2 && m_spellCastDelay <= 0)
+                        if (Game.PlayerStats.Class == ClassType.SPELL_SWORD2 && m_spellCastDelay <= 0)
                             CastSpell(false, true);
-                        else if (Game.PlayerStats.Class == ClassType.Lich2)
+                        else if (Game.PlayerStats.Class == ClassType.LICH2)
                             ConvertHPtoMP();
-                        else if (Game.PlayerStats.Class == ClassType.Assassin2 && CurrentMana > 0)
+                        else if (Game.PlayerStats.Class == ClassType.ASSASSIN2 && CurrentMana > 0)
                         {
                             if (m_assassinSpecialActive == false)
                                 ActivateAssassinAbility();
                             else
                                 DisableAssassinAbility();
                         }
-                        else if (Game.PlayerStats.Class == ClassType.Wizard2)
+                        else if (Game.PlayerStats.Class == ClassType.WIZARD2)
                             SwapSpells();
-                        else if (Game.PlayerStats.Class == ClassType.Ninja2)
+                        else if (Game.PlayerStats.Class == ClassType.NINJA2)
                             NinjaTeleport();
-                        else if (Game.PlayerStats.Class == ClassType.Knight2)
+                        else if (Game.PlayerStats.Class == ClassType.KNIGHT2)
                         {
                             if (this.State == STATE_TANOOKI)
                                 DeactivateTanooki();
                             else if (Game.GlobalInput.Pressed(InputMapType.PLAYER_DOWN1) || Game.GlobalInput.Pressed(InputMapType.PLAYER_DOWN2))
                                 ActivateTanooki();
                         }
-                        else if (Game.PlayerStats.Class == ClassType.Barbarian2)
+                        else if (Game.PlayerStats.Class == ClassType.BARBARIAN2)
                             CastFuhRohDah();
-                        else if (Game.PlayerStats.Class == ClassType.Traitor)
+                        else if (Game.PlayerStats.Class == ClassType.TRAITOR)
                         {
                             if (CurrentMana >= PlayerEV.TRAITOR_AXE_MANACOST && m_spellCastDelay <= 0)
                             {
@@ -1052,7 +1052,7 @@ namespace RogueCastle
                             DeactivateTanooki();
                     }
 
-                    if (Game.PlayerStats.Class == ClassType.Dragon)
+                    if (Game.PlayerStats.Class == ClassType.DRAGON)
                     {
                         if (State != STATE_DRAGON)
                         {
@@ -1068,7 +1068,7 @@ namespace RogueCastle
                             m_isFlying = false;
                         }
                     }
-                    else if (Game.PlayerStats.Class == ClassType.Banker2)
+                    else if (Game.PlayerStats.Class == ClassType.BANKER2)
                     {
                         if (m_lightOn == true)
                         {
@@ -1086,7 +1086,7 @@ namespace RogueCastle
                 }
 
                 // Extra handling to link jump to dragon flight.
-                if (Game.PlayerStats.Class == ClassType.Dragon && (Game.GlobalInput.JustPressed(InputMapType.PLAYER_JUMP1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_JUMP2)))
+                if (Game.PlayerStats.Class == ClassType.DRAGON && (Game.GlobalInput.JustPressed(InputMapType.PLAYER_JUMP1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_JUMP2)))
                 {
                     if (State != STATE_DRAGON)
                     {
@@ -1237,7 +1237,7 @@ namespace RogueCastle
                 //if (this.AccelerationY > 0)
                 //    this.AccelerationY = -250;
             }
-            if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
+            if (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2)
                 FadeSword();
 
             //if (m_assassinSpecialActive == true)
@@ -1276,7 +1276,7 @@ namespace RogueCastle
                 }
 
                 // Adds the spellsword sparkle effect.
-                if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
+                if (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2)
                 {
                     if (m_wizardSparkleCounter > 0)
                     {
@@ -1291,7 +1291,7 @@ namespace RogueCastle
                 }
 
                 // Adding assassin smoke effect.
-                if (Game.PlayerStats.Class == ClassType.Assassin || Game.PlayerStats.Class == ClassType.Assassin2)
+                if (Game.PlayerStats.Class == ClassType.ASSASSIN || Game.PlayerStats.Class == ClassType.ASSASSIN2)
                 {
                     if (m_assassinSmokeTimer > 0)
                     {
@@ -1408,7 +1408,7 @@ namespace RogueCastle
                     }
                 }
 
-                if (Game.PlayerStats.Class == ClassType.Dragon && this.CurrentMana < MaxMana)
+                if (Game.PlayerStats.Class == ClassType.DRAGON && this.CurrentMana < MaxMana)
                 {
                     m_dragonManaRechargeCounter += elapsedSeconds;
                     if (m_dragonManaRechargeCounter >= GameEV.MANA_OVER_TIME_TIC_RATE)
@@ -2144,7 +2144,7 @@ namespace RogueCastle
                 SoundManager.PlaySound("Player_Male_Effort_01", "Player_Male_Effort_02", "Player_Male_Effort_04", "Player_Male_Effort_05", "Player_Male_Effort_07",
                       "Blank", "Blank", "Blank");
 
-            if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
+            if (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2)
                 SoundManager.PlaySound("Player_Attack_Sword_Spell_01", "Player_Attack_Sword_Spell_02", "Player_Attack_Sword_Spell_03");
             else
             {
@@ -2635,7 +2635,7 @@ namespace RogueCastle
                 {
                     if (Game.PlayerStats.HasTrait(TraitType.SAVANT))
                     {
-                        if (Game.PlayerStats.Class != ClassType.Dragon && Game.PlayerStats.Class != ClassType.Traitor)
+                        if (Game.PlayerStats.Class != ClassType.DRAGON && Game.PlayerStats.Class != ClassType.TRAITOR)
                         {
                             byte[] spellList = ClassType.GetSpellList(Game.PlayerStats.Class);
                             do
@@ -2943,7 +2943,7 @@ namespace RogueCastle
                         }
 
                         m_translocatorSprite.GetChildAt(PlayerPart.LIGHT).Visible = false;
-                        if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
+                        if (Game.PlayerStats.Class == ClassType.SPELL_SWORD || Game.PlayerStats.Class == ClassType.SPELL_SWORD2)
                         {
                             m_translocatorSprite.GetChildAt(PlayerPart.SWORD1).Visible = false;
                             m_translocatorSprite.GetChildAt(PlayerPart.SWORD2).Visible = false;
@@ -3448,7 +3448,7 @@ namespace RogueCastle
                 // This is to maintain the player's helmet tint.
                 Game.ColourSwapShader.Parameters["desiredTint"].SetValue(m_playerHead.TextureColor.ToVector4());
                 // This is the Tint Removal effect, that removes the tint from his face.
-                if (Game.PlayerStats.Class == ClassType.Lich || Game.PlayerStats.Class == ClassType.Lich2)
+                if (Game.PlayerStats.Class == ClassType.LICH || Game.PlayerStats.Class == ClassType.LICH2)
                 {
                     Game.ColourSwapShader.Parameters["Opacity"].SetValue(this.Opacity);
                     Game.ColourSwapShader.Parameters["ColourSwappedOut1"].SetValue(m_skinColour1.ToVector4());
@@ -3457,7 +3457,7 @@ namespace RogueCastle
                     Game.ColourSwapShader.Parameters["ColourSwappedOut2"].SetValue(m_skinColour2.ToVector4());
                     Game.ColourSwapShader.Parameters["ColourSwappedIn2"].SetValue(m_lichColour2.ToVector4());
                 }
-                else if (Game.PlayerStats.Class == ClassType.Assassin || Game.PlayerStats.Class == ClassType.Assassin2)
+                else if (Game.PlayerStats.Class == ClassType.ASSASSIN || Game.PlayerStats.Class == ClassType.ASSASSIN2)
                 {
                     Game.ColourSwapShader.Parameters["Opacity"].SetValue(this.Opacity);
                     Game.ColourSwapShader.Parameters["ColourSwappedOut1"].SetValue(m_skinColour1.ToVector4());
@@ -3845,7 +3845,7 @@ namespace RogueCastle
         {
             get
             {
-                if (Game.PlayerStats.Class == ClassType.Dragon)
+                if (Game.PlayerStats.Class == ClassType.DRAGON)
                     return true;
                 return TotalFlightTime > 0;
             }
@@ -3860,7 +3860,7 @@ namespace RogueCastle
         {
             get
             {
-                if (Game.PlayerStats.Class == ClassType.Knight2)
+                if (Game.PlayerStats.Class == ClassType.KNIGHT2)
                     return true;
                 return false;
             }
@@ -3925,7 +3925,7 @@ namespace RogueCastle
                 //     + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaHPGain) * GameEV.RUNE_MANAHPGAIN);
 
                 int classManaGain = 0;
-                if (Game.PlayerStats.Class == ClassType.Wizard || Game.PlayerStats.Class == ClassType.Wizard2)
+                if (Game.PlayerStats.Class == ClassType.WIZARD || Game.PlayerStats.Class == ClassType.WIZARD2)
                     classManaGain = GameEV.MAGE_MANA_GAIN;
                 return (int)((m_manaGain + classManaGain + SkillSystem.GetSkill(SkillType.Mana_Regen_Up).ModifierAmount + ((Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaGain) + (int)GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.ManaDrain)) * GameEV.RUNE_MANA_GAIN)
                      + (Game.PlayerStats.GetNumberOfEquippedRunes(EquipmentAbilityType.ManaHPGain) * GameEV.RUNE_MANA_HP_GAIN)) * (1 + Game.PlayerStats.TimesCastleBeaten * 0.5f));
@@ -3952,11 +3952,11 @@ namespace RogueCastle
                 float CritChanceBonus = BaseCriticalChance + SkillSystem.GetSkill(SkillType.Crit_Chance_Up).ModifierAmount + GetEquipmentSecondaryAttrib(EquipmentSecondaryDataType.CritChance);
                 switch (Game.PlayerStats.Class)
                 {
-                    case (ClassType.Assassin):
-                    case (ClassType.Assassin2):
+                    case (ClassType.ASSASSIN):
+                    case (ClassType.ASSASSIN2):
                          return (CritChanceBonus + PlayerEV.ASSASSIN_CRITCHANCE_MOD);
-                    case (ClassType.Ninja):
-                    case (ClassType.Ninja2):
+                    case (ClassType.NINJA):
+                    case (ClassType.NINJA2):
                         return 0; // Ninjas have a 0% chance of critical striking.
                 }
                 return CritChanceBonus;
@@ -3973,8 +3973,8 @@ namespace RogueCastle
 
                 switch (Game.PlayerStats.Class)
                 {
-                    case (ClassType.Assassin):
-                    case (ClassType.Assassin2):
+                    case (ClassType.ASSASSIN):
+                    case (ClassType.ASSASSIN2):
                         return (CritDamageBonus + PlayerEV.ASSASSIN_CRITDAMAGE_MOD);
                 }
                 return CritDamageBonus;
@@ -4000,8 +4000,8 @@ namespace RogueCastle
 
                 switch (Game.PlayerStats.Class)
                 {
-                    case (ClassType.Banker):
-                    case (ClassType.Banker2):
+                    case (ClassType.BANKER):
+                    case (ClassType.BANKER2):
                         return (goldBonus + PlayerEV.BANKER_GOLDGAIN_MOD);
                 }
                 return goldBonus;
@@ -4116,26 +4116,26 @@ namespace RogueCastle
             {
                 switch (Game.PlayerStats.Class)
                 {
-                    case (ClassType.Barbarian):
-                    case (ClassType.Barbarian2):
+                    case (ClassType.BARBARIAN):
+                    case (ClassType.BARBARIAN2):
                         return PlayerEV.BARBARIAN_DAMAGE_MOD;
-                    case (ClassType.Wizard):
-                    case (ClassType.Wizard2):
+                    case (ClassType.WIZARD):
+                    case (ClassType.WIZARD2):
                         return PlayerEV.MAGE_DAMAGE_MOD;
-                    case (ClassType.SpellSword):
-                    case (ClassType.SpellSword2):
+                    case (ClassType.SPELL_SWORD):
+                    case (ClassType.SPELL_SWORD2):
                         return PlayerEV.SPELLSWORD_DAMAGE_MOD;//0.25f;//0.2f; //0.25f;
-                    case (ClassType.Banker):
-                    case (ClassType.Banker2):
+                    case (ClassType.BANKER):
+                    case (ClassType.BANKER2):
                         return PlayerEV.BANKER_DAMAGE_MOD;
-                    case (ClassType.Ninja):
-                    case (ClassType.Ninja2):
+                    case (ClassType.NINJA):
+                    case (ClassType.NINJA2):
                         return PlayerEV.NINJA_DAMAGE_MOD;//1.75f; //1.5f;
-                    case (ClassType.Assassin):
-                    case (ClassType.Assassin2):
+                    case (ClassType.ASSASSIN):
+                    case (ClassType.ASSASSIN2):
                         return PlayerEV.ASSASSIN_DAMAGE_MOD;
-                    case (ClassType.Lich):
-                    case (ClassType.Lich2):
+                    case (ClassType.LICH):
+                    case (ClassType.LICH2):
                         return PlayerEV.LICH_DAMAGE_MOD;
 
                 }
@@ -4149,8 +4149,8 @@ namespace RogueCastle
             {
                 switch (Game.PlayerStats.Class)
                 {
-                    case (ClassType.Assassin):
-                    case (ClassType.Assassin2):
+                    case (ClassType.ASSASSIN):
+                    case (ClassType.ASSASSIN2):
                         return 1f;
                 }
                 return 1f;
@@ -4163,11 +4163,11 @@ namespace RogueCastle
             {
                 switch (Game.PlayerStats.Class)
                 {
-                    case (ClassType.Wizard):
-                    case (ClassType.Wizard2):
+                    case (ClassType.WIZARD):
+                    case (ClassType.WIZARD2):
                         return PlayerEV.MAGE_MAGICDAMAGE_MOD; //1.25f;
-                    case (ClassType.Lich):
-                    case (ClassType.Lich2):
+                    case (ClassType.LICH):
+                    case (ClassType.LICH2):
                         return PlayerEV.LICH_MAGICDAMAGE_MOD; //1.25f;
                 }
                 return 1f;
@@ -4180,30 +4180,30 @@ namespace RogueCastle
             {
                 switch (Game.PlayerStats.Class)
                 {
-                    case (ClassType.Wizard):
-                    case (ClassType.Wizard2):
+                    case (ClassType.WIZARD):
+                    case (ClassType.WIZARD2):
                         return PlayerEV.MAGE_HEALTH_MOD; //1.25f;
-                    case (ClassType.Banker):
-                    case (ClassType.Banker2):
+                    case (ClassType.BANKER):
+                    case (ClassType.BANKER2):
                         return PlayerEV.BANKER_HEALTH_MOD;
-                    case (ClassType.Barbarian):
-                    case (ClassType.Barbarian2):
+                    case (ClassType.BARBARIAN):
+                    case (ClassType.BARBARIAN2):
                         return PlayerEV.BARBARIAN_HEALTH_MOD;
-                    case (ClassType.Ninja):
-                    case (ClassType.Ninja2):
+                    case (ClassType.NINJA):
+                    case (ClassType.NINJA2):
                         return PlayerEV.NINJA_HEALTH_MOD;
-                    case (ClassType.Assassin):
-                    case (ClassType.Assassin2):
+                    case (ClassType.ASSASSIN):
+                    case (ClassType.ASSASSIN2):
                         return PlayerEV.ASSASSIN_HEALTH_MOD;
-                    case (ClassType.Lich):
-                    case (ClassType.Lich2):
+                    case (ClassType.LICH):
+                    case (ClassType.LICH2):
                         return PlayerEV.LICH_HEALTH_MOD;
-                    case (ClassType.SpellSword):
-                    case (ClassType.SpellSword2):
+                    case (ClassType.SPELL_SWORD):
+                    case (ClassType.SPELL_SWORD2):
                         return PlayerEV.SPELLSWORD_HEALTH_MOD;//0.5f;
-                    case (ClassType.Dragon):
+                    case (ClassType.DRAGON):
                         return PlayerEV.DRAGON_HEALTH_MOD;//1.5f;
-                    case (ClassType.Traitor):
+                    case (ClassType.TRAITOR):
                         return PlayerEV.TRAITOR_HEALTH_MOD;
                 }
                 return 1f;
@@ -4216,30 +4216,30 @@ namespace RogueCastle
             {
                 switch (Game.PlayerStats.Class)
                 {
-                    case (ClassType.Wizard):
-                    case (ClassType.Wizard2):
+                    case (ClassType.WIZARD):
+                    case (ClassType.WIZARD2):
                         return PlayerEV.MAGE_MANA_MOD;
-                    case (ClassType.Banker):
-                    case (ClassType.Banker2):
+                    case (ClassType.BANKER):
+                    case (ClassType.BANKER2):
                         return PlayerEV.BANKER_MANA_MOD;
-                    case (ClassType.Barbarian):
-                    case (ClassType.Barbarian2):
+                    case (ClassType.BARBARIAN):
+                    case (ClassType.BARBARIAN2):
                         return PlayerEV.BARBARIAN_MANA_MOD;
-                    case (ClassType.SpellSword):
-                    case (ClassType.SpellSword2):
+                    case (ClassType.SPELL_SWORD):
+                    case (ClassType.SPELL_SWORD2):
                         return PlayerEV.SPELLSWORD_MANA_MOD;//0.5f;
-                    case (ClassType.Ninja):
-                    case (ClassType.Ninja2):
+                    case (ClassType.NINJA):
+                    case (ClassType.NINJA2):
                         return PlayerEV.NINJA_MANA_MOD;
-                    case (ClassType.Assassin):
-                    case (ClassType.Assassin2):
+                    case (ClassType.ASSASSIN):
+                    case (ClassType.ASSASSIN2):
                         return PlayerEV.ASSASSIN_MANA_MOD;
-                    case (ClassType.Lich):
-                    case (ClassType.Lich2):
+                    case (ClassType.LICH):
+                    case (ClassType.LICH2):
                         return PlayerEV.LICH_MANA_MOD;
-                    case (ClassType.Dragon):
+                    case (ClassType.DRAGON):
                         return PlayerEV.DRAGON_MANA_MOD;//1.5f;
-                    case (ClassType.Traitor):
+                    case (ClassType.TRAITOR):
                         return PlayerEV.TRAITOR_MANA_MOD;
                 }
                 return 1f;
@@ -4252,10 +4252,10 @@ namespace RogueCastle
             {
                 switch (Game.PlayerStats.Class)
                 {
-                    case (ClassType.Ninja):
-                    case (ClassType.Ninja2):
+                    case (ClassType.NINJA):
+                    case (ClassType.NINJA2):
                         return PlayerEV.NINJA_MOVESPEED_MOD;//1.5f;
-                    case (ClassType.Dragon):
+                    case (ClassType.DRAGON):
                         return PlayerEV.DRAGON_MOVESPEED_MOD;//1.5f;
                 }
                 return 0f;
