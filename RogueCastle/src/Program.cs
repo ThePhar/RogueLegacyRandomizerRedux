@@ -107,13 +107,13 @@ public static class Program
                 var osDir = Environment.GetEnvironmentVariable("XDG_CONFIG_HOME");
                 if (!string.IsNullOrEmpty(osDir))
                 {
-                    return Path.Combine(osDir, "RogueLegacy");
+                    return Path.Combine(osDir, "RogueLegacyRandomizer");
                 }
 
                 osDir = Environment.GetEnvironmentVariable("HOME");
                 return string.IsNullOrEmpty(osDir)
                     ? "." // Oh, well.
-                    : Path.Combine(osDir, ".config", "RogueLegacy");
+                    : Path.Combine(osDir, ".config", "RogueLegacyRandomizer");
 
             }
             case "macOS":
@@ -121,13 +121,13 @@ public static class Program
                 var osDir = Environment.GetEnvironmentVariable("HOME");
                 return string.IsNullOrEmpty(osDir)
                     ? "." // Oh, well.
-                    : Path.Combine(osDir, "Library/Application Support/RogueLegacy");
+                    : Path.Combine(osDir, "Library/Application Support/RogueLegacyRandomizer");
             }
 
             case "Windows":
             {
                 var osDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                return Path.Combine(osDir, "Rogue Legacy");
+                return Path.Combine(osDir, "Rogue Legacy Randomizer");
             }
 
             default:

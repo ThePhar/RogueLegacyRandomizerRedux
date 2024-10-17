@@ -124,7 +124,7 @@ namespace RogueCastle
             EngineEV.ScreenHeight = GlobalEV.SCREEN_HEIGHT;
 
             //this.graphics.IsFullScreen = true;
-            this.Window.Title = "Rogue Legacy";
+            this.Window.Title = "Rogue Legacy Randomizer Redux";
             ScreenManager = new RCScreenManager(this);
             m_saveGameManager = new SaveGameManager(this);
 
@@ -133,7 +133,7 @@ namespace RogueCastle
             this.graphics.SynchronizeWithVerticalRetrace = !LevelEV.ShowFps; // Disables setting the FPS to your screen's refresh rate.
             // WARNING, if you turn off frame limiting, if the framerate goes over 1000 then the elapsed time will be too small a number for a float to carry and things will break.
             //this.TargetElapsedTime = TimeSpan.FromSeconds(1.0f / 60.0f);// Sets the frame rate to 30 fps.
-            this.Window.AllowUserResizing = false;
+            this.Window.AllowUserResizing = true;
             
             if (LevelEV.EnableOffscreenControl == false)
                 InactiveSleepTime = new TimeSpan(); // Overrides sleep time, which disables the lag when losing focus.

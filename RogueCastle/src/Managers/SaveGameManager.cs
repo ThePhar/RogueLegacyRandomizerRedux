@@ -12,12 +12,12 @@ namespace RogueCastle.Managers;
 
 public class SaveGameManager(Game game)
 {
-    private const string FileNameLineage = "RogueLegacyLineage.rcdat";
-    private const string FileNameMap = "RogueLegacyMap.rcdat";
-    private const string FileNameMapData = "RogueLegacyMapDat.rcdat";
-    private const string FileNamePlayer = "RogueLegacyPlayer.rcdat";
-    private const string FileNameUpgrades = "RogueLegacyBP.rcdat";
-    private const string StorageContainerName = "RogueLegacyStorageContainer";
+    private const string FileNameLineage = "RLRandomizerLineage.rcdat";
+    private const string FileNameMap = "RLRandomizerMap.rcdat";
+    private const string FileNameMapData = "RLRandomizerMapData.rcdat";
+    private const string FileNamePlayer = "RLRandomizerPlayer.rcdat";
+    private const string FileNameUpgrades = "RLRandomizerUpgrades.rcdat";
+    private const string StorageContainerName = "RLRandomizerStorageContainer";
 
     private bool _autosaveLoaded;
     private int _saveFailCounter;
