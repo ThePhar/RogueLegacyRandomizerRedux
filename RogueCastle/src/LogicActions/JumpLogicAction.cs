@@ -1,41 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DS2DEngine;
-using Microsoft.Xna.Framework;
+﻿using DS2DEngine;
 
-namespace RogueCastle
+namespace RogueCastle.LogicActions;
+
+public class JumpLogicAction(float overriddenHeight = 0) : LogicAction
 {
-    public class JumpLogicAction : LogicAction
+    public override void Execute()
     {
-        private float m_overriddenHeight;
-
-        public JumpLogicAction(float overriddenHeight = 0)
+        if (ParentLogicSet is not { IsActive: true })
         {
-            m_overriddenHeight = overriddenHeight;
+            return;
         }
 
-        public override void Execute()
+        if (ParentLogicSet.ParentGameObj is CharacterObj character)
         {
-            if (ParentLogicSet != null && ParentLogicSet.IsActive == true)
+            if (overriddenHeight > 0)
             {
-                CharacterObj character = ParentLogicSet.ParentGameObj as CharacterObj;
-                if (character != null)
-                {
-                    if (m_overriddenHeight > 0)
-                        character.AccelerationY = -m_overriddenHeight;
-                    else
-                        character.AccelerationY = -character.JumpHeight;
-                }
-
-                base.Execute();
+                character.AccelerationY = -overriddenHeight;
+            }
+            else
+            {
+                character.AccelerationY = -character.JumpHeight;
             }
         }
 
-        public override object Clone()
-        {
-            return new JumpLogicAction(m_overriddenHeight);
-        }
+        base.Execute();
+    }
+
+    public override object Clone()
+    {
+        return new JumpLogicAction(overriddenHeight);
     }
 }

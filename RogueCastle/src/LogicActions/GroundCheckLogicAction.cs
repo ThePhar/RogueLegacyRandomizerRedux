@@ -1,50 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DS2DEngine;
+﻿using DS2DEngine;
+using Microsoft.Xna.Framework;
 
-namespace RogueCastle
+namespace RogueCastle.LogicActions;
+
+public class GroundCheckLogicAction : LogicAction
 {
-    public class GroundCheckLogicAction : LogicAction
+    private CharacterObj _obj;
+
+    public override void Execute()
     {
-        CharacterObj m_obj = null;
-
-        public override void Execute()
+        if (ParentLogicSet is not { IsActive: true })
         {
-            if (ParentLogicSet != null && ParentLogicSet.IsActive == true)
-            {
-                m_obj = ParentLogicSet.ParentGameObj as CharacterObj;
-                SequenceType = Types.Sequence.Serial;
-                base.Execute();
-            }
+            return;
         }
 
-        public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
+        _obj = ParentLogicSet.ParentGameObj as CharacterObj;
+        SequenceType = Types.Sequence.Serial;
+        base.Execute();
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        ExecuteNext();
+        base.Update(gameTime);
+    }
+
+    public override void ExecuteNext()
+    {
+        if (_obj.IsTouchingGround)
         {
-            this.ExecuteNext();
-            base.Update(gameTime);
+            base.ExecuteNext();
+        }
+    }
+
+    public override object Clone()
+    {
+        return new GroundCheckLogicAction();
+    }
+
+    public override void Dispose()
+    {
+        if (IsDisposed)
+        {
+            return;
         }
 
-        public override void ExecuteNext()
-        {
-            if (m_obj.IsTouchingGround == true)
-                base.ExecuteNext();
-        }
-
-        public override object Clone()
-        {
-            return new GroundCheckLogicAction();
-        }
-
-        public override void Dispose()
-        {
-            if (IsDisposed == false)
-            {
-                // Done
-                m_obj = null;
-                base.Dispose();
-            }
-        }
+        _obj = null;
+        base.Dispose();
     }
 }

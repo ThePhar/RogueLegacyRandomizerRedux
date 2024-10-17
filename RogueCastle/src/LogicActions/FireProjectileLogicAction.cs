@@ -1,48 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DS2DEngine;
-using Microsoft.Xna.Framework;
+﻿using DS2DEngine;
 
-namespace RogueCastle
+namespace RogueCastle.LogicActions;
+
+public class FireProjectileLogicAction(ProjectileManager projectileManager, ProjectileData data) : LogicAction
 {
-    public class FireProjectileLogicAction : LogicAction
+    private ProjectileData _data = data.Clone();
+    private ProjectileManager _projectileManager = projectileManager;
+
+    public override void Execute()
     {
-        ProjectileManager m_projectileManager;
-        ProjectileData m_data;
-
-        public FireProjectileLogicAction(ProjectileManager projectileManager, ProjectileData data)
+        if (ParentLogicSet is not { IsActive: true })
         {
-            m_projectileManager = projectileManager;
-            m_data = data.Clone();
+            return;
         }
 
-        public override void Execute()
-        {
-            if (ParentLogicSet != null && ParentLogicSet.IsActive == true)
-            {
-                EnemyObj enemy = ParentLogicSet.ParentGameObj as EnemyObj;
-                ProjectileObj obj = m_projectileManager.FireProjectile(m_data);
+        var enemy = ParentLogicSet.ParentGameObj as EnemyObj;
+        var obj = _projectileManager.FireProjectile(_data);
 
-                base.Execute();
-            }
+        base.Execute();
+    }
+
+    public override object Clone()
+    {
+        return new FireProjectileLogicAction(_projectileManager, _data);
+    }
+
+    public override void Dispose()
+    {
+        if (IsDisposed)
+        {
+            return;
         }
 
-        public override object Clone()
-        {
-            return new FireProjectileLogicAction(m_projectileManager, m_data);
-        }
-
-        public override void Dispose()
-        {
-            if (IsDisposed == false)
-            {
-                // Done
-                m_projectileManager = null;
-                m_data = null;
-                base.Dispose();
-            }
-        }
+        _projectileManager = null;
+        _data = null;
+        base.Dispose();
     }
 }
