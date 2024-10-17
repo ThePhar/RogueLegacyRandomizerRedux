@@ -12,6 +12,7 @@ using Tweener;
 using Microsoft.Xna.Framework.Audio;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.Managers;
 using RogueCastle.Objects;
 
 namespace RogueCastle

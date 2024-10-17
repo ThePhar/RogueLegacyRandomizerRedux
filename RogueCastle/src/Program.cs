@@ -35,7 +35,6 @@ public static class Program
             LevelEV.DeleteSaveFile = false;
             LevelEV.CloseTestRoomDoors = false;
             LevelEV.RunTutorial = false;
-            LevelEV.RunDemoVersion = false;
             LevelEV.DisableSaving = false;
             LevelEV.RunCrashLogs = false; // todo
             LevelEV.WeakenBosses = true; // todo

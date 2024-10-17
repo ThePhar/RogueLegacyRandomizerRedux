@@ -17,6 +17,7 @@ using System.Globalization;
 using System.Threading;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.Managers;
 
 namespace RogueCastle
 {
@@ -472,61 +473,6 @@ namespace RogueCastle
                     BonusRooms = new Vector2(2, 3),
                     Color = Color.Red,
                 };
-
-                #region Demo Levels
-
-                AreaStruct CastleZoneDemo = new AreaStruct()
-                {
-                    Name = "The Grand Entrance",
-                    LevelType = GameTypes.LevelType.Castle,
-                    TotalRooms = new Vector2(24, 27),//(25,35),//(20,25),//(15, 25),
-                    BossInArea = true,
-                    SecretRooms = new Vector2(2, 3),
-                    BonusRooms = new Vector2(2, 3),
-                    Color = Color.White,
-                };
-
-                AreaStruct GardenZoneDemo = new AreaStruct()
-                {
-                    Name = "The Grand Entrance",
-                    LevelType = GameTypes.LevelType.Garden,
-                    TotalRooms = new Vector2(12, 14),//(25, 35),//(15, 25),
-                    BossInArea = true,
-                    SecretRooms = new Vector2(2, 3),
-                    BonusRooms = new Vector2(1, 2),
-                    Color = Color.Green,
-                };
-
-                AreaStruct DungeonZoneDemo = new AreaStruct()
-                {
-                    Name = "The Grand Entrance",
-                    LevelType = GameTypes.LevelType.Dungeon,
-                    TotalRooms = new Vector2(12, 14),//(25, 35),//(15, 25),
-                    BossInArea = true,
-                    SecretRooms = new Vector2(2, 3),
-                    BonusRooms = new Vector2(1, 2),
-                    Color = Color.Red,
-                };
-
-                AreaStruct TowerZoneDemo = new AreaStruct()
-                {
-                    Name = "The Grand Entrance",
-                    LevelType = GameTypes.LevelType.Tower,
-                    TotalRooms = new Vector2(12, 14),//(25, 35),//(15, 25),
-                    BossInArea = true,
-                    SecretRooms = new Vector2(2, 3),
-                    BonusRooms = new Vector2(1, 2),
-                    Color = Color.DarkBlue,
-                };
-
-                #endregion
-
-                Area1List = new AreaStruct[] { CastleZone, GardenZone, TowerZone, DungeonZone }; //DUNGEON IS LAST AREA
-
-                if (LevelEV.RunDemoVersion == true)
-                    Area1List = new AreaStruct[] { CastleZoneDemo }; //DUNGEON IS LAST AREA
-                //Area1List = new AreaStruct[] { CastleZoneDemo, GardenZoneDemo, TowerZoneDemo, DungeonZoneDemo }; //DUNGEON IS LAST AREA
-
             }
 
             //ScreenManager.LoadContent(); // What is this doing here?
@@ -783,10 +729,7 @@ namespace RogueCastle
 #else
                 if (LevelEV.LoadSplashScreen == true)
                 {
-                    if (LevelEV.RunDemoVersion == true)
-                        ScreenManager.DisplayScreen(ScreenType.DEMO_START, true, null);
-                    else
-                        ScreenManager.DisplayScreen(ScreenType.CDG_SPLASH, true, null);
+                    ScreenManager.DisplayScreen(ScreenType.CDG_SPLASH, true, null);
                 }
                 else
                 {

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System.Globalization;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.Managers;
 using RogueCastle.Objects;
 using Tweener;
 

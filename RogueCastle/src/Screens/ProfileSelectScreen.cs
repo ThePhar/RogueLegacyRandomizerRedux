@@ -12,6 +12,7 @@ using InputSystem;
 using System.Text.RegularExpressions;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.Managers;
 
 namespace RogueCastle
 {

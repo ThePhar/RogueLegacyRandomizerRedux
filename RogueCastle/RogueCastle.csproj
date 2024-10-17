@@ -33,4 +33,8 @@
       <Name>FNA</Name>
     </ProjectReference>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\GameObjects\RandomizerObjs\" />
+  </ItemGroup>
 </Project>

@@ -9,6 +9,7 @@ using Tweener.Ease;
 using System.Threading;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.Managers;
 
 namespace RogueCastle
 {

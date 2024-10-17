@@ -13,6 +13,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.Managers;
 using RogueCastle.Objects;
 using Tweener;
 using Tweener.Ease;
@@ -1551,7 +1552,7 @@ namespace RogueCastle
                 if (DisableRoomTransitioning == false && CollisionMath.Intersects(new Rectangle((int)m_player.X, (int)m_player.Y, 1,1), Camera.Bounds) == false)
                     CheckForRoomTransition();
 
-                if ((m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.RunDemoVersion == true || LevelEV.CreateRetailVersion == true))) && CameraLockedToPlayer == true)
+                if ((m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.CreateRetailVersion == true))) && CameraLockedToPlayer == true)
                     UpdateCamera(); // Must be called AFTER the PhysicsManager Update() because the PhysicsManager changes the player's position depending on what he/she is colliding with.
 
                 if (Game.PlayerStats.SpecialItem == SpecialItemType.COMPASS && CurrentRoom.Name != "Start" && CurrentRoom.Name !="Tutorial" && CurrentRoom.Name != "Boss" && CurrentRoom.Name != "Throne" && CurrentRoom.Name != "ChallengeBoss")
@@ -1664,7 +1665,7 @@ namespace RogueCastle
             if (LevelEV.EnableDebugInput == true)
                 HandleDebugInput();
 
-            if (m_player != null && (m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.RunDemoVersion == true || LevelEV.CreateRetailVersion == true))) && m_player.IsKilled == false)
+            if (m_player != null && (m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.CreateRetailVersion == true))) && m_player.IsKilled == false)
                 m_player.HandleInput();
 
             base.HandleInput();
@@ -2067,7 +2068,7 @@ namespace RogueCastle
             Camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, null, null, null, Camera.GetTransformation());
             m_backgroundSprite.Draw(Camera);
 
-            if (CurrentRoom != null && Camera.Zoom == 1 && (m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.RunDemoVersion == true || LevelEV.CreateRetailVersion == true))))
+            if (CurrentRoom != null && Camera.Zoom == 1 && (m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.CreateRetailVersion == true))))
             {
                 CurrentRoom.DrawBGObjs(Camera);
                 // This line isn't being drawn anyway for some reason.

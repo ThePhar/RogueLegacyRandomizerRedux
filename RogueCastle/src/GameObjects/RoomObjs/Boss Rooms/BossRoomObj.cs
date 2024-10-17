@@ -163,10 +163,7 @@ namespace RogueCastle
             else if (m_bossChest.Visible == true && m_bossChest.IsOpen == true && BossKilled == true && m_teleportingOut == false)
             {
                 m_teleportingOut = true;
-                if (LevelEV.RunDemoVersion == true)
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DEMO_END, true);
-                else
-                    TeleportPlayer();
+                TeleportPlayer();
             }
         }
 

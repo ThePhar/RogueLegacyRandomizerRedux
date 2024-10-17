@@ -209,7 +209,6 @@ public static class LevelEV
     public static bool DeleteSaveFile = false;
     public static bool CloseTestRoomDoors = false;
     public static bool RunTutorial = false;
-    public static bool RunDemoVersion = false;
     public static bool DisableSaving = false;
     public static bool RunCrashLogs = false;
     public static bool WeakenBosses = false;
