@@ -2217,178 +2217,151 @@ public class SaveGameManager(Game game)
 
     private void LoadLineageData()
     {
-        using (var stream = _storageContainer.OpenFile(
-                   "Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameLineage, FileMode.Open, FileAccess.Read,
-                   FileShare.Read))
+        using var stream = _storageContainer.OpenFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}", FileMode.Open, FileAccess.Read, FileShare.Read);
+        using (var reader = new BinaryReader(stream))
         {
-            using (var reader = new BinaryReader(stream))
+            Console.WriteLine(@"///// PLAYER LINEAGE DATA - BEGIN LOADING /////");
+
+            // Loading the currently created branch.
+            var loadedBranches = new List<PlayerLineageData>();
+            var numChildren = reader.ReadInt32();
+
+            for (var i = 0; i < numChildren; i++)
             {
-                Console.WriteLine("///// PLAYER LINEAGE DATA - BEGIN LOADING /////");
+                var data = new PlayerLineageData();
 
-                // Loading the currently created branch.
-                var loadedBranches = new List<PlayerLineageData>();
-                var numChildren = reader.ReadInt32();
+                data.Name = reader.ReadString();
+                data.Spell = reader.ReadByte();
+                data.Class = reader.ReadByte();
+                data.HeadPiece = reader.ReadByte();
+                data.ChestPiece = reader.ReadByte();
+                data.ShoulderPiece = reader.ReadByte();
+                data.Age = reader.ReadByte();
+                data.ChildAge = reader.ReadByte();
+                data.Traits = (reader.ReadByte(), reader.ReadByte());
+                data.IsFemale = reader.ReadBoolean();
 
-                for (var i = 0; i < numChildren; i++)
+                if (Game.PlayerStats.RevisionNumber > 0)
                 {
-                    var data = new PlayerLineageData();
-
-                    data.Name = reader.ReadString();
-                    data.Spell = reader.ReadByte();
-                    data.Class = reader.ReadByte();
-                    data.HeadPiece = reader.ReadByte();
-                    data.ChestPiece = reader.ReadByte();
-                    data.ShoulderPiece = reader.ReadByte();
-                    data.Age = reader.ReadByte();
-                    data.ChildAge = reader.ReadByte();
-                    data.Traits = (reader.ReadByte(), reader.ReadByte());
-                    data.IsFemale = reader.ReadBoolean();
-
-                    if (Game.PlayerStats.RevisionNumber > 0)
-                    {
-                        data.RomanNumeral = reader.ReadString();
-                    }
-
-                    loadedBranches.Add(data);
+                    data.RomanNumeral = reader.ReadString();
                 }
 
-                if (loadedBranches.Count > 0)
-                {
-                    // Loading the CurrentBranches into Game.PlayerStats.
-                    Game.PlayerStats.CurrentBranches = loadedBranches;
-
-                    if (LevelEV.ShowSaveLoadDebugText)
-                    {
-                        Console.WriteLine("Loading Current Branch Lineage Data");
-                        List<PlayerLineageData> currentBranches = Game.PlayerStats.CurrentBranches;
-                        for (var i = 0; i < numChildren; i++)
-                        {
-                            Console.WriteLine("Player Name: " + currentBranches[i].Name);
-                            Console.WriteLine("Spell: " + currentBranches[i].Name);
-                            Console.WriteLine("Class: " + currentBranches[i].Name);
-                            Console.WriteLine("Head Piece: " + currentBranches[i].HeadPiece);
-                            Console.WriteLine("Chest Piece: " + currentBranches[i].ChestPiece);
-                            Console.WriteLine("Shoulder Piece: " + currentBranches[i].ShoulderPiece);
-                            Console.WriteLine("Player Age: " + currentBranches[i].Age);
-                            Console.WriteLine("Player Child Age: " + currentBranches[i].ChildAge);
-                            Console.WriteLine("Traits: " + currentBranches[i].Traits.Trait1 + ", " +
-                                              currentBranches[i].Traits.Trait2);
-                            Console.WriteLine("Is Female: " + currentBranches[i].IsFemale);
-                            if (Game.PlayerStats.RevisionNumber > 0)
-                            {
-                                Console.WriteLine("Roman Number:" + currentBranches[i].RomanNumeral);
-                            }
-                        }
-
-                        currentBranches = null;
-                    }
-                }
-
-                loadedBranches = null;
-
-                ////////////////////////////////////////
-
-                // Loading family tree info
-
-                var familyTree = new List<FamilyTreeNode>();
-                var numBranches = reader.ReadInt32();
-
-                for (var i = 0; i < numBranches; i++)
-                {
-                    var data = new FamilyTreeNode();
-                    data.Name = reader.ReadString();
-                    data.Age = reader.ReadByte();
-                    data.Class = reader.ReadByte();
-                    data.HeadPiece = reader.ReadByte();
-                    data.ChestPiece = reader.ReadByte();
-                    data.ShoulderPiece = reader.ReadByte();
-                    data.NumEnemiesBeaten = reader.ReadInt32();
-                    data.BeatenABoss = reader.ReadBoolean();
-                    data.Traits.Trait1 = reader.ReadByte();
-                    data.Traits.Trait2 = reader.ReadByte();
-                    data.IsFemale = reader.ReadBoolean();
-                    if (Game.PlayerStats.RevisionNumber > 0)
-                    {
-                        data.RomanNumeral = reader.ReadString();
-                    }
-
-                    familyTree.Add(data);
-                }
-
-                if (familyTree.Count > 0)
-                {
-                    // Loading the created Family Tree list into Game.PlayerStats.
-                    Game.PlayerStats.FamilyTreeArray = familyTree;
-
-                    if (LevelEV.ShowSaveLoadDebugText)
-                    {
-                        List<FamilyTreeNode> familyTreeArray = Game.PlayerStats.FamilyTreeArray;
-                        Console.WriteLine("Loading Family Tree Data");
-                        Console.WriteLine("Number of Branches: " + numBranches);
-                        for (var i = 0; i < numBranches; i++)
-                        {
-                            Console.WriteLine("/// Saving branch");
-                            Console.WriteLine("Name: " + familyTreeArray[i].Name);
-                            Console.WriteLine("Age: " + familyTreeArray[i].Age);
-                            Console.WriteLine("Class: " + familyTreeArray[i].Class);
-                            Console.WriteLine("Head Piece: " + familyTreeArray[i].HeadPiece);
-                            Console.WriteLine("Chest Piece: " + familyTreeArray[i].ChestPiece);
-                            Console.WriteLine("Shoulder Piece: " + familyTreeArray[i].ShoulderPiece);
-                            Console.WriteLine("Number of Enemies Beaten: " + familyTreeArray[i].NumEnemiesBeaten);
-                            Console.WriteLine("Beaten a Boss: " + familyTreeArray[i].BeatenABoss);
-                            Console.WriteLine("Traits: " + familyTreeArray[i].Traits.Trait1 + ", " +
-                                              familyTreeArray[i].Traits.Trait2);
-                            Console.WriteLine("Is Female: " + familyTreeArray[i].IsFemale);
-                            if (Game.PlayerStats.RevisionNumber > 0)
-                            {
-                                Console.WriteLine("Roman Numeral: " + familyTreeArray[i].RomanNumeral);
-                            }
-                        }
-
-                        familyTreeArray = null;
-                    }
-                }
-
-                familyTree = null;
-
-                ///////////////////////////////////////////
-                Console.WriteLine("///// PLAYER LINEAGE DATA - LOAD COMPLETE /////");
-
-                reader.Close();
+                loadedBranches.Add(data);
             }
 
-            stream.Close();
+            if (loadedBranches.Count > 0)
+            {
+                // Loading the CurrentBranches into Game.PlayerStats.
+                Game.PlayerStats.CurrentBranches = loadedBranches;
+
+                if (LevelEV.ShowSaveLoadDebugText)
+                {
+                    Console.WriteLine("Loading Current Branch Lineage Data");
+                    List<PlayerLineageData> currentBranches = Game.PlayerStats.CurrentBranches;
+                    for (var i = 0; i < numChildren; i++)
+                    {
+                        Console.WriteLine("Player Name: " + currentBranches[i].Name);
+                        Console.WriteLine("Spell: " + currentBranches[i].Name);
+                        Console.WriteLine("Class: " + currentBranches[i].Name);
+                        Console.WriteLine("Head Piece: " + currentBranches[i].HeadPiece);
+                        Console.WriteLine("Chest Piece: " + currentBranches[i].ChestPiece);
+                        Console.WriteLine("Shoulder Piece: " + currentBranches[i].ShoulderPiece);
+                        Console.WriteLine("Player Age: " + currentBranches[i].Age);
+                        Console.WriteLine("Player Child Age: " + currentBranches[i].ChildAge);
+                        Console.WriteLine("Traits: " + currentBranches[i].Traits.Trait1 + ", " +
+                                          currentBranches[i].Traits.Trait2);
+                        Console.WriteLine("Is Female: " + currentBranches[i].IsFemale);
+                        if (Game.PlayerStats.RevisionNumber > 0)
+                        {
+                            Console.WriteLine("Roman Number:" + currentBranches[i].RomanNumeral);
+                        }
+                    }
+                }
+            }
+
+            ////////////////////////////////////////
+
+            // Loading family tree info
+
+            var familyTree = new List<FamilyTreeNode>();
+            var numBranches = reader.ReadInt32();
+
+            for (var i = 0; i < numBranches; i++)
+            {
+                var data = new FamilyTreeNode();
+                data.Name = reader.ReadString();
+                data.Age = reader.ReadByte();
+                data.Class = reader.ReadByte();
+                data.HeadPiece = reader.ReadByte();
+                data.ChestPiece = reader.ReadByte();
+                data.ShoulderPiece = reader.ReadByte();
+                data.NumEnemiesBeaten = reader.ReadInt32();
+                data.BeatenABoss = reader.ReadBoolean();
+                data.Traits.Trait1 = reader.ReadByte();
+                data.Traits.Trait2 = reader.ReadByte();
+                data.IsFemale = reader.ReadBoolean();
+                if (Game.PlayerStats.RevisionNumber > 0)
+                {
+                    data.RomanNumeral = reader.ReadString();
+                }
+
+                familyTree.Add(data);
+            }
+
+            if (familyTree.Count > 0)
+            {
+                // Loading the created Family Tree list into Game.PlayerStats.
+                Game.PlayerStats.FamilyTreeArray = familyTree;
+
+                if (LevelEV.ShowSaveLoadDebugText)
+                {
+                    List<FamilyTreeNode> familyTreeArray = Game.PlayerStats.FamilyTreeArray;
+                    Console.WriteLine("Loading Family Tree Data");
+                    Console.WriteLine("Number of Branches: " + numBranches);
+                    for (var i = 0; i < numBranches; i++)
+                    {
+                        Console.WriteLine("/// Saving branch");
+                        Console.WriteLine("Name: " + familyTreeArray[i].Name);
+                        Console.WriteLine("Age: " + familyTreeArray[i].Age);
+                        Console.WriteLine("Class: " + familyTreeArray[i].Class);
+                        Console.WriteLine("Head Piece: " + familyTreeArray[i].HeadPiece);
+                        Console.WriteLine("Chest Piece: " + familyTreeArray[i].ChestPiece);
+                        Console.WriteLine("Shoulder Piece: " + familyTreeArray[i].ShoulderPiece);
+                        Console.WriteLine("Number of Enemies Beaten: " + familyTreeArray[i].NumEnemiesBeaten);
+                        Console.WriteLine("Beaten a Boss: " + familyTreeArray[i].BeatenABoss);
+                        Console.WriteLine("Traits: " + familyTreeArray[i].Traits.Trait1 + ", " +
+                                          familyTreeArray[i].Traits.Trait2);
+                        Console.WriteLine("Is Female: " + familyTreeArray[i].IsFemale);
+                        if (Game.PlayerStats.RevisionNumber > 0)
+                        {
+                            Console.WriteLine("Roman Numeral: " + familyTreeArray[i].RomanNumeral);
+                        }
+                    }
+                }
+            }
+
+            ///////////////////////////////////////////
+            Console.WriteLine(@"///// PLAYER LINEAGE DATA - LOAD COMPLETE /////");
+
+            reader.Close();
         }
+
+        stream.Close();
     }
 
     public bool FileExists(SaveType saveType)
     {
         GetStorageContainer();
 
-        var fileExists = false;
-        switch (saveType)
+        var fileExists = saveType switch
         {
-            case SaveType.PlayerData:
-                fileExists =
-                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNamePlayer);
-                break;
-            case SaveType.UpgradeData:
-                fileExists =
-                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameUpgrades);
-                break;
-            case SaveType.Map:
-                fileExists =
-                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameMap);
-                break;
-            case SaveType.MapData:
-                fileExists =
-                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameMapData);
-                break;
-            case SaveType.Lineage:
-                fileExists =
-                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameLineage);
-                break;
-        }
+            SaveType.PlayerData  => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNamePlayer}"),
+            SaveType.UpgradeData => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameUpgrades}"),
+            SaveType.Map         => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMap}"),
+            SaveType.MapData     => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMapData}"),
+            SaveType.Lineage     => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}"),
+            _                    => false,
+        };
 
         if (_storageContainer is { IsDisposed: false })
         {
@@ -2420,124 +2393,118 @@ public class SaveGameManager(Game game)
 
         GetStorageContainer();
 
-        if (_storageContainer.FileExists("Profile" + profile + "/" + FileNamePlayer))
+        if (_storageContainer.FileExists($"Profile{profile}/{FileNamePlayer}"))
         {
-            using (var stream = _storageContainer.OpenFile("Profile" + profile + "/" + FileNamePlayer, FileMode.Open,
-                       FileAccess.Read, FileShare.Read))
+            using var stream = _storageContainer.OpenFile($"Profile{profile}/{FileNamePlayer}", FileMode.Open, FileAccess.Read, FileShare.Read);
+            using (var reader = new BinaryReader(stream))
             {
-                using (var reader = new BinaryReader(stream))
-                {
-                    reader.ReadInt32(); // Gold
-                    reader.ReadInt32(); // Health
-                    reader.ReadInt32(); // Mana
-                    reader.ReadByte(); // Age
-                    reader.ReadByte(); // Child Age
-                    reader.ReadByte(); // Spell
-                    playerClass = reader.ReadByte();
-                    reader.ReadByte(); // Special Item
-                    reader.ReadByte(); // TraitX
-                    reader.ReadByte(); // TraitY
-                    playerName = reader.ReadString();
+                reader.ReadInt32(); // Gold
+                reader.ReadInt32(); // Health
+                reader.ReadInt32(); // Mana
+                reader.ReadByte(); // Age
+                reader.ReadByte(); // Child Age
+                reader.ReadByte(); // Spell
+                playerClass = reader.ReadByte();
+                reader.ReadByte(); // Special Item
+                reader.ReadByte(); // TraitX
+                reader.ReadByte(); // TraitY
+                playerName = reader.ReadString();
 
-                    reader.ReadByte(); // Head Piece
-                    reader.ReadByte(); // Shoulder Piece
-                    reader.ReadByte(); // Chest Piece
-                    reader.ReadByte(); // Diary Entry
-                    reader.ReadInt32(); // Bonus Health
-                    reader.ReadInt32(); // Bonus Strength
-                    reader.ReadInt32(); // Bonus Mana
-                    reader.ReadInt32(); // Bonus Defense
-                    reader.ReadInt32(); // Bonus Weight
-                    reader.ReadInt32(); // Bonus Magic
+                reader.ReadByte(); // Head Piece
+                reader.ReadByte(); // Shoulder Piece
+                reader.ReadByte(); // Chest Piece
+                reader.ReadByte(); // Diary Entry
+                reader.ReadInt32(); // Bonus Health
+                reader.ReadInt32(); // Bonus Strength
+                reader.ReadInt32(); // Bonus Mana
+                reader.ReadInt32(); // Bonus Defense
+                reader.ReadInt32(); // Bonus Weight
+                reader.ReadInt32(); // Bonus Magic
 
-                    // Reading lich stats.
-                    reader.ReadInt32();
-                    reader.ReadInt32();
-                    reader.ReadSingle();
+                // Reading lich stats.
+                reader.ReadInt32();
+                reader.ReadInt32();
+                reader.ReadSingle();
 
-                    // Reading boss progress states
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
+                // Reading boss progress states
+                reader.ReadBoolean();
+                reader.ReadBoolean();
+                reader.ReadBoolean();
+                reader.ReadBoolean();
+                reader.ReadBoolean();
+                reader.ReadBoolean();
 
-                    // Reading new game plus progress
-                    castlesBeaten = reader.ReadInt32();
-                    reader.ReadInt32();
+                // Reading new game plus progress
+                castlesBeaten = reader.ReadInt32();
+                reader.ReadInt32();
 
-                    // Loading misc flags
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
+                // Loading misc flags
+                reader.ReadBoolean();
+                reader.ReadBoolean();
+                reader.ReadBoolean();
 
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    playerIsDead = reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    reader.ReadBoolean();
-                    isFemale = reader.ReadBoolean();
+                reader.ReadBoolean();
+                reader.ReadBoolean();
+                reader.ReadBoolean();
+                reader.ReadBoolean();
+                reader.ReadBoolean();
+                playerIsDead = reader.ReadBoolean();
+                reader.ReadBoolean();
+                reader.ReadBoolean();
+                isFemale = reader.ReadBoolean();
 
-                    reader.Close();
-                }
-
-                stream.Close();
+                reader.Close();
             }
+
+            stream.Close();
         }
 
-        if (_storageContainer.FileExists("Profile" + profile + "/" + FileNameUpgrades))
+        if (_storageContainer.FileExists($"Profile{profile}/{FileNameUpgrades}"))
         {
-            using (var stream = _storageContainer.OpenFile("Profile" + profile + "/" + FileNameUpgrades,
-                       FileMode.Open, FileAccess.Read, FileShare.Read))
+            using var stream = _storageContainer.OpenFile($"Profile{profile}/{FileNameUpgrades}", FileMode.Open, FileAccess.Read, FileShare.Read);
+            using (var reader = new BinaryReader(stream))
             {
-                using (var reader = new BinaryReader(stream))
+                for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
                 {
-                    for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
+                    for (var k = 0; k < EquipmentBaseType.TOTAL; k++)
                     {
-                        for (var k = 0; k < EquipmentBaseType.TOTAL; k++)
-                        {
-                            reader.ReadByte();
-                        }
+                        reader.ReadByte();
                     }
-
-                    for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
-                    {
-                        for (var k = 0; k < EquipmentAbilityType.TOTAL; k++)
-                        {
-                            reader.ReadByte();
-                        }
-                    }
-
-                    for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
-                    {
-                        reader.ReadSByte();
-                    }
-
-                    for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
-                    {
-                        reader.ReadSByte();
-                    }
-
-                    var levelCounter = 0;
-                    for (var i = 0; i < (int)SkillType.Divider - 2; i++) //The starting 2 traits are null and filler.
-                    {
-                        var traitLevel = reader.ReadInt32();
-                        for (var k = 0; k < traitLevel; k++)
-                        {
-                            levelCounter++;
-                        }
-                    }
-
-                    playerLevel = levelCounter;
-                    reader.Close();
                 }
 
-                stream.Close();
+                for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
+                {
+                    for (var k = 0; k < EquipmentAbilityType.TOTAL; k++)
+                    {
+                        reader.ReadByte();
+                    }
+                }
+
+                for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
+                {
+                    reader.ReadSByte();
+                }
+
+                for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
+                {
+                    reader.ReadSByte();
+                }
+
+                var levelCounter = 0;
+                for (var i = 0; i < (int)SkillType.Divider - 2; i++) //The starting 2 traits are null and filler.
+                {
+                    var traitLevel = reader.ReadInt32();
+                    for (var k = 0; k < traitLevel; k++)
+                    {
+                        levelCounter++;
+                    }
+                }
+
+                playerLevel = levelCounter;
+                reader.Close();
             }
+
+            stream.Close();
         }
 
         _storageContainer.Dispose();
