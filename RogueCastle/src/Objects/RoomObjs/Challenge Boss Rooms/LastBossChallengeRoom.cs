@@ -37,33 +37,33 @@ namespace RogueCastle
         private void SetRoomData()
         {
             // Set enemy and player data here.
-            m_boss.GetChildAt(PlayerPart.Cape).TextureColor = Color.DarkRed;
-            m_boss2.GetChildAt(PlayerPart.Cape).TextureColor = Color.MediumPurple;
+            m_boss.GetChildAt(PlayerPart.CAPE).TextureColor = Color.DarkRed;
+            m_boss2.GetChildAt(PlayerPart.CAPE).TextureColor = Color.MediumPurple;
             
-            m_boss.GetChildAt(PlayerPart.Chest).TextureColor = Color.DarkRed;
-            m_boss2.GetChildAt(PlayerPart.Chest).TextureColor = Color.MediumPurple;
+            m_boss.GetChildAt(PlayerPart.CHEST).TextureColor = Color.DarkRed;
+            m_boss2.GetChildAt(PlayerPart.CHEST).TextureColor = Color.MediumPurple;
 
-            m_boss.GetChildAt(PlayerPart.Head).TextureColor = Color.MediumPurple;
-            m_boss2.GetChildAt(PlayerPart.Head).TextureColor = Color.DarkRed;
+            m_boss.GetChildAt(PlayerPart.HEAD).TextureColor = Color.MediumPurple;
+            m_boss2.GetChildAt(PlayerPart.HEAD).TextureColor = Color.DarkRed;
 
-            m_boss.GetChildAt(PlayerPart.Hair).TextureColor = Color.DarkRed;
-            m_boss2.GetChildAt(PlayerPart.Hair).TextureColor = Color.MediumPurple;
+            m_boss.GetChildAt(PlayerPart.HAIR).TextureColor = Color.DarkRed;
+            m_boss2.GetChildAt(PlayerPart.HAIR).TextureColor = Color.MediumPurple;
 
-            m_boss.GetChildAt(PlayerPart.Legs).TextureColor = Color.MediumPurple;
-            m_boss2.GetChildAt(PlayerPart.Legs).TextureColor = Color.DarkRed;
+            m_boss.GetChildAt(PlayerPart.LEGS).TextureColor = Color.MediumPurple;
+            m_boss2.GetChildAt(PlayerPart.LEGS).TextureColor = Color.DarkRed;
 
-            m_boss.GetChildAt(PlayerPart.Arms).TextureColor = Color.MediumPurple;
-            m_boss2.GetChildAt(PlayerPart.Arms).TextureColor = Color.DarkRed;
+            m_boss.GetChildAt(PlayerPart.ARMS).TextureColor = Color.MediumPurple;
+            m_boss2.GetChildAt(PlayerPart.ARMS).TextureColor = Color.DarkRed;
 
-            m_boss.GetChildAt(PlayerPart.ShoulderA).TextureColor = Color.MediumPurple;
-            m_boss.GetChildAt(PlayerPart.ShoulderB).TextureColor = Color.MediumPurple;
-            m_boss2.GetChildAt(PlayerPart.ShoulderA).TextureColor = Color.DarkRed;
-            m_boss2.GetChildAt(PlayerPart.ShoulderB).TextureColor = Color.DarkRed;
+            m_boss.GetChildAt(PlayerPart.SHOULDER_A).TextureColor = Color.MediumPurple;
+            m_boss.GetChildAt(PlayerPart.SHOULDER_B).TextureColor = Color.MediumPurple;
+            m_boss2.GetChildAt(PlayerPart.SHOULDER_A).TextureColor = Color.DarkRed;
+            m_boss2.GetChildAt(PlayerPart.SHOULDER_B).TextureColor = Color.DarkRed;
 
-            m_boss.GetChildAt(PlayerPart.Sword1).TextureColor = Color.White;
-            m_boss.GetChildAt(PlayerPart.Sword2).TextureColor = Color.DarkRed;
-            m_boss2.GetChildAt(PlayerPart.Sword1).TextureColor = Color.White;
-            m_boss2.GetChildAt(PlayerPart.Sword2).TextureColor = Color.DarkRed;
+            m_boss.GetChildAt(PlayerPart.SWORD1).TextureColor = Color.White;
+            m_boss.GetChildAt(PlayerPart.SWORD2).TextureColor = Color.DarkRed;
+            m_boss2.GetChildAt(PlayerPart.SWORD1).TextureColor = Color.White;
+            m_boss2.GetChildAt(PlayerPart.SWORD2).TextureColor = Color.DarkRed;
 
             m_boss.IsNeo = true;
             m_boss2.IsNeo = true;
@@ -167,7 +167,7 @@ namespace RogueCastle
 
             base.OnEnter();
 
-            m_bossChest.ForcedItemType = ItemDropType.FountainPiece5; // Must be called after base.OnEnter()
+            m_bossChest.ForcedItemType = ItemDropType.FOUNTAIN_PIECE5; // Must be called after base.OnEnter()
         }
 
         public override void OnExit()

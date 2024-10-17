@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -60,7 +61,7 @@ namespace RogueCastle
                 {
                     RCScreenManager manager = Game.ScreenManager;
                     manager.DialogueScreen.SetDialogue("PortraitRoomText" + ID);
-                    manager.DisplayScreen(ScreenType.Dialogue, true);
+                    manager.DisplayScreen(ScreenType.DIALOGUE, true);
                 }
             }
 

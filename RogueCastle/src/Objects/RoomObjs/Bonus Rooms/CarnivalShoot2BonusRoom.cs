@@ -350,7 +350,7 @@ namespace RogueCastle
             {
                 RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
                 manager.DialogueScreen.SetDialogue("CarnivalRoom2-Reward");
-                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true, null);
+                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true, null);
                 RevealChest();
                 GameUtil.UnlockAchievement("LOVE_OF_CLOWNS");
             }
@@ -358,7 +358,7 @@ namespace RogueCastle
             {
                 RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
                 manager.DialogueScreen.SetDialogue("CarnivalRoom2-Fail");
-                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true, null);
+                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true, null);
             }
         }
 
@@ -429,7 +429,7 @@ namespace RogueCastle
                     manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
                     manager.DialogueScreen.SetConfirmEndHandler(this, "BeginGame");
                     manager.DialogueScreen.SetCancelEndHandler(typeof(Console), "WriteLine", "Canceling Selection");
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true, null);
+                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true, null);
                 }
             }
             else if (m_elf.IsTouching == true && RoomCompleted == true)
@@ -438,7 +438,7 @@ namespace RogueCastle
                 {
                     RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
                     manager.DialogueScreen.SetDialogue("CarnivalRoom1-End");
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true, null);
+                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true, null);
                 }
             }
 

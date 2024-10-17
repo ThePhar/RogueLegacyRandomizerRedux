@@ -11,6 +11,7 @@ using Tweener.Ease;
 using InputSystem;
 using System.Text.RegularExpressions;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -243,7 +244,7 @@ namespace RogueCastle
                             slotText.Text = string.Format(LocaleBuilder.GetResourceString(!isFemale ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW" : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW"), playerName, LocaleBuilder.GetResourceString(ClassType.ToStringID(playerClass, isFemale))); // {0} the {1}
                         else
                             slotText.Text = string.Format(LocaleBuilder.GetResourceString(!isFemale ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW" : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW"), playerName); // {0} the deceased
-                        if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(slotText.Text, @"\p{IsCyrillic}"))
+                        if (LocaleBuilder.LanguageType != LanguageType.ChineseSimple && Regex.IsMatch(slotText.Text, @"\p{IsCyrillic}"))
                             slotText.ChangeFontNoDefault(Game.RobotoSlabFont);
                     }
                     catch
@@ -366,7 +367,7 @@ namespace RogueCastle
                     game.SaveConfig();
 
                     if (game.SaveManager.FileExists(SaveType.PlayerData))
-                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Title, true);
+                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TITLE, true);
                     else
                     {
                         SkillSystem.ResetAllTraits();
@@ -375,7 +376,7 @@ namespace RogueCastle
                         (ScreenManager as RCScreenManager).Player.Reset();
                         Game.ScreenManager.Player.CurrentHealth = Game.PlayerStats.CurrentHealth;
                         Game.ScreenManager.Player.CurrentMana = Game.PlayerStats.CurrentMana;
-                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TutorialRoom, true, null);
+                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TUTORIAL_ROOM, true, null);
                     }
                 }
 
@@ -414,7 +415,7 @@ namespace RogueCastle
             manager.DialogueScreen.SetDialogue("Delete Save");
             manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
             manager.DialogueScreen.SetConfirmEndHandler(this, "DeleteSaveAskAgain");
-            manager.DisplayScreen(ScreenType.Dialogue, false, null);
+            manager.DisplayScreen(ScreenType.DIALOGUE, false, null);
         }
 
         public void DeleteSaveAskAgain()
@@ -423,7 +424,7 @@ namespace RogueCastle
             manager.DialogueScreen.SetDialogue("Delete Save2");
             manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
             manager.DialogueScreen.SetConfirmEndHandler(this, "DeleteSave");
-            manager.DisplayScreen(ScreenType.Dialogue, false, null);
+            manager.DisplayScreen(ScreenType.DIALOGUE, false, null);
         }
 
         public void DeleteSave()
@@ -454,7 +455,7 @@ namespace RogueCastle
 
                 SoundManager.StopMusic(1);
 
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TutorialRoom, true);
+                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TUTORIAL_ROOM, true);
             }
             else
             {

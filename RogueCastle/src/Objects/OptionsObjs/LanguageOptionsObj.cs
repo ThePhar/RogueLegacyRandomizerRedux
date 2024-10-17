@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using DS2DEngine;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -45,16 +46,16 @@ namespace RogueCastle
                 case (LanguageType.Russian):
                     m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_LANGUAGE_RUSSIAN", m_toggleText);
                     break;
-                case (LanguageType.Portuguese_Brazil):
+                case (LanguageType.PortugueseBrazil):
                     m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_LANGUAGE_PORTUGUESE", m_toggleText);
                     break;
-                case (LanguageType.Spanish_Spain):
+                case (LanguageType.SpanishSpain):
                     m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_LANGUAGE_SPANISH", m_toggleText);
                     break;
                 case (LanguageType.Polish):
                     m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_LANGUAGE_POLISH", m_toggleText);
                     break;
-                case (LanguageType.Chinese_Simp):
+                case (LanguageType.ChineseSimple):
                     m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_OPTIONS_LANGUAGE_CHINESE", m_toggleText);
                     break;
             }
@@ -129,7 +130,7 @@ namespace RogueCastle
             switch (LocaleBuilder.LanguageType)
             {
                 case(LanguageType.German):
-                case(LanguageType.Portuguese_Brazil):
+                case(LanguageType.PortugueseBrazil):
                     m_toggleText.ScaleX = 0.9f;
                     break;
                 case (LanguageType.Polish):

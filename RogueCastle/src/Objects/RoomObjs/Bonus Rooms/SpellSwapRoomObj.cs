@@ -158,10 +158,10 @@ namespace RogueCastle
             (Game.ScreenManager.CurrentScreen as ProceduralLevelScreen).UpdatePlayerSpellIcon();
             List<object> objectList = new List<object>();
             objectList.Add(new Vector2(m_icon.X, m_icon.Y - m_icon.Height / 2f));
-            objectList.Add(GetItemType.Spell);
+            objectList.Add(GetItemType.SPELL);
             objectList.Add(new Vector2((byte)Game.PlayerStats.Spell, 0));
 
-            (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
+            (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GET_ITEM, true, objectList);
             Tweener.Tween.RunFunction(0, Player, "RunGetItemAnimation"); // Necessary to delay this call by one update.
         }
 

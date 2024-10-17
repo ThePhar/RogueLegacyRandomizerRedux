@@ -80,12 +80,12 @@ namespace RogueCastle
                 bool droppedItem = false;
                 if (this.Name == "Health")
                 {
-                    player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.Health, GameEV.ITEM_HEALTHDROP_AMOUNT);
+                    player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
                     droppedItem = true;
                 }
                 else if (this.Name == "Mana")
                 {
-                    player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.Mana, GameEV.ITEM_MANADROP_AMOUNT);
+                    player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.MANA, GameEV.ITEM_MANADROP_AMOUNT);
                     droppedItem = true;
                 }
 
@@ -117,7 +117,7 @@ namespace RogueCastle
                         if (i == 0)
                         {
                             if (!Game.PlayerStats.HasTrait(TraitType.ALEKTOROPHOBIA))
-                                player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.Health, GameEV.ITEM_HEALTHDROP_AMOUNT);
+                                player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
                             else
                             {
                                 EnemyObj_Chicken chicken = new EnemyObj_Chicken(null, null, null, GameTypes.EnemyDifficulty.BASIC);
@@ -132,11 +132,11 @@ namespace RogueCastle
                             }
                         }
                         else if (i == 1)
-                            player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.Mana, GameEV.ITEM_MANADROP_AMOUNT);
+                            player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.MANA, GameEV.ITEM_MANADROP_AMOUNT);
                         else if (i == 2)
-                            player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.Coin, ItemDropType.CoinAmount);
+                            player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.COIN, ItemDropType.COIN_AMOUNT);
                         else if (i == 3)
-                            player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.MoneyBag, ItemDropType.MoneyBagAmount);
+                            player.AttachedLevel.ItemDropManager.DropItem(this.Position, ItemDropType.MONEY_BAG, ItemDropType.MONEY_BAG_AMOUNT);
                         break;
                     }
                 }

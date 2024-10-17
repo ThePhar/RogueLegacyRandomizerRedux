@@ -134,7 +134,7 @@ namespace RogueCastle
                         RCScreenManager manager = Game.ScreenManager;
                         manager.DialogueScreen.SetDialogue("Save File Error Antivirus");
                         //manager.DisplayScreen(ScreenType.Dialogue, false, null);
-                        Tweener.Tween.RunFunction(0.25f, manager, "DisplayScreen", ScreenType.Dialogue, true, typeof(List<object>));
+                        Tweener.Tween.RunFunction(0.25f, manager, "DisplayScreen", ScreenType.DIALOGUE, true, typeof(List<object>));
                         m_saveFailCounter = 0;
                     }
                     else
@@ -205,7 +205,7 @@ namespace RogueCastle
                             Game.gameIsCorrupt = true;
                             manager.DialogueScreen.SetConfirmEndHandler(this, "LoadAutosave");
                             //manager.DialogueScreen.SetConfirmEndHandler(m_game, "Exit");
-                            manager.DisplayScreen(ScreenType.Dialogue, false, null);
+                            manager.DisplayScreen(ScreenType.DIALOGUE, false, null);
                             // Just a small trigger to make sure the game knows the file is corrupt, and to stop doing whatever it's doing.
                             Game.PlayerStats.HeadPiece = 0;
 
@@ -218,7 +218,7 @@ namespace RogueCastle
                             //manager.DialogueScreen.SetConfirmEndHandler(this, "StartNewGame");
                             Game.gameIsCorrupt = true;
                             manager.DialogueScreen.SetConfirmEndHandler(m_game, "Exit");
-                            manager.DisplayScreen(ScreenType.Dialogue, false, null);
+                            manager.DisplayScreen(ScreenType.DIALOGUE, false, null);
 
                             // Just a small trigger to make sure the game knows the file is corrupt, and to stop doing whatever it's doing.
                             Game.PlayerStats.HeadPiece = 0;
@@ -252,7 +252,7 @@ namespace RogueCastle
             RCScreenManager manager = Game.ScreenManager;
             manager.DialogueScreen.SetDialogue("Save File Error");
             manager.DialogueScreen.SetConfirmEndHandler(this, "LoadAutosave");
-            manager.DisplayScreen(ScreenType.Dialogue, false, null);
+            manager.DisplayScreen(ScreenType.DIALOGUE, false, null);
         }
 
         public void LoadAutosave()
@@ -263,7 +263,7 @@ namespace RogueCastle
             Game.PlayerStats = new PlayerStats();
             Game.ScreenManager.Player.Reset();
             LoadBackups();
-            Game.ScreenManager.DisplayScreen(ScreenType.Title, true);
+            Game.ScreenManager.DisplayScreen(ScreenType.TITLE, true);
         }
 
         public void StartNewGame()
@@ -274,7 +274,7 @@ namespace RogueCastle
             Game.PlayerStats.Dispose();
             Game.PlayerStats = new PlayerStats();
             Game.ScreenManager.Player.Reset();
-            Game.ScreenManager.DisplayScreen(ScreenType.TutorialRoom, true);
+            Game.ScreenManager.DisplayScreen(ScreenType.TUTORIAL_ROOM, true);
         }
 
         public void ResetAutosave()

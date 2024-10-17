@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -38,7 +39,7 @@ namespace RogueCastle
                     manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
                     manager.DialogueScreen.SetConfirmEndHandler(this, "QuitProgram");
                     manager.DialogueScreen.SetCancelEndHandler(this, "CancelCommand");
-                    manager.DisplayScreen(ScreenType.Dialogue, false, null);
+                    manager.DisplayScreen(ScreenType.DIALOGUE, false, null);
                 }
             }
         }

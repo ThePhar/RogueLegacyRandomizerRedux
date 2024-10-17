@@ -1348,7 +1348,7 @@ namespace RogueCastle
                 }
                 else if (m_isTouchingGround == true && m_currentActiveLB != null && this.SpriteName == "PlayerAttacking3_Character" && this.CurrentSpeed != 0)
                 {
-                    SpriteObj bossLegs = this.GetChildAt(PlayerPart.Legs) as SpriteObj;
+                    SpriteObj bossLegs = this.GetChildAt(PlayerPart.LEGS) as SpriteObj;
                     if (bossLegs.SpriteName != "PlayerWalkingLegs_Sprite")
                     {
                         bossLegs.ChangeSprite("PlayerWalkingLegs_Sprite");
@@ -1374,14 +1374,14 @@ namespace RogueCastle
                 if (IsTouchingGround == true && m_firstFormDying == false)
                 {
                     m_firstFormDying = true;
-                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.Health, GameEV.ITEM_HEALTHDROP_AMOUNT);
-                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.Health, GameEV.ITEM_HEALTHDROP_AMOUNT);
-                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.Health, GameEV.ITEM_HEALTHDROP_AMOUNT);
-                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.Health, GameEV.ITEM_HEALTHDROP_AMOUNT);
+                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
+                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
+                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
+                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
                     //m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.Mana, GameEV.ITEM_MANADROP_AMOUNT);
-                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.Mana, GameEV.ITEM_MANADROP_AMOUNT);
-                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.Mana, GameEV.ITEM_MANADROP_AMOUNT);
-                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.Mana, GameEV.ITEM_MANADROP_AMOUNT);
+                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.MANA, GameEV.ITEM_MANADROP_AMOUNT);
+                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.MANA, GameEV.ITEM_MANADROP_AMOUNT);
+                    m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.MANA, GameEV.ITEM_MANADROP_AMOUNT);
                     this.IsWeighted = false;
                     this.IsCollidable = false;
                     this.AnimationDelay = 1 / 10f;
@@ -1505,7 +1505,7 @@ namespace RogueCastle
             RCScreenManager manager = m_levelScreen.ScreenManager as RCScreenManager;
             manager.DialogueScreen.SetDialogue("FinalBossTalk02");
             manager.DialogueScreen.SetConfirmEndHandler(m_levelScreen.CurrentRoom, "RunFountainCutscene");
-            manager.DisplayScreen(ScreenType.Dialogue, true);
+            manager.DisplayScreen(ScreenType.DIALOGUE, true);
         }
 
         public void SecondFormComplete()
@@ -1768,14 +1768,14 @@ namespace RogueCastle
             RCScreenManager manager = m_levelScreen.ScreenManager as RCScreenManager;
             manager.DialogueScreen.SetDialogue("FinalBossTalk03");
             manager.DialogueScreen.SetConfirmEndHandler(this, "Part4");
-            manager.DisplayScreen(ScreenType.Dialogue, true);
+            manager.DisplayScreen(ScreenType.DIALOGUE, true);
         }
 
         public void Part4()
         {
             List<object> dataList = new List<object>();
             dataList.Add(this);
-            (m_levelScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GameOverBoss, true, dataList);
+            (m_levelScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GAME_OVER_BOSS, true, dataList);
         }
 
         public EnemyObj_LastBoss(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
@@ -1788,18 +1788,18 @@ namespace RogueCastle
 
             m_damageShieldProjectiles = new List<ProjectileObj>();
 
-            _objectList[PlayerPart.Boobs].Visible = false;
-            _objectList[PlayerPart.Extra].Visible = false;
-            _objectList[PlayerPart.Light].Visible = false;
-            _objectList[PlayerPart.Glasses].Visible = false;
-            _objectList[PlayerPart.Bowtie].Visible = false;
-            _objectList[PlayerPart.Wings].Visible = false;
+            _objectList[PlayerPart.BOOBS].Visible = false;
+            _objectList[PlayerPart.EXTRA].Visible = false;
+            _objectList[PlayerPart.LIGHT].Visible = false;
+            _objectList[PlayerPart.GLASSES].Visible = false;
+            _objectList[PlayerPart.BOWTIE].Visible = false;
+            _objectList[PlayerPart.WINGS].Visible = false;
 
-            string headPart = (_objectList[PlayerPart.Head] as IAnimateableObj).SpriteName;
+            string headPart = (_objectList[PlayerPart.HEAD] as IAnimateableObj).SpriteName;
             int numberIndex = headPart.IndexOf("_") - 1;
             headPart = headPart.Remove(numberIndex, 1);
-            headPart = headPart.Replace("_", PlayerPart.IntroHelm + "_");
-            _objectList[PlayerPart.Head].ChangeSprite(headPart);
+            headPart = headPart.Replace("_", PlayerPart.INTRO_HELM + "_");
+            _objectList[PlayerPart.HEAD].ChangeSprite(headPart);
             this.PlayAnimation(true);
 
             m_delayObj = new BlankObj(0, 0);
@@ -1814,18 +1814,18 @@ namespace RogueCastle
 
             if (m_inSecondForm == false)
             {
-                string headPart = (_objectList[PlayerPart.Head] as IAnimateableObj).SpriteName;
+                string headPart = (_objectList[PlayerPart.HEAD] as IAnimateableObj).SpriteName;
                 int numberIndex = headPart.IndexOf("_") - 1;
                 headPart = headPart.Remove(numberIndex, 1);
-                headPart = headPart.Replace("_", PlayerPart.IntroHelm + "_");
-                _objectList[PlayerPart.Head].ChangeSprite(headPart);
+                headPart = headPart.Replace("_", PlayerPart.INTRO_HELM + "_");
+                _objectList[PlayerPart.HEAD].ChangeSprite(headPart);
 
-                _objectList[PlayerPart.Boobs].Visible = false;
-                _objectList[PlayerPart.Extra].Visible = false;
-                _objectList[PlayerPart.Light].Visible = false;
-                _objectList[PlayerPart.Glasses].Visible = false;
-                _objectList[PlayerPart.Bowtie].Visible = false;
-                _objectList[PlayerPart.Wings].Visible = false;
+                _objectList[PlayerPart.BOOBS].Visible = false;
+                _objectList[PlayerPart.EXTRA].Visible = false;
+                _objectList[PlayerPart.LIGHT].Visible = false;
+                _objectList[PlayerPart.GLASSES].Visible = false;
+                _objectList[PlayerPart.BOWTIE].Visible = false;
+                _objectList[PlayerPart.WINGS].Visible = false;
             }
         }
 

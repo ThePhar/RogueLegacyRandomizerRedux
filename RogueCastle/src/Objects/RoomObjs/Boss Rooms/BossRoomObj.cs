@@ -164,7 +164,7 @@ namespace RogueCastle
             {
                 m_teleportingOut = true;
                 if (LevelEV.RunDemoVersion == true)
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DemoEnd, true);
+                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DEMO_END, true);
                 else
                     TeleportPlayer();
             }

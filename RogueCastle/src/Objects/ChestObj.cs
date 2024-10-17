@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -95,32 +96,32 @@ namespace RogueCastle
                 {
                     switch (ForcedItemType)
                     {
-                        case (ItemDropType.Coin):
-                        case (ItemDropType.MoneyBag):
-                        case (ItemDropType.Diamond):
-                        case(ItemDropType.BigDiamond):
+                        case (ItemDropType.COIN):
+                        case (ItemDropType.MONEY_BAG):
+                        case (ItemDropType.DIAMOND):
+                        case(ItemDropType.BIG_DIAMOND):
                             GiveGold(itemDropManager, (int)ForcedAmount);
                             break;
-                        case (ItemDropType.Stat_Defense):
-                        case (ItemDropType.Stat_Magic):
-                        case (ItemDropType.Stat_MaxHealth):
-                        case (ItemDropType.Stat_MaxMana):
-                        case (ItemDropType.Stat_Weight):
-                        case (ItemDropType.Stat_Strength):
+                        case (ItemDropType.STAT_DEFENSE):
+                        case (ItemDropType.STAT_MAGIC):
+                        case (ItemDropType.STAT_MAX_HEALTH):
+                        case (ItemDropType.STAT_MAX_MANA):
+                        case (ItemDropType.STAT_WEIGHT):
+                        case (ItemDropType.STAT_STRENGTH):
                             GiveStatDrop(itemDropManager, player, 1, ForcedItemType);
                             break;
-                        case (ItemDropType.Blueprint):
-                        case (ItemDropType.Redprint):
+                        case (ItemDropType.BLUEPRINT):
+                        case (ItemDropType.REDPRINT):
                             GivePrint(itemDropManager, player);
                             break;
-                        case (ItemDropType.TripStatDrop):
+                        case (ItemDropType.TRIP_STAT_DROP):
                             GiveStatDrop(itemDropManager, player, 3, 0);
                             break;
-                        case (ItemDropType.FountainPiece1):
-                        case (ItemDropType.FountainPiece2):
-                        case (ItemDropType.FountainPiece3):
-                        case (ItemDropType.FountainPiece4):
-                        case (ItemDropType.FountainPiece5):
+                        case (ItemDropType.FOUNTAIN_PIECE1):
+                        case (ItemDropType.FOUNTAIN_PIECE2):
+                        case (ItemDropType.FOUNTAIN_PIECE3):
+                        case (ItemDropType.FOUNTAIN_PIECE4):
+                        case (ItemDropType.FOUNTAIN_PIECE5):
                             GiveStatDrop(itemDropManager, player, 1, ForcedItemType);
                             break;
                     }
@@ -145,23 +146,23 @@ namespace RogueCastle
             if (amount != 0) // Override the randomized gold amount if a method parameter is passed in.
                 goldAmount = amount;
 
-            int numBigDiamonds = (int)(goldAmount / ItemDropType.BigDiamondAmount);
-            goldAmount -= numBigDiamonds * ItemDropType.BigDiamondAmount;
+            int numBigDiamonds = (int)(goldAmount / ItemDropType.BIG_DIAMOND_AMOUNT);
+            goldAmount -= numBigDiamonds * ItemDropType.BIG_DIAMOND_AMOUNT;
 
-            int numDiamonds = (int)(goldAmount / ItemDropType.DiamondAmount);
-            goldAmount -= numDiamonds * ItemDropType.DiamondAmount;
+            int numDiamonds = (int)(goldAmount / ItemDropType.DIAMOND_AMOUNT);
+            goldAmount -= numDiamonds * ItemDropType.DIAMOND_AMOUNT;
 
-            int numMoneyBags = (int)(goldAmount / ItemDropType.MoneyBagAmount);
-            goldAmount -= numMoneyBags * ItemDropType.MoneyBagAmount;
+            int numMoneyBags = (int)(goldAmount / ItemDropType.MONEY_BAG_AMOUNT);
+            goldAmount -= numMoneyBags * ItemDropType.MONEY_BAG_AMOUNT;
 
-            int numCoins = goldAmount / ItemDropType.CoinAmount;
+            int numCoins = goldAmount / ItemDropType.COIN_AMOUNT;
 
             float delay = 0f;
 
             for (int i = 0; i < numBigDiamonds; i++)
             {
                 Tweener.Tween.To(this, delay, Tweener.Ease.Linear.EaseNone);
-                Tweener.Tween.AddEndHandlerToLastTween(itemDropManager, "DropItem", new Vector2(this.Position.X, this.Position.Y - this.Height / 2), ItemDropType.BigDiamond, ItemDropType.BigDiamondAmount);
+                Tweener.Tween.AddEndHandlerToLastTween(itemDropManager, "DropItem", new Vector2(this.Position.X, this.Position.Y - this.Height / 2), ItemDropType.BIG_DIAMOND, ItemDropType.BIG_DIAMOND_AMOUNT);
                 delay += 0.1f;
             }
             delay = 0f;
@@ -169,21 +170,21 @@ namespace RogueCastle
             for (int i = 0; i < numDiamonds; i++)
             {
                 Tweener.Tween.To(this, delay, Tweener.Ease.Linear.EaseNone);
-                Tweener.Tween.AddEndHandlerToLastTween(itemDropManager, "DropItem", new Vector2(this.Position.X, this.Position.Y - this.Height / 2), ItemDropType.Diamond, ItemDropType.DiamondAmount);
+                Tweener.Tween.AddEndHandlerToLastTween(itemDropManager, "DropItem", new Vector2(this.Position.X, this.Position.Y - this.Height / 2), ItemDropType.DIAMOND, ItemDropType.DIAMOND_AMOUNT);
                 delay += 0.1f;
             }
             delay = 0f;
             for (int i = 0; i < numMoneyBags; i++)
             {
                 Tweener.Tween.To(this, delay, Tweener.Ease.Linear.EaseNone);
-                Tweener.Tween.AddEndHandlerToLastTween(itemDropManager, "DropItem", new Vector2(this.Position.X, this.Position.Y - this.Height / 2), ItemDropType.MoneyBag, ItemDropType.MoneyBagAmount);
+                Tweener.Tween.AddEndHandlerToLastTween(itemDropManager, "DropItem", new Vector2(this.Position.X, this.Position.Y - this.Height / 2), ItemDropType.MONEY_BAG, ItemDropType.MONEY_BAG_AMOUNT);
                 delay += 0.1f;
             }
             delay = 0f;
             for (int i = 0; i < numCoins; i++)
             {
                 Tweener.Tween.To(this, delay, Tweener.Ease.Linear.EaseNone);
-                Tweener.Tween.AddEndHandlerToLastTween(itemDropManager, "DropItem", new Vector2(this.Position.X, this.Position.Y - this.Height / 2), ItemDropType.Coin, ItemDropType.CoinAmount);
+                Tweener.Tween.AddEndHandlerToLastTween(itemDropManager, "DropItem", new Vector2(this.Position.X, this.Position.Y - this.Height / 2), ItemDropType.COIN, ItemDropType.COIN_AMOUNT);
                 delay += 0.1f;
             }
         }
@@ -207,33 +208,33 @@ namespace RogueCastle
                         {
                             if (i == 0)
                             {
-                                dropArray[k] = ItemDropType.Stat_Strength;
+                                dropArray[k] = ItemDropType.STAT_STRENGTH;
                                 Game.PlayerStats.BonusStrength += 1 + Game.PlayerStats.TimesCastleBeaten;
                             }
                             else if (i == 1)
                             {
-                                dropArray[k] = ItemDropType.Stat_Magic;
+                                dropArray[k] = ItemDropType.STAT_MAGIC;
                                 Game.PlayerStats.BonusMagic += 1 + Game.PlayerStats.TimesCastleBeaten;
 
                             }
                             else if (i == 2)
                             {
-                                dropArray[k] = ItemDropType.Stat_Defense;
+                                dropArray[k] = ItemDropType.STAT_DEFENSE;
                                 Game.PlayerStats.BonusDefense += 1 + Game.PlayerStats.TimesCastleBeaten;
                             }
                             else if (i == 3)
                             {
-                                dropArray[k] = ItemDropType.Stat_MaxHealth;
+                                dropArray[k] = ItemDropType.STAT_MAX_HEALTH;
                                 Game.PlayerStats.BonusHealth += 1 + Game.PlayerStats.TimesCastleBeaten;
                             }
                             else if (i == 4)
                             {
-                                dropArray[k] = ItemDropType.Stat_MaxMana;
+                                dropArray[k] = ItemDropType.STAT_MAX_MANA;
                                 Game.PlayerStats.BonusMana += 1 + Game.PlayerStats.TimesCastleBeaten;
                             }
                             else
                             {
-                                dropArray[k] = ItemDropType.Stat_Weight;
+                                dropArray[k] = ItemDropType.STAT_WEIGHT;
                                 Game.PlayerStats.BonusWeight += 1 + Game.PlayerStats.TimesCastleBeaten;
                             }
                             break;
@@ -244,22 +245,22 @@ namespace RogueCastle
                 {
                     switch (statDropType)
                     {
-                        case (ItemDropType.Stat_MaxHealth):
+                        case (ItemDropType.STAT_MAX_HEALTH):
                             Game.PlayerStats.BonusHealth += 1 + Game.PlayerStats.TimesCastleBeaten;
                             break;
-                        case (ItemDropType.Stat_MaxMana):
+                        case (ItemDropType.STAT_MAX_MANA):
                             Game.PlayerStats.BonusMana += 1 + Game.PlayerStats.TimesCastleBeaten;
                             break;
-                        case (ItemDropType.Stat_Defense):
+                        case (ItemDropType.STAT_DEFENSE):
                             Game.PlayerStats.BonusDefense += 1 + Game.PlayerStats.TimesCastleBeaten;
                             break;
-                        case (ItemDropType.Stat_Magic):
+                        case (ItemDropType.STAT_MAGIC):
                             Game.PlayerStats.BonusMagic += 1 + Game.PlayerStats.TimesCastleBeaten;
                             break;
-                        case (ItemDropType.Stat_Strength):
+                        case (ItemDropType.STAT_STRENGTH):
                             Game.PlayerStats.BonusStrength += 1 + Game.PlayerStats.TimesCastleBeaten;
                             break;
-                        case (ItemDropType.Stat_Weight):
+                        case (ItemDropType.STAT_WEIGHT):
                             Game.PlayerStats.BonusWeight += 1 + Game.PlayerStats.TimesCastleBeaten;
                             break;
                     }
@@ -275,16 +276,16 @@ namespace RogueCastle
 
             objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
 
-            if (statDropType >= ItemDropType.FountainPiece1 && statDropType <= ItemDropType.FountainPiece5)
+            if (statDropType >= ItemDropType.FOUNTAIN_PIECE1 && statDropType <= ItemDropType.FOUNTAIN_PIECE5)
             {
-                objectList.Add(GetItemType.FountainPiece);
+                objectList.Add(GetItemType.FOUNTAIN_PIECE);
             }
             else
             {
                 if (numDrops <= 1)
-                    objectList.Add(GetItemType.StatDrop);
+                    objectList.Add(GetItemType.STAT_DROP);
                 else
-                    objectList.Add(GetItemType.TripStatDrop);
+                    objectList.Add(GetItemType.TRIP_STAT_DROP);
             }
 
             objectList.Add(new Vector2(dropArray[0], 0));
@@ -293,7 +294,7 @@ namespace RogueCastle
                 objectList.Add(new Vector2(dropArray[1], dropArray[2]));
 
             player.AttachedLevel.UpdatePlayerHUD();
-            (player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
+            (player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GET_ITEM, true, objectList);
             player.RunGetItemAnimation();
         }
 
@@ -335,10 +336,10 @@ namespace RogueCastle
                     Game.PlayerStats.GetBlueprintArray[(int)chosenBlueprint.X][(int)chosenBlueprint.Y] = EquipmentState.FoundButNotSeen;
                     List<object> objectList = new List<object>();
                     objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
-                    objectList.Add(GetItemType.Blueprint);
+                    objectList.Add(GetItemType.BLUEPRINT);
                     objectList.Add(new Vector2(chosenBlueprint.X, chosenBlueprint.Y));
 
-                    (player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
+                    (player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GET_ITEM, true, objectList);
                     player.RunGetItemAnimation();
 
                     Console.WriteLine("Unlocked item index " + chosenBlueprint.X + " of type " + chosenBlueprint.Y);
@@ -415,7 +416,7 @@ namespace RogueCastle
                 bool openChest = this.IsOpen;
                 if (m_chestType == GameStructs.ChestType.BOSS)
                 {
-                    ForcedItemType = ItemDropType.TripStatDrop;
+                    ForcedItemType = ItemDropType.TRIP_STAT_DROP;
                     this.ChangeSprite("BossChest_Sprite");
                 }
                 else if (m_chestType == GameStructs.ChestType.FAIRY)

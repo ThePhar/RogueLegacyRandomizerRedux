@@ -64,7 +64,7 @@ namespace RogueCastle
                  Game.PlayerStats.HasTrait(TraitType.NOSTALGIC))
             {
                 if (CDGMath.RandomInt(1, 100) <= 30) // 30% chance of getting glasses.
-                    ItemType = SpecialItemType.Glasses;
+                    ItemType = SpecialItemType.GLASSES;
                 else
                     ItemType = GetRandomItem();
                     //ItemType = (byte)(CDGMath.RandomInt(1, SpecialItemType.Total - 1));
@@ -81,29 +81,29 @@ namespace RogueCastle
         {
             List<byte> possibleItems = new List<byte>();
 
-            for (int i = 1; i < SpecialItemType.Total; i++)
+            for (int i = 1; i < SpecialItemType.TOTAL; i++)
                 possibleItems.Add((byte)i);
 
             if ((Game.PlayerStats.EyeballBossBeaten == true && Game.PlayerStats.TimesCastleBeaten > 0) && Game.PlayerStats.ChallengeEyeballUnlocked == false && Game.PlayerStats.ChallengeEyeballBeaten == false)
             {
-                possibleItems.Add(SpecialItemType.EyeballToken);
-                possibleItems.Add(SpecialItemType.EyeballToken);
+                possibleItems.Add(SpecialItemType.EYEBALL_TOKEN);
+                possibleItems.Add(SpecialItemType.EYEBALL_TOKEN);
             }
             if ((Game.PlayerStats.FairyBossBeaten == true && Game.PlayerStats.TimesCastleBeaten > 0) && Game.PlayerStats.ChallengeSkullUnlocked == false && Game.PlayerStats.ChallengeSkullBeaten == false)
             {
-                possibleItems.Add(SpecialItemType.SkullToken);
-                possibleItems.Add(SpecialItemType.SkullToken);
+                possibleItems.Add(SpecialItemType.SKULL_TOKEN);
+                possibleItems.Add(SpecialItemType.SKULL_TOKEN);
             }
             if ((Game.PlayerStats.FireballBossBeaten == true && Game.PlayerStats.TimesCastleBeaten > 0) && Game.PlayerStats.ChallengeFireballUnlocked == false && Game.PlayerStats.ChallengeFireballBeaten == false)
             {
-                possibleItems.Add(SpecialItemType.FireballToken);
-                possibleItems.Add(SpecialItemType.FireballToken);
+                possibleItems.Add(SpecialItemType.FIREBALL_TOKEN);
+                possibleItems.Add(SpecialItemType.FIREBALL_TOKEN);
             }
             if ((Game.PlayerStats.BlobBossBeaten == true && Game.PlayerStats.TimesCastleBeaten > 0) && Game.PlayerStats.ChallengeBlobUnlocked == false && Game.PlayerStats.ChallengeBlobBeaten == false)
             {
-                possibleItems.Add(SpecialItemType.BlobToken);
-                possibleItems.Add(SpecialItemType.BlobToken);
-                possibleItems.Add(SpecialItemType.BlobToken);
+                possibleItems.Add(SpecialItemType.BLOB_TOKEN);
+                possibleItems.Add(SpecialItemType.BLOB_TOKEN);
+                possibleItems.Add(SpecialItemType.BLOB_TOKEN);
             }
 
             if (Game.PlayerStats.ChallengeLastBossUnlocked == false && Game.PlayerStats.ChallengeLastBossBeaten == false
@@ -112,11 +112,11 @@ namespace RogueCastle
                 && Game.PlayerStats.ChallengeFireballBeaten == true
                 && Game.PlayerStats.ChallengeBlobBeaten == true && Game.PlayerStats.TimesCastleBeaten > 0)
             {
-                possibleItems.Add(SpecialItemType.LastBossToken);
-                possibleItems.Add(SpecialItemType.LastBossToken);
-                possibleItems.Add(SpecialItemType.LastBossToken);
-                possibleItems.Add(SpecialItemType.LastBossToken);
-                possibleItems.Add(SpecialItemType.LastBossToken);
+                possibleItems.Add(SpecialItemType.LAST_BOSS_TOKEN);
+                possibleItems.Add(SpecialItemType.LAST_BOSS_TOKEN);
+                possibleItems.Add(SpecialItemType.LAST_BOSS_TOKEN);
+                possibleItems.Add(SpecialItemType.LAST_BOSS_TOKEN);
+                possibleItems.Add(SpecialItemType.LAST_BOSS_TOKEN);
             }
 
             return possibleItems[CDGMath.RandomInt(0, possibleItems.Count - 1)];
@@ -174,7 +174,7 @@ namespace RogueCastle
                         manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
                         manager.DialogueScreen.SetConfirmEndHandler(this, "TakeItem");
                         manager.DialogueScreen.SetCancelEndHandler(typeof(Console), "WriteLine", "Canceling Selection");
-                        manager.DisplayScreen(ScreenType.Dialogue, true);
+                        manager.DisplayScreen(ScreenType.DIALOGUE, true);
                     }
                 }
                 else
@@ -192,7 +192,7 @@ namespace RogueCastle
             Game.PlayerStats.SpecialItem = ItemType;
             m_pedestal.TextureColor = new Color(100, 100, 100);
 
-            if (ItemType == SpecialItemType.Glasses)
+            if (ItemType == SpecialItemType.GLASSES)
             {
                 Player.GetChildAt(10).Visible = true;
                 Player.PlayAnimation(true);
@@ -208,13 +208,13 @@ namespace RogueCastle
             (Game.ScreenManager.CurrentScreen as ProceduralLevelScreen).UpdatePlayerSpellIcon();
             List<object> objectList = new List<object>();
             objectList.Add(new Vector2(m_pedestal.X, m_pedestal.Y - m_pedestal.Height / 2f));
-            objectList.Add(GetItemType.SpecialItem);
+            objectList.Add(GetItemType.SPECIAL_ITEM);
             objectList.Add(new Vector2(Game.PlayerStats.SpecialItem, 0));
 
             // Saves the map and player Data the moment you take an item, to ensure you don't exploit.
             (Player.AttachedLevel.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.MapData);
 
-            (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
+            (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GET_ITEM, true, objectList);
             Tweener.Tween.RunFunction(0, Player, "RunGetItemAnimation"); // Necessary to delay this call by one update.
         }
 

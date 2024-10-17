@@ -73,7 +73,7 @@ namespace RogueCastle
             Game.PlayerStats.BonusMagic += (int)(Game.PlayerStats.BonusMagic * EMPOWER_PWR_AMT * numEmpowered);
 
             Game.PlayerStats.Traits = (TraitType.VERTIGO, TraitType.HYPERACTIVE);
-            Game.PlayerStats.SpecialItem = SpecialItemType.Glasses;
+            Game.PlayerStats.SpecialItem = SpecialItemType.GLASSES;
             //Player.Scale = new Vector2(GameEV.TRAIT_DWARFISM, GameEV.TRAIT_DWARFISM);
 
             Game.PlayerStats.GetEquippedArray[EquipmentCategoryType.Helm] = EquipmentBaseType.Silver;
@@ -119,7 +119,7 @@ namespace RogueCastle
 
             base.OnEnter();
          
-            m_bossChest.ForcedItemType = ItemDropType.FountainPiece1; // Must be called after base.OnEnter()
+            m_bossChest.ForcedItemType = ItemDropType.FOUNTAIN_PIECE1; // Must be called after base.OnEnter()
         }
 
         public void Intro2()

@@ -119,7 +119,7 @@ namespace RogueCastle
 
             base.OnEnter();
 
-            m_bossChest.ForcedItemType = ItemDropType.FountainPiece3; // Must be called after base.OnEnter()
+            m_bossChest.ForcedItemType = ItemDropType.FOUNTAIN_PIECE3; // Must be called after base.OnEnter()
         }
 
         public void Intro2()

@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using Tweener;
 using Tweener.Ease;
 
@@ -78,7 +79,7 @@ namespace RogueCastle
             //Console.WriteLine(sender);
             ProceduralLevelScreen level = CurrentScreen as ProceduralLevelScreen;
             if (level != null && (level.CurrentRoom is EndingRoomObj == false))// && RogueCastle.Game.PlayerStats.TutorialComplete == true)
-                DisplayScreen(ScreenType.Pause, true);
+                DisplayScreen(ScreenType.PAUSE, true);
         }
 
         public void ReinitializeContent(object sender, EventArgs e)
@@ -264,93 +265,93 @@ namespace RogueCastle
             // This currently has no checks to see if the screen is already in the screenmanager's screen list.
             switch (screenType)
             {
-                case (ScreenType.CDGSplash):
-                case(ScreenType.BlitWorks):
-                case (ScreenType.Title):
-                case(ScreenType.TitleWhite):
-                case (ScreenType.StartingRoom):
-                case (ScreenType.DemoStart):
-                case(ScreenType.DemoEnd):
-                case (ScreenType.Lineage):
+                case (ScreenType.CDG_SPLASH):
+                case(ScreenType.BLIT_WORKS):
+                case (ScreenType.TITLE):
+                case(ScreenType.TITLE_WHITE):
+                case (ScreenType.STARTING_ROOM):
+                case (ScreenType.DEMO_START):
+                case(ScreenType.DEMO_END):
+                case (ScreenType.LINEAGE):
                     this.LoadScreen((byte)screenType, true);
                     break;
-                case (ScreenType.Level):
+                case (ScreenType.LEVEL):
                     if (RogueCastle.Game.PlayerStats.LockCastle == true || (this.CurrentScreen is ProceduralLevelScreen == false))
                         this.LoadScreen((byte)screenType, true);
                     else
                         this.LoadScreen((byte)screenType, false);
                     break;
-                case (ScreenType.Skill):
+                case (ScreenType.SKILL):
                     this.AddScreen(m_traitScreen, null);
                     break;
-                case(ScreenType.GameOver):
+                case(ScreenType.GAME_OVER):
                     m_gameOverScreen.PassInData(objList);
                     this.AddScreen(m_gameOverScreen, null);
                     break;
-                case (ScreenType.GameOverBoss):
+                case (ScreenType.GAME_OVER_BOSS):
                     m_gameOverBossScreen.PassInData(objList);
                     this.AddScreen(m_gameOverBossScreen, null);
                     break;
-                case (ScreenType.Blacksmith):
+                case (ScreenType.BLACKSMITH):
                     m_blacksmithScreen.Player = m_player;
                     this.AddScreen(m_blacksmithScreen, null);
                     break;
-                case (ScreenType.GetItem):
+                case (ScreenType.GET_ITEM):
                     m_getItemScreen.PassInData(objList);
                     this.AddScreen(m_getItemScreen, null);
                     break;
-                case (ScreenType.Enchantress):
+                case (ScreenType.ENCHANTRESS):
                     m_enchantressScreen.Player = m_player;
                     this.AddScreen(m_enchantressScreen, null);
                     break;
-                case (ScreenType.Dialogue):
+                case (ScreenType.DIALOGUE):
                     this.AddScreen(m_dialogueScreen, null);
                     break;
-                case (ScreenType.Map):
+                case (ScreenType.MAP):
                     m_mapScreen.SetPlayer(m_player);
                     this.AddScreen(m_mapScreen, null);
                     break;
-                case (ScreenType.Pause):
+                case (ScreenType.PAUSE):
                     GetLevelScreen().CurrentRoom.DarkenRoom();
                     this.AddScreen(m_pauseScreen, null);
                     break;
-                case (ScreenType.Options):
+                case (ScreenType.OPTIONS):
                     m_optionsScreen.PassInData(objList);
                     this.AddScreen(m_optionsScreen, null);
                     break;
-                case(ScreenType.ProfileCard):
+                case(ScreenType.PROFILE_CARD):
                     this.AddScreen(m_profileCardScreen, null);
                     break;
-                case (ScreenType.Credits):
-                    this.LoadScreen(ScreenType.Credits, true);
+                case (ScreenType.CREDITS):
+                    this.LoadScreen(ScreenType.CREDITS, true);
                     break;
-                case (ScreenType.SkillUnlock):
+                case (ScreenType.SKILL_UNLOCK):
                     m_skillUnlockScreen.PassInData(objList);
                     this.AddScreen(m_skillUnlockScreen, null);
                     break;
-                case (ScreenType.DiaryEntry):
+                case (ScreenType.DIARY_ENTRY):
                     this.AddScreen(m_diaryEntryScreen, null);
                     break;
-                case (ScreenType.DeathDefy):
+                case (ScreenType.DEATH_DEFY):
                     this.AddScreen(m_deathDefyScreen, null);
                     break;
-                case (ScreenType.Text):
+                case (ScreenType.TEXT):
                     m_textScreen.PassInData(objList);
                     this.AddScreen(m_textScreen, null);
                     break;
-                case (ScreenType.TutorialRoom):
-                    this.LoadScreen(ScreenType.TutorialRoom, true);
+                case (ScreenType.TUTORIAL_ROOM):
+                    this.LoadScreen(ScreenType.TUTORIAL_ROOM, true);
                     break;
-                case (ScreenType.Ending):
+                case (ScreenType.ENDING):
                     GetLevelScreen().CameraLockedToPlayer = false;
                     GetLevelScreen().DisableRoomTransitioning = true;
                     Player.Position = new Vector2(100, 100); //HHHAACCK
-                    this.LoadScreen(ScreenType.Ending, true);
+                    this.LoadScreen(ScreenType.ENDING, true);
                     break;
-                case (ScreenType.DiaryFlashback):
+                case (ScreenType.DIARY_FLASHBACK):
                     this.AddScreen(m_flashbackScreen, null);
                     break;
-                case (ScreenType.ProfileSelect):
+                case (ScreenType.PROFILE_SELECT):
                     this.AddScreen(m_profileSelectScreen, null);
                     break;
             }
@@ -400,7 +401,7 @@ namespace RogueCastle
         // This is overridden so that a custom LoadScreen can be passed in.
         private void LoadScreen(byte screenType, bool wipeTransition)
         {
-            m_currentScreenType = ScreenType.Loading;
+            m_currentScreenType = ScreenType.LOADING;
             foreach (Screen screen in m_screenArray)
             {
                 screen.DrawIfCovered = true;

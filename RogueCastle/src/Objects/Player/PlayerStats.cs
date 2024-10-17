@@ -152,7 +152,7 @@ namespace RogueCastle
                 this.TutorialComplete = true;
 
             PlayerName = "Lee";//"Sir Johannes";
-            SpecialItem = SpecialItemType.None;
+            SpecialItem = SpecialItemType.NONE;
             Class = ClassType.Knight;
             Spell = SpellType.DAGGER;
             Age = 30;

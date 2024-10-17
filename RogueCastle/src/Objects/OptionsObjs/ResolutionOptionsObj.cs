@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using DS2DEngine;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -97,7 +98,7 @@ namespace RogueCastle
                         manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
                         manager.DialogueScreen.SetConfirmEndHandler(this, "SaveResolution", newRes);
                         manager.DialogueScreen.SetCancelEndHandler(this, "CancelResolution");
-                        manager.DisplayScreen(ScreenType.Dialogue, false, null);
+                        manager.DisplayScreen(ScreenType.DIALOGUE, false, null);
                         m_resetCounter = 10;
                     }
                     else

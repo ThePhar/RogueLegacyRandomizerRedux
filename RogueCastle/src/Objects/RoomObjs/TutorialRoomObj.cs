@@ -12,6 +12,7 @@ using InputSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -320,12 +321,12 @@ namespace RogueCastle
                             RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
                             manager.DialogueScreen.SetDialogue("DiaryEntry" + (LevelEV.TOTAL_JOURNAL_ENTRIES - 1));
                             manager.DialogueScreen.SetConfirmEndHandler(this, "RunFlashback");
-                            manager.DisplayScreen(ScreenType.Dialogue, true, null);
+                            manager.DisplayScreen(ScreenType.DIALOGUE, true, null);
                         }
                         else
                         {
                             RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
-                            manager.DisplayScreen(ScreenType.DiaryEntry, true);
+                            manager.DisplayScreen(ScreenType.DIARY_ENTRY, true);
                         }
                     }
                 }
@@ -347,7 +348,7 @@ namespace RogueCastle
         public void RunFlashback()
         {
             Player.LockControls();
-            (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DiaryFlashback, true);
+            (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIARY_FLASHBACK, true);
             Tween.RunFunction(0.5f, this, "OpenDoor");
         }
 

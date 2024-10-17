@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -60,7 +61,7 @@ namespace RogueCastle
             if (Game.PlayerStats.TutorialComplete == true && level != null && level.CurrentRoom.Name != "Start" && level.CurrentRoom.Name != "Ending" && level.CurrentRoom.Name != "Tutorial")
                 (m_parentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.MapData);
 
-            Game.ScreenManager.DisplayScreen(ScreenType.Title, true);
+            Game.ScreenManager.DisplayScreen(ScreenType.TITLE, true);
         }
 
         public void CancelCommand()
@@ -81,7 +82,7 @@ namespace RogueCastle
                     manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
                     manager.DialogueScreen.SetConfirmEndHandler(this, "GoBackToTitle");
                     manager.DialogueScreen.SetCancelEndHandler(this, "CancelCommand");
-                    manager.DisplayScreen(ScreenType.Dialogue, false, null);
+                    manager.DisplayScreen(ScreenType.DIALOGUE, false, null);
                 }
             }
         }

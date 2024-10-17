@@ -195,7 +195,7 @@ namespace RogueCastle
             {
                 knightName.ChangeFontNoDefault(knightName.defaultFont);
                 knightName.Text = Game.NameHelper(selectedObj.PlayerName, selectedObj.RomanNumeral, selectedObj.IsFemale);
-                if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(knightName.Text, @"\p{IsCyrillic}"))
+                if (LocaleBuilder.LanguageType != LanguageType.ChineseSimple && Regex.IsMatch(knightName.Text, @"\p{IsCyrillic}"))
                     knightName.ChangeFontNoDefault(Game.RobotoSlabFont);
             }
             catch
@@ -714,7 +714,7 @@ namespace RogueCastle
                                 manager.DialogueScreen.SetConfirmEndHandler(this, "StartGame");
                                 //manager.DialogueScreen.SetCancelEndHandler(typeof(Console), "WriteLine", "Canceling Selection");
                                 manager.DialogueScreen.SetCancelEndHandler(this, "CancelSelection");
-                                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true);
+                                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true);
                             }
                         }
                         else
@@ -912,7 +912,7 @@ namespace RogueCastle
 
             // This loads the starting room, then puts the skill screen on top of it.  How does this work?
             // The call is done in LoadingScreen.  First it adds the level, disables anything that could cause problems in the level, then adds the skill tree.
-            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.StartingRoom, true);
+            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.STARTING_ROOM, true);
         }
 
 

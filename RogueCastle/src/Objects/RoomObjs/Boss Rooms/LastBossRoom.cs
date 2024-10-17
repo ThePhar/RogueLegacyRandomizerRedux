@@ -8,6 +8,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using Tweener.Ease;
 using Tweener;
 
@@ -129,7 +130,7 @@ namespace RogueCastle
             }
             else
                 manager.DialogueScreen.SetDialogue("FinalBossTalk01");
-            manager.DisplayScreen(ScreenType.Dialogue, true);
+            manager.DisplayScreen(ScreenType.DIALOGUE, true);
         }
 
         public void Cutscene4()
@@ -324,11 +325,11 @@ namespace RogueCastle
             {
                 Vector2 goldPos = m_boss.Position;
                 if (goldArray[i] == 0)
-                    Tween.RunFunction(i * coinDelay, Player.AttachedLevel.ItemDropManager, "DropItemWide", goldPos, ItemDropType.Coin, ItemDropType.CoinAmount);
+                    Tween.RunFunction(i * coinDelay, Player.AttachedLevel.ItemDropManager, "DropItemWide", goldPos, ItemDropType.COIN, ItemDropType.COIN_AMOUNT);
                 else if (goldArray[i] == 1)
-                    Tween.RunFunction(i * coinDelay, Player.AttachedLevel.ItemDropManager, "DropItemWide", goldPos, ItemDropType.MoneyBag, ItemDropType.MoneyBagAmount);
+                    Tween.RunFunction(i * coinDelay, Player.AttachedLevel.ItemDropManager, "DropItemWide", goldPos, ItemDropType.MONEY_BAG, ItemDropType.MONEY_BAG_AMOUNT);
                 else
-                    Tween.RunFunction(i * coinDelay, Player.AttachedLevel.ItemDropManager, "DropItemWide", goldPos, ItemDropType.Diamond, ItemDropType.DiamondAmount);
+                    Tween.RunFunction(i * coinDelay, Player.AttachedLevel.ItemDropManager, "DropItemWide", goldPos, ItemDropType.DIAMOND, ItemDropType.DIAMOND_AMOUNT);
             }
         }
 

@@ -10,6 +10,7 @@ using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using InputSystem;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {

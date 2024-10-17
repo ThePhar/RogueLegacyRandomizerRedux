@@ -10,6 +10,7 @@ using System.IO;
 using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -38,7 +39,7 @@ namespace RogueCastle
         public override void OnEnter()
         {
             BackBufferOpacity = 1;
-            Tween.RunFunction(7, ScreenManager, "DisplayScreen", ScreenType.CDGSplash, true, typeof(List<object>));
+            Tween.RunFunction(7, ScreenManager, "DisplayScreen", ScreenType.CDG_SPLASH, true, typeof(List<object>));
             base.OnEnter();
         }
 

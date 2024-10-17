@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace RogueCastle.GameStructs;
 
-namespace RogueCastle
+public enum LanguageType
 {
-    public enum LanguageType
-    {
-        English,
-        French,
-        German,
-        Russian,
-        Portuguese_Brazil,
-        Spanish_Spain,
-        Polish,
-        Chinese_Simp,
-        MAX,
-    }
+    English,
+    French,
+    German,
+    Russian,
+    PortugueseBrazil,
+    SpanishSpain,
+    Polish,
+    ChineseSimple,
+    MAX,
 }

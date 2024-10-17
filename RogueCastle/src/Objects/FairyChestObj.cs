@@ -136,11 +136,11 @@ public class FairyChestObj(PhysicsManager physicsManager) : ChestObj(physicsMana
                 var objectList = new List<object>
                 {
                     new Vector2(X, Y - (Height / 2f)),
-                    GetItemType.Rune,
+                    GetItemType.RUNE,
                     new Vector2(chosenRune.X, chosenRune.Y),
                 };
 
-                (player.AttachedLevel.ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.GetItem, true,
+                (player.AttachedLevel.ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.GET_ITEM, true,
                     objectList);
                 player.RunGetItemAnimation();
 

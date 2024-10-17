@@ -879,11 +879,11 @@ namespace RogueCastle
                 {
                     Vector2 goldPos = this.Position;
                     if (goldArray[i] == 0)
-                        Tween.RunFunction(i * coinDelay, m_levelScreen.ItemDropManager, "DropItemWide", goldPos, ItemDropType.Coin, ItemDropType.CoinAmount);
+                        Tween.RunFunction(i * coinDelay, m_levelScreen.ItemDropManager, "DropItemWide", goldPos, ItemDropType.COIN, ItemDropType.COIN_AMOUNT);
                     else if (goldArray[i] == 1)
-                        Tween.RunFunction(i * coinDelay, m_levelScreen.ItemDropManager, "DropItemWide", goldPos, ItemDropType.MoneyBag, ItemDropType.MoneyBagAmount);
+                        Tween.RunFunction(i * coinDelay, m_levelScreen.ItemDropManager, "DropItemWide", goldPos, ItemDropType.MONEY_BAG, ItemDropType.MONEY_BAG_AMOUNT);
                     else
-                        Tween.RunFunction(i * coinDelay, m_levelScreen.ItemDropManager, "DropItemWide", goldPos, ItemDropType.Diamond, ItemDropType.DiamondAmount);
+                        Tween.RunFunction(i * coinDelay, m_levelScreen.ItemDropManager, "DropItemWide", goldPos, ItemDropType.DIAMOND, ItemDropType.DIAMOND_AMOUNT);
                 }
             }
         }

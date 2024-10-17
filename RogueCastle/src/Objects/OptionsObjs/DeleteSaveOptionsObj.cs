@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -27,7 +28,7 @@ namespace RogueCastle
                     manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
                     manager.DialogueScreen.SetConfirmEndHandler(this, "DeleteSaveAskAgain");
                     manager.DialogueScreen.SetCancelEndHandler(this, "CancelCommand");
-                    manager.DisplayScreen(ScreenType.Dialogue, false, null);
+                    manager.DisplayScreen(ScreenType.DIALOGUE, false, null);
                 }
             }
         }
@@ -44,7 +45,7 @@ namespace RogueCastle
             manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
             manager.DialogueScreen.SetConfirmEndHandler(this, "DeleteSave");
             manager.DialogueScreen.SetCancelEndHandler(this, "CancelCommand");
-            manager.DisplayScreen(ScreenType.Dialogue, false, null);
+            manager.DisplayScreen(ScreenType.DIALOGUE, false, null);
         }
 
         public void DeleteSave()
@@ -58,7 +59,7 @@ namespace RogueCastle
             (m_parentScreen.ScreenManager as RCScreenManager).Player.Reset();
             SoundManager.StopMusic(1);
 
-            (m_parentScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TutorialRoom, true);
+            (m_parentScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TUTORIAL_ROOM, true);
             //(m_parentScreen.ScreenManager as RCScreenManager).HideCurrentScreen();
         }
     }

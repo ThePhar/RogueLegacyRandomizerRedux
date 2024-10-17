@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {

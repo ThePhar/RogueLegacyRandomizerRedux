@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace RogueCastle.GameStructs;
 
-namespace RogueCastle
+public static class RoomType
 {
-    public class RoomType
-    {
-        public const int Normal = 0;
-        public const int Boss = 1;
-        public const int Secret = 2;
-        public const int Bonus = 3;
-        public const int Linker = 4;
-        public const int Starting = 5;
-        public const int BossEntrance = 6;
-        public const int Test = 7;
-        public const int CastleEntrance = 8;
-        public const int Tutorial = 9;
-        public const int Compass = 10;
-    }
+    public const int NORMAL          = 0;
+    public const int BOSS            = 1;
+    public const int SECRET          = 2;
+    public const int BONUS           = 3;
+    public const int LINKER          = 4;
+    public const int STARTING        = 5;
+    public const int BOSS_ENTRANCE   = 6;
+    public const int TEST            = 7;
+    public const int CASTLE_ENTRANCE = 8;
+    public const int TUTORIAL        = 9;
+    public const int COMPASS         = 10;
 }

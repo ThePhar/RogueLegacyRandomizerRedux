@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using Tweener;
 using Tweener.Ease;
 
@@ -560,72 +561,72 @@ namespace RogueCastle
 
         public void CheckForSkillUnlock(SkillObj skill, bool displayScreen)
         {
-            byte skillUnlockType = SkillUnlockType.None;
+            byte skillUnlockType = SkillUnlockType.NONE;
             switch(skill.TraitType)
             {
                 case (SkillType.Smithy):
-                    skillUnlockType = SkillUnlockType.Blacksmith;
+                    skillUnlockType = SkillUnlockType.BLACKSMITH;
                     break;
                 case (SkillType.Enchanter):
-                    skillUnlockType = SkillUnlockType.Enchantress;
+                    skillUnlockType = SkillUnlockType.ENCHANTRESS;
                     break;
                 case (SkillType.Architect):
-                    skillUnlockType = SkillUnlockType.Architect;
+                    skillUnlockType = SkillUnlockType.ARCHITECT;
                     break;
                 case (SkillType.Ninja_Unlock):
-                    skillUnlockType = SkillUnlockType.Ninja;
+                    skillUnlockType = SkillUnlockType.NINJA;
                     break;
                 case (SkillType.Banker_Unlock):
-                    skillUnlockType = SkillUnlockType.Banker;
+                    skillUnlockType = SkillUnlockType.BANKER;
                     break;
                 case (SkillType.Lich_Unlock):
-                    skillUnlockType = SkillUnlockType.Lich;
+                    skillUnlockType = SkillUnlockType.LICH;
                     break;
                 case (SkillType.Spellsword_Unlock):
-                    skillUnlockType = SkillUnlockType.SpellSword;
+                    skillUnlockType = SkillUnlockType.SPELL_SWORD;
                     break;
                 case (SkillType.Knight_Up):
-                    skillUnlockType = SkillUnlockType.KnightUp;
+                    skillUnlockType = SkillUnlockType.KNIGHT_UP;
                     if (Game.PlayerStats.Class == ClassType.Knight) Game.PlayerStats.Class = ClassType.Knight2;
                     break;
                 case (SkillType.Barbarian_Up):
-                    skillUnlockType = SkillUnlockType.BarbarianUp;
+                    skillUnlockType = SkillUnlockType.BARBARIAN_UP;
                     if (Game.PlayerStats.Class == ClassType.Barbarian) Game.PlayerStats.Class = ClassType.Barbarian2;
                     break;
                 case (SkillType.Mage_Up):
-                    skillUnlockType = SkillUnlockType.WizardUp;
+                    skillUnlockType = SkillUnlockType.WIZARD_UP;
                     if (Game.PlayerStats.Class == ClassType.Wizard) Game.PlayerStats.Class = ClassType.Wizard2;
                     break;
                 case (SkillType.Ninja_Up):
-                    skillUnlockType = SkillUnlockType.NinjaUp;
+                    skillUnlockType = SkillUnlockType.NINJA_UP;
                     if (Game.PlayerStats.Class == ClassType.Ninja) Game.PlayerStats.Class = ClassType.Ninja2;
                     break;
                 case (SkillType.Assassin_Up):
-                    skillUnlockType = SkillUnlockType.AssassinUp;
+                    skillUnlockType = SkillUnlockType.ASSASSIN_UP;
                     if (Game.PlayerStats.Class == ClassType.Assassin) Game.PlayerStats.Class = ClassType.Assassin2;
                     break;
                 case (SkillType.Banker_Up):
-                    skillUnlockType = SkillUnlockType.BankerUp;
+                    skillUnlockType = SkillUnlockType.BANKER_UP;
                     if (Game.PlayerStats.Class == ClassType.Banker) Game.PlayerStats.Class = ClassType.Banker2;
                     break;
                 case (SkillType.SpellSword_Up):
-                    skillUnlockType = SkillUnlockType.SpellSwordUp;
+                    skillUnlockType = SkillUnlockType.SPELL_SWORD_UP;
                     if (Game.PlayerStats.Class == ClassType.SpellSword) Game.PlayerStats.Class = ClassType.SpellSword2;
                     break;
                 case (SkillType.Lich_Up):
-                    skillUnlockType = SkillUnlockType.LichUp;
+                    skillUnlockType = SkillUnlockType.LICH_UP;
                     if (Game.PlayerStats.Class == ClassType.Lich) Game.PlayerStats.Class = ClassType.Lich2;
                     break;
                 case (SkillType.SuperSecret):
-                    skillUnlockType = SkillUnlockType.Dragon;
+                    skillUnlockType = SkillUnlockType.DRAGON;
                     break;
             }
 
-            if (skillUnlockType != SkillUnlockType.None && displayScreen == true)
+            if (skillUnlockType != SkillUnlockType.NONE && displayScreen == true)
             {
                 List<object> data = new List<object>();
                 data.Add(skillUnlockType);
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.SkillUnlock, true, data);
+                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.SKILL_UNLOCK, true, data);
             }
         }
 
@@ -859,7 +860,7 @@ namespace RogueCastle
                             //levelScreen.CurrentRoom.OnEnter(); // Hack to force starting room OnEnter() when exiting trait screen.
                         }
                         else
-                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.StartingRoom, true, null);
+                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.STARTING_ROOM, true, null);
 
                         //(ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Lineage, true);
                     }
@@ -1067,11 +1068,11 @@ namespace RogueCastle
                     if (m_lastSkillObj.TraitType == SkillType.Banker_Unlock || m_lastSkillObj.TraitType == SkillType.Invuln_Time_Up)
                         m_skillTitle.ScaleX = 0.9f;
                     break;
-                case (LanguageType.Spanish_Spain):
+                case (LanguageType.SpanishSpain):
                     if (m_lastSkillObj.TraitType == SkillType.Equip_Up || m_lastSkillObj.TraitType == SkillType.Spellsword_Unlock || m_lastSkillObj.TraitType == SkillType.SpellSword_Up)
                         m_skillTitle.ScaleX = 0.9f;
                     break;
-                case (LanguageType.Portuguese_Brazil):
+                case (LanguageType.PortugueseBrazil):
                     switch (m_lastSkillObj.TraitType)
                     {
                         case (SkillType.Spellsword_Unlock):

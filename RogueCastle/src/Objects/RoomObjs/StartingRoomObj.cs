@@ -226,16 +226,16 @@ namespace RogueCastle
         public override void OnEnter()
         {
             // Extra check to make sure sure you don't have a challenge token for a challenge already beaten.
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.EyeballToken && Game.PlayerStats.ChallengeEyeballBeaten == true)
-                Game.PlayerStats.SpecialItem = SpecialItemType.None;
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.SkullToken && Game.PlayerStats.ChallengeSkullBeaten == true)
-                Game.PlayerStats.SpecialItem = SpecialItemType.None;
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.FireballToken && Game.PlayerStats.ChallengeFireballBeaten == true)
-                Game.PlayerStats.SpecialItem = SpecialItemType.None;
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.BlobToken && Game.PlayerStats.ChallengeBlobBeaten == true)
-                Game.PlayerStats.SpecialItem = SpecialItemType.None;
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.LastBossToken && Game.PlayerStats.ChallengeLastBossBeaten == true)
-                Game.PlayerStats.SpecialItem = SpecialItemType.None;
+            if (Game.PlayerStats.SpecialItem == SpecialItemType.EYEBALL_TOKEN && Game.PlayerStats.ChallengeEyeballBeaten == true)
+                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
+            if (Game.PlayerStats.SpecialItem == SpecialItemType.SKULL_TOKEN && Game.PlayerStats.ChallengeSkullBeaten == true)
+                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
+            if (Game.PlayerStats.SpecialItem == SpecialItemType.FIREBALL_TOKEN && Game.PlayerStats.ChallengeFireballBeaten == true)
+                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
+            if (Game.PlayerStats.SpecialItem == SpecialItemType.BLOB_TOKEN && Game.PlayerStats.ChallengeBlobBeaten == true)
+                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
+            if (Game.PlayerStats.SpecialItem == SpecialItemType.LAST_BOSS_TOKEN && Game.PlayerStats.ChallengeLastBossBeaten == true)
+                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
             Player.AttachedLevel.UpdatePlayerHUDSpecialItem();
 
             m_isSnowing = (DateTime.Now.Month == 12 || DateTime.Now.Month == 1); // Only snows in Dec. and Jan.
@@ -358,7 +358,7 @@ namespace RogueCastle
                 {
                     m_playerWalkedOut = true;
                     (Player.AttachedLevel.ScreenManager as RCScreenManager).StartWipeTransition();
-                    Tween.RunFunction(0.2f, Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.Skill, true, typeof(List<object>));
+                    Tween.RunFunction(0.2f, Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.SKILL, true, typeof(List<object>));
                 }
                 else if (Player.ControlsLocked == false && Player.X > this.Bounds.Right && TollCollectorAvailable == false) // Make sure the player can't pass the toll collector
                 {
@@ -475,7 +475,7 @@ namespace RogueCastle
 
         private void LoadLevel()
         {
-            Game.ScreenManager.DisplayScreen(ScreenType.Level, true, null);
+            Game.ScreenManager.DisplayScreen(ScreenType.LEVEL, true, null);
         }
 
         private void HandleInput()
@@ -520,40 +520,40 @@ namespace RogueCastle
                         else
                             manager.DialogueScreen.SetDialogue("No Castle Architect");
 
-                        manager.DisplayScreen(ScreenType.Dialogue, true);
+                        manager.DisplayScreen(ScreenType.DIALOGUE, true);
                     }
                 }
 
                 if (m_tollCollectorIcon.Visible == true && (Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP2)))
                 {
                     RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
-                    if (Game.PlayerStats.SpecialItem == SpecialItemType.FreeEntrance)
+                    if (Game.PlayerStats.SpecialItem == SpecialItemType.FREE_ENTRANCE)
                     {
                         Tween.RunFunction(0.1f, this, "TollPaid", false);
                         manager.DialogueScreen.SetDialogue("Toll Collector Obol");
-                        manager.DisplayScreen(ScreenType.Dialogue, true);
+                        manager.DisplayScreen(ScreenType.DIALOGUE, true);
                     }
-                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.EyeballToken)
+                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.EYEBALL_TOKEN)
                     {
                         manager.DialogueScreen.SetDialogue("Challenge Icon Eyeball");
                         RunTollPaidSelection(manager);
                     }
-                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.SkullToken)
+                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.SKULL_TOKEN)
                     {
                         manager.DialogueScreen.SetDialogue("Challenge Icon Skull");
                         RunTollPaidSelection(manager);
                     }
-                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.FireballToken)
+                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.FIREBALL_TOKEN)
                     {
                         manager.DialogueScreen.SetDialogue("Challenge Icon Fireball");
                         RunTollPaidSelection(manager);
                     }
-                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.BlobToken)
+                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.BLOB_TOKEN)
                     {
                         manager.DialogueScreen.SetDialogue("Challenge Icon Blob");
                         RunTollPaidSelection(manager);
                     }
-                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.LastBossToken)
+                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.LAST_BOSS_TOKEN)
                     {
                         manager.DialogueScreen.SetDialogue("Challenge Icon Last Boss");
                         RunTollPaidSelection(manager);
@@ -579,7 +579,7 @@ namespace RogueCastle
             manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
             manager.DialogueScreen.SetConfirmEndHandler(this, "TollPaid", true);
             manager.DialogueScreen.SetCancelEndHandler(typeof(Console), "WriteLine", "Canceling Selection");
-            manager.DisplayScreen(ScreenType.Dialogue, true);
+            manager.DisplayScreen(ScreenType.DIALOGUE, true);
         }
 
         public void MovePlayerTo(GameObj target)
@@ -625,11 +625,11 @@ namespace RogueCastle
                 {
                     Game.PlayerStats.SpokeToBlacksmith = true;
                     (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetDialogue("Meet Blacksmith");
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetConfirmEndHandler(Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.Blacksmith, true, null);
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true);
+                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetConfirmEndHandler(Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.BLACKSMITH, true, null);
+                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true);
                 }
                 else
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Blacksmith, true);
+                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.BLACKSMITH, true);
             }
             else if (target == m_enchantress)
             {
@@ -637,11 +637,11 @@ namespace RogueCastle
                 {
                     Game.PlayerStats.SpokeToEnchantress = true;
                     (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetDialogue("Meet Enchantress");
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetConfirmEndHandler(Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.Enchantress, true, null);
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true);
+                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetConfirmEndHandler(Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.ENCHANTRESS, true, null);
+                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true);
                 }
                 else
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Enchantress, true);
+                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.ENCHANTRESS, true);
             }
         }
 
@@ -655,12 +655,12 @@ namespace RogueCastle
                     Player.AttachedLevel.TextManager.DisplayNumberStringText(-(int)goldLost, "LOC_ID_PLAYER_OBJ_1" /*"gold"*/, Color.Yellow, new Vector2(Player.X, Player.Bounds.Top));
             }
 
-            if (Game.PlayerStats.SpokeToTollCollector == true && Game.PlayerStats.SpecialItem != SpecialItemType.FreeEntrance
-                && Game.PlayerStats.SpecialItem != SpecialItemType.BlobToken
-                && Game.PlayerStats.SpecialItem != SpecialItemType.LastBossToken
-                && Game.PlayerStats.SpecialItem != SpecialItemType.FireballToken
-                && Game.PlayerStats.SpecialItem != SpecialItemType.EyeballToken
-                && Game.PlayerStats.SpecialItem != SpecialItemType.SkullToken)
+            if (Game.PlayerStats.SpokeToTollCollector == true && Game.PlayerStats.SpecialItem != SpecialItemType.FREE_ENTRANCE
+                && Game.PlayerStats.SpecialItem != SpecialItemType.BLOB_TOKEN
+                && Game.PlayerStats.SpecialItem != SpecialItemType.LAST_BOSS_TOKEN
+                && Game.PlayerStats.SpecialItem != SpecialItemType.FIREBALL_TOKEN
+                && Game.PlayerStats.SpecialItem != SpecialItemType.EYEBALL_TOKEN
+                && Game.PlayerStats.SpecialItem != SpecialItemType.SKULL_TOKEN)
             {
                 Player.AttachedLevel.ImpactEffectPool.DisplayDeathEffect(m_tollCollector.Position);
                 SoundManager.PlaySound("Charon_Laugh");
@@ -677,25 +677,25 @@ namespace RogueCastle
                 Tween.RunFunction(1, this, "HideTollCollector");
             }
 
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.FreeEntrance ||
-                Game.PlayerStats.SpecialItem == SpecialItemType.SkullToken ||
-                Game.PlayerStats.SpecialItem == SpecialItemType.EyeballToken ||
-                Game.PlayerStats.SpecialItem == SpecialItemType.LastBossToken ||
-                Game.PlayerStats.SpecialItem == SpecialItemType.FireballToken||
-                Game.PlayerStats.SpecialItem == SpecialItemType.BlobToken)
+            if (Game.PlayerStats.SpecialItem == SpecialItemType.FREE_ENTRANCE ||
+                Game.PlayerStats.SpecialItem == SpecialItemType.SKULL_TOKEN ||
+                Game.PlayerStats.SpecialItem == SpecialItemType.EYEBALL_TOKEN ||
+                Game.PlayerStats.SpecialItem == SpecialItemType.LAST_BOSS_TOKEN ||
+                Game.PlayerStats.SpecialItem == SpecialItemType.FIREBALL_TOKEN||
+                Game.PlayerStats.SpecialItem == SpecialItemType.BLOB_TOKEN)
             {
-                if (Game.PlayerStats.SpecialItem == SpecialItemType.EyeballToken)
+                if (Game.PlayerStats.SpecialItem == SpecialItemType.EYEBALL_TOKEN)
                     Game.PlayerStats.ChallengeEyeballUnlocked = true;
-                else if (Game.PlayerStats.SpecialItem == SpecialItemType.SkullToken)
+                else if (Game.PlayerStats.SpecialItem == SpecialItemType.SKULL_TOKEN)
                     Game.PlayerStats.ChallengeSkullUnlocked = true;
-                else if (Game.PlayerStats.SpecialItem == SpecialItemType.FireballToken)
+                else if (Game.PlayerStats.SpecialItem == SpecialItemType.FIREBALL_TOKEN)
                     Game.PlayerStats.ChallengeFireballUnlocked = true;
-                else if (Game.PlayerStats.SpecialItem == SpecialItemType.BlobToken)
+                else if (Game.PlayerStats.SpecialItem == SpecialItemType.BLOB_TOKEN)
                     Game.PlayerStats.ChallengeBlobUnlocked = true;
-                else if (Game.PlayerStats.SpecialItem == SpecialItemType.LastBossToken)
+                else if (Game.PlayerStats.SpecialItem == SpecialItemType.LAST_BOSS_TOKEN)
                     Game.PlayerStats.ChallengeLastBossUnlocked = true;
 
-                Game.PlayerStats.SpecialItem = SpecialItemType.None;
+                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
                 Player.AttachedLevel.UpdatePlayerHUDSpecialItem();
             }
         }
@@ -761,7 +761,7 @@ namespace RogueCastle
 
             RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
             manager.DialogueScreen.SetDialogue("Castle Lock Complete Architect");
-            manager.DisplayScreen(ScreenType.Dialogue, true);
+            manager.DisplayScreen(ScreenType.DIALOGUE, true);
         }
 
         public override void Draw(Camera2D camera)

@@ -10,6 +10,7 @@ using System.IO;
 using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -112,7 +113,7 @@ namespace RogueCastle
                 Tween.AddEndHandlerToLastTween(Game.ScreenManager, "HideCurrentScreen");
             }
             else
-                Game.ScreenManager.DisplayScreen(ScreenType.Ending, true);
+                Game.ScreenManager.DisplayScreen(ScreenType.ENDING, true);
         }
 
         public override void Update(GameTime gameTime)

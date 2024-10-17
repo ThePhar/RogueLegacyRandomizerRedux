@@ -8,6 +8,7 @@ using Tweener;
 using Tweener.Ease;
 using Microsoft.Xna.Framework.Audio;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -66,9 +67,9 @@ namespace RogueCastle
                     else
                     {
                         if (Game.PlayerStats.TutorialComplete == false)
-                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TutorialRoom, true, null);
+                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TUTORIAL_ROOM, true, null);
                         else
-                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Title, true, null);
+                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TITLE, true, null);
                     }
                 //}
                 //catch
@@ -80,9 +81,9 @@ namespace RogueCastle
             else
             {
                 if (Game.PlayerStats.TutorialComplete == false)
-                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TutorialRoom, true, null);
+                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TUTORIAL_ROOM, true, null);
                 else
-                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Title, true, null);
+                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TITLE, true, null);
             }
         }
 

@@ -8,6 +8,7 @@ using Tweener;
 using InputSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -107,7 +108,7 @@ namespace RogueCastle
                 m_kingKilled = true;
                 //SoundManager.PlaySound("Boss_Title_Exit");
                 //SoundManager.PlaySound("Player_Death_Grunt");
-                Game.ScreenManager.DisplayScreen(ScreenType.TitleWhite, false);
+                Game.ScreenManager.DisplayScreen(ScreenType.TITLE_WHITE, false);
             }
 
             base.Update(gameTime);

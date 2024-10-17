@@ -197,7 +197,7 @@ namespace RogueCastle
 
                 RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
                 manager.DialogueScreen.SetDialogue("DonationBoxTalkUpgraded");
-                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true, null);
+                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true, null);
 
                 // Text effect of the gold cost.
                 Player.AttachedLevel.TextManager.DisplayNumberStringText(-(int)cost, "LOC_ID_CARNIVAL_BONUS_ROOM_4" /*"gold"*/, Color.Yellow, new Vector2(Player.X, Player.Bounds.Top));
@@ -207,14 +207,14 @@ namespace RogueCastle
                 // Already maxxed empowered
                 RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
                 manager.DialogueScreen.SetDialogue("DonationBoxTalkMaxxed");
-                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true, null);
+                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true, null);
             }
             else
             {
                 // Can't afford it.
                 RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
                 manager.DialogueScreen.SetDialogue("DonationBoxTalkPoor");
-                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true, null);
+                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true, null);
             }
         }
 
@@ -291,13 +291,13 @@ namespace RogueCastle
                                 manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
                                 manager.DialogueScreen.SetConfirmEndHandler(this, "BuffPlayer");
                                 manager.DialogueScreen.SetCancelEndHandler(typeof(Console), "WriteLine", "Canceling Selection");
-                                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true, null);
+                                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true, null);
                             }
                             else
                             {
                                 // Already maxxed empowered
                                 manager.DialogueScreen.SetDialogue("DonationBoxTalkMaxxed");
-                                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Dialogue, true, null);
+                                (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true, null);
                             }
                         }
                     }

@@ -11,6 +11,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using System.Text.RegularExpressions;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -196,13 +197,13 @@ namespace RogueCastle
             if (m_inputDelay <= 0)
             {
                 if (Game.GlobalInput.JustPressed(InputMapType.MENU_PROFILECARD) && Game.PlayerStats.TutorialComplete == true) // this needs to be unified.
-                    (this.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.ProfileCard, true, null);
+                    (this.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.PROFILE_CARD, true, null);
 
                 if (Game.GlobalInput.JustPressed(InputMapType.MENU_OPTIONS))
                 {
                     List<object> optionsData = new List<object>();
                     optionsData.Add(false);
-                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Options, false, optionsData);
+                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.OPTIONS, false, optionsData);
                 }
 
                 if (Game.GlobalInput.JustPressed(InputMapType.MENU_PAUSE))
@@ -368,7 +369,7 @@ namespace RogueCastle
                     {
                         m_name.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_name));
                         m_name.Text = LocaleBuilder.GetString(name, m_name);
-                        if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(m_name.Text, @"\p{IsCyrillic}"))
+                        if (LocaleBuilder.LanguageType != LanguageType.ChineseSimple && Regex.IsMatch(m_name.Text, @"\p{IsCyrillic}"))
                             m_name.ChangeFontNoDefault(Game.RobotoSlabFont);
                     }
                     catch
@@ -383,7 +384,7 @@ namespace RogueCastle
                     {
                         m_name.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_name));
                         m_name.Text = name;
-                        if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(m_name.Text, @"\p{IsCyrillic}"))
+                        if (LocaleBuilder.LanguageType != LanguageType.ChineseSimple && Regex.IsMatch(m_name.Text, @"\p{IsCyrillic}"))
                             m_name.ChangeFontNoDefault(Game.RobotoSlabFont);
                     }
                     catch

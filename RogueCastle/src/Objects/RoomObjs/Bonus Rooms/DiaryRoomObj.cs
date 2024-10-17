@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 using Tweener;
 
 namespace RogueCastle
@@ -82,7 +83,7 @@ namespace RogueCastle
                     {
                         RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
                         manager.DialogueScreen.SetDialogue("DiaryEntry" + m_diaryIndex);
-                        manager.DisplayScreen(ScreenType.Dialogue, true, null);
+                        manager.DisplayScreen(ScreenType.DIALOGUE, true, null);
 
                         Game.PlayerStats.DiaryEntry++;
                         RoomCompleted = true;
@@ -91,7 +92,7 @@ namespace RogueCastle
                     {
                         RoomCompleted = true;
                         RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
-                        manager.DisplayScreen(ScreenType.DiaryEntry, true);
+                        manager.DisplayScreen(ScreenType.DIARY_ENTRY, true);
                     }
                 }
             }

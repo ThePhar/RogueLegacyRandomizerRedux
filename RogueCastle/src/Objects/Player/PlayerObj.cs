@@ -310,8 +310,8 @@ namespace RogueCastle
             : base(spriteName, physicsManager, levelToAttachTo)  // Base is called first.
         {
             m_game = game;
-            m_playerLegs = this.GetChildAt(PlayerPart.Legs) as SpriteObj;
-            m_playerHead = this.GetChildAt(PlayerPart.Head) as SpriteObj;
+            m_playerLegs = this.GetChildAt(PlayerPart.LEGS) as SpriteObj;
+            m_playerHead = this.GetChildAt(PlayerPart.HEAD) as SpriteObj;
             m_playerIndex = playerIndex;
 
             m_currentLogicSet = new LogicSet(null);
@@ -427,127 +427,127 @@ namespace RogueCastle
 
             if (State != STATE_TANOOKI)
             {
-                string headPart = (_objectList[PlayerPart.Head] as IAnimateableObj).SpriteName;
+                string headPart = (_objectList[PlayerPart.HEAD] as IAnimateableObj).SpriteName;
                 int numberIndex = headPart.IndexOf("_") - 1;
                 headPart = headPart.Remove(numberIndex, 1);
                 if (Game.PlayerStats.Class == ClassType.Dragon)
-                    headPart = headPart.Replace("_", PlayerPart.DragonHelm + "_");
+                    headPart = headPart.Replace("_", PlayerPart.DRAGON_HELM + "_");
                 else if (Game.PlayerStats.Class == ClassType.Traitor)
-                    headPart = headPart.Replace("_", PlayerPart.IntroHelm + "_");
+                    headPart = headPart.Replace("_", PlayerPart.INTRO_HELM + "_");
                 else
                     headPart = headPart.Replace("_", Game.PlayerStats.HeadPiece + "_");
-                _objectList[PlayerPart.Head].ChangeSprite(headPart);
+                _objectList[PlayerPart.HEAD].ChangeSprite(headPart);
 
-                string chestPart = (_objectList[PlayerPart.Chest] as IAnimateableObj).SpriteName;
+                string chestPart = (_objectList[PlayerPart.CHEST] as IAnimateableObj).SpriteName;
                 numberIndex = chestPart.IndexOf("_") - 1;
                 chestPart = chestPart.Remove(numberIndex, 1);
                 chestPart = chestPart.Replace("_", Game.PlayerStats.ChestPiece + "_");
-                _objectList[PlayerPart.Chest].ChangeSprite(chestPart);
+                _objectList[PlayerPart.CHEST].ChangeSprite(chestPart);
 
-                string shoulderAPart = (_objectList[PlayerPart.ShoulderA] as IAnimateableObj).SpriteName;
+                string shoulderAPart = (_objectList[PlayerPart.SHOULDER_A] as IAnimateableObj).SpriteName;
                 numberIndex = shoulderAPart.IndexOf("_") - 1;
                 shoulderAPart = shoulderAPart.Remove(numberIndex, 1);
                 shoulderAPart = shoulderAPart.Replace("_", Game.PlayerStats.ShoulderPiece + "_");
-                _objectList[PlayerPart.ShoulderA].ChangeSprite(shoulderAPart);
+                _objectList[PlayerPart.SHOULDER_A].ChangeSprite(shoulderAPart);
 
-                string shoulderBPart = (_objectList[PlayerPart.ShoulderB] as IAnimateableObj).SpriteName;
+                string shoulderBPart = (_objectList[PlayerPart.SHOULDER_B] as IAnimateableObj).SpriteName;
                 numberIndex = shoulderBPart.IndexOf("_") - 1;
                 shoulderBPart = shoulderBPart.Remove(numberIndex, 1);
                 shoulderBPart = shoulderBPart.Replace("_", Game.PlayerStats.ShoulderPiece + "_");
-                _objectList[PlayerPart.ShoulderB].ChangeSprite(shoulderBPart);
+                _objectList[PlayerPart.SHOULDER_B].ChangeSprite(shoulderBPart);
 
                 // This is giving the SpellSword special arms and changing his sword opacity.
                 if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
                 {
                     if (this.State == STATE_WALKING && (m_currentLogicSet != m_standingAttack3LogicSet || (m_currentLogicSet == m_standingAttack3LogicSet && m_currentLogicSet.IsActive == false)))
-                        _objectList[PlayerPart.Arms].ChangeSprite("PlayerWalkingArmsSpellSword_Sprite");
+                        _objectList[PlayerPart.ARMS].ChangeSprite("PlayerWalkingArmsSpellSword_Sprite");
                     else if (this.State == STATE_JUMPING && (m_currentLogicSet != m_standingAttack3LogicSet || (m_currentLogicSet == m_standingAttack3LogicSet && m_currentLogicSet.IsActive == false)) && IsAirAttacking == false && IsKilled == false)
                     {
                         if (this.AccelerationY < 0)
-                            _objectList[PlayerPart.Arms].ChangeSprite("PlayerFallingArmsSpellSword_Sprite");
+                            _objectList[PlayerPart.ARMS].ChangeSprite("PlayerFallingArmsSpellSword_Sprite");
                         else
-                            _objectList[PlayerPart.Arms].ChangeSprite("PlayerJumpingArmsSpellSword_Sprite");
+                            _objectList[PlayerPart.ARMS].ChangeSprite("PlayerJumpingArmsSpellSword_Sprite");
 
                     }
-                    _objectList[PlayerPart.Sword1].Opacity = 0f;
-                    _objectList[PlayerPart.Sword2].Opacity = 0f;
+                    _objectList[PlayerPart.SWORD1].Opacity = 0f;
+                    _objectList[PlayerPart.SWORD2].Opacity = 0f;
                 }
                 else
                 {
-                    _objectList[PlayerPart.Sword1].Opacity = 1f;
-                    _objectList[PlayerPart.Sword2].Opacity = 1f;
+                    _objectList[PlayerPart.SWORD1].Opacity = 1f;
+                    _objectList[PlayerPart.SWORD2].Opacity = 1f;
                 }
 
-                _objectList[PlayerPart.Light].Opacity = 0.3f;
-                _objectList[PlayerPart.Light].Visible = false;
+                _objectList[PlayerPart.LIGHT].Opacity = 0.3f;
+                _objectList[PlayerPart.LIGHT].Visible = false;
 
                 if (Game.PlayerStats.Class == ClassType.Banker2 && spriteName != "PlayerDeath_Character" && m_lightOn == true) // turn off the light if the player is dead.
-                    _objectList[PlayerPart.Light].Visible = true;
+                    _objectList[PlayerPart.LIGHT].Visible = true;
 
                 // This gives the player a shield in case he is the knight class.
                 if (Game.PlayerStats.Class == ClassType.Knight || Game.PlayerStats.Class == ClassType.Knight2)
                 {
                     string partName = spriteName.Replace("_Character", "Shield_Sprite");
-                    _objectList[PlayerPart.Extra].Visible = true;
-                    _objectList[PlayerPart.Extra].ChangeSprite(partName);
+                    _objectList[PlayerPart.EXTRA].Visible = true;
+                    _objectList[PlayerPart.EXTRA].ChangeSprite(partName);
                 }
                 // This gives the player a headlamp in case he is the banker (spelunker) class.
                 else if (Game.PlayerStats.Class == ClassType.Banker || Game.PlayerStats.Class == ClassType.Banker2)
                 {
                     string partName = spriteName.Replace("_Character", "Lamp_Sprite");
-                    _objectList[PlayerPart.Extra].Visible = true;
-                    _objectList[PlayerPart.Extra].ChangeSprite(partName);
+                    _objectList[PlayerPart.EXTRA].Visible = true;
+                    _objectList[PlayerPart.EXTRA].ChangeSprite(partName);
                 }
                 // This gives the player a headlamp in case he is the ninja.
                 else if (Game.PlayerStats.Class == ClassType.Ninja || Game.PlayerStats.Class == ClassType.Ninja2)
                 {
                     string partName = spriteName.Replace("_Character", "Headband_Sprite");
-                    _objectList[PlayerPart.Extra].Visible = true;
-                    _objectList[PlayerPart.Extra].ChangeSprite(partName);
+                    _objectList[PlayerPart.EXTRA].Visible = true;
+                    _objectList[PlayerPart.EXTRA].ChangeSprite(partName);
                 }
                 // This gives the player a headlamp in case he is the wizard.
                 else if (Game.PlayerStats.Class == ClassType.Wizard || Game.PlayerStats.Class == ClassType.Wizard2)
                 {
                     string partName = spriteName.Replace("_Character", "Beard_Sprite");
-                    _objectList[PlayerPart.Extra].Visible = true;
-                    _objectList[PlayerPart.Extra].ChangeSprite(partName);
+                    _objectList[PlayerPart.EXTRA].Visible = true;
+                    _objectList[PlayerPart.EXTRA].ChangeSprite(partName);
                 }
                 else if (Game.PlayerStats.Class == ClassType.Barbarian || Game.PlayerStats.Class == ClassType.Barbarian2)
                 {
                     string partName = spriteName.Replace("_Character", "Horns_Sprite");
-                    _objectList[PlayerPart.Extra].Visible = true;
-                    _objectList[PlayerPart.Extra].ChangeSprite(partName);
+                    _objectList[PlayerPart.EXTRA].Visible = true;
+                    _objectList[PlayerPart.EXTRA].ChangeSprite(partName);
                 }
                 else
-                    _objectList[PlayerPart.Extra].Visible = false;
+                    _objectList[PlayerPart.EXTRA].Visible = false;
 
                 // These are the glasses.
-                _objectList[PlayerPart.Glasses].Visible = false;
-                if (Game.PlayerStats.SpecialItem == SpecialItemType.Glasses)
-                    _objectList[PlayerPart.Glasses].Visible = true;
+                _objectList[PlayerPart.GLASSES].Visible = false;
+                if (Game.PlayerStats.SpecialItem == SpecialItemType.GLASSES)
+                    _objectList[PlayerPart.GLASSES].Visible = true;
 
                 // This is for the hair.
-                _objectList[PlayerPart.Hair].Visible = true;
+                _objectList[PlayerPart.HAIR].Visible = true;
                 if (Game.PlayerStats.HasTrait(TraitType.BALDNESS))
-                    _objectList[PlayerPart.Hair].Visible = false;
+                    _objectList[PlayerPart.HAIR].Visible = false;
 
                 // This is for male/female counterparts
                 if (Game.PlayerStats.IsFemale == false)
                 {
-                    _objectList[PlayerPart.Boobs].Visible = false;
-                    _objectList[PlayerPart.Bowtie].Visible = false;
+                    _objectList[PlayerPart.BOOBS].Visible = false;
+                    _objectList[PlayerPart.BOWTIE].Visible = false;
                 }
                 else
                 {
-                    _objectList[PlayerPart.Boobs].Visible = true;
-                    _objectList[PlayerPart.Bowtie].Visible = true;
+                    _objectList[PlayerPart.BOOBS].Visible = true;
+                    _objectList[PlayerPart.BOWTIE].Visible = true;
                 }
 
                 // Dragon wings.
-                _objectList[PlayerPart.Wings].Visible = false;
-                _objectList[PlayerPart.Wings].Opacity = 1;
+                _objectList[PlayerPart.WINGS].Visible = false;
+                _objectList[PlayerPart.WINGS].Opacity = 1;
                 if (Game.PlayerStats.Class == ClassType.Dragon)
-                    _objectList[PlayerPart.Wings].Visible = true;
+                    _objectList[PlayerPart.WINGS].Visible = true;
 
                 //_objectList[PlayerPart.Sword2].Visible = false; // This is needed until the sword is properly separated.
 
@@ -675,60 +675,60 @@ namespace RogueCastle
             {
                 List<object> objectList = new List<object>();
                 objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
-                objectList.Add(GetItemType.Blueprint);
+                objectList.Add(GetItemType.BLUEPRINT);
                 objectList.Add(Vector2.Zero);
 
-                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
+                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GET_ITEM, true, objectList);
                 this.RunGetItemAnimation();
             }
             else if (InputManager.JustPressed(Keys.N, this.PlayerIndex))
             {
                 List<object> objectList = new List<object>();
                 objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
-                objectList.Add(GetItemType.Rune);
+                objectList.Add(GetItemType.RUNE);
                 objectList.Add(Vector2.Zero);
 
-                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
+                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GET_ITEM, true, objectList);
                 this.RunGetItemAnimation();
             }
             else if (InputManager.JustPressed(Keys.M, this.PlayerIndex))
             {
                 List<object> objectList = new List<object>();
                 objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
-                objectList.Add(GetItemType.StatDrop);
-                objectList.Add(new Vector2(ItemDropType.Stat_Strength, ItemDropType.Stat_Strength));
+                objectList.Add(GetItemType.STAT_DROP);
+                objectList.Add(new Vector2(ItemDropType.STAT_STRENGTH, ItemDropType.STAT_STRENGTH));
 
-                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
+                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GET_ITEM, true, objectList);
                 this.RunGetItemAnimation();
             }
             else if (InputManager.JustPressed(Keys.OemComma, this.PlayerIndex))
             {
                 List<object> objectList = new List<object>();
                 objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
-                objectList.Add(GetItemType.Spell);
+                objectList.Add(GetItemType.SPELL);
                 objectList.Add(new Vector2((byte)SpellType.AXE, 0));
 
-                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
+                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GET_ITEM, true, objectList);
                 this.RunGetItemAnimation();
             }
             else if (InputManager.JustPressed(Keys.OemPeriod, this.PlayerIndex))
             {
                 List<object> objectList = new List<object>();
                 objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
-                objectList.Add(GetItemType.SpecialItem);
-                objectList.Add(new Vector2(SpecialItemType.FreeEntrance, 0));
+                objectList.Add(GetItemType.SPECIAL_ITEM);
+                objectList.Add(new Vector2(SpecialItemType.FREE_ENTRANCE, 0));
 
-                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
+                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GET_ITEM, true, objectList);
                 this.RunGetItemAnimation();
             }
             else if (InputManager.JustPressed(Keys.OemQuestion, this.PlayerIndex))
             {
                 List<object> objectList = new List<object>();
                 objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
-                objectList.Add(GetItemType.FountainPiece);
-                objectList.Add(new Vector2(ItemDropType.FountainPiece1, 0));
+                objectList.Add(GetItemType.FOUNTAIN_PIECE);
+                objectList.Add(new Vector2(ItemDropType.FOUNTAIN_PIECE1, 0));
 
-                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
+                (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GET_ITEM, true, objectList);
                 this.RunGetItemAnimation();
             }
         }
@@ -1074,13 +1074,13 @@ namespace RogueCastle
                         {
                             SoundManager.PlaySound("HeadLampOff");
                             m_lightOn = false;
-                            _objectList[PlayerPart.Light].Visible = false;
+                            _objectList[PlayerPart.LIGHT].Visible = false;
                         }
                         else
                         {
                             SoundManager.PlaySound("HeadLampOn");
                             m_lightOn = true;
-                            _objectList[PlayerPart.Light].Visible = true;
+                            _objectList[PlayerPart.LIGHT].Visible = true;
                         }
                     }
                 }
@@ -1475,7 +1475,7 @@ namespace RogueCastle
                         if (CurrentMana <= 0)
                         {
                             m_lightOn = false;
-                            _objectList[PlayerPart.Light].Visible = false;
+                            _objectList[PlayerPart.LIGHT].Visible = false;
                         }
                     }
                 }
@@ -1915,7 +1915,7 @@ namespace RogueCastle
                     if (door.Room.DonationBox == null || (door.Room.DonationBox != null && (door.Room.DonationBox.IsTouching == false || door.Room.DonationBox.Visible == false)))
                     {
                         if (door.Name == "FinalBossDoor")
-                            Game.ScreenManager.DisplayScreen(ScreenType.Ending, true, null);
+                            Game.ScreenManager.DisplayScreen(ScreenType.ENDING, true, null);
                         else
                         {
                             RoomObj linkedRoom = door.Room.LinkedRoom;
@@ -2253,7 +2253,7 @@ namespace RogueCastle
             bool hitPlayer = true;
             if (obj is HazardObj)
             {
-                if ((Game.PlayerStats.SpecialItem == SpecialItemType.SpikeImmunity && obj.Bounds.Top > this.Y) || InvincibleToSpikes == true)
+                if ((Game.PlayerStats.SpecialItem == SpecialItemType.SPIKE_IMMUNITY && obj.Bounds.Top > this.Y) || InvincibleToSpikes == true)
                     hitPlayer = false;
             }
 
@@ -2367,13 +2367,13 @@ namespace RogueCastle
 
                 if (CurrentHealth <= 0)
                 {
-                    if (Game.PlayerStats.SpecialItem == SpecialItemType.Revive)
+                    if (Game.PlayerStats.SpecialItem == SpecialItemType.REVIVE)
                     {
                         this.CurrentHealth = (int)(MaxHealth * 0.25f);
-                        Game.PlayerStats.SpecialItem = SpecialItemType.None;
+                        Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
                         (Game.ScreenManager.CurrentScreen as ProceduralLevelScreen).UpdatePlayerHUDSpecialItem();
                         m_invincibleCounter = InvincibilityTime; // Kick in the invincible timer automatically if the player is hit and knockback_immune trait exists.
-                        (m_levelScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DeathDefy, true);
+                        (m_levelScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DEATH_DEFY, true);
                     }
                     else
                     {
@@ -2383,7 +2383,7 @@ namespace RogueCastle
                             //this.CurrentHealth = 1;
                             this.CurrentHealth = (int)(MaxHealth * 0.1f);
                             m_invincibleCounter = InvincibilityTime; // Kick in the invincible timer automatically if the player is hit and knockback_immune trait exists.
-                            (m_levelScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DeathDefy, true);
+                            (m_levelScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DEATH_DEFY, true);
                         }
                         else
                         {
@@ -2409,9 +2409,9 @@ namespace RogueCastle
                         m_levelScreen.TextManager.DisplayNumberText(damage, Color.Red, new Vector2(this.X, this.Bounds.Top));
                 }
 
-                if (Game.PlayerStats.SpecialItem == SpecialItemType.LoseCoins)
+                if (Game.PlayerStats.SpecialItem == SpecialItemType.LOSE_COINS)
                 {
-                    int numCoinsLost = (int)(Game.PlayerStats.Gold * 0.25f / ItemDropType.CoinAmount);
+                    int numCoinsLost = (int)(Game.PlayerStats.Gold * 0.25f / ItemDropType.COIN_AMOUNT);
                     if (numCoinsLost > 50) numCoinsLost = 50;
                     if (numCoinsLost > 0 && AttachedLevel.ItemDropManager.AvailableItems > numCoinsLost)
                     {
@@ -2419,10 +2419,10 @@ namespace RogueCastle
                         if (Game.PlayerStats.HasArchitectFee == true)
                             castleLockGoldModifier = GameEV.ARCHITECT_FEE;
                         //Game.PlayerStats.Gold -= numCoinsLost * ItemDropType.CoinAmount;
-                        int goldAmount = (int)(((numCoinsLost * ItemDropType.CoinAmount) * (1 + this.TotalGoldBonus)) * castleLockGoldModifier);
+                        int goldAmount = (int)(((numCoinsLost * ItemDropType.COIN_AMOUNT) * (1 + this.TotalGoldBonus)) * castleLockGoldModifier);
                         Game.PlayerStats.Gold -= goldAmount;
                         for (int i = 0; i < numCoinsLost; i++)
-                            m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.Coin, ItemDropType.CoinAmount);
+                            m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.COIN, ItemDropType.COIN_AMOUNT);
 
                         if (goldAmount > 0)
                             AttachedLevel.TextManager.DisplayNumberStringText(-(int)goldAmount, "LOC_ID_PLAYER_OBJ_1" /*"gold"*/, Color.Yellow, new Vector2(this.X, this.Bounds.Top));
@@ -2476,8 +2476,8 @@ namespace RogueCastle
             this.ChangeSprite("PlayerDeath_Character");
             this.PlayAnimation(false);
 
-            if (_objectList[PlayerPart.Wings].Visible == true)
-                Tween.To(_objectList[PlayerPart.Wings], 0.5f, Tween.EaseNone, "delay", "0.5", "Opacity", "0");
+            if (_objectList[PlayerPart.WINGS].Visible == true)
+                Tween.To(_objectList[PlayerPart.WINGS], 0.5f, Tween.EaseNone, "delay", "0.5", "Opacity", "0");
         }
 
         public void RunGetItemAnimation()
@@ -2575,8 +2575,8 @@ namespace RogueCastle
                             this.GetChildAt((int)playerPart.Z).TextureColor = equipmentData.SecondColour;
 
                         // Special handling to tint the female's boobs.
-                        if (i == EquipmentCategoryType.Chest && playerPart.X != PlayerPart.None)
-                            this.GetChildAt(PlayerPart.Boobs).TextureColor = equipmentData.FirstColour;
+                        if (i == EquipmentCategoryType.Chest && playerPart.X != PlayerPart.NONE)
+                            this.GetChildAt(PlayerPart.BOOBS).TextureColor = equipmentData.FirstColour;
                     }
                     else // The player is dequipping
                     {
@@ -2592,11 +2592,11 @@ namespace RogueCastle
 
                         // Special handling to tint the female's boobs.
                         if (i == EquipmentCategoryType.Chest)
-                            this.GetChildAt(PlayerPart.Boobs).TextureColor = Color.White;
+                            this.GetChildAt(PlayerPart.BOOBS).TextureColor = Color.White;
 
                         // Special handling to make the default player's cape and helm red instead of white.
                         if (i == EquipmentCategoryType.Helm)
-                            this.GetChildAt(PlayerPart.Hair).TextureColor = Color.Red;
+                            this.GetChildAt(PlayerPart.HAIR).TextureColor = Color.Red;
                         else if (i == EquipmentCategoryType.Cape)
                         {
                             if (playerPart.X != -1)
@@ -2611,7 +2611,7 @@ namespace RogueCastle
                         }
 
                         Color darkPink = new Color(251, 156, 172);
-                        this.GetChildAt(PlayerPart.Bowtie).TextureColor = darkPink;
+                        this.GetChildAt(PlayerPart.BOWTIE).TextureColor = darkPink;
                     }
                 }
             }
@@ -2942,11 +2942,11 @@ namespace RogueCastle
                             m_translocatorSprite.GetChildAt(i).Visible = _objectList[i].Visible;
                         }
 
-                        m_translocatorSprite.GetChildAt(PlayerPart.Light).Visible = false;
+                        m_translocatorSprite.GetChildAt(PlayerPart.LIGHT).Visible = false;
                         if (Game.PlayerStats.Class == ClassType.SpellSword || Game.PlayerStats.Class == ClassType.SpellSword2)
                         {
-                            m_translocatorSprite.GetChildAt(PlayerPart.Sword1).Visible = false;
-                            m_translocatorSprite.GetChildAt(PlayerPart.Sword2).Visible = false;
+                            m_translocatorSprite.GetChildAt(PlayerPart.SWORD1).Visible = false;
+                            m_translocatorSprite.GetChildAt(PlayerPart.SWORD2).Visible = false;
                         }
                         m_levelScreen.TextManager.DisplayNumberStringText(-manaCost, "LOC_ID_SKILL_SCREEN_15" /*"mp"*/, Color.SkyBlue, new Vector2(this.X, this.Bounds.Top));
 
@@ -3483,17 +3483,17 @@ namespace RogueCastle
 
                 camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, camera.GetTransformation());
                 if (Game.PlayerStats.IsFemale == true)
-                    _objectList[PlayerPart.Bowtie].Draw(camera);
-                _objectList[PlayerPart.Glasses].Draw(camera);
-                _objectList[PlayerPart.Extra].Draw(camera);
+                    _objectList[PlayerPart.BOWTIE].Draw(camera);
+                _objectList[PlayerPart.GLASSES].Draw(camera);
+                _objectList[PlayerPart.EXTRA].Draw(camera);
             }
         }
 
         public void FadeSword()
         {
             //SoundManager.PlaySound("Player_Attack_Sword_Spell_01", "Player_Attack_Sword_Spell_02", "Player_Attack_Sword_Spell_03");
-            SpriteObj sword = _objectList[PlayerPart.Sword1] as SpriteObj;
-            SpriteObj sword2 = _objectList[PlayerPart.Sword2] as SpriteObj;
+            SpriteObj sword = _objectList[PlayerPart.SWORD1] as SpriteObj;
+            SpriteObj sword2 = _objectList[PlayerPart.SWORD2] as SpriteObj;
 
             Tween.StopAllContaining(sword, false);
             Tween.StopAllContaining(sword2, false);
@@ -3516,10 +3516,10 @@ namespace RogueCastle
 
         public void ChangePartColour(int playerPart, Color colour)
         {
-            if (playerPart == PlayerPart.Cape || playerPart == PlayerPart.Neck)
+            if (playerPart == PlayerPart.CAPE || playerPart == PlayerPart.NECK)
             {
-                GetPlayerPart(PlayerPart.Neck).TextureColor = colour;
-                GetPlayerPart(PlayerPart.Cape).TextureColor = colour;
+                GetPlayerPart(PlayerPart.NECK).TextureColor = colour;
+                GetPlayerPart(PlayerPart.CAPE).TextureColor = colour;
             }
             else
                 GetPlayerPart(playerPart).TextureColor = colour;

@@ -11,6 +11,7 @@ using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -240,7 +241,7 @@ namespace RogueCastle
         {
             RCScreenManager manager = ScreenManager as RCScreenManager;
             manager.DialogueScreen.SetDialogue("DiaryEntry" + m_entryIndex);
-            manager.DisplayScreen(ScreenType.Dialogue, true);
+            manager.DisplayScreen(ScreenType.DIALOGUE, true);
         }
 
         private void UpdateSelection()

@@ -9,6 +9,7 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -838,7 +839,7 @@ namespace RogueCastle
             switch (LocaleBuilder.LanguageType)
             {
                 case (LanguageType.French):
-                case (LanguageType.Spanish_Spain):
+                case (LanguageType.SpanishSpain):
                 case (LanguageType.German):
                 case (LanguageType.Polish):
                     (m_unlockCostContainer.GetChildAt(1) as TextObj).ScaleX = 0.9f;

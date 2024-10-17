@@ -9,6 +9,7 @@ using Tweener.Ease;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -689,16 +690,16 @@ namespace RogueCastle
                         UpdateIconSelectionText();
                         Vector3 playerPart = PlayerPart.GetPartIndices(equipmentCategory);
                      
-                        if (playerPart.X != PlayerPart.None)
+                        if (playerPart.X != PlayerPart.NONE)
                             Player.GetChildAt((int)playerPart.X).TextureColor = equipmentData.FirstColour;
-                        if (playerPart.Y != PlayerPart.None)
+                        if (playerPart.Y != PlayerPart.NONE)
                             Player.GetChildAt((int)playerPart.Y).TextureColor = equipmentData.SecondColour;
-                        if (playerPart.Z != PlayerPart.None)
+                        if (playerPart.Z != PlayerPart.NONE)
                             Player.GetChildAt((int)playerPart.Z).TextureColor = equipmentData.SecondColour;
 
                         // Special handling to tint the female's boobs.
-                        if (equipmentCategory == EquipmentCategoryType.Chest && playerPart.X != PlayerPart.None)
-                            Player.GetChildAt(PlayerPart.Boobs).TextureColor = equipmentData.FirstColour;
+                        if (equipmentCategory == EquipmentCategoryType.Chest && playerPart.X != PlayerPart.NONE)
+                            Player.GetChildAt(PlayerPart.BOOBS).TextureColor = equipmentData.FirstColour;
 
                         UpdateNewIcons();
                     }
@@ -1075,7 +1076,7 @@ namespace RogueCastle
                     (m_unlockCostContainer.GetChildAt(1) as TextObj).ScaleX = 0.9f;
                     m_addPropertiesTitleText.ScaleX = 0.9f;
                     break;
-                case(LanguageType.Spanish_Spain):
+                case(LanguageType.SpanishSpain):
                 case(LanguageType.German):
                 case(LanguageType.Polish):
                     (m_unlockCostContainer.GetChildAt(1) as TextObj).ScaleX = 0.9f;

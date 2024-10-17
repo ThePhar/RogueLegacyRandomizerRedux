@@ -97,7 +97,7 @@ namespace RogueCastle
             if (m_loadingComplete == false)
             {
                 // A special transition for the intro sequence.
-                if (m_screenTypeToLoad == ScreenType.TitleWhite)
+                if (m_screenTypeToLoad == ScreenType.TITLE_WHITE)
                 {
                     Tween.To(this, 0.05f, Tween.EaseNone, "BackBufferOpacity", "1");
                     Tween.RunFunction(1, this, "BeginThreading");
@@ -155,27 +155,27 @@ namespace RogueCastle
             m_loadingComplete = false;
             switch (m_screenTypeToLoad)
             {
-                case (ScreenType.CDGSplash):
+                case (ScreenType.CDG_SPLASH):
                     m_levelToLoad = new CDGSplashScreen();
                     lock (m_levelToLoad)
                         m_loadingComplete = true;
                     break;
-                case(ScreenType.BlitWorks):
+                case(ScreenType.BLIT_WORKS):
                     m_levelToLoad = new BlitWorksSplashScreen();
                     lock (m_levelToLoad)
                         m_loadingComplete = true;
                     break;
-                case (ScreenType.DemoEnd):
+                case (ScreenType.DEMO_END):
                     m_levelToLoad = new DemoEndScreen();
                     lock (m_levelToLoad)
                         m_loadingComplete = true;
                     break;
-                case (ScreenType.DemoStart):
+                case (ScreenType.DEMO_START):
                     m_levelToLoad = new DemoStartScreen();
                     lock (m_levelToLoad)
                         m_loadingComplete = true;
                     break;
-                case (ScreenType.Credits):
+                case (ScreenType.CREDITS):
                     m_levelToLoad = new CreditsScreen();
 
                     // This is a check to see if you should load the special ending credits or the regular one.
@@ -194,25 +194,25 @@ namespace RogueCastle
                     lock (m_levelToLoad)
                         m_loadingComplete = true;
                     break;
-                case (ScreenType.Title):
-                case (ScreenType.TitleWhite):
+                case (ScreenType.TITLE):
+                case (ScreenType.TITLE_WHITE):
                     m_levelToLoad = new TitleScreen();
                     lock (m_levelToLoad)
                     {
                         m_loadingComplete = true;
                     }
                     break;
-                case (ScreenType.Lineage):
+                case (ScreenType.LINEAGE):
                     m_levelToLoad = new LineageScreen();
                     lock (m_levelToLoad)
                     {
                         m_loadingComplete = true;
                     }
                     break;
-                case (ScreenType.Level):
-                case (ScreenType.Ending):
-                case (ScreenType.StartingRoom):
-                case (ScreenType.TutorialRoom):
+                case (ScreenType.LEVEL):
+                case (ScreenType.ENDING):
+                case (ScreenType.STARTING_ROOM):
+                case (ScreenType.TUTORIAL_ROOM):
                     RCScreenManager manager = ScreenManager as RCScreenManager;
 
                     AreaStruct[] levelStruct = Game.Area1List;
@@ -220,11 +220,11 @@ namespace RogueCastle
                     m_levelToLoad = null;
 
                     // Creating the level.
-                    if (m_screenTypeToLoad == ScreenType.StartingRoom)
+                    if (m_screenTypeToLoad == ScreenType.STARTING_ROOM)
                         m_levelToLoad = LevelBuilder2.CreateStartingRoom();
-                    else if (m_screenTypeToLoad == ScreenType.TutorialRoom)
+                    else if (m_screenTypeToLoad == ScreenType.TUTORIAL_ROOM)
                         m_levelToLoad = LevelBuilder2.CreateTutorialRoom();
-                    else if (m_screenTypeToLoad == ScreenType.Ending)
+                    else if (m_screenTypeToLoad == ScreenType.ENDING)
                         m_levelToLoad = LevelBuilder2.CreateEndingRoom();
                     else
                     {
@@ -343,7 +343,7 @@ namespace RogueCastle
             this.ScreenManager = manager; // Since RemoveScreen removes the reference to the ScreenManager, we need to re-add the reference (for now).
             m_levelToLoad.DrawIfCovered = true;
 
-            if (m_screenTypeToLoad == ScreenType.StartingRoom)
+            if (m_screenTypeToLoad == ScreenType.STARTING_ROOM)
             {
                 // Only display the skill screen if the player has died before.
                 if (Game.PlayerStats.IsDead == true)
@@ -371,7 +371,7 @@ namespace RogueCastle
 
         public void AddFinalTransition()
         {
-            if (m_screenTypeToLoad == ScreenType.TitleWhite)
+            if (m_screenTypeToLoad == ScreenType.TITLE_WHITE)
             {
                 BackBufferOpacity = 1;
                 Tween.To(this, 2f, Tween.EaseNone, "BackBufferOpacity", "0");
@@ -399,7 +399,7 @@ namespace RogueCastle
         public override void Draw(GameTime gameTime)
         {
             Camera.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
-            if (m_screenTypeToLoad != ScreenType.TitleWhite)
+            if (m_screenTypeToLoad != ScreenType.TITLE_WHITE)
             {
                 if (m_wipeTransition == false)
                 {

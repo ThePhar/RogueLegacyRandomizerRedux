@@ -5,12 +5,13 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
     public class ItemDropObj : PhysicsObj
     {
-        public int DropType = ItemDropType.None;
+        public int DropType = ItemDropType.NONE;
         private float m_amount = 0;
         public float CollectionCounter { get; set; }
 
@@ -31,50 +32,50 @@ namespace RogueCastle
 
             switch (dropType)
             {
-                case (ItemDropType.Health):
+                case (ItemDropType.HEALTH):
                     this.ChangeSprite("ChickenLeg_Sprite");
                     this.PlayAnimation(true);
                     break;
-                case (ItemDropType.Mana):
+                case (ItemDropType.MANA):
                     this.ChangeSprite("ManaPotion_Sprite");
                     this.PlayAnimation(true);
                     break;
-                case(ItemDropType.BigDiamond):
+                case(ItemDropType.BIG_DIAMOND):
                     this.Scale = new Vector2(1.5f);
                     this.TextureColor = Color.LightGreen;
                     this.ChangeSprite("Diamond_Sprite");
                     this.PlayAnimation(true);
                     break;
-                case (ItemDropType.Diamond):
+                case (ItemDropType.DIAMOND):
                     this.ChangeSprite("Diamond_Sprite");
                     this.PlayAnimation(true);
                     break;
-                case (ItemDropType.MoneyBag):
+                case (ItemDropType.MONEY_BAG):
                     this.ChangeSprite("MoneyBag_Sprite");
                     this.PlayAnimation(1, 1, false);
                     break;
-                case (ItemDropType.Stat_Strength):
+                case (ItemDropType.STAT_STRENGTH):
                     this.ChangeSprite("Sword_Sprite");
                     this.PlayAnimation(true);
                     break;
-                case(ItemDropType.Stat_Defense):
+                case(ItemDropType.STAT_DEFENSE):
                     this.ChangeSprite("Shield_Sprite");
                     this.PlayAnimation(true);
                     break;
-                case(ItemDropType.Stat_Weight):
+                case(ItemDropType.STAT_WEIGHT):
                     this.ChangeSprite("Backpack_Sprite");
                     this.PlayAnimation(true);
                     break;
-                case (ItemDropType.Stat_MaxMana):
+                case (ItemDropType.STAT_MAX_MANA):
                     this.ChangeSprite("Heart_Sprite");
                     this.PlayAnimation(true);
                     this.TextureColor = Color.Blue;
                     break;
-                case (ItemDropType.Stat_MaxHealth):
+                case (ItemDropType.STAT_MAX_HEALTH):
                     this.ChangeSprite("Heart_Sprite");
                     this.PlayAnimation(true);
                     break;
-                case (ItemDropType.Coin):
+                case (ItemDropType.COIN):
                 default:
                     this.ChangeSprite("Coin_Sprite");
                     this.PlayAnimation(true);
@@ -91,10 +92,10 @@ namespace RogueCastle
         {
             switch (DropType)
             {
-                case (ItemDropType.Coin):
-                case (ItemDropType.Diamond):
-                case(ItemDropType.BigDiamond):
-                case (ItemDropType.MoneyBag):
+                case (ItemDropType.COIN):
+                case (ItemDropType.DIAMOND):
+                case(ItemDropType.BIG_DIAMOND):
+                case (ItemDropType.MONEY_BAG):
                     player.AttachedLevel.ItemDropCollected(DropType);
 
                     float castleLockGoldModifier = 1;
@@ -103,44 +104,44 @@ namespace RogueCastle
                     int goldAmount = (int)Math.Round(m_amount * (1 + player.TotalGoldBonus) * castleLockGoldModifier, MidpointRounding.AwayFromZero);
                     Game.PlayerStats.Gold += goldAmount;
                     textManager.DisplayNumberStringText(goldAmount, "LOC_ID_ITEM_DROP_OBJ_1" /*"gold"*/, Color.Yellow, new Vector2(this.X, this.Bounds.Top));
-                    if (DropType == ItemDropType.MoneyBag)
+                    if (DropType == ItemDropType.MONEY_BAG)
                         this.PlayAnimation(1, 1, false);
                     break;
-                case (ItemDropType.Health):
+                case (ItemDropType.HEALTH):
                     int healthAmount = (int)(player.MaxHealth * (m_amount + SkillSystem.GetSkill(SkillType.Potion_Up).ModifierAmount));
                     player.CurrentHealth += healthAmount;
                     textManager.DisplayNumberStringText(healthAmount, "LOC_ID_ITEM_DROP_OBJ_2" /*"hp recovered"*/, Color.LawnGreen, new Vector2(this.X, this.Bounds.Top));
                     SoundManager.Play3DSound(this, Game.ScreenManager.Player,"Collect_Health");
                     break;
-                case (ItemDropType.Mana):
+                case (ItemDropType.MANA):
                     int manaAmount = (int)(player.MaxMana * (m_amount + SkillSystem.GetSkill(SkillType.Potion_Up).ModifierAmount));
                     player.CurrentMana += manaAmount;
                     textManager.DisplayNumberStringText(manaAmount, "LOC_ID_ITEM_DROP_OBJ_3" /*"mp recovered"*/, Color.LawnGreen, new Vector2(this.X, this.Bounds.Top));
                     SoundManager.Play3DSound(this, Game.ScreenManager.Player,"Collect_Mana");
                     break;
-                case (ItemDropType.Stat_Defense):
+                case (ItemDropType.STAT_DEFENSE):
                     Game.PlayerStats.BonusDefense += 1 + Game.PlayerStats.TimesCastleBeaten;
                     textManager.DisplayStringNumberText("LOC_ID_ITEM_DROP_OBJ_4" /*"Armor Up"*/, GameEV.ITEM_STAT_ARMOR_AMOUNT * (1  + Game.PlayerStats.TimesCastleBeaten), Color.LightSteelBlue, new Vector2(this.X, this.Bounds.Top));
                     break;
-                case (ItemDropType.Stat_MaxHealth):
+                case (ItemDropType.STAT_MAX_HEALTH):
                     Game.PlayerStats.BonusHealth += 1 + Game.PlayerStats.TimesCastleBeaten;
                     textManager.DisplayStringNumberText("LOC_ID_ITEM_DROP_OBJ_5" /*"Max Health Up"*/, GameEV.ITEM_STAT_MAXHP_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten), Color.LightSteelBlue, new Vector2(this.X, this.Bounds.Top));
                     player.CurrentHealth += GameEV.ITEM_STAT_MAXHP_AMOUNT;
                     break;
-                case (ItemDropType.Stat_MaxMana):
+                case (ItemDropType.STAT_MAX_MANA):
                     Game.PlayerStats.BonusMana += 1 + Game.PlayerStats.TimesCastleBeaten;
                     textManager.DisplayStringNumberText("LOC_ID_ITEM_DROP_OBJ_6" /*"Max Mana Up"*/, GameEV.ITEM_STAT_MAXMP_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten), Color.LightSteelBlue, new Vector2(this.X, this.Bounds.Top));
                     player.CurrentMana += GameEV.ITEM_STAT_MAXMP_AMOUNT;
                     break;
-                case (ItemDropType.Stat_Strength):
+                case (ItemDropType.STAT_STRENGTH):
                     Game.PlayerStats.BonusStrength += 1 + Game.PlayerStats.TimesCastleBeaten;
                     textManager.DisplayStringNumberText("LOC_ID_ITEM_DROP_OBJ_7" /*"Attack Up"*/, GameEV.ITEM_STAT_STRENGTH_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten), Color.LightSteelBlue, new Vector2(this.X, this.Bounds.Top));
                     break;
-                case (ItemDropType.Stat_Magic):
+                case (ItemDropType.STAT_MAGIC):
                     Game.PlayerStats.BonusMagic += 1 + Game.PlayerStats.TimesCastleBeaten;
                     textManager.DisplayStringNumberText("LOC_ID_ITEM_DROP_OBJ_8" /*"Magic Up"*/, GameEV.ITEM_STAT_MAGIC_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten), Color.LightSteelBlue, new Vector2(this.X, this.Bounds.Top));
                     break;
-                case (ItemDropType.Stat_Weight):
+                case (ItemDropType.STAT_WEIGHT):
                     Game.PlayerStats.BonusWeight += 1 + Game.PlayerStats.TimesCastleBeaten;
                     textManager.DisplayStringNumberText("LOC_ID_ITEM_DROP_OBJ_9" /*"Max Weight Up"*/, GameEV.ITEM_STAT_WEIGHT_AMOUNT * (1 + Game.PlayerStats.TimesCastleBeaten), Color.LightSteelBlue, new Vector2(this.X, this.Bounds.Top));
                     break;
@@ -154,7 +155,7 @@ namespace RogueCastle
                 base.CollisionResponse(thisBox, otherBox, collisionResponseType);
                 this.AccelerationX = 0;
                 this.Y = (int)this.Y;
-                if (this.DropType == ItemDropType.MoneyBag && this.CurrentFrame == 1)
+                if (this.DropType == ItemDropType.MONEY_BAG && this.CurrentFrame == 1)
                 {
                     Vector2 mtd = CollisionMath.CalculateMTD(thisBox.AbsRect, otherBox.AbsRect);
                     //if (mtd == Vector2.Zero)

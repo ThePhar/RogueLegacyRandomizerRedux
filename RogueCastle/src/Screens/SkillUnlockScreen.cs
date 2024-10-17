@@ -11,6 +11,7 @@ using System.Globalization;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -120,71 +121,71 @@ namespace RogueCastle
         {
             switch (m_skillUnlockType)
             {
-                case (SkillUnlockType.Blacksmith):
+                case (SkillUnlockType.BLACKSMITH):
                     m_picture.ChangeSprite("BlacksmithUnlockPicture_Sprite");
                     m_title.ChangeSprite("SmithyUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.Enchantress):
+                case (SkillUnlockType.ENCHANTRESS):
                     m_picture.ChangeSprite("EnchantressUnlockPicture_Sprite");
                     m_title.ChangeSprite("EnchantressUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.Architect):
+                case (SkillUnlockType.ARCHITECT):
                     m_picture.ChangeSprite("ArchitectUnlockPicture_Sprite");
                     m_title.ChangeSprite("ArchitectUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.Ninja):
+                case (SkillUnlockType.NINJA):
                     m_picture.ChangeSprite("NinjaUnlockPicture_Sprite");
                     m_title.ChangeSprite("ClassUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.Banker):
+                case (SkillUnlockType.BANKER):
                     m_picture.ChangeSprite("BankerUnlockPicture_Sprite");
                     m_title.ChangeSprite("ClassUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.Lich):
+                case (SkillUnlockType.LICH):
                     m_picture.ChangeSprite("LichUnlockPicture_Sprite");
                     m_title.ChangeSprite("ClassUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.SpellSword):
+                case (SkillUnlockType.SPELL_SWORD):
                     m_picture.ChangeSprite("SpellSwordUnlockPicture_Sprite");
                     m_title.ChangeSprite("ClassUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.KnightUp):
+                case (SkillUnlockType.KNIGHT_UP):
                     m_picture.ChangeSprite("KnightUpgradePicture_Sprite");
                     m_title.ChangeSprite("ClassUpgradedText_Sprite");
                     break;
-                case (SkillUnlockType.WizardUp):
+                case (SkillUnlockType.WIZARD_UP):
                     m_picture.ChangeSprite("MageUpgradePicture_Sprite");
                     m_title.ChangeSprite("ClassUpgradedText_Sprite");
                     break;
-                case (SkillUnlockType.BarbarianUp):
+                case (SkillUnlockType.BARBARIAN_UP):
                     m_picture.ChangeSprite("BarbarianUpgradePicture_Sprite");
                     m_title.ChangeSprite("ClassUpgradedText_Sprite");
                     break;
-                case (SkillUnlockType.AssassinUp):
+                case (SkillUnlockType.ASSASSIN_UP):
                     m_picture.ChangeSprite("AssassinUpgradePicture_Sprite");
                     m_title.ChangeSprite("ClassUpgradedText_Sprite");
                     break;
-                case (SkillUnlockType.LichUp):
+                case (SkillUnlockType.LICH_UP):
                     m_picture.ChangeSprite("LichUpgradePicture_Sprite");
                     m_title.ChangeSprite("ClassUpgradedText_Sprite");
                     break;
-                case (SkillUnlockType.SpellSwordUp):
+                case (SkillUnlockType.SPELL_SWORD_UP):
                     m_picture.ChangeSprite("SpellSwordUpgradePicture_Sprite");
                     m_title.ChangeSprite("ClassUpgradedText_Sprite");
                     break;
-                case (SkillUnlockType.NinjaUp):
+                case (SkillUnlockType.NINJA_UP):
                     m_picture.ChangeSprite("NinjaUpgradePicture_Sprite");
                     m_title.ChangeSprite("ClassUpgradedText_Sprite");
                     break;
-                case (SkillUnlockType.BankerUp):
+                case (SkillUnlockType.BANKER_UP):
                     m_picture.ChangeSprite("BankerUpgradePicture_Sprite");
                     m_title.ChangeSprite("ClassUpgradedText_Sprite");
                     break;
-                case (SkillUnlockType.Dragon):
+                case (SkillUnlockType.DRAGON):
                     m_picture.ChangeSprite("DragonUnlockPicture_Sprite");
                     m_title.ChangeSprite("ClassUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.Traitor):
+                case (SkillUnlockType.TRAITOR):
                     m_picture.ChangeSprite("TraitorUnlockPicture_Sprite");
                     m_title.ChangeSprite("ClassUnlockedText_Sprite");
                     break;
@@ -274,31 +275,31 @@ namespace RogueCastle
         {
             switch (m_skillUnlockType)
             {
-                case (SkillUnlockType.Blacksmith):
+                case (SkillUnlockType.BLACKSMITH):
                     Game.ChangeBitmapLanguage(m_title, "SmithyUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.Enchantress):
+                case (SkillUnlockType.ENCHANTRESS):
                     Game.ChangeBitmapLanguage(m_title, "EnchantressUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.Architect):
+                case (SkillUnlockType.ARCHITECT):
                     Game.ChangeBitmapLanguage(m_title, "ArchitectUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.Ninja):
-                case (SkillUnlockType.Banker):
-                case (SkillUnlockType.Lich):
-                case (SkillUnlockType.SpellSword):
-                case (SkillUnlockType.Dragon):
-                case (SkillUnlockType.Traitor):
+                case (SkillUnlockType.NINJA):
+                case (SkillUnlockType.BANKER):
+                case (SkillUnlockType.LICH):
+                case (SkillUnlockType.SPELL_SWORD):
+                case (SkillUnlockType.DRAGON):
+                case (SkillUnlockType.TRAITOR):
                     Game.ChangeBitmapLanguage(m_title, "ClassUnlockedText_Sprite");
                     break;
-                case (SkillUnlockType.KnightUp):
-                case (SkillUnlockType.WizardUp):
-                case (SkillUnlockType.BarbarianUp):
-                case (SkillUnlockType.AssassinUp):
-                case (SkillUnlockType.LichUp):
-                case (SkillUnlockType.SpellSwordUp):
-                case (SkillUnlockType.NinjaUp):
-                case (SkillUnlockType.BankerUp):
+                case (SkillUnlockType.KNIGHT_UP):
+                case (SkillUnlockType.WIZARD_UP):
+                case (SkillUnlockType.BARBARIAN_UP):
+                case (SkillUnlockType.ASSASSIN_UP):
+                case (SkillUnlockType.LICH_UP):
+                case (SkillUnlockType.SPELL_SWORD_UP):
+                case (SkillUnlockType.NINJA_UP):
+                case (SkillUnlockType.BANKER_UP):
                     Game.ChangeBitmapLanguage(m_title, "ClassUpgradedText_Sprite");
                     break;
             }

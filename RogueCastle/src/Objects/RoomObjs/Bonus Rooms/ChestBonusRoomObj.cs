@@ -106,7 +106,7 @@ namespace RogueCastle
                 ChestObj chest = obj as ChestObj;
                 if (chest != null)
                 {
-                    chest.ForcedItemType = ItemDropType.Coin;
+                    chest.ForcedItemType = ItemDropType.COIN;
                     int chestReward = chestRand[chestCounter];
                     if (chestReward == 1)
                         chest.IsEmpty = true;
@@ -122,7 +122,7 @@ namespace RogueCastle
                     chest.IsLocked = false;
 
                     chest.TextureColor = Color.White;
-                    if (chestReward == 3 && Game.PlayerStats.SpecialItem == SpecialItemType.Glasses)
+                    if (chestReward == 3 && Game.PlayerStats.SpecialItem == SpecialItemType.GLASSES)
                         chest.TextureColor = Color.Gold;
                 }
             }
@@ -159,7 +159,7 @@ namespace RogueCastle
                         manager.DialogueScreen.SetDialogue("ChestBonusRoom1-Won");
                     else
                         manager.DialogueScreen.SetDialogue("ChestBonusRoom1-Lost");
-                    Game.ScreenManager.DisplayScreen(ScreenType.Dialogue, true);
+                    Game.ScreenManager.DisplayScreen(ScreenType.DIALOGUE, true);
                 }
             }
 
@@ -191,7 +191,7 @@ namespace RogueCastle
                     else
                         manager.DialogueScreen.SetDialogue("ChestBonusRoom1-End");
 
-                    Game.ScreenManager.DisplayScreen(ScreenType.Dialogue, true);
+                    Game.ScreenManager.DisplayScreen(ScreenType.DIALOGUE, true);
                 }
             }
         }
@@ -218,7 +218,7 @@ namespace RogueCastle
             {
                 (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetDialogue("ChestBonusRoom1-NoMoney");
                 Tween.To(this, 0, Linear.EaseNone);
-                Tween.AddEndHandlerToLastTween(Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.Dialogue, true, typeof(List<object>));
+                Tween.AddEndHandlerToLastTween(Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.DIALOGUE, true, typeof(List<object>));
             }
         }
 

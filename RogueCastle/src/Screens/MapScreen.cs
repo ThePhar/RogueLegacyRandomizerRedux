@@ -204,15 +204,15 @@ namespace RogueCastle
             m_playerIcon.ForceDraw = true;
             m_playerIcon.OutlineWidth = 2;
 
-            m_playerIcon.GetChildAt(PlayerPart.Cape).TextureColor = Color.Red;
-            m_playerIcon.GetChildAt(PlayerPart.Hair).TextureColor = Color.Red;
-            m_playerIcon.GetChildAt(PlayerPart.Neck).TextureColor = Color.Red;
-            m_playerIcon.GetChildAt(PlayerPart.Light).Visible = false;
-            m_playerIcon.GetChildAt(PlayerPart.Boobs).Visible = false;
-            m_playerIcon.GetChildAt(PlayerPart.Bowtie).Visible = false;
-            m_playerIcon.GetChildAt(PlayerPart.Wings).Visible = false;
-            m_playerIcon.GetChildAt(PlayerPart.Extra).Visible = false;
-            m_playerIcon.GetChildAt(PlayerPart.Glasses).Visible = false;
+            m_playerIcon.GetChildAt(PlayerPart.CAPE).TextureColor = Color.Red;
+            m_playerIcon.GetChildAt(PlayerPart.HAIR).TextureColor = Color.Red;
+            m_playerIcon.GetChildAt(PlayerPart.NECK).TextureColor = Color.Red;
+            m_playerIcon.GetChildAt(PlayerPart.LIGHT).Visible = false;
+            m_playerIcon.GetChildAt(PlayerPart.BOOBS).Visible = false;
+            m_playerIcon.GetChildAt(PlayerPart.BOWTIE).Visible = false;
+            m_playerIcon.GetChildAt(PlayerPart.WINGS).Visible = false;
+            m_playerIcon.GetChildAt(PlayerPart.EXTRA).Visible = false;
+            m_playerIcon.GetChildAt(PlayerPart.GLASSES).Visible = false;
 
             m_continueText = new KeyIconTextObj(Game.JunicodeFont);
             m_continueText.Text = LocaleBuilder.GetString("LOC_ID_CLASS_NAME_1_MALE", m_continueText); // dummy locID to add TextObj to language refresh list

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -69,10 +70,10 @@ namespace RogueCastle
             switch (LocaleBuilder.LanguageType)
             {
                 case (LanguageType.French):
-                case (LanguageType.Spanish_Spain):
+                case (LanguageType.SpanishSpain):
                     m_nameText.ScaleX = 0.9f;
                     break;
-                case (LanguageType.Portuguese_Brazil):
+                case (LanguageType.PortugueseBrazil):
                 case (LanguageType.Russian):
                     m_nameText.ScaleX = 0.8f;
                     break;

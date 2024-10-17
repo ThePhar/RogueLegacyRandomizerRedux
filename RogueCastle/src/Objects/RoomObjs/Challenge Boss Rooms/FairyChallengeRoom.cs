@@ -136,8 +136,8 @@ namespace RogueCastle
             Tween.RunFunction(1.2f, this, "DisplayBossTitle", Game.NameHelper() + " VS", m_boss.LocStringID, "Intro2"); //The Lookout
 
             base.OnEnter();
-            Player.GetChildAt(PlayerPart.Sword1).TextureColor = Color.White; // Hack to change player sword since black on black looks awful.
-            m_bossChest.ForcedItemType = ItemDropType.FountainPiece2; // Must be called after base.OnEnter()
+            Player.GetChildAt(PlayerPart.SWORD1).TextureColor = Color.White; // Hack to change player sword since black on black looks awful.
+            m_bossChest.ForcedItemType = ItemDropType.FOUNTAIN_PIECE2; // Must be called after base.OnEnter()
         }
 
         public void Intro2()

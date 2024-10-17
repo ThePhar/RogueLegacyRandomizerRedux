@@ -8,6 +8,7 @@ using Tweener;
 using Tweener.Ease;
 using System.Threading;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -75,7 +76,7 @@ namespace RogueCastle
         public void LoadNextScreen()
         {
             if (LevelEV.EnableBlitworksSplash == true)
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.BlitWorks, true, null);
+                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.BLIT_WORKS, true, null);
             else
             {
                 if ((ScreenManager.Game as Game).SaveManager.FileExists(SaveType.PlayerData))
@@ -89,9 +90,9 @@ namespace RogueCastle
                     else
                     {
                         if (Game.PlayerStats.TutorialComplete == false)
-                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TutorialRoom, true, null);
+                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TUTORIAL_ROOM, true, null);
                         else
-                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Title, true, null);
+                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TITLE, true, null);
                     }
                     //}
                     //catch
@@ -103,9 +104,9 @@ namespace RogueCastle
                 else
                 {
                     if (Game.PlayerStats.TutorialComplete == false)
-                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TutorialRoom, true, null);
+                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TUTORIAL_ROOM, true, null);
                     else
-                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Title, true, null);
+                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TITLE, true, null);
                 }
             }
         }

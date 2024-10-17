@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -163,7 +164,7 @@ namespace RogueCastle
                             manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
                             manager.DialogueScreen.SetConfirmEndHandler(this, "RestoreControls");
                             manager.DialogueScreen.SetCancelEndHandler(this, "CancelRestoreControls");
-                            manager.DisplayScreen(ScreenType.Dialogue, true);
+                            manager.DisplayScreen(ScreenType.DIALOGUE, true);
                         }
                         else
                         {
@@ -483,10 +484,10 @@ namespace RogueCastle
                 case (LanguageType.German):
                     m_buttonTitle[9].ScaleX = 0.8f;
                     break;
-                case (LanguageType.Portuguese_Brazil):
+                case (LanguageType.PortugueseBrazil):
                     m_buttonTitle[7].ScaleX = 0.9f;
                     break;
-                case (LanguageType.Spanish_Spain):
+                case (LanguageType.SpanishSpain):
                     m_buttonTitle[7].FontSize = 10;
                     m_buttonTitle[8].FontSize = 10;
                     m_buttonTitle[7].ScaleX = 0.8f;

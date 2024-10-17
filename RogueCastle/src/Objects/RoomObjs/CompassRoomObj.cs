@@ -20,9 +20,9 @@ namespace RogueCastle
 
         public override void OnEnter()
         {
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.Compass)
+            if (Game.PlayerStats.SpecialItem == SpecialItemType.COMPASS)
             {
-                Game.PlayerStats.SpecialItem = SpecialItemType.None;
+                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
                 Player.AttachedLevel.UpdatePlayerHUDSpecialItem();
             }
 

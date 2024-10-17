@@ -335,7 +335,7 @@ namespace RogueCastle
                 if (m_waypointIndex > m_cameraPosList.Count - 1)
                 {
                     m_waypointIndex = 0;
-                    Tween.RunFunction(0, Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.Credits, true, typeof(List<object>));
+                    Tween.RunFunction(0, Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.CREDITS, true, typeof(List<object>));
                 }
                 else
                     Tween.RunFunction(m_waypointSpeed, this, "ChangeWaypoints");
@@ -357,7 +357,7 @@ namespace RogueCastle
                 if (m_displayingContinueText == true)
                 {
                     Tween.StopAll(false);
-                    Game.ScreenManager.DisplayScreen(ScreenType.Credits, true);
+                    Game.ScreenManager.DisplayScreen(ScreenType.CREDITS, true);
                 }
                 else
                 {

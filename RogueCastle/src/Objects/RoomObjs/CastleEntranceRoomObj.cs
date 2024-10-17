@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.GameStructs;
 using Tweener.Ease;
 using Tweener;
 
@@ -309,14 +310,14 @@ namespace RogueCastle
                     {
                         RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
                         manager.DialogueScreen.SetDialogue("DiaryEntry0");
-                        manager.DisplayScreen(ScreenType.Dialogue, true, null);
+                        manager.DisplayScreen(ScreenType.DIALOGUE, true, null);
 
                         Game.PlayerStats.DiaryEntry++;
                     }
                     else
                     {
                         RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
-                        manager.DisplayScreen(ScreenType.DiaryEntry, true);
+                        manager.DisplayScreen(ScreenType.DIARY_ENTRY, true);
                     }
                 }
             }

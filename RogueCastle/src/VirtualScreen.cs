@@ -126,7 +126,7 @@ namespace RogueCastle
         {
             if ((Game.ScreenManager.CurrentScreen is SkillScreen == false) && (Game.ScreenManager.CurrentScreen is LineageScreen == false) && 
                 (Game.ScreenManager.CurrentScreen is SkillUnlockScreen == false) && (Game.ScreenManager.GetLevelScreen() != null) &&
-                (Game.PlayerStats.HasTrait(TraitType.VERTIGO)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                (Game.PlayerStats.HasTrait(TraitType.VERTIGO)) && Game.PlayerStats.SpecialItem != SpecialItemType.GLASSES)
                 spriteBatch.Draw(screen, area, null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipVertically, 0);
             else
                 spriteBatch.Draw(screen, area, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);

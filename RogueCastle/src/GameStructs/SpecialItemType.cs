@@ -1,92 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace RogueCastle.GameStructs;
 
-namespace RogueCastle
+public static class SpecialItemType
 {
-    class SpecialItemType
+    public const byte TOTAL = 7;
+
+    public const byte NONE            = 0;
+    public const byte FREE_ENTRANCE  = 1; // Done
+    public const byte LOSE_COINS     = 2; // Done
+    public const byte REVIVE         = 3; // Done
+    public const byte SPIKE_IMMUNITY = 4; // Done
+    public const byte GOLD_PER_KILL  = 5; // Done
+    public const byte COMPASS        = 6; // Done
+
+    // Don't include glasses on the list because it needs to be hard coded in.
+    public const byte GLASSES         = 8; // Done
+
+    public const byte EYEBALL_TOKEN   = 9;
+    public const byte SKULL_TOKEN     = 10;
+    public const byte FIREBALL_TOKEN  = 11;
+    public const byte BLOB_TOKEN      = 12;
+    public const byte LAST_BOSS_TOKEN = 13;
+
+    public static string ToStringID(byte itemType)
     {
-        public const byte None = 0;
-        public const byte FreeEntrance = 1; // Done
-        public const byte LoseCoins = 2;  // Done
-        public const byte Revive = 3; // Done
-        public const byte SpikeImmunity = 4; // Done
-        public const byte GoldPerKill = 5; // Done
-        public const byte Compass = 6; // Done
-
-        public const byte Total = 7;
-
-        public const byte Glasses = 8; // Done. Don't include glasses on the list because it needs to be hard coded in.
-
-        public const byte EyeballToken = 9;
-        public const byte SkullToken = 10;
-        public const byte FireballToken = 11;
-        public const byte BlobToken = 12;
-        public const byte LastBossToken = 13;
-
-        public static string ToStringID(byte itemType)
+        return itemType switch
         {
-            switch (itemType)
-            {
-                case (Revive):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_1";
-                case (SpikeImmunity):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_2";
-                case (LoseCoins):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_3";
-                case (FreeEntrance):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_4";
-                case (Compass):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_5";
-                case (GoldPerKill):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_6";
-                case (Glasses):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_7";
-                case (EyeballToken):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_8";
-                case (SkullToken):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_9";
-                case (FireballToken):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_10";
-                case (BlobToken):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_11";
-                case (LastBossToken):
-                    return "LOC_ID_SPECIAL_ITEM_TYPE_12";
-            }
-            return "";
-        }
+            REVIVE          => "LOC_ID_SPECIAL_ITEM_TYPE_1",
+            SPIKE_IMMUNITY  => "LOC_ID_SPECIAL_ITEM_TYPE_2",
+            LOSE_COINS      => "LOC_ID_SPECIAL_ITEM_TYPE_3",
+            FREE_ENTRANCE   => "LOC_ID_SPECIAL_ITEM_TYPE_4",
+            COMPASS         => "LOC_ID_SPECIAL_ITEM_TYPE_5",
+            GOLD_PER_KILL   => "LOC_ID_SPECIAL_ITEM_TYPE_6",
+            GLASSES         => "LOC_ID_SPECIAL_ITEM_TYPE_7",
+            EYEBALL_TOKEN   => "LOC_ID_SPECIAL_ITEM_TYPE_8",
+            SKULL_TOKEN     => "LOC_ID_SPECIAL_ITEM_TYPE_9",
+            FIREBALL_TOKEN  => "LOC_ID_SPECIAL_ITEM_TYPE_10",
+            BLOB_TOKEN      => "LOC_ID_SPECIAL_ITEM_TYPE_11",
+            LAST_BOSS_TOKEN => "LOC_ID_SPECIAL_ITEM_TYPE_12",
+            _               => "",
+        };
+    }
 
-        public static string SpriteName(byte itemType)
+    public static string SpriteName(byte itemType)
+    {
+        return itemType switch
         {
-            switch (itemType)
-            {
-                case (Revive):
-                    return "BonusRoomRingIcon_Sprite";
-                case (SpikeImmunity):
-                    return "BonusRoomBootsIcon_Sprite";
-                case (LoseCoins):
-                    return "BonusRoomHedgehogIcon_Sprite";
-                case(FreeEntrance):
-                    return "BonusRoomObolIcon_Sprite";
-                case (Compass):
-                    return "BonusRoomCompassIcon_Sprite";
-                case (GoldPerKill):
-                    return "BonusRoomBlessingIcon_Sprite";
-                case(Glasses):
-                    return "BonusRoomGlassesIcon_Sprite";
-                case (EyeballToken):
-                    return "ChallengeIcon_Eyeball_Sprite";
-                case (SkullToken):
-                    return "ChallengeIcon_Skull_Sprite";
-                case (FireballToken):
-                    return "ChallengeIcon_Fireball_Sprite";
-                case (BlobToken):
-                    return "ChallengeIcon_Blob_Sprite";
-                case (LastBossToken):
-                    return "ChallengeIcon_LastBoss_Sprite";
-            }
-            return "";
-        }
+            REVIVE          => "BonusRoomRingIcon_Sprite",
+            SPIKE_IMMUNITY  => "BonusRoomBootsIcon_Sprite",
+            LOSE_COINS      => "BonusRoomHedgehogIcon_Sprite",
+            FREE_ENTRANCE   => "BonusRoomObolIcon_Sprite",
+            COMPASS         => "BonusRoomCompassIcon_Sprite",
+            GOLD_PER_KILL   => "BonusRoomBlessingIcon_Sprite",
+            GLASSES         => "BonusRoomGlassesIcon_Sprite",
+            EYEBALL_TOKEN   => "ChallengeIcon_Eyeball_Sprite",
+            SKULL_TOKEN     => "ChallengeIcon_Skull_Sprite",
+            FIREBALL_TOKEN  => "ChallengeIcon_Fireball_Sprite",
+            BLOB_TOKEN      => "ChallengeIcon_Blob_Sprite",
+            LAST_BOSS_TOKEN => "ChallengeIcon_LastBoss_Sprite",
+            _               => "",
+        };
     }
 }

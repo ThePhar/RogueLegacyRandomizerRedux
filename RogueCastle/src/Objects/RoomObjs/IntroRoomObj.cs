@@ -9,6 +9,7 @@ using InputSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -148,7 +149,7 @@ namespace RogueCastle
             introTextObj.Add(true);
             introTextObj.Add(m_introText);
             introTextObj.Add(false);
-            Game.ScreenManager.DisplayScreen(ScreenType.Text, false, introTextObj);
+            Game.ScreenManager.DisplayScreen(ScreenType.TEXT, false, introTextObj);
             Tween.RunFunction(3, this, "Intro2");
         }
 
@@ -180,7 +181,7 @@ namespace RogueCastle
             introTextObj.Add(true);
             introTextObj.Add(m_introText);
             introTextObj.Add(false);
-            Game.ScreenManager.DisplayScreen(ScreenType.Text, false, introTextObj);
+            Game.ScreenManager.DisplayScreen(ScreenType.TEXT, false, introTextObj);
             Tween.RunFunction(4, this, "Intro4");
         }
 

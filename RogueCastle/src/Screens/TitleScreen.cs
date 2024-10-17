@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Input;
 using Randomchaos2DGodRays;
 using Microsoft.Xna.Framework.Audio;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -352,12 +353,12 @@ namespace RogueCastle
                 if (m_heroIsDead == false) // Loading a previous file.
                 {
                     if (m_loadStartingRoom == true)
-                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.StartingRoom, true);
+                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.STARTING_ROOM, true);
                     else
-                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Level, true);
+                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.LEVEL, true);
                 }
                 else // Selecting a new heir.
-                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Lineage, true);
+                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.LINEAGE, true);
             }
             else
             {
@@ -382,11 +383,11 @@ namespace RogueCastle
 
                 // Default data that needs to be restarted when starting a new game.
                 //Game.PlayerStats.Gold = 0;
-                Game.PlayerStats.HeadPiece = (byte)CDGMath.RandomInt(1, PlayerPart.NumHeadPieces);// Necessary to change his headpiece so he doesn't look like the first dude.
+                Game.PlayerStats.HeadPiece = (byte)CDGMath.RandomInt(1, PlayerPart.NUM_HEAD_PIECES);// Necessary to change his headpiece so he doesn't look like the first dude.
                 Game.PlayerStats.EnemiesKilledInRun.Clear();
 
                 (ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Lineage, SaveType.UpgradeData); // Create new player, lineage, and upgrade data.
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.StartingRoom, true);
+                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.STARTING_ROOM, true);
             }
 
             SoundManager.StopMusic(0.2f);
@@ -473,7 +474,7 @@ namespace RogueCastle
             if (m_startNewLegacy == false)
             {
                 if (Game.GlobalInput.JustPressed(InputMapType.MENU_PROFILECARD))
-                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.ProfileCard, false, null);
+                    (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.PROFILE_CARD, false, null);
             }
 
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_OPTIONS))
@@ -481,14 +482,14 @@ namespace RogueCastle
                 m_optionsEntered = true;
                 List<object> optionsData = new List<object>();
                 optionsData.Add(true);
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Options, false, optionsData);
+                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.OPTIONS, false, optionsData);
             }
 
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_CREDITS))// && InputManager.Pressed(Keys.LeftAlt, PlayerIndex.One) == false && InputManager.Pressed(Keys.RightAlt, PlayerIndex.One) == false) // Make sure not to load credits if alttabbing.                
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Credits, false, null);
+                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.CREDITS, false, null);
 
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_PROFILESELECT))
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.ProfileSelect, false, null);
+                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.PROFILE_SELECT, false, null);
 
             base.HandleInput();
         }

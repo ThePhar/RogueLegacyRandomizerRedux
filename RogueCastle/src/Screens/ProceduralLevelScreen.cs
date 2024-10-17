@@ -1554,7 +1554,7 @@ namespace RogueCastle
                 if ((m_inputMap.Pressed(INPUT_LEFTCONTROL) == false || (m_inputMap.Pressed(INPUT_LEFTCONTROL) == true && (LevelEV.RunDemoVersion == true || LevelEV.CreateRetailVersion == true))) && CameraLockedToPlayer == true)
                     UpdateCamera(); // Must be called AFTER the PhysicsManager Update() because the PhysicsManager changes the player's position depending on what he/she is colliding with.
 
-                if (Game.PlayerStats.SpecialItem == SpecialItemType.Compass && CurrentRoom.Name != "Start" && CurrentRoom.Name !="Tutorial" && CurrentRoom.Name != "Boss" && CurrentRoom.Name != "Throne" && CurrentRoom.Name != "ChallengeBoss")
+                if (Game.PlayerStats.SpecialItem == SpecialItemType.COMPASS && CurrentRoom.Name != "Start" && CurrentRoom.Name !="Tutorial" && CurrentRoom.Name != "Boss" && CurrentRoom.Name != "Throne" && CurrentRoom.Name != "ChallengeBoss")
                 {
                     if (m_compassDisplayed == false) // Display compass here
                         DisplayCompass();
@@ -1659,7 +1659,7 @@ namespace RogueCastle
         public override void HandleInput()
         {
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_PAUSE) && CurrentRoom.Name != "Ending")
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Pause, true);
+                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.PAUSE, true);
 
             if (LevelEV.EnableDebugInput == true)
                 HandleDebugInput();
@@ -2220,13 +2220,13 @@ namespace RogueCastle
             // Myopia effect.
             if (CurrentRoom.Name != "Ending")
             {
-                if ((Game.PlayerStats.HasTrait(TraitType.NEAR_SIGHTED)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                if ((Game.PlayerStats.HasTrait(TraitType.NEAR_SIGHTED)) && Game.PlayerStats.SpecialItem != SpecialItemType.GLASSES)
                 {
                     Game.GaussianBlur.InvertMask = true;
                     Game.GaussianBlur.Draw(m_finalRenderTarget, Camera, m_traitAuraRenderTarget);
                 }
                 // Hyperopia effect.
-                else if ((Game.PlayerStats.HasTrait(TraitType.FAR_SIGHTED)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                else if ((Game.PlayerStats.HasTrait(TraitType.FAR_SIGHTED)) && Game.PlayerStats.SpecialItem != SpecialItemType.GLASSES)
                 {
                     Game.GaussianBlur.InvertMask = false;
                     Game.GaussianBlur.Draw(m_finalRenderTarget, Camera, m_traitAuraRenderTarget);
@@ -2264,7 +2264,7 @@ namespace RogueCastle
 
             if (CurrentRoom.Name != "Ending")
             {
-                if ((Game.PlayerStats.TutorialComplete == false || Game.PlayerStats.HasTrait(TraitType.NOSTALGIC)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                if ((Game.PlayerStats.TutorialComplete == false || Game.PlayerStats.HasTrait(TraitType.NOSTALGIC)) && Game.PlayerStats.SpecialItem != SpecialItemType.GLASSES)
                     m_filmGrain.Draw(Camera);
             }
             Camera.End();
@@ -2302,14 +2302,14 @@ namespace RogueCastle
             if (CurrentRoom.Name != "Ending")
             {
                 // Colour blind effect.
-                if ((Game.PlayerStats.HasTrait(TraitType.COLOR_BLIND)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                if ((Game.PlayerStats.HasTrait(TraitType.COLOR_BLIND)) && Game.PlayerStats.SpecialItem != SpecialItemType.GLASSES)
                 {
                     Game.HSVEffect.Parameters["Saturation"].SetValue(0);
                     Game.HSVEffect.Parameters["Brightness"].SetValue(0);
                     Game.HSVEffect.Parameters["Contrast"].SetValue(0);
                     Camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, null, null, Game.HSVEffect);
                 }
-                else if ((Game.PlayerStats.TutorialComplete == false || Game.PlayerStats.HasTrait(TraitType.NOSTALGIC)) && Game.PlayerStats.SpecialItem != SpecialItemType.Glasses)
+                else if ((Game.PlayerStats.TutorialComplete == false || Game.PlayerStats.HasTrait(TraitType.NOSTALGIC)) && Game.PlayerStats.SpecialItem != SpecialItemType.GLASSES)
                 {
                     Camera.GraphicsDevice.SetRenderTarget(m_finalRenderTarget);
                     Game.HSVEffect.Parameters["Saturation"].SetValue(0.2f);
@@ -2531,7 +2531,7 @@ namespace RogueCastle
             dataList.Add(m_bigDiamondsCollected);
             dataList.Add(m_objKilledPlayer);
 
-            Tween.RunFunction(0, ScreenManager, "DisplayScreen", ScreenType.GameOver, true, dataList);
+            Tween.RunFunction(0, ScreenManager, "DisplayScreen", ScreenType.GAME_OVER, true, dataList);
         }
 
         public void RunCinematicBorders(float duration)
@@ -2560,7 +2560,7 @@ namespace RogueCastle
             (ScreenManager as RCScreenManager).AddRoomsToMap(m_miniMapDisplay.AddedRoomsList);
             if (isTeleporterScreen == true)
                 (ScreenManager as RCScreenManager).ActivateMapScreenTeleporter();
-            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Map, true);
+            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.MAP, true);
         }
 
         public void PauseAllEnemies()
@@ -2846,20 +2846,20 @@ namespace RogueCastle
         {
             switch (itemDropType)
             {
-                case (ItemDropType.Coin):
+                case (ItemDropType.COIN):
                     m_coinsCollected++;
                     break;
-                case (ItemDropType.MoneyBag):
+                case (ItemDropType.MONEY_BAG):
                     m_bagsCollected++;
                     break;
-                case (ItemDropType.Diamond):
+                case (ItemDropType.DIAMOND):
                     m_diamondsCollected++;
                     break;
-                case(ItemDropType.BigDiamond):
+                case(ItemDropType.BIG_DIAMOND):
                     m_bigDiamondsCollected++;
                     break;
-                case (ItemDropType.Blueprint):
-                case (ItemDropType.Redprint):
+                case (ItemDropType.BLUEPRINT):
+                case (ItemDropType.REDPRINT):
                     m_blueprintsCollected++;
                     break;
             }

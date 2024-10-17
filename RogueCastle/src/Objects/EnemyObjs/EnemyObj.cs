@@ -897,10 +897,10 @@ namespace RogueCastle
                 m_levelScreen.TextManager.DisplayNumberStringText((int)m_target.ManaGain, "LOC_ID_SKILL_SCREEN_15" /*"mp"*/, Color.RoyalBlue, new Vector2(m_target.X, m_target.Bounds.Top - 90));
             }
 
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.GoldPerKill)
+            if (Game.PlayerStats.SpecialItem == SpecialItemType.GOLD_PER_KILL)
             {
-                m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.Coin, ItemDropType.CoinAmount);
-                m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.Coin, ItemDropType.CoinAmount);
+                m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.COIN, ItemDropType.COIN_AMOUNT);
+                m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.COIN, ItemDropType.COIN_AMOUNT);
                 //m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.Coin, ItemDropType.CoinAmount);
             }
 
@@ -913,41 +913,41 @@ namespace RogueCastle
             {
                 // Chance of dropping health or mana.  Or in the case of a chicken, health.
                 if (this.Type == EnemyType.CHICKEN)
-                    m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.Health, GameEV.ITEM_HEALTHDROP_AMOUNT);
+                    m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
                 else if (CDGMath.RandomInt(1, 100) <= GameEV.ENEMY_ITEMDROP_CHANCE)
                 {
                     if (CDGMath.RandomPlusMinus() < 0)
-                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.Health, GameEV.ITEM_HEALTHDROP_AMOUNT);
+                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
                     else
-                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.Mana, GameEV.ITEM_MANADROP_AMOUNT);
+                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.MANA, GameEV.ITEM_MANADROP_AMOUNT);
                 }
 
                 if (CDGMath.RandomFloat(0, 1) <= MoneyDropChance) // 100% chance of dropping money.
                 {
                     int goldAmount = CDGMath.RandomInt(MinMoneyDropAmount, MaxMoneyDropAmount) * 10 + (int)((CDGMath.RandomFloat(MinMoneyGainPerLevel, MaxMoneyGainPerLevel) * this.Level) * 10);
 
-                    int numBigDiamonds = (int)(goldAmount / ItemDropType.BigDiamondAmount);
-                    goldAmount -= numBigDiamonds * ItemDropType.BigDiamondAmount;
+                    int numBigDiamonds = (int)(goldAmount / ItemDropType.BIG_DIAMOND_AMOUNT);
+                    goldAmount -= numBigDiamonds * ItemDropType.BIG_DIAMOND_AMOUNT;
 
-                    int numDiamonds = (int)(goldAmount / ItemDropType.DiamondAmount);
-                    goldAmount -= numDiamonds * ItemDropType.DiamondAmount;
+                    int numDiamonds = (int)(goldAmount / ItemDropType.DIAMOND_AMOUNT);
+                    goldAmount -= numDiamonds * ItemDropType.DIAMOND_AMOUNT;
 
-                    int numMoneyBags = (int)(goldAmount / ItemDropType.MoneyBagAmount);
-                    goldAmount -= numMoneyBags * ItemDropType.MoneyBagAmount;
+                    int numMoneyBags = (int)(goldAmount / ItemDropType.MONEY_BAG_AMOUNT);
+                    goldAmount -= numMoneyBags * ItemDropType.MONEY_BAG_AMOUNT;
 
-                    int numCoins = goldAmount / ItemDropType.CoinAmount;
+                    int numCoins = goldAmount / ItemDropType.COIN_AMOUNT;
 
                     for (int i = 0; i < numBigDiamonds; i++)
-                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.BigDiamond, ItemDropType.BigDiamondAmount);
+                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.BIG_DIAMOND, ItemDropType.BIG_DIAMOND_AMOUNT);
 
                     for (int i = 0; i < numDiamonds; i++)
-                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.Diamond, ItemDropType.DiamondAmount);
+                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.DIAMOND, ItemDropType.DIAMOND_AMOUNT);
 
                     for (int i = 0; i < numMoneyBags; i++)
-                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.MoneyBag, ItemDropType.MoneyBagAmount);
+                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.MONEY_BAG, ItemDropType.MONEY_BAG_AMOUNT);
 
                     for (int i = 0; i < numCoins; i++)
-                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.Coin, ItemDropType.CoinAmount);
+                        m_levelScreen.ItemDropManager.DropItem(this.Position, ItemDropType.COIN, ItemDropType.COIN_AMOUNT);
                 }
             }
 

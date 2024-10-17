@@ -270,7 +270,7 @@ namespace RogueCastle
         {
             m_specialItemIcon.Visible = false;
             m_iconHolder2.Opacity = 0.5f;
-            if (Game.PlayerStats.SpecialItem != SpecialItemType.None)
+            if (Game.PlayerStats.SpecialItem != SpecialItemType.NONE)
             {
                 m_specialItemIcon.Visible = true;
                 m_specialItemIcon.ChangeSprite(SpecialItemType.SpriteName(Game.PlayerStats.SpecialItem));

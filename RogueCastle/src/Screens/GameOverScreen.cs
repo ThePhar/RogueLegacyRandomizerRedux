@@ -184,13 +184,13 @@ namespace RogueCastle
             Game.PlayerStats.LoadStartingRoom = true;
             Game.PlayerStats.EnemiesKilledInRun.Clear();
 
-            if (Game.PlayerStats.SpecialItem != SpecialItemType.FreeEntrance &&
-                Game.PlayerStats.SpecialItem != SpecialItemType.EyeballToken &&
-                Game.PlayerStats.SpecialItem != SpecialItemType.SkullToken &&
-                Game.PlayerStats.SpecialItem != SpecialItemType.FireballToken &&
-                Game.PlayerStats.SpecialItem != SpecialItemType.BlobToken &&
-                Game.PlayerStats.SpecialItem != SpecialItemType.LastBossToken)
-                Game.PlayerStats.SpecialItem = SpecialItemType.None;
+            if (Game.PlayerStats.SpecialItem != SpecialItemType.FREE_ENTRANCE &&
+                Game.PlayerStats.SpecialItem != SpecialItemType.EYEBALL_TOKEN &&
+                Game.PlayerStats.SpecialItem != SpecialItemType.SKULL_TOKEN &&
+                Game.PlayerStats.SpecialItem != SpecialItemType.FIREBALL_TOKEN &&
+                Game.PlayerStats.SpecialItem != SpecialItemType.BLOB_TOKEN &&
+                Game.PlayerStats.SpecialItem != SpecialItemType.LAST_BOSS_TOKEN)
+                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
 
             // Ensures the prosopagnosia effect kicks in when selecting an heir.
             if (storedTraits.Trait1 == TraitType.PROSOPAGNOSIA || storedTraits.Trait2 == TraitType.PROSOPAGNOSIA)
@@ -266,7 +266,7 @@ namespace RogueCastle
             {
                 (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault((m_dialoguePlate.GetChildAt(3) as TextObj).defaultFont);
                 (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), Game.NameHelper()); //"'s Parting Words"
-                if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch((m_dialoguePlate.GetChildAt(3) as TextObj).Text, @"\p{IsCyrillic}"))
+                if (LocaleBuilder.LanguageType != LanguageType.ChineseSimple && Regex.IsMatch((m_dialoguePlate.GetChildAt(3) as TextObj).Text, @"\p{IsCyrillic}"))
                     (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault(Game.RobotoSlabFont);
             }
             catch
@@ -382,7 +382,7 @@ namespace RogueCastle
             {
                 playerSlainText.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(playerSlainText));
                 playerSlainText.Text = Game.PlayerStats.PlayerName;
-                if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch(playerSlainText.Text, @"\p{IsCyrillic}"))
+                if (LocaleBuilder.LanguageType != LanguageType.ChineseSimple && Regex.IsMatch(playerSlainText.Text, @"\p{IsCyrillic}"))
                     playerSlainText.ChangeFontNoDefault(Game.RobotoSlabFont);
             }
             catch
@@ -458,7 +458,7 @@ namespace RogueCastle
                         }
                         else //if (m_continueText.Opacity == 1)
                         {
-                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.Title, true, null);
+                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TITLE, true, null);
                             m_lockControls = true;
                         }
                     }
@@ -605,7 +605,7 @@ namespace RogueCastle
             {
                 (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault(LocaleBuilder.GetLanguageFont((m_dialoguePlate.GetChildAt(3) as TextObj)));
                 (m_dialoguePlate.GetChildAt(3) as TextObj).Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_8_NEW"), Game.NameHelper()); //"'s Parting Words"
-                if (LocaleBuilder.LanguageType != LanguageType.Chinese_Simp && Regex.IsMatch((m_dialoguePlate.GetChildAt(3) as TextObj).Text, @"\p{IsCyrillic}"))
+                if (LocaleBuilder.LanguageType != LanguageType.ChineseSimple && Regex.IsMatch((m_dialoguePlate.GetChildAt(3) as TextObj).Text, @"\p{IsCyrillic}"))
                     (m_dialoguePlate.GetChildAt(3) as TextObj).ChangeFontNoDefault(Game.RobotoSlabFont);
             }
             catch
@@ -656,7 +656,7 @@ namespace RogueCastle
                             break;
                     }
                     break;
-                case(LanguageType.Portuguese_Brazil):
+                case(LanguageType.PortugueseBrazil):
                     if (m_gameHint == 18)
                         partingWords.ScaleX = 0.9f;
                     break;
@@ -664,7 +664,7 @@ namespace RogueCastle
                     if (m_gameHint == 18)
                         partingWords.ScaleX = 0.9f;
                     break;
-                case(LanguageType.Spanish_Spain):
+                case(LanguageType.SpanishSpain):
                     if (m_gameHint == 29)
                         partingWords.ScaleX = 0.9f;
                     else if (m_gameHint == 35)

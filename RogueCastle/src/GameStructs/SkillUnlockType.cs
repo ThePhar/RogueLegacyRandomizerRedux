@@ -1,75 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿namespace RogueCastle.GameStructs;
 
-namespace RogueCastle
+public static class SkillUnlockType
 {
-    class SkillUnlockType
+    public const byte NONE           = 0;
+    public const byte BLACKSMITH     = 1;
+    public const byte ENCHANTRESS    = 2;
+    public const byte ARCHITECT      = 3;
+    public const byte NINJA          = 4;
+    public const byte BANKER         = 5;
+    public const byte SPELL_SWORD    = 6;
+    public const byte LICH           = 7;
+
+    public const byte KNIGHT_UP      = 8;
+    public const byte WIZARD_UP      = 9;
+    public const byte BARBARIAN_UP   = 10;
+    public const byte NINJA_UP       = 11;
+    public const byte ASSASSIN_UP    = 12;
+    public const byte BANKER_UP      = 13;
+    public const byte SPELL_SWORD_UP = 14;
+    public const byte LICH_UP        = 15;
+
+    public const byte DRAGON         = 16;
+    public const byte TRAITOR        = 17;
+
+    public static string DescriptionID(byte unlockType)
     {
-        public const byte None = 0;
-        public const byte Blacksmith = 1;
-        public const byte Enchantress = 2;
-        public const byte Architect = 3;
-        public const byte Ninja = 4;
-        public const byte Banker = 5;
-        public const byte SpellSword = 6;
-        public const byte Lich = 7;
-
-        public const byte KnightUp = 8;
-        public const byte WizardUp = 9;
-        public const byte BarbarianUp = 10;
-        public const byte NinjaUp = 11;
-        public const byte AssassinUp = 12;
-        public const byte BankerUp = 13;
-        public const byte SpellSwordUp = 14;
-        public const byte LichUp = 15;
-
-        public const byte Dragon = 16;
-        public const byte Traitor = 17;
-
-        public static string DescriptionID(byte unlockType)
+        return unlockType switch
         {
-            switch (unlockType)
-            {
-                case (Blacksmith):
-                    return "LOC_ID_SKILL_UNLOCK_1";
-                case (Enchantress):
-                    return "LOC_ID_SKILL_UNLOCK_2";
-                case (Architect):
-                    return "LOC_ID_SKILL_UNLOCK_3";
-                case (Ninja):
-                    return "LOC_ID_SKILL_UNLOCK_4";
-                case (Banker):
-                    return "LOC_ID_SKILL_UNLOCK_5";
-                case (SpellSword):
-                    return "LOC_ID_SKILL_UNLOCK_6";
-                case (Lich):
-                    return "LOC_ID_SKILL_UNLOCK_7";
-                case (KnightUp):
-                    return "LOC_ID_SKILL_UNLOCK_8";
-                case (WizardUp):
-                    return "LOC_ID_SKILL_UNLOCK_9";
-                case (BarbarianUp):
-                    return "LOC_ID_SKILL_UNLOCK_10";
-                case (NinjaUp):
-                    return "LOC_ID_SKILL_UNLOCK_11";
-                case (AssassinUp):
-                    return "LOC_ID_SKILL_UNLOCK_12";
-                case (BankerUp):
-                    return "LOC_ID_SKILL_UNLOCK_13";
-                case (SpellSwordUp):
-                    return "LOC_ID_SKILL_UNLOCK_14";
-                case (LichUp):
-                    return "LOC_ID_SKILL_UNLOCK_15";
-                case(Dragon):
-                    return "LOC_ID_SKILL_UNLOCK_16";
-                case (Traitor):
-                    return "LOC_ID_SKILL_UNLOCK_17";
-            }
-
-            return "";
-        }
+            BLACKSMITH     => "LOC_ID_SKILL_UNLOCK_1",
+            ENCHANTRESS    => "LOC_ID_SKILL_UNLOCK_2",
+            ARCHITECT      => "LOC_ID_SKILL_UNLOCK_3",
+            NINJA          => "LOC_ID_SKILL_UNLOCK_4",
+            BANKER         => "LOC_ID_SKILL_UNLOCK_5",
+            SPELL_SWORD    => "LOC_ID_SKILL_UNLOCK_6",
+            LICH           => "LOC_ID_SKILL_UNLOCK_7",
+            KNIGHT_UP      => "LOC_ID_SKILL_UNLOCK_8",
+            WIZARD_UP      => "LOC_ID_SKILL_UNLOCK_9",
+            BARBARIAN_UP   => "LOC_ID_SKILL_UNLOCK_10",
+            NINJA_UP       => "LOC_ID_SKILL_UNLOCK_11",
+            ASSASSIN_UP    => "LOC_ID_SKILL_UNLOCK_12",
+            BANKER_UP      => "LOC_ID_SKILL_UNLOCK_13",
+            SPELL_SWORD_UP => "LOC_ID_SKILL_UNLOCK_14",
+            LICH_UP        => "LOC_ID_SKILL_UNLOCK_15",
+            DRAGON         => "LOC_ID_SKILL_UNLOCK_16",
+            TRAITOR        => "LOC_ID_SKILL_UNLOCK_17",
+            _              => "",
+        };
     }
-
 }

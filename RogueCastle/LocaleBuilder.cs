@@ -7,6 +7,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameStructs;
 using RogueCastle.Resources;
 
 namespace RogueCastle;
@@ -32,17 +33,17 @@ internal static class LocaleBuilder
                     LanguageType.English           => new CultureInfo("en-US", false),
                     LanguageType.French            => new CultureInfo("fr", false),
                     LanguageType.German            => new CultureInfo("de", false),
-                    LanguageType.Portuguese_Brazil => new CultureInfo("pt-BR", false),
-                    LanguageType.Spanish_Spain     => new CultureInfo("es-ES", false),
+                    LanguageType.PortugueseBrazil => new CultureInfo("pt-BR", false),
+                    LanguageType.SpanishSpain     => new CultureInfo("es-ES", false),
                     LanguageType.Russian           => new CultureInfo("ru-RU", false),
                     LanguageType.Polish            => new CultureInfo("pl", false),
-                    LanguageType.Chinese_Simp      => new CultureInfo("zh-CHS", false),
+                    LanguageType.ChineseSimple      => new CultureInfo("zh-CHS", false),
                     _                              => new CultureInfo("en-US", false),
                 };
 
                 newCI.NumberFormat.CurrencyDecimalSeparator = ".";
                 LocStrings.Culture = newCI;
-                _spaceSeparator = _languageType == LanguageType.Chinese_Simp ? "" : " ";
+                _spaceSeparator = _languageType == LanguageType.ChineseSimple ? "" : " ";
             }
             else
             {
@@ -58,7 +59,7 @@ internal static class LocaleBuilder
 
     public static string GetResourceStringCustomFemale(this string stringID, bool isFemale, bool forceMale = false)
     {
-        if (forceMale || LanguageType == LanguageType.English || LanguageType == LanguageType.Chinese_Simp)
+        if (forceMale || LanguageType == LanguageType.English || LanguageType == LanguageType.ChineseSimple)
         {
             isFemale = false;
         }
@@ -122,7 +123,7 @@ internal static class LocaleBuilder
             if (LanguageType != LanguageType.English)
             {
                 textObj.Text = "";
-                textObj.isLogographic = LanguageType == LanguageType.Chinese_Simp;
+                textObj.isLogographic = LanguageType == LanguageType.ChineseSimple;
                 textObj.ChangeFontNoDefault(GetLanguageFont(textObj));
             }
         }
@@ -154,7 +155,7 @@ internal static class LocaleBuilder
 
         return LanguageType switch
         {
-            LanguageType.Chinese_Simp => Game.NotoSansSCFont,
+            LanguageType.ChineseSimple => Game.NotoSansSCFont,
             LanguageType.Russian      => Game.RobotoSlabFont,
             _                         => font,
         };
@@ -219,7 +220,7 @@ internal static class LocaleBuilder
         {
             textObj.ChangeFontNoDefault(GetLanguageFont(textObj));
             textObj.Text = GetResourceString(textObj.locStringID);
-            textObj.isLogographic = LanguageType == LanguageType.Chinese_Simp;
+            textObj.isLogographic = LanguageType == LanguageType.ChineseSimple;
         }
 
         Screen[] screenList = Game.ScreenManager.GetScreens();
