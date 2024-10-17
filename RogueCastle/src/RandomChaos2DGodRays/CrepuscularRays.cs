@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Randomchaos2DGodRays
+namespace RogueCastle.RandomChaos2DGodRays
 {
     public class CrepuscularRays : BasePostProcessingEffect
     {
@@ -85,7 +80,7 @@ namespace Randomchaos2DGodRays
         }
 
         
-        public CrepuscularRays(Game game, Vector2 lightScreenSourcePos, string lightSourceImage, float lightSourceSize, float density, float decay, float weight, float exposure)
+        public CrepuscularRays(Microsoft.Xna.Framework.Game game, Vector2 lightScreenSourcePos, string lightSourceImage, float lightSourceSize, float density, float decay, float weight, float exposure)
             : base(game)
         {
             lsMask = new LightSourceMask(game, lightScreenSourcePos, lightSourceImage, lightSourceSize);

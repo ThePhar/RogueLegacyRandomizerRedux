@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Randomchaos2DGodRays
+namespace RogueCastle.RandomChaos2DGodRays
 {
     public class BasePostProcess
     {
@@ -18,7 +13,7 @@ namespace Randomchaos2DGodRays
         public bool Enabled = true;
         protected Effect effect;
 
-        protected Game Game;
+        protected Microsoft.Xna.Framework.Game Game;
         public RenderTarget2D newScene;
 
         ScreenQuad sq;
@@ -30,7 +25,7 @@ namespace Randomchaos2DGodRays
             get { return (SpriteBatch)Game.Services.GetService(typeof(SpriteBatch)); }
         }
 
-        public BasePostProcess(Game game)
+        public BasePostProcess(Microsoft.Xna.Framework.Game game)
         {
             Game = game;
 

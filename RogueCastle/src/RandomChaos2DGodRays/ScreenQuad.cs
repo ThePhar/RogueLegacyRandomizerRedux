@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Randomchaos2DGodRays
+namespace RogueCastle.RandomChaos2DGodRays
 {
     public class ScreenQuad
     {
@@ -15,9 +10,9 @@ namespace Randomchaos2DGodRays
         short[] ib;
         VertexDeclaration vertDec;
 
-        Game Game;
+        Microsoft.Xna.Framework.Game Game;
 
-        public ScreenQuad(Game game)
+        public ScreenQuad(Microsoft.Xna.Framework.Game game)
         {
             Game = game;
             corners = new VertexPositionTexture[4];

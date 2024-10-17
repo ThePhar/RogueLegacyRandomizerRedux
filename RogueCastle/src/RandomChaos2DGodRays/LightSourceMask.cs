@@ -1,13 +1,7 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Randomchaos2DGodRays
+namespace RogueCastle.RandomChaos2DGodRays
 {
     public class LightSourceMask : BasePostProcess
     {
@@ -16,7 +10,7 @@ namespace Randomchaos2DGodRays
         public string lightSourceasset;
         public float lightSize = 1500;
 
-        public LightSourceMask(Game game, Vector2 sourcePos, string lightSourceasset, float lightSize)
+        public LightSourceMask(Microsoft.Xna.Framework.Game game, Vector2 sourcePos, string lightSourceasset, float lightSize)
             : base(game)
         {
             UsesVertexShader = true;

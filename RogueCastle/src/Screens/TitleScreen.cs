@@ -9,10 +9,10 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
-using Randomchaos2DGodRays;
 using Microsoft.Xna.Framework.Audio;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.RandomChaos2DGodRays;
 
 namespace RogueCastle
 {

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Randomchaos2DGodRays
+namespace RogueCastle.RandomChaos2DGodRays
 {
     public class LightRay : BasePostProcess
     {
@@ -16,7 +11,7 @@ namespace Randomchaos2DGodRays
         public float Weight = 1.0f;
         public float Exposure = .15f;
 
-        public LightRay(Game game, Vector2 sourcePos, float density, float decay, float weight, float exposure)
+        public LightRay(Microsoft.Xna.Framework.Game game, Vector2 sourcePos, float density, float decay, float weight, float exposure)
             : base(game)
         {
             lighScreenSourcePos = sourcePos;

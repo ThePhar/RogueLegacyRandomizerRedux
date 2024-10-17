@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.IO;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Randomchaos2DGodRays
+namespace RogueCastle.RandomChaos2DGodRays
 {
     public class PostProcessingManager
     {
-        protected Game Game;
+        protected Microsoft.Xna.Framework.Game Game;
         public Texture2D Scene;
 
         public RenderTarget2D newScene;
@@ -26,7 +22,7 @@ namespace Randomchaos2DGodRays
             get { return m_spriteBatch; }
         }
 
-        public PostProcessingManager(Game game, SpriteBatch spriteBatch)
+        public PostProcessingManager(Microsoft.Xna.Framework.Game game, SpriteBatch spriteBatch)
         {
             Game = game;
             m_spriteBatch = spriteBatch;

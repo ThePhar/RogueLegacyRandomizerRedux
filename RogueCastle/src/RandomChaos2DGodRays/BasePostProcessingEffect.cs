@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Randomchaos2DGodRays
+namespace RogueCastle.RandomChaos2DGodRays
 {
     public class BasePostProcessingEffect
     {
@@ -15,9 +11,9 @@ namespace Randomchaos2DGodRays
         public Texture2D orgScene;
         protected List<BasePostProcess> postProcesses = new List<BasePostProcess>();
 
-        protected Game Game;
+        protected Microsoft.Xna.Framework.Game Game;
 
-        public BasePostProcessingEffect(Game game)
+        public BasePostProcessingEffect(Microsoft.Xna.Framework.Game game)
         {
             Game = game;
         }
