@@ -12,12 +12,14 @@ namespace RogueCastle.Managers;
 
 public class SaveGameManager(Game game)
 {
+    private const string FileNameLineage = "RogueLegacyLineage.rcdat";
+    private const string FileNameMap = "RogueLegacyMap.rcdat";
+    private const string FileNameMapData = "RogueLegacyMapDat.rcdat";
+    private const string FileNamePlayer = "RogueLegacyPlayer.rcdat";
+    private const string FileNameUpgrades = "RogueLegacyBP.rcdat";
+    private const string StorageContainerName = "RogueLegacyStorageContainer";
+
     private bool _autosaveLoaded;
-    private string _fileNameLineage = "RogueLegacyLineage.rcdat";
-    private string _fileNameMap = "RogueLegacyMap.rcdat";
-    private string _fileNameMapData = "RogueLegacyMapDat.rcdat";
-    private string _fileNamePlayer = "RogueLegacyPlayer.rcdat";
-    private string _fileNameUpgrades = "RogueLegacyBP.rcdat";
     private int _saveFailCounter;
     private StorageContainer _storageContainer;
 
@@ -32,112 +34,42 @@ public class SaveGameManager(Game game)
         PerformDirectoryCheck();
     }
 
-    private void GetStorageContainer()
-    {
-        if (_storageContainer == null || _storageContainer.IsDisposed)
-        {
-            var aSyncResult = StorageDevice.BeginShowSelector(null, null);
-            aSyncResult.AsyncWaitHandle.WaitOne();
-            var storageDevice = StorageDevice.EndShowSelector(aSyncResult);
-            aSyncResult.AsyncWaitHandle.Close();
-            aSyncResult = storageDevice.BeginOpenContainer("RogueLegacyStorageContainer", null, null);
-            aSyncResult.AsyncWaitHandle.WaitOne();
-            _storageContainer = storageDevice.EndOpenContainer(aSyncResult);
-            aSyncResult.AsyncWaitHandle.Close();
-        }
-    }
-
-    // This code was added to create profile directories in case the computer doesn't have them.
-    // Older versions of this game does not use directories.
-    private void PerformDirectoryCheck()
-    {
-        GetStorageContainer();
-
-        // Creating the directories.
-        if (_storageContainer.DirectoryExists("Profile1") == false)
-        {
-            _storageContainer.CreateDirectory("Profile1");
-
-            // Copying all files from the base directory into Profile1.
-            CopyFile(_storageContainer, _fileNamePlayer, "Profile1");
-            CopyFile(_storageContainer, "AutoSave_" + _fileNamePlayer, "Profile1");
-
-            CopyFile(_storageContainer, _fileNameUpgrades, "Profile1");
-            CopyFile(_storageContainer, "AutoSave_" + _fileNameUpgrades, "Profile1");
-
-            CopyFile(_storageContainer, _fileNameMap, "Profile1");
-            CopyFile(_storageContainer, "AutoSave_" + _fileNameMap, "Profile1");
-
-            CopyFile(_storageContainer, _fileNameMapData, "Profile1");
-            CopyFile(_storageContainer, "AutoSave_" + _fileNameMapData, "Profile1");
-
-            CopyFile(_storageContainer, _fileNameLineage, "Profile1");
-            CopyFile(_storageContainer, "AutoSave_" + _fileNameLineage, "Profile1");
-        }
-
-        if (_storageContainer.DirectoryExists("Profile2") == false)
-        {
-            _storageContainer.CreateDirectory("Profile2");
-        }
-
-        if (_storageContainer.DirectoryExists("Profile3") == false)
-        {
-            _storageContainer.CreateDirectory("Profile3");
-        }
-
-        _storageContainer.Dispose();
-        _storageContainer = null;
-    }
-
-    private void CopyFile(StorageContainer storageContainer, string fileName, string profileName)
-    {
-        if (storageContainer.FileExists(fileName))
-        {
-            var fileToCopy = storageContainer.OpenFile(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var copiedFile = storageContainer.CreateFile(profileName + "/" + fileName);
-            fileToCopy.CopyTo(copiedFile);
-            fileToCopy.Close();
-            copiedFile.Close();
-        }
-    }
-
     public void SaveFiles(params SaveType[] saveList)
     {
-        if (LevelEV.DisableSaving == false)
+        if (LevelEV.DisableSaving)
         {
-            GetStorageContainer();
-            try
-            {
-                foreach (var saveType in saveList)
-                {
-                    SaveData(saveType, false);
-                }
+            return;
+        }
 
+        GetStorageContainer();
+        try
+        {
+            foreach (var saveType in saveList)
+            {
+                SaveData(saveType, false);
+            }
+
+            _saveFailCounter = 0;
+        }
+        catch
+        {
+            if (_saveFailCounter > 2)
+            {
+                var manager = Game.ScreenManager;
+                manager.DialogueScreen.SetDialogue("Save File Error Antivirus");
+                Tween.RunFunction(0.25f, manager, "DisplayScreen", ScreenType.DIALOGUE, true, typeof(List<object>));
                 _saveFailCounter = 0;
             }
-            //catch (IOException e)
-            catch
+            else
             {
-                if (_saveFailCounter > 2)
-                {
-                    var manager = Game.ScreenManager;
-                    manager.DialogueScreen.SetDialogue("Save File Error Antivirus");
-                    //manager.DisplayScreen(ScreenType.Dialogue, false, null);
-                    Tween.RunFunction(0.25f, manager, "DisplayScreen", ScreenType.DIALOGUE, true, typeof(List<object>));
-                    _saveFailCounter = 0;
-                }
-                else
-                {
-                    _saveFailCounter++;
-                }
+                _saveFailCounter++;
             }
-            finally
+        }
+        finally
+        {
+            if (_storageContainer is { IsDisposed: false })
             {
-                if (_storageContainer != null && _storageContainer.IsDisposed == false)
-                {
-                    _storageContainer.Dispose();
-                }
-
+                _storageContainer.Dispose();
                 _storageContainer = null;
             }
         }
@@ -145,17 +77,19 @@ public class SaveGameManager(Game game)
 
     public void SaveBackupFiles(params SaveType[] saveList)
     {
-        if (LevelEV.DisableSaving == false)
+        if (LevelEV.DisableSaving)
         {
-            GetStorageContainer();
-            foreach (var saveType in saveList)
-            {
-                SaveData(saveType, true);
-            }
-
-            _storageContainer.Dispose();
-            _storageContainer = null;
+            return;
         }
+
+        GetStorageContainer();
+        foreach (var saveType in saveList)
+        {
+            SaveData(saveType, true);
+        }
+
+        _storageContainer.Dispose();
+        _storageContainer = null;
     }
 
     public void SaveAllFileTypes(bool saveBackup)
@@ -166,108 +100,97 @@ public class SaveGameManager(Game game)
         }
         else
         {
-            SaveBackupFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData,
-                SaveType.Lineage);
+            SaveBackupFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage);
         }
     }
 
     public void LoadFiles(ProceduralLevelScreen level, params SaveType[] loadList)
     {
-        if (LevelEV.EnableBackupSaving)
+        if (LevelEV.DisableSaving)
+        {
+            return;
+        }
+
+        if (!LevelEV.EnableBackupSaving)
         {
             GetStorageContainer();
-
-            var currentType = SaveType.None;
-
-            try
+            foreach (var loadType in loadList)
             {
-                if (LevelEV.DisableSaving == false)
-                {
-                    foreach (var loadType in loadList)
-                    {
-                        currentType = loadType;
-                        LoadData(loadType, level);
-                    }
-                }
+                LoadData(loadType, level);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine("Save File Error: " + e.Message);
-                // Only perform autosave loading if you're not loading the map.  This is because the map is loaded on a separate thread, so it needs to
-                // manually call ForceBackup() once the thread has exited.
-                if (currentType != SaveType.Map && currentType != SaveType.MapData && currentType != SaveType.None)
-                {
-                    if (_autosaveLoaded == false)
-                    {
-                        var manager = Game.ScreenManager;
-                        manager.DialogueScreen.SetDialogue("Save File Error");
-                        //manager.DialogueScreen.SetDialogue("Save File Error 2");
-                        Game.gameIsCorrupt = true;
-                        manager.DialogueScreen.SetConfirmEndHandler(this, "LoadAutosave");
-                        //manager.DialogueScreen.SetConfirmEndHandler(m_game, "Exit");
-                        manager.DisplayScreen(ScreenType.DIALOGUE, false);
-                        // Just a small trigger to make sure the game knows the file is corrupt, and to stop doing whatever it's doing.
-                        Game.PlayerStats.HeadPiece = 0;
-                    }
-                    else
-                    {
-                        _autosaveLoaded = false;
-                        var manager = Game.ScreenManager;
-                        manager.DialogueScreen.SetDialogue("Save File Error 2");
-                        //manager.DialogueScreen.SetConfirmEndHandler(this, "StartNewGame");
-                        Game.gameIsCorrupt = true;
-                        manager.DialogueScreen.SetConfirmEndHandler(game, "Exit");
-                        manager.DisplayScreen(ScreenType.DIALOGUE, false);
 
-                        // Just a small trigger to make sure the game knows the file is corrupt, and to stop doing whatever it's doing.
-                        Game.PlayerStats.HeadPiece = 0;
-                    }
+            _storageContainer.Dispose();
+            _storageContainer = null;
+            return;
+        }
+
+        GetStorageContainer();
+
+        var currentType = SaveType.None;
+        try
+        {
+            foreach (var loadType in loadList)
+            {
+                currentType = loadType;
+                LoadData(loadType, level);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($@"Save File Error: {e.Message}");
+            // Only perform autosave loading if you're not loading the map.  This is because the map is loaded on a separate thread, so it needs to
+            // manually call ForceBackup() once the thread has exited.
+            if (currentType != SaveType.Map && currentType != SaveType.MapData && currentType != SaveType.None)
+            {
+                if (_autosaveLoaded == false)
+                {
+                    Game.ScreenManager.DialogueScreen.SetDialogue("Save File Error");
+                    Game.gameIsCorrupt = true;
+                    Game.ScreenManager.DialogueScreen.SetConfirmEndHandler(this, "LoadAutosave");
                 }
                 else
                 {
-                    throw new Exception(); // This triggers the try/catch block in the loading screen
-                }
-            }
-            finally
-            {
-                if (_storageContainer != null && _storageContainer.IsDisposed == false)
-                {
-                    _storageContainer.Dispose();
-                }
-            }
-        }
-        else
-        {
-            if (LevelEV.DisableSaving == false)
-            {
-                GetStorageContainer();
-                foreach (var loadType in loadList)
-                {
-                    LoadData(loadType, level);
+                    _autosaveLoaded = false;
+                    Game.ScreenManager.DialogueScreen.SetDialogue("Save File Error 2");
+                    Game.gameIsCorrupt = true;
+                    Game.ScreenManager.DialogueScreen.SetConfirmEndHandler(game, "Exit");
                 }
 
+                Game.ScreenManager.DisplayScreen(ScreenType.DIALOGUE, false);
+
+                // Just a small trigger to make sure the game knows the file is corrupt, and to stop doing whatever it's doing.
+                Game.PlayerStats.HeadPiece = 0;
+            }
+            else
+            {
+                // This triggers the try/catch block in the loading screen.
+                throw new Exception();
+            }
+        }
+        finally
+        {
+            if (_storageContainer is { IsDisposed: false })
+            {
                 _storageContainer.Dispose();
-                _storageContainer = null;
             }
         }
     }
 
     public void ForceBackup()
     {
-        if (_storageContainer != null && _storageContainer.IsDisposed == false)
+        if (_storageContainer is { IsDisposed: false })
         {
             _storageContainer.Dispose();
         }
 
-        var manager = Game.ScreenManager;
-        manager.DialogueScreen.SetDialogue("Save File Error");
-        manager.DialogueScreen.SetConfirmEndHandler(this, "LoadAutosave");
-        manager.DisplayScreen(ScreenType.DIALOGUE, false);
+        Game.ScreenManager.DialogueScreen.SetDialogue("Save File Error");
+        Game.ScreenManager.DialogueScreen.SetConfirmEndHandler(this, "LoadAutosave");
+        Game.ScreenManager.DisplayScreen(ScreenType.DIALOGUE, false);
     }
 
     public void LoadAutosave()
     {
-        Console.WriteLine("Save file corrupted");
+        Console.WriteLine(@"Save file corrupted");
         SkillSystem.ResetAllTraits();
         Game.PlayerStats.Dispose();
         Game.PlayerStats = new PlayerStats();
@@ -329,8 +252,7 @@ public class SaveGameManager(Game game)
         }
         else
         {
-            ClearBackupFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData,
-                SaveType.Lineage);
+            ClearBackupFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage);
         }
     }
 
@@ -339,43 +261,43 @@ public class SaveGameManager(Game game)
         switch (deleteType)
         {
             case SaveType.PlayerData:
-                if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNamePlayer))
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNamePlayer}"))
                 {
-                    _storageContainer.DeleteFile("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNamePlayer);
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNamePlayer}");
                 }
 
                 break;
             case SaveType.UpgradeData:
-                if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameUpgrades))
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameUpgrades}"))
                 {
-                    _storageContainer.DeleteFile("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameUpgrades);
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameUpgrades}");
                 }
 
                 break;
             case SaveType.Map:
-                if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameMap))
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMap}"))
                 {
-                    _storageContainer.DeleteFile("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameMap);
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMap}");
                 }
 
                 break;
             case SaveType.MapData:
-                if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameMapData))
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMapData}"))
                 {
-                    _storageContainer.DeleteFile("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameMapData);
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMapData}");
                 }
 
                 break;
             case SaveType.Lineage:
-                if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameLineage))
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}"))
                 {
-                    _storageContainer.DeleteFile("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameLineage);
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}");
                 }
 
                 break;
         }
 
-        Console.WriteLine("Save file type " + deleteType + " deleted.");
+        Console.WriteLine($@"Save file type {deleteType} deleted.");
     }
 
     private void DeleteBackupData(SaveType deleteType)
@@ -383,190 +305,181 @@ public class SaveGameManager(Game game)
         switch (deleteType)
         {
             case SaveType.PlayerData:
-                if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                                 _fileNamePlayer))
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNamePlayer}"))
                 {
-                    _storageContainer.DeleteFile("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                                 _fileNamePlayer);
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNamePlayer}");
                 }
 
                 break;
             case SaveType.UpgradeData:
-                if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                                 _fileNameUpgrades))
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameUpgrades}"))
                 {
-                    _storageContainer.DeleteFile("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                                 _fileNameUpgrades);
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameUpgrades}");
                 }
 
                 break;
             case SaveType.Map:
-                if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                                 _fileNameMap))
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameMap}"))
                 {
-                    _storageContainer.DeleteFile("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                                 _fileNameMap);
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameMap}");
                 }
 
                 break;
             case SaveType.MapData:
-                if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                                 _fileNameMapData))
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameMapData}"))
                 {
-                    _storageContainer.DeleteFile("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                                 _fileNameMapData);
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameMapData}");
                 }
 
                 break;
             case SaveType.Lineage:
-                if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                                 _fileNameLineage))
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameLineage}"))
                 {
-                    _storageContainer.DeleteFile("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                                 _fileNameLineage);
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameLineage}");
                 }
 
                 break;
         }
 
-        Console.WriteLine("Backup save file type " + deleteType + " deleted.");
+        Console.WriteLine($@"Backup save file type {deleteType} deleted.");
     }
 
     private void LoadBackups()
     {
-        Console.WriteLine("Replacing save file with back up saves");
+        Console.WriteLine(@"Replacing save file with back up saves");
         GetStorageContainer();
-        if (_storageContainer.FileExists(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNamePlayer) &&
-            _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNamePlayer))
+
+        // Player Data
+        if (
+            _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNamePlayer}") &&
+            _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNamePlayer}")
+        )
         {
             var fileToCopy = _storageContainer.OpenFile(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNamePlayer, FileMode.Open,
-                FileAccess.Read, FileShare.Read); // Open the backup
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNamePlayer}",
+                FileMode.Open, FileAccess.Read, FileShare.Read); // Open the backup
 
-            // Copy the backup prior to corruption revert.  This is in case the loading didn't work, and all data is lost (since backups get overwritten once people start playing again.
-            var backupCopy = _storageContainer.CreateFile("Profile" + Game.GameConfig.ProfileSlot + "/" +
-                                                          "AutoSaveBACKUP_" + _fileNamePlayer);
+            // Copy the backup prior to corruption revert. This is in case the loading didn't work, and all data is
+            // lost (since backups get overwritten once people start playing again).
+            var backupCopy = _storageContainer.CreateFile(
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSaveBACKUP_{FileNamePlayer}");
             fileToCopy.CopyTo(backupCopy);
             backupCopy.Close();
             fileToCopy.Close();
 
             fileToCopy = _storageContainer.OpenFile(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNamePlayer, FileMode.Open,
-                FileAccess.Read, FileShare.Read); // Open the backup
-            var fileToOverride =
-                _storageContainer.CreateFile("Profile" + Game.GameConfig.ProfileSlot + "/" +
-                                             _fileNamePlayer); // Create a new file
-            fileToCopy.CopyTo(fileToOverride); // Copy the backup to the new file.
-
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNamePlayer}",
+                FileMode.Open, FileAccess.Read, FileShare.Read); // Open the backup
+            var fileToOverride = _storageContainer.CreateFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNamePlayer}");
+            fileToCopy.CopyTo(fileToOverride);
             fileToCopy.Close();
             fileToOverride.Close();
         }
 
-        if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                         _fileNameUpgrades) && _storageContainer.FileExists("Profile" +
-                Game.GameConfig.ProfileSlot + "/" + _fileNameUpgrades))
+        // Upgrade Data
+        if (
+            _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameUpgrades}") &&
+            _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameUpgrades}")
+        )
         {
             var fileToCopy = _storageContainer.OpenFile(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNameUpgrades, FileMode.Open,
-                FileAccess.Read, FileShare.Read); // Open the backup
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameUpgrades}",
+                FileMode.Open, FileAccess.Read, FileShare.Read); // Open the backup
 
-            // Copy the backup prior to corruption revert.  This is in case the loading didn't work, and all data is lost (since backups get overwritten once people start playing again.
-            var backupCopy = _storageContainer.CreateFile("Profile" + Game.GameConfig.ProfileSlot + "/" +
-                                                          "AutoSaveBACKUP_" + _fileNameUpgrades);
+            // Copy the backup prior to corruption revert. This is in case the loading didn't work, and all data is
+            // lost (since backups get overwritten once people start playing again).
+            var backupCopy = _storageContainer.CreateFile(
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSaveBACKUP_{FileNameUpgrades}");
             fileToCopy.CopyTo(backupCopy);
             backupCopy.Close();
             fileToCopy.Close();
 
             fileToCopy = _storageContainer.OpenFile(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNameUpgrades, FileMode.Open,
-                FileAccess.Read, FileShare.Read); // Open the backup
-            var fileToOverride =
-                _storageContainer.CreateFile("Profile" + Game.GameConfig.ProfileSlot + "/" +
-                                             _fileNameUpgrades); // Create a new file
-            fileToCopy.CopyTo(fileToOverride); // Copy the backup to the new file.
-
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameUpgrades}",
+                FileMode.Open, FileAccess.Read, FileShare.Read); // Open the backup
+            var fileToOverride = _storageContainer.CreateFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameUpgrades}");
+            fileToCopy.CopyTo(fileToOverride);
             fileToCopy.Close();
             fileToOverride.Close();
         }
 
-        if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                         _fileNameMap) && _storageContainer.FileExists("Profile" +
-                Game.GameConfig.ProfileSlot + "/" + _fileNameMap))
+        // Map Data
+        if (
+            _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameMap}") &&
+            _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMap}")
+        )
         {
             var fileToCopy = _storageContainer.OpenFile(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNameMap, FileMode.Open,
-                FileAccess.Read, FileShare.Read); // Open the backup
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameMap}",
+                FileMode.Open, FileAccess.Read, FileShare.Read); // Open the backup
 
-            // Copy the backup prior to corruption revert.  This is in case the loading didn't work, and all data is lost (since backups get overwritten once people start playing again.
-            var backupCopy = _storageContainer.CreateFile("Profile" + Game.GameConfig.ProfileSlot + "/" +
-                                                          "AutoSaveBACKUP_" + _fileNameMap);
+            // Copy the backup prior to corruption revert. This is in case the loading didn't work, and all data is
+            // lost (since backups get overwritten once people start playing again).
+            var backupCopy = _storageContainer.CreateFile(
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSaveBACKUP_{FileNameMap}");
             fileToCopy.CopyTo(backupCopy);
             backupCopy.Close();
             fileToCopy.Close();
 
             fileToCopy = _storageContainer.OpenFile(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNameMap, FileMode.Open,
-                FileAccess.Read, FileShare.Read); // Open the backup
-            var fileToOverride =
-                _storageContainer.CreateFile("Profile" + Game.GameConfig.ProfileSlot + "/" +
-                                             _fileNameMap); // Create a new file
-            fileToCopy.CopyTo(fileToOverride); // Copy the backup to the new file.
-
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameMap}",
+                FileMode.Open, FileAccess.Read, FileShare.Read); // Open the backup
+            var fileToOverride = _storageContainer.CreateFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMap}");
+            fileToCopy.CopyTo(fileToOverride);
             fileToCopy.Close();
             fileToOverride.Close();
         }
 
-        if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                         _fileNameMapData) && _storageContainer.FileExists("Profile" +
-                Game.GameConfig.ProfileSlot + "/" + _fileNameMapData))
+        // Map Data... Data
+        if (
+            _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameMapData}") &&
+            _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMapData}")
+        )
         {
             var fileToCopy = _storageContainer.OpenFile(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNameMapData, FileMode.Open,
-                FileAccess.Read, FileShare.Read); // Open the backup
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameMapData}",
+                FileMode.Open, FileAccess.Read, FileShare.Read); // Open the backup
 
-            // Copy the backup prior to corruption revert.  This is in case the loading didn't work, and all data is lost (since backups get overwritten once people start playing again.
-            var backupCopy = _storageContainer.CreateFile("Profile" + Game.GameConfig.ProfileSlot + "/" +
-                                                          "AutoSaveBACKUP_" + _fileNameMapData);
+            // Copy the backup prior to corruption revert. This is in case the loading didn't work, and all data is
+            // lost (since backups get overwritten once people start playing again).
+            var backupCopy = _storageContainer.CreateFile(
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSaveBACKUP_{FileNameMapData}");
             fileToCopy.CopyTo(backupCopy);
             backupCopy.Close();
             fileToCopy.Close();
 
             fileToCopy = _storageContainer.OpenFile(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNameMapData, FileMode.Open,
-                FileAccess.Read, FileShare.Read); // Open the backup
-            var fileToOverride =
-                _storageContainer.CreateFile("Profile" + Game.GameConfig.ProfileSlot + "/" +
-                                             _fileNameMapData); // Create a new file
-            fileToCopy.CopyTo(fileToOverride); // Copy the backup to the new file.
-
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameMapData}",
+                FileMode.Open, FileAccess.Read, FileShare.Read); // Open the backup
+            var fileToOverride = _storageContainer.CreateFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMapData}");
+            fileToCopy.CopyTo(fileToOverride);
             fileToCopy.Close();
             fileToOverride.Close();
         }
 
-        if (_storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" +
-                                         _fileNameLineage) && _storageContainer.FileExists("Profile" +
-                Game.GameConfig.ProfileSlot + "/" + _fileNameLineage))
+        // Lineage Data
+        if (
+            _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameLineage}") &&
+            _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}")
+        )
         {
             var fileToCopy = _storageContainer.OpenFile(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNameLineage, FileMode.Open,
-                FileAccess.Read, FileShare.Read); // Open the backup
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameLineage}",
+                FileMode.Open, FileAccess.Read, FileShare.Read); // Open the backup
 
-            // Copy the backup prior to corruption revert.  This is in case the loading didn't work, and all data is lost (since backups get overwritten once people start playing again.
-            var backupCopy = _storageContainer.CreateFile("Profile" + Game.GameConfig.ProfileSlot + "/" +
-                                                          "AutoSaveBACKUP_" + _fileNameLineage);
+            // Copy the backup prior to corruption revert.  This is in case the loading didn't work, and all data is
+            // lost (since backups get overwritten once people start playing again).
+            var backupCopy = _storageContainer.CreateFile(
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSaveBACKUP_{FileNameLineage}");
             fileToCopy.CopyTo(backupCopy);
             backupCopy.Close();
             fileToCopy.Close();
 
             fileToCopy = _storageContainer.OpenFile(
-                "Profile" + Game.GameConfig.ProfileSlot + "/" + "AutoSave_" + _fileNameLineage, FileMode.Open,
-                FileAccess.Read, FileShare.Read); // Open the backup
-            var fileToOverride =
-                _storageContainer.CreateFile("Profile" + Game.GameConfig.ProfileSlot + "/" +
-                                             _fileNameLineage); // Create a new file
-            fileToCopy.CopyTo(fileToOverride); // Copy the backup to the new file.
-
+                $"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameLineage}",
+                FileMode.Open, FileAccess.Read, FileShare.Read); // Open the backup
+            var fileToOverride = _storageContainer.CreateFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}");
+            fileToCopy.CopyTo(fileToOverride);
             fileToCopy.Close();
             fileToOverride.Close();
         }
@@ -597,12 +510,12 @@ public class SaveGameManager(Game game)
                 break;
         }
 
-        Console.WriteLine("\nData type " + saveType + " saved!");
+        Console.WriteLine('\n' + $@"Data type {saveType} saved!");
     }
 
     private void SavePlayerData(bool saveBackup)
     {
-        var fileName = _fileNamePlayer;
+        var fileName = FileNamePlayer;
         if (saveBackup)
         {
             fileName = fileName.Insert(0, "AutoSave_");
@@ -902,7 +815,7 @@ public class SaveGameManager(Game game)
 
     private void SaveUpgradeData(bool saveBackup)
     {
-        var fileName = _fileNameUpgrades;
+        var fileName = FileNameUpgrades;
         if (saveBackup)
         {
             fileName = fileName.Insert(0, "AutoSave_");
@@ -1033,7 +946,7 @@ public class SaveGameManager(Game game)
 
     private void SaveMap(bool saveBackup)
     {
-        var fileName = _fileNameMap;
+        var fileName = FileNameMap;
         if (saveBackup)
         {
             fileName = fileName.Insert(0, "AutoSave_");
@@ -1086,7 +999,8 @@ public class SaveGameManager(Game game)
 
                     // Store the number of rooms in the level first.
 
-                    writer.Write(levelToSave.RoomList.Count - 12); // Subtracting the 5 boss rooms + the tutorial room + compass room + 5 challenge rooms.
+                    writer.Write(levelToSave.RoomList.Count -
+                                 12); // Subtracting the 5 boss rooms + the tutorial room + compass room + 5 challenge rooms.
 
                     if (LevelEV.ShowSaveLoadDebugText)
                     {
@@ -1183,7 +1097,7 @@ public class SaveGameManager(Game game)
 
     private void SaveMapData(bool saveBackup)
     {
-        var fileName = _fileNameMapData;
+        var fileName = FileNameMapData;
         if (saveBackup)
         {
             fileName = fileName.Insert(0, "AutoSave_");
@@ -1382,7 +1296,7 @@ public class SaveGameManager(Game game)
 
     private void SaveLineageData(bool saveBackup)
     {
-        var fileName = _fileNameLineage;
+        var fileName = FileNameLineage;
         if (saveBackup)
         {
             fileName = fileName.Insert(0, "AutoSave_");
@@ -1593,7 +1507,7 @@ public class SaveGameManager(Game game)
     private void LoadPlayerData()
     {
         using (var stream = _storageContainer.OpenFile(
-                   "Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNamePlayer, FileMode.Open, FileAccess.Read,
+                   "Profile" + Game.GameConfig.ProfileSlot + "/" + FileNamePlayer, FileMode.Open, FileAccess.Read,
                    FileShare.Read))
         {
             using (var reader = new BinaryReader(stream))
@@ -1877,7 +1791,7 @@ public class SaveGameManager(Game game)
     private void LoadUpgradeData()
     {
         using (var stream = _storageContainer.OpenFile(
-                   "Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameUpgrades, FileMode.Open, FileAccess.Read,
+                   "Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameUpgrades, FileMode.Open, FileAccess.Read,
                    FileShare.Read))
         {
             using (var reader = new BinaryReader(stream))
@@ -2015,7 +1929,7 @@ public class SaveGameManager(Game game)
     {
         GetStorageContainer();
         ProceduralLevelScreen loadedLevel = null;
-        using (var stream = _storageContainer.OpenFile("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameMap,
+        using (var stream = _storageContainer.OpenFile("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameMap,
                    FileMode.Open, FileAccess.Read, FileShare.Read))
         {
             using (var reader = new BinaryReader(stream))
@@ -2070,7 +1984,7 @@ public class SaveGameManager(Game game)
         //createdLevel.InitializeChests(true); // Can't remember why this was put here.  It was disabled because it was shifting chests twice, screwing up their positions.
 
         using (var stream = _storageContainer.OpenFile(
-                   "Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameMapData, FileMode.Open, FileAccess.Read,
+                   "Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameMapData, FileMode.Open, FileAccess.Read,
                    FileShare.Read))
         {
             using (var reader = new BinaryReader(stream))
@@ -2304,7 +2218,7 @@ public class SaveGameManager(Game game)
     private void LoadLineageData()
     {
         using (var stream = _storageContainer.OpenFile(
-                   "Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameLineage, FileMode.Open, FileAccess.Read,
+                   "Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameLineage, FileMode.Open, FileAccess.Read,
                    FileShare.Read))
         {
             using (var reader = new BinaryReader(stream))
@@ -2449,13 +2363,6 @@ public class SaveGameManager(Game game)
 
     public bool FileExists(SaveType saveType)
     {
-        var disposeStorage = true;
-        if (_storageContainer != null && _storageContainer.IsDisposed == false)
-        {
-            disposeStorage =
-                false; // Don't dispose the storage container because FileExists() was called from LoadData().
-        }
-
         GetStorageContainer();
 
         var fileExists = false;
@@ -2463,38 +2370,35 @@ public class SaveGameManager(Game game)
         {
             case SaveType.PlayerData:
                 fileExists =
-                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNamePlayer);
+                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNamePlayer);
                 break;
             case SaveType.UpgradeData:
                 fileExists =
-                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameUpgrades);
+                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameUpgrades);
                 break;
             case SaveType.Map:
                 fileExists =
-                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameMap);
+                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameMap);
                 break;
             case SaveType.MapData:
                 fileExists =
-                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameMapData);
+                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameMapData);
                 break;
             case SaveType.Lineage:
                 fileExists =
-                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + _fileNameLineage);
+                    _storageContainer.FileExists("Profile" + Game.GameConfig.ProfileSlot + "/" + FileNameLineage);
                 break;
         }
 
-        if (disposeStorage)
+        if (_storageContainer is { IsDisposed: false })
         {
-            _storageContainer.Dispose();
-            _storageContainer = null;
+            return fileExists;
         }
 
-        return fileExists;
-    }
+        _storageContainer.Dispose();
+        _storageContainer = null;
 
-    public StorageContainer GetContainer()
-    {
-        return _storageContainer;
+        return fileExists;
     }
 
     public void GetSaveHeader(
@@ -2516,9 +2420,9 @@ public class SaveGameManager(Game game)
 
         GetStorageContainer();
 
-        if (_storageContainer.FileExists("Profile" + profile + "/" + _fileNamePlayer))
+        if (_storageContainer.FileExists("Profile" + profile + "/" + FileNamePlayer))
         {
-            using (var stream = _storageContainer.OpenFile("Profile" + profile + "/" + _fileNamePlayer, FileMode.Open,
+            using (var stream = _storageContainer.OpenFile("Profile" + profile + "/" + FileNamePlayer, FileMode.Open,
                        FileAccess.Read, FileShare.Read))
             {
                 using (var reader = new BinaryReader(stream))
@@ -2585,9 +2489,9 @@ public class SaveGameManager(Game game)
             }
         }
 
-        if (_storageContainer.FileExists("Profile" + profile + "/" + _fileNameUpgrades))
+        if (_storageContainer.FileExists("Profile" + profile + "/" + FileNameUpgrades))
         {
-            using (var stream = _storageContainer.OpenFile("Profile" + profile + "/" + _fileNameUpgrades,
+            using (var stream = _storageContainer.OpenFile("Profile" + profile + "/" + FileNameUpgrades,
                        FileMode.Open, FileAccess.Read, FileShare.Read))
             {
                 using (var reader = new BinaryReader(stream))
@@ -2639,17 +2543,79 @@ public class SaveGameManager(Game game)
         _storageContainer.Dispose();
         _storageContainer = null;
     }
-}
 
-public enum SavingState
-{
-    NotSaving,
-    ReadyToSelectStorageDevice,
-    SelectingStorageDevice,
+    private void GetStorageContainer()
+    {
+        if (_storageContainer is { IsDisposed: false })
+        {
+            return;
+        }
 
-    ReadyToOpenStorageContainer, // once we have a storage device start here
-    OpeningStorageContainer,
-    ReadyToSave,
+        var asyncResult = StorageDevice.BeginShowSelector(null, null);
+        asyncResult.AsyncWaitHandle.WaitOne();
+        var storageDevice = StorageDevice.EndShowSelector(asyncResult);
+        asyncResult.AsyncWaitHandle.Close();
+        asyncResult = storageDevice.BeginOpenContainer(StorageContainerName, null, null);
+        asyncResult.AsyncWaitHandle.WaitOne();
+        _storageContainer = storageDevice.EndOpenContainer(asyncResult);
+        asyncResult.AsyncWaitHandle.Close();
+    }
+
+    // This code was added to create profile directories in case the computer doesn't have them.
+    // Older versions of this game do not use directories.
+    private void PerformDirectoryCheck()
+    {
+        GetStorageContainer();
+
+        // Creating the directories.
+        if (_storageContainer.DirectoryExists("Profile1") == false)
+        {
+            _storageContainer.CreateDirectory("Profile1");
+
+            // Copying all files from the base directory into Profile1.
+            CopyFile(_storageContainer, FileNamePlayer, "Profile1");
+            CopyFile(_storageContainer, "AutoSave_" + FileNamePlayer, "Profile1");
+
+            CopyFile(_storageContainer, FileNameUpgrades, "Profile1");
+            CopyFile(_storageContainer, "AutoSave_" + FileNameUpgrades, "Profile1");
+
+            CopyFile(_storageContainer, FileNameMap, "Profile1");
+            CopyFile(_storageContainer, "AutoSave_" + FileNameMap, "Profile1");
+
+            CopyFile(_storageContainer, FileNameMapData, "Profile1");
+            CopyFile(_storageContainer, "AutoSave_" + FileNameMapData, "Profile1");
+
+            CopyFile(_storageContainer, FileNameLineage, "Profile1");
+            CopyFile(_storageContainer, "AutoSave_" + FileNameLineage, "Profile1");
+        }
+
+        if (_storageContainer.DirectoryExists("Profile2") == false)
+        {
+            _storageContainer.CreateDirectory("Profile2");
+        }
+
+        if (_storageContainer.DirectoryExists("Profile3") == false)
+        {
+            _storageContainer.CreateDirectory("Profile3");
+        }
+
+        _storageContainer.Dispose();
+        _storageContainer = null;
+    }
+
+    private static void CopyFile(StorageContainer storageContainer, string fileName, string profileName)
+    {
+        if (!storageContainer.FileExists(fileName))
+        {
+            return;
+        }
+
+        var fileToCopy = storageContainer.OpenFile(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+        var copiedFile = storageContainer.CreateFile(profileName + "/" + fileName);
+        fileToCopy.CopyTo(copiedFile);
+        fileToCopy.Close();
+        copiedFile.Close();
+    }
 }
 
 public enum SaveType
