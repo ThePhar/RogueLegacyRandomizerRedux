@@ -11,7 +11,7 @@ namespace RogueCastle
 {
     public class SpellSwapRoomObj : BonusRoomObj
     {
-        public SpellType Spell { get; set; }
+        public byte Spell { get; set; }
         private SpriteObj m_pedestal;
         private SpriteObj m_icon;
         private float m_iconYPos;
@@ -60,14 +60,14 @@ namespace RogueCastle
             // Selecting random spell.
             if (Game.PlayerStats.Class != ClassType.Dragon && Game.PlayerStats.Class != ClassType.Traitor)
             {
-                SpellType[] spellList = ClassType.GetSpellList(Game.PlayerStats.Class);
+                byte[] spellList = ClassType.GetSpellList(Game.PlayerStats.Class);
 
                 // Code to make sure spell swap doesn't interfere with savantism.
                 do
                 {
                     Spell = spellList[CDGMath.RandomInt(0, spellList.Length - 1)];
                 } while ((Game.PlayerStats.HasTrait(TraitType.SAVANT)) &&
-                (Spell == SpellType.Translocator || Spell == SpellType.TimeStop || Spell == SpellType.DamageShield));
+                (Spell == SpellType.TRANSLOCATOR || Spell == SpellType.TIME_STOP || Spell == SpellType.DAMAGE_SHIELD));
 
                 Array.Clear(spellList, 0, spellList.Length);
                 ID = (int) Spell;
@@ -76,19 +76,19 @@ namespace RogueCastle
             {
                 if (Game.PlayerStats.Class == ClassType.Dragon)
                 {
-                    ID = (int) SpellType.DragonFire;
-                    Spell = SpellType.DragonFire;
+                    ID = (int) SpellType.DRAGON_FIRE;
+                    Spell = SpellType.DRAGON_FIRE;
                 }
                 else if (Game.PlayerStats.Class == ClassType.Traitor)
                 {
-                    ID = (int) SpellType.RapidDagger;
-                    Spell = SpellType.RapidDagger;
+                    ID = (int) SpellType.RAPID_DAGGER;
+                    Spell = SpellType.RAPID_DAGGER;
                 }
             }
                 
             //Spell = ClassType.GetSpellList(Game.PlayerStats.Class)[0];
 
-            m_icon.ChangeSprite(Spell.Icon());
+            m_icon.ChangeSprite(SpellEV.Icon(Spell));
             //RoomCompleted = true;
         }
 
@@ -100,13 +100,13 @@ namespace RogueCastle
                 {
                     RandomizeItem();
                 } while ((Spell == Game.PlayerStats.Spell && Game.PlayerStats.Class != ClassType.Dragon && Game.PlayerStats.Class != ClassType.Traitor) // Make sure the room doesn't randomize to the item the player already has.
-                    || (Spell == SpellType.DragonFire && Game.PlayerStats.Class != ClassType.Dragon) // Make sure Dragon fire is not set as the spell for a locked castle and changed class.
-                    || (Spell == SpellType.RapidDagger && Game.PlayerStats.Class != ClassType.Traitor)); // Make sure rapid dagger is not set as the spell for a locked castle and changed class.
+                    || (Spell == SpellType.DRAGON_FIRE && Game.PlayerStats.Class != ClassType.Dragon) // Make sure Dragon fire is not set as the spell for a locked castle and changed class.
+                    || (Spell == SpellType.RAPID_DAGGER && Game.PlayerStats.Class != ClassType.Traitor)); // Make sure rapid dagger is not set as the spell for a locked castle and changed class.
             }
             else if (ID != -1)
             {
-                Spell = (SpellType)ID;
-                m_icon.ChangeSprite(Spell.Icon());
+                Spell = (byte)ID;
+                m_icon.ChangeSprite(SpellEV.Icon(Spell));
 
                 if (RoomCompleted == true)
                 {

@@ -1234,7 +1234,7 @@ namespace RogueCastle
                 ProjectileObj proj = m_levelScreen.ProjectileManager.FireProjectile(orbData);
                 proj.AltX = angle; // AltX and AltY are used as holders to hold the projectiles angle and distance from player respectively.
                 proj.AltY = projectileDistance;
-                proj.Spell = SpellType.DamageShield;
+                proj.Spell = SpellType.DAMAGE_SHIELD;
                 proj.AccelerationXEnabled = false;
                 proj.AccelerationYEnabled = false;
                 proj.IgnoreBoundsCheck = true;

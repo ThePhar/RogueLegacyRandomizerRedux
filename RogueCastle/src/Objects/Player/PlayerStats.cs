@@ -26,7 +26,7 @@ namespace RogueCastle
         public int CurrentMana { get; set; }
         public byte Age { get; set; }
         public byte ChildAge { get; set; }
-        public SpellType Spell { get; set; }
+        public byte Spell { get; set; }
         public byte Class { get; set; }
         public byte SpecialItem { get; set; }
         public Traits Traits { get; set; }
@@ -109,7 +109,7 @@ namespace RogueCastle
         // Adding Save file revision numbers.
         public int RevisionNumber { get; set; }
 
-        public Vector3 WizardSpellList { get; set; }
+        public byte[] WizardSpellList { get; set; }
 
         // These arrays hold the blueprint unlock state of each item.
         private List<byte[]> m_blueprintArray;
@@ -154,7 +154,7 @@ namespace RogueCastle
             PlayerName = "Lee";//"Sir Johannes";
             SpecialItem = SpecialItemType.None;
             Class = ClassType.Knight;
-            Spell = SpellType.Dagger;
+            Spell = SpellType.DAGGER;
             Age = 30;
             ChildAge = 5;
             LichHealthMod = 1; // Default is 1
@@ -167,7 +167,7 @@ namespace RogueCastle
             for (int i = 0; i < EnemyType.TOTAL; i++)
                 EnemiesKilledList.Add(new Vector4());
 
-            WizardSpellList = new Vector3((byte)SpellType.Dagger, (byte)SpellType.Axe, (byte)SpellType.Boomerang);
+            WizardSpellList = [SpellType.DAGGER, SpellType.AXE, SpellType.BOOMERANG];
 
             Traits = (TraitType.NONE, TraitType.NONE);
             Gold = 0;

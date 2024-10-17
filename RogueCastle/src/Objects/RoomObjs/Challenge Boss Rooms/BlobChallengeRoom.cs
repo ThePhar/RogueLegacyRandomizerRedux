@@ -108,7 +108,7 @@ namespace RogueCastle
 
             Game.PlayerStats.PlayerName = "Echidna";
             Game.PlayerStats.Class = ClassType.Dragon;
-            Game.PlayerStats.Spell = SpellType.DragonFireNeo;
+            Game.PlayerStats.Spell = SpellType.DRAGON_FIRE_NEO;
             Game.PlayerStats.IsFemale = true;
            
             Game.PlayerStats.BonusHealth = 450 / 5;//325/ 5; //1050//266 / 5;

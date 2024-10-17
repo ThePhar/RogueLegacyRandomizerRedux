@@ -698,13 +698,13 @@ namespace RogueCastle
                     intersectPt = Rectangle.Intersect(thisBox.AbsParent.Bounds, otherBox.AbsParent.Bounds).Center;
                 Vector2 impactPosition = new Vector2(intersectPt.X, intersectPt.Y);
 
-                if (projectile == null || (projectile != null && projectile.Spell != SpellType.Shout))
+                if (projectile == null || (projectile != null && projectile.Spell != SpellType.SHOUT))
                 {
                     if (projectile != null || (otherBoxParent.CollisionTypeTag != GameTypes.CollisionType_GLOBAL_DAMAGE_WALL ||
                         (otherBoxParent.CollisionTypeTag == GameTypes.CollisionType_GLOBAL_DAMAGE_WALL && this.IsWeighted == true))) // Make sure flying enemies don't hit global damage walls.
                     HitEnemy(damage, impactPosition, isPlayer);
                 }
-                else if (projectile != null && projectile.Spell == SpellType.Shout) // Fus roh dah logic.
+                else if (projectile != null && projectile.Spell == SpellType.SHOUT) // Fus roh dah logic.
                 {
                     if (CanBeKnockedBack == true && IsPaused == false)
                     {

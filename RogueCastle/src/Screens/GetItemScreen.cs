@@ -204,9 +204,9 @@ namespace RogueCastle
                     m_itemFoundText.Text = LocaleBuilder.GetString(SpecialItemType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.Spell):
-                    m_itemSprite.ChangeSprite(((SpellType)m_itemInfo.X).Icon());
+                    m_itemSprite.ChangeSprite(SpellEV.Icon((byte)m_itemInfo.X));
                     m_itemFoundSprite.ChangeSprite("SpellFoundText_Sprite");
-                    m_itemFoundText.Text = LocaleBuilder.GetString(((SpellType)m_itemInfo.X).ToStringID(), m_itemFoundText);
+                    m_itemFoundText.Text = LocaleBuilder.GetString(SpellEV.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.FountainPiece):
                     m_itemSprite.ChangeSprite(GetMedallionImage((int)m_itemInfo.X)); // This needs to change to reflect the stat stored in m_itemInfo.X
@@ -485,18 +485,18 @@ namespace RogueCastle
                     if (InputManager.JustPressed(Keys.OemOpenBrackets, null))
                     {
                         m_itemInfo.X--;
-                        if (m_itemInfo.X < (byte) SpellType.Dagger)
-                            m_itemInfo.X = (byte) SpellType.DragonFireNeo;
+                        if (m_itemInfo.X < (byte) SpellType.DAGGER)
+                            m_itemInfo.X = (byte) SpellType.DRAGON_FIRE_NEO;
                     }
                     else if (InputManager.JustPressed(Keys.OemCloseBrackets, null))
                     {
                         m_itemInfo.X++;
-                        if (m_itemInfo.X > (byte) SpellType.DragonFireNeo)
-                            m_itemInfo.X = (byte) SpellType.Dagger;
+                        if (m_itemInfo.X > (byte) SpellType.DRAGON_FIRE_NEO)
+                            m_itemInfo.X = (byte) SpellType.DAGGER;
                     }
 
                     if (previousItemInfo != m_itemInfo)
-                        m_itemFoundText.Text = LocaleBuilder.GetString(((SpellType)m_itemInfo.X).ToStringID(), m_itemFoundText);
+                        m_itemFoundText.Text = LocaleBuilder.GetString(SpellEV.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
 
                     break;
                 case (GetItemType.FountainPiece):
@@ -664,7 +664,7 @@ namespace RogueCastle
                     m_itemFoundText.Text = LocaleBuilder.GetString(SpecialItemType.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.Spell):
-                    m_itemFoundText.Text = LocaleBuilder.GetString(((SpellType)m_itemInfo.X).ToStringID(), m_itemFoundText);
+                    m_itemFoundText.Text = LocaleBuilder.GetString(SpellEV.ToStringID((byte)m_itemInfo.X), m_itemFoundText);
                     break;
                 case (GetItemType.FountainPiece):
                     if (m_itemInfo.X == ItemDropType.FountainPiece5)

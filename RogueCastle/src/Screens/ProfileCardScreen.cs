@@ -88,7 +88,7 @@ namespace RogueCastle
             m_tombStoneSprite.Scale = new Vector2(3, 3);
             m_tombStoneSprite.OutlineWidth = 2;
 
-            m_spellIcon = new SpriteObj(SpellType.Bounce.Icon());
+            m_spellIcon = new SpriteObj(SpellEV.Icon(SpellType.BOUNCE));
             m_spellIcon.Position = new Vector2(350, 295);
             m_spellIcon.OutlineWidth = 2;
             m_spellIcon.ForceDraw = true;
@@ -300,7 +300,7 @@ namespace RogueCastle
             SoundManager.PlaySound("StatCard_In");
             LoadCardColour();
 
-            m_spellIcon.ChangeSprite(Game.PlayerStats.Spell.Icon());
+            m_spellIcon.ChangeSprite(SpellEV.Icon(Game.PlayerStats.Spell));
             string[] randBG = new string[] { "CardCastleBG_Sprite", "CardGardenBG_Sprite", "CardDungeonBG_Sprite", "CardTowerBG_Sprite" };
             m_playerBG.ChangeSprite(randBG[CDGMath.RandomInt(0, 3)]);
             randBG = null;

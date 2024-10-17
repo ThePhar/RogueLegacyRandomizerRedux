@@ -14,7 +14,7 @@ namespace RogueCastle
     {
         private GameObj m_line;
         private List<BreakableObj> m_targetList;
-        private SpellType m_storedPlayerSpell;
+        private byte m_storedPlayerSpell;
         private int m_daggersThrown = 0;
         private float m_storedPlayerMana;
 
@@ -232,7 +232,7 @@ namespace RogueCastle
 
             Tween.AddEndHandlerToLastTween(this, "CheckPlayerReward");
             m_isPlayingGame = false;
-            Game.PlayerStats.Spell = SpellType.None;
+            Game.PlayerStats.Spell = SpellType.NONE;
             Player.AttachedLevel.UpdatePlayerSpellIcon();
             this.RoomCompleted = true;
         }
@@ -282,7 +282,7 @@ namespace RogueCastle
 
         private void EquipPlayer()
         {
-            Game.PlayerStats.Spell = SpellType.Dagger;
+            Game.PlayerStats.Spell = SpellType.DAGGER;
             Player.AttachedLevel.UpdatePlayerSpellIcon();
             Player.CurrentMana = Player.MaxMana;
         }
@@ -313,7 +313,7 @@ namespace RogueCastle
                     if (m_daggersThrown <= m_numTries)
                         m_daggerIcons.GetChildAt(m_numTries - m_daggersThrown).Visible = false;
                     if (m_daggersThrown > m_numTries)
-                        Game.PlayerStats.Spell = SpellType.None;
+                        Game.PlayerStats.Spell = SpellType.NONE;
                 }
             }
         }

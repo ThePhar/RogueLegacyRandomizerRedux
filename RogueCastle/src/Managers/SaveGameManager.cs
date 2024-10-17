@@ -599,9 +599,9 @@ namespace RogueCastle
                     writer.Write(Game.PlayerStats.TotalHoursPlayed);
                     
                     // Saving the wizard spell list.
-                    writer.Write((byte)Game.PlayerStats.WizardSpellList.X);
-                    writer.Write((byte)Game.PlayerStats.WizardSpellList.Y);
-                    writer.Write((byte)Game.PlayerStats.WizardSpellList.Z);
+                    writer.Write(Game.PlayerStats.WizardSpellList[0]);
+                    writer.Write(Game.PlayerStats.WizardSpellList[1]);
+                    writer.Write(Game.PlayerStats.WizardSpellList[2]);
 
                     if (LevelEV.ShowSaveLoadDebugText == true)
                     {
@@ -662,9 +662,9 @@ namespace RogueCastle
                         Console.WriteLine("Player has spoken to last boss: " + Game.PlayerStats.SpokenToLastBoss);
                         Console.WriteLine("Is Hardcore mode: " + Game.PlayerStats.HardcoreMode);
                         Console.WriteLine("Total Hours Played " + Game.PlayerStats.TotalHoursPlayed);
-                        Console.WriteLine("Wizard Spell 1: " + Game.PlayerStats.WizardSpellList.X);
-                        Console.WriteLine("Wizard Spell 2: " + Game.PlayerStats.WizardSpellList.Y);
-                        Console.WriteLine("Wizard Spell 3: " + Game.PlayerStats.WizardSpellList.Z);
+                        Console.WriteLine("Wizard Spell 1: " + Game.PlayerStats.WizardSpellList[0]);
+                        Console.WriteLine("Wizard Spell 2: " + Game.PlayerStats.WizardSpellList[1]);
+                        Console.WriteLine("Wizard Spell 3: " + Game.PlayerStats.WizardSpellList[2]);
                     }
 
                     Console.WriteLine("///// ENEMY LIST DATA - BEGIN SAVING /////");
@@ -1351,7 +1351,7 @@ namespace RogueCastle
                     Game.PlayerStats.CurrentMana = reader.ReadInt32();
                     Game.PlayerStats.Age = reader.ReadByte();
                     Game.PlayerStats.ChildAge = reader.ReadByte();
-                    Game.PlayerStats.Spell = (SpellType)reader.ReadByte();
+                    Game.PlayerStats.Spell = reader.ReadByte();
                     Game.PlayerStats.Class = reader.ReadByte();
                     Game.PlayerStats.SpecialItem = reader.ReadByte();
                     Game.PlayerStats.Traits = (reader.ReadByte(), reader.ReadByte());
@@ -1421,7 +1421,7 @@ namespace RogueCastle
                     byte wizardSpell2 = reader.ReadByte();
                     byte wizardSpell3 = reader.ReadByte();
 
-                    Game.PlayerStats.WizardSpellList = new Vector3(wizardSpell1, wizardSpell2, wizardSpell3);
+                    Game.PlayerStats.WizardSpellList = [wizardSpell1, wizardSpell2, wizardSpell3];
 
                     if (LevelEV.ShowSaveLoadDebugText == true)
                     {
@@ -1483,9 +1483,9 @@ namespace RogueCastle
                         Console.WriteLine("Player has spoken to last boss: " + Game.PlayerStats.SpokenToLastBoss);
                         Console.WriteLine("Is Hardcore mode: " + Game.PlayerStats.HardcoreMode);
                         Console.WriteLine("Total Hours Played " + Game.PlayerStats.TotalHoursPlayed);
-                        Console.WriteLine("Wizard Spell 1: " + Game.PlayerStats.WizardSpellList.X);
-                        Console.WriteLine("Wizard Spell 2: " + Game.PlayerStats.WizardSpellList.Y);
-                        Console.WriteLine("Wizard Spell 3: " + Game.PlayerStats.WizardSpellList.Z);
+                        Console.WriteLine("Wizard Spell 1: " + Game.PlayerStats.WizardSpellList[0]);
+                        Console.WriteLine("Wizard Spell 2: " + Game.PlayerStats.WizardSpellList[1]);
+                        Console.WriteLine("Wizard Spell 3: " + Game.PlayerStats.WizardSpellList[2]);
                     }
 
                     Console.WriteLine("///// ENEMY LIST DATA - BEGIN LOADING /////");
@@ -1978,7 +1978,7 @@ namespace RogueCastle
                         PlayerLineageData data = new PlayerLineageData();
 
                         data.Name = reader.ReadString();
-                        data.Spell = (SpellType)reader.ReadByte();
+                        data.Spell = reader.ReadByte();
                         data.Class = reader.ReadByte();
                         data.HeadPiece = reader.ReadByte();
                         data.ChestPiece = reader.ReadByte();

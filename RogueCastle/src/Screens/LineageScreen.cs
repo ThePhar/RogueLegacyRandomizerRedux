@@ -269,10 +269,10 @@ namespace RogueCastle
             }
 
             TextObj spellName = m_descriptionPlate.GetChildAt(8) as TextObj;
-            spellName.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_8") + " - " + LocaleBuilder.GetResourceString(selectedObj.Spell.ToStringID());
+            spellName.Text = LocaleBuilder.GetResourceString("LOC_ID_LINEAGE_SCREEN_8") + " - " + LocaleBuilder.GetResourceString(SpellEV.ToStringID(selectedObj.Spell));
             spellName.Y = spellY;
             KeyIconTextObj spellDescription = m_descriptionPlate.GetChildAt(9) as KeyIconTextObj;
-            spellDescription.Text = "[Input:" + InputMapType.PLAYER_SPELL1 + "]  " + LocaleBuilder.GetResourceString(selectedObj.Spell.DescriptionID());
+            spellDescription.Text = "[Input:" + InputMapType.PLAYER_SPELL1 + "]  " + LocaleBuilder.GetResourceString(SpellEV.DescriptionID(selectedObj.Spell));
             spellDescription.Y = spellName.Y + 30;
             spellDescription.WordWrap(340);
         }
@@ -804,18 +804,18 @@ namespace RogueCastle
             var previousSpell = spell;
             if (InputManager.JustPressed(Keys.OemOpenBrackets, PlayerIndex.One))
             {
-                if (spell == SpellType.None)
-                    spell = SpellType.DragonFireNeo;
+                if (spell == SpellType.NONE)
+                    spell = SpellType.DRAGON_FIRE_NEO;
                 else
                     spell--;
             }
             else if (InputManager.JustPressed(Keys.OemCloseBrackets, PlayerIndex.One))
                 spell++;
 
-            if (spell < SpellType.None)
-                spell = SpellType.DragonFireNeo;
-            else if (spell > SpellType.DragonFireNeo)
-                spell = SpellType.None;
+            if (spell < SpellType.NONE)
+                spell = SpellType.DRAGON_FIRE_NEO;
+            else if (spell > SpellType.DRAGON_FIRE_NEO)
+                spell = SpellType.NONE;
 
             if (spell != previousSpell)
             {

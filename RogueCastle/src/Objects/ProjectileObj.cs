@@ -36,7 +36,7 @@ namespace RogueCastle
         public bool IsDying { get; internal set; }
 
         // Property used exclusively for player spells.
-        public SpellType Spell { get; set; }
+        public byte Spell { get; set; }
         public float AltX { get; set; }
         public float AltY { get; set; }
         public float BlinkTime { get; set; }
@@ -112,7 +112,7 @@ namespace RogueCastle
                 float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
                 switch (Spell)
                 {
-                    case (SpellType.TimeBomb):
+                    case (SpellType.TIME_BOMB):
                         if (BlinkTime >= AltX && AltX != 0)
                         {
                             Blink(Color.Red, 0.1f);
@@ -125,7 +125,7 @@ namespace RogueCastle
                                 this.ActivateEffect();
                         }
                         break;
-                    case (SpellType.Nuke):
+                    case (SpellType.NUKE):
                         // Smoke effect
                         if (AltY > 0)
                         {
@@ -185,7 +185,7 @@ namespace RogueCastle
                             RunDestroyAnimation(false);
 
                         break;
-                    case (SpellType.DamageShield):
+                    case (SpellType.DAMAGE_SHIELD):
                         PlayerObj player = Game.ScreenManager.Player;
                         if (player.CastingDamageShield == true || Source is EnemyObj) // Special handling for the last boss since he casts this spell too.
                         {
@@ -195,7 +195,7 @@ namespace RogueCastle
                         else
                             this.KillProjectile();
                         break;
-                    case (SpellType.Bounce):
+                    case (SpellType.BOUNCE):
                         this.AccelerationX = 0;
                         this.AccelerationY = 0;
                         this.HeadingX = (float)Math.Cos(this.Orientation);
@@ -209,7 +209,7 @@ namespace RogueCastle
                                 ActivateEffect();
                         }
                         break;
-                    case (SpellType.Boomerang):
+                    case (SpellType.BOOMERANG):
                         this.AccelerationX -= (AltX * 60 * elapsedTime);
                         if (this.AltY > 0)
                         {
@@ -218,7 +218,7 @@ namespace RogueCastle
                                 ActivateEffect();
                         }
                         break;
-                    case (SpellType.Laser):
+                    case (SpellType.LASER):
                         if (AltX > 0)
                         {
                             AltX -= elapsedTime;
@@ -289,7 +289,7 @@ namespace RogueCastle
         public override void CollisionResponse(CollisionBox thisBox, CollisionBox otherBox, int collisionResponseType)
         {
             // Special handling for shout.
-            if (this.Spell == SpellType.Shout)
+            if (this.Spell == SpellType.SHOUT)
             {
                 ProjectileObj proj = otherBox.AbsParent as ProjectileObj;
                 if (proj != null && proj.CollisionTypeTag != GameTypes.CollisionType_PLAYER && proj.CanBeFusRohDahed == true)
@@ -302,12 +302,12 @@ namespace RogueCastle
             {
                 switch (Spell)
                 {
-                    case (SpellType.Displacer):
+                    case (SpellType.DISPLACER):
                         base.CollisionResponse(thisBox, otherBox, collisionResponseType);
                         this.IsWeighted = false;
                         ActivateEffect();
                         break;
-                    case (SpellType.Bounce):
+                    case (SpellType.BOUNCE):
                         Vector2 mtd = CollisionMath.RotatedRectIntersectsMTD(thisBox.AbsRect, thisBox.AbsRotation, Vector2.Zero, otherBox.AbsRect, otherBox.AbsRotation, Vector2.Zero);
                         if (mtd != Vector2.Zero)
                         {
@@ -322,7 +322,7 @@ namespace RogueCastle
                             //this.Heading = newHeading;
                         }
                         break;
-                    case (SpellType.TimeBomb): // Proper logic for weighted objects.
+                    case (SpellType.TIME_BOMB): // Proper logic for weighted objects.
                         if (terrain.CollidesBottom == true && terrain.CollidesTop == true && terrain.CollidesLeft == true && terrain.CollidesRight == true)
                         {
                             Vector2 mtd2 = CollisionMath.RotatedRectIntersectsMTD(thisBox.AbsRect, thisBox.AbsRotation, Vector2.Zero, otherBox.AbsRect, otherBox.AbsRotation, Vector2.Zero);
@@ -365,7 +365,7 @@ namespace RogueCastle
             {
                 switch (Spell)
                 {
-                    case (SpellType.Nuke):
+                    case (SpellType.NUKE):
                         if (otherBox.AbsParent == this.Target) // Ensures each crow only hits its target.
                             this.CollisionTypeTag = GameTypes.CollisionType_PLAYER;
                         break;
@@ -564,7 +564,7 @@ namespace RogueCastle
         {
             switch (Spell)
             {
-                case (SpellType.TimeBomb):
+                case (SpellType.TIME_BOMB):
                     //this.RunDestroyAnimation(false);
                     this.IsWeighted = false;
                     this.ChangeSprite("SpellTimeBombExplosion_Sprite");
@@ -576,22 +576,22 @@ namespace RogueCastle
                     Tweener.Tween.RunFunction(0.5f, this, "KillProjectile");
                     (Game.ScreenManager.CurrentScreen as ProceduralLevelScreen).ImpactEffectPool.DisplayExplosionEffect(this.Position);
                     break;
-                case (SpellType.Nuke):
+                case (SpellType.NUKE):
                     this.RunDestroyAnimation(false);
                     (Game.ScreenManager.CurrentScreen as ProceduralLevelScreen).DamageAllEnemies((int)this.Damage);
                     (Game.ScreenManager.CurrentScreen as ProceduralLevelScreen).ImpactEffectPool.DisplayDeathEffect(this.Position);
                     break;
-                case (SpellType.Displacer):
+                case (SpellType.DISPLACER):
                     this.RunDestroyAnimation(false);
                     PlayerObj player = (Game.ScreenManager.CurrentScreen as ProceduralLevelScreen).Player;
                     //(Game.ScreenManager.CurrentScreen as ProceduralLevelScreen).ImpactEffectPool.StartInverseEmit;
                     player.Translocate(this.Position);
                     break;
-                case (SpellType.Boomerang):
-                case (SpellType.Bounce):
+                case (SpellType.BOOMERANG):
+                case (SpellType.BOUNCE):
                     this.CollisionTypeTag = GameTypes.CollisionType_GLOBAL_DAMAGE_WALL;
                     break;
-                case (SpellType.Laser):
+                case (SpellType.LASER):
                     this.CollisionTypeTag = GameTypes.CollisionType_GLOBAL_DAMAGE_WALL;
                     this.LifeSpan = AltY;
                     m_elapsedLifeSpan = 0;

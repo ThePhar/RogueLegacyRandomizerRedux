@@ -97,7 +97,7 @@ namespace RogueCastle
             m_specialItemIcon.Scale = new Vector2(1.7f, 1.7f);
             m_specialItemIcon.Visible = false;
 
-            m_spellIcon = new SpriteObj(SpellType.None.Icon());
+            m_spellIcon = new SpriteObj(SpellEV.Icon(SpellType.NONE));
             m_spellIcon.ForceDraw = true;
             m_spellIcon.OutlineWidth = 1;
             m_spellIcon.Visible = false;
@@ -284,9 +284,9 @@ namespace RogueCastle
             m_iconHolder1.Opacity = 0.5f;
             m_spellCost.Visible = false;
 
-            if (Game.PlayerStats.Spell != SpellType.None)
+            if (Game.PlayerStats.Spell != SpellType.NONE)
             {
-                m_spellIcon.ChangeSprite(Game.PlayerStats.Spell.Icon());
+                m_spellIcon.ChangeSprite(SpellEV.Icon(Game.PlayerStats.Spell));
                 m_spellIcon.Visible = true;
                 m_iconHolder1.Opacity = 1;
                 m_spellCost.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_spellCost));
@@ -335,7 +335,7 @@ namespace RogueCastle
 
         public void RefreshTextObjs()
         {
-            if (Game.PlayerStats.Spell != SpellType.None)
+            if (Game.PlayerStats.Spell != SpellType.NONE)
             {
                 m_spellCost.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_spellCost));
                 m_spellCost.Text = (int)(SpellEV.GetManaCost(Game.PlayerStats.Spell) * (1 - SkillSystem.GetSkill(SkillType.Mana_Cost_Down).ModifierAmount)) + " " + LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_15", null);

@@ -35,7 +35,7 @@ namespace RogueCastle
         public byte Age = 30;
         public byte ChildAge = 4;
         public byte Class = 0;
-        public SpellType Spell = 0;
+        public byte Spell = 0;
         public bool IsFemale = false;
         public bool FlipPortrait = false;
         public string RomanNumeral = "";
@@ -196,11 +196,11 @@ namespace RogueCastle
                     this.Traits = TraitType.CreateRandomTraits();
 
                 // Selecting random spell.  There's a check to make sure savants don't get particular spells.
-                SpellType[] spellList = ClassType.GetSpellList(this.Class);
+                var spellList = ClassType.GetSpellList(this.Class);
                 do
                 {
                     this.Spell = spellList[CDGMath.RandomInt(0, spellList.Length - 1)];
-                } while ((this.Spell == SpellType.DamageShield || this.Spell == SpellType.TimeStop || this.Spell == SpellType.Translocator) && (HasTrait(TraitType.SAVANT)));
+                } while ((this.Spell == SpellType.DAMAGE_SHIELD || this.Spell == SpellType.TIME_STOP || this.Spell == SpellType.TRANSLOCATOR) && (HasTrait(TraitType.SAVANT)));
                 Array.Clear(spellList, 0, spellList.Length);
 
                 // Setting age.
@@ -369,7 +369,7 @@ namespace RogueCastle
             }
             m_classTextObj.Text = classText + LocaleBuilder.GetResourceString(ClassType.ToStringID(this.Class, this.IsFemale));
 
-            m_spellIcon.ChangeSprite(Spell.Icon());
+            m_spellIcon.ChangeSprite(SpellEV.Icon(Spell));
 
             if (this.Class == ClassType.Knight || this.Class == ClassType.Knight2)
             {
@@ -478,7 +478,7 @@ namespace RogueCastle
             m_frameSprite.Opacity = this.Opacity;
             m_frameSprite.Draw(camera);
 
-            if (this.IsDead == false && this.Spell != SpellType.None)
+            if (this.IsDead == false && this.Spell != SpellType.NONE)
             {
                 m_spellIconHolder.Position = new Vector2(m_frameSprite.X, m_frameSprite.Bounds.Bottom - 20);
                 m_spellIcon.Position = m_spellIconHolder.Position;

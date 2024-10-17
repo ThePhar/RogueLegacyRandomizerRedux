@@ -115,7 +115,7 @@ namespace RogueCastle
             
             Game.PlayerStats.BonusDefense = 0;//40 / 1;
             Game.PlayerStats.Traits = (TraitType.HYPERGONADISM, TraitType.NONE);
-            Game.PlayerStats.Spell = SpellType.RapidDagger;
+            Game.PlayerStats.Spell = SpellType.RAPID_DAGGER;
             
             //Player.CanBeKnockedBack = false;
             //Game.PlayerStats.SpecialItem = SpecialItemType.Glasses;

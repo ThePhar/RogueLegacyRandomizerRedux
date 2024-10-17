@@ -242,84 +242,84 @@ namespace RogueCastle
             return false;
         }
 
-        public static SpellType[] GetSpellList(byte classType)
+        public static byte[] GetSpellList(byte classType)
         {
             return classType switch
             {
                 Knight or Knight2 =>
                 [
-                    SpellType.Axe,
-                    SpellType.Dagger,
-                    SpellType.Boomerang,
-                    SpellType.DualBlades,
-                    SpellType.Close,
-                    SpellType.Bounce
+                    SpellType.AXE,
+                    SpellType.DAGGER,
+                    SpellType.BOOMERANG,
+                    SpellType.DUAL_BLADES,
+                    SpellType.CLOSE,
+                    SpellType.BOUNCE,
                 ],
                 Barbarian or Barbarian2 =>
                 [
-                    SpellType.Axe,
-                    SpellType.Dagger,
-                    SpellType.Boomerang,
-                    SpellType.DualBlades,
-                    SpellType.Close
+                    SpellType.AXE,
+                    SpellType.DAGGER,
+                    SpellType.BOOMERANG,
+                    SpellType.DUAL_BLADES,
+                    SpellType.CLOSE,
                 ],
                 Assassin or Assassin2 =>
                 [
-                    SpellType.Axe,
-                    SpellType.Dagger,
-                    SpellType.Translocator,
-                    SpellType.Boomerang,
-                    SpellType.DualBlades,
-                    SpellType.Bounce
+                    SpellType.AXE,
+                    SpellType.DAGGER,
+                    SpellType.TRANSLOCATOR,
+                    SpellType.BOOMERANG,
+                    SpellType.DUAL_BLADES,
+                    SpellType.BOUNCE,
                 ],
                 Banker or Banker2 =>
                 [
-                    SpellType.Axe,
-                    SpellType.Dagger,
-                    SpellType.Boomerang,
-                    SpellType.DualBlades,
-                    SpellType.DamageShield,
-                    SpellType.Bounce
+                    SpellType.AXE,
+                    SpellType.DAGGER,
+                    SpellType.BOOMERANG,
+                    SpellType.DUAL_BLADES,
+                    SpellType.DAMAGE_SHIELD,
+                    SpellType.BOUNCE,
                 ],
                 Lich or Lich2 =>
                 [
-                    SpellType.Nuke,
-                    SpellType.DamageShield,
-                    SpellType.Bounce
+                    SpellType.NUKE,
+                    SpellType.DAMAGE_SHIELD,
+                    SpellType.BOUNCE,
                 ],
                 SpellSword or SpellSword2 =>
                 [
-                    SpellType.Axe,
-                    SpellType.Dagger,
-                    SpellType.Boomerang,
-                    SpellType.DualBlades,
-                    SpellType.Close,
-                    SpellType.DamageShield
+                    SpellType.AXE,
+                    SpellType.DAGGER,
+                    SpellType.BOOMERANG,
+                    SpellType.DUAL_BLADES,
+                    SpellType.CLOSE,
+                    SpellType.DAMAGE_SHIELD,
                 ],
                 Wizard or Wizard2 =>
                 [
-                    SpellType.Axe,
-                    SpellType.Dagger,
-                    SpellType.TimeStop,
-                    SpellType.Boomerang,
-                    SpellType.DualBlades,
-                    SpellType.Close,
-                    SpellType.DamageShield,
-                    SpellType.Bounce
+                    SpellType.AXE,
+                    SpellType.DAGGER,
+                    SpellType.TIME_STOP,
+                    SpellType.BOOMERANG,
+                    SpellType.DUAL_BLADES,
+                    SpellType.CLOSE,
+                    SpellType.DAMAGE_SHIELD,
+                    SpellType.BOUNCE,
                 ],
                 Ninja or Ninja2 =>
                 [
-                    SpellType.Axe,
-                    SpellType.Dagger,
-                    SpellType.Translocator,
-                    SpellType.Boomerang,
-                    SpellType.DualBlades,
-                    SpellType.Close,
-                    SpellType.Bounce
+                    SpellType.AXE,
+                    SpellType.DAGGER,
+                    SpellType.TRANSLOCATOR,
+                    SpellType.BOOMERANG,
+                    SpellType.DUAL_BLADES,
+                    SpellType.CLOSE,
+                    SpellType.BOUNCE,
                 ],
-                Dragon => [SpellType.DragonFire],
-                Traitor => [SpellType.RapidDagger],
-                _ => null
+                Dragon => [SpellType.DRAGON_FIRE],
+                Traitor => [SpellType.RAPID_DAGGER],
+                _ => null,
             };
         }
     }

@@ -219,7 +219,7 @@ namespace RogueCastle
                 {
                     projectile.GamePaused = true;
                     projectile.PauseAnimation();
-                    if (projectile.Spell != SpellType.DamageShield || (projectile.Spell == SpellType.DamageShield && projectile.CollisionTypeTag == GameTypes.CollisionType_ENEMY))
+                    if (projectile.Spell != SpellType.DAMAGE_SHIELD || (projectile.Spell == SpellType.DAMAGE_SHIELD && projectile.CollisionTypeTag == GameTypes.CollisionType_ENEMY))
                     {
                         projectile.AccelerationXEnabled = false;
                         projectile.AccelerationYEnabled = false;
@@ -238,7 +238,7 @@ namespace RogueCastle
                 {
                     projectile.GamePaused = false;
                     projectile.ResumeAnimation();
-                    if (projectile.Spell != SpellType.DamageShield || (projectile.Spell == SpellType.DamageShield && projectile.CollisionTypeTag == GameTypes.CollisionType_ENEMY))
+                    if (projectile.Spell != SpellType.DAMAGE_SHIELD || (projectile.Spell == SpellType.DAMAGE_SHIELD && projectile.CollisionTypeTag == GameTypes.CollisionType_ENEMY))
                     {
                         projectile.AccelerationXEnabled = true;
                         projectile.AccelerationYEnabled = true;

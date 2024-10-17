@@ -57,7 +57,7 @@ namespace RogueCastle
 
             Game.PlayerStats.PlayerName = "Dovahkiin";
             Game.PlayerStats.Class = ClassType.Barbarian2;
-            Game.PlayerStats.Spell = SpellType.None;
+            Game.PlayerStats.Spell = SpellType.NONE;
             Game.PlayerStats.IsFemale = false;
             
             Game.PlayerStats.BonusHealth = 140 / 5;//266 / 5;

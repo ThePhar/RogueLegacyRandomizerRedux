@@ -16,7 +16,7 @@ namespace RogueCastle
         private int m_numTries = 5;
 
         private Rectangle m_targetBounds;
-        private SpellType m_storedPlayerSpell;
+        private byte m_storedPlayerSpell;
         private float m_storedPlayerMana;
         private bool m_isPlayingGame;
         private int m_axesThrown;
@@ -377,7 +377,7 @@ namespace RogueCastle
 
         private void EquipPlayer()
         {
-            Game.PlayerStats.Spell = SpellType.Axe;
+            Game.PlayerStats.Spell = SpellType.AXE;
             Player.AttachedLevel.UpdatePlayerSpellIcon();
             Player.CurrentMana = Player.MaxMana;
         }
@@ -472,7 +472,7 @@ namespace RogueCastle
                     if (m_axesThrown <= m_numTries)
                         m_axeIcons.GetChildAt(m_numTries - m_axesThrown).Visible = false;
                     if (m_axesThrown > m_numTries)
-                        Game.PlayerStats.Spell = SpellType.None;
+                        Game.PlayerStats.Spell = SpellType.NONE;
                 }
             }
         }

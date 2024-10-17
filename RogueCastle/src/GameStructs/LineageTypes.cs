@@ -3,7 +3,7 @@
 public struct PlayerLineageData
 {
     public string Name;
-    public SpellType Spell;
+    public byte Spell;
     public byte Class;
     public byte Age;
     public byte ChildAge;

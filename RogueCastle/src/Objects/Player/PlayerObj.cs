@@ -183,7 +183,7 @@ namespace RogueCastle
         private bool m_lightOn = false;
         private float m_lightDrainCounter = 0;
 
-        private List<SpellType> m_wizardSpellList; // This is saved because it is accessed often.
+        private List<byte> m_wizardSpellList; // This is saved because it is accessed often.
         private float m_wizardSparkleCounter = 0.2f;
 
         private float m_ninjaTeleportDelay = 0;
@@ -399,10 +399,7 @@ namespace RogueCastle
             this.Scale = new Vector2(2, 2);
             m_internalScale = this.Scale;
 
-            m_wizardSpellList = new List<SpellType>();
-            m_wizardSpellList.Add((SpellType)Game.PlayerStats.WizardSpellList.X);
-            m_wizardSpellList.Add((SpellType)Game.PlayerStats.WizardSpellList.Y);
-            m_wizardSpellList.Add((SpellType)Game.PlayerStats.WizardSpellList.Z);
+            m_wizardSpellList = Game.PlayerStats.WizardSpellList.ToList();
         }
 
         public void UpdateInternalScale()
@@ -609,8 +606,8 @@ namespace RogueCastle
             if (m_debugInputMap.JustPressed(DEBUG_INPUT_SWAPWEAPON))
             {
                 Game.PlayerStats.Spell++;
-                if (Game.PlayerStats.Spell > SpellType.DragonFireNeo)
-                    Game.PlayerStats.Spell = SpellType.Dagger;
+                if (Game.PlayerStats.Spell > SpellType.DRAGON_FIRE_NEO)
+                    Game.PlayerStats.Spell = SpellType.DAGGER;
                 m_levelScreen.UpdatePlayerSpellIcon();
             }
             if (m_debugInputMap.JustPressed(DEBUG_INPUT_GIVEHEALTH))
@@ -709,7 +706,7 @@ namespace RogueCastle
                 List<object> objectList = new List<object>();
                 objectList.Add(new Vector2(this.X, this.Y - this.Height / 2f));
                 objectList.Add(GetItemType.Spell);
-                objectList.Add(new Vector2((byte)SpellType.Axe, 0));
+                objectList.Add(new Vector2((byte)SpellType.AXE, 0));
 
                 (this.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GetItem, true, objectList);
                 this.RunGetItemAnimation();
@@ -994,7 +991,7 @@ namespace RogueCastle
             if (Game.PlayerStats.TutorialComplete == true)
             {
                 bool fireballCasted = false;
-                if (Game.PlayerStats.Spell == SpellType.DragonFireNeo && (Game.GlobalInput.Pressed(InputMapType.PLAYER_ATTACK) || Game.GlobalInput.Pressed(InputMapType.PLAYER_SPELL1)) && m_rapidSpellCastDelay <= 0)
+                if (Game.PlayerStats.Spell == SpellType.DRAGON_FIRE_NEO && (Game.GlobalInput.Pressed(InputMapType.PLAYER_ATTACK) || Game.GlobalInput.Pressed(InputMapType.PLAYER_SPELL1)) && m_rapidSpellCastDelay <= 0)
                 {
                     m_rapidSpellCastDelay = 0.2f;
                     CastSpell(false);
@@ -2064,7 +2061,7 @@ namespace RogueCastle
 
                 // Enemy hit player.  Response goes here.
                 // Player blocked
-                if (State == STATE_BLOCKING && (CurrentMana > 0 || m_blockInvincibleCounter > 0) && (proj == null || (proj != null && proj.Spell != SpellType.Boomerang && proj.Spell != SpellType.Bounce)))//CurrentMana >= BlockManaDrain)
+                if (State == STATE_BLOCKING && (CurrentMana > 0 || m_blockInvincibleCounter > 0) && (proj == null || (proj != null && proj.Spell != SpellType.BOOMERANG && proj.Spell != SpellType.BOUNCE)))//CurrentMana >= BlockManaDrain)
                 {
                     if (CanBeKnockedBack == true)
                     {
@@ -2265,7 +2262,7 @@ namespace RogueCastle
             {
                 if (projectile.IsDemented == true)
                     hitPlayer = false;
-                else if (projectile.Spell == SpellType.Bounce || projectile.Spell == SpellType.Boomerang)
+                else if (projectile.Spell == SpellType.BOUNCE || projectile.Spell == SpellType.BOOMERANG)
                 {
                     hitPlayer = false;
                     projectile.KillProjectile();
@@ -2640,11 +2637,11 @@ namespace RogueCastle
                     {
                         if (Game.PlayerStats.Class != ClassType.Dragon && Game.PlayerStats.Class != ClassType.Traitor)
                         {
-                            SpellType[] spellList = ClassType.GetSpellList(Game.PlayerStats.Class);
+                            byte[] spellList = ClassType.GetSpellList(Game.PlayerStats.Class);
                             do
                             {
                                 Game.PlayerStats.Spell = spellList[CDGMath.RandomInt(0, spellList.Length - 1)];
-                            } while (Game.PlayerStats.Spell == SpellType.Translocator || Game.PlayerStats.Spell == SpellType.TimeStop || Game.PlayerStats.Spell == SpellType.DamageShield);
+                            } while (Game.PlayerStats.Spell == SpellType.TRANSLOCATOR || Game.PlayerStats.Spell == SpellType.TIME_STOP || Game.PlayerStats.Spell == SpellType.DAMAGE_SHIELD);
                             AttachedLevel.UpdatePlayerSpellIcon();
                         }
                     }
@@ -2663,10 +2660,10 @@ namespace RogueCastle
 
             if (this.CurrentMana < manaCost)
                 SoundManager.PlaySound("Error_Spell");
-            else if (spellType != SpellType.Translocator && spellType != SpellType.Nuke && m_damageShieldCast == false && manaCost > 0)
+            else if (spellType != SpellType.TRANSLOCATOR && spellType != SpellType.NUKE && m_damageShieldCast == false && manaCost > 0)
                 m_levelScreen.TextManager.DisplayNumberStringText(-manaCost, "LOC_ID_SKILL_SCREEN_15" /*"mp"*/, Color.SkyBlue, new Vector2(this.X, this.Bounds.Top));
 
-            if (spellType != SpellType.Bounce && spellType != SpellType.DamageShield)
+            if (spellType != SpellType.BOUNCE && spellType != SpellType.DAMAGE_SHIELD)
             {
                 if (Game.PlayerStats.HasTrait(TraitType.AMBILEVOUS))
                     projData.SourceAnchor = new Vector2(projData.SourceAnchor.X * -1, projData.SourceAnchor.Y);
@@ -2674,31 +2671,31 @@ namespace RogueCastle
 
             switch (spellType)
             {
-                case (SpellType.Dagger):
-                case (SpellType.Axe):
-                case (SpellType.TimeBomb):
-                case (SpellType.Displacer):
-                case (SpellType.Close):
-                case (SpellType.DualBlades):
-                case (SpellType.DragonFire):
-                case (SpellType.DragonFireNeo):
+                case (SpellType.DAGGER):
+                case (SpellType.AXE):
+                case (SpellType.TIME_BOMB):
+                case (SpellType.DISPLACER):
+                case (SpellType.CLOSE):
+                case (SpellType.DUAL_BLADES):
+                case (SpellType.DRAGON_FIRE):
+                case (SpellType.DRAGON_FIRE_NEO):
                     if (this.CurrentMana >= manaCost && activateSecondary == false)
                     {
-                        if (spellType == SpellType.DragonFireNeo)
+                        if (spellType == SpellType.DRAGON_FIRE_NEO)
                         {
-                            projData.Lifespan = spellType.GetXValue();
+                            projData.Lifespan = SpellEV.GetXValue(spellType);
                             projData.WrapProjectile = true;
                         }
 
-                        if (spellType == SpellType.Dagger)
+                        if (spellType == SpellType.DAGGER)
                             SoundManager.PlaySound("Cast_Dagger");
-                        else if (spellType == SpellType.Axe)
+                        else if (spellType == SpellType.AXE)
                             SoundManager.PlaySound("Cast_Axe");
-                        else if (spellType == SpellType.DualBlades)
+                        else if (spellType == SpellType.DUAL_BLADES)
                             SoundManager.PlaySound("Cast_Chakram");
-                        else if (spellType == SpellType.Close)
+                        else if (spellType == SpellType.CLOSE)
                             SoundManager.PlaySound("Cast_GiantSword");
-                        else if (spellType == SpellType.DragonFire || spellType == SpellType.DragonFireNeo)
+                        else if (spellType == SpellType.DRAGON_FIRE || spellType == SpellType.DRAGON_FIRE_NEO)
                             SoundManager.PlaySound("Enemy_WallTurret_Fire_01", "Enemy_WallTurret_Fire_02", "Enemy_WallTurret_Fire_03", "Enemy_WallTurret_Fire_04");
 
                         ProjectileObj proj = m_levelScreen.ProjectileManager.FireProjectile(projData);
@@ -2706,9 +2703,9 @@ namespace RogueCastle
                         proj.TextureColor = textureColor;
                         proj.AltY = altY;
                         proj.AltX = altX;
-                        if (spellType == SpellType.Boomerang && this.Flip == SpriteEffects.FlipHorizontally)
+                        if (spellType == SpellType.BOOMERANG && this.Flip == SpriteEffects.FlipHorizontally)
                             proj.AltX = -altX;
-                        if (spellType == SpellType.Close)
+                        if (spellType == SpellType.CLOSE)
                         {
                             proj.LifeSpan = altX;
                             proj.Opacity = 0;
@@ -2716,7 +2713,7 @@ namespace RogueCastle
                             Tween.By(proj, 0.1f, Tween.EaseNone, "Y", "20");
                             Tween.To(proj, 0.1f, Tween.EaseNone, "Opacity", "1");
                         }
-                        if (spellType == SpellType.DualBlades)
+                        if (spellType == SpellType.DUAL_BLADES)
                         {
                             projData.Angle = new Vector2(-10, -10);
                             if (Game.PlayerStats.HasTrait(TraitType.AMBILEVOUS))
@@ -2733,21 +2730,21 @@ namespace RogueCastle
                             projData.RotationSpeed = -20;
                             proj = m_levelScreen.ProjectileManager.FireProjectile(projData);
                         }
-                        if (spellType == SpellType.TimeBomb)
+                        if (spellType == SpellType.TIME_BOMB)
                         {
                             proj.ShowIcon = true;
                             proj.Rotation = 0;
                             proj.BlinkTime = altX / 1.5f;
                             proj.LifeSpan = 20;
                         }
-                        if (spellType == SpellType.Displacer)
+                        if (spellType == SpellType.DISPLACER)
                         {
                             proj.Rotation = 0;
                             proj.RunDisplacerEffect(m_levelScreen.CurrentRoom, this);
                             proj.KillProjectile();
                         }
 
-                        if (spellType == SpellType.Close)
+                        if (spellType == SpellType.CLOSE)
                             m_levelScreen.ImpactEffectPool.SpellCastEffect(proj.Position, 90, megaSpell);
                         else if (Game.PlayerStats.HasTrait(TraitType.AMBILEVOUS))
                             m_levelScreen.ImpactEffectPool.SpellCastEffect(proj.Position, -proj.Rotation, megaSpell);
@@ -2757,7 +2754,7 @@ namespace RogueCastle
                         this.CurrentMana -= manaCost;
                     }
                     break;
-                case (SpellType.Boomerang):
+                case (SpellType.BOOMERANG):
                     if (this.CurrentMana >= manaCost && activateSecondary == false)
                     {
                         SoundManager.PlaySound("Cast_Boomerang");
@@ -2776,7 +2773,7 @@ namespace RogueCastle
                         m_levelScreen.ImpactEffectPool.SpellCastEffect(proj.Position, proj.Rotation, megaSpell);
                     }
                     break;
-                case (SpellType.Bounce):
+                case (SpellType.BOUNCE):
                     if (this.CurrentMana >= manaCost && activateSecondary == false)
                     {
                         SoundManager.PlaySound("Cast_Dagger");
@@ -2800,7 +2797,7 @@ namespace RogueCastle
                         this.CurrentMana -= manaCost;
                     }
                     break;
-                case (SpellType.Nuke):
+                case (SpellType.NUKE):
                     int numEnemies = this.AttachedLevel.CurrentRoom.ActiveEnemies;
                     int spellCap = 9;//10;//15;//20;
 
@@ -2866,7 +2863,7 @@ namespace RogueCastle
                         m_levelScreen.TextManager.DisplayNumberStringText(-manaCost, "LOC_ID_SKILL_SCREEN_15" /*"mp"*/, Color.SkyBlue, new Vector2(this.X, this.Bounds.Top));
                     }
                     break;
-                case (SpellType.DamageShield):
+                case (SpellType.DAMAGE_SHIELD):
                     if (m_damageShieldCast == true)
                     {
                         m_damageShieldCast = false;
@@ -2896,7 +2893,7 @@ namespace RogueCastle
                         this.CurrentMana -= manaCost;
                     }
                     break;
-                case (SpellType.Laser):
+                case (SpellType.LASER):
                     if (this.CurrentMana >= manaCost && activateSecondary == false)
                     {
                         ProjectileObj proj = m_levelScreen.ProjectileManager.FireProjectile(projData);
@@ -2911,7 +2908,7 @@ namespace RogueCastle
                         this.CurrentMana -= manaCost;
                     }
                     break;
-                case (SpellType.TimeStop):
+                case (SpellType.TIME_STOP):
                     if (m_timeStopCast == true)
                     {
                         AttachedLevel.StopTimeStop();
@@ -2927,7 +2924,7 @@ namespace RogueCastle
                         }
                     }
                     break;
-                case (SpellType.Translocator):
+                case (SpellType.TRANSLOCATOR):
                     if (m_translocatorSprite.Visible == false && this.CurrentMana >= manaCost)
                     {
                         this.CurrentMana -= manaCost;
@@ -2965,7 +2962,7 @@ namespace RogueCastle
                         m_translocatorSprite.Visible = false;
                     }
                     break;
-                case (SpellType.RapidDagger):
+                case (SpellType.RAPID_DAGGER):
                     if (this.CurrentMana >= manaCost)
                     {
                         this.CurrentMana -= manaCost;
@@ -3060,9 +3057,7 @@ namespace RogueCastle
             //if (AttachedLevel.CurrentRoom is CarnivalShoot1BonusRoom == false && AttachedLevel.CurrentRoom is CarnivalShoot2BonusRoom == false)
             {
                 SoundManager.PlaySound("Spell_Switch");
-                m_wizardSpellList[0] = (SpellType)Game.PlayerStats.WizardSpellList.X;
-                m_wizardSpellList[1] = (SpellType)Game.PlayerStats.WizardSpellList.Y;
-                m_wizardSpellList[2] = (SpellType)Game.PlayerStats.WizardSpellList.Z;
+                m_wizardSpellList = Game.PlayerStats.WizardSpellList.ToList();
 
                 int spellIndex = m_wizardSpellList.IndexOf(Game.PlayerStats.Spell);
                 spellIndex++;
@@ -3249,7 +3244,7 @@ namespace RogueCastle
                 ProjectileObj proj = m_levelScreen.ProjectileManager.FireProjectile(spellData);
                 proj.Opacity = 0;
                 proj.CollisionTypeTag = GameTypes.CollisionType_PLAYER;
-                proj.Spell = SpellType.Shout;
+                proj.Spell = SpellType.SHOUT;
                 proj.IgnoreBoundsCheck = true;
 
                 Tween.To(proj, 0.2f, Tween.EaseNone, "ScaleX", "100", "ScaleY", "50");
@@ -3315,7 +3310,7 @@ namespace RogueCastle
         private void ThrowDaggerProjectiles()
         {
             m_rapidDaggerProjData.AngleOffset = 0;
-            m_rapidDaggerProjData.Damage = (int)(TotalMagicDamage * SpellEV.GetDamageMultiplier(SpellType.RapidDagger));
+            m_rapidDaggerProjData.Damage = (int)(TotalMagicDamage * SpellEV.GetDamageMultiplier(SpellType.RAPID_DAGGER));
 
             Tween.RunFunction(0, this, "CastDaggers", false);
             Tween.RunFunction(0.05f, this, "CastDaggers", true);

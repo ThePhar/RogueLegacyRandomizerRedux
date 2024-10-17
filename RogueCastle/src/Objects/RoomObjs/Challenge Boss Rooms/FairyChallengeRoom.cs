@@ -71,7 +71,7 @@ namespace RogueCastle
 
             Game.PlayerStats.PlayerName = "Wagner";
             Game.PlayerStats.Class = ClassType.Ninja2;
-            Game.PlayerStats.Spell = SpellType.Translocator;
+            Game.PlayerStats.Spell = SpellType.TRANSLOCATOR;
             Game.PlayerStats.IsFemale = false;
 
             Game.PlayerStats.BonusHealth = 150 / 5;//266 / 5;
