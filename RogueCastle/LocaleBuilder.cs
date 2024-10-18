@@ -54,7 +54,7 @@ internal static class LocaleBuilder
 
     public static string FormatResourceString(this string stringID, params object[] args)
     {
-        return string.Format(stringID, args);
+        return string.Format(stringID.GetResourceString(), args);
     }
 
     public static string GetResourceString(this string stringID, bool forceMale = false)

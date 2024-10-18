@@ -246,7 +246,7 @@ namespace RogueCastle
                                 }
                             }
                             else // Castle is not locked. Load a new map.
-                                m_levelToLoad = LevelBuilder2.CreateLevel(level.RoomList[0]);
+                                m_levelToLoad = LevelBuilder2.CreateLevel(level.RoomList[0], Game.Area1List);
                         }
                         else // Player is loading from the title screen.
                         {

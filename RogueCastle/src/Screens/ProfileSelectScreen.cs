@@ -209,13 +209,13 @@ public class ProfileSelectScreen : Screen
                     if (isDead == false)
                     {
                         slotText.Text = !isFemale
-                            ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW".GetResourceString()
+                            ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(playerClass, false).GetResourceString())
                             : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(playerClass, true).GetResourceString());
                     }
                     else
                     {
                         slotText.Text = !isFemale
-                            ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW".GetResourceString()
+                            ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW".FormatResourceString(playerName)
                             : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW".FormatResourceString(playerName);
                     }
 
@@ -230,13 +230,13 @@ public class ProfileSelectScreen : Screen
                     if (isDead == false)
                     {
                         slotText.Text = !isFemale
-                            ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW".GetResourceString()
+                            ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(playerClass, false).GetResourceString())
                             : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(playerClass, true).GetResourceString());
                     }
                     else
                     {
                         slotText.Text = !isFemale
-                            ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW".GetResourceString()
+                            ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW".FormatResourceString(playerName)
                             : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW".FormatResourceString(playerName);
                     }
                 }
@@ -382,7 +382,8 @@ public class ProfileSelectScreen : Screen
                     manager!.Player.Reset();
                     Game.ScreenManager.Player.CurrentHealth = Game.PlayerStats.CurrentHealth;
                     Game.ScreenManager.Player.CurrentMana = Game.PlayerStats.CurrentMana;
-                    manager.DisplayScreen(ScreenType.TUTORIAL_ROOM, true);
+
+                    ExitTransition();
                 }
             }
 
@@ -464,7 +465,7 @@ public class ProfileSelectScreen : Screen
             Game.PlayerStats = new PlayerStats();
             manager!.Player.Reset();
 
-            SoundManager.StopMusic(1);
+            ExitTransition();
         }
         else
         {
