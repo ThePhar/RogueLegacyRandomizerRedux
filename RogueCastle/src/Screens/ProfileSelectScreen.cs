@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
+using RogueCastle.Screens.BaseScreens;
 
 namespace RogueCastle
 {

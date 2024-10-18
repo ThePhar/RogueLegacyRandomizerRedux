@@ -1,162 +1,138 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using Tweener;
-using Tweener.Ease;
-using System.Threading;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
+using RogueCastle.Screens.BaseScreens;
+using Tweener;
+using Tweener.Ease;
 
-namespace RogueCastle
+namespace RogueCastle.Screens;
+
+public class CDGSplashScreen : Screen
 {
-    public class CDGSplashScreen : Screen
+    private bool _fadingOut;
+    private bool _levelDataLoaded;
+    private TextObj _loadingText;
+    private SpriteObj _logo;
+    private float _totalElapsedTime;
+
+    private RCScreenManager RCScreenManager => ScreenManager as RCScreenManager;
+    private Game Game => ScreenManager.Game as Game;
+
+    public override void LoadContent()
     {
-        private SpriteObj m_logo;
-        private TextObj m_loadingText;
-        private bool m_levelDataLoaded = false;
-        private bool m_fadingOut = false;
-        private float m_totalElapsedTime = 0;
-
-        public override void LoadContent()
+        _logo = new SpriteObj("CDGLogo_Sprite")
         {
-            m_logo = new SpriteObj("CDGLogo_Sprite");
-            m_logo.Position = new Vector2(1320 / 2, 720 / 2);
-            m_logo.Rotation = 90;
-            m_logo.ForceDraw = true;
+            Position = new Vector2(1320 / 2, 720 / 2),
+            Rotation = 90,
+            ForceDraw = true,
+        };
 
-            m_loadingText = new TextObj(Game.JunicodeFont);
-            m_loadingText.FontSize = 18;
-            m_loadingText.Align = Types.TextAlign.Right;
-            m_loadingText.Text = LocaleBuilder.GetString("LOC_ID_SPLASH_SCREEN_1", m_loadingText);
-            m_loadingText.TextureColor = new Color(100, 100, 100);
-            m_loadingText.Position = new Vector2(1320 - 40, 720 - 90);
-            m_loadingText.ForceDraw = true;
-            m_loadingText.Opacity = 0;
-            base.LoadContent();
+        _loadingText = new TextObj(Game.JunicodeFont)
+        {
+            FontSize = 18,
+            Align = Types.TextAlign.Right,
+            TextureColor = new Color(100, 100, 100),
+            Position = new Vector2(1320 - 40, 720 - 90),
+            ForceDraw = true,
+            Opacity = 0,
+        };
+        _loadingText.Text = "LOC_ID_SPLASH_SCREEN_1".GetString(_loadingText);
+
+        base.LoadContent();
+    }
+
+    public override void OnEnter()
+    {
+        // Level data loading is multithreaded.
+        _levelDataLoaded = false;
+        _fadingOut = false;
+        var loadingThread = new Thread(LoadLevelData);
+        loadingThread.Start();
+
+        _logo.Opacity = 0;
+        Tween.To(_logo, 1, Linear.EaseNone, "delay", "0.5", "Opacity", "1");
+        Tween.RunFunction(0.75f, typeof(SoundManager), "PlaySound", "CDGSplashCreak");
+        base.OnEnter();
+    }
+
+    private void LoadLevelData()
+    {
+        lock (this)
+        {
+            LevelBuilder2.Initialize();
+            LevelParser.ParseRooms("Map_1x1", ScreenManager.Game.Content);
+            LevelParser.ParseRooms("Map_1x2", ScreenManager.Game.Content);
+            LevelParser.ParseRooms("Map_1x3", ScreenManager.Game.Content);
+            LevelParser.ParseRooms("Map_2x1", ScreenManager.Game.Content);
+            LevelParser.ParseRooms("Map_2x2", ScreenManager.Game.Content);
+            LevelParser.ParseRooms("Map_2x3", ScreenManager.Game.Content);
+            LevelParser.ParseRooms("Map_3x1", ScreenManager.Game.Content);
+            LevelParser.ParseRooms("Map_3x2", ScreenManager.Game.Content);
+            LevelParser.ParseRooms("Map_Special", ScreenManager.Game.Content);
+            LevelParser.ParseRooms("Map_DLC1", ScreenManager.Game.Content, true);
+            LevelBuilder2.IndexRoomList();
+            _levelDataLoaded = true;
+        }
+    }
+
+    public void LoadNextScreen()
+    {
+        if (Game.SaveManager.FileExists(SaveType.PlayerData))
+        {
+            Game.SaveManager.LoadFiles(null, SaveType.PlayerData);
         }
 
-        public override void OnEnter()
-        {
-            // Level data loading is multithreaded.
-            m_levelDataLoaded = false;
-            m_fadingOut = false;
-            Thread loadingThread = new Thread(LoadLevelData);
-            loadingThread.Start();
+        RCScreenManager.DisplayScreen(ScreenType.TITLE, true);
+    }
 
-            m_logo.Opacity = 0;
-            Tween.To(m_logo, 1, Linear.EaseNone, "delay", "0.5", "Opacity", "1");
-            Tween.RunFunction(0.75f, typeof(SoundManager), "PlaySound", "CDGSplashCreak");
-            //Tween.AddEndHandlerToLastTween(typeof(SoundManager), "PlaySound", "CDGSplashCreak");
-            base.OnEnter();
+    public override void Update(GameTime gameTime)
+    {
+        if (_levelDataLoaded == false && _logo.Opacity == 1)
+        {
+            var opacity = (float)Math.Abs(Math.Sin(_totalElapsedTime));
+            _totalElapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _loadingText.Opacity = opacity;
         }
 
-        private void LoadLevelData()
+        if (_levelDataLoaded && _fadingOut == false)
         {
-            lock (this)
-            {
-                LevelBuilder2.Initialize();
-                LevelParser.ParseRooms("Map_1x1", ScreenManager.Game.Content);
-                LevelParser.ParseRooms("Map_1x2", ScreenManager.Game.Content);
-                LevelParser.ParseRooms("Map_1x3", ScreenManager.Game.Content);
-                LevelParser.ParseRooms("Map_2x1", ScreenManager.Game.Content);
-                LevelParser.ParseRooms("Map_2x2", ScreenManager.Game.Content);
-                LevelParser.ParseRooms("Map_2x3", ScreenManager.Game.Content);
-                LevelParser.ParseRooms("Map_3x1", ScreenManager.Game.Content);
-                LevelParser.ParseRooms("Map_3x2", ScreenManager.Game.Content);
-                LevelParser.ParseRooms("Map_Special", ScreenManager.Game.Content);
-                LevelParser.ParseRooms("Map_DLC1", ScreenManager.Game.Content, true);
-                LevelBuilder2.IndexRoomList();
-                m_levelDataLoaded = true;
-            }
+            _fadingOut = true;
+            var logoOpacity = _logo.Opacity;
+            _logo.Opacity = 1;
+            Tween.To(_logo, 1, Linear.EaseNone, "delay", "1.5", "Opacity", "0");
+            Tween.AddEndHandlerToLastTween(this, "LoadNextScreen");
+            Tween.To(_loadingText, 0.5f, Tween.EaseNone, "Opacity", "0");
+            _logo.Opacity = logoOpacity;
         }
 
-        public void LoadNextScreen()
+        base.Update(gameTime);
+    }
+
+    public override void Draw(GameTime gameTime)
+    {
+        Camera.GraphicsDevice.Clear(Color.Black);
+        Camera.Begin();
+        _logo.Draw(Camera);
+        _loadingText.Draw(Camera);
+        Camera.End();
+        base.Draw(gameTime);
+    }
+
+    public override void Dispose()
+    {
+        if (IsDisposed == false)
         {
-            if (LevelEV.EnableBlitworksSplash == true)
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.BLIT_WORKS, true, null);
-            else
-            {
-                if ((ScreenManager.Game as Game).SaveManager.FileExists(SaveType.PlayerData))
-                {
-                    //try
-                    //{
-                    (ScreenManager.Game as Game).SaveManager.LoadFiles(null, SaveType.PlayerData);
+            Console.WriteLine("Disposing CDG Splash Screen");
 
-                    if (Game.PlayerStats.ShoulderPiece < 1 || Game.PlayerStats.HeadPiece < 1 || Game.PlayerStats.ChestPiece < 1)
-                        Game.PlayerStats.TutorialComplete = false;
-                    else
-                    {
-                        if (Game.PlayerStats.TutorialComplete == false)
-                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TUTORIAL_ROOM, true, null);
-                        else
-                            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TITLE, true, null);
-                    }
-                    //}
-                    //catch
-                    //{
-                    //    Console.WriteLine(" Could not load Player data.");
-                    //    Game.PlayerStats.TutorialComplete = false;
-                    //}
-                }
-                else
-                {
-                    if (Game.PlayerStats.TutorialComplete == false)
-                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TUTORIAL_ROOM, true, null);
-                    else
-                        (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TITLE, true, null);
-                }
-            }
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            if (m_levelDataLoaded == false && m_logo.Opacity == 1)
-            {
-                float opacity = (float)Math.Abs(Math.Sin(m_totalElapsedTime));
-                m_totalElapsedTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-                m_loadingText.Opacity = opacity;
-            }
-
-            if (m_levelDataLoaded == true && m_fadingOut == false)
-            {
-                m_fadingOut = true;
-                float logoOpacity = m_logo.Opacity;
-                m_logo.Opacity = 1;
-                Tween.To(m_logo, 1, Linear.EaseNone, "delay", "1.5", "Opacity", "0");
-                Tween.AddEndHandlerToLastTween(this, "LoadNextScreen");
-                Tween.To(m_loadingText, 0.5f, Tween.EaseNone, "Opacity", "0");
-                m_logo.Opacity = logoOpacity;
-            }
-
-            base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime)
-        {
-            Camera.GraphicsDevice.Clear(Color.Black);
-            Camera.Begin();
-            m_logo.Draw(Camera);
-            m_loadingText.Draw(Camera);
-            Camera.End();
-            base.Draw(gameTime);
-        }
-
-        public override void Dispose()
-        {
-            if (IsDisposed == false)
-            {
-                Console.WriteLine("Disposing CDG Splash Screen");
-
-                m_logo.Dispose();
-                m_logo = null;
-                m_loadingText.Dispose();
-                m_loadingText = null;
-                base.Dispose();
-            }
+            _logo.Dispose();
+            _logo = null;
+            _loadingText.Dispose();
+            _loadingText = null;
+            base.Dispose();
         }
     }
 }

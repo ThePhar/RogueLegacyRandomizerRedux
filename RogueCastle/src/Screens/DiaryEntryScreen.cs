@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.Screens.BaseScreens;
 
 namespace RogueCastle
 {

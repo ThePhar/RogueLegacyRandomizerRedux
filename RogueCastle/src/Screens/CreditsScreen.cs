@@ -1,8 +1,4 @@
-﻿//#define XBOX_CREDITS
-//#define PLAYSTATION_CREDITS
-//#define SWITCH_CREDITS
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +9,7 @@ using Tweener.Ease;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.Screens.BaseScreens;
 
 namespace RogueCastle
 {
@@ -283,11 +280,7 @@ namespace RogueCastle
                     "", "",
                     "[@LOC_ID_CREDITS_SCREEN_8" /*"Programming"*/, "Kenny Lee",
                     "", "",
-#if SWITCH_CREDITS
-                    "[@LOC_ID_CREDITS_SCREEN_9" /*"Production"*/, "Ryan Lee",
-#else
                     "[@LOC_ID_CREDITS_SCREEN_9" /*"Production"*/, "Marie-Christine Bourdua",
-#endif
                     "", "",
                     "[@LOC_ID_CREDITS_SCREEN_10" /*"Art"*/, "Glauber Kotaki",
                     "", "",
@@ -299,74 +292,23 @@ namespace RogueCastle
                     "", "",
                     "[@LOC_ID_CREDITS_SCREEN_25" /*"Additional Programming"*/, "David Man",
                     "", "",
-
                     "[@LOC_ID_CREDITS_SCREEN_14" /*"Additional Audio Design"*/,"Alessio Mellina",
                     "","",
                     "[@LOC_ID_CREDITS_SCREEN_15" /*"Additional Background Art"*/, "John Won", 
                     "","",
-#if SWITCH_CREDITS
-                    "[@LOC_ID_CREDITS_SCREEN_16" /*"Business Support"*/, "Michelle Lee",
-#else
                     "[@LOC_ID_CREDITS_SCREEN_16" /*"Business Support"*/, "Ryan & Michelle Lee",
-#endif
                     "","",
                     "[@LOC_ID_CREDITS_SCREEN_17" /*"Super Special Thanks: Turbo Edition"*/, "Jenny Lee",
                     "","",
                     "[@LOC_ID_CREDITS_SCREEN_18" /*"Special Thanks"*/, "Amber Campbell (Phedran), Amir Rao, Blair Hurm Cowan, Caitlin Groves", "Doug Culp, Eric Lee Lewis, Nathan Vella, Priscila Garcia, Rima Singh", "Scott Barcik, Stephen Goldstein, Tyler Mayes, Will Turnbull", "John 'Duke' Wain", 
                     "","",
                     "[@LOC_ID_CREDITS_SCREEN_19" /*"Additional Thanks"*/, "Jake Hirshey, Joshua Hornsby, Mark Wallace", "Peter Lee, Sean Fleming",
-#if XBOX_CREDITS || PLAYSTATION_CREDITS
-                    "","",
-                    "","",
-                    "","",
-                    "[@LOC_ID_CREDITS_SCREEN_26",/*"Adaptation by"*/ "Abstraction Games",
-                    "","",
-                    "Ralph Egas",
-                    "Erik Bastianen",
-                    "Wilco Schroo",
-                    "Coen Campman",
-                    "Adrian Francis",
-                    "Rutger Janssen",
-                    "Jorge Lorenzon",
-                    "Frédéric Schertenleib",
-                    "Tj'ièn Twijnstra",
-                    "","",
-                    "","",
-                    "","",
-                    "[@LOC_ID_CREDITS_QA", "Testronic Labs",
-#endif
-#if SWITCH_CREDITS
-                    "","",
-                    "","",
-                    "","",
-                    "[@LOC_ID_CREDITS_SCREEN_26",/*"Adaptation by"*/ "BlitWorks SL",
-                    "","",
-                    "Tony Cabello",
-                    "Oscar Serrano",
-                    "Guillermo NWDD",
-                    "Julio Garcia",
-                    "Daniel Lancha",
-                    "Javier Moya",
-                    "Miguel Pascual",
-                    "","",
-                    "","",
-                    "","",
-                    "[@LOC_ID_CREDITS_QA", "Lollipop Robot",
-                    "","",
-                    "Pablo Granada",
-                    "Luis Moyano",
-                    "Oscar Navalon",
-                    "Francesc Sanchez",
-                    "Daniel Segarra",
-#endif
-#if !XBOX_CREDITS && !PLAYSTATION_CREDITS && !SWITCH_CREDITS
                     "","",
                     "","",
                     "","",
                     "[@LOC_ID_CREDITS_SCREEN_20" /*"Mac/Linux Adaptation by"*/, "Ethan 'flibitijibibo' Lee",
                     "","",
                     "[@LOC_ID_CREDITS_SCREEN_21" /*"Mac/Linux QA Team"*/, "David Gow, Forrest Loomis,", "Jorgen Tjerno, Marcus Moller, Matthias Niess, ", "Stanislaw Gackowski, Stefano Angeleri",
-#endif
                     "","",
                     "","",
                     "","",
@@ -375,28 +317,6 @@ namespace RogueCastle
                     "[@LOC_ID_CREDITS_SCREEN_24" /*"Chinese & Add'l Localization by"*/, "Universally Speaking", 
                     "Tobias Gut (" + LocaleBuilder.GetResourceString("LOC_ID_OPTIONS_LANGUAGE_GERMAN") + ")", 
                     "Virtualname (" + LocaleBuilder.GetResourceString("LOC_ID_OPTIONS_LANGUAGE_CHINESE") + ")",
-#if XBOX_CREDITS
-                    "","",
-                    "","",
-                    "","",
-                    "[Microsoft ID@Xbox", "Chris Charla", "Dave Mianowski", "Wally Barger",
-#endif
-#if PLAYSTATION_CREDITS
-                    "","",
-                    "","",
-                    "","",
-                    "[@LOC_ID_CREDITS_JAPAN " /*"Japanese Localization & Production By"*/, "8-4, Ltd.",
-                    "","",
-                    "","",
-                    "","",
-                    "[Sony Computer Entertainment", "Alessandro Bovenzi", "Annie Meltzer", "Ben Andac", "Eddie Ramirez", "Justin Massongil", "Laura Casey", "Maimoona Block", "Norma Green", "Rey Gutierrez", "Ryan Clements", "Shahid Kamal Ahmad", "Shane Bettenhausen", "Akinari Ito", "Teppei Fujita", 
-#endif
-#if SWITCH_CREDITS
-                    "","",
-                    "","",
-                    "","",
-                    "[Nintendo", "Kirk Scott", "Sara Popescu",
-#endif
                     "","",
                     "",
                     "@LOC_ID_CREDITS_SCREEN_22" /*"Thanks to all our fans for their support!"*/,

@@ -7,6 +7,7 @@ using Tweener;
 using InputSystem;
 using Microsoft.Xna.Framework;
 using RogueCastle.GameStructs;
+using RogueCastle.Screens.BaseScreens;
 
 namespace RogueCastle
 {

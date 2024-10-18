@@ -1,7 +1,4 @@
-﻿//#define OLD_CONSOLE_CREDITS
-//#define SWITCH_CREDITS
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
+using RogueCastle.Screens.BaseScreens;
 
 namespace RogueCastle
 {
@@ -115,33 +113,18 @@ namespace RogueCastle
                     "LOC_ID_TUTORIAL_CREDITS_TITLE_5",
                     "LOC_ID_TUTORIAL_CREDITS_TITLE_6",
                     "LOC_ID_TUTORIAL_CREDITS_TITLE_7",
-#if OLD_CONSOLE_CREDITS || SWITCH_CREDITS
-                    "LOC_ID_CREDITS_SCREEN_26",
-                    //"Japanese Localization & Production By",  // This is not translated
-#endif
-                    "LOC_ID_TUTORIAL_CREDITS_TITLE_8"
+                    "LOC_ID_TUTORIAL_CREDITS_TITLE_8",
                 };
 
             m_creditsTextList = new string[]
                 {
                     "Cellar Door Games",
                     "Teddy Lee",
-                    "Kenny Lee", 
-#if SWITCH_CREDITS
-                    "Ryan Lee",
-#else
+                    "Kenny Lee",
                     "Marie-Christine Bourdua",
-#endif
                     "Glauber Kotaki",
                     "Gordon McGladdery",
                     "Judson Cowan",
-#if OLD_CONSOLE_CREDITS
-                    "Abstraction Games",
-                    //"8-4, Ltd.", // The Japanese Localization text above needs to be translated before this can be uncommented out.
-#endif
-#if SWITCH_CREDITS
-                    "BlitWorks SL",
-#endif
                     "Rogue Legacy",
                 };
 

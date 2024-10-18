@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.GameStructs;
+using RogueCastle.Screens.BaseScreens;
 
 namespace RogueCastle
 {
@@ -59,7 +60,6 @@ namespace RogueCastle
             (m_parentScreen.ScreenManager as RCScreenManager).Player.Reset();
             SoundManager.StopMusic(1);
 
-            (m_parentScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.TUTORIAL_ROOM, true);
             //(m_parentScreen.ScreenManager as RCScreenManager).HideCurrentScreen();
         }
     }

@@ -10,6 +10,7 @@ using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
 using RogueCastle.Objects;
+using RogueCastle.Screens.BaseScreens;
 using Tweener;
 
 namespace RogueCastle

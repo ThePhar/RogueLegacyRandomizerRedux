@@ -8,6 +8,7 @@ using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.GameStructs;
+using RogueCastle.Screens.BaseScreens;
 using Tweener.Ease;
 using Tweener;
 

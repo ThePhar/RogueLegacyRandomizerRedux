@@ -66,7 +66,7 @@ namespace RogueCastle
         public int TimesCastleBeaten { get; set; } // Times you've beaten the game.
         public int NumEnemiesBeaten { get; set; } // Number of enemies you've beaten in a single run.
 
-        public bool TutorialComplete { get; set; }
+        public bool TutorialComplete { get; set; } = true;
         public bool CharacterFound { get; set; }
         public bool LoadStartingRoom { get; set; }
 
@@ -148,9 +148,6 @@ namespace RogueCastle
 
         public PlayerStats()
         {
-            if (LevelEV.RunTutorial == false && this.TutorialComplete == false && LevelEV.RunTestRoom == true) // This is debug that needs to be removed once tutorial is properly implemented.
-                this.TutorialComplete = true;
-
             PlayerName = "Lee";//"Sir Johannes";
             SpecialItem = SpecialItemType.NONE;
             Class = ClassType.KNIGHT;

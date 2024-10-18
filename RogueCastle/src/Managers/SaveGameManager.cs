@@ -762,7 +762,7 @@ public class SaveGameManager(Game game)
 
                 writer.Write(Game.PlayerStats.RomanNumeral);
                 writer.Write(Game.PlayerStats.HasProsopagnosia);
-                writer.Write(LevelEV.SaveFileRevisionNumber);
+                writer.Write(LevelEV.SAVE_FILE_REVISION_NUMBER);
                 writer.Write(Game.PlayerStats.ArchitectUsed);
 
                 if (LevelEV.ShowSaveLoadDebugText)
@@ -791,7 +791,7 @@ public class SaveGameManager(Game game)
 
                     Console.WriteLine("Player Name Number: " + Game.PlayerStats.RomanNumeral);
                     Console.WriteLine("Player HasProsopagnosia: " + Game.PlayerStats.HasProsopagnosia);
-                    Console.WriteLine("Save File Revision Number: " + LevelEV.SaveFileRevisionNumber);
+                    Console.WriteLine("Save File Revision Number: " + LevelEV.SAVE_FILE_REVISION_NUMBER);
                     Console.WriteLine("Architect used: " + Game.PlayerStats.ArchitectUsed);
                 }
 

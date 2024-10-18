@@ -34,7 +34,6 @@ public static class Program
             LevelEV.ShowSaveLoadDebugText = false;
             LevelEV.DeleteSaveFile = false;
             LevelEV.CloseTestRoomDoors = false;
-            LevelEV.RunTutorial = false;
             LevelEV.DisableSaving = false;
             LevelEV.RunCrashLogs = false; // todo
             LevelEV.WeakenBosses = true; // todo
@@ -43,12 +42,12 @@ public static class Program
             LevelEV.ShowFps = false;
             LevelEV.SaveFrames = false;
             LevelEV.UnlockAllDiaryEntries = false;
-            LevelEV.EnableBlitworksSplash = false;
         }
 
         if (args.Length == 1 && LevelEV.CreateRetailVersion == false)
         {
             using var game = new Game(args[0]);
+
             LevelEV.RunTestRoom = true;
             LevelEV.DisableSaving = true;
             game.Run();
@@ -60,6 +59,7 @@ public static class Program
                 try
                 {
                     using var game = new Game();
+
                     game.Run();
                 }
                 catch (Exception e)
@@ -88,6 +88,7 @@ public static class Program
             else
             {
                 using var game = new Game();
+
                 game.Run();
             }
         }

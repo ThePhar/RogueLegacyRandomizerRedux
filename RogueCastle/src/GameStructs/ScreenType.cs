@@ -34,7 +34,6 @@ public static class ScreenType
     public const int TITLE_WHITE     = 27;
     public const int DEMO_START      = 28;
     public const int DEMO_END        = 29;
-    public const int BLIT_WORKS      = 30;
     public const int PROFILE_SELECT  = 31;
     public const int LOADING         = 32;
 }

@@ -8,6 +8,8 @@ using System.Threading;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
+using RogueCastle.Screens;
+using RogueCastle.Screens.BaseScreens;
 using Tweener;
 using Tweener.Ease;
 
@@ -161,11 +163,6 @@ namespace RogueCastle
                     lock (m_levelToLoad)
                         m_loadingComplete = true;
                     break;
-                case(ScreenType.BLIT_WORKS):
-                    m_levelToLoad = new BlitWorksSplashScreen();
-                    lock (m_levelToLoad)
-                        m_loadingComplete = true;
-                    break;
                 case (ScreenType.DEMO_END):
                     m_levelToLoad = new DemoEndScreen();
                     lock (m_levelToLoad)
@@ -216,8 +213,6 @@ namespace RogueCastle
                 case (ScreenType.TUTORIAL_ROOM):
                     RCScreenManager manager = ScreenManager as RCScreenManager;
 
-                    AreaStruct[] levelStruct = Game.Area1List;
-
                     m_levelToLoad = null;
 
                     // Creating the level.
@@ -251,14 +246,14 @@ namespace RogueCastle
                                 }
                             }
                             else // Castle is not locked. Load a new map.
-                                m_levelToLoad = LevelBuilder2.CreateLevel(level.RoomList[0], levelStruct);
+                                m_levelToLoad = LevelBuilder2.CreateLevel(level.RoomList[0]);
                         }
                         else // Player is loading from the title screen.
                         {
                             if (Game.PlayerStats.LoadStartingRoom == true) // New game. Player has started in the starting room.
                             {
                                 Console.WriteLine("This should only be used for debug purposes");
-                                m_levelToLoad = LevelBuilder2.CreateLevel(null, levelStruct);
+                                m_levelToLoad = LevelBuilder2.CreateLevel();
                                 (ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.Map, SaveType.MapData);
                             }
                             else // Player has saved data. Load the saved map and saved map data.

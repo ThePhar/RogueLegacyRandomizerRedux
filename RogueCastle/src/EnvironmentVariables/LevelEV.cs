@@ -208,16 +208,14 @@ public static class LevelEV
     public static bool ShowSaveLoadDebugText = false;
     public static bool DeleteSaveFile = false;
     public static bool CloseTestRoomDoors = false;
-    public static bool RunTutorial = false;
     public static bool DisableSaving = false;
     public static bool RunCrashLogs = false;
     public static bool WeakenBosses = false;
     public static bool EnableOffscreenControl = false;
     public static bool EnableBackupSaving = true;
-    public static bool EnableBlitworksSplash = false;
 
     public static bool SaveFrames = false;
-    public static readonly int SaveFileRevisionNumber = 1;
+    public const int SAVE_FILE_REVISION_NUMBER = 1;
 
     /// <summary>
     ///     This EV overrides all the other Level EVs to create a retail build of the game.

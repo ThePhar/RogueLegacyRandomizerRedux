@@ -14,6 +14,7 @@ using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
 using RogueCastle.RandomChaos2DGodRays;
+using RogueCastle.Screens.BaseScreens;
 
 namespace RogueCastle
 {

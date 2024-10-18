@@ -13,6 +13,8 @@ using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
+using RogueCastle.Screens;
+using RogueCastle.Screens.BaseScreens;
 using SpriteSystem;
 using Tweener;
 
@@ -443,7 +445,6 @@ public class Game : Microsoft.Xna.Framework.Game
         SpriteLibrary.LoadSpritesheet(Content, @"GameSpritesheets\languageSpritesheet", false);
         SpriteLibrary.LoadSpritesheet(Content, @"GameSpritesheets\language2Spritesheet", false);
         SpriteLibrary.LoadSpritesheet(Content, @"GameSpritesheets\language3Spritesheet", false);
-        SpriteLibrary.LoadSpritesheet(Content, @"GameSpritesheets\blitworksSpritesheet", false);
     }
 
     public void LoadAllEffects()
@@ -507,14 +508,7 @@ public class Game : Microsoft.Xna.Framework.Game
                     }
                     else
                     {
-                        if (LevelEV.RunTutorial)
-                        {
-                            ScreenManager.DisplayScreen(ScreenType.TUTORIAL_ROOM, true);
-                        }
-                        else
-                        {
-                            ScreenManager.DisplayScreen(ScreenType.STARTING_ROOM, true);
-                        }
+                        ScreenManager.DisplayScreen(ScreenType.STARTING_ROOM, true);
                     }
                 }
                 else
