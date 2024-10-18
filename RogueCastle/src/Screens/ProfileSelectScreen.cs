@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using DS2DEngine;
 using InputSystem;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
@@ -14,7 +16,7 @@ namespace RogueCastle.Screens;
 
 public class ProfileSelectScreen : Screen
 {
-    private const int SlotCount = 3;
+    private const int SlotCount = 5;
 
     private KeyIconTextObj _cancelText;
     private KeyIconTextObj _confirmText;
@@ -24,7 +26,6 @@ public class ProfileSelectScreen : Screen
     private int _selectedIndex;
     private ObjContainer _selectedSlot;
     private List<ObjContainer> _slotArray = [];
-    private SpriteObj _title;
 
     public ProfileSelectScreen()
     {
@@ -35,37 +36,42 @@ public class ProfileSelectScreen : Screen
 
     public override void LoadContent()
     {
-        _title = new SpriteObj("ProfileSelectTitle_Sprite") { ForceDraw = true };
-
         // Template for slot text
         var slotText = new TextObj(Game.JunicodeFont) {
             Align = Types.TextAlign.Centre,
             TextureColor = Color.White,
             OutlineWidth = 2,
-            FontSize = 10,
+            FontSize = 12,
         };
         slotText.Text = "LOC_ID_PROFILE_SEL_SCREEN_1".GetString(slotText);
         slotText.Position = new Vector2(0, -(slotText.Height / 2f));
 
         for (var i = 0; i < SlotCount; i++)
         {
-            var iSlotContainer = new ObjContainer("ProfileSlotBG_Container") { ForceDraw = true };
-            var iSlotText = slotText.Clone() as TextObj;
-            var iSlotLvlText = slotText.Clone() as TextObj;
-            var iSlot1NGText = slotText.Clone() as TextObj;
-            var iSlotTitle = new SpriteObj($"ProfileSlot{i + 1}Text_Sprite") { Position = new Vector2(-130, 35) };
+            var iSlotContainer = new ObjContainer { ForceDraw = true };
+            var iSlotBackground = new SpriteObj("DialogBox_Sprite");
+            var iSlotName = slotText.Clone() as TextObj;
+            var iSlotLevel = slotText.Clone() as TextObj;
+            var iSlotNumber = slotText.Clone() as TextObj;
 
-            iSlotText!.Text = "LOC_ID_CLASS_NAME_1_MALE".GetString(iSlotText);
-            iSlotLvlText!.Text = "LOC_ID_CLASS_NAME_1_MALE".GetString(iSlotLvlText);
-            iSlot1NGText!.Text = "LOC_ID_CLASS_NAME_1_MALE".GetString(iSlot1NGText);
+            iSlotBackground.Scale = new Vector2(0.5f, 0.5f);
 
-            iSlotLvlText.Position = new Vector2(120, 15);
-            iSlot1NGText.Position = new Vector2(-120, 15);
+            iSlotName!.Text = "LOC_ID_CLASS_NAME_1_MALE".GetString(iSlotName);
+            iSlotLevel!.Text = "LOC_ID_CLASS_NAME_1_MALE".GetString(iSlotLevel);
+            iSlotNumber!.Text = "LOC_ID_RANDOMIZER_SLOT".FormatResourceString(i + 1);
 
-            iSlotContainer.AddChild(iSlotText);
-            iSlotContainer.AddChild(iSlotTitle);
-            iSlotContainer.AddChild(iSlotLvlText);
-            iSlotContainer.AddChild(iSlot1NGText);
+            iSlotLevel.Position = new Vector2(227, 28);
+            iSlotLevel.Align = Types.TextAlign.Right;
+            iSlotLevel.FontSize = 10;
+
+            iSlotNumber.Position = new Vector2(-227, -55);
+            iSlotNumber.Align = Types.TextAlign.Left;
+            iSlotNumber.FontSize = 10;
+
+            iSlotContainer.AddChild(iSlotBackground);
+            iSlotContainer.AddChild(iSlotName);
+            iSlotContainer.AddChild(iSlotLevel);
+            iSlotContainer.AddChild(iSlotNumber);
 
             _slotArray.Add(iSlotContainer);
         }
@@ -96,12 +102,13 @@ public class ProfileSelectScreen : Screen
 
         _deleteProfileText = new KeyIconTextObj(Game.JunicodeFont);
         _deleteProfileText.Text = "LOC_ID_PROFILE_SEL_SCREEN_6".GetString(_deleteProfileText);
-        _deleteProfileText.Align = Types.TextAlign.Left;
+        _deleteProfileText.Align = Types.TextAlign.Right;
         _deleteProfileText.DropShadow = new Vector2(2, 2);
         _deleteProfileText.FontSize = 12;
-        _deleteProfileText.Position = new Vector2(20, _confirmText.Y + 80);
+        _deleteProfileText.Position = new Vector2(_confirmText.X, _confirmText.Y - 40);
         _deleteProfileText.ForceDraw = true;
 
+        slotText.Dispose();
         base.LoadContent();
     }
 
@@ -126,12 +133,9 @@ public class ProfileSelectScreen : Screen
 
         Tween.To(this, 0.2f, Tween.EaseNone, "BackBufferOpacity", "0.9");
 
-        _title.Position = new Vector2(1320 / 2f, 100);
-        TweenInText(_title, 0);
-
         for (var i = 0; i < SlotCount; i++)
         {
-            _slotArray[i].Position = new Vector2(1320 / 2f, 300 + i * 120);
+            _slotArray[i].Position = new Vector2(1320 / 4f, 100 + i * 128);
             TweenInText(_slotArray[i], 0.05f * (i + 1));
         }
 
@@ -141,12 +145,14 @@ public class ProfileSelectScreen : Screen
         {
             _confirmText.ForcedScale = new Vector2(0.7f, 0.7f);
             _cancelText.ForcedScale = new Vector2(0.7f, 0.7f);
+            _deleteProfileText.ForcedScale = new Vector2(0.7f, 0.7f);
             _navigationText.Text = "LOC_ID_PROFILE_SEL_SCREEN_2_NEW".GetString(_navigationText);
         }
         else
         {
             _confirmText.ForcedScale = new Vector2(1f, 1f);
             _cancelText.ForcedScale = new Vector2(1f, 1f);
+            _deleteProfileText.ForcedScale = new Vector2(1f, 1f);
             _navigationText.Text = "LOC_ID_PROFILE_SEL_SCREEN_3".GetString(_navigationText);
         }
 
@@ -164,22 +170,14 @@ public class ProfileSelectScreen : Screen
         Tween.To(_navigationText, 0.2f, Tween.EaseNone, "Opacity", "1");
         Tween.To(_deleteProfileText, 0.2f, Tween.EaseNone, "Opacity", "1");
 
-        Game.ChangeBitmapLanguage(_title, "ProfileSelectTitle_Sprite");
-        for (var i = 0; i < SlotCount; i++)
-        {
-            Game.ChangeBitmapLanguage(_slotArray[i].GetChildAt(2) as SpriteObj, $"ProfileSlot{i + 1}Text_Sprite");
-        }
-
         base.OnEnter();
     }
 
     private void CheckSaveHeaders(ObjContainer container, byte profile)
     {
         var slotText = container.GetChildAt(1) as TextObj;
-        var slotLvlText = container.GetChildAt(3) as TextObj;
-        var slotNGText = container.GetChildAt(4) as TextObj;
+        var slotLvlText = container.GetChildAt(2) as TextObj;
         slotLvlText!.Text = "";
-        slotNGText!.Text = "";
 
         try
         {
@@ -242,11 +240,6 @@ public class ProfileSelectScreen : Screen
                 }
 
                 slotLvlText.Text = $"{"LOC_ID_PROFILE_SEL_SCREEN_9".GetResourceString()} {playerLevel}";
-                if (timesCastleBeaten > 0)
-                {
-                    slotNGText.Text = $"{"LOC_ID_PROFILE_SEL_SCREEN_10".GetResourceString()} {timesCastleBeaten}";
-                }
-
                 container.ID = 1; // Container with ID == 1 means it has a save file.
             }
         }
@@ -281,7 +274,6 @@ public class ProfileSelectScreen : Screen
 
         _lockControls = true;
 
-        TweenOutText(_title, 0);
         for (var i = 0; i < SlotCount; i++)
         {
             TweenOutText(_slotArray[i], 0.05f * (i + 1));
@@ -402,7 +394,6 @@ public class ProfileSelectScreen : Screen
         Camera.Begin();
         Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT), Color.Black * BackBufferOpacity);
 
-        _title.Draw(Camera);
         for (var i = 0; i < SlotCount; i++)
         {
             _slotArray[i].Draw(Camera);
@@ -481,9 +472,6 @@ public class ProfileSelectScreen : Screen
             return;
         }
 
-        _title.Dispose();
-        _title = null;
-
         foreach (var container in _slotArray)
         {
             container.Dispose();
@@ -505,10 +493,8 @@ public class ProfileSelectScreen : Screen
 
     public override void RefreshTextObjs()
     {
-        Game.ChangeBitmapLanguage(_title, "ProfileSelectTitle_Sprite");
         for (var i = 0; i < SlotCount; i++)
         {
-            Game.ChangeBitmapLanguage(_slotArray[i].GetChildAt(2) as SpriteObj, $"ProfileSlot{i + 1}Text_Sprite");
             CheckSaveHeaders(_slotArray[i], (byte)(i + 1));
         }
 

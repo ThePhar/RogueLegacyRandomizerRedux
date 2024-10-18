@@ -4975,4 +4975,7 @@
   <data name="LOC_ID_TRADEMARK_GENERIC" xml:space="preserve">
     <value>{0} is a trademark of Cellar Door Games Inc.  All Right Reserved.</value>
   </data>
+  <data name="LOC_ID_RANDOMIZER_SLOT" xml:space="preserve">
+    <value>Slot {0}</value>
+  </data>
 </root>

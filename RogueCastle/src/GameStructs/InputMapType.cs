@@ -59,4 +59,14 @@ public static class InputMapType
     {
         return map.JustPressed(PLAYER_DOWN1) || map.JustPressed(PLAYER_DOWN2);
     }
+
+    public static bool PressedLeft(this InputMap map)
+    {
+        return map.JustPressed(PLAYER_LEFT1) || map.JustPressed(PLAYER_LEFT2);
+    }
+
+    public static bool PressedRight(this InputMap map)
+    {
+        return map.JustPressed(PLAYER_RIGHT1) || map.JustPressed(PLAYER_RIGHT2);
+    }
 }
