@@ -23,6 +23,7 @@ namespace RogueCastle;
 public class Game : Microsoft.Xna.Framework.Game
 {
     private const float FrameLimit = 1 / 40f;
+
     public static Texture2D GenericTexture;
     public static Effect MaskEffect;
     public static Effect BWMaskEffect;

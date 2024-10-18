@@ -4790,7 +4790,7 @@
     <value>to Attack Down</value>
   </data>
   <data name="LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW" xml:space="preserve">
-    <value>[Input:25] to Change Profile ({0})</value>
+    <value>[Input:25] to Change Seed ({0})</value>
   </data>
   <data name="LOC_ID_BLACKSMITH_SCREEN_16_NEW" xml:space="preserve">
     <value>{0} to unlock</value>
