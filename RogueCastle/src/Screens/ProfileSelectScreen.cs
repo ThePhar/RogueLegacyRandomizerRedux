@@ -65,6 +65,7 @@ public class ProfileSelectScreen : Screen
             iSlotContainer.AddChild(iSlotText);
             iSlotContainer.AddChild(iSlotTitle);
             iSlotContainer.AddChild(iSlotLvlText);
+            iSlotContainer.AddChild(iSlot1NGText);
 
             _slotArray.Add(iSlotContainer);
         }

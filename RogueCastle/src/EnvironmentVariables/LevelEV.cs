@@ -195,8 +195,10 @@ public static class LevelEV
 
     #region Debug
 
+    public const int SAVE_FILE_REVISION_NUMBER = 1;
+
     public static bool ShowEnemyRadii = false;
-    public static bool EnableDebugInput = true;
+    public static bool EnableDebugInput = false;
     public static bool UnlockAllAbilities = false;
     public static bool UnlockAllDiaryEntries = false;
     public static GameTypes.LevelType TestRoomLevelType = GameTypes.LevelType.Castle;
@@ -204,23 +206,21 @@ public static class LevelEV
     public static bool RunTestRoom = false;
     public static bool ShowDebugText = false;
     public static bool LoadTitleScreen = true;
-    public static bool LoadSplashScreen = false;
+    public static bool LoadSplashScreen = true;
     public static bool ShowSaveLoadDebugText = false;
     public static bool DeleteSaveFile = false;
     public static bool CloseTestRoomDoors = false;
     public static bool DisableSaving = false;
-    public static bool RunCrashLogs = false;
+    public static bool RunCrashLogs = true;
     public static bool WeakenBosses = false;
     public static bool EnableOffscreenControl = false;
     public static bool EnableBackupSaving = true;
-
     public static bool SaveFrames = false;
-    public const int SAVE_FILE_REVISION_NUMBER = 1;
 
     /// <summary>
     ///     This EV overrides all the other Level EVs to create a retail build of the game.
     /// </summary>
-    public static readonly bool CreateRetailVersion = true;
+    public static bool CreateRetailVersion = true;
 
     /// <summary>
     ///     Setting this true also turns vsync off (so that you can get an FPS greater than 60).

@@ -18,6 +18,47 @@ public static class Program
     {
         Environment.SetEnvironmentVariable("FNA_PLATFORM_BACKEND", "SDL3");
 
+        // Parse command line arguments.
+        foreach (var arg in args)
+        {
+            switch (arg)
+            {
+                case "--show_enemy_radii":
+                    LevelEV.ShowEnemyRadii = true;
+                    LevelEV.CreateRetailVersion = false;
+                    break;
+
+                case "--debug":
+                    LevelEV.EnableDebugInput = true;
+                    LevelEV.ShowDebugText = true;
+                    LevelEV.ShowSaveLoadDebugText = true;
+                    LevelEV.RunCrashLogs = false;
+                    LevelEV.CreateRetailVersion = false;
+                    break;
+
+                case "--no_save":
+                    LevelEV.DisableSaving = true;
+                    LevelEV.EnableBackupSaving = false;
+                    LevelEV.CreateRetailVersion = false;
+                    break;
+
+                case "--no_splash":
+                    LevelEV.LoadSplashScreen = false;
+                    LevelEV.CreateRetailVersion = false;
+                    break;
+
+                case "--weaken_bosses":
+                    LevelEV.WeakenBosses = true;
+                    LevelEV.CreateRetailVersion = false;
+                    break;
+
+                case "--fps":
+                    LevelEV.ShowFps = true;
+                    LevelEV.CreateRetailVersion = false;
+                    break;
+            }
+        }
+
         if (LevelEV.CreateRetailVersion)
         {
             Steamworks.Init();
@@ -25,72 +66,69 @@ public static class Program
             LevelEV.ShowEnemyRadii = false;
             LevelEV.EnableDebugInput = false;
             LevelEV.UnlockAllAbilities = false;
+            LevelEV.UnlockAllDiaryEntries = false;
             LevelEV.TestRoomLevelType = GameTypes.LevelType.Castle;
             LevelEV.TestRoomReverse = false;
             LevelEV.RunTestRoom = false;
             LevelEV.ShowDebugText = false;
-            LevelEV.LoadTitleScreen = false;
+            LevelEV.LoadTitleScreen = true;
             LevelEV.LoadSplashScreen = true;
             LevelEV.ShowSaveLoadDebugText = false;
             LevelEV.DeleteSaveFile = false;
             LevelEV.CloseTestRoomDoors = false;
             LevelEV.DisableSaving = false;
-            LevelEV.RunCrashLogs = false; // todo
-            LevelEV.WeakenBosses = true; // todo
-            LevelEV.EnableBackupSaving = true;
+            LevelEV.RunCrashLogs = true;
+            LevelEV.WeakenBosses = false;
             LevelEV.EnableOffscreenControl = false;
-            LevelEV.ShowFps = false;
+            LevelEV.EnableBackupSaving = true;
             LevelEV.SaveFrames = false;
-            LevelEV.UnlockAllDiaryEntries = false;
         }
 
-        if (args.Length == 1 && LevelEV.CreateRetailVersion == false)
+        // if (args.Length == 1 && LevelEV.CreateRetailVersion == false)
+        // {
+        //     using var game = new Game(args[0]);
+        //
+        //     LevelEV.RunTestRoom = true;
+        //     LevelEV.DisableSaving = true;
+        //     game.Run();
+        // }
+
+        if (LevelEV.RunCrashLogs)
         {
-            using var game = new Game(args[0]);
-
-            LevelEV.RunTestRoom = true;
-            LevelEV.DisableSaving = true;
-            game.Run();
-        }
-        else
-        {
-            if (LevelEV.RunCrashLogs)
-            {
-                try
-                {
-                    using var game = new Game();
-
-                    game.Run();
-                }
-                catch (Exception e)
-                {
-                    var date = DateTime.Now.ToString("dd-mm-yyyy_HH-mm-ss");
-                    if (!Directory.Exists(OSDir))
-                    {
-                        Directory.CreateDirectory(OSDir);
-                    }
-
-                    var configFilePath = Path.Combine(OSDir, "CrashLog_" + date + ".log");
-                    using (var writer = new StreamWriter(configFilePath, false))
-                    {
-                        writer.WriteLine(e.ToString());
-                    }
-
-                    Console.WriteLine(e.ToString());
-                    SDL.SDL_ShowSimpleMessageBox(
-                        SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_ERROR,
-                        "SAVE THIS MESSAGE!",
-                        e.ToString(),
-                        IntPtr.Zero
-                    );
-                }
-            }
-            else
+            try
             {
                 using var game = new Game();
 
                 game.Run();
             }
+            catch (Exception e)
+            {
+                var date = DateTime.Now.ToString("dd-mm-yyyy_HH-mm-ss");
+                if (!Directory.Exists(OSDir))
+                {
+                    Directory.CreateDirectory(OSDir);
+                }
+
+                var configFilePath = Path.Combine(OSDir, "CrashLog_" + date + ".log");
+                using (var writer = new StreamWriter(configFilePath, false))
+                {
+                    writer.WriteLine(e.ToString());
+                }
+
+                Console.WriteLine(e.ToString());
+                SDL.SDL_ShowSimpleMessageBox(
+                    SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_ERROR,
+                    "SAVE THIS MESSAGE!",
+                    e.ToString(),
+                    IntPtr.Zero
+                );
+            }
+        }
+        else
+        {
+            using var game = new Game();
+
+            game.Run();
         }
 
         Steamworks.Shutdown();
