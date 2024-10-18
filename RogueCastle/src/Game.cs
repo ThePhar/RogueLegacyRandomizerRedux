@@ -62,7 +62,6 @@ public class Game : Microsoft.Xna.Framework.Game
     private GameTime _forcedGameTime1, _forcedGameTime2;
     private bool _frameLimitSwap;
     private bool _gameLoaded;
-    private WeakReference _gcTracker = new(new object());
     private bool _maleChineseNamesLoaded;
 
     // This makes sure your very first inputs upon returning after leaving the screen does not register (no accidental inputs happen).
