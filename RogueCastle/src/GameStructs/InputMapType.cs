@@ -1,4 +1,6 @@
-﻿namespace RogueCastle.GameStructs;
+﻿using InputSystem;
+
+namespace RogueCastle.GameStructs;
 
 public static class InputMapType
 {
@@ -36,4 +38,25 @@ public static class InputMapType
 
     public const byte MENU_CONFIRM3 = 27;
     public const byte MENU_CANCEL3 = 28;
+
+    // Helper extension methods to prevent `||`ing every possible action button.
+    public static bool PressedCancel(this InputMap map)
+    {
+        return map.JustPressed(MENU_CANCEL1) || map.JustPressed(MENU_CANCEL2) || map.JustPressed(MENU_CANCEL3);
+    }
+
+    public static bool PressedConfirm(this InputMap map)
+    {
+        return map.JustPressed(MENU_CONFIRM1) || map.JustPressed(MENU_CONFIRM2) || map.JustPressed(MENU_CONFIRM3);
+    }
+
+    public static bool PressedUp(this InputMap map)
+    {
+        return map.JustPressed(PLAYER_UP1) || map.JustPressed(PLAYER_UP2);
+    }
+
+    public static bool PressedDown(this InputMap map)
+    {
+        return map.JustPressed(PLAYER_DOWN1) || map.JustPressed(PLAYER_DOWN2);
+    }
 }
