@@ -6,6 +6,7 @@ using InputSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameObjects;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
 using RogueCastle.Screens.BaseScreens;
@@ -26,6 +27,7 @@ public class ProfileSelectScreen : Screen
     private int _selectedIndex;
     private ObjContainer _selectedSlot;
     private List<ObjContainer> _slotArray = [];
+    private ProfileStatsObj _profileStats;
 
     public ProfileSelectScreen()
     {
@@ -108,6 +110,9 @@ public class ProfileSelectScreen : Screen
         _deleteProfileText.Position = new Vector2(_confirmText.X, _confirmText.Y - 40);
         _deleteProfileText.ForceDraw = true;
 
+        _profileStats = new ProfileStatsObj() { ForceDraw = true };
+        _profileStats.Position = new Vector2(592f, 48f);
+
         slotText.Dispose();
         base.LoadContent();
     }
@@ -123,6 +128,9 @@ public class ProfileSelectScreen : Screen
         for (var i = 0; i < SlotCount; i++)
         {
             CheckSaveHeaders(_slotArray[i], (byte)(i + 1));
+
+            _slotArray[i].Position = new Vector2(300f, 100 + i * 132);
+            TweenInText(_slotArray[i], 0.05f * (i + 1));
         }
 
         _deleteProfileText.Visible = true;
@@ -131,13 +139,9 @@ public class ProfileSelectScreen : Screen
             _deleteProfileText.Visible = false;
         }
 
-        Tween.To(this, 0.2f, Tween.EaseNone, "BackBufferOpacity", "0.9");
+        _profileStats.LoadContent();
 
-        for (var i = 0; i < SlotCount; i++)
-        {
-            _slotArray[i].Position = new Vector2(1320 / 4f, 100 + i * 128);
-            TweenInText(_slotArray[i], 0.05f * (i + 1));
-        }
+        Tween.To(this, 0.2f, Tween.EaseNone, "BackBufferOpacity", "0.9");
 
         Tween.RunFunction(0.5f, this, "UnlockControls");
 
@@ -164,11 +168,13 @@ public class ProfileSelectScreen : Screen
         _cancelText.Opacity = 0;
         _navigationText.Opacity = 0;
         _deleteProfileText.Opacity = 0;
+        _profileStats.Opacity = 0;
 
         Tween.To(_confirmText, 0.2f, Tween.EaseNone, "Opacity", "1");
         Tween.To(_cancelText, 0.2f, Tween.EaseNone, "Opacity", "1");
         Tween.To(_navigationText, 0.2f, Tween.EaseNone, "Opacity", "1");
         Tween.To(_deleteProfileText, 0.2f, Tween.EaseNone, "Opacity", "1");
+        Tween.To(_profileStats, 0.2f, Tween.EaseNone, "Opacity", "1");
 
         base.OnEnter();
     }
@@ -193,6 +199,7 @@ public class ProfileSelectScreen : Screen
             if (playerName == null)
             {
                 slotText!.Text = "LOC_ID_PROFILE_SEL_SCREEN_1".GetResourceString();
+                slotText.TextureColor = Color.Gray;
                 container.ID = 0; // Container with ID == 0 means it has no save file.
             }
             else
@@ -246,6 +253,7 @@ public class ProfileSelectScreen : Screen
         catch
         {
             slotText!.Text = "LOC_ID_PROFILE_SEL_SCREEN_1".GetString(slotText);
+            slotText.TextureColor = Color.Gray;
             container.ID = 0; // Container with ID == 0 means it has no save file.
         }
     }
@@ -271,6 +279,7 @@ public class ProfileSelectScreen : Screen
         Tween.To(_cancelText, 0.2f, Tween.EaseNone, "Opacity", "0");
         Tween.To(_navigationText, 0.2f, Tween.EaseNone, "Opacity", "0");
         Tween.To(_deleteProfileText, 0.2f, Tween.EaseNone, "Opacity", "0");
+        Tween.To(_profileStats, 0.2f, Tween.EaseNone, "Opacity", "0");
 
         _lockControls = true;
 
@@ -302,6 +311,8 @@ public class ProfileSelectScreen : Screen
 
     public override void HandleInput()
     {
+        _profileStats.HandleDebugInput();
+
         if (_lockControls == false)
         {
             var selectedSlot = _selectedSlot;
@@ -344,8 +355,8 @@ public class ProfileSelectScreen : Screen
 
             if (_selectedSlot != selectedSlot)
             {
-                selectedSlot.TextureColor = Color.White;
                 _selectedSlot.TextureColor = Color.Yellow;
+                selectedSlot.TextureColor = Color.White;
             }
 
             if (Game.GlobalInput.PressedCancel())
@@ -375,7 +386,7 @@ public class ProfileSelectScreen : Screen
                     Game.ScreenManager.Player.CurrentHealth = Game.PlayerStats.CurrentHealth;
                     Game.ScreenManager.Player.CurrentMana = Game.PlayerStats.CurrentMana;
 
-                    ExitTransition();
+                    manager!.DisplayScreen(ScreenType.TITLE, true);
                 }
             }
 
@@ -398,6 +409,8 @@ public class ProfileSelectScreen : Screen
         {
             _slotArray[i].Draw(Camera);
         }
+
+        _profileStats.Draw(Camera);
 
         _confirmText.Draw(Camera);
         _cancelText.Draw(Camera);
