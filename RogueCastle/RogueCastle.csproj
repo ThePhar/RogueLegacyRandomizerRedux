@@ -37,4 +37,8 @@
   <ItemGroup>
     <Folder Include="src\GameObjects\RandomizerObjs\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Archipelago.MultiClient.Net" Version="6.3.1" />
+  </ItemGroup>
 </Project>
