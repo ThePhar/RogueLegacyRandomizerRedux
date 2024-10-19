@@ -2,7 +2,7 @@
 
 public static class ScreenType
 {
-    public const int NUM_SCREENS = 32;
+    public const int NUM_SCREENS = 33;
 
     public const int NULL            = 0;
     public const int CDG_SPLASH      = 1;
@@ -36,4 +36,5 @@ public static class ScreenType
     public const int DEMO_END        = 29;
     public const int PROFILE_SELECT  = 31;
     public const int LOADING         = 32;
+    public const int RANDOMIZER_MENU = 33;
 }

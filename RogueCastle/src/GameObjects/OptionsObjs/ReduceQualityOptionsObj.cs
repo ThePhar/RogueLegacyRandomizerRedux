@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 
@@ -16,8 +17,8 @@ namespace RogueCastle
         public ReduceQualityOptionsObj(OptionsScreen parentScreen)
             : base(parentScreen, "LOC_ID_OPTIONS_SCREEN_12") //"Reduce Shader Quality"
         {
-            m_toggleText = m_nameText.Clone() as TextObj;
-            m_toggleText.X = m_optionsTextOffset;
+            m_toggleText = NameText.Clone() as TextObj;
+            m_toggleText.X = OPTIONS_TEXT_OFFSET;
             m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_QUICKDROP_OPTIONS_2", m_toggleText); //"No"
             this.AddChild(m_toggleText);
         }
@@ -67,16 +68,16 @@ namespace RogueCastle
 
         public override void RefreshTextObjs()
         {
-            m_nameText.ScaleX = 1;
+            NameText.ScaleX = 1;
             switch (LocaleBuilder.LanguageType)
             {
                 case (LanguageType.French):
                 case (LanguageType.SpanishSpain):
-                    m_nameText.ScaleX = 0.9f;
+                    NameText.ScaleX = 0.9f;
                     break;
                 case (LanguageType.PortugueseBrazil):
                 case (LanguageType.Russian):
-                    m_nameText.ScaleX = 0.8f;
+                    NameText.ScaleX = 0.8f;
                     break;
             }
             base.RefreshTextObjs();

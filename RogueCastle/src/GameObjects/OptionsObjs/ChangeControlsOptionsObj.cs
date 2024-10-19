@@ -6,6 +6,7 @@ using DS2DEngine;
 using Microsoft.Xna.Framework;
 using InputSystem;
 using Microsoft.Xna.Framework.Input;
+using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 using RogueCastle.Screens.BaseScreens;
@@ -538,8 +539,8 @@ namespace RogueCastle
                 else
                     OnExit();
 
-                if (value != m_isActive)
-                    m_parentScreen.ToggleControlsConfig();
+                if (value != IsActive)
+                    ParentScreen.ToggleControlsConfig();
 
                 base.IsActive = value;
             }

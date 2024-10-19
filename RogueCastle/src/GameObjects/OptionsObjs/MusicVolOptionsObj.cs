@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 
@@ -18,7 +19,7 @@ namespace RogueCastle
             : base(parentScreen, "LOC_ID_MUSICVOL_OPTIONS_1") //"Music Volume"
         {
             m_volumeBarBG = new SpriteObj("OptionsScreenVolumeBG_Sprite");
-            m_volumeBarBG.X = m_optionsTextOffset;
+            m_volumeBarBG.X = OPTIONS_TEXT_OFFSET;
             m_volumeBarBG.Y = m_volumeBarBG.Height / 2f - 2;
             this.AddChild(m_volumeBarBG);
 

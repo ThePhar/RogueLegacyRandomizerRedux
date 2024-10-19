@@ -4,6 +4,7 @@ using DS2DEngine;
 using InputSystem;
 using Microsoft.Xna.Framework;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens.BaseScreens;
 using Tweener;
@@ -31,7 +32,6 @@ public class OptionsScreen : Screen
     private int _selectedOptionIndex;
     private bool _titleScreenOptions = true;
     private bool _transitioning;
-    private OptionsObj _unlockTraitorObj;
 
     public OptionsScreen()
     {
@@ -161,8 +161,6 @@ public class OptionsScreen : Screen
         Tween.To(_navigationText, 0.2f, Tween.EaseNone, "Opacity", "1");
 
         Tween.RunFunction(0.1f, typeof(SoundManager), "PlaySound", "DialogueMenuOpen");
-        //SoundManager.PlaySound("DialogueMenuOpen");
-
 
         if (_optionsArray.Contains(_backToMenuObj) == false)
         {
@@ -251,12 +249,6 @@ public class OptionsScreen : Screen
         _selectedOption = null;
         Game.SaveConfig();
         (ScreenManager as RCScreenManager).UpdatePauseScreenIcons();
-
-        // Remove the unlock traitor option.
-        if (_optionsArray.Contains(_unlockTraitorObj))
-        {
-            _optionsArray.Remove(_unlockTraitorObj);
-        }
 
         base.OnExit();
     }
@@ -461,7 +453,6 @@ public class OptionsScreen : Screen
             _quickDropObj = null;
             _enableSteamCloudObj = null;
             _reduceQualityObj = null;
-            _unlockTraitorObj = null;
             base.Dispose();
         }
     }

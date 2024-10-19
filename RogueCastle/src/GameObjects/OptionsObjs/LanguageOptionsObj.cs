@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using DS2DEngine;
+using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 
@@ -18,8 +19,8 @@ namespace RogueCastle
         public LanguageOptionsObj(OptionsScreen parentScreen)
             : base(parentScreen, "LOC_ID_OPTIONS_LANGUAGE_TITLE")
         {
-            m_toggleText = m_nameText.Clone() as TextObj;
-            m_toggleText.X = m_optionsTextOffset;
+            m_toggleText = NameText.Clone() as TextObj;
+            m_toggleText.X = OPTIONS_TEXT_OFFSET;
             m_toggleText.Text = "null";
             this.AddChild(m_toggleText);
         }

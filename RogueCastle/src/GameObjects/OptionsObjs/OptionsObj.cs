@@ -1,86 +1,82 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using DS2DEngine;
+﻿using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 
-namespace RogueCastle
+namespace RogueCastle.GameObjects.OptionsObjs;
+
+public abstract class OptionsObj : ObjContainer
 {
-    public abstract class OptionsObj : ObjContainer
+    protected const int OPTIONS_TEXT_OFFSET = 300;
+
+    protected TextObj NameText;
+    protected OptionsScreen ParentScreen;
+
+    private bool _isActive;
+    private bool _isSelected;
+
+    protected OptionsObj(OptionsScreen parentScreen, string nameLocID)
     {
-        protected bool m_isSelected = false;
-        protected bool m_isActive = false;
+        ParentScreen = parentScreen;
 
-        protected TextObj m_nameText;
-        protected OptionsScreen m_parentScreen;
-        protected int m_optionsTextOffset = 300;
-
-        public OptionsObj(OptionsScreen parentScreen, string nameLocID)
+        NameText = new TextObj(Game.JunicodeFont)
         {
-            m_parentScreen = parentScreen;
+            FontSize = 12,
+            DropShadow = new Vector2(2, 2),
+        };
+        NameText.Text = nameLocID.GetString(NameText, true);
 
-            m_nameText = new TextObj(Game.JunicodeFont);
-            m_nameText.FontSize = 12;
-            m_nameText.Text = LocaleBuilder.GetString(nameLocID, m_nameText, true);
-            m_nameText.DropShadow = new Vector2(2, 2);
-            this.AddChild(m_nameText);
+        AddChild(NameText);
+        ForceDraw = true;
+    }
 
-            this.ForceDraw = true;
+    public virtual bool IsActive
+    {
+        get => _isActive;
+        set
+        {
+            IsSelected = !value;
+
+            _isActive = value;
+        }
+    }
+
+    public bool IsSelected
+    {
+        get => _isSelected;
+        set
+        {
+            _isSelected = value;
+            NameText.TextureColor = value ? Color.Yellow : Color.White;
+        }
+    }
+
+    public virtual void Initialize() { }
+
+    public virtual void HandleInput()
+    {
+        if (Game.GlobalInput.PressedCancel())
+        {
+            SoundManager.PlaySound("Options_Menu_Deselect");
+        }
+    }
+
+    public virtual void Update(GameTime gameTime) { }
+
+    public virtual void RefreshTextObjs() { }
+
+    public override void Dispose()
+    {
+        if (IsDisposed)
+        {
+            return;
         }
 
-        public virtual void Initialize() { }
+        // Don't accidentally dispose the parent screen; might still be used lol
+        ParentScreen = null;
 
-        public virtual void HandleInput()
-        {
-            if (Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL1) || Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL2) || Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL3))
-                SoundManager.PlaySound("Options_Menu_Deselect");
-        }
-
-        public virtual void Update(GameTime gameTime) { }
-
-        public virtual void RefreshTextObjs() { }
-
-        public override void Dispose()
-        {
-            if (IsDisposed == false)
-            {
-                // Done
-                m_parentScreen = null;
-                m_nameText = null;
-                base.Dispose();
-            }
-        }
-
-        public virtual bool IsActive
-        {
-            get { return m_isActive; }
-            set
-            {
-                if (value == true)
-                    IsSelected = false;
-                else
-                    IsSelected = true;
-                m_isActive = value; 
-
-                if (value == false)
-                    Game.SaveConfig();
-            }
-        }
-
-        public bool IsSelected
-        {
-            get { return m_isSelected; }
-            set
-            {
-                m_isSelected = value;
-                if (value == true)
-                    m_nameText.TextureColor = Color.Yellow;
-                else
-                    m_nameText.TextureColor = Color.White;
-            }
-        }
+        NameText.Dispose();
+        NameText = null;
+        base.Dispose();
     }
 }

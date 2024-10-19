@@ -32,6 +32,7 @@ public class RCScreenManager(Game game) : ScreenManager(game)
     private ProfileSelectScreen _profileSelectScreen;
     private SkillUnlockScreen _skillUnlockScreen;
     private TextScreen _textScreen;
+    private RandomizerMenuScreen _randomizerMenuScreen;
     private VirtualScreen _virtualScreen;
 
     public int CurrentScreenType { get; private set; }
@@ -207,6 +208,13 @@ public class RCScreenManager(Game game) : ScreenManager(game)
         }
 
         _profileSelectScreen = new ProfileSelectScreen();
+
+        if (_randomizerMenuScreen != null)
+        {
+            _screenCleanupList.Add(_randomizerMenuScreen);
+        }
+
+        _randomizerMenuScreen = new RandomizerMenuScreen();
     }
 
     public override void LoadContent()
@@ -228,6 +236,7 @@ public class RCScreenManager(Game game) : ScreenManager(game)
         _flashbackScreen.LoadContent();
         _gameOverBossScreen.LoadContent();
         _profileSelectScreen.LoadContent();
+        _randomizerMenuScreen.LoadContent();
 
         if (IsContentLoaded == false)
         {
@@ -400,6 +409,9 @@ public class RCScreenManager(Game game) : ScreenManager(game)
                 break;
             case ScreenType.PROFILE_SELECT:
                 AddScreen(_profileSelectScreen, null);
+                break;
+            case ScreenType.RANDOMIZER_MENU:
+                AddScreen(_randomizerMenuScreen, null);
                 break;
         }
 

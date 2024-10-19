@@ -311,8 +311,6 @@ public class ProfileSelectScreen : Screen
 
     public override void HandleInput()
     {
-        _profileStats.HandleDebugInput();
-
         if (_lockControls == false)
         {
             var selectedSlot = _selectedSlot;
@@ -379,14 +377,14 @@ public class ProfileSelectScreen : Screen
                 }
                 else
                 {
-                    SkillSystem.ResetAllTraits();
-                    Game.PlayerStats.Dispose();
-                    Game.PlayerStats = new PlayerStats();
-                    manager!.Player.Reset();
-                    Game.ScreenManager.Player.CurrentHealth = Game.PlayerStats.CurrentHealth;
-                    Game.ScreenManager.Player.CurrentMana = Game.PlayerStats.CurrentMana;
+                    // SkillSystem.ResetAllTraits();
+                    // Game.PlayerStats.Dispose();
+                    // Game.PlayerStats = new PlayerStats();
+                    // manager!.Player.Reset();
+                    // Game.ScreenManager.Player.CurrentHealth = Game.PlayerStats.CurrentHealth;
+                    // Game.ScreenManager.Player.CurrentMana = Game.PlayerStats.CurrentMana;
 
-                    manager!.DisplayScreen(ScreenType.TITLE, true);
+                    manager!.DisplayScreen(ScreenType.RANDOMIZER_MENU, true);
                 }
             }
 

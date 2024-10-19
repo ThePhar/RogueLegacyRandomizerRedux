@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
 using RogueCastle.Screens;
@@ -21,9 +22,9 @@ namespace RogueCastle
         public override void Initialize()
         {
             if (Game.PlayerStats.TutorialComplete == true)
-                m_nameText.Text = LocaleBuilder.GetString("LOC_ID_BACK_TO_MENU_OPTIONS_1", m_nameText); //"Quit to Title Screen"
+                NameText.Text = LocaleBuilder.GetString("LOC_ID_BACK_TO_MENU_OPTIONS_1", NameText); //"Quit to Title Screen"
             else
-                m_nameText.Text = LocaleBuilder.GetString("LOC_ID_BACK_TO_MENU_OPTIONS_2", m_nameText); //"Quit to Title Screen (skip tutorial)"
+                NameText.Text = LocaleBuilder.GetString("LOC_ID_BACK_TO_MENU_OPTIONS_2", NameText); //"Quit to Title Screen (skip tutorial)"
 
             base.Initialize();
         }
@@ -49,7 +50,7 @@ namespace RogueCastle
                 if (challengeRoom != null)
                 {
                     challengeRoom.LoadPlayerData(); // Make sure this is loaded before upgrade data, otherwise player equipment will be overridden.
-                    (m_parentScreen.ScreenManager.Game as Game).SaveManager.LoadFiles(level, SaveType.UpgradeData);
+                    (ParentScreen.ScreenManager.Game as Game).SaveManager.LoadFiles(level, SaveType.UpgradeData);
                     level.Player.CurrentHealth = challengeRoom.StoredHP;
                     level.Player.CurrentMana = challengeRoom.StoredMP;
                 }
@@ -58,11 +59,11 @@ namespace RogueCastle
             // This code is needed otherwise the lineage data will still be on Revision 0 when the game exits, but player data is Rev1
             // which results in a mismatch.
             if (Game.PlayerStats.RevisionNumber <= 0)
-                 (m_parentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.Lineage);
-            (m_parentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.UpgradeData);
+                 (ParentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.Lineage);
+            (ParentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.UpgradeData);
 
             if (Game.PlayerStats.TutorialComplete == true && level != null && level.CurrentRoom.Name != "Start" && level.CurrentRoom.Name != "Ending" && level.CurrentRoom.Name != "Tutorial")
-                (m_parentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.MapData);
+                (ParentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.MapData);
 
             Game.ScreenManager.DisplayScreen(ScreenType.TITLE, true);
         }
@@ -80,7 +81,7 @@ namespace RogueCastle
                 base.IsActive = value;
                 if (IsActive == true)
                 {
-                    RCScreenManager manager = m_parentScreen.ScreenManager as RCScreenManager;
+                    RCScreenManager manager = ParentScreen.ScreenManager as RCScreenManager;
                     manager.DialogueScreen.SetDialogue("Back to Menu");
                     manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
                     manager.DialogueScreen.SetConfirmEndHandler(this, "GoBackToTitle");

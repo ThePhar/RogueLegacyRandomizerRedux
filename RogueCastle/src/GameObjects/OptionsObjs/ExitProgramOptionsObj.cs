@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 using RogueCastle.Screens.BaseScreens;
@@ -19,8 +20,8 @@ namespace RogueCastle
 
         public void QuitProgram()
         {
-            (m_parentScreen.ScreenManager.Game as Game).SaveOnExit();
-            m_parentScreen.ScreenManager.Game.Exit();
+            (ParentScreen.ScreenManager.Game as Game).SaveOnExit();
+            ParentScreen.ScreenManager.Game.Exit();
         }
 
         public void CancelCommand()
@@ -36,7 +37,7 @@ namespace RogueCastle
                 base.IsActive = value;
                 if (IsActive == true)
                 {
-                    RCScreenManager manager = m_parentScreen.ScreenManager as RCScreenManager;
+                    RCScreenManager manager = ParentScreen.ScreenManager as RCScreenManager;
                     manager.DialogueScreen.SetDialogue("Quit Rogue Legacy");
                     manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
                     manager.DialogueScreen.SetConfirmEndHandler(this, "QuitProgram");

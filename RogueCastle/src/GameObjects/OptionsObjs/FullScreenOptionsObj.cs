@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 
@@ -16,15 +17,15 @@ namespace RogueCastle
         public FullScreenOptionsObj(OptionsScreen parentScreen)
             : base(parentScreen, "LOC_ID_OPTIONS_SCREEN_11")
         {
-            m_toggleText = m_nameText.Clone() as TextObj;
-            m_toggleText.X = m_optionsTextOffset;
+            m_toggleText = NameText.Clone() as TextObj;
+            m_toggleText.X = OPTIONS_TEXT_OFFSET;
             m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_QUICKDROP_OPTIONS_2", m_toggleText); //"No"
             this.AddChild(m_toggleText);
         }
 
         public override void Initialize()
         {
-            if ((m_parentScreen.ScreenManager.Game as Game).Graphics.IsFullScreen == true)
+            if ((ParentScreen.ScreenManager.Game as Game).Graphics.IsFullScreen == true)
                 m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_QUICKDROP_OPTIONS_3", m_toggleText); //"Yes"
             else
                 m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_QUICKDROP_OPTIONS_2", m_toggleText); //"No"
@@ -47,7 +48,7 @@ namespace RogueCastle
             {
                 SoundManager.PlaySound("Option_Menu_Select");
 
-                GraphicsDeviceManager graphics = (m_parentScreen.ScreenManager.Game as Game).Graphics;
+                GraphicsDeviceManager graphics = (ParentScreen.ScreenManager.Game as Game).Graphics;
                 if ((m_toggleText.Text == LocaleBuilder.GetResourceString("LOC_ID_QUICKDROP_OPTIONS_2") && graphics.IsFullScreen == true) ||
                     (m_toggleText.Text == LocaleBuilder.GetResourceString("LOC_ID_QUICKDROP_OPTIONS_3") && graphics.IsFullScreen == false))
                 {
@@ -59,7 +60,7 @@ namespace RogueCastle
 
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL1) || Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL2) || Game.GlobalInput.JustPressed(InputMapType.MENU_CANCEL3))
             {
-                if ((m_parentScreen.ScreenManager.Game as Game).Graphics.IsFullScreen == true)
+                if ((ParentScreen.ScreenManager.Game as Game).Graphics.IsFullScreen == true)
                     m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_QUICKDROP_OPTIONS_3", m_toggleText); //"Yes"
                 else
                     m_toggleText.Text = LocaleBuilder.GetString("LOC_ID_QUICKDROP_OPTIONS_2", m_toggleText); //"No"

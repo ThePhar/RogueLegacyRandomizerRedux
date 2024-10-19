@@ -5,6 +5,7 @@ using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using InputSystem;
+using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 
@@ -19,7 +20,7 @@ namespace RogueCastle
             : base(parentScreen, "LOC_ID_DEAD_ZONE_OPTIONS_1") //"Joystick Dead Zone"
         {
             m_deadZoneBarBG = new SpriteObj("OptionsScreenVolumeBG_Sprite");
-            m_deadZoneBarBG.X = m_optionsTextOffset;
+            m_deadZoneBarBG.X = OPTIONS_TEXT_OFFSET;
             m_deadZoneBarBG.Y = m_deadZoneBarBG.Height / 2f - 2;
             this.AddChild(m_deadZoneBarBG);
 

@@ -4790,7 +4790,7 @@
     <value>to Attack Down</value>
   </data>
   <data name="LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW" xml:space="preserve">
-    <value>[Input:25] to Change Seed ({0})</value>
+    <value>[Input:25] to Change Profile ({0})</value>
   </data>
   <data name="LOC_ID_BLACKSMITH_SCREEN_16_NEW" xml:space="preserve">
     <value>{0} to unlock</value>
@@ -4977,5 +4977,20 @@
   </data>
   <data name="LOC_ID_RANDOMIZER_SLOT" xml:space="preserve">
     <value>Slot {0}</value>
+  </data>
+    <data name="LOC_ID_RANDOMIZER_MENU_TITLE" xml:space="preserve">
+    <value>CONNECT TO ARCHIPELAGO</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_OPTION_HOSTNAME" xml:space="preserve">
+    <value>Room Address</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_OPTION_SLOTNAME" xml:space="preserve">
+    <value>Slot Name</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_OPTION_PASSWORD" xml:space="preserve">
+    <value>Room Password</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_OPTION_SHOW_PASSWORD" xml:space="preserve">
+    <value>Show Password</value>
   </data>
 </root>
