@@ -554,6 +554,13 @@ namespace RogueCastle
                     new string[] { "LOC_ID_DONATIONBOX_TITLE_1" },
                     new string[] { "LOC_ID_DONATIONBOX_TEXT_3" }
                 ));
+
+            // Randomizer Specific
+            m_dialogDict.Add("MultiworldConnect",
+                new DialogueObj(
+                    ["LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TITLE_1"],
+                    ["LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TEXT_1"]
+                ));
         }
 
         public static void LoadLanguageDocument(ContentManager content, string fileName)

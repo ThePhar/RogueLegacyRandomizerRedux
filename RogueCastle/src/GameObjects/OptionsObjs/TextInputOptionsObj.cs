@@ -12,6 +12,7 @@ public sealed class TextInputOptionsObj : OptionsObj
     private string _currentValue = "";
     private int _cursorIndex;
     private TextObj _valueText;
+    private bool _hidden;
 
     public TextInputOptionsObj(string nameLocID, string placeholder = "") : base(null, nameLocID)
     {
@@ -33,7 +34,20 @@ public sealed class TextInputOptionsObj : OptionsObj
 
     public string GetValue => _currentValue != string.Empty ? _currentValue : _placeholder;
 
-    public bool Hidden { get; set; }
+    public bool Hidden
+    {
+        get => _hidden;
+        set
+        {
+            if (_hidden == value)
+            {
+                return;
+            }
+
+            _hidden = value;
+            UpdateText();
+        }
+    }
 
     public override void Update(GameTime gameTime)
     {
@@ -63,14 +77,7 @@ public sealed class TextInputOptionsObj : OptionsObj
 
             _valueText.TextureColor = _currentValue.Length > 0 ? Color.White : Color.Gray;
 
-            if (Hidden && _currentValue.Length > 0)
-            {
-                _valueText.Text = string.Concat(Enumerable.Repeat("*", _currentValue.Length));
-            }
-            else
-            {
-                _valueText.Text = _currentValue.Length > 0 ? _currentValue : _placeholder;
-            }
+            UpdateText();
         }
     }
 
@@ -85,15 +92,8 @@ public sealed class TextInputOptionsObj : OptionsObj
 
         if (IsActive)
         {
-            if (Hidden && _currentValue.Length > 0)
-            {
-                var obscured = string.Concat(Enumerable.Repeat("*", _currentValue.Length));
-                _valueText.Text = obscured.Insert(_cursorIndex, "|");
-            }
-            else
-            {
-                _valueText.Text = _currentValue.Insert(_cursorIndex, "|");
-            }
+            UpdateText();
+            _valueText.Text = _valueText.Text.Insert(_cursorIndex, "|");
         }
         else
         {
@@ -101,7 +101,7 @@ public sealed class TextInputOptionsObj : OptionsObj
         }
     }
 
-    public void InterceptKey(char chr)
+    private void InterceptKey(char chr)
     {
         if (!char.IsControl(chr))
         {
@@ -131,6 +131,18 @@ public sealed class TextInputOptionsObj : OptionsObj
                 TextInputEXT.StopTextInput();
                 TextInputEXT.TextInput -= InterceptKey;
                 break;
+        }
+    }
+
+    private void UpdateText()
+    {
+        if (Hidden && _currentValue.Length > 0)
+        {
+            _valueText.Text = string.Concat(Enumerable.Repeat("*", _currentValue.Length));
+        }
+        else
+        {
+            _valueText.Text = _currentValue.Length > 0 || IsActive ? _currentValue : _placeholder;
         }
     }
 

@@ -29,6 +29,8 @@ public class RandomizerMenuScreen : Screen
     private TextInputOptionsObj _hostname;
     private TextInputOptionsObj _slotname;
     private TextInputOptionsObj _password;
+    private ToggleOptionsObj _showPassword;
+    private ToggleOptionsObj _showHostname;
 
     public RandomizerMenuScreen()
     {
@@ -45,18 +47,26 @@ public class RandomizerMenuScreen : Screen
         _hostname = new TextInputOptionsObj("LOC_ID_RANDOMIZER_OPTION_HOSTNAME", "archipelago.gg:38281");
         _slotname = new TextInputOptionsObj("LOC_ID_RANDOMIZER_OPTION_SLOTNAME", "Phar");
         _password = new TextInputOptionsObj("LOC_ID_RANDOMIZER_OPTION_PASSWORD", "");
+        _showHostname = new ToggleOptionsObj("LOC_ID_RANDOMIZER_OPTION_SHOW_HOSTNAME", true);
+        _showPassword = new ToggleOptionsObj("LOC_ID_RANDOMIZER_OPTION_SHOW_PASSWORD");
 
         _optionsArray.Add(_hostname);
         _optionsArray.Add(_password);
         _optionsArray.Add(_slotname);
-        _optionsArray.Add(new ToggleOptionsObj("LOC_ID_RANDOMIZER_OPTION_SHOW_PASSWORD", true));
-        _optionsArray.Add(new ToggleOptionsObj("LOC_ID_RANDOMIZER_OPTION_SHOW_PASSWORD"));
-        _optionsArray.Add(new ToggleOptionsObj("LOC_ID_RANDOMIZER_OPTION_SHOW_PASSWORD"));
+        _optionsArray.Add(_showHostname);
+        _optionsArray.Add(_showPassword);
+        _optionsArray.Add(null);
+        _optionsArray.Add(new ConnectOptionsObj(this, "LOC_ID_RANDOMIZER_OPTION_CONNECT"));
 
         _optionsBar = new SpriteObj("OptionsBar_Sprite") { ForceDraw = true };
 
         for (var i = 0; i < _optionsArray.Count; i++)
         {
+            if (_optionsArray[i] is null)
+            {
+                continue;
+            }
+
             if (i < 3)
             {
                 _optionsArray[i].X = 420 + _optionsBar.Width / 2f;
@@ -166,6 +176,11 @@ public class RandomizerMenuScreen : Screen
 
         for (var i = 0; i < _optionsArray.Count; i++)
         {
+            if (_optionsArray[i] is null)
+            {
+                continue;
+            }
+
             var obj = _optionsArray[i];
             var offset = Math.Min(3, i) * 50 + i * 30;
 
@@ -207,6 +222,11 @@ public class RandomizerMenuScreen : Screen
 
         for (var i = 0; i < _optionsArray.Count; i++)
         {
+            if (_optionsArray[i] is null)
+            {
+                continue;
+            }
+
             var obj = _optionsArray[i];
             var offset = Math.Min(3, i) * 50 + i * 30;
 
@@ -233,13 +253,16 @@ public class RandomizerMenuScreen : Screen
     {
         foreach (var obj in _optionsArray)
         {
-            obj.Update(gameTime);
+            obj?.Update(gameTime);
         }
+
+        // todo probably not the most efficient way to do this, and should be changed later
+        _password.Hidden = !_showPassword.Value;
+        _hostname.Hidden = !_showHostname.Value;
 
         _optionsBar.Position = _selectedOption is TextInputOptionsObj
             ? new Vector2(_selectedOption.X - _optionsBar.Width / 2f, _selectedOption.Y + 28)
             : new Vector2(_selectedOption.X - 15, _selectedOption.Y);
-
 
         base.Update(gameTime);
     }
@@ -256,7 +279,7 @@ public class RandomizerMenuScreen : Screen
         _bgSprite.Draw(Camera);
         foreach (var obj in _optionsArray)
         {
-            obj.Draw(Camera);
+            obj?.Draw(Camera);
         }
 
         _contextText.Draw(Camera);
@@ -289,31 +312,33 @@ public class RandomizerMenuScreen : Screen
         if (Game.GlobalInput.PressedUp())
         {
             SoundManager.PlaySound("frame_swap");
-            _selectedOptionIndex--;
-
-            if (_selectedOptionIndex < 0)
+            do
             {
-                _selectedOptionIndex = _optionsArray.Count - 1;
-            }
+                _selectedOptionIndex--;
+
+                if (_selectedOptionIndex < 0)
+                {
+                    _selectedOptionIndex = _optionsArray.Count - 1;
+                }
+            } while (_optionsArray[_selectedOptionIndex] == null);
         }
         else if (Game.GlobalInput.PressedDown())
         {
             SoundManager.PlaySound("frame_swap");
-            _selectedOptionIndex++;
-
-            if (_selectedOptionIndex >= _optionsArray.Count)
+            do
             {
-                _selectedOptionIndex = 0;
-            }
+                _selectedOptionIndex++;
+
+                if (_selectedOptionIndex >= _optionsArray.Count)
+                {
+                    _selectedOptionIndex = 0;
+                }
+            } while (_optionsArray[_selectedOptionIndex] == null);
         }
 
         if (previousSelectedOptionIndex != _selectedOptionIndex)
         {
-            if (_selectedOption != null)
-            {
-                _selectedOption.IsSelected = false;
-            }
-
+            _selectedOption.IsSelected = false;
             _selectedOption = _optionsArray[_selectedOptionIndex];
             _selectedOption.IsSelected = true;
         }
@@ -335,7 +360,7 @@ public class RandomizerMenuScreen : Screen
     {
         foreach (var obj in _optionsArray)
         {
-            obj.RefreshTextObjs();
+            obj?.RefreshTextObjs();
         }
 
         _contextText.ScaleX = 1;

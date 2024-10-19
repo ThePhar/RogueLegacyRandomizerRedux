@@ -4979,7 +4979,7 @@
     <value>Slot {0}</value>
   </data>
     <data name="LOC_ID_RANDOMIZER_MENU_TITLE" xml:space="preserve">
-    <value>CONNECT TO ARCHIPELAGO</value>
+    <value>NEW CONNECTION</value>
   </data>
   <data name="LOC_ID_RANDOMIZER_OPTION_HOSTNAME" xml:space="preserve">
     <value>Room Address</value>
@@ -4992,5 +4992,17 @@
   </data>
   <data name="LOC_ID_RANDOMIZER_OPTION_SHOW_PASSWORD" xml:space="preserve">
     <value>Show Password</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_OPTION_SHOW_HOSTNAME" xml:space="preserve">
+    <value>Show Address</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_OPTION_CONNECT" xml:space="preserve">
+    <value>Connect to Archipelago Room</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TITLE_1" xml:space="preserve">
+    <value>Ready to Connect?</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TEXT_1" xml:space="preserve">
+    <value>Are you ready to connect to the room?</value>
   </data>
 </root>
