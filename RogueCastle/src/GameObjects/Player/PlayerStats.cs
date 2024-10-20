@@ -208,12 +208,12 @@ namespace RogueCastle
             */
             
             // Debug stuff to test items.
-            m_blueprintArray[EquipmentCategoryType.HELM][EquipmentBaseType.BRONZE] = EquipmentState.FOUND_BUT_NOT_SEEN;
-            m_blueprintArray[EquipmentCategoryType.LIMBS][EquipmentBaseType.BRONZE] = EquipmentState.FOUND_BUT_NOT_SEEN;
-            m_blueprintArray[EquipmentCategoryType.SWORD][EquipmentBaseType.BRONZE] = EquipmentState.FOUND_BUT_NOT_SEEN;
+            // m_blueprintArray[EquipmentCategoryType.HELM][EquipmentBaseType.BRONZE] = EquipmentState.FOUND_BUT_NOT_SEEN;
+            // m_blueprintArray[EquipmentCategoryType.LIMBS][EquipmentBaseType.BRONZE] = EquipmentState.FOUND_BUT_NOT_SEEN;
+            // m_blueprintArray[EquipmentCategoryType.SWORD][EquipmentBaseType.BRONZE] = EquipmentState.FOUND_BUT_NOT_SEEN;
 
-            m_runeArray[EquipmentCategoryType.HELM][EquipmentAbilityType.DOUBLE_JUMP] = EquipmentState.FOUND_BUT_NOT_SEEN;
-            m_runeArray[EquipmentCategoryType.SWORD][EquipmentAbilityType.DASH] = EquipmentState.FOUND_BUT_NOT_SEEN;
+            // m_runeArray[EquipmentCategoryType.HELM][EquipmentAbilityType.DOUBLE_JUMP] = EquipmentState.FOUND_BUT_NOT_SEEN;
+            // m_runeArray[EquipmentCategoryType.SWORD][EquipmentAbilityType.DASH] = EquipmentState.FOUND_BUT_NOT_SEEN;
             //m_blueprintArray[0][0] = EquipmentState.Purchased;
             //m_blueprintArray[0][1] = EquipmentState.NotPurchased;
             //m_blueprintArray[0][2] = EquipmentState.NotPurchased;

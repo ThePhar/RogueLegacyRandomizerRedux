@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Storage;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Objects;
+using RogueCastle.Randomizer;
 using Tweener;
 
 namespace RogueCastle.Managers;
@@ -17,7 +19,8 @@ public class SaveGameManager(Game game)
     private const string FileNameMapData = "RLRandomizerMapData.rcdat";
     private const string FileNamePlayer = "RLRandomizerPlayer.rcdat";
     private const string FileNameUpgrades = "RLRandomizerUpgrades.rcdat";
-    private const string StorageContainerName = "RLRandomizerStorageContainer";
+    private const string FileNameArchipelago = "RLRandomizerMultiworld.rcdat";
+    private const string StorageContainerName = "RandomizerStorageContainer";
 
     private bool _autosaveLoaded;
     private int _saveFailCounter;
@@ -96,11 +99,11 @@ public class SaveGameManager(Game game)
     {
         if (saveBackup == false)
         {
-            SaveFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage);
+            SaveFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage, SaveType.Archipelago);
         }
         else
         {
-            SaveBackupFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage);
+            SaveBackupFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage, SaveType.Archipelago);
         }
     }
 
@@ -217,7 +220,7 @@ public class SaveGameManager(Game game)
 
     public void LoadAllFileTypes(ProceduralLevelScreen level)
     {
-        LoadFiles(level, SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage);
+        LoadFiles(level, SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage, SaveType.Archipelago);
     }
 
     public void ClearFiles(params SaveType[] deleteList)
@@ -248,11 +251,11 @@ public class SaveGameManager(Game game)
     {
         if (deleteBackups == false)
         {
-            ClearFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage);
+            ClearFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage, SaveType.Archipelago);
         }
         else
         {
-            ClearBackupFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage);
+            ClearBackupFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage, SaveType.Archipelago);
         }
     }
 
@@ -290,6 +293,13 @@ public class SaveGameManager(Game game)
                 break;
             case SaveType.Lineage:
                 if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}"))
+                {
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}");
+                }
+
+                break;
+            case SaveType.Archipelago:
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameArchipelago}"))
                 {
                     _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}");
                 }
@@ -336,6 +346,13 @@ public class SaveGameManager(Game game)
                 if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameLineage}"))
                 {
                     _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameLineage}");
+                }
+
+                break;
+            case SaveType.Archipelago:
+                if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameArchipelago}"))
+                {
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/AutoSave_{FileNameArchipelago}");
                 }
 
                 break;
@@ -508,9 +525,73 @@ public class SaveGameManager(Game game)
             case SaveType.Lineage:
                 SaveLineageData(saveBackup);
                 break;
+            case SaveType.Archipelago:
+                SaveArchipelagoData(saveBackup);
+                break;
         }
 
         Console.WriteLine('\n' + $@"Data type {saveType} saved!");
+    }
+
+    private void SaveArchipelagoData(bool saveBackup)
+    {
+        var fileName = FileNameArchipelago;
+        if (saveBackup)
+        {
+            fileName = fileName.Insert(0, "AutoSave_");
+        }
+
+        fileName = fileName.Insert(0, "Profile" + Game.GameConfig.ProfileSlot + "/");
+        using var stream = _storageContainer.CreateFile(fileName);
+        using var writer = new BinaryWriter(stream);
+
+        // Revision number for this save format. (byte)
+        writer.Write(RandomizerStats.SAVE_FORMAT_REVISION);
+
+        // Whether this is a multi-world seed or solo generated one. (bool)
+        writer.Write(Game.RandomizerStats.Multiworld);
+
+        // AP slot #, used for validation on connection. (int32, char[])
+        var phSlot = 1;
+        writer.Write(phSlot);
+
+        // AP seed name (or seed for solo), used for validation on connection.
+        var phSeed = "42000000000000000069"; //TODO: Replace with APManager seed
+        writer.Write(phSeed); // (int32, char[])
+
+        // AP Generator version (int32, char[])
+        var phGenVersion = "0.5.0";
+        writer.Write(phGenVersion);
+
+        // Game version (int32, char[])
+        var phGameVersion = "2.0.0-dev";
+        writer.Write(phGameVersion);
+
+        // Server connection info (for remembering last connection)  (int32, char[])
+        var phAddress = "localhost";
+        var phSlotname = "Phar";
+        var phPassword = "";
+        writer.Write(phAddress);
+        writer.Write(phSlotname);
+        writer.Write(phPassword);
+
+        // Chests checked and total (int32)
+        writer.Write(Game.RandomizerStats.BrownChestsChecked);
+        writer.Write(Game.RandomizerStats.BrownChestsTotal);
+        writer.Write(Game.RandomizerStats.SilverChestsChecked);
+        writer.Write(Game.RandomizerStats.SilverChestsTotal);
+        writer.Write(Game.RandomizerStats.GoldChestsChecked);
+        writer.Write(Game.RandomizerStats.GoldChestsTotal);
+        writer.Write(Game.RandomizerStats.FairyChestsChecked);
+        writer.Write(Game.RandomizerStats.FairyChestsTotal);
+
+        // Diary Totals (byte) -- checked is tracked in PlayerData
+        writer.Write(Game.RandomizerStats.DiaryEntryTotal);
+
+        if (saveBackup && stream is FileStream fileStream)
+        {
+            fileStream.Flush(true);
+        }
     }
 
     private void SavePlayerData(bool saveBackup)
@@ -1494,6 +1575,9 @@ public class SaveGameManager(Game game)
                 case SaveType.Lineage:
                     LoadLineageData();
                     break;
+                case SaveType.Archipelago:
+                    LoadArchipelagoData();
+                    break;
             }
 
             Console.WriteLine("\nData of type " + loadType + " Loaded.");
@@ -1502,6 +1586,40 @@ public class SaveGameManager(Game game)
         {
             Console.WriteLine("Could not load data of type " + loadType + " because data did not exist.");
         }
+    }
+
+    private void LoadArchipelagoData()
+    {
+        using var stream = _storageContainer.OpenFile(
+            $"Profile${Game.GameConfig.ProfileSlot}/{FileNameArchipelago}",
+            FileMode.Open, FileAccess.Read, FileShare.Read);
+        using var reader = new BinaryReader(stream);
+
+        if (reader.ReadByte() < RandomizerStats.SAVE_FORMAT_REVISION)
+        {
+            throw new NotImplementedException("Loading previous save formats is not currently supported.");
+        }
+
+        // Metadata
+        Game.RandomizerStats.Multiworld = reader.ReadBoolean();
+        reader.ReadInt32();  // slot
+        reader.ReadString(); // seed
+        reader.ReadString(); // gen version
+        reader.ReadString(); // game version
+        Game.RandomizerStats.SavedAddress = reader.ReadString();
+        Game.RandomizerStats.SavedSlotName = reader.ReadString();
+        Game.RandomizerStats.SavedPassword = reader.ReadString();
+
+        // Chests
+        Game.RandomizerStats.BrownChestsChecked = reader.ReadInt32();
+        Game.RandomizerStats.BrownChestsTotal = reader.ReadInt32();
+        Game.RandomizerStats.SilverChestsChecked = reader.ReadInt32();
+        Game.RandomizerStats.SilverChestsTotal = reader.ReadInt32();
+        Game.RandomizerStats.GoldChestsChecked = reader.ReadInt32();
+        Game.RandomizerStats.GoldChestsTotal = reader.ReadInt32();
+        Game.RandomizerStats.FairyChestsChecked = reader.ReadInt32();
+        Game.RandomizerStats.FairyChestsTotal = reader.ReadInt32();
+        Game.RandomizerStats.DiaryEntryTotal = reader.ReadByte();
     }
 
     private void LoadPlayerData()
@@ -2360,6 +2478,7 @@ public class SaveGameManager(Game game)
             SaveType.Map         => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMap}"),
             SaveType.MapData     => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMapData}"),
             SaveType.Lineage     => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}"),
+            SaveType.Archipelago => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameArchipelago}"),
             _                    => false,
         };
 
@@ -2374,141 +2493,151 @@ public class SaveGameManager(Game game)
         return fileExists;
     }
 
-    public void GetSaveHeader(
-        byte profile,
-        out byte playerClass,
-        out string playerName,
-        out int playerLevel,
-        out bool playerIsDead,
-        out int castlesBeaten,
-        out bool isFemale
-    )
+    public ProfileSaveHeader GetSaveHeader(byte profile)
     {
-        playerName = null;
-        playerClass = 0;
-        playerLevel = 0;
-        playerIsDead = false;
-        castlesBeaten = 0;
-        isFemale = false;
+        var header = new ProfileSaveHeader();
 
         GetStorageContainer();
 
+        // Archipelago
+        if (_storageContainer.FileExists($"Profile{profile}/{FileNameArchipelago}"))
+        {
+            using var stream = _storageContainer.OpenFile($"Profile{profile}/{FileNameArchipelago}", FileMode.Open, FileAccess.Read, FileShare.Read);
+            using var reader = new BinaryReader(stream);
+
+            reader.ReadByte(); // revision #
+            header.MultiWorld = reader.ReadBoolean();
+            header.Slot = reader.ReadInt32();
+            header.SeedName = reader.ReadString();
+            header.GeneratorVersion = reader.ReadString();
+            header.GameVersion = reader.ReadString();
+            header.Address = reader.ReadString();
+            header.SlotName = reader.ReadString();
+            header.Password = reader.ReadString();
+
+            header.LocationCounts[0] = (reader.ReadInt32(), reader.ReadInt32());
+            header.LocationCounts[1] = (reader.ReadInt32(), reader.ReadInt32());
+            header.LocationCounts[2] = (reader.ReadInt32(), reader.ReadInt32());
+            header.LocationCounts[3] = (reader.ReadInt32(), reader.ReadInt32());
+            header.LocationCounts[4] = (0, reader.ReadByte());
+        }
+
+        // Player
         if (_storageContainer.FileExists($"Profile{profile}/{FileNamePlayer}"))
         {
             using var stream = _storageContainer.OpenFile($"Profile{profile}/{FileNamePlayer}", FileMode.Open, FileAccess.Read, FileShare.Read);
-            using (var reader = new BinaryReader(stream))
-            {
-                reader.ReadInt32(); // Gold
-                reader.ReadInt32(); // Health
-                reader.ReadInt32(); // Mana
-                reader.ReadByte(); // Age
-                reader.ReadByte(); // Child Age
-                reader.ReadByte(); // Spell
-                playerClass = reader.ReadByte();
-                reader.ReadByte(); // Special Item
-                reader.ReadByte(); // TraitX
-                reader.ReadByte(); // TraitY
-                playerName = reader.ReadString();
+            using var reader = new BinaryReader(stream);
 
-                reader.ReadByte(); // Head Piece
-                reader.ReadByte(); // Shoulder Piece
-                reader.ReadByte(); // Chest Piece
-                reader.ReadByte(); // Diary Entry
-                reader.ReadInt32(); // Bonus Health
-                reader.ReadInt32(); // Bonus Strength
-                reader.ReadInt32(); // Bonus Mana
-                reader.ReadInt32(); // Bonus Defense
-                reader.ReadInt32(); // Bonus Weight
-                reader.ReadInt32(); // Bonus Magic
+            header.Gold = reader.ReadInt32(); // Gold
+            reader.ReadInt32(); // Health
+            reader.ReadInt32(); // Mana
+            reader.ReadByte(); // Age
+            reader.ReadByte(); // Child Age
+            reader.ReadByte(); // Spell
+            header.PlayerClass = reader.ReadByte();
+            reader.ReadByte(); // Special Item
+            reader.ReadByte(); // TraitX
+            reader.ReadByte(); // TraitY
+            header.PlayerName = reader.ReadString();
 
-                // Reading lich stats.
-                reader.ReadInt32();
-                reader.ReadInt32();
-                reader.ReadSingle();
+            reader.ReadByte(); // Head Piece
+            reader.ReadByte(); // Shoulder Piece
+            reader.ReadByte(); // Chest Piece
+            header.LocationCounts[4].Checked = reader.ReadByte(); // Diary Entry
+            reader.ReadInt32(); // Bonus Health
+            reader.ReadInt32(); // Bonus Strength
+            reader.ReadInt32(); // Bonus Mana
+            reader.ReadInt32(); // Bonus Defense
+            reader.ReadInt32(); // Bonus Weight
+            reader.ReadInt32(); // Bonus Magic
 
-                // Reading boss progress states
-                reader.ReadBoolean();
-                reader.ReadBoolean();
-                reader.ReadBoolean();
-                reader.ReadBoolean();
-                reader.ReadBoolean();
-                reader.ReadBoolean();
+            // Reading lich stats.
+            reader.ReadInt32();
+            reader.ReadInt32();
+            reader.ReadSingle();
 
-                // Reading new game plus progress
-                castlesBeaten = reader.ReadInt32();
-                reader.ReadInt32();
+            // Reading boss progress states
+            reader.ReadBoolean();
+            reader.ReadBoolean();
+            reader.ReadBoolean();
+            reader.ReadBoolean();
+            reader.ReadBoolean();
+            reader.ReadBoolean();
 
-                // Loading misc flags
-                reader.ReadBoolean();
-                reader.ReadBoolean();
-                reader.ReadBoolean();
+            // Reading new game plus progress
+            reader.ReadInt32();
+            reader.ReadInt32();
 
-                reader.ReadBoolean();
-                reader.ReadBoolean();
-                reader.ReadBoolean();
-                reader.ReadBoolean();
-                reader.ReadBoolean();
-                playerIsDead = reader.ReadBoolean();
-                reader.ReadBoolean();
-                reader.ReadBoolean();
-                isFemale = reader.ReadBoolean();
+            // Loading misc flags
+            reader.ReadBoolean();
+            reader.ReadBoolean();
+            reader.ReadBoolean();
 
-                reader.Close();
-            }
-
-            stream.Close();
+            reader.ReadBoolean();
+            reader.ReadBoolean();
+            reader.ReadBoolean();
+            reader.ReadBoolean();
+            reader.ReadBoolean();
+            header.IsDead = reader.ReadBoolean();
+            reader.ReadBoolean();
+            reader.ReadBoolean();
+            header.IsFemale = reader.ReadBoolean();
         }
 
+        // Equipment & Skills
         if (_storageContainer.FileExists($"Profile{profile}/{FileNameUpgrades}"))
         {
             using var stream = _storageContainer.OpenFile($"Profile{profile}/{FileNameUpgrades}", FileMode.Open, FileAccess.Read, FileShare.Read);
-            using (var reader = new BinaryReader(stream))
+            using var reader = new BinaryReader(stream);
+
+            for (var category = 0; category < EquipmentCategoryType.TOTAL; category++)
             {
-                for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
+                header.Blueprints[category] = new byte[EquipmentBaseType.TOTAL];
+                for (var @base = 0; @base < EquipmentBaseType.TOTAL; @base++)
                 {
-                    for (var k = 0; k < EquipmentBaseType.TOTAL; k++)
-                    {
-                        reader.ReadByte();
-                    }
+                    header.Blueprints[category][@base] = reader.ReadByte();
                 }
-
-                for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
-                {
-                    for (var k = 0; k < EquipmentAbilityType.TOTAL; k++)
-                    {
-                        reader.ReadByte();
-                    }
-                }
-
-                for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
-                {
-                    reader.ReadSByte();
-                }
-
-                for (var i = 0; i < EquipmentCategoryType.TOTAL; i++)
-                {
-                    reader.ReadSByte();
-                }
-
-                var levelCounter = 0;
-                for (var i = 0; i < (int)SkillType.Divider - 2; i++) //The starting 2 traits are null and filler.
-                {
-                    var traitLevel = reader.ReadInt32();
-                    for (var k = 0; k < traitLevel; k++)
-                    {
-                        levelCounter++;
-                    }
-                }
-
-                playerLevel = levelCounter;
-                reader.Close();
             }
 
-            stream.Close();
+            for (var category = 0; category < EquipmentCategoryType.TOTAL; category++)
+            {
+                header.Runes[category] = new byte[EquipmentAbilityType.TOTAL];
+                for (var @base = 0; @base < EquipmentAbilityType.TOTAL; @base++)
+                {
+                    header.Runes[category][@base] = reader.ReadByte();
+                }
+            }
+
+            for (var category = 0; category < EquipmentCategoryType.TOTAL; category++)
+            {
+                reader.ReadSByte();
+            }
+
+            for (var category = 0; category < EquipmentCategoryType.TOTAL; category++)
+            {
+                reader.ReadSByte();
+            }
+
+            var levelCounter = 0;
+            for (var skill = 0; skill < (int)SkillType.Divider - 2; skill++) //The starting 2 traits are null and filler.
+            {
+                var traitLevel = reader.ReadInt32();
+                levelCounter += traitLevel;
+
+                // Haggling
+                if (skill == (int)SkillType.PricesDown)
+                {
+                    header.CharonFee -= 10 * traitLevel;
+                }
+            }
+
+            header.Level = levelCounter;
         }
 
         _storageContainer.Dispose();
         _storageContainer = null;
+
+        return header;
     }
 
     private void GetStorageContainer()
@@ -2593,4 +2722,30 @@ public enum SaveType
     Map,
     MapData,
     Lineage,
+    Archipelago,
+}
+
+public record ProfileSaveHeader
+{
+    public string PlayerName { get; set; } // `null` means failed to load or no save file
+    public byte PlayerClass { get; set; }
+    public bool IsFemale { get; set; }
+    public int Level { get; set; }
+    public bool IsDead { get; set; }
+
+    public bool MultiWorld { get; set; }
+    public string Address { get; set; } = "";
+    public string SlotName { get; set; } = "";
+    public string Password { get; set; } = "";
+
+    public int Slot { get; set; }
+    public string SeedName { get; set; } = "???";
+    public string GeneratorVersion { get; set; } = "???";
+    public string GameVersion { get; set; } = "???";
+    public int Gold { get; set; }
+    public (int Checked, int Total)[] LocationCounts { get; set; } = [(0, 0), (0, 0), (0, 0), (0, 0), (0, 0)];
+    public byte[][] Blueprints { get; set; } = new byte[EquipmentCategoryType.TOTAL][];
+    public byte[][] Runes { get; set; } = new byte[EquipmentCategoryType.TOTAL][];
+    public int ArchitectFee { get; set; } = 40;
+    public int CharonFee { get; set; } = 100;
 }

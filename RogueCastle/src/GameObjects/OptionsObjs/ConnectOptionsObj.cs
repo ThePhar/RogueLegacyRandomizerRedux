@@ -30,7 +30,7 @@ public class ConnectOptionsObj(RandomizerMenuScreen parentScreen, string nameLoc
     public void Connect()
     {
         IsActive = false;
-        Game.ScreenManager.DisplayScreen(ScreenType.STARTING_ROOM, true);
+        Game.ScreenManager.DisplayScreen(ScreenType.TITLE, true);
     }
 
     public void Cancel()

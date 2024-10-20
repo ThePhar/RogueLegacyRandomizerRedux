@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using DS2DEngine;
 using InputSystem;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameObjects;
 using RogueCastle.GameStructs;
@@ -52,15 +51,17 @@ public class ProfileSelectScreen : Screen
         {
             var iSlotContainer = new ObjContainer { ForceDraw = true };
             var iSlotBackground = new SpriteObj("DialogBox_Sprite");
-            var iSlotName = slotText.Clone() as TextObj;
+            var iSlotPlayer = slotText.Clone() as TextObj;
             var iSlotLevel = slotText.Clone() as TextObj;
             var iSlotNumber = slotText.Clone() as TextObj;
+            var iSlotName = slotText.Clone() as TextObj;
 
             iSlotBackground.Scale = new Vector2(0.5f, 0.5f);
 
-            iSlotName!.Text = "LOC_ID_CLASS_NAME_1_MALE".GetString(iSlotName);
+            iSlotPlayer!.Text = "LOC_ID_CLASS_NAME_1_MALE".GetString(iSlotPlayer);
             iSlotLevel!.Text = "LOC_ID_CLASS_NAME_1_MALE".GetString(iSlotLevel);
             iSlotNumber!.Text = "LOC_ID_RANDOMIZER_SLOT".FormatResourceString(i + 1);
+            iSlotName!.Text = "";
 
             iSlotLevel.Position = new Vector2(227, 28);
             iSlotLevel.Align = Types.TextAlign.Right;
@@ -70,10 +71,15 @@ public class ProfileSelectScreen : Screen
             iSlotNumber.Align = Types.TextAlign.Left;
             iSlotNumber.FontSize = 10;
 
+            iSlotName.Position = new Vector2(-227, 28);
+            iSlotName.Align = Types.TextAlign.Left;
+            iSlotName.FontSize = 10;
+
             iSlotContainer.AddChild(iSlotBackground);
-            iSlotContainer.AddChild(iSlotName);
+            iSlotContainer.AddChild(iSlotPlayer);
             iSlotContainer.AddChild(iSlotLevel);
             iSlotContainer.AddChild(iSlotNumber);
+            iSlotContainer.AddChild(iSlotName);
 
             _slotArray.Add(iSlotContainer);
         }
@@ -125,9 +131,11 @@ public class ProfileSelectScreen : Screen
         _selectedSlot = _slotArray[_selectedIndex];
         _selectedSlot.TextureColor = Color.Yellow;
 
+        _profileStats.LoadContent();
+
         for (var i = 0; i < SlotCount; i++)
         {
-            CheckSaveHeaders(_slotArray[i], (byte)(i + 1));
+            CheckSaveHeaders(_slotArray[i], (byte)(i + 1), i == _selectedIndex);
 
             _slotArray[i].Position = new Vector2(300f, 100 + i * 132);
             TweenInText(_slotArray[i], 0.05f * (i + 1));
@@ -138,8 +146,6 @@ public class ProfileSelectScreen : Screen
         {
             _deleteProfileText.Visible = false;
         }
-
-        _profileStats.LoadContent();
 
         Tween.To(this, 0.2f, Tween.EaseNone, "BackBufferOpacity", "0.9");
 
@@ -179,75 +185,78 @@ public class ProfileSelectScreen : Screen
         base.OnEnter();
     }
 
-    private void CheckSaveHeaders(ObjContainer container, byte profile)
+    private void CheckSaveHeaders(ObjContainer container, byte profile, bool updateStats = false)
     {
         var slotText = container.GetChildAt(1) as TextObj;
         var slotLvlText = container.GetChildAt(2) as TextObj;
+        var slotNameText = container.GetChildAt(4) as TextObj;
         slotLvlText!.Text = "";
 
         try
         {
-            (ScreenManager.Game as Game)!.SaveManager.GetSaveHeader(
-                profile,
-                out var playerClass,
-                out var playerName,
-                out var playerLevel,
-                out var isDead,
-                out var timesCastleBeaten,
-                out var isFemale);
+            var header = (ScreenManager.Game as Game)!.SaveManager.GetSaveHeader(profile);
 
-            if (playerName == null)
+            if (header.PlayerName == null)
             {
                 slotText!.Text = "LOC_ID_PROFILE_SEL_SCREEN_1".GetResourceString();
                 slotText.TextureColor = Color.Gray;
                 container.ID = 0; // Container with ID == 0 means it has no save file.
+                if (updateStats)
+                {
+                    _profileStats.Blank();
+                }
+
+                return;
             }
-            else
+
+            // This call to Game.NameHelper forces a name conversion check every time.  This is necessary because it is possible for different profile slots to have different
+            // save revision numbers.  So you have to do the check every time in case that happens only in this scenario (since the check can be a little expensive).
+            var playerName = Game.NameHelper(header.PlayerName, "", header.IsFemale, true);
+
+            try
             {
-                // This call to Game.NameHelper forces a name conversion check every time.  This is necessary because it is possible for different profile slots to have different
-                // save revision numbers.  So you have to do the check every time in case that happens only in this scenario (since the check can be a little expensive).
-                playerName = Game.NameHelper(playerName, "", isFemale, true);
-
-                try
+                slotText!.ChangeFontNoDefault(slotText.GetLanguageFont());
+                if (header.IsDead == false)
                 {
-                    slotText!.ChangeFontNoDefault(slotText.GetLanguageFont());
-                    if (isDead == false)
-                    {
-                        slotText.Text = !isFemale
-                            ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(playerClass, false).GetResourceString())
-                            : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(playerClass, true).GetResourceString());
-                    }
-                    else
-                    {
-                        slotText.Text = !isFemale
-                            ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW".FormatResourceString(playerName)
-                            : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW".FormatResourceString(playerName);
-                    }
-
-                    if (LocaleBuilder.LanguageType != LanguageType.ChineseSimple && Regex.IsMatch(slotText.Text, @"\p{IsCyrillic}"))
-                    {
-                        slotText.ChangeFontNoDefault(Game.RobotoSlabFont);
-                    }
+                    slotText.Text = !header.IsFemale
+                        ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(header.PlayerClass, false).GetResourceString())
+                        : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(header.PlayerClass, true).GetResourceString());
                 }
-                catch
+                else
                 {
-                    slotText!.ChangeFontNoDefault(Game.NotoSansSCFont);
-                    if (isDead == false)
-                    {
-                        slotText.Text = !isFemale
-                            ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(playerClass, false).GetResourceString())
-                            : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(playerClass, true).GetResourceString());
-                    }
-                    else
-                    {
-                        slotText.Text = !isFemale
-                            ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW".FormatResourceString(playerName)
-                            : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW".FormatResourceString(playerName);
-                    }
+                    slotText.Text = !header.IsFemale
+                        ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW".FormatResourceString(playerName)
+                        : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW".FormatResourceString(playerName);
                 }
 
-                slotLvlText.Text = $"{"LOC_ID_PROFILE_SEL_SCREEN_9".GetResourceString()} {playerLevel}";
-                container.ID = 1; // Container with ID == 1 means it has a save file.
+                if (LocaleBuilder.LanguageType != LanguageType.ChineseSimple && Regex.IsMatch(slotText.Text, @"\p{IsCyrillic}"))
+                {
+                    slotText.ChangeFontNoDefault(Game.RobotoSlabFont);
+                }
+            }
+            catch
+            {
+                slotText!.ChangeFontNoDefault(Game.NotoSansSCFont);
+                if (header.IsDead == false)
+                {
+                    slotText.Text = !header.IsFemale
+                        ? "LOC_ID_PROFILE_SEL_SCREEN_7_MALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(header.PlayerClass, false).GetResourceString())
+                        : "LOC_ID_PROFILE_SEL_SCREEN_7_FEMALE_NEW".FormatResourceString(playerName, ClassType.ToStringID(header.PlayerClass, true).GetResourceString());
+                }
+                else
+                {
+                    slotText.Text = !header.IsFemale
+                        ? "LOC_ID_PROFILE_SEL_SCREEN_8_MALE_NEW".FormatResourceString(playerName)
+                        : "LOC_ID_PROFILE_SEL_SCREEN_8_FEMALE_NEW".FormatResourceString(playerName);
+                }
+            }
+
+            slotLvlText.Text = $"{"LOC_ID_PROFILE_SEL_SCREEN_9".GetResourceString()} {header.Level}";
+            slotNameText!.Text = header.MultiWorld ? header.SlotName : "";
+            container.ID = 1; // Container with ID == 1 means it has a save file.
+            if (updateStats)
+            {
+                _profileStats.Update(header);
             }
         }
         catch
@@ -255,6 +264,10 @@ public class ProfileSelectScreen : Screen
             slotText!.Text = "LOC_ID_PROFILE_SEL_SCREEN_1".GetString(slotText);
             slotText.TextureColor = Color.Gray;
             container.ID = 0; // Container with ID == 0 means it has no save file.
+            if (updateStats)
+            {
+                _profileStats.Blank();
+            }
         }
     }
 
@@ -355,6 +368,9 @@ public class ProfileSelectScreen : Screen
             {
                 _selectedSlot.TextureColor = Color.Yellow;
                 selectedSlot.TextureColor = Color.White;
+
+                CheckSaveHeaders(_slotArray[_selectedIndex], (byte)(_selectedIndex + 1), true);
+
             }
 
             if (Game.GlobalInput.PressedCancel())
@@ -466,14 +482,13 @@ public class ProfileSelectScreen : Screen
             SkillSystem.ResetAllTraits();
             Game.PlayerStats = new PlayerStats();
             manager!.Player.Reset();
-
-            ExitTransition();
         }
         else
         {
             _deleteProfileText.Visible = false;
-            CheckSaveHeaders(_slotArray[_selectedIndex], (byte)(_selectedIndex + 1));
         }
+
+        CheckSaveHeaders(_slotArray[_selectedIndex], (byte)(_selectedIndex + 1), true);
     }
 
     public override void Dispose()
@@ -506,7 +521,7 @@ public class ProfileSelectScreen : Screen
     {
         for (var i = 0; i < SlotCount; i++)
         {
-            CheckSaveHeaders(_slotArray[i], (byte)(i + 1));
+            CheckSaveHeaders(_slotArray[i], (byte)(i + 1), _selectedIndex + 1 == i + 1);
         }
 
         base.RefreshTextObjs();

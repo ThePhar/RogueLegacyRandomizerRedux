@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
+using RogueCastle.Randomizer;
 using RogueCastle.Screens;
 using RogueCastle.Screens.BaseScreens;
 using SpriteSystem;
@@ -36,6 +37,7 @@ public class Game : Microsoft.Xna.Framework.Game
     public static Effect ColourSwapShader;
     public static EquipmentSystem EquipmentSystem;
     public static PlayerStats PlayerStats = new();
+    public static RandomizerStats RandomizerStats = new();
     public static SpriteFont PixelArtFont;
     public static SpriteFont PixelArtFontBold;
     public static SpriteFont JunicodeFont;

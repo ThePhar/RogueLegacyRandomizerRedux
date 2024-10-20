@@ -1939,7 +1939,7 @@
     <value>Move {0} % faster</value>
   </data>
   <data name="LOC_ID_EXIT_ROGUE_LEGACY_OPTIONS_1" xml:space="preserve">
-    <value>Quit Rogue Legacy</value>
+    <value>Quit Rogue Legacy Randomizer</value>
   </data>
   <data name="LOC_ID_GAME_OVER_BOSS_SCREEN_1" xml:space="preserve">
     <value>Press</value>
@@ -2665,7 +2665,7 @@
     <value>Huge HP.  Low Str and MP.</value>
   </data>
   <data name="LOC_ID_PROFILE_SEL_SCREEN_1" xml:space="preserve">
-    <value>- START NEW LEGACY -</value>
+    <value>- New File -</value>
   </data>
   <data name="LOC_ID_PROFILE_SEL_SCREEN_10" xml:space="preserve">
     <value>NG+</value>
@@ -4009,7 +4009,7 @@
     <value />
   </data>
   <data name="LOC_ID_TEXT_257" xml:space="preserve">
-    <value>Are you sure you want to quit playing Rogue Legacy? (Your current status will be saved)</value>
+    <value>Are you sure you want to quit playing Rogue Legacy Randomizer? (Your current status will be saved)</value>
   </data>
   <data name="LOC_ID_TEXT_258" xml:space="preserve">
     <value>Save Error</value>

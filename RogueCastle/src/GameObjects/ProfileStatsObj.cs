@@ -1,8 +1,7 @@
-using System;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.Managers;
 
 namespace RogueCastle.GameObjects;
 
@@ -33,12 +32,12 @@ public class ProfileStatsObj : ObjContainer
         {
             FontSize = 12,
             OutlineWidth = 2,
-            Text = "AP 28935182734696621447",
+            Text = "AP TEST",
         };
 
         _versionText = _seedText.Clone() as TextObj;
         _versionText!.Position = new Vector2(682, _seedText.Y);
-        _versionText.Text = "RLR 2.0.0-dev";
+        _versionText.Text = "(AP 0.5.1) RLR 2.0.0-dev";
         _versionText.Align = Types.TextAlign.Right;
 
         AddChild(_seedText);
@@ -73,6 +72,7 @@ public class ProfileStatsObj : ObjContainer
                 }
             }
 
+            _blueprints[row, bp] = icon;
             AddChild(icon);
         }
 
@@ -97,6 +97,7 @@ public class ProfileStatsObj : ObjContainer
                 icon.ChangeSprite(EquipmentAbilityType.Icon(rune));
             }
 
+            _runes[row, rune] = icon;
             AddChild(icon);
         }
 
@@ -236,22 +237,70 @@ public class ProfileStatsObj : ObjContainer
         // AddChild(_skills);
     }
 
-    public void HandleDebugInput()
+    public void Blank()
     {
-        if (!LevelEV.EnableDebugInput)
+        for (var i = 0; i < NumChildren; i++)
         {
-            return;
+            GetChildAt(i).Visible = false;
+        }
+    }
+
+    public void Update(ProfileSaveHeader header)
+    {
+        for (var i = 0; i < NumChildren; i++)
+        {
+            GetChildAt(i).Visible = true;
         }
 
-        Console.WriteLine(_architectFeeText.Position);
-        if (Game.GlobalInput.PressedUp())
-            _architectFeeText.Position -= Vector2.UnitY;
-        else if (Game.GlobalInput.PressedDown())
-            _architectFeeText.Position += Vector2.UnitY;
-        else if (Game.GlobalInput.PressedLeft())
-            _architectFeeText.Position -= Vector2.UnitX;
-        else if (Game.GlobalInput.PressedRight())
-            _architectFeeText.Position += Vector2.UnitX;
+        _seedText.Text = header.MultiWorld ? "AP " : "" + header.SeedName;
+        _versionText.Text = $"(AP ${header.GeneratorVersion}) RLR {header.GameVersion}";
+        _money.Text = $"{header.Gold}";
+        _architectFeeText.Text = $"{header.ArchitectFee}%";
+        _gatekepperEnabledText.Text = $"{header.CharonFee}%";
+        _gatekepperEnabledText.TextureColor = header.CharonFee > 0
+            ? Color.Red
+            : Color.Green;
+
+        // Blueprints
+        for (var category = 0; category < header.Blueprints.Length; category++)
+        for (var @base = 0; @base < header.Blueprints[category].Length; @base++)
+        {
+            var icon = _blueprints[category, @base];
+            var state = header.Blueprints[category][@base];
+            if (state > EquipmentState.NOT_FOUND)
+            {
+                icon.ChangeSprite($"BlacksmithUI_{EquipmentCategoryType.ToStringEN(category)}{(@base % 5) + 1}Icon_Character");
+
+                var equipmentData = Game.EquipmentSystem.GetEquipmentData(category, @base);
+                var colorIndex = category == EquipmentCategoryType.SWORD ? 2 : 1;
+                icon.GetChildAt(colorIndex).TextureColor = equipmentData.FirstColour;
+                if (category != EquipmentCategoryType.CAPE)
+                {
+                    icon.GetChildAt(colorIndex + 1).TextureColor = equipmentData.SecondColour;
+                }
+            }
+            else
+            {
+                icon.ChangeSprite("BlacksmithUI_QuestionMarkIcon_Character");
+            }
+        }
+
+        // Runes
+        for (var category = 0; category < header.Runes.Length; category++)
+        for (var rune = 0; rune < header.Runes[category].Length; rune++)
+        {
+            var icon = _runes[category, rune];
+            var state = header.Runes[category][rune];
+            icon.ChangeSprite(state > EquipmentState.NOT_FOUND
+                ? EquipmentAbilityType.Icon(rune)
+                : "BlacksmithUI_QuestionMarkIcon_Sprite");
+        }
+
+        for (var i = 0; i < header.LocationCounts.Length; i++)
+        {
+            var counts = header.LocationCounts[i];
+            _counts[i].Text = $"{counts.Checked}/{counts.Total}";
+        }
     }
 
     public override void Dispose()
