@@ -1,0 +1,4 @@
+<xml>
+  <instance name="RandomizerLogo_Sprite" index="0" posX="0" posY="0" anchorX="0" anchorY="0" width="365" height="69"/>
+  <animation frame="1" name="RandomizerLogo_Sprite" index="0" duration="1" label=""/>
+</xml>

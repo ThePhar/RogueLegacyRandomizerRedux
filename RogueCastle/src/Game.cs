@@ -105,6 +105,7 @@ public class Game : Microsoft.Xna.Framework.Game
         Window.Title = "Rogue Legacy Randomizer Redux";
         ScreenManager = new RCScreenManager(this);
         SaveManager = new SaveGameManager(this);
+        ArchipelagoManager = new ArchipelagoManager(this);
 
         IsFixedTimeStep = false;
         Graphics.SynchronizeWithVerticalRetrace = !LevelEV.ShowFps;
@@ -134,6 +135,8 @@ public class Game : Microsoft.Xna.Framework.Game
     public ContentManager ContentManager => Content;
 
     public SaveGameManager SaveManager { get; }
+
+    public ArchipelagoManager ArchipelagoManager { get; }
 
     public GraphicsDeviceManager GraphicsDeviceManager => Graphics;
 
@@ -332,7 +335,7 @@ public class Game : Microsoft.Xna.Framework.Game
         GameConfig.SFXVolume = 0.8f;
         GameConfig.EnableDirectInput = true;
         InputManager.Deadzone = 10;
-        GameConfig.ProfileSlot = 1;
+        GameConfig.ProfileSlot = 0;
         GameConfig.EnableSteamCloud = false;
         GameConfig.ReduceQuality = false;
 
@@ -493,6 +496,9 @@ public class Game : Microsoft.Xna.Framework.Game
         SpriteLibrary.LoadSpritesheet(Content, @"GameSpritesheets\languageSpritesheet", false);
         SpriteLibrary.LoadSpritesheet(Content, @"GameSpritesheets\language2Spritesheet", false);
         SpriteLibrary.LoadSpritesheet(Content, @"GameSpritesheets\language3Spritesheet", false);
+
+        // Randomizer Specific Sheets
+        SpriteLibrary.LoadSpritesheet(Content, @"RandomizerSpritesheets\randomizerSpritesheet", false);
     }
 
     public void LoadAllEffects()
@@ -1200,7 +1206,7 @@ public class Game : Microsoft.Xna.Framework.Game
                             GameConfig.EnableSteamCloud = bool.Parse(lineValue);
                             break;
                         case "Slot":
-                            GameConfig.ProfileSlot = byte.Parse(lineValue, NumberStyles.Any, ci);
+                            GameConfig.ProfileSlot = 0;
                             break;
                         case "KeyUP":
                             GlobalInput.KeyList[InputMapType.PLAYER_UP1] =

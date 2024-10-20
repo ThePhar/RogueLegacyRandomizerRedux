@@ -4289,7 +4289,7 @@
     <value>to Attack</value>
   </data>
   <data name="LOC_ID_TITLE_SCREEN_1" xml:space="preserve">
-    <value>to Change Slot</value>
+    <value>Choose Profile</value>
   </data>
   <data name="LOC_ID_TITLE_SCREEN_2" xml:space="preserve">
     <value>Continue Your Quest</value>
@@ -4298,7 +4298,7 @@
     <value>Choose Your Heir</value>
   </data>
   <data name="LOC_ID_TITLE_SCREEN_4" xml:space="preserve">
-    <value>Start Your Legacy</value>
+    <value>Start Your Randomized Legacy</value>
   </data>
   <data name="LOC_ID_TRAINING_DUMMY_1" xml:space="preserve">
     <value>Training Dummy</value>
@@ -4792,6 +4792,9 @@
   <data name="LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW" xml:space="preserve">
     <value>[Input:25] to Change Profile ({0})</value>
   </data>
+  <data name="LOC_ID_BACK_TO_MENU_OPTIONS_4_NEW" xml:space="preserve">
+    <value>[Input:25] to Choose Profile</value>
+  </data>
   <data name="LOC_ID_BLACKSMITH_SCREEN_16_NEW" xml:space="preserve">
     <value>{0} to unlock</value>
   </data>
@@ -5004,5 +5007,14 @@
   </data>
   <data name="LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TEXT_1" xml:space="preserve">
     <value>Are you ready to connect to the room?</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_TEXT_1" xml:space="preserve">
+    <value>Use Saved</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_TEXT_2" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_TITLE_SCREEN_1" xml:space="preserve">
+    <value>Choose a Profile</value>
   </data>
 </root>

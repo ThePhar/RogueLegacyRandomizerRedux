@@ -332,6 +332,11 @@ namespace RogueCastle
                     new string[] { "LOC_ID_TEXT_237", },
                     new string[] { "LOC_ID_TEXT_238", }
                 ));
+            m_dialogDict.Add("ConfirmMultiworld",
+                new DialogueObj(
+                    new string[] { "LOC_ID_RANDOMIZER_TEXT_1", },
+                    new string[] { "LOC_ID_RANDOMIZER_TEXT_2", }
+                ));
             m_dialogDict.Add("DeleteFileWarning",
                 new DialogueObj(
                     new string[] { "LOC_ID_TEXT_239", },
@@ -560,6 +565,11 @@ namespace RogueCastle
                 new DialogueObj(
                     ["LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TITLE_1"],
                     ["LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TEXT_1"]
+                ));
+            m_dialogDict.Add("MultiworldReconnect",
+                new DialogueObj(
+                    ["LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TITLE_2"],
+                    ["LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TEXT_2"]
                 ));
         }
 

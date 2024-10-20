@@ -32,6 +32,7 @@ public class TitleScreen : Screen
     private SpriteObj _largeCloud1, _largeCloud2, _largeCloud3, _largeCloud4;
     private bool _loadStartingRoom;
     private SpriteObj _logo;
+    private SpriteObj _logo2;
     private bool _optionsEntered;
     private SpriteObj _optionsIcon;
     private KeyIconTextObj _optionsKey;
@@ -66,6 +67,11 @@ public class TitleScreen : Screen
 
         _logo = new SpriteObj("TitleLogo_Sprite") {
             Position = new Vector2(1320 / 2, 720 / 2),
+            DropShadow = new Vector2(0, 5),
+        };
+        _logo2 = new SpriteObj("RandomizerLogo_Sprite")
+        {
+            Position = _logo.Position + new Vector2(-80, 100),
             DropShadow = new Vector2(0, 5),
         };
 
@@ -203,7 +209,9 @@ public class TitleScreen : Screen
         Game.HoursPlayedSinceLastSave = 0;
 
         Camera.Zoom = 1;
-        _profileSelectKey.Text = "LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW".FormatResourceString(Game.GameConfig.ProfileSlot);
+        _profileSelectKey.Text = Game.GameConfig.ProfileSlot == 0
+            ? "LOC_ID_BACK_TO_MENU_OPTIONS_4_NEW".GetResourceString()
+            : "LOC_ID_BACK_TO_MENU_OPTIONS_3_NEW".FormatResourceString(Game.GameConfig.ProfileSlot);
 
         // Setting initial data.
         SoundManager.PlayMusic("TitleScreenSong", true, 1f);
@@ -225,6 +233,11 @@ public class TitleScreen : Screen
         _logo.Position = new Vector2(1320 / 2, (720 / 2) - 50);
         Tween.To(_logo, 2, Linear.EaseNone, "Opacity", "1");
         Tween.To(_logo, 3, Quad.EaseInOut, "Y", "360");
+
+        _logo2.Opacity = 0;
+        _logo2.Position = _logo.Position + new Vector2(-245, 50);
+        Tween.To(_logo2, 2, Linear.EaseNone, "Opacity", "1");
+        Tween.To(_logo2, 3, Quad.EaseInOut, "Y", "430");
 
         _crown.Opacity = 0;
         _crown.Position = new Vector2(390, 250 - 50);
@@ -300,7 +313,12 @@ public class TitleScreen : Screen
     {
         _pressStartText2.ChangeFontNoDefault(_pressStartText.GetLanguageFont());
 
-        if (_startNewLegacy == false)
+        // Slot not picked.
+        if (Game.GameConfig.ProfileSlot == 0)
+        {
+            _pressStartText2.Text = "LOC_ID_TITLE_SCREEN_1".GetResourceString();
+        }
+        else if (_startNewLegacy == false)
         {
             // You have an active character who is not dead. Therefore begin the game like normal.
             if (_heroIsDead == false)
@@ -360,6 +378,15 @@ public class TitleScreen : Screen
 
     public void StartPressed()
     {
+        var game = ScreenManager.Game as Game;
+
+        // Need to be connected and choose a slot.
+        if (game!.ArchipelagoManager.Status != ConnectionStatus.Ready || Game.GameConfig.ProfileSlot == 0)
+        {
+            Game.ScreenManager.DisplayScreen(ScreenType.PROFILE_SELECT, false);
+            return;
+        }
+
         SoundManager.PlaySound("Game_Start");
 
         if (_startNewLegacy == false)
@@ -499,9 +526,7 @@ public class TitleScreen : Screen
         HandleAchievementInput();
 
         //ChangeRay();
-        if (Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM1) ||
-            Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM2) ||
-            Game.GlobalInput.JustPressed(InputMapType.MENU_CONFIRM3))
+        if (Game.GlobalInput.PressedConfirm())
         {
             StartPressed();
         }
@@ -684,6 +709,7 @@ public class TitleScreen : Screen
         _smallCloud2.DrawOutline(Camera);
         _smallCloud5.DrawOutline(Camera);
         _logo.DrawOutline(Camera);
+        _logo2.DrawOutline(Camera);
         _dlcIcon.DrawOutline(Camera);
         _crown.DrawOutline(Camera);
         //_largeCloud1.DrawOutline(Camera);
@@ -724,6 +750,7 @@ public class TitleScreen : Screen
 
         Camera.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, null, null);
         _logo.Draw(Camera);
+        _logo2.Draw(Camera);
         _crown.Draw(Camera);
         _copyrightText.Draw(Camera);
         _versionNumber.Draw(Camera);
@@ -781,6 +808,8 @@ public class TitleScreen : Screen
             _bg = null;
             _logo.Dispose();
             _logo = null;
+            _logo2.Dispose();
+            _logo2 = null;
             _castle.Dispose();
             _castle = null;
 

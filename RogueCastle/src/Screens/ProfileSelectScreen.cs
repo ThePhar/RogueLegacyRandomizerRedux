@@ -127,7 +127,7 @@ public class ProfileSelectScreen : Screen
     {
         SoundManager.PlaySound("DialogOpen");
         _lockControls = true;
-        _selectedIndex = Game.GameConfig.ProfileSlot - 1;
+        _selectedIndex = Game.GameConfig.ProfileSlot != 0 ? Game.GameConfig.ProfileSlot - 1 : 0;
         _selectedSlot = _slotArray[_selectedIndex];
         _selectedSlot.TextureColor = Color.Yellow;
 
@@ -384,24 +384,33 @@ public class ProfileSelectScreen : Screen
 
                 Game.GameConfig.ProfileSlot = (byte)(_selectedIndex + 1);
                 var game = ScreenManager.Game as Game;
-                var manager = ScreenManager as RCScreenManager;
+                var rcs = ScreenManager as RCScreenManager;
                 Game.SaveConfig();
 
-                if (game!.SaveManager.FileExists(SaveType.PlayerData))
+                if (game!.SaveManager.FileExists(SaveType.Archipelago))
                 {
-                    manager!.DisplayScreen(ScreenType.TITLE, true);
+                    rcs!.DialogueScreen.SetDialogue("MultiworldReconnect");
+                    rcs.DialogueScreen.SetDialogueChoice("ConfirmMultiworld");
+                    rcs.DialogueScreen.SetConfirmEndHandler(this, "Connect", true);
+                    rcs.DialogueScreen.SetCancelEndHandler(this, "ShowConnectionScreen");
+                    rcs.DisplayScreen(ScreenType.DIALOGUE, false);
                 }
-                else
-                {
-                    SkillSystem.ResetAllTraits();
-                    Game.PlayerStats.Dispose();
-                    Game.PlayerStats = new PlayerStats();
-                    manager!.Player.Reset();
-                    Game.ScreenManager.Player.CurrentHealth = Game.PlayerStats.CurrentHealth;
-                    Game.ScreenManager.Player.CurrentMana = Game.PlayerStats.CurrentMana;
 
-                    manager!.DisplayScreen(ScreenType.RANDOMIZER_MENU, true);
-                }
+                // if (game!.SaveManager.FileExists(SaveType.PlayerData))
+                // {
+                //     manager!.DisplayScreen(ScreenType.TITLE, true);
+                // }
+                // else
+                // {
+                //     SkillSystem.ResetAllTraits();
+                //     Game.PlayerStats.Dispose();
+                //     Game.PlayerStats = new PlayerStats();
+                //     manager!.Player.Reset();
+                //     Game.ScreenManager.Player.CurrentHealth = Game.PlayerStats.CurrentHealth;
+                //     Game.ScreenManager.Player.CurrentMana = Game.PlayerStats.CurrentMana;
+                //
+                //     manager!.DisplayScreen(ScreenType.RANDOMIZER_MENU, true);
+                // }
             }
 
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_DELETEPROFILE) && _deleteProfileText.Visible)
@@ -412,6 +421,11 @@ public class ProfileSelectScreen : Screen
         }
 
         base.HandleInput();
+    }
+
+    public void Connect(bool useCachedCredentials)
+    {
+
     }
 
     public override void Draw(GameTime gametime)
