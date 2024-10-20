@@ -60,7 +60,7 @@ namespace RogueCastle
             // which results in a mismatch.
             if (Game.PlayerStats.RevisionNumber <= 0)
                  (ParentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.Lineage);
-            (ParentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.UpgradeData);
+            (ParentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Archipelago);
 
             if (Game.PlayerStats.TutorialComplete == true && level != null && level.CurrentRoom.Name != "Start" && level.CurrentRoom.Name != "Ending" && level.CurrentRoom.Name != "Tutorial")
                 (ParentScreen.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.MapData);

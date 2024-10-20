@@ -99,7 +99,7 @@ public class SaveGameManager(Game game)
     {
         if (saveBackup == false)
         {
-            SaveFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage, SaveType.Archipelago);
+            SaveFiles(SaveType.PlayerData, SaveType.UpgradeData, SaveType.Map, SaveType.MapData, SaveType.Lineage);
         }
         else
         {
@@ -564,8 +564,7 @@ public class SaveGameManager(Game game)
         writer.Write(phGenVersion);
 
         // Game version (int32, char[])
-        var phGameVersion = "2.0.0-dev";
-        writer.Write(phGameVersion);
+        writer.Write(LevelEV.RLRX_VERSION);
 
         // Server connection info (for remembering last connection)  (int32, char[])
         var phAddress = "localhost";
@@ -2515,11 +2514,11 @@ public class SaveGameManager(Game game)
             header.SlotName = reader.ReadString();
             header.Password = reader.ReadString();
 
-            header.LocationCounts[0] = (reader.ReadInt32(), reader.ReadInt32());
             header.LocationCounts[1] = (reader.ReadInt32(), reader.ReadInt32());
             header.LocationCounts[2] = (reader.ReadInt32(), reader.ReadInt32());
             header.LocationCounts[3] = (reader.ReadInt32(), reader.ReadInt32());
-            header.LocationCounts[4] = (0, reader.ReadByte());
+            header.LocationCounts[4] = (reader.ReadInt32(), reader.ReadInt32());
+            header.LocationCounts[0] = (0, reader.ReadByte());
         }
 
         // Player
@@ -2543,7 +2542,7 @@ public class SaveGameManager(Game game)
             reader.ReadByte(); // Head Piece
             reader.ReadByte(); // Shoulder Piece
             reader.ReadByte(); // Chest Piece
-            header.LocationCounts[4].Checked = reader.ReadByte(); // Diary Entry
+            header.LocationCounts[0].Checked = reader.ReadByte(); // Diary Entry
             reader.ReadInt32(); // Bonus Health
             reader.ReadInt32(); // Bonus Strength
             reader.ReadInt32(); // Bonus Mana
@@ -2733,7 +2732,7 @@ public record ProfileSaveHeader
     public int Level { get; set; }
     public bool IsDead { get; set; }
 
-    public bool MultiWorld { get; set; }
+    public bool MultiWorld { get; set; } = true;
     public string Address { get; set; } = "";
     public string SlotName { get; set; } = "";
     public string Password { get; set; } = "";

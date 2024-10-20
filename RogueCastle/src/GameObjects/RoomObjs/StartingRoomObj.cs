@@ -259,7 +259,7 @@ namespace RogueCastle
             Player.CurrentHealth = Player.MaxHealth;
             Player.CurrentMana = Player.MaxMana;
             Player.ForceInvincible = false;
-            (Player.AttachedLevel.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData);
+            (Player.AttachedLevel.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Archipelago);
 
             if (TollCollectorAvailable == true)
             {

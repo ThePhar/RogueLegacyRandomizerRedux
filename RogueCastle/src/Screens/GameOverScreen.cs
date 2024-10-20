@@ -198,7 +198,7 @@ namespace RogueCastle
             if (storedTraits.Trait1 == TraitType.PROSOPAGNOSIA || storedTraits.Trait2 == TraitType.PROSOPAGNOSIA)
                 Game.PlayerStats.HasProsopagnosia = true;
 
-            (ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Lineage, SaveType.MapData);
+            (ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Lineage, SaveType.MapData, SaveType.Archipelago);
             (ScreenManager.Game as Game).SaveManager.SaveAllFileTypes(true); // Save the backup the moment the player dies.
 
             // The player's traits need to be restored to so that his death animation matches the player.

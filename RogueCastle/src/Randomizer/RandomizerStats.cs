@@ -8,7 +8,7 @@ public class RandomizerStats : IDisposableObj
     public const byte SAVE_FORMAT_REVISION = 0;
 
     // Meta Data
-    public bool Multiworld { get; set; }
+    public bool Multiworld { get; set; } = true;
     public string SavedAddress { get; set; } = "";
     public string SavedSlotName { get; set; } = "";
     public string SavedPassword { get; set; } = "";

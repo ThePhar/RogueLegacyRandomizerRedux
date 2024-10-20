@@ -1711,7 +1711,7 @@ namespace RogueCastle
             if (Game.PlayerStats.ArchitectUsed == false && Game.PlayerStats.TimesDead <= 15)
                 GameUtil.UnlockAchievement("FEAR_OF_DYING");
 
-            (m_target.AttachedLevel.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData);
+            (m_target.AttachedLevel.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Archipelago);
         }
 
         public override void CollisionResponse(CollisionBox thisBox, CollisionBox otherBox, int collisionResponseType)

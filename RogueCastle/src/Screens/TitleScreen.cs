@@ -109,7 +109,7 @@ public class TitleScreen : Screen
         _versionNumber!.Align = Types.TextAlign.Right;
         _versionNumber.FontSize = 8;
         _versionNumber.Position = new Vector2(1320 - 15, 5);
-        _versionNumber.Text = LevelEV.GAME_VERSION;
+        _versionNumber.Text = $"RL   {LevelEV.GAME_VERSION}\nRLR {LevelEV.RLRX_VERSION}";
 
         _pressStartText = new KeyIconTextObj(Game.JunicodeFont) {
             FontSize = 20,

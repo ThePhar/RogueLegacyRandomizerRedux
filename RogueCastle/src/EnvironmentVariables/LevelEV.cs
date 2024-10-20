@@ -4,7 +4,8 @@ namespace RogueCastle.EnvironmentVariables;
 
 public static class LevelEV
 {
-    public const string GAME_VERSION = "v1.4.1";
+    public const string GAME_VERSION = "1.4.1";
+    public const string RLRX_VERSION = "2.0.0-dev";
 
     /// <summary>
     ///     The number of levels an enemy needs to be before he goes to the next difficulty.

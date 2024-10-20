@@ -1047,7 +1047,7 @@ public class Game : Microsoft.Xna.Framework.Game
                 level.CurrentRoom.Name != "Tutorial"
             )
             {
-                SaveManager.SaveFiles(SaveType.MapData);
+                SaveManager.SaveFiles(SaveType.MapData, SaveType.Archipelago);
             }
         }
     }

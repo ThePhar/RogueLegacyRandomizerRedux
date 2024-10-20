@@ -13,6 +13,7 @@ public class ProfileStatsObj : ObjContainer
     private TextObj _gatekepperEnabledText;
     private TextObj[] _counts = new TextObj[5];
     private TextObj _money;
+    private TextObj _noSaveData;
 
     private ObjContainer _skills;
     private ObjContainer[,] _blueprints = new ObjContainer[5, 15];
@@ -28,6 +29,17 @@ public class ProfileStatsObj : ObjContainer
 
     public void LoadContent()
     {
+        _noSaveData = new TextObj(Game.JunicodeFont)
+        {
+            FontSize = 14,
+            Align = Types.TextAlign.Centre,
+            OutlineWidth = 2,
+            Text = "No save data.",
+            TextureColor = Color.LightGray,
+            Position = new Vector2(682f / 2f, 274f),
+            Visible = false,
+        };
+
         _seedText = new TextObj(Game.JunicodeFont)
         {
             FontSize = 12,
@@ -40,6 +52,7 @@ public class ProfileStatsObj : ObjContainer
         _versionText.Text = "(AP 0.5.1) RLR 2.0.0-dev";
         _versionText.Align = Types.TextAlign.Right;
 
+        AddChild(_noSaveData);
         AddChild(_seedText);
         AddChild(_versionText);
 
@@ -243,6 +256,8 @@ public class ProfileStatsObj : ObjContainer
         {
             GetChildAt(i).Visible = false;
         }
+
+        _noSaveData.Visible = true;
     }
 
     public void Update(ProfileSaveHeader header)
@@ -252,8 +267,10 @@ public class ProfileStatsObj : ObjContainer
             GetChildAt(i).Visible = true;
         }
 
-        _seedText.Text = header.MultiWorld ? "AP " : "" + header.SeedName;
-        _versionText.Text = $"(AP ${header.GeneratorVersion}) RLR {header.GameVersion}";
+        _noSaveData.Visible = false;
+
+        _seedText.Text = (header.MultiWorld ? "AP " : "") + header.SeedName;
+        _versionText.Text = $"(AP {header.GeneratorVersion}) RLR {header.GameVersion}";
         _money.Text = $"{header.Gold}";
         _architectFeeText.Text = $"{header.ArchitectFee}%";
         _gatekepperEnabledText.Text = $"{header.CharonFee}%";
