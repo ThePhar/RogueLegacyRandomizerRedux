@@ -623,30 +623,31 @@ public class Game : Microsoft.Xna.Framework.Game
     {
         var languageType = (int)LocaleBuilder.LanguageType;
 
-        if (InputManager.JustPressed(Keys.OemQuotes, null))
-        {
-            languageType++;
-            if (languageType >= (int)LanguageType.MAX)
-            {
-                languageType = 0;
-            }
-
-            LocaleBuilder.LanguageType = (LanguageType)languageType;
-            LocaleBuilder.RefreshAllText();
-            Console.WriteLine($@"Changing to language type: {(LanguageType)languageType}");
-        }
-        else if (InputManager.JustPressed(Keys.OemSemicolon, null))
-        {
-            languageType--;
-            if (languageType < 0)
-            {
-                languageType = (int)LanguageType.MAX - 1;
-            }
-
-            LocaleBuilder.LanguageType = (LanguageType)languageType;
-            LocaleBuilder.RefreshAllText();
-            Console.WriteLine($@"Changing to language type: {(LanguageType)languageType}");
-        }
+        // temp disabled since i keep pressing : to enter AP info, then it changes my language to chinese
+        // if (InputManager.JustPressed(Keys.OemQuotes, null))
+        // {
+        //     languageType++;
+        //     if (languageType >= (int)LanguageType.MAX)
+        //     {
+        //         languageType = 0;
+        //     }
+        //
+        //     LocaleBuilder.LanguageType = (LanguageType)languageType;
+        //     LocaleBuilder.RefreshAllText();
+        //     Console.WriteLine($@"Changing to language type: {(LanguageType)languageType}");
+        // }
+        // else if (InputManager.JustPressed(Keys.OemSemicolon, null))
+        // {
+        //     languageType--;
+        //     if (languageType < 0)
+        //     {
+        //         languageType = (int)LanguageType.MAX - 1;
+        //     }
+        //
+        //     LocaleBuilder.LanguageType = (LanguageType)languageType;
+        //     LocaleBuilder.RefreshAllText();
+        //     Console.WriteLine($@"Changing to language type: {(LanguageType)languageType}");
+        // }
 
         if (InputManager.JustPressed(Keys.OemPipe, null))
         {

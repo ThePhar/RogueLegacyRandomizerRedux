@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DS2DEngine;
 using InputSystem;
 using Microsoft.Xna.Framework;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameObjects.OptionsObjs;
 using RogueCastle.GameStructs;
+using RogueCastle.Managers;
 using RogueCastle.Screens.BaseScreens;
 using Tweener;
 using Tweener.Ease;
@@ -31,6 +33,10 @@ public class RandomizerMenuScreen : Screen
     private TextInputOptionsObj _password;
     private ToggleOptionsObj _showPassword;
     private ToggleOptionsObj _showHostname;
+    private ConnectOptionsObj _connectOption;
+
+    private Task<bool> _connectionSuccess;
+    private int _profile;
 
     public RandomizerMenuScreen()
     {
@@ -49,6 +55,7 @@ public class RandomizerMenuScreen : Screen
         _password = new TextInputOptionsObj("LOC_ID_RANDOMIZER_OPTION_PASSWORD", "");
         _showHostname = new ToggleOptionsObj("LOC_ID_RANDOMIZER_OPTION_SHOW_HOSTNAME", true);
         _showPassword = new ToggleOptionsObj("LOC_ID_RANDOMIZER_OPTION_SHOW_PASSWORD");
+        _connectOption = new ConnectOptionsObj(this, "LOC_ID_RANDOMIZER_OPTION_CONNECT");
 
         _optionsArray.Add(_hostname);
         _optionsArray.Add(_password);
@@ -56,7 +63,7 @@ public class RandomizerMenuScreen : Screen
         _optionsArray.Add(_showHostname);
         _optionsArray.Add(_showPassword);
         _optionsArray.Add(null);
-        _optionsArray.Add(new ConnectOptionsObj(this, "LOC_ID_RANDOMIZER_OPTION_CONNECT"));
+        _optionsArray.Add(_connectOption);
 
         _optionsBar = new SpriteObj("OptionsBar_Sprite") { ForceDraw = true };
 
@@ -120,10 +127,11 @@ public class RandomizerMenuScreen : Screen
         _navigationText.Text = "LOC_ID_CLASS_NAME_1_MALE".GetString(_navigationText);
 
         _contextText = new TextObj(Game.JunicodeFont) {
-            FontSize = 8,
-            Text = "This is some test text.", // todo change me
-            Position = new Vector2(420, 620),
-            DropShadow = new Vector2(2, 2),
+            FontSize = 9,
+            Text = "",
+            Align = Types.TextAlign.Centre,
+            Position = new Vector2(_optionsArray[0].X, 620),
+            OutlineWidth = 2,
             ForceDraw = true,
         };
 
@@ -249,6 +257,11 @@ public class RandomizerMenuScreen : Screen
         base.OnExit();
     }
 
+    public override void PassInData(List<object> objList)
+    {
+        _profile = (int)objList[0];
+    }
+
     public override void Update(GameTime gameTime)
     {
         foreach (var obj in _optionsArray)
@@ -264,7 +277,48 @@ public class RandomizerMenuScreen : Screen
             ? new Vector2(_selectedOption.X - _optionsBar.Width / 2f, _selectedOption.Y + 28)
             : new Vector2(_selectedOption.X - 15, _selectedOption.Y);
 
+        if (_connectionSuccess is { IsCompleted: true })
+        {
+            // New Game Time!
+            if (_connectionSuccess.Result)
+            {
+                Game.GameConfig.ProfileSlot = (byte)_profile;
+                var game = ScreenManager.Game as Game;
+                var rcs = ScreenManager as RCScreenManager;
+
+                // Reset stats.
+                SkillSystem.ResetAllTraits();
+                Game.PlayerStats.Dispose();
+                Game.PlayerStats = new PlayerStats();
+                Game.ScreenManager.Player.Reset();
+                Game.ScreenManager.Player.CurrentHealth = Game.PlayerStats.CurrentHealth;
+                Game.ScreenManager.Player.CurrentMana = Game.PlayerStats.CurrentMana;
+
+                // Save data.
+                (ScreenManager.Game as Game)!.SaveManager.SaveFiles(SaveType.Archipelago, SaveType.PlayerData, SaveType.UpgradeData);
+
+                // Return to title with new save.
+                Game.ScreenManager.DisplayScreen(ScreenType.TITLE, true);
+                _connectOption.IsActive = false;
+            }
+
+            _contextText.Visible = false;
+            _connectionSuccess = null;
+        }
+
         base.Update(gameTime);
+    }
+
+    public void StartConnect()
+    {
+        _connectionSuccess = (ScreenManager.Game as Game)!.ArchipelagoManager.ConnectAsync(
+            _hostname.GetValue.Trim(),
+            _slotname.GetValue.Trim(),
+            _password.GetValue);
+
+        _contextText.Visible = true;
+        _contextText.Text = "Attempting to connect to...";
+        _connectOption.IsActive = false;
     }
 
     public override void Draw(GameTime gametime)

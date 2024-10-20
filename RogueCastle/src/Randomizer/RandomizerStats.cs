@@ -9,9 +9,6 @@ public class RandomizerStats : IDisposableObj
 
     // Meta Data
     public bool Multiworld { get; set; } = true;
-    public string SavedAddress { get; set; } = "";
-    public string SavedSlotName { get; set; } = "";
-    public string SavedPassword { get; set; } = "";
 
     // Generation
     public int BrownChestsChecked { get; set; }

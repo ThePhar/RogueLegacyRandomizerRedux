@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Storage;
 using RogueCastle.EnvironmentVariables;
@@ -39,7 +38,8 @@ public class SaveGameManager(Game game)
 
     public void SaveFiles(params SaveType[] saveList)
     {
-        if (LevelEV.DisableSaving)
+        // no saving if disabled (or slot 0).
+        if (LevelEV.DisableSaving || Game.GameConfig.ProfileSlot == 0)
         {
             return;
         }
@@ -542,6 +542,7 @@ public class SaveGameManager(Game game)
         }
 
         fileName = fileName.Insert(0, "Profile" + Game.GameConfig.ProfileSlot + "/");
+        var manager = game.ArchipelagoManager;
         using var stream = _storageContainer.CreateFile(fileName);
         using var writer = new BinaryWriter(stream);
 
@@ -552,27 +553,21 @@ public class SaveGameManager(Game game)
         writer.Write(Game.RandomizerStats.Multiworld);
 
         // AP slot #, used for validation on connection. (int32, char[])
-        var phSlot = 1;
-        writer.Write(phSlot);
+        writer.Write(manager.Slot);
 
         // AP seed name (or seed for solo), used for validation on connection.
-        var phSeed = "42000000000000000069"; //TODO: Replace with APManager seed
-        writer.Write(phSeed); // (int32, char[])
+        writer.Write(manager.SeedName); // (int32, char[])
 
         // AP Generator version (int32, char[])
-        var phGenVersion = "0.5.0";
-        writer.Write(phGenVersion);
+        writer.Write(manager.GeneratorVersion);
 
         // Game version (int32, char[])
         writer.Write(LevelEV.RLRX_VERSION);
 
         // Server connection info (for remembering last connection)  (int32, char[])
-        var phAddress = "localhost";
-        var phSlotname = "Phar";
-        var phPassword = "";
-        writer.Write(phAddress);
-        writer.Write(phSlotname);
-        writer.Write(phPassword);
+        writer.Write(manager.Address);
+        writer.Write(manager.SlotName);
+        writer.Write(manager.Password);
 
         // Chests checked and total (int32)
         writer.Write(Game.RandomizerStats.BrownChestsChecked);
@@ -1605,9 +1600,9 @@ public class SaveGameManager(Game game)
         reader.ReadString(); // seed
         reader.ReadString(); // gen version
         reader.ReadString(); // game version
-        Game.RandomizerStats.SavedAddress = reader.ReadString();
-        Game.RandomizerStats.SavedSlotName = reader.ReadString();
-        Game.RandomizerStats.SavedPassword = reader.ReadString();
+        reader.ReadString(); // address
+        reader.ReadString(); // slot name
+        reader.ReadString(); // password
 
         // Chests
         Game.RandomizerStats.BrownChestsChecked = reader.ReadInt32();
@@ -2466,32 +2461,6 @@ public class SaveGameManager(Game game)
         stream.Close();
     }
 
-    public bool FileExists(SaveType saveType)
-    {
-        GetStorageContainer();
-
-        var fileExists = saveType switch
-        {
-            SaveType.PlayerData  => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNamePlayer}"),
-            SaveType.UpgradeData => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameUpgrades}"),
-            SaveType.Map         => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMap}"),
-            SaveType.MapData     => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameMapData}"),
-            SaveType.Lineage     => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}"),
-            SaveType.Archipelago => _storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameArchipelago}"),
-            _                    => false,
-        };
-
-        if (_storageContainer is { IsDisposed: false })
-        {
-            return fileExists;
-        }
-
-        _storageContainer.Dispose();
-        _storageContainer = null;
-
-        return fileExists;
-    }
-
     public ProfileSaveHeader GetSaveHeader(byte profile)
     {
         var header = new ProfileSaveHeader();
@@ -2639,6 +2608,37 @@ public class SaveGameManager(Game game)
         return header;
     }
 
+    public bool FileExists(SaveType saveType, byte profile = 0)
+    {
+        if (profile == 0)
+        {
+            profile = Game.GameConfig.ProfileSlot;
+        }
+
+        GetStorageContainer();
+
+        var fileExists = saveType switch
+        {
+            SaveType.PlayerData  => _storageContainer.FileExists($"Profile{profile}/{FileNamePlayer}"),
+            SaveType.UpgradeData => _storageContainer.FileExists($"Profile{profile}/{FileNameUpgrades}"),
+            SaveType.Map         => _storageContainer.FileExists($"Profile{profile}/{FileNameMap}"),
+            SaveType.MapData     => _storageContainer.FileExists($"Profile{profile}/{FileNameMapData}"),
+            SaveType.Lineage     => _storageContainer.FileExists($"Profile{profile}/{FileNameLineage}"),
+            SaveType.Archipelago => _storageContainer.FileExists($"Profile{profile}/{FileNameArchipelago}"),
+            _                    => false,
+        };
+
+        if (_storageContainer is { IsDisposed: false })
+        {
+            return fileExists;
+        }
+
+        _storageContainer.Dispose();
+        _storageContainer = null;
+
+        return fileExists;
+    }
+
     private void GetStorageContainer()
     {
         if (_storageContainer is { IsDisposed: false })
@@ -2682,6 +2682,9 @@ public class SaveGameManager(Game game)
 
             CopyFile(_storageContainer, FileNameLineage, "Profile1");
             CopyFile(_storageContainer, "AutoSave_" + FileNameLineage, "Profile1");
+
+            CopyFile(_storageContainer, FileNameArchipelago, "Profile1");
+            CopyFile(_storageContainer, "AutoSave_" + FileNameArchipelago, "Profile1");
         }
 
         if (_storageContainer.DirectoryExists("Profile2") == false)
@@ -2692,6 +2695,16 @@ public class SaveGameManager(Game game)
         if (_storageContainer.DirectoryExists("Profile3") == false)
         {
             _storageContainer.CreateDirectory("Profile3");
+        }
+
+        if (_storageContainer.DirectoryExists("Profile4") == false)
+        {
+            _storageContainer.CreateDirectory("Profile4");
+        }
+
+        if (_storageContainer.DirectoryExists("Profile5") == false)
+        {
+            _storageContainer.CreateDirectory("Profile5");
         }
 
         _storageContainer.Dispose();

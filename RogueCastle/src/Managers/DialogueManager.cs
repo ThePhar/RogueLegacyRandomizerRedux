@@ -759,45 +759,13 @@ namespace RogueCastle
 
         public static void AddText(string key, string[] speakers, string[] text)
         {
-            if (m_currentLanguage != null)
+            // Remove the same key if it exists. We will use this to send messages.
+            if (m_dialogDict.ContainsKey(key))
             {
-                if (m_languageArray[m_currentLanguage].ContainsKey(key))
-                    Console.WriteLine("Cannot add text. Text with title already specified.");
-                else
-                {
-                    DialogueObj dialogueObj = new DialogueObj(speakers, text);
-                    m_languageArray[m_currentLanguage].Add(key, dialogueObj);
-
-#if false
-                    // Generate this:
-                    /*
-                    m_dialogDict.Add("DiaryEntry0",
-                        new DialogueObj(
-                            new string[] { "LOC_ID_DIARY_1", "LOC_ID_DIARY_1", "LOC_ID_DIARY_1", "LOC_ID_DIARY_1", "LOC_ID_DIARY_1", "LOC_ID_DIARY_1" },
-                            new string[] { "LOC_ID_DIARY_2", "LOC_ID_DIARY_3", "LOC_ID_DIARY_4", "LOC_ID_DIARY_5", "LOC_ID_DIARY_6", "LOC_ID_DIARY_7" }
-                        ));
-                     */
-
-                    Console.WriteLine("m_dialogDict.Add(\"" + key + "\",");
-                    Console.WriteLine("    new DialogueObj(");
-                    Console.Write("        new string[] { ");
-                    foreach (var item in speakers)
-                    {
-                        Console.Write("\"" + item.ToString() + "\", ");
-                    }
-                    Console.WriteLine("},");
-                    Console.Write("        new string[] { ");
-                    foreach (var item in text)
-                    {
-                        Console.Write("\"" + item.ToString() + "\", ");
-                    }
-                    Console.WriteLine("}");
-                    Console.WriteLine("    ));");
-#endif
-                }
+                m_dialogDict.Remove(key);
             }
-            else
-                Console.WriteLine("Call SetLanguage() before attempting to add text to a specified language.");
+
+            m_dialogDict.Add(key, new DialogueObj(speakers, text));
         }
 
         public static DialogueObj GetText(string key)

@@ -17,11 +17,17 @@ public class ArchipelagoManager(Game game)
 
     public ConnectionStatus Status { get; private set; }
 
+    public string Password { get; private set; }
+
     public string SeedName => _session.RoomState.Seed;
 
     public int Slot => _session.Players.ActivePlayer.Slot;
 
     public string GeneratorVersion => _session.RoomState.GeneratorVersion.ToString();
+
+    public string Address => _session.Socket.Uri.ToString();
+    public string SlotName => _session.Players.ActivePlayer.Name;
+
 
     public async Task<bool> ConnectAsync(string address, string slotname, string password)
     {
@@ -50,24 +56,30 @@ public class ArchipelagoManager(Game game)
                 var failure = result as LoginFailure;
 
                 // Display issue
-                DialogueManager.SetLanguage(DialogueManager.GetCurrentLanguage());
-                DialogueManager.AddText("MultiworldConnectFailure", ["Failed to Connect", "Failed to Connect"], ["Unable to connect to Archipelago Server.", failure!.Errors[0]]);
+                DialogueManager.AddText("MultiworldConnectFailure",
+                    ["LOC_ID_RANDOMIZER_DIALOGUE_TITLE_1", "LOC_ID_RANDOMIZER_DIALOGUE_TITLE_1"],
+                    ["LOC_ID_RANDOMIZER_DIALOGUE_TEXT_1", "LOC_ID_RANDOMIZER_DIALOGUE_TEXT_PURE"]);
 
-                Game.ScreenManager.DialogueScreen.SetDialogue("MultiworldConnectFailure");
+                Game.ScreenManager.DialogueScreen.SetDialogue("MultiworldConnectFailure", failure!.Errors[0]);
                 Game.ScreenManager.DisplayScreen(ScreenType.DIALOGUE, false);
                 return false;
             }
 
+            Password = password;
+
             Status = ConnectionStatus.Ready;
             return true;
         }
-        catch (ArchipelagoSocketClosedException exception)
+        catch (Exception exception)
         {
-            throw;
-        }
-        catch (ArchipelagoServerRejectedPacketException exception)
-        {
-            throw;
+            // Display issue
+            DialogueManager.AddText("MultiworldConnectFailure",
+                ["LOC_ID_RANDOMIZER_DIALOGUE_TITLE_1", "LOC_ID_RANDOMIZER_DIALOGUE_TITLE_1"],
+                ["LOC_ID_RANDOMIZER_DIALOGUE_TEXT_1", "LOC_ID_RANDOMIZER_DIALOGUE_TEXT_PURE"]);
+
+            Game.ScreenManager.DialogueScreen.SetDialogue("MultiworldConnectFailure", "Unable to establish a connection to the server. Did you type the address correctly?");
+            Game.ScreenManager.DisplayScreen(ScreenType.DIALOGUE, false);
+            return false;
         }
     }
 

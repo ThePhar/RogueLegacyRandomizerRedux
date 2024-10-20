@@ -5005,16 +5005,31 @@
   <data name="LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TITLE_1" xml:space="preserve">
     <value>Ready to Connect?</value>
   </data>
+  <data name="LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TITLE_2" xml:space="preserve">
+    <value></value>
+  </data>
   <data name="LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TEXT_1" xml:space="preserve">
     <value>Are you ready to connect to the room?</value>
   </data>
+  <data name="LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TEXT_2" xml:space="preserve">
+    <value>Do you want to reconnect to the last known connection arguments or re-enter them?</value>
+  </data>
   <data name="LOC_ID_RANDOMIZER_TEXT_1" xml:space="preserve">
-    <value>Use Saved</value>
+    <value>Use Last Known</value>
   </data>
   <data name="LOC_ID_RANDOMIZER_TEXT_2" xml:space="preserve">
-    <value>Change</value>
+    <value>Enter Manually</value>
   </data>
   <data name="LOC_ID_RANDOMIZER_TITLE_SCREEN_1" xml:space="preserve">
     <value>Choose a Profile</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_DIALOGUE_TITLE_1" xml:space="preserve">
+    <value>Failed to Connect</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_DIALOGUE_TEXT_PURE" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_DIALOGUE_TEXT_1" xml:space="preserve">
+    <value>Failed to connect to the Archipelago server!</value>
   </data>
 </root>

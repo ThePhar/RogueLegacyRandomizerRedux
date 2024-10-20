@@ -382,35 +382,21 @@ public class ProfileSelectScreen : Screen
             {
                 SoundManager.PlaySound("Map_On");
 
-                Game.GameConfig.ProfileSlot = (byte)(_selectedIndex + 1);
                 var game = ScreenManager.Game as Game;
-                var rcs = ScreenManager as RCScreenManager;
-                Game.SaveConfig();
 
-                if (game!.SaveManager.FileExists(SaveType.Archipelago))
+                if (game!.SaveManager.FileExists(SaveType.Archipelago, (byte)(_selectedIndex + 1)))
                 {
-                    rcs!.DialogueScreen.SetDialogue("MultiworldReconnect");
-                    rcs.DialogueScreen.SetDialogueChoice("ConfirmMultiworld");
-                    rcs.DialogueScreen.SetConfirmEndHandler(this, "Connect", true);
-                    rcs.DialogueScreen.SetCancelEndHandler(this, "ShowConnectionScreen");
-                    rcs.DisplayScreen(ScreenType.DIALOGUE, false);
+                    Game.ScreenManager!.DialogueScreen.SetDialogue("MultiworldReconnect");
+                    Game.ScreenManager.DialogueScreen.SetDialogueChoice("ConfirmMultiworld");
+                    Game.ScreenManager.DialogueScreen.SetConfirmEndHandler(this, "Connect", true);
+                    Game.ScreenManager.DialogueScreen.SetCancelEndHandler(this, "ShowConnectionScreen");
+                    Game.ScreenManager.DisplayScreen(ScreenType.DIALOGUE, false);
                 }
-
-                // if (game!.SaveManager.FileExists(SaveType.PlayerData))
-                // {
-                //     manager!.DisplayScreen(ScreenType.TITLE, true);
-                // }
-                // else
-                // {
-                //     SkillSystem.ResetAllTraits();
-                //     Game.PlayerStats.Dispose();
-                //     Game.PlayerStats = new PlayerStats();
-                //     manager!.Player.Reset();
-                //     Game.ScreenManager.Player.CurrentHealth = Game.PlayerStats.CurrentHealth;
-                //     Game.ScreenManager.Player.CurrentMana = Game.PlayerStats.CurrentMana;
-                //
-                //     manager!.DisplayScreen(ScreenType.RANDOMIZER_MENU, true);
-                // }
+                else
+                {
+                    List<object> objectList = [(byte)_selectedIndex + 1];
+                    Game.ScreenManager.DisplayScreen(ScreenType.RANDOMIZER_MENU, false, objectList);
+                }
             }
 
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_DELETEPROFILE) && _deleteProfileText.Visible)
@@ -488,6 +474,9 @@ public class ProfileSelectScreen : Screen
 
         // Reverting profile slot back to stored slot.
         Game.GameConfig.ProfileSlot = storedProfile;
+
+        // Clear slot name from profile list.
+        (_slotArray[_selectedIndex].GetChildAt(4) as TextObj)!.Text = "";
 
         // Tutorial is bypassed in Rando, so we just use this to clear all values.
         if (runTutorial)

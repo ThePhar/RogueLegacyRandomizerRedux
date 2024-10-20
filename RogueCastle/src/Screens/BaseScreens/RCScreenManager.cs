@@ -411,6 +411,7 @@ public class RCScreenManager(Game game) : ScreenManager(game)
                 AddScreen(_profileSelectScreen, null);
                 break;
             case ScreenType.RANDOMIZER_MENU:
+                _randomizerMenuScreen.PassInData(objList);
                 AddScreen(_randomizerMenuScreen, null);
                 break;
         }

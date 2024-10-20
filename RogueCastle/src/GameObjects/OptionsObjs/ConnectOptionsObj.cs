@@ -20,17 +20,11 @@ public class ConnectOptionsObj(RandomizerMenuScreen parentScreen, string nameLoc
 
                 rcs.DialogueScreen.SetDialogue("MultiworldConnect");
                 rcs.DialogueScreen.SetDialogueChoice("ConfirmTest1");
-                rcs.DialogueScreen.SetConfirmEndHandler(this, "Connect");
+                rcs.DialogueScreen.SetConfirmEndHandler(_parentScreen, "StartConnect");
                 rcs.DialogueScreen.SetCancelEndHandler(this, "Cancel");
                 rcs.DisplayScreen(ScreenType.DIALOGUE, false);
             }
         }
-    }
-
-    public void Connect()
-    {
-        IsActive = false;
-        Game.ScreenManager.DisplayScreen(ScreenType.TITLE, true);
     }
 
     public void Cancel()
