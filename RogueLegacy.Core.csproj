@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyName>RogueLegacy</AssemblyName>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="!Exists('$(SolutionDir)NativeAOT_Console.targets')">
+    <PublishAot>true</PublishAot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <RdXmlFile Include="$(ProjectDir)rd.xml" />
+    <DirectPInvoke Include="SDL3" />
+    <DirectPInvoke Include="FNA3D" />
+    <DirectPInvoke Include="FAudio" />
+    <IlcSatelliteAssembly Include="$(TargetDir)de\RogueLegacy.resources.dll" />
+    <IlcSatelliteAssembly Include="$(TargetDir)es\RogueLegacy.resources.dll" />
+    <IlcSatelliteAssembly Include="$(TargetDir)fr\RogueLegacy.resources.dll" />
+    <IlcSatelliteAssembly Include="$(TargetDir)pl\RogueLegacy.resources.dll" />
+    <IlcSatelliteAssembly Include="$(TargetDir)pt\RogueLegacy.resources.dll" />
+    <IlcSatelliteAssembly Include="$(TargetDir)ru\RogueLegacy.resources.dll" />
+    <IlcSatelliteAssembly Include="$(TargetDir)zh\RogueLegacy.resources.dll" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(OS)' != 'Windows_NT'">
+    <NativeLibrary Include="-lSDL3" />
+    <NativeLibrary Include="-lFNA3D" />
+    <NativeLibrary Include="-lFAudio" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
+    <NativeLibrary Include="SDL3.lib" />
+    <NativeLibrary Include="FNA3D.lib" />
+    <NativeLibrary Include="FAudio.lib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="RogueCastle\Resources\LocStrings.de.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>RogueCastle.Resources.LocStrings.de.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RogueCastle\Resources\LocStrings.es.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>RogueCastle.Resources.LocStrings.es.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RogueCastle\Resources\LocStrings.fr.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>RogueCastle.Resources.LocStrings.fr.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RogueCastle\Resources\LocStrings.pl.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>RogueCastle.Resources.LocStrings.pl.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RogueCastle\Resources\LocStrings.pt.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>RogueCastle.Resources.LocStrings.pt.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RogueCastle\Resources\LocStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <LogicalName>RogueCastle.Resources.LocStrings.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RogueCastle\Resources\LocStrings.ru.resx">
+      <LogicalName>RogueCastle.Resources.LocStrings.ru.resources</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RogueCastle\Resources\LocStrings.zh.resx">
+      <SubType>Designer</SubType>
+      <LogicalName>RogueCastle.Resources.LocStrings.zh.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FNA\FNA.Core.csproj">
+      <Project>{35253CE1-C864-4CD3-8249-4D1319748E8F}</Project>
+      <Name>FNA</Name>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Import Project="$(SolutionDir)NativeAOT_Console.targets" Condition="Exists('$(SolutionDir)NativeAOT_Console.targets')" />
+</Project>

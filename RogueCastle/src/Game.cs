@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -722,7 +722,7 @@ public class Game : Microsoft.Xna.Framework.Game
         {
             _maleChineseNamesLoaded = false;
 
-            using (var sr = new StreamReader(Path.Combine("Content", "HeroNames.txt")))
+            using (var sr = new StreamReader(TitleContainer.OpenStream(Path.Combine(Content.RootDirectory, "HeroNames.txt"))))
             {
                 // A test to make sure no special characters are used in the game.
                 var junicode = Content.Load<SpriteFont>("Fonts\\Junicode");
@@ -828,7 +828,7 @@ public class Game : Microsoft.Xna.Framework.Game
         {
             _femaleChineseNamesLoaded = false;
 
-            using (var sr = new StreamReader(Path.Combine("Content", "HeroineNames.txt")))
+            using (var sr = new StreamReader(TitleContainer.OpenStream(Path.Combine(Content.RootDirectory, "HeroineNames.txt"))))
             {
                 // A test to make sure no special characters are used in the game.
                 var junicode = Content.Load<SpriteFont>("Fonts\\Junicode");

@@ -12,9 +12,21 @@ public static class Program
     public static readonly string OSDir = GetOSDir();
 
     /// <summary>
-    ///     The main entry point for the application.
+    /// The main entry point for the application.
     /// </summary>
+#if NET
+    static void Main(string[] realArgs)
+    {
+        args = realArgs;
+        SDL.SDL_RunApp(0, IntPtr.Zero, RealMain, IntPtr.Zero);
+    }
+
+    static string[] args;
+
+    static int RealMain(int argc, IntPtr argv)
+#else
     private static void Main(string[] args)
+#endif
     {
         Environment.SetEnvironmentVariable("FNA_PLATFORM_BACKEND", "SDL3");
 
@@ -132,6 +144,10 @@ public static class Program
         }
 
         Steamworks.Shutdown();
+        
+#if NET
+        return 0;
+#endif
     }
 
     private static string GetOSDir()
@@ -143,34 +159,32 @@ public static class Program
             case "OpenBSD":
             case "NetBSD":
             {
-                var osDir = Environment.GetEnvironmentVariable("XDG_CONFIG_HOME");
-                if (!string.IsNullOrEmpty(osDir))
+                var homePath = Environment.GetEnvironmentVariable("XDG_CONFIG_HOME");
+                if (!string.IsNullOrEmpty(homePath))
                 {
-                    return Path.Combine(osDir, "RogueLegacyRandomizer");
+                    return Path.Combine(homePath, "RogueLegacyRandomizer");
                 }
 
-                osDir = Environment.GetEnvironmentVariable("HOME");
-                return string.IsNullOrEmpty(osDir)
+                homePath = Environment.GetEnvironmentVariable("HOME");
+                return string.IsNullOrEmpty(homePath)
                     ? "." // Oh, well.
-                    : Path.Combine(osDir, ".config", "RogueLegacyRandomizer");
+                    : Path.Combine(homePath, ".config", "RogueLegacyRandomizer");
 
             }
             case "macOS":
             {
-                var osDir = Environment.GetEnvironmentVariable("HOME");
-                return string.IsNullOrEmpty(osDir)
+                var homePath = Environment.GetEnvironmentVariable("HOME");
+                return string.IsNullOrEmpty(homePath)
                     ? "." // Oh, well.
-                    : Path.Combine(osDir, "Library/Application Support/RogueLegacyRandomizer");
+                    : Path.Combine(homePath, "Library/Application Support/RogueLegacyRandomizer");
             }
 
             case "Windows":
-            {
-                var osDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                return Path.Combine(osDir, "Rogue Legacy Randomizer");
-            }
-
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Rogue Legacy");
+            
+            // Any other unknown platform.
             default:
-                throw new NotSupportedException("Unhandled SDL3 platform!");
+                return SDL.SDL_GetPrefPath("Cellar Door Games", "Rogue Legacy");
         }
     }
 }
