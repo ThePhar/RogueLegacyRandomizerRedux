@@ -498,7 +498,7 @@ public class Game : Microsoft.Xna.Framework.Game
         SpriteLibrary.LoadSpritesheet(Content, @"GameSpritesheets\language3Spritesheet", false);
 
         // Randomizer Specific Sheets
-        SpriteLibrary.LoadSpritesheet(Content, @"RandomizerSpritesheets\randomizerSpritesheet", false);
+        SpriteLibrary.LoadSpritesheet(Content, @"Randomizer\randomizerSpritesheet", false);
     }
 
     public void LoadAllEffects()

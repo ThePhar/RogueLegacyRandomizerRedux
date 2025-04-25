@@ -627,7 +627,11 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-### VisualStudio Patch ###
-# Additional files built by Visual Studio
-
-# End of https://www.toptal.com/developers/gitignore/api/linux,macos,rider,windows,visualstudio,visualstudiocode,dotnetcore,intellij+all
+### Rogue Legacy Assets ###
+Content/Audio
+Content/Fonts
+Content/GameSpritesheets
+Content/Languages
+Content/Levels
+Content/Shaders
+Content/*.txt
