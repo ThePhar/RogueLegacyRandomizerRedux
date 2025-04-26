@@ -5020,9 +5020,6 @@
   <data name="LOC_ID_RANDOMIZER_TEXT_2" xml:space="preserve">
     <value>Enter Manually</value>
   </data>
-  <data name="LOC_ID_RANDOMIZER_TITLE_SCREEN_1" xml:space="preserve">
-    <value>Choose a Profile</value>
-  </data>
   <data name="LOC_ID_RANDOMIZER_DIALOGUE_TITLE_1" xml:space="preserve">
     <value>Failed to Connect</value>
   </data>

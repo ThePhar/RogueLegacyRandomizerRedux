@@ -1,5 +1,4 @@
 ﻿using DS2DEngine;
-using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 
 namespace RogueCastle.GameObjects.OptionsObjs;
@@ -21,19 +20,8 @@ public class ConnectOptionsObj(RandomizerMenuScreen parentScreen, string nameLoc
             base.IsActive = value;
             if (IsActive)
             {
-                var rcs = Game.ScreenManager;
-
-                rcs.DialogueScreen.SetDialogue("MultiworldConnect");
-                rcs.DialogueScreen.SetDialogueChoice("ConfirmTest1");
-                rcs.DialogueScreen.SetConfirmEndHandler(parentScreen, "StartConnect");
-                rcs.DialogueScreen.SetCancelEndHandler(this, "Cancel");
-                rcs.DisplayScreen(ScreenType.DIALOGUE, false);
+                parentScreen.StartConnect();
             }
         }
-    }
-
-    public void Cancel()
-    {
-        IsActive = false;
     }
 }

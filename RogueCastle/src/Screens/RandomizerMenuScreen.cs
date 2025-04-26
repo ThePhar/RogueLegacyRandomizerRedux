@@ -313,7 +313,7 @@ public class RandomizerMenuScreen : Screen
             _password.GetValue);
 
         _contextText.Visible = true;
-        _contextText.Text = "Attempting to connect to...";
+        _contextText.Text = "Attempting to connect to server...";
         _connectOption.IsActive = false;
     }
 

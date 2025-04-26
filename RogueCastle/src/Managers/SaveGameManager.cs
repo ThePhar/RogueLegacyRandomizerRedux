@@ -301,7 +301,7 @@ public class SaveGameManager(Game game)
             case SaveType.Archipelago:
                 if (_storageContainer.FileExists($"Profile{Game.GameConfig.ProfileSlot}/{FileNameArchipelago}"))
                 {
-                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameLineage}");
+                    _storageContainer.DeleteFile($"Profile{Game.GameConfig.ProfileSlot}/{FileNameArchipelago}");
                 }
 
                 break;

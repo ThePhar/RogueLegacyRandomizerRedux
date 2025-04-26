@@ -10,7 +10,7 @@ namespace RogueCastle.Managers;
 
 public class ArchipelagoManager(Game game)
 {
-    private static readonly Version SupportedVersion = new(0, 5, 1);
+    private static readonly Version SupportedVersion = new(0, 6, 2);
     private readonly Game _game = game;
     private DeathLinkService _deathLinkService;
     private ArchipelagoSession _session;

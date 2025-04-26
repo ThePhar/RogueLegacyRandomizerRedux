@@ -320,7 +320,7 @@ public class TitleScreen : Screen
         }
         else if (_startNewLegacy == false)
         {
-            // You have an active character who is not dead. Therefore begin the game like normal.
+            // You have an active character who is not dead. Therefore, begin the game like normal.
             if (_heroIsDead == false)
             {
                 if (Game.PlayerStats.TimesCastleBeaten == 1)
@@ -356,7 +356,7 @@ public class TitleScreen : Screen
         }
         else
         {
-            // No character was found, and the castle was never beaten. Therefore you are starting a new game.
+            // No character was found, and the castle was never beaten. Therefore, you are starting a new game.
             if (_startNewGamePlus == false)
             {
                 _pressStartText2.Text = "LOC_ID_TITLE_SCREEN_4".GetResourceString(true);
@@ -518,6 +518,10 @@ public class TitleScreen : Screen
             //InitializeSaveData();
         }
 
+        // Hide profile select text if we are connected.
+        // todo this should probably be something else
+        _profileSelectKey.Visible = (ScreenManager.Game as Game)!.ArchipelagoManager.Status == ConnectionStatus.Disconnected;
+        
         base.Update(gameTime);
     }
 
@@ -535,27 +539,32 @@ public class TitleScreen : Screen
         {
             if (Game.GlobalInput.JustPressed(InputMapType.MENU_PROFILECARD))
             {
-                (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.PROFILE_CARD, false);
+                (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.PROFILE_CARD, false);
             }
         }
 
         if (Game.GlobalInput.JustPressed(InputMapType.MENU_OPTIONS))
         {
             _optionsEntered = true;
-            var optionsData = new List<object>();
-            optionsData.Add(true);
-            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.OPTIONS, false, optionsData);
+            var optionsData = new List<object> { true };
+            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.OPTIONS, false, optionsData);
         }
 
         if (Game.GlobalInput.JustPressed(InputMapType
                 .MENU_CREDITS)) // && InputManager.Pressed(Keys.LeftAlt, PlayerIndex.One) == false && InputManager.Pressed(Keys.RightAlt, PlayerIndex.One) == false) // Make sure not to load credits if alttabbing.                
         {
-            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.CREDITS, false);
+            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.CREDITS, false);
         }
 
         if (Game.GlobalInput.JustPressed(InputMapType.MENU_PROFILESELECT))
         {
-            (ScreenManager as RCScreenManager).DisplayScreen(ScreenType.PROFILE_SELECT, false);
+            // todo: have this disconnect instead
+            if ((ScreenManager.Game as Game)!.ArchipelagoManager.Status == ConnectionStatus.Ready)
+            {
+                return;
+            }
+            
+            (ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.PROFILE_SELECT, false);
         }
 
         base.HandleInput();
