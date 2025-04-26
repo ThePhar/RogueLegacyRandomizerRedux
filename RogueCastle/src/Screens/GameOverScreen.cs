@@ -281,9 +281,8 @@ public class GameOverScreen : Screen
         Tween.To(_continueText, 0.4f, Linear.EaseNone, "delay", "4", "Opacity", "1");
 
         // Randomizer - Send DeathLink
-        (ScreenManager.Game as Game)!.ArchipelagoManager.SendDeath(Game.PlayerStats.PlayerName,
-            (_dialoguePlate.GetChildAt(1) as TextObj).Text);
-            
+        (ScreenManager.Game as Game)!.ArchipelagoManager.SendDeath((_dialoguePlate.GetChildAt(1) as TextObj).Text);
+
         base.OnEnter();
     }
 

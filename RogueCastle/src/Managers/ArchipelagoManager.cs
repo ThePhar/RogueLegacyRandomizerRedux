@@ -34,6 +34,7 @@ public class ArchipelagoManager(Game game)
         Disconnect();
 
         _session = ArchipelagoSessionFactory.CreateSession(address);
+        _deathLinkService = _session.CreateDeathLinkService();
 
         _session.Socket.ErrorReceived += OnError;
         _session.Socket.PacketReceived += OnPacketReceived;
@@ -48,7 +49,8 @@ public class ArchipelagoManager(Game game)
                 slotname,
                 ItemsHandlingFlags.AllItems,
                 SupportedVersion,
-                password: password);
+                password: password,
+                tags:["NoText"]);
 
             if (!result.Successful)
             {
@@ -97,13 +99,15 @@ public class ArchipelagoManager(Game game)
         _session?.Socket.DisconnectAsync();
     }
 
-    public void SendDeath(string player, string cause)
+    public void SendDeath(string deathMessage)
     {
         if (!_session.Socket.Connected)
         {
             return;
         }
-        
+
+        var player = _session.Players.GetPlayerName(_session.ConnectionInfo.Slot);
+        var cause = $"{player}'s {deathMessage}.";
         _deathLinkService.SendDeathLink(new DeathLink(player, cause));
     }
     
