@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Enums;
-using Archipelago.MultiClient.Net.Exceptions;
 using RogueCastle.GameStructs;
+using RogueCastle.Randomizer;
 
 namespace RogueCastle.Managers;
 
@@ -17,14 +17,13 @@ public class ArchipelagoManager(Game game)
 
     public ConnectionStatus Status { get; private set; }
 
+    public SlotDataV1 SlotData { get; private set; }
+    
     public string Password { get; private set; }
 
     public string SeedName => _session.RoomState.Seed;
-
     public int Slot => _session.Players.ActivePlayer.Slot;
-
     public string GeneratorVersion => _session.RoomState.GeneratorVersion.ToString();
-
     public string Address => _session.Socket.Uri.ToString();
     public string SlotName => _session.Players.ActivePlayer.Name;
 
@@ -65,9 +64,15 @@ public class ArchipelagoManager(Game game)
                 return false;
             }
 
-            Password = password;
 
+            Password = password;
             Status = ConnectionStatus.Ready;
+            var success = result as LoginSuccessful;
+            
+            // todo test for v2
+            SlotData = new SlotDataV1(success!.SlotData);
+            Console.WriteLine(SlotData);
+
             return true;
         }
         catch (Exception exception)
@@ -77,7 +82,8 @@ public class ArchipelagoManager(Game game)
                 ["LOC_ID_RANDOMIZER_DIALOGUE_TITLE_1", "LOC_ID_RANDOMIZER_DIALOGUE_TITLE_1"],
                 ["LOC_ID_RANDOMIZER_DIALOGUE_TEXT_1", "LOC_ID_RANDOMIZER_DIALOGUE_TEXT_PURE"]);
 
-            Game.ScreenManager.DialogueScreen.SetDialogue("MultiworldConnectFailure", "Unable to establish a connection to the server. Did you type the address correctly?");
+            Game.ScreenManager.DialogueScreen.SetDialogue("MultiworldConnectFailure",
+                $"{exception.Message}");
             Game.ScreenManager.DisplayScreen(ScreenType.DIALOGUE, false);
             return false;
         }

@@ -561,11 +561,6 @@ namespace RogueCastle
                 ));
 
             // Randomizer Specific
-            m_dialogDict.Add("MultiworldConnect",
-                new DialogueObj(
-                    ["LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TITLE_1"],
-                    ["LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TEXT_1"]
-                ));
             m_dialogDict.Add("MultiworldReconnect",
                 new DialogueObj(
                     ["LOC_ID_RANDOMIZER_DIALOG_CONNECTION_TITLE_2"],
