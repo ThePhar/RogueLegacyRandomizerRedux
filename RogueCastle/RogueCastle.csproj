@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net48</TargetFramework>
     <LangVersion>default</LangVersion>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -41,4 +42,8 @@
   <ItemGroup>
     <PackageReference Include="Archipelago.MultiClient.Net" Version="6.3.1" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="echo &quot;Deleting old content files...&quot; &amp;&amp;&#xA;rm -rf &quot;$(OutDir)/Content&quot; &amp;&amp;&#xA;echo &quot;Copying content files...&quot; &amp;&amp;&#xA;cp -r &quot;$(ProjectDir)/Content&quot; &quot;$(OutDir)/Content&quot; &amp;&amp;&#xA;echo &quot;Done copying content files!&quot;" />
+  </Target>
 </Project>
