@@ -32,7 +32,6 @@ public class RandomizerMenuScreen : Screen
     private TextInputOptionsObj _slotname;
     private TextInputOptionsObj _password;
     private ToggleOptionsObj _showPassword;
-    private ToggleOptionsObj _showHostname;
     private ConnectOptionsObj _connectOption;
 
     private Task<bool> _connectionSuccess;
@@ -53,14 +52,12 @@ public class RandomizerMenuScreen : Screen
         _hostname = new TextInputOptionsObj("LOC_ID_RANDOMIZER_OPTION_HOSTNAME", "archipelago.gg:38281");
         _slotname = new TextInputOptionsObj("LOC_ID_RANDOMIZER_OPTION_SLOTNAME", "Phar");
         _password = new TextInputOptionsObj("LOC_ID_RANDOMIZER_OPTION_PASSWORD", "");
-        _showHostname = new ToggleOptionsObj("LOC_ID_RANDOMIZER_OPTION_SHOW_HOSTNAME", true);
         _showPassword = new ToggleOptionsObj("LOC_ID_RANDOMIZER_OPTION_SHOW_PASSWORD");
         _connectOption = new ConnectOptionsObj(this, "LOC_ID_RANDOMIZER_OPTION_CONNECT");
 
         _optionsArray.Add(_hostname);
         _optionsArray.Add(_password);
         _optionsArray.Add(_slotname);
-        _optionsArray.Add(_showHostname);
         _optionsArray.Add(_showPassword);
         _optionsArray.Add(null);
         _optionsArray.Add(_connectOption);
@@ -74,7 +71,7 @@ public class RandomizerMenuScreen : Screen
                 continue;
             }
 
-            if (i < 3)
+            if (i < 3 || _optionsArray[i] is ConnectOptionsObj)
             {
                 _optionsArray[i].X = 420 + _optionsBar.Width / 2f;
             }
@@ -82,7 +79,6 @@ public class RandomizerMenuScreen : Screen
             {
                 _optionsArray[i].X = 420 + 15;
             }
-            // _optionsArray[i].Y = 160 + (i * 80);
         }
 
         _title = new TextObj(Game.JunicodeFont)
@@ -271,11 +267,13 @@ public class RandomizerMenuScreen : Screen
 
         // todo probably not the most efficient way to do this, and should be changed later
         _password.Hidden = !_showPassword.Value;
-        _hostname.Hidden = !_showHostname.Value;
 
-        _optionsBar.Position = _selectedOption is TextInputOptionsObj
-            ? new Vector2(_selectedOption.X - _optionsBar.Width / 2f, _selectedOption.Y + 28)
-            : new Vector2(_selectedOption.X - 15, _selectedOption.Y);
+        _optionsBar.Position = _selectedOption switch
+        {
+            TextInputOptionsObj => new Vector2(_selectedOption.X - _optionsBar.Width / 2f, _selectedOption.Y + 28),
+            ConnectOptionsObj   => new Vector2(_selectedOption.X - _optionsBar.Width / 2f, _selectedOption.Y),
+            _                   => new Vector2(_selectedOption.X - 15, _selectedOption.Y),
+        };
 
         if (_connectionSuccess is { IsCompleted: true })
         {
@@ -283,8 +281,6 @@ public class RandomizerMenuScreen : Screen
             if (_connectionSuccess.Result)
             {
                 Game.GameConfig.ProfileSlot = (byte)_profile;
-                var game = ScreenManager.Game as Game;
-                var rcs = ScreenManager as RCScreenManager;
 
                 // Reset stats.
                 SkillSystem.ResetAllTraits();
@@ -417,14 +413,11 @@ public class RandomizerMenuScreen : Screen
             obj?.RefreshTextObjs();
         }
 
-        _contextText.ScaleX = 1;
-        switch (LocaleBuilder.LanguageType)
+        _contextText.ScaleX = LocaleBuilder.LanguageType switch
         {
-            case LanguageType.Russian:
-            case LanguageType.German:
-                _contextText.ScaleX = 0.9f;
-                break;
-        }
+            LanguageType.Russian or LanguageType.German => 0.9f,
+            _                                           => 1,
+        };
 
         base.RefreshTextObjs();
     }

@@ -16,7 +16,7 @@ namespace RogueCastle.Screens;
 
 public class ProfileSelectScreen : Screen
 {
-    private const int SlotCount = 5;
+    private const int SLOT_COUNT = 5;
 
     private KeyIconTextObj _cancelText;
     private KeyIconTextObj _confirmText;
@@ -47,7 +47,7 @@ public class ProfileSelectScreen : Screen
         slotText.Text = "LOC_ID_PROFILE_SEL_SCREEN_1".GetString(slotText);
         slotText.Position = new Vector2(0, -(slotText.Height / 2f));
 
-        for (var i = 0; i < SlotCount; i++)
+        for (var i = 0; i < SLOT_COUNT; i++)
         {
             var iSlotContainer = new ObjContainer { ForceDraw = true };
             var iSlotBackground = new SpriteObj("DialogBox_Sprite");
@@ -133,7 +133,7 @@ public class ProfileSelectScreen : Screen
 
         _profileStats.LoadContent();
 
-        for (var i = 0; i < SlotCount; i++)
+        for (var i = 0; i < SLOT_COUNT; i++)
         {
             CheckSaveHeaders(_slotArray[i], (byte)(i + 1), i == _selectedIndex);
 
@@ -296,7 +296,7 @@ public class ProfileSelectScreen : Screen
 
         _lockControls = true;
 
-        for (var i = 0; i < SlotCount; i++)
+        for (var i = 0; i < SLOT_COUNT; i++)
         {
             TweenOutText(_slotArray[i], 0.05f * (i + 1));
         }
@@ -313,7 +313,7 @@ public class ProfileSelectScreen : Screen
 
     public override void OnExit()
     {
-        for (var i = 0; i < SlotCount; i++)
+        for (var i = 0; i < SLOT_COUNT; i++)
         {
             _slotArray[i].TextureColor = Color.White;
         }
@@ -414,12 +414,17 @@ public class ProfileSelectScreen : Screen
 
     }
 
+    public void ShowConnectionScreen()
+    {
+        
+    }
+
     public override void Draw(GameTime gametime)
     {
         Camera.Begin();
         Camera.Draw(Game.GenericTexture, new Rectangle(0, 0, GlobalEV.SCREEN_WIDTH, GlobalEV.SCREEN_HEIGHT), Color.Black * BackBufferOpacity);
 
-        for (var i = 0; i < SlotCount; i++)
+        for (var i = 0; i < SLOT_COUNT; i++)
         {
             _slotArray[i].Draw(Camera);
         }
@@ -522,7 +527,7 @@ public class ProfileSelectScreen : Screen
 
     public override void RefreshTextObjs()
     {
-        for (var i = 0; i < SlotCount; i++)
+        for (var i = 0; i < SLOT_COUNT; i++)
         {
             CheckSaveHeaders(_slotArray[i], (byte)(i + 1), _selectedIndex + 1 == i + 1);
         }
