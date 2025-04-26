@@ -9,6 +9,7 @@ using Tweener;
 using System.Globalization;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
+using RogueCastle.Screens;
 
 namespace RogueCastle
 {

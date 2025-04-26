@@ -8,6 +8,7 @@ using Tweener.Ease;
 using Tweener;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.GameStructs;
+using RogueCastle.Screens;
 
 namespace RogueCastle
 {

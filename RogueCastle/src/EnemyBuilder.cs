@@ -1,6 +1,7 @@
 ﻿using System;
 using DS2DEngine;
 using RogueCastle.GameStructs;
+using RogueCastle.Screens;
 
 namespace RogueCastle;
 

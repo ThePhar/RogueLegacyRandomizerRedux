@@ -20,6 +20,8 @@ public class ArchipelagoManager(Game game)
     public SlotDataV1 SlotData { get; private set; }
     
     public string Password { get; private set; }
+    
+    public DeathLink QueuedDeathLink { get; private set; }
 
     public string SeedName => _session.RoomState.Seed;
     public int Slot => _session.Players.ActivePlayer.Slot;
@@ -38,6 +40,7 @@ public class ArchipelagoManager(Game game)
 
         _session.Socket.ErrorReceived += OnError;
         _session.Socket.PacketReceived += OnPacketReceived;
+        _deathLinkService.OnDeathLinkReceived += OnDeathLink;
 
         try
         {
@@ -110,6 +113,11 @@ public class ArchipelagoManager(Game game)
         var cause = $"{player}'s {deathMessage}.";
         _deathLinkService.SendDeathLink(new DeathLink(player, cause));
     }
+
+    public void ClearDeath()
+    {
+        QueuedDeathLink = null;
+    }
     
     private static void OnError(Exception exception, string message)
     {
@@ -121,6 +129,11 @@ public class ArchipelagoManager(Game game)
     {
         // TODO: This should probably be removed before a live-version goes out.
         Console.WriteLine(@$"[Packet]: Received a {packet.PacketType} packet.");
+    }
+
+    private void OnDeathLink(DeathLink deathLink)
+    {
+        QueuedDeathLink ??= deathLink;
     }
 }
 

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.LogicActions;
+using RogueCastle.Screens;
 
 namespace RogueCastle
 {

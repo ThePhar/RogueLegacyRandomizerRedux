@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.GameStructs;
 using RogueCastle.Objects;
+using RogueCastle.Screens;
 using Tweener;
 
 namespace RogueCastle

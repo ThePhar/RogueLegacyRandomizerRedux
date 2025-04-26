@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Audio;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.LogicActions;
+using RogueCastle.Screens;
 
 namespace RogueCastle
 {
