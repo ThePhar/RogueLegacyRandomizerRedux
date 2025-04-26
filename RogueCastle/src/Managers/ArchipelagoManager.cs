@@ -71,7 +71,10 @@ public class ArchipelagoManager(Game game)
             
             // todo test for v2
             SlotData = new SlotDataV1(success!.SlotData);
-            Console.WriteLine(SlotData);
+            if (SlotData.DeathLink)
+            {
+                _deathLinkService.EnableDeathLink();
+            }
 
             return true;
         }
@@ -94,6 +97,16 @@ public class ArchipelagoManager(Game game)
         _session?.Socket.DisconnectAsync();
     }
 
+    public void SendDeath(string player, string cause)
+    {
+        if (!_session.Socket.Connected)
+        {
+            return;
+        }
+        
+        _deathLinkService.SendDeathLink(new DeathLink(player, cause));
+    }
+    
     private static void OnError(Exception exception, string message)
     {
         Console.WriteLine(@$"[Error]: ${message}");
