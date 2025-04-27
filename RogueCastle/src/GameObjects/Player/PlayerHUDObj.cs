@@ -1,391 +1,375 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Archipelago.MultiClient.Net.Models;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 
-namespace RogueCastle
-{
-    public class PlayerHUDObj : SpriteObj
-    {
-        private int m_maxBarLength = 360;
+namespace RogueCastle.GameObjects.Player;
 
-        private TextObj m_playerLevelText;
-        private SpriteObj m_coin;
-        private TextObj m_goldText;
+public class PlayerHUDObj : SpriteObj {
+    private const int MAX_BAR_LENGTH = 360;
 
-        private SpriteObj m_hpBar;
-        private TextObj m_hpText;
+    private SpriteObj[] _abilitiesSpriteArray;
+    private SpriteObj _coin;
+    private TextObj _goldText;
+    private SpriteObj _hpBar;
+    private ObjContainer _hpBarContainer;
+    private TextObj _hpText;
+    private SpriteObj _iconHolder1, _iconHolder2;
+    private SpriteObj _mpBar;
+    private ObjContainer _mpBarContainer;
+    private TextObj _mpText;
+    private TextObj _playerLevelText;
+    private SpriteObj _specialItemIcon;
+    private TextObj _spellCost;
+    private SpriteObj _spellIcon;
+    private ItemsReceivedHUD _itemsReceivedHUD;
 
-        private SpriteObj m_mpBar;
-        private TextObj m_mpText;
+    public PlayerHUDObj() : base("PlayerHUDLvlText_Sprite") {
+        ForceDraw = true;
+        ForcedPlayerLevel = -1;
 
-        private SpriteObj[] m_abilitiesSpriteArray;
+        _playerLevelText = new TextObj();
+        _playerLevelText.Text = Game.PlayerStats.CurrentLevel.ToString();
+        _playerLevelText.Font = Game.PlayerLevelFont;
 
-        private ObjContainer m_hpBarContainer;
-        private ObjContainer m_mpBarContainer;
+        _coin = new SpriteObj("PlayerUICoin_Sprite") { ForceDraw = true };
+        _goldText = new TextObj {
+            Text = "0",
+            Font = Game.GoldFont,
+            FontSize = 25,
+        };
+        _hpBar = new SpriteObj("HPBar_Sprite") { ForceDraw = true };
+        _mpBar = new SpriteObj("MPBar_Sprite") { ForceDraw = true };
+        _hpText = new TextObj(Game.JunicodeFont) {
+            FontSize = 8,
+            DropShadow = new Vector2(1, 1),
+            ForceDraw = true,
+        };
+        _mpText = new TextObj(Game.JunicodeFont) {
+            FontSize = 8,
+            DropShadow = new Vector2(1, 1),
+            ForceDraw = true,
+        };
 
-        private SpriteObj m_specialItemIcon;
-        private SpriteObj m_spellIcon;
-        private TextObj m_spellCost;
+        _abilitiesSpriteArray = new SpriteObj[5]; // Can only have 5 abilities equipped at a time.
+        var startPos = new Vector2(130, 690);
+        const int xOffset = 35;
+        for (var i = 0; i < _abilitiesSpriteArray.Length; i++) {
+            _abilitiesSpriteArray[i] = new SpriteObj("Blank_Sprite") {
+                ForceDraw = true,
+                Position = startPos,
+                Scale = new Vector2(0.5f, 0.5f),
+            };
+            startPos.X += xOffset;
+        }
 
-        private SpriteObj m_iconHolder1, m_iconHolder2;
+        _hpBarContainer = new ObjContainer("PlayerHUDHPBar_Character") { ForceDraw = true };
+        _mpBarContainer = new ObjContainer("PlayerHUDMPBar_Character") { ForceDraw = true };
+        _itemsReceivedHUD = new ItemsReceivedHUD { ForceDraw = true };
+        _specialItemIcon = new SpriteObj("Blank_Sprite") {
+            ForceDraw = true,
+            OutlineWidth = 1,
+            Scale = new Vector2(1.7f, 1.7f),
+            Visible = false,
+        };
+        _spellIcon = new SpriteObj(SpellEV.Icon(SpellType.NONE)) {
+            ForceDraw = true,
+            OutlineWidth = 1,
+            Visible = false,
+        };
+        _iconHolder1 = new SpriteObj("BlacksmithUI_IconBG_Sprite") {
+            ForceDraw = true,
+            Opacity = 0.5f,
+            Scale = new Vector2(0.8f, 0.8f),
+        };
+        _iconHolder2 = _iconHolder1.Clone() as SpriteObj;
 
-        public bool ShowBarsOnly { get; set; }
+        _spellCost = new TextObj(Game.JunicodeFont) {
+            Align = Types.TextAlign.Centre,
+            ForceDraw = true,
+            OutlineWidth = 2,
+            FontSize = 8,
+            Visible = false,
+        };
 
-        public int forcedPlayerLevel { get; set; }
+        UpdateSpecialItemIcon();
+        UpdateSpellIcon();
+    }
 
-        public PlayerHUDObj() :
-            base("PlayerHUDLvlText_Sprite")
-        {
-            this.ForceDraw = true;
-            forcedPlayerLevel = -1;
+    public bool ShowBarsOnly { get; set; }
 
-            m_playerLevelText = new TextObj();
-            m_playerLevelText.Text = Game.PlayerStats.CurrentLevel.ToString();
-            m_playerLevelText.Font = Game.PlayerLevelFont;
+    public int ForcedPlayerLevel { get; set; }
 
-            m_coin = new SpriteObj("PlayerUICoin_Sprite");
-            m_coin.ForceDraw = true;
+    public void SetPosition(Vector2 position) {
+        SpriteObj mpBar, hpBar;
+        ObjContainer mpContainer, hpContainer;
 
-            m_goldText = new TextObj();
-            m_goldText.Text = "0";
-            m_goldText.Font = Game.GoldFont;
-            m_goldText.FontSize = 25;
+        if (Game.PlayerStats.HasTrait(TraitType.DEXTROCARDIA)) {
+            mpBar = _hpBar;
+            hpBar = _mpBar;
+            mpContainer = _hpBarContainer;
+            hpContainer = _mpBarContainer;
+        } else {
+            mpBar = _mpBar;
+            hpBar = _hpBar;
+            mpContainer = _mpBarContainer;
+            hpContainer = _hpBarContainer;
+        }
 
-            m_hpBar = new SpriteObj("HPBar_Sprite");
-            m_hpBar.ForceDraw = true;
+        Position = position;
+        mpBar.Position = new Vector2(X + 7, Y + 60);
+        hpBar.Position = new Vector2(X + 8, Y + 29);
+        _playerLevelText.Position = new Vector2(X + 30, Y - 20);
 
-            m_mpBar = new SpriteObj("MPBar_Sprite");
-            m_mpBar.ForceDraw = true;
+        if (Game.PlayerStats.HasTrait(TraitType.DEXTROCARDIA)) {
+            _mpText.Position = new Vector2(X + 5, Y + 16);
+            _mpText.X += 8;
 
-            m_hpText = new TextObj(Game.JunicodeFont);
-            m_hpText.FontSize = 8;
-            m_hpText.DropShadow = new Vector2(1, 1);
-            m_hpText.ForceDraw = true;
+            _hpText.Position = _mpText.Position;
+            _hpText.Y += 28;
+        } else {
+            _hpText.Position = new Vector2(X + 5, Y + 16);
+            _hpText.X += 8;
+            _hpText.Y += 5;
 
-            m_mpText = new TextObj(Game.JunicodeFont);
-            m_mpText.FontSize = 8;
-            m_mpText.DropShadow = new Vector2(1, 1);
-            m_mpText.ForceDraw = true;
+            _mpText.Position = _hpText.Position;
+            _mpText.Y += 30;
+        }
 
-            m_abilitiesSpriteArray = new SpriteObj[5]; // Can only have 5 abilities equipped at a time.
-            Vector2 startPos = new Vector2(130, 690);
-            int xOffset = 35;
-            for (int i = 0; i < m_abilitiesSpriteArray.Length; i++)
-            {
-                m_abilitiesSpriteArray[i] = new SpriteObj("Blank_Sprite");
-                m_abilitiesSpriteArray[i].ForceDraw = true;
-                m_abilitiesSpriteArray[i].Position = startPos;
-                m_abilitiesSpriteArray[i].Scale = new Vector2(0.5f, 0.5f);
-                startPos.X += xOffset;
+        hpContainer.Position = new Vector2(X, Y + 17);
+        hpBar.Position = hpBar == _hpBar
+            ? new Vector2(hpContainer.X + 2, hpContainer.Y + 7)
+            : new Vector2(hpContainer.X + 2, hpContainer.Y + 6); // Small hack to properly align dextrocardia
+
+        mpContainer.Position = new Vector2(X, hpContainer.Bounds.Bottom);
+        mpBar.Position = mpBar == _mpBar
+            ? new Vector2(mpContainer.X + 2, mpContainer.Y + 6)
+            : new Vector2(mpContainer.X + 2, mpContainer.Y + 7); // Small hack to properly align dextrocardia
+
+        _coin.Position = new Vector2(X, mpContainer.Bounds.Bottom + 2);
+        _goldText.Position = new Vector2(_coin.X + 28, _coin.Y - 2);
+        _iconHolder1.Position = new Vector2(_coin.X + 25, _coin.Y + 60);
+        _iconHolder2.Position = new Vector2(_iconHolder1.X + 55, _iconHolder1.Y);
+        _spellIcon.Position = _iconHolder1.Position;
+        _specialItemIcon.Position = _iconHolder2.Position;
+        _spellCost.Position = new Vector2(_spellIcon.X, _spellIcon.Bounds.Bottom + 10);
+
+        // Received items view goes on the other side, just below where the mini map would be.
+        _itemsReceivedHUD.Position = new Vector2(1080, 84);
+        _itemsReceivedHUD.AnchorX = 200;
+    }
+
+    public void Update(PlayerObj player) {
+        var playerLevel = Game.PlayerStats.CurrentLevel;
+        if (playerLevel < 0) {
+            playerLevel = 0;
+        }
+
+        if (ForcedPlayerLevel >= 0) {
+            playerLevel = ForcedPlayerLevel;
+        }
+
+        _playerLevelText.Text = playerLevel.ToString();
+
+        var playerGold = Game.PlayerStats.Gold;
+        if (playerGold < 0) {
+            playerGold = 0;
+        }
+
+        _goldText.Text = playerGold.ToString();
+
+        _hpText.Text = player.CurrentHealth + "/" + player.MaxHealth;
+        _mpText.Text = player.CurrentMana + "/" + player.MaxMana;
+
+        UpdatePlayerHP(player);
+        UpdatePlayerMP(player);
+
+        _itemsReceivedHUD.Update();
+    }
+
+    private void UpdatePlayerHP(PlayerObj player) {
+        // Each piece is 32 pixels in width.
+        // Total bar length is 88;
+        var hpBarIncreaseAmount = player.MaxHealth - player.BaseHealth; // The amount of bonus HP the player has compared to his base health.
+        var hpPercent = player.CurrentHealth / (float)player.MaxHealth; // The current percent of health player has compared to his max health.
+
+        var hpBarIncreaseWidth = (int)(88 + (hpBarIncreaseAmount / 5f));
+        if (hpBarIncreaseWidth > MAX_BAR_LENGTH) {
+            hpBarIncreaseWidth = MAX_BAR_LENGTH;
+        }
+
+        var midBarScaleX = (hpBarIncreaseWidth - 28 - 28) / 32f;
+        _hpBarContainer.GetChildAt(1).ScaleX = midBarScaleX;
+        _hpBarContainer.GetChildAt(2).X = _hpBarContainer.GetChildAt(1).Bounds.Right;
+        _hpBarContainer.CalculateBounds();
+
+        _hpBar.ScaleX = 1;
+        _hpBar.ScaleX = (_hpBarContainer.Width - 8) / (float)_hpBar.Width * hpPercent;
+    }
+
+    private void UpdatePlayerMP(PlayerObj player) {
+        var mpBarIncreaseAmount = (int)(player.MaxMana - player.BaseMana);
+        var mpPercent = player.CurrentMana / player.MaxMana;
+
+        var mpBarIncreaseWidth = (int)(88 + (mpBarIncreaseAmount / 5f));
+        if (mpBarIncreaseWidth > MAX_BAR_LENGTH) {
+            mpBarIncreaseWidth = MAX_BAR_LENGTH;
+        }
+
+        var midBarScaleX = (mpBarIncreaseWidth - 28 - 28) / 32f;
+        _mpBarContainer.GetChildAt(1).ScaleX = midBarScaleX;
+        _mpBarContainer.GetChildAt(2).X = _mpBarContainer.GetChildAt(1).Bounds.Right;
+        _mpBarContainer.CalculateBounds();
+
+        _mpBar.ScaleX = 1;
+        _mpBar.ScaleX = (_mpBarContainer.Width - 8) / (float)_mpBar.Width * mpPercent;
+    }
+
+    public void UpdatePlayerLevel() {
+        _playerLevelText.Text = Game.PlayerStats.CurrentLevel.ToString();
+    }
+
+    public void UpdateAbilityIcons() {
+        foreach (var sprite in _abilitiesSpriteArray) {
+            sprite.ChangeSprite("Blank_Sprite"); // Zeroing out each sprite.
+        }
+
+        var spriteArrayIndex = 0;
+        foreach (var index in Game.PlayerStats.GetEquippedRuneArray) {
+            if (index == -1) {
+                continue;
             }
 
-            m_hpBarContainer = new ObjContainer("PlayerHUDHPBar_Character");
-            m_hpBarContainer.ForceDraw = true;
+            _abilitiesSpriteArray[spriteArrayIndex].ChangeSprite(EquipmentAbilityType.Icon(index));
+            spriteArrayIndex++;
+        }
+    }
 
-            m_mpBarContainer = new ObjContainer("PlayerHUDMPBar_Character");
-            m_mpBarContainer.ForceDraw = true;
-
-            m_specialItemIcon = new SpriteObj("Blank_Sprite");
-            m_specialItemIcon.ForceDraw = true;
-            m_specialItemIcon.OutlineWidth = 1;
-            m_specialItemIcon.Scale = new Vector2(1.7f, 1.7f);
-            m_specialItemIcon.Visible = false;
-
-            m_spellIcon = new SpriteObj(SpellEV.Icon(SpellType.NONE));
-            m_spellIcon.ForceDraw = true;
-            m_spellIcon.OutlineWidth = 1;
-            m_spellIcon.Visible = false;
-
-            m_iconHolder1 = new SpriteObj("BlacksmithUI_IconBG_Sprite");
-            m_iconHolder1.ForceDraw = true;
-            m_iconHolder1.Opacity = 0.5f;
-            m_iconHolder1.Scale = new Vector2(0.8f, 0.8f);
-            m_iconHolder2 = m_iconHolder1.Clone() as SpriteObj;
-
-            m_spellCost = new TextObj(Game.JunicodeFont);
-            m_spellCost.Align = Types.TextAlign.Centre;
-            m_spellCost.ForceDraw = true;
-            m_spellCost.OutlineWidth = 2;
-            m_spellCost.FontSize = 8;
-            m_spellCost.Visible = false;
-
-            UpdateSpecialItemIcon();
-            UpdateSpellIcon();
+    public void UpdateSpecialItemIcon() {
+        _specialItemIcon.Visible = false;
+        _iconHolder2.Opacity = 0.5f;
+        if (Game.PlayerStats.SpecialItem == SpecialItemType.NONE) {
+            return;
         }
 
-        public void SetPosition(Vector2 position)
-        {
-            SpriteObj mpBar, hpBar;
-            ObjContainer mpContainer, hpContainer;
+        _specialItemIcon.Visible = true;
+        _specialItemIcon.ChangeSprite(SpecialItemType.SpriteName(Game.PlayerStats.SpecialItem));
+        _iconHolder2.Opacity = 1;
+    }
 
-            if (Game.PlayerStats.HasTrait(TraitType.DEXTROCARDIA))
-            {
-                mpBar = m_hpBar;
-                hpBar = m_mpBar;
-                mpContainer = m_hpBarContainer;
-                hpContainer = m_mpBarContainer;
-            }
-            else
-            {
-                mpBar = m_mpBar;
-                hpBar = m_hpBar;
-                mpContainer = m_mpBarContainer;
-                hpContainer = m_hpBarContainer;
-            }
+    public void UpdateSpellIcon() {
+        _spellIcon.Visible = false;
+        _iconHolder1.Opacity = 0.5f;
+        _spellCost.Visible = false;
 
-            this.Position = position;
-            mpBar.Position = new Vector2(this.X + 7, this.Y + 60);
-            hpBar.Position = new Vector2(this.X + 8, this.Y + 29);
-            m_playerLevelText.Position = new Vector2(this.X + 30, this.Y - 20);
+        if (Game.PlayerStats.Spell == SpellType.NONE) {
+            return;
+        }
 
-            if (Game.PlayerStats.HasTrait(TraitType.DEXTROCARDIA))
-            {
-                m_mpText.Position = new Vector2(this.X + 5, this.Y + 16);
-                m_mpText.X += 8;
+        _spellIcon.ChangeSprite(SpellEV.Icon(Game.PlayerStats.Spell));
+        _spellIcon.Visible = true;
+        _iconHolder1.Opacity = 1;
+        _spellCost.ChangeFontNoDefault(_spellCost.GetLanguageFont());
+        _spellCost.Text = (int)(SpellEV.GetManaCost(Game.PlayerStats.Spell) * (1 - SkillSystem.GetSkill(SkillType.ManaCostDown).ModifierAmount)) + " " + "LOC_ID_SKILL_SCREEN_15".GetString(null);
+        _spellCost.Visible = true;
+    }
 
-                m_hpText.Position = m_mpText.Position;
-                m_hpText.Y += 28;
-            }
-            else
-            {
-                m_hpText.Position = new Vector2(this.X + 5, this.Y + 16);
-                m_hpText.X += 8;
-                m_hpText.Y += 5;
+    public void AddReceivedItem(int type, ItemInfo item, int sender, params object[] args) {
+        _itemsReceivedHUD.Elements.Add(new ItemsReceivedElement(_itemsReceivedHUD, type, item, sender, args));
+    }
 
-                m_mpText.Position = m_hpText.Position;
-                m_mpText.Y += 30;
+    public override void Draw(Camera2D camera) {
+        if (!Visible) {
+            return;
+        }
+
+        if (ShowBarsOnly == false) {
+            base.Draw(camera);
+            _coin.Draw(camera);
+
+            _playerLevelText.Draw(camera);
+            _goldText.Draw(camera);
+
+            camera.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
+            foreach (var sprite in _abilitiesSpriteArray) {
+                sprite.Draw(camera);
             }
 
-            hpContainer.Position = new Vector2(this.X, this.Y + 17);
-            if (hpBar == m_hpBar)
-                hpBar.Position = new Vector2(hpContainer.X + 2, hpContainer.Y + 7); // Small hack to properly align dextrocardia
-            else
-                hpBar.Position = new Vector2(hpContainer.X + 2, hpContainer.Y + 6);
+            _iconHolder1.Draw(camera);
+            _iconHolder2.Draw(camera);
+            _spellIcon.Draw(camera);
+            _specialItemIcon.Draw(camera);
 
-            mpContainer.Position = new Vector2(this.X, hpContainer.Bounds.Bottom);
-            if (mpBar == m_mpBar)
-                mpBar.Position = new Vector2(mpContainer.X + 2, mpContainer.Y + 6);
-            else
-                mpBar.Position = new Vector2(mpContainer.X + 2, mpContainer.Y + 7); // Small hack to properly align dextrocardia
-
-            m_coin.Position = new Vector2(this.X, mpContainer.Bounds.Bottom + 2);
-            m_goldText.Position = new Vector2(m_coin.X + 28, m_coin.Y - 2);
-
-
-            m_iconHolder1.Position = new Vector2(m_coin.X + 25, m_coin.Y + 60);
-            m_iconHolder2.Position = new Vector2(m_iconHolder1.X + 55, m_iconHolder1.Y);
-
-            m_spellIcon.Position = m_iconHolder1.Position;
-            m_specialItemIcon.Position = m_iconHolder2.Position;
-            m_spellCost.Position = new Vector2(m_spellIcon.X, m_spellIcon.Bounds.Bottom + 10);
+            camera.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
+            _spellCost.Draw(camera);
         }
 
-        public void Update(PlayerObj player)
-        {
-            int playerLevel = Game.PlayerStats.CurrentLevel;
-            if (playerLevel < 0)
-                playerLevel = 0;
-            if (forcedPlayerLevel >= 0)
-                playerLevel = forcedPlayerLevel;
-            m_playerLevelText.Text = playerLevel.ToString();
-            //m_playerLevelText.Text = Game.PlayerStats.CurrentLevel.ToString();
-
-            int playerGold = Game.PlayerStats.Gold;
-            if (playerGold < 0)
-                playerGold = 0;
-            m_goldText.Text = playerGold.ToString();
-            //m_goldText.Text = Game.PlayerStats.Gold.ToString();
-
-            m_hpText.Text = (player.CurrentHealth + "/" + player.MaxHealth);
-            m_mpText.Text = (player.CurrentMana + "/" + player.MaxMana);
-
-            UpdatePlayerHP(player);
-            UpdatePlayerMP(player);
+        _mpBar.Draw(camera);
+        _mpText.Draw(camera);
+        if (!Game.PlayerStats.HasTrait(TraitType.CIP)) {
+            _hpBar.Draw(camera);
+            _hpText.Draw(camera);
         }
 
-        private void UpdatePlayerHP(PlayerObj player)
-        {
-            // Each piece is 32 pixels in width.
-            // Total bar length is 88;
-            int hpBarIncreaseAmount = player.MaxHealth - player.BaseHealth; // The amount of bonus HP the player has compared to his base health.
-            float hpPercent = player.CurrentHealth / (float)player.MaxHealth; // The current percent of health player has compared to his max health.
+        _mpBarContainer.Draw(camera);
+        _hpBarContainer.Draw(camera);
+        _itemsReceivedHUD.Draw(camera);
+    }
 
-            int hpBarIncreaseWidth = (int)(88 + (hpBarIncreaseAmount / 5f));
-            if (hpBarIncreaseWidth > m_maxBarLength)
-                hpBarIncreaseWidth = m_maxBarLength;
-            float midBarScaleX = (hpBarIncreaseWidth - 28 - 28) / 32f;
-            m_hpBarContainer.GetChildAt(1).ScaleX = midBarScaleX;
-            m_hpBarContainer.GetChildAt(2).X = m_hpBarContainer.GetChildAt(1).Bounds.Right;
-            m_hpBarContainer.CalculateBounds();
-
-            m_hpBar.ScaleX = 1;
-            m_hpBar.ScaleX = ((m_hpBarContainer.Width - 8) / (float)m_hpBar.Width) * hpPercent;
+    public void RefreshTextObjs() {
+        if (Game.PlayerStats.Spell == SpellType.NONE) {
+            return;
         }
 
-        private void UpdatePlayerMP(PlayerObj player)
-        {
-            int mpBarIncreaseAmount = (int)(player.MaxMana - player.BaseMana);
-            float mpPercent = player.CurrentMana / player.MaxMana;
+        _spellCost.ChangeFontNoDefault(_spellCost.GetLanguageFont());
+        _spellCost.Text = (int)(SpellEV.GetManaCost(Game.PlayerStats.Spell) * (1 - SkillSystem.GetSkill(SkillType.ManaCostDown).ModifierAmount)) + " " + "LOC_ID_SKILL_SCREEN_15".GetString(null);
+    }
 
-            int mpBarIncreaseWidth = (int)(88 + (mpBarIncreaseAmount / 5f));
-            if (mpBarIncreaseWidth > m_maxBarLength)
-                mpBarIncreaseWidth = m_maxBarLength;
-            float midBarScaleX = (mpBarIncreaseWidth - 28 - 28) / 32f;
-            m_mpBarContainer.GetChildAt(1).ScaleX = midBarScaleX;
-            m_mpBarContainer.GetChildAt(2).X = m_mpBarContainer.GetChildAt(1).Bounds.Right;
-            m_mpBarContainer.CalculateBounds();
-
-            m_mpBar.ScaleX = 1;
-            m_mpBar.ScaleX = ((m_mpBarContainer.Width - 8) / (float)m_mpBar.Width) * mpPercent;
+    public override void Dispose() {
+        if (IsDisposed) {
+            return;
         }
 
-        public void UpdatePlayerLevel()
-        {
-            m_playerLevelText.Text = Game.PlayerStats.CurrentLevel.ToString();
+        foreach (var sprite in _abilitiesSpriteArray) {
+            sprite.Dispose();
         }
 
-        public void UpdateAbilityIcons()
-        {
-            foreach (SpriteObj sprite in m_abilitiesSpriteArray)
-                sprite.ChangeSprite("Blank_Sprite"); // Zeroing out each sprite.
+        Array.Clear(_abilitiesSpriteArray, 0, _abilitiesSpriteArray.Length);
+        _abilitiesSpriteArray = null;
 
-            int spriteArrayIndex = 0;
-            foreach (sbyte index in Game.PlayerStats.GetEquippedRuneArray)
-            {
-                if (index != -1)
-                {
-                    m_abilitiesSpriteArray[spriteArrayIndex].ChangeSprite(EquipmentAbilityType.Icon(index));
-                    spriteArrayIndex++;
-                }
-            }
-        }
-
-        public void UpdateSpecialItemIcon()
-        {
-            m_specialItemIcon.Visible = false;
-            m_iconHolder2.Opacity = 0.5f;
-            if (Game.PlayerStats.SpecialItem != SpecialItemType.NONE)
-            {
-                m_specialItemIcon.Visible = true;
-                m_specialItemIcon.ChangeSprite(SpecialItemType.SpriteName(Game.PlayerStats.SpecialItem));
-                m_iconHolder2.Opacity = 1;
-            }
-        }
-
-        public void UpdateSpellIcon()
-        {
-            m_spellIcon.Visible = false;
-            m_iconHolder1.Opacity = 0.5f;
-            m_spellCost.Visible = false;
-
-            if (Game.PlayerStats.Spell != SpellType.NONE)
-            {
-                m_spellIcon.ChangeSprite(SpellEV.Icon(Game.PlayerStats.Spell));
-                m_spellIcon.Visible = true;
-                m_iconHolder1.Opacity = 1;
-                m_spellCost.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_spellCost));
-                m_spellCost.Text = (int)(SpellEV.GetManaCost(Game.PlayerStats.Spell) * (1 - SkillSystem.GetSkill(SkillType.ManaCostDown).ModifierAmount)) + " " + LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_15", null);
-                m_spellCost.Visible = true;
-            }
-        }
-
-        public override void Draw(Camera2D camera)
-        {
-            if (this.Visible == true)
-            {
-                if (ShowBarsOnly == false)
-                {
-                    base.Draw(camera);
-                    m_coin.Draw(camera);
-
-                    m_playerLevelText.Draw(camera);
-                    m_goldText.Draw(camera);
-
-                    camera.GraphicsDevice.SamplerStates[0] = SamplerState.PointClamp;
-                    foreach (SpriteObj sprite in m_abilitiesSpriteArray)
-                        sprite.Draw(camera);
-
-                    m_iconHolder1.Draw(camera);
-                    m_iconHolder2.Draw(camera);
-                    m_spellIcon.Draw(camera);
-                    m_specialItemIcon.Draw(camera);
-
-                    camera.GraphicsDevice.SamplerStates[0] = SamplerState.LinearClamp;
-                    m_spellCost.Draw(camera);
-                }
-
-                m_mpBar.Draw(camera);
-                m_mpText.Draw(camera);
-                if (!Game.PlayerStats.HasTrait(TraitType.CIP))
-                {
-                    m_hpBar.Draw(camera);
-                    m_hpText.Draw(camera);
-                }
-
-                m_mpBarContainer.Draw(camera);
-                m_hpBarContainer.Draw(camera);
-            }
-        }
-
-        public void RefreshTextObjs()
-        {
-            if (Game.PlayerStats.Spell != SpellType.NONE)
-            {
-                m_spellCost.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(m_spellCost));
-                m_spellCost.Text = (int)(SpellEV.GetManaCost(Game.PlayerStats.Spell) * (1 - SkillSystem.GetSkill(SkillType.ManaCostDown).ModifierAmount)) + " " + LocaleBuilder.GetString("LOC_ID_SKILL_SCREEN_15", null);
-            }
-        }
-
-        public override void Dispose()
-        {
-            if (IsDisposed == false)
-            {
-                // Done
-                foreach (SpriteObj sprite in m_abilitiesSpriteArray)
-                    sprite.Dispose();
-                Array.Clear(m_abilitiesSpriteArray, 0, m_abilitiesSpriteArray.Length);
-                m_abilitiesSpriteArray = null;
-
-                m_coin.Dispose();
-                m_coin = null;
-                m_mpBar.Dispose();
-                m_mpBar = null;
-                m_hpBar.Dispose();
-                m_hpBar = null;
-                m_playerLevelText.Dispose();
-                m_playerLevelText = null;
-                m_goldText.Dispose();
-                m_goldText = null;
-                m_hpText.Dispose();
-                m_hpText = null;
-                m_mpText.Dispose();
-                m_mpText = null;
-
-                m_hpBarContainer.Dispose();
-                m_hpBarContainer = null;
-                m_mpBarContainer.Dispose();
-                m_mpBarContainer = null;
-
-                m_specialItemIcon.Dispose();
-                m_specialItemIcon = null;
-                m_spellIcon.Dispose();
-                m_spellIcon = null;
-
-                m_spellCost.Dispose();
-                m_spellCost = null;
-
-                m_iconHolder1.Dispose();
-                m_iconHolder1 = null;
-                m_iconHolder2.Dispose();
-                m_iconHolder2 = null;
-                base.Dispose();
-            }
-        }
+        _coin.Dispose();
+        _coin = null;
+        _mpBar.Dispose();
+        _mpBar = null;
+        _hpBar.Dispose();
+        _hpBar = null;
+        _playerLevelText.Dispose();
+        _playerLevelText = null;
+        _goldText.Dispose();
+        _goldText = null;
+        _hpText.Dispose();
+        _hpText = null;
+        _mpText.Dispose();
+        _mpText = null;
+        _hpBarContainer.Dispose();
+        _hpBarContainer = null;
+        _mpBarContainer.Dispose();
+        _mpBarContainer = null;
+        _specialItemIcon.Dispose();
+        _specialItemIcon = null;
+        _spellIcon.Dispose();
+        _spellIcon = null;
+        _spellCost.Dispose();
+        _spellCost = null;
+        _iconHolder1.Dispose();
+        _iconHolder1 = null;
+        _iconHolder2.Dispose();
+        _iconHolder2 = null;
+        _itemsReceivedHUD.Dispose();
+        _itemsReceivedHUD = null;
+        base.Dispose();
     }
 }

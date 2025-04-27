@@ -105,7 +105,7 @@ public class Game : Microsoft.Xna.Framework.Game
         Window.Title = "Rogue Legacy Randomizer Redux";
         ScreenManager = new RCScreenManager(this);
         SaveManager = new SaveGameManager(this);
-        ArchipelagoManager = new ArchipelagoManager(this);
+        ArchipelagoManager = new ArchipelagoManager();
 
         IsFixedTimeStep = false;
         Graphics.SynchronizeWithVerticalRetrace = !LevelEV.ShowFps;

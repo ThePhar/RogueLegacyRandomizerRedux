@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using DS2DEngine;
+using InputSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Tweener;
-using Tweener.Ease;
-using InputSystem;
 using Microsoft.Xna.Framework.Input;
-using System.Text.RegularExpressions;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameObjects.Player;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens.BaseScreens;
+using Tweener;
+using Tweener.Ease;
 
 namespace RogueCastle
 {

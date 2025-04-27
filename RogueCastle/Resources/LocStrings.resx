@@ -5029,4 +5029,10 @@
   <data name="LOC_ID_GAME_OVER_SCREEN_10_NEW" xml:space="preserve">
     <value>Received a mysterious DeathLink from {0}...</value>
   </data>
+  <data name="LOC_ID_RANDOMIZER_RECEIVED_SELF" xml:space="preserve">
+    <value>Received from yourself!</value>
+  </data>
+  <data name="LOC_ID_RANDOMIZER_RECEIVED_OTHER" xml:space="preserve">
+    <value>Received from {0}!</value>
+  </data>
 </root>

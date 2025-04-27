@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameObjects.Player;
 using RogueCastle.GameObjects.RoomObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
@@ -1799,153 +1800,116 @@ public class ProceduralLevelScreen : Screen
 
     public override void Update(GameTime gameTime)
     {
-        //if (InputManager.JustPressed(Keys.L, PlayerIndex.One))
-        //{
-        //    if (Camera.Zoom != 2)
-        //        Camera.Zoom = 2;
-        //    else
-        //        Camera.Zoom = 1;
-        //}
-        //if (InputManager.JustPressed(Keys.K, PlayerIndex.One))
-        //{
-        //    if (Camera.Zoom != 0.5)
-        //        Camera.Zoom = 0.5f;
-        //    else
-        //        Camera.Zoom = 1;
-        //}
-
-        //if (InputManager.JustPressed(Keys.B, null))
-        //    this.ResetEnemyPositions();
-
         var elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
         _projectileIconPool.Update(Camera);
 
-        if (IsPaused == false)
+        if (IsPaused) {
+            base.Update(gameTime);
+            return;
+        }
+
+        var elapsedTotalHours = (float)gameTime.ElapsedGameTime.TotalHours;
+        if (elapsedTotalHours <= 0) // This is a check to ensure total GameTime is always incremented.
         {
-            //TotalGameTimeHours = (float)gameTime.TotalGameTime.TotalHours;
-            var elapsedTotalHours = (float)gameTime.ElapsedGameTime.TotalHours;
-            if (elapsedTotalHours <= 0) // This is a check to ensure total GameTime is always incremented.
-            {
-                elapsedTotalHours = _fakeElapsedTotalHour;
-            }
+            elapsedTotalHours = _fakeElapsedTotalHour;
+        }
 
-            Game.HoursPlayedSinceLastSave += elapsedTotalHours;
-
-            _sky.Update(gameTime);
-
-            if (_enemyPauseDuration > 0)
-            {
-                _enemyPauseDuration -= elapsed;
-                if (_enemyPauseDuration <= 0)
-                {
-                    StopTimeStop();
+        if (!Game.PlayerStats.IsDead) {
+            // Handle incoming items.
+            while (!Program.Game.ArchipelagoManager.ItemQueue.IsEmpty) {
+                if (Program.Game.ArchipelagoManager.ItemQueue.TryDequeue(out var item)) {
+                    _playerHUD.AddReceivedItem(0, item, item.Player);
                 }
             }
+        }
 
-            CurrentRoom.Update(gameTime);
+        Game.HoursPlayedSinceLastSave += elapsedTotalHours;
 
-            if (Player != null)
+        _sky.Update(gameTime);
+
+        if (_enemyPauseDuration > 0) {
+            _enemyPauseDuration -= elapsed;
+            if (_enemyPauseDuration <= 0) {
+                StopTimeStop();
+            }
+        }
+
+        CurrentRoom.Update(gameTime);
+        Player?.Update(gameTime);
+        _enemyHUD.Update(gameTime);
+        _playerHUD.Update(Player);
+        _projectileManager.Update(gameTime);
+        _physicsManager.Update(gameTime);
+
+        // Only check for room transitions if the player steps out of the camera zone.
+        if (DisableRoomTransitioning == false &&
+            CollisionMath.Intersects(new Rectangle((int)Player.X, (int)Player.Y, 1, 1), Camera.Bounds) == false) {
+            CheckForRoomTransition();
+        }
+
+        if ((_inputMap.Pressed(INPUT_LEFTCONTROL) == false ||
+             (_inputMap.Pressed(INPUT_LEFTCONTROL) && LevelEV.CreateRetailVersion)) && CameraLockedToPlayer) {
+            UpdateCamera(); // Must be called AFTER the PhysicsManager Update() because the PhysicsManager changes the player's position depending on what he/she is colliding with.
+        }
+
+        if (Game.PlayerStats.SpecialItem == SpecialItemType.COMPASS && CurrentRoom.Name != "Start" &&
+            CurrentRoom.Name != "Tutorial" && CurrentRoom.Name != "Boss" && CurrentRoom.Name != "Throne" &&
+            CurrentRoom.Name != "ChallengeBoss") {
+            if (_compassDisplayed == false) // Display compass here
             {
-                Player.Update(gameTime);
+                DisplayCompass();
+            } else {
+                UpdateCompass();
+            }
+        } else {
+            if (_compassDisplayed && CurrentRoom.Name != "Compass") {
+                HideCompass();
+            }
+        }
+
+        // This means the objective plate is displayed. Now we are checking to make sure if any enemy of player collides with it, change its opacity.
+        if (_objectivePlate.X == 1170) {
+            var objectivePlateCollides = false;
+            var objectivePlateAbsRect = _objectivePlate.Bounds;
+            objectivePlateAbsRect.X += (int)Camera.TopLeftCorner.X;
+            objectivePlateAbsRect.Y += (int)Camera.TopLeftCorner.Y;
+
+            if (CollisionMath.Intersects(Player.Bounds, objectivePlateAbsRect)) {
+                objectivePlateCollides = true;
             }
 
-            _enemyHUD.Update(gameTime);
-            _playerHUD.Update(Player);
-
-            _projectileManager.Update(gameTime);
-            _physicsManager.Update(gameTime);
-
-            // Only check for room transitions if the player steps out of the camera zone.
-            if (DisableRoomTransitioning == false &&
-                CollisionMath.Intersects(new Rectangle((int)Player.X, (int)Player.Y, 1, 1), Camera.Bounds) == false)
-            {
-                CheckForRoomTransition();
-            }
-
-            if ((_inputMap.Pressed(INPUT_LEFTCONTROL) == false ||
-                 (_inputMap.Pressed(INPUT_LEFTCONTROL) && LevelEV.CreateRetailVersion)) && CameraLockedToPlayer)
-            {
-                UpdateCamera(); // Must be called AFTER the PhysicsManager Update() because the PhysicsManager changes the player's position depending on what he/she is colliding with.
-            }
-
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.COMPASS && CurrentRoom.Name != "Start" &&
-                CurrentRoom.Name != "Tutorial" && CurrentRoom.Name != "Boss" && CurrentRoom.Name != "Throne" &&
-                CurrentRoom.Name != "ChallengeBoss")
-            {
-                if (_compassDisplayed == false) // Display compass here
-                {
-                    DisplayCompass();
-                }
-                else
-                {
-                    UpdateCompass();
-                }
-            }
-            else
-            {
-                if (_compassDisplayed && CurrentRoom.Name != "Compass")
-                {
-                    HideCompass();
-                }
-            }
-
-            // This means the objective plate is displayed. Now we are checking to make sure if any enemy of player collides with it, change its opacity.
-            if (_objectivePlate.X == 1170)
-            {
-                var objectivePlateCollides = false;
-                var objectivePlateAbsRect = _objectivePlate.Bounds;
-                objectivePlateAbsRect.X += (int)Camera.TopLeftCorner.X;
-                objectivePlateAbsRect.Y += (int)Camera.TopLeftCorner.Y;
-
-                if (CollisionMath.Intersects(Player.Bounds, objectivePlateAbsRect))
-                {
-                    objectivePlateCollides = true;
-                }
-
-                if (objectivePlateCollides == false)
-                {
-                    foreach (var enemy in CurrentRoom.EnemyList)
-                    {
-                        if (CollisionMath.Intersects(enemy.Bounds, objectivePlateAbsRect))
-                        {
-                            objectivePlateCollides = true;
-                            break;
-                        }
+            if (objectivePlateCollides == false) {
+                foreach (var enemy in CurrentRoom.EnemyList) {
+                    if (CollisionMath.Intersects(enemy.Bounds, objectivePlateAbsRect)) {
+                        objectivePlateCollides = true;
+                        break;
                     }
                 }
+            }
 
-                if (objectivePlateCollides)
-                {
-                    _objectivePlate.Opacity = 0.5f;
-                }
-                else
-                {
-                    _objectivePlate.Opacity = 1;
+            if (objectivePlateCollides) {
+                _objectivePlate.Opacity = 0.5f;
+            } else {
+                _objectivePlate.Opacity = 1;
+            }
+        }
+
+        if (CurrentRoom != null && CurrentRoom is BonusRoomObj == false) {
+            if (_elapsedScreenShake > 0) {
+                _elapsedScreenShake -= elapsed;
+                if (_elapsedScreenShake <= 0) {
+                    if (Game.PlayerStats.HasTrait(TraitType.CLONUS)) {
+                        ShakeScreen(1);
+                        GamePad.SetVibration(PlayerIndex.One, 0.25f, 0.25f);
+                        Tween.RunFunction(CDGMath.RandomFloat(1, 1.5f), this, "StopScreenShake");
+                        _elapsedScreenShake =
+                            CDGMath.RandomFloat(GameEV.TRAIT_CLONUS_MIN, GameEV.TRAIT_CLONUS_MAX);
+                    }
                 }
             }
 
-            if (CurrentRoom != null && CurrentRoom is BonusRoomObj == false)
-            {
-                if (_elapsedScreenShake > 0)
-                {
-                    _elapsedScreenShake -= elapsed;
-                    if (_elapsedScreenShake <= 0)
-                    {
-                        if (Game.PlayerStats.HasTrait(TraitType.CLONUS))
-                        {
-                            ShakeScreen(1);
-                            GamePad.SetVibration(PlayerIndex.One, 0.25f, 0.25f);
-                            Tween.RunFunction(CDGMath.RandomFloat(1, 1.5f), this, "StopScreenShake");
-                            _elapsedScreenShake =
-                                CDGMath.RandomFloat(GameEV.TRAIT_CLONUS_MIN, GameEV.TRAIT_CLONUS_MAX);
-                        }
-                    }
-                }
-
-                if (_shakeScreen)
-                {
-                    UpdateShake();
-                }
+            if (_shakeScreen) {
+                UpdateShake();
             }
         }
 
@@ -3873,7 +3837,7 @@ public class ProceduralLevelScreen : Screen
 
     public void ForcePlayerHUDLevel(int level)
     {
-        _playerHUD.forcedPlayerLevel = level;
+        _playerHUD.ForcedPlayerLevel = level;
     }
 
     public void UpdatePlayerHUDAbilities()
