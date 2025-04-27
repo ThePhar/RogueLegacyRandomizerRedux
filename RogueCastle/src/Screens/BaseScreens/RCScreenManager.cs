@@ -11,8 +11,7 @@ using Tweener.Ease;
 
 namespace RogueCastle.Screens.BaseScreens;
 
-public class RCScreenManager(Game game) : ScreenManager(game)
-{
+public class RCScreenManager(Game game) : ScreenManager(game) {
     private readonly List<Screen> _screenCleanupList = [];
     private BlacksmithScreen _blacksmithScreen;
     private SpriteObj _blackTransitionIn, _blackScreen, _blackTransitionOut;
@@ -30,14 +29,12 @@ public class RCScreenManager(Game game) : ScreenManager(game)
     private PauseScreen _pauseScreen;
     private ProfileCardScreen _profileCardScreen;
     private ProfileSelectScreen _profileSelectScreen;
+    private RandomizerMenuScreen _randomizerMenuScreen;
     private SkillUnlockScreen _skillUnlockScreen;
     private TextScreen _textScreen;
-    private RandomizerMenuScreen _randomizerMenuScreen;
     private VirtualScreen _virtualScreen;
 
     public int CurrentScreenType { get; private set; }
-
-    public bool InventoryVisible => false;
 
     public RenderTarget2D RenderTarget => _virtualScreen.RenderTarget;
 
@@ -49,8 +46,7 @@ public class RCScreenManager(Game game) : ScreenManager(game)
 
     public bool IsTransitioning { get; private set; }
 
-    public override void Initialize()
-    {
+    public override void Initialize() {
         InitializeScreens();
         base.Initialize(); // Camera gets initialized here.
 
@@ -59,166 +55,140 @@ public class RCScreenManager(Game game) : ScreenManager(game)
         Game.Deactivated += PauseGame;
     }
 
-    public void PauseGame(object sender, EventArgs e)
-    {
-        if (CurrentScreen is ProceduralLevelScreen level && level.CurrentRoom is EndingRoomObj == false)
-        {
+    public void PauseGame(object sender, EventArgs e) {
+        if (CurrentScreen is ProceduralLevelScreen level && level.CurrentRoom is EndingRoomObj == false) {
             DisplayScreen(ScreenType.PAUSE, true);
         }
     }
 
-    public void ReinitializeContent(object sender, EventArgs e)
-    {
+    public void ReinitializeContent(object sender, EventArgs e) {
         _virtualScreen.ReinitializeRTs(Game.GraphicsDevice);
 
-        foreach (var screen in m_screenArray)
-        {
+        foreach (var screen in m_screenArray) {
             screen.DisposeRTs();
         }
 
-        foreach (var screen in m_screenArray)
-        {
+        foreach (var screen in m_screenArray) {
             screen.ReinitializeRTs();
         }
     }
 
-    public void ReinitializeCamera(GraphicsDevice graphicsDevice)
-    {
+    public void ReinitializeCamera(GraphicsDevice graphicsDevice) {
         m_camera.Dispose();
         m_camera = new Camera2D(graphicsDevice, EngineEV.ScreenWidth, EngineEV.ScreenHeight);
     }
 
-    public void InitializeScreens()
-    {
-        if (_gameOverScreen != null)
-        {
+    public void InitializeScreens() {
+        if (_gameOverScreen != null) {
             _screenCleanupList.Add(_gameOverScreen);
         }
 
         _gameOverScreen = new GameOverScreen();
 
-        if (SkillScreen != null)
-        {
+        if (SkillScreen != null) {
             _screenCleanupList.Add(SkillScreen);
         }
 
         SkillScreen = new SkillScreen();
 
-        if (_blacksmithScreen != null)
-        {
+        if (_blacksmithScreen != null) {
             _screenCleanupList.Add(_blacksmithScreen);
         }
 
         _blacksmithScreen = new BlacksmithScreen();
 
-        if (_getItemScreen != null)
-        {
+        if (_getItemScreen != null) {
             _screenCleanupList.Add(_getItemScreen);
         }
 
         _getItemScreen = new GetItemScreen();
 
-        if (_enchantressScreen != null)
-        {
+        if (_enchantressScreen != null) {
             _screenCleanupList.Add(_enchantressScreen);
         }
 
         _enchantressScreen = new EnchantressScreen();
 
-        if (DialogueScreen != null)
-        {
+        if (DialogueScreen != null) {
             _screenCleanupList.Add(DialogueScreen);
         }
 
         DialogueScreen = new DialogueScreen();
 
-        if (_pauseScreen != null)
-        {
+        if (_pauseScreen != null) {
             _screenCleanupList.Add(_pauseScreen);
         }
 
         _pauseScreen = new PauseScreen();
 
-        if (_optionsScreen != null)
-        {
+        if (_optionsScreen != null) {
             _screenCleanupList.Add(_optionsScreen);
         }
 
         _optionsScreen = new OptionsScreen();
 
-        if (_profileCardScreen != null)
-        {
+        if (_profileCardScreen != null) {
             _screenCleanupList.Add(_profileCardScreen);
         }
 
         _profileCardScreen = new ProfileCardScreen();
 
-        if (_creditsScreen != null)
-        {
+        if (_creditsScreen != null) {
             _screenCleanupList.Add(_creditsScreen);
         }
 
         _creditsScreen = new CreditsScreen();
 
-        if (_skillUnlockScreen != null)
-        {
+        if (_skillUnlockScreen != null) {
             _screenCleanupList.Add(_skillUnlockScreen);
         }
 
         _skillUnlockScreen = new SkillUnlockScreen();
 
-        if (_diaryEntryScreen != null)
-        {
+        if (_diaryEntryScreen != null) {
             _screenCleanupList.Add(_diaryEntryScreen);
         }
 
         _diaryEntryScreen = new DiaryEntryScreen();
 
-        if (_deathDefyScreen != null)
-        {
+        if (_deathDefyScreen != null) {
             _screenCleanupList.Add(_deathDefyScreen);
         }
 
         _deathDefyScreen = new DeathDefiedScreen();
 
-        if (_textScreen != null)
-        {
+        if (_textScreen != null) {
             _screenCleanupList.Add(_textScreen);
         }
 
         _textScreen = new TextScreen();
 
-        if (_flashbackScreen != null)
-        {
+        if (_flashbackScreen != null) {
             _screenCleanupList.Add(_flashbackScreen);
         }
 
         _flashbackScreen = new DiaryFlashbackScreen();
 
-        if (_gameOverBossScreen != null)
-        {
+        if (_gameOverBossScreen != null) {
             _screenCleanupList.Add(_gameOverBossScreen);
         }
 
         _gameOverBossScreen = new GameOverBossScreen();
 
-        if (_profileSelectScreen != null)
-        {
+        if (_profileSelectScreen != null) {
             _screenCleanupList.Add(_profileSelectScreen);
         }
 
         _profileSelectScreen = new ProfileSelectScreen();
 
-        if (_randomizerMenuScreen != null)
-        {
+        if (_randomizerMenuScreen != null) {
             _screenCleanupList.Add(_randomizerMenuScreen);
         }
 
         _randomizerMenuScreen = new RandomizerMenuScreen();
     }
 
-    public override void LoadContent()
-    {
+    public override void LoadContent() {
         _gameOverScreen.LoadContent();
         SkillScreen.LoadContent();
         _blacksmithScreen.LoadContent();
@@ -238,8 +208,7 @@ public class RCScreenManager(Game game) : ScreenManager(game)
         _profileSelectScreen.LoadContent();
         _randomizerMenuScreen.LoadContent();
 
-        if (IsContentLoaded == false)
-        {
+        if (IsContentLoaded == false) {
             _blackTransitionIn = new SpriteObj("Blank_Sprite") {
                 Rotation = 15,
                 TextureColor = Color.Black,
@@ -274,49 +243,42 @@ public class RCScreenManager(Game game) : ScreenManager(game)
         base.LoadContent();
     }
 
-    private void Window_ClientSizeChanged(object sender, EventArgs e)
-    {
+    private void Window_ClientSizeChanged(object sender, EventArgs e) {
         _virtualScreen.PhysicalResolutionChanged();
         EngineEV.RefreshEngine(Camera.GraphicsDevice);
-        Console.WriteLine(@"Resolution Changed");
+        Console.WriteLine(@"Resolution changed.");
     }
 
-    private void LoadPlayer()
-    {
-        if (Player != null)
-        {
+    private void LoadPlayer() {
+        if (Player != null) {
             return;
         }
 
-        Player = new PlayerObj("PlayerIdle_Character", PlayerIndex.One, (Game as Game)!.PhysicsManager, null, Game as Game)
-        {
+        Player = new PlayerObj("PlayerIdle_Character", PlayerIndex.One, (Game as Game)!.PhysicsManager, null, Game as Game) {
             Position = new Vector2(200, 200),
         };
         Player.Initialize();
     }
 
-    public void DisplayScreen(int screenType, bool pauseOtherScreens, List<object> objList = null)
-    {
+    public void DisplayScreen(int screenType, bool pauseOtherScreens, List<object> objList = null) {
         LoadPlayer();
 
-        if (pauseOtherScreens)
-        {
+        if (pauseOtherScreens) {
             // This needs to be changed so that the ScreenManager holds a reference to the ProceduralLevelScreen.
-            foreach (var screen in GetScreens())
-            {
-                if (screen == CurrentScreen)
-                {
-                    screen.PauseScreen();
-                    break;
+            foreach (var screen in GetScreens()) {
+                if (screen != CurrentScreen) {
+                    continue;
                 }
+
+                screen.PauseScreen();
+                break;
             }
         }
 
         CurrentScreenType = screenType;
 
         // This currently has no checks to see if the screen is already in the screen-manager's screen list.
-        switch (screenType)
-        {
+        switch (screenType) {
             case ScreenType.CDG_SPLASH:
             case ScreenType.TITLE:
             case ScreenType.TITLE_WHITE:
@@ -326,162 +288,169 @@ public class RCScreenManager(Game game) : ScreenManager(game)
             case ScreenType.LINEAGE:
                 LoadScreen((byte)screenType, true);
                 break;
+
             case ScreenType.LEVEL:
-                if (RogueCastle.Game.PlayerStats.LockCastle || CurrentScreen is ProceduralLevelScreen == false)
-                {
+                if (RogueCastle.Game.PlayerStats.LockCastle || CurrentScreen is ProceduralLevelScreen == false) {
                     LoadScreen((byte)screenType, true);
-                }
-                else
-                {
+                } else {
                     LoadScreen((byte)screenType, false);
                 }
 
                 break;
+
             case ScreenType.SKILL:
                 AddScreen(SkillScreen, null);
                 break;
+
             case ScreenType.GAME_OVER:
                 _gameOverScreen.PassInData(objList);
                 AddScreen(_gameOverScreen, null);
                 break;
+
             case ScreenType.GAME_OVER_BOSS:
                 _gameOverBossScreen.PassInData(objList);
                 AddScreen(_gameOverBossScreen, null);
                 break;
+
             case ScreenType.BLACKSMITH:
                 _blacksmithScreen.Player = Player;
                 AddScreen(_blacksmithScreen, null);
                 break;
+
             case ScreenType.GET_ITEM:
                 _getItemScreen.PassInData(objList);
                 AddScreen(_getItemScreen, null);
                 break;
+
             case ScreenType.ENCHANTRESS:
                 _enchantressScreen.Player = Player;
                 AddScreen(_enchantressScreen, null);
                 break;
+
             case ScreenType.DIALOGUE:
                 AddScreen(DialogueScreen, null);
                 break;
+
             case ScreenType.MAP:
                 _mapScreen.SetPlayer(Player);
                 AddScreen(_mapScreen, null);
                 break;
+
             case ScreenType.PAUSE:
                 GetLevelScreen().CurrentRoom.DarkenRoom();
                 AddScreen(_pauseScreen, null);
                 break;
+
             case ScreenType.OPTIONS:
                 _optionsScreen.PassInData(objList);
                 AddScreen(_optionsScreen, null);
                 break;
+
             case ScreenType.PROFILE_CARD:
                 AddScreen(_profileCardScreen, null);
                 break;
+
             case ScreenType.CREDITS:
                 LoadScreen(ScreenType.CREDITS, true);
                 break;
+
             case ScreenType.SKILL_UNLOCK:
                 _skillUnlockScreen.PassInData(objList);
                 AddScreen(_skillUnlockScreen, null);
                 break;
+
             case ScreenType.DIARY_ENTRY:
                 AddScreen(_diaryEntryScreen, null);
                 break;
+
             case ScreenType.DEATH_DEFY:
                 AddScreen(_deathDefyScreen, null);
                 break;
+
             case ScreenType.TEXT:
                 _textScreen.PassInData(objList);
                 AddScreen(_textScreen, null);
                 break;
+
             case ScreenType.TUTORIAL_ROOM:
                 LoadScreen(ScreenType.TUTORIAL_ROOM, true);
                 break;
+
             case ScreenType.ENDING:
                 GetLevelScreen().CameraLockedToPlayer = false;
                 GetLevelScreen().DisableRoomTransitioning = true;
-                Player.Position = new Vector2(100, 100); //HHHAACCK
+                Player.Position = new Vector2(100, 100); // HHHAACCK
                 LoadScreen(ScreenType.ENDING, true);
                 break;
+
             case ScreenType.DIARY_FLASHBACK:
                 AddScreen(_flashbackScreen, null);
                 break;
+
             case ScreenType.PROFILE_SELECT:
                 AddScreen(_profileSelectScreen, null);
                 break;
+
             case ScreenType.RANDOMIZER_MENU:
                 _randomizerMenuScreen.PassInData(objList);
                 AddScreen(_randomizerMenuScreen, null);
                 break;
         }
 
-        if (_isWipeTransitioning)
-        {
+        if (_isWipeTransitioning) {
             EndWipeTransition();
         }
     }
 
-    public void AddRoomsToMap(List<RoomObj> roomList)
-    {
+    public void AddRoomsToMap(List<RoomObj> roomList) {
         _mapScreen.AddRooms(roomList);
     }
 
-    public void AddIconsToMap(List<RoomObj> roomList)
-    {
+    public void AddIconsToMap(List<RoomObj> roomList) {
         _mapScreen.AddAllIcons(roomList);
     }
 
-    public void RefreshMapScreenChestIcons(RoomObj room)
-    {
+    public void RefreshMapScreenChestIcons(RoomObj room) {
         _mapScreen.RefreshMapChestIcons(room);
     }
 
-    public void ActivateMapScreenTeleporter()
-    {
+    public void ActivateMapScreenTeleporter() {
         _mapScreen.IsTeleporter = true;
     }
 
-    public void HideCurrentScreen()
-    {
+    public void HideCurrentScreen() {
         RemoveScreen(CurrentScreen, false);
 
-        if (CurrentScreen is ProceduralLevelScreen level)
-        {
+        if (CurrentScreen is ProceduralLevelScreen level) {
             level.UnpauseScreen();
         }
 
-        if (_isWipeTransitioning)
-        {
+        if (_isWipeTransitioning) {
             EndWipeTransition();
         }
     }
 
-    public void ForceResolutionChangeCheck()
-    {
+    public void ForceResolutionChangeCheck() {
         _virtualScreen.PhysicalResolutionChanged();
         EngineEV.RefreshEngine(Game.GraphicsDevice);
     }
 
     // This is overridden so that a custom LoadScreen can be passed in.
-    private void LoadScreen(byte screenType, bool wipeTransition)
-    {
+    private void LoadScreen(byte screenType, bool wipeTransition) {
         CurrentScreenType = ScreenType.LOADING;
-        foreach (var screen in m_screenArray)
-        {
+        foreach (var screen in m_screenArray) {
             screen.DrawIfCovered = true;
-            if (screen is ProceduralLevelScreen levelScreen)
-            {
-                Player.AttachLevel(levelScreen);
-                levelScreen.Player = Player;
-
-                AttachMap(levelScreen);
+            if (screen is not ProceduralLevelScreen levelScreen) {
+                continue;
             }
+
+            Player.AttachLevel(levelScreen);
+            levelScreen.Player = Player;
+            AttachMap(levelScreen);
         }
 
         // Double check this.  This doesn't seem right.
-        if (_gameOverScreen != null)
-        {
+        if (_gameOverScreen != null) {
             InitializeScreens();
             LoadContent(); // Since all screens are disposed, their content needs to be loaded again. Hacked.
         }
@@ -493,10 +462,8 @@ public class RCScreenManager(Game game) : ScreenManager(game)
         AddScreen(loadingScreen, PlayerIndex.One);
     }
 
-    public void PerformCleanUp()
-    {
-        foreach (var screen in _screenCleanupList.Where(screen => screen.IsDisposed == false && screen.IsContentLoaded))
-        {
+    public void PerformCleanUp() {
+        foreach (var screen in _screenCleanupList.Where(screen => screen.IsDisposed == false && screen.IsContentLoaded)) {
             screen.Dispose();
         }
 
@@ -506,47 +473,40 @@ public class RCScreenManager(Game game) : ScreenManager(game)
         GC.Collect();
     }
 
-    public void LoadingComplete(int screenType)
-    {
+    public void LoadingComplete(int screenType) {
         CurrentScreenType = screenType;
     }
 
-    public override void RemoveScreen(Screen screen, bool disposeScreen)
-    {
-        if (screen is LoadingScreen)
-        {
+    public override void RemoveScreen(Screen screen, bool disposeScreen) {
+        if (screen is LoadingScreen) {
             IsTransitioning = false;
         }
 
         base.RemoveScreen(screen, disposeScreen);
     }
 
-    public void AttachMap(ProceduralLevelScreen level)
-    {
+    public void AttachMap(ProceduralLevelScreen level) {
         _mapScreen?.Dispose();
         _mapScreen = new MapScreen(level);
     }
 
-    public override void Update(GameTime gameTime)
-    {
+    public override void Update(GameTime gameTime) {
         _virtualScreen.Update();
-        if (IsTransitioning == false)
-        {
+        if (IsTransitioning == false) {
             base.Update(gameTime);
+            return;
         }
-        else
-        {
-            Camera.GameTime = gameTime;
-            if (CurrentScreen != null)
-            {
-                CurrentScreen.Update(gameTime);
-                CurrentScreen.HandleInput();
-            }
+
+        Camera.GameTime = gameTime;
+        if (CurrentScreen == null) {
+            return;
         }
+
+        CurrentScreen.Update(gameTime);
+        CurrentScreen.HandleInput();
     }
 
-    public override void Draw(GameTime gameTime)
-    {
+    public override void Draw(GameTime gameTime) {
         _virtualScreen.BeginCapture();
         Camera.GraphicsDevice.Clear(Color.Black);
 
@@ -565,30 +525,27 @@ public class RCScreenManager(Game game) : ScreenManager(game)
         _blackScreen.Draw(Camera);
         Camera.End();
 
-        if (LevelEV.EnableDebugInput)
-        {
+        if (LevelEV.EnableDebugInput) {
             Camera.Begin();
-            var forcedGenderString = RogueCastle.Game.PlayerStats.ForceLanguageGender switch
-            {
+            var forcedGenderString = RogueCastle.Game.PlayerStats.ForceLanguageGender switch {
                 1 => "Male",
                 2 => "Female",
                 _ => "None",
             };
 
             var godModeString = "Off";
-            if (RogueCastle.Game.PlayerStats.GodMode)
-            {
+            if (RogueCastle.Game.PlayerStats.GodMode) {
                 godModeString = "On";
             }
 
-            Camera.DrawString(RogueCastle.Game.PixelArtFont, "Forced Gender Language: " + forcedGenderString, new Vector2(10, 10), Color.White);
-            Camera.DrawString(RogueCastle.Game.PixelArtFont, "God Mode: " + godModeString, new Vector2(10, 30), Color.White);
+            Camera.DrawString(RogueCastle.Game.PixelArtFont, $"Forced Gender Language: {forcedGenderString}", new Vector2(10, 10), Color.White);
+            Camera.DrawString(RogueCastle.Game.PixelArtFont, $"Current Screen: {CurrentScreenType}", new Vector2(10, 30), Color.White);
+            Camera.DrawString(RogueCastle.Game.PixelArtFont, $"God Mode: {godModeString}", new Vector2(10, 50), Color.White);
             Camera.End();
         }
     }
 
-    public void StartWipeTransition()
-    {
+    public void StartWipeTransition() {
         _isWipeTransitioning = true;
         _blackTransitionIn.Visible = true;
         _blackScreen.Visible = true;
@@ -605,8 +562,7 @@ public class RCScreenManager(Game game) : ScreenManager(game)
         Tween.By(_blackTransitionOut, 0.15f, Quad.EaseInOut, "X", $"{-_blackTransitionIn.X}");
     }
 
-    public void EndWipeTransition()
-    {
+    public void EndWipeTransition() {
         _isWipeTransitioning = false;
 
         _blackTransitionOut.Y = -500;
@@ -615,17 +571,13 @@ public class RCScreenManager(Game game) : ScreenManager(game)
         Tween.By(_blackTransitionOut, 0.25f, Quad.EaseInOut, "X", "-3000");
     }
 
-    public void UpdatePauseScreenIcons()
-    {
+    public void UpdatePauseScreenIcons() {
         _pauseScreen.UpdatePauseScreenIcons();
     }
 
-    public ProceduralLevelScreen GetLevelScreen()
-    {
-        foreach (var screen in GetScreens())
-        {
-            if (screen is ProceduralLevelScreen level)
-            {
+    public ProceduralLevelScreen GetLevelScreen() {
+        foreach (var screen in GetScreens()) {
+            if (screen is ProceduralLevelScreen level) {
                 return level;
             }
         }
