@@ -76,13 +76,8 @@ public class GameOverScreen : Screen
             _objKilledPlayer = objList[6] as GameObj;
         }
         
-        var cause = SetObjectKilledPlayerText();
+        SetObjectKilledPlayerText();
         _enemyStoredPositions.Clear();
-        
-        if (_objKilledPlayer is not DeathLinkObj)
-        {
-            (ScreenManager.Game as Game)!.ArchipelagoManager.SendDeath(cause);
-        }
         
         base.PassInData(objList);
     }
@@ -391,7 +386,7 @@ public class GameOverScreen : Screen
         SoundManager.PlaySound("Enemy_Kill_Plant");
     }
 
-    private string SetObjectKilledPlayerText()
+    private void SetObjectKilledPlayerText()
     {
         var playerSlainText = _dialoguePlate.GetChildAt(1) as TextObj;
 
@@ -449,8 +444,6 @@ public class GameOverScreen : Screen
         {
             playerSlainText.Text = string.Format("LOC_ID_GAME_OVER_SCREEN_6_NEW".GetResourceString(), Game.NameHelper());
         }
-
-        return playerSlainText.Text;
     }
 
     public override void HandleInput()

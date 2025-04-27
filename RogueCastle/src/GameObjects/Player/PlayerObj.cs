@@ -1254,18 +1254,6 @@ namespace RogueCastle
         public override void Update(GameTime gameTime)
         {
             var elapsedSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            // Check if we should force a DeathLink
-            if (!m_lockControls && !Game.PlayerStats.IsDead && m_levelScreen.CurrentRoom.Name is not "Boss" and not "ChallengeBoss" and not "Start")
-            {
-                var apManager = m_game.ArchipelagoManager;
-                if (apManager.QueuedDeathLink is not null)
-                {
-                    AttachedLevel.SetObjectKilledPlayer(new DeathLinkObj(apManager.QueuedDeathLink.Source, apManager.QueuedDeathLink.Cause));
-                    apManager.ClearDeath();
-                    Kill();
-                }
-            }
             
             if (m_dropThroughGroundTimer > 0)
                 m_dropThroughGroundTimer -= elapsedSeconds;
@@ -1519,6 +1507,18 @@ namespace RogueCastle
             else if (m_externalLS.IsActive == true)
             {
                 m_externalLS.Update(gameTime);
+            }
+            
+            // Check if we should force a DeathLink
+            if (!m_lockControls && !Game.PlayerStats.IsDead && m_levelScreen.CurrentRoom.Name is not "Boss" and not "ChallengeBoss" and not "Start")
+            {
+                var apManager = m_game.ArchipelagoManager;
+                if (apManager.QueuedDeathLink is not null)
+                {
+                    AttachedLevel.SetObjectKilledPlayer(new DeathLinkObj(apManager.QueuedDeathLink.Source, apManager.QueuedDeathLink.Cause));
+                    apManager.ClearDeath();
+                    Kill();
+                }
             }
         }
 
@@ -2402,7 +2402,7 @@ namespace RogueCastle
                         if (chanceToSurvive <= SkillSystem.GetSkill(SkillType.DeathDodge).ModifierAmount * 100)
                         {
                             //this.CurrentHealth = 1;
-                            this.CurrentHealth = (int)(MaxHealth * 0.1f);
+                            CurrentHealth = (int)(MaxHealth * 0.1f);
                             m_invincibleCounter = InvincibilityTime; // Kick in the invincible timer automatically if the player is hit and knockback_immune trait exists.
                             (m_levelScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DEATH_DEFY, true);
                         }
@@ -2415,7 +2415,8 @@ namespace RogueCastle
                             }
                             else
                             {
-                                this.AttachedLevel.SetObjectKilledPlayer(obj);
+                                AttachedLevel.SetObjectKilledPlayer(obj);
+                                m_game.ArchipelagoManager.SendDeath(obj);
                                 Kill();
                             }
                         }

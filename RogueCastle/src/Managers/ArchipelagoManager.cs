@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
 using Archipelago.MultiClient.Net.Enums;
+using DS2DEngine;
 using RogueCastle.GameStructs;
 using RogueCastle.Randomizer;
 
@@ -103,7 +104,7 @@ public class ArchipelagoManager(Game game)
         _session?.Socket.DisconnectAsync();
     }
 
-    public void SendDeath(string deathMessage)
+    public void SendDeath(GameObj deathCauseObj)
     {
         if (!_session.Socket.Connected || !_session.ConnectionInfo.Tags.Contains("DeathLink"))
         {
@@ -111,7 +112,7 @@ public class ArchipelagoManager(Game game)
         }
 
         var player = _session.Players.GetPlayerName(_session.ConnectionInfo.Slot);
-        var cause = $"{player}'s {deathMessage}.";
+        var cause = $"{player} was slain by {deathCauseObj.Name}.";
         _deathLinkService.SendDeathLink(new DeathLink(player, cause));
     }
 
