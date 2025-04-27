@@ -1,141 +1,107 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using SpriteSystem;
-using DS2DEngine;
+using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.GameStructs;
+using SpriteSystem;
 
-namespace RogueCastle
-{
-    class VirtualScreen
-    {
-        public readonly int VirtualWidth;
-        public readonly int VirtualHeight;
-        public readonly float VirtualAspectRatio;
+namespace RogueCastle;
 
-        private GraphicsDevice graphicsDevice;
-        private RenderTarget2D screen;
+internal class VirtualScreen(int virtualWidth, int virtualHeight, GraphicsDevice graphicsDevice) {
+    public readonly float VirtualAspectRatio = virtualWidth / (float)virtualHeight;
+    public readonly int VirtualHeight = virtualHeight;
+    public readonly int VirtualWidth = virtualWidth;
 
-        public VirtualScreen(int virtualWidth, int virtualHeight, GraphicsDevice graphicsDevice)
-        {
-            VirtualWidth = virtualWidth;
-            VirtualHeight = virtualHeight;
-            VirtualAspectRatio = (float)(virtualWidth) / (float)(virtualHeight);
+    private Rectangle _area;
+    private bool _areaIsDirty = true;
+    private GraphicsDevice _graphicsDevice = graphicsDevice;
 
-            this.graphicsDevice = graphicsDevice;
-            //screen = new RenderTarget2D(graphicsDevice, virtualWidth, virtualHeight, false, graphicsDevice.PresentationParameters.BackBufferFormat, graphicsDevice.PresentationParameters.DepthStencilFormat, graphicsDevice.PresentationParameters.MultiSampleCount, RenderTargetUsage.DiscardContents);
-            screen = new RenderTarget2D(graphicsDevice, virtualWidth, virtualHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+    public RenderTarget2D RenderTarget { get; private set; } = new(graphicsDevice, virtualWidth, virtualHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+
+    public void ReinitializeRTs(GraphicsDevice graphicsDevice) {
+        _graphicsDevice = graphicsDevice;
+        if (RenderTarget.IsDisposed == false) {
+            RenderTarget.Dispose();
+            RenderTarget = null;
         }
 
-        public void ReinitializeRTs(GraphicsDevice graphicsDevice)
-        {
-            this.graphicsDevice = graphicsDevice;
-            if (screen.IsDisposed == false)
-            {
-                screen.Dispose();
-                screen = null;
-            }
-            //screen = new RenderTarget2D(graphicsDevice, VirtualWidth, VirtualHeight, false, graphicsDevice.PresentationParameters.BackBufferFormat, graphicsDevice.PresentationParameters.DepthStencilFormat, graphicsDevice.PresentationParameters.MultiSampleCount, RenderTargetUsage.DiscardContents);
-            screen = new RenderTarget2D(graphicsDevice, VirtualWidth, VirtualHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+        RenderTarget = new RenderTarget2D(graphicsDevice, VirtualWidth, VirtualHeight, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+    }
 
+    public void PhysicalResolutionChanged() {
+        _areaIsDirty = true;
+    }
+
+    public void Update() {
+        if (!_areaIsDirty) {
+            return;
         }
 
-        private bool areaIsDirty = true;
+        _areaIsDirty = false;
+        var physicalWidth = _graphicsDevice.Viewport.Width;
+        var physicalHeight = _graphicsDevice.Viewport.Height;
+        var physicalAspectRatio = _graphicsDevice.Viewport.AspectRatio;
 
-        public void PhysicalResolutionChanged()
-        {
-            areaIsDirty = true;
+        // This 'if' was commented out during Switch development, flibit added it back
+        if ((int)(physicalAspectRatio * 10) == (int)(VirtualAspectRatio * 10)) {
+            _area = new Rectangle(0, 0, physicalWidth, physicalHeight);
+            return;
         }
 
-        private Rectangle area;
+        if (VirtualAspectRatio > physicalAspectRatio) {
+            var scaling = physicalWidth / (float)VirtualWidth;
+            var width = VirtualWidth * scaling;
+            var height = VirtualHeight * scaling;
+            var borderSize = (int)((physicalHeight - height) / 2);
+            _area = new Rectangle(0, borderSize, (int)width, (int)height);
+        } else {
+            var scaling = physicalHeight / (float)VirtualHeight;
+            var width = VirtualWidth * scaling;
+            var height = VirtualHeight * scaling;
+            var borderSize = (int)((physicalWidth - width) / 2);
+            _area = new Rectangle(borderSize, 0, (int)width, (int)height);
+        }
+    }
 
-        public void Update()
-        {
-            if (!areaIsDirty)
-            {
-                return;
-            }
+    public static void RecreateGraphics() {
+        Console.WriteLine(@"GraphicsDevice Virtualization failed.");
 
-            areaIsDirty = false;
-            var physicalWidth = graphicsDevice.Viewport.Width;
-            var physicalHeight = graphicsDevice.Viewport.Height;
-            var physicalAspectRatio = graphicsDevice.Viewport.AspectRatio;
+        var newDevice = Program.Game.Graphics.GraphicsDevice;
+        Game.ScreenManager.ReinitializeCamera(newDevice);
+        SpriteLibrary.ClearLibrary();
+        Program.Game.LoadAllSpriteFonts();
+        Program.Game.LoadAllEffects();
+        Program.Game.LoadAllSpritesheets();
 
-            // This 'if' was commented out during Switch development, flibit added it back
-            if ((int)(physicalAspectRatio * 10) == (int)(VirtualAspectRatio * 10))
-            {
-                area = new Rectangle(0, 0, physicalWidth, physicalHeight);
-                return;
-            }
-
-            if (VirtualAspectRatio > physicalAspectRatio)
-            {
-                var scaling = (float)physicalWidth / (float)VirtualWidth;
-                var width = (float)(VirtualWidth) * scaling;
-                var height = (float)(VirtualHeight) * scaling;
-                var borderSize = (int)((physicalHeight - height) / 2);
-                area = new Rectangle(0, borderSize, (int)width, (int)height);
-            }
-            else
-            {
-                var scaling = (float)physicalHeight / (float)VirtualHeight;
-                var width = (float)(VirtualWidth) * scaling;
-                var height = (float)(VirtualHeight) * scaling;
-                var borderSize = (int)((physicalWidth - width) / 2);
-                area = new Rectangle(borderSize, 0, (int)width, (int)height);
-            }
+        if (Game.GenericTexture.IsDisposed == false) {
+            Game.GenericTexture.Dispose();
         }
 
-        public void RecreateGraphics()
-        {
-            Console.WriteLine("GraphicsDevice Virtualization failed");
+        Game.GenericTexture = new Texture2D(newDevice, 1, 1);
+        Game.GenericTexture.SetData([Color.White]);
 
-            GraphicsDevice newDevice = (Game.ScreenManager.Game as Game).Graphics.GraphicsDevice;
-            Game.ScreenManager.ReinitializeCamera(newDevice);
-            SpriteLibrary.ClearLibrary();
-            (Game.ScreenManager.Game as Game).LoadAllSpriteFonts();
-            (Game.ScreenManager.Game as Game).LoadAllEffects();
-            (Game.ScreenManager.Game as Game).LoadAllSpritesheets();
+        Game.ScreenManager.ReinitializeContent(null, null);
+    }
 
-            if (Game.GenericTexture.IsDisposed == false)
-                Game.GenericTexture.Dispose();
-            Game.GenericTexture = new Texture2D(newDevice, 1, 1);
-            Game.GenericTexture.SetData(new Color[] { Color.White });
-
-            Game.ScreenManager.ReinitializeContent(null, null);
+    public void BeginCapture() {
+        // XNA failed to properly reinitialize GraphicsDevice in virtualization. Time to recreate graphics device.
+        if (_graphicsDevice.IsDisposed) {
+            RecreateGraphics();
         }
 
-        public void BeginCapture()
-        {
-            // XNA failed to properly reinitialize GraphicsDevice in virtualization. Time to recreate graphics device.
-            if (graphicsDevice.IsDisposed)
-                RecreateGraphics();
+        _graphicsDevice.SetRenderTarget(RenderTarget);
+    }
 
-            graphicsDevice.SetRenderTarget(screen);
-        }
+    public void EndCapture() {
+        _graphicsDevice.SetRenderTarget(null);
+    }
 
-        public void EndCapture()
-        {
-            graphicsDevice.SetRenderTarget(null);
-        }
+    public void Draw(SpriteBatch spriteBatch) {
+        var predicate = Game.ScreenManager.CurrentScreen is SkillScreen == false && Game.ScreenManager.CurrentScreen is LineageScreen == false &&
+                        Game.ScreenManager.CurrentScreen is SkillUnlockScreen == false && Game.ScreenManager.GetLevelScreen() != null &&
+                        Game.PlayerStats.HasTrait(TraitType.VERTIGO) && Game.PlayerStats.SpecialItem != SpecialItemType.GLASSES;
 
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            if ((Game.ScreenManager.CurrentScreen is SkillScreen == false) && (Game.ScreenManager.CurrentScreen is LineageScreen == false) && 
-                (Game.ScreenManager.CurrentScreen is SkillUnlockScreen == false) && (Game.ScreenManager.GetLevelScreen() != null) &&
-                (Game.PlayerStats.HasTrait(TraitType.VERTIGO)) && Game.PlayerStats.SpecialItem != SpecialItemType.GLASSES)
-                spriteBatch.Draw(screen, area, null, Color.White, 0, Vector2.Zero, SpriteEffects.FlipVertically, 0);
-            else
-                spriteBatch.Draw(screen, area, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 0);
-        }
-
-        public RenderTarget2D RenderTarget
-        {
-            get { return screen; }
-        }
-
+        spriteBatch.Draw(RenderTarget, _area, null, Color.White, 0, Vector2.Zero, predicate
+            ? SpriteEffects.FlipVertically
+            : SpriteEffects.None, 0);
     }
 }

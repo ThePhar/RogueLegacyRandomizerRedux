@@ -7,73 +7,26 @@ using SteamWorksWrapper;
 
 namespace RogueCastle;
 
-public static class Program
-{
+public static class Program {
     public static readonly string OSDir = GetOSDir();
-    public static Game Game;
 
-    /// <summary>
-    /// The main entry point for the application.
-    /// </summary>
+    public static Game Game { get; } = new();
+
+    /// <summary>The main entry point for the application.</summary>
 #if NET
-    static void Main(string[] realArgs)
-    {
+    private static void Main(string[] realArgs) {
         args = realArgs;
         SDL.SDL_RunApp(0, IntPtr.Zero, RealMain, IntPtr.Zero);
     }
-
-    static string[] args;
-
-    static int RealMain(int argc, IntPtr argv)
+    
+    private static string[] args;
+    private static int RealMain(int argc, IntPtr argv) {
 #else
-    private static void Main(string[] args)
+    private static void Main(string[] args) {
 #endif
-    {
         Environment.SetEnvironmentVariable("FNA_PLATFORM_BACKEND", "SDL3");
 
-        // Parse command line arguments.
-        foreach (var arg in args)
-        {
-            switch (arg)
-            {
-                case "--show_enemy_radii":
-                    LevelEV.ShowEnemyRadii = true;
-                    LevelEV.CreateRetailVersion = false;
-                    break;
-
-                case "--debug":
-                    LevelEV.EnableDebugInput = true;
-                    LevelEV.ShowDebugText = false;
-                    LevelEV.ShowSaveLoadDebugText = true;
-                    LevelEV.RunCrashLogs = false;
-                    LevelEV.CreateRetailVersion = false;
-                    break;
-
-                case "--no_save":
-                    LevelEV.DisableSaving = true;
-                    LevelEV.EnableBackupSaving = false;
-                    LevelEV.CreateRetailVersion = false;
-                    break;
-
-                case "--no_splash":
-                    LevelEV.LoadSplashScreen = false;
-                    LevelEV.CreateRetailVersion = false;
-                    break;
-
-                case "--weaken_bosses":
-                    LevelEV.WeakenBosses = true;
-                    LevelEV.CreateRetailVersion = false;
-                    break;
-
-                case "--fps":
-                    LevelEV.ShowFps = true;
-                    LevelEV.CreateRetailVersion = false;
-                    break;
-            }
-        }
-
-        if (LevelEV.CreateRetailVersion)
-        {
+        if (LevelEV.CreateRetailVersion) {
             Steamworks.Init();
 
             LevelEV.ShowEnemyRadii = false;
@@ -97,49 +50,31 @@ public static class Program
             LevelEV.SaveFrames = false;
         }
 
-        // if (args.Length == 1 && LevelEV.CreateRetailVersion == false)
-        // {
-        //     using var game = new Game(args[0]);
-        //
-        //     LevelEV.RunTestRoom = true;
-        //     LevelEV.DisableSaving = true;
-        //     game.Run();
-        // }
+        // Parse command line arguments to modify game flags.
+        foreach (var arg in args) {
+            switch (arg) {
+                case "--debug":
+                    LevelEV.EnableDebugInput = true;
+                    LevelEV.ShowDebugText = false;
+                    LevelEV.RunCrashLogs = false;
+                    LevelEV.ShowFps = true;
+                    break;
 
-        if (LevelEV.RunCrashLogs)
-        {
-            try
-            {
-                Game = new Game();
-                Game.Run();
-            }
-            catch (Exception e)
-            {
-                var date = DateTime.Now.ToString("dd-mm-yyyy_HH-mm-ss");
-                if (!Directory.Exists(OSDir))
-                {
-                    Directory.CreateDirectory(OSDir);
-                }
+                case "--no_save":
+                    LevelEV.DisableSaving = true;
+                    LevelEV.EnableBackupSaving = false;
+                    break;
 
-                var configFilePath = Path.Combine(OSDir, "CrashLog_" + date + ".log");
-                using (var writer = new StreamWriter(configFilePath, false))
-                {
-                    writer.WriteLine(e.ToString());
-                }
-
-                Console.WriteLine(e.ToString());
-                SDL.SDL_ShowSimpleMessageBox(
-                    SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_ERROR,
-                    "SAVE THIS MESSAGE!",
-                    e.ToString(),
-                    IntPtr.Zero
-                );
+                case "--no_splash":
+                    LevelEV.LoadSplashScreen = false;
+                    break;
             }
         }
-        else
-        {
-            Game = new Game();
+
+        try {
             Game.Run();
+        } catch (Exception e) when (LevelEV.RunCrashLogs) {
+            RunCrashLogger(e);
         }
 
         Steamworks.Shutdown();
@@ -149,41 +84,65 @@ public static class Program
 #endif
     }
 
-    private static string GetOSDir()
-    {
-        switch (SDL.SDL_GetPlatform())
-        {
+    private static string GetOSDir() {
+        switch (SDL.SDL_GetPlatform()) {
             case "Linux":
             case "FreeBSD":
             case "OpenBSD":
-            case "NetBSD":
-            {
+            case "NetBSD": {
                 var homePath = Environment.GetEnvironmentVariable("XDG_CONFIG_HOME");
-                if (!string.IsNullOrEmpty(homePath))
-                {
+                if (!string.IsNullOrEmpty(homePath)) {
                     return Path.Combine(homePath, "RogueLegacyRandomizer");
                 }
 
+                // Fallback home.
                 homePath = Environment.GetEnvironmentVariable("HOME");
                 return string.IsNullOrEmpty(homePath)
-                    ? "." // Oh, well.
+                    ? "."
                     : Path.Combine(homePath, ".config", "RogueLegacyRandomizer");
-
             }
-            case "macOS":
-            {
+
+            case "macOS": {
                 var homePath = Environment.GetEnvironmentVariable("HOME");
                 return string.IsNullOrEmpty(homePath)
-                    ? "." // Oh, well.
+                    ? "."
                     : Path.Combine(homePath, "Library/Application Support/RogueLegacyRandomizer");
             }
 
             case "Windows":
-                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Rogue Legacy");
-            
+                return Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    "Rogue Legacy Randomizer"
+                );
+
             // Any other unknown platform.
             default:
-                return SDL.SDL_GetPrefPath("Cellar Door Games", "Rogue Legacy");
+                return SDL.SDL_GetPrefPath("Cellar Door Games", "Rogue Legacy Randomizer");
         }
+    }
+
+    private static void RunCrashLogger(Exception e) {
+        var datetime = DateTime.Now.ToString(@"yyyyMMddTHHmmss");
+        if (!Directory.Exists(OSDir)) {
+            Directory.CreateDirectory(OSDir);
+        }
+
+        var configFilePath = Path.Combine(OSDir, $"CrashLog_{datetime}.log");
+        using (var writer = new StreamWriter(configFilePath, false)) {
+            writer.WriteLine(e.ToString());
+        }
+
+        Console.WriteLine(e.ToString());
+        SDL.SDL_ShowSimpleMessageBox(
+            SDL.SDL_MessageBoxFlags.SDL_MESSAGEBOX_ERROR,
+            "RLRandomizer Unhandled Exception",
+            "Sorry, the Rogue Legacy Randomizer has encountered an unknown error and ended up crashing. If you are\n" +
+            "continuing to see this error, please make a bug report with the following information on the project\n" +
+            "repository here: https://github.com/ThePhar/RogueLegacyRandomizer\n\n" +
+            $"Version: {LevelEV.RLRX_VERSION} ({SDL.SDL_GetPlatform()})\n\n" +
+            $"Please include the following crash log:\n{configFilePath}\n\n" +
+            "Finally, if you are the mod developer, stop breaking things. Thanks.",
+            IntPtr.Zero
+        );
     }
 }
