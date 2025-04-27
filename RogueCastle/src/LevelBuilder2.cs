@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
 using RogueCastle.EnvironmentVariables;
@@ -10,124 +11,123 @@ using RogueCastle.Screens;
 
 namespace RogueCastle;
 
-internal class LevelBuilder2 {
+internal static class LevelBuilder2 {
     private const int MAX_ROOM_SIZE = 4;
 
-    private static readonly List<RoomObj>[,] m_castleRoomArray = new List<RoomObj>[MAX_ROOM_SIZE, MAX_ROOM_SIZE];
-    private static readonly List<RoomObj>[,] m_dungeonRoomArray = new List<RoomObj>[MAX_ROOM_SIZE, MAX_ROOM_SIZE];
-    private static readonly List<RoomObj>[,] m_towerRoomArray = new List<RoomObj>[MAX_ROOM_SIZE, MAX_ROOM_SIZE];
-    private static readonly List<RoomObj>[,] m_gardenRoomArray = new List<RoomObj>[MAX_ROOM_SIZE, MAX_ROOM_SIZE];
+    private static readonly List<RoomObj>[,] CastleRoomArray = new List<RoomObj>[MAX_ROOM_SIZE, MAX_ROOM_SIZE];
+    private static readonly List<RoomObj>[,] GardenRoomArray = new List<RoomObj>[MAX_ROOM_SIZE, MAX_ROOM_SIZE];
+    private static readonly List<RoomObj>[,] TowerRoomArray = new List<RoomObj>[MAX_ROOM_SIZE, MAX_ROOM_SIZE];
+    private static readonly List<RoomObj>[,] DungeonRoomArray = new List<RoomObj>[MAX_ROOM_SIZE, MAX_ROOM_SIZE];
 
-    private static List<RoomObj> m_bossRoomArray;
-    private static RoomObj m_testRoom;
-    private static RoomObj m_castleEntranceRoom;
-    private static RoomObj m_linkerCastleRoom;
-    private static RoomObj m_linkerDungeonRoom;
-    private static RoomObj m_linkerGardenRoom;
-    private static RoomObj m_linkerTowerRoom;
-    private static RoomObj m_bossCastleEntranceRoom;
-    private static RoomObj m_bossDungeonEntranceRoom;
-    private static RoomObj m_bossGardenEntranceRoom;
-    private static RoomObj m_bossTowerEntranceRoom;
-    private static List<RoomObj> m_secretCastleRoomArray;
-    private static List<RoomObj> m_secretGardenRoomArray;
-    private static List<RoomObj> m_secretTowerRoomArray;
-    private static List<RoomObj> m_secretDungeonRoomArray;
-    private static List<RoomObj> m_bonusCastleRoomArray;
-    private static List<RoomObj> m_bonusGardenRoomArray;
-    private static List<RoomObj> m_bonusTowerRoomArray;
-    private static List<RoomObj> m_bonusDungeonRoomArray;
-    private static List<RoomObj> m_dlcCastleRoomArray;
-    private static List<RoomObj> m_dlcGardenRoomArray;
-    private static List<RoomObj> m_dlcTowerRoomArray;
-    private static List<RoomObj> m_dlcDungeonRoomArray;
-    private static RoomObj m_tutorialRoom;
-    private static RoomObj m_throneRoom;
-    private static RoomObj m_endingRoom;
-    private static CompassRoomObj m_compassRoom;
+    private static List<RoomObj> _bossRoomArray;
+    private static RoomObj _testRoom;
+    private static RoomObj _castleEntranceRoom;
+    private static RoomObj _linkerCastleRoom;
+    private static RoomObj _linkerDungeonRoom;
+    private static RoomObj _linkerGardenRoom;
+    private static RoomObj _linkerTowerRoom;
+    private static RoomObj _bossCastleEntranceRoom;
+    private static RoomObj _bossDungeonEntranceRoom;
+    private static RoomObj _bossGardenEntranceRoom;
+    private static RoomObj _bossTowerEntranceRoom;
+    private static List<RoomObj> _secretCastleRoomArray;
+    private static List<RoomObj> _secretGardenRoomArray;
+    private static List<RoomObj> _secretTowerRoomArray;
+    private static List<RoomObj> _secretDungeonRoomArray;
+    private static List<RoomObj> _bonusCastleRoomArray;
+    private static List<RoomObj> _bonusGardenRoomArray;
+    private static List<RoomObj> _bonusTowerRoomArray;
+    private static List<RoomObj> _bonusDungeonRoomArray;
+    private static List<RoomObj> _dlcCastleRoomArray;
+    private static List<RoomObj> _dlcGardenRoomArray;
+    private static List<RoomObj> _dlcTowerRoomArray;
+    private static List<RoomObj> _dlcDungeonRoomArray;
+    private static RoomObj _tutorialRoom;
+    private static RoomObj _throneRoom;
+    private static RoomObj _endingRoom;
+    private static CompassRoomObj _compassRoom;
 
     // Challenge Room Content.
-    private static List<RoomObj> m_challengeRoomArray;
+    private static List<RoomObj> _challengeRoomArray;
 
-    private static bool hasTopDoor;
-    private static bool hasBottomDoor;
-    private static bool hasLeftDoor;
-    private static bool hasRightDoor;
-    
-    private static bool hasTopLeftDoor;
-    private static bool hasTopRightDoor;
-    private static bool hasBottomLeftDoor;
-    private static bool hasBottomRightDoor;
-    private static bool hasRightTopDoor;
-    private static bool hasRightBottomDoor;
-    private static bool hasLeftTopDoor;
-    private static bool hasLeftBottomDoor;
+    private static bool _hasTopDoor;
+    private static bool _hasBottomDoor;
+    private static bool _hasLeftDoor;
+    private static bool _hasRightDoor;
+
+    private static bool _hasTopLeftDoor;
+    private static bool _hasTopRightDoor;
+    private static bool _hasBottomLeftDoor;
+    private static bool _hasBottomRightDoor;
+    private static bool _hasRightTopDoor;
+    private static bool _hasRightBottomDoor;
+    private static bool _hasLeftTopDoor;
+    private static bool _hasLeftBottomDoor;
 
     public static RoomObj StartingRoom { get; private set; }
 
     public static List<RoomObj> SequencedRoomList {
         get {
-            var sequencedRoomList = new List<RoomObj>();
-
             // Add the special rooms first.
-            sequencedRoomList.Add(StartingRoom);
-
-            sequencedRoomList.Add(m_linkerCastleRoom);
-            sequencedRoomList.Add(m_linkerTowerRoom);
-            sequencedRoomList.Add(m_linkerDungeonRoom);
-            sequencedRoomList.Add(m_linkerGardenRoom);
-
-            sequencedRoomList.Add(m_bossCastleEntranceRoom);
-            sequencedRoomList.Add(m_bossTowerEntranceRoom);
-            sequencedRoomList.Add(m_bossDungeonEntranceRoom);
-            sequencedRoomList.Add(m_bossGardenEntranceRoom);
-
-            sequencedRoomList.Add(m_castleEntranceRoom);
+            var sequencedRoomList = new List<RoomObj> {
+                StartingRoom,
+                _linkerCastleRoom,
+                _linkerTowerRoom,
+                _linkerDungeonRoom,
+                _linkerGardenRoom,
+                _bossCastleEntranceRoom,
+                _bossTowerEntranceRoom,
+                _bossDungeonEntranceRoom,
+                _bossGardenEntranceRoom,
+                _castleEntranceRoom,
+            };
 
             // Add the normal rooms.
-            foreach (List<RoomObj> roomList in m_castleRoomArray) {
+            foreach (List<RoomObj> roomList in CastleRoomArray) {
                 sequencedRoomList.AddRange(roomList);
             }
 
-            foreach (List<RoomObj> roomList in m_dungeonRoomArray) {
+            foreach (List<RoomObj> roomList in DungeonRoomArray) {
                 sequencedRoomList.AddRange(roomList);
             }
 
-            foreach (List<RoomObj> roomList in m_towerRoomArray) {
+            foreach (List<RoomObj> roomList in TowerRoomArray) {
                 sequencedRoomList.AddRange(roomList);
             }
 
-            foreach (List<RoomObj> roomList in m_gardenRoomArray) {
+            foreach (List<RoomObj> roomList in GardenRoomArray) {
                 sequencedRoomList.AddRange(roomList);
             }
 
             // Add the secret rooms.
-            sequencedRoomList.AddRange(m_secretCastleRoomArray);
-            sequencedRoomList.AddRange(m_secretTowerRoomArray);
-            sequencedRoomList.AddRange(m_secretDungeonRoomArray);
-            sequencedRoomList.AddRange(m_secretGardenRoomArray);
+            sequencedRoomList.AddRange(_secretCastleRoomArray);
+            sequencedRoomList.AddRange(_secretTowerRoomArray);
+            sequencedRoomList.AddRange(_secretDungeonRoomArray);
+            sequencedRoomList.AddRange(_secretGardenRoomArray);
 
             // Add the bonus rooms.
-            sequencedRoomList.AddRange(m_bonusCastleRoomArray);
-            sequencedRoomList.AddRange(m_bonusTowerRoomArray);
-            sequencedRoomList.AddRange(m_bonusDungeonRoomArray);
-            sequencedRoomList.AddRange(m_bonusGardenRoomArray);
+            sequencedRoomList.AddRange(_bonusCastleRoomArray);
+            sequencedRoomList.AddRange(_bonusTowerRoomArray);
+            sequencedRoomList.AddRange(_bonusDungeonRoomArray);
+            sequencedRoomList.AddRange(_bonusGardenRoomArray);
 
             // Add the boss room array.
-            sequencedRoomList.AddRange(m_bossRoomArray);
+            sequencedRoomList.AddRange(_bossRoomArray);
 
             // Add the challenge room array.
-            sequencedRoomList.AddRange(m_challengeRoomArray);
+            sequencedRoomList.AddRange(_challengeRoomArray);
 
             //Add the compass room.
-            sequencedRoomList.Add(m_compassRoom);
+            sequencedRoomList.Add(_compassRoom);
 
             for (var i = 0; i < sequencedRoomList.Count; i++) {
-                if (sequencedRoomList[i] == null) {
-                    Console.WriteLine("WARNING: Null room found at index " + i + " of sequencedRoomList.  Removing room...");
-                    sequencedRoomList.RemoveAt(i);
-                    i--;
+                if (sequencedRoomList[i] != null) {
+                    continue;
                 }
+
+                Console.WriteLine($@"WARNING: Null room found at index {i} of sequencedRoomList.  Removing room...");
+                sequencedRoomList.RemoveAt(i);
+                i--;
             }
 
             return sequencedRoomList;
@@ -135,306 +135,288 @@ internal class LevelBuilder2 {
     }
 
     public static void Initialize() {
-        for (var i = 0; i < MAX_ROOM_SIZE; i++) {
-            for (var k = 0; k < MAX_ROOM_SIZE; k++) {
-                m_castleRoomArray[i, k] = new List<RoomObj>();
-                m_dungeonRoomArray[i, k] = new List<RoomObj>();
-                m_towerRoomArray[i, k] = new List<RoomObj>();
-                m_gardenRoomArray[i, k] = new List<RoomObj>();
-            }
+        for (var i = 0; i < MAX_ROOM_SIZE; i++)
+        for (var k = 0; k < MAX_ROOM_SIZE; k++) {
+            CastleRoomArray[i, k] = [];
+            DungeonRoomArray[i, k] = [];
+            TowerRoomArray[i, k] = [];
+            GardenRoomArray[i, k] = [];
         }
 
-        m_secretCastleRoomArray = new List<RoomObj>();
-        m_secretGardenRoomArray = new List<RoomObj>();
-        m_secretTowerRoomArray = new List<RoomObj>();
-        m_secretDungeonRoomArray = new List<RoomObj>();
-
-        m_bonusCastleRoomArray = new List<RoomObj>();
-        m_bonusGardenRoomArray = new List<RoomObj>();
-        m_bonusTowerRoomArray = new List<RoomObj>();
-        m_bonusDungeonRoomArray = new List<RoomObj>();
-
-        m_bossRoomArray = new List<RoomObj>();
-        m_challengeRoomArray = new List<RoomObj>();
-
-        m_dlcCastleRoomArray = new List<RoomObj>();
-        m_dlcDungeonRoomArray = new List<RoomObj>();
-        m_dlcGardenRoomArray = new List<RoomObj>();
-        m_dlcTowerRoomArray = new List<RoomObj>();
+        _secretCastleRoomArray = [];
+        _secretGardenRoomArray = [];
+        _secretTowerRoomArray = [];
+        _secretDungeonRoomArray = [];
+        _bonusCastleRoomArray = [];
+        _bonusGardenRoomArray = [];
+        _bonusTowerRoomArray = [];
+        _bonusDungeonRoomArray = [];
+        _bossRoomArray = [];
+        _challengeRoomArray = [];
+        _dlcCastleRoomArray = [];
+        _dlcDungeonRoomArray = [];
+        _dlcGardenRoomArray = [];
+        _dlcTowerRoomArray = [];
     }
 
     public static void StoreRoom(RoomObj room, GameTypes.LevelType levelType) {
-        if (room.Name != "Start" && room.Name != "Linker" &&
-            room.Name != "Boss" && room.Name != "EntranceBoss" &&
-            room.Name != "Secret" && room.Name != "Bonus" &&
-            room.Name != "CastleEntrance" && room.Name != "Throne" &&
-            room.Name != "Tutorial" && room.Name != "Ending" &&
-            room.Name != "Compass" && room.Name != "DEBUG_ROOM" && room.Name != "ChallengeBoss") {
-            if (room.Width % GlobalEV.SCREEN_WIDTH != 0) {
-                throw new Exception("Room Name: " + room.Name + " is not a width divisible by " + GlobalEV.SCREEN_WIDTH + ". Cannot parse the file.");
-            }
+        // Ignore non-special rooms.
+        if (room.Name is "Start" or "Linker" or "Boss" or "EntranceBoss" or "Secret" or "Bonus" or "CastleEntrance" or
+            "Throne" or "Tutorial" or "Ending" or "Compass" or "DEBUG_ROOM" or "ChallengeBoss") {
+            return;
+        }
 
-            if (room.Height % GlobalEV.SCREEN_HEIGHT != 0) {
-                throw new Exception("Room Name: " + room.Name + " is not a height divisible by " + GlobalEV.SCREEN_HEIGHT + ". Cannot parse the file.");
-            }
+        if (room.Width % GlobalEV.SCREEN_WIDTH != 0) {
+            throw new Exception($"Room Name: {room.Name} is not a width divisible by {GlobalEV.SCREEN_WIDTH}. Cannot parse the file.");
+        }
 
-            var i = room.Width / GlobalEV.SCREEN_WIDTH;
-            var k = room.Height / GlobalEV.SCREEN_HEIGHT;
+        if (room.Height % GlobalEV.SCREEN_HEIGHT != 0) {
+            throw new Exception($"Room Name: {room.Name} is not a height divisible by {GlobalEV.SCREEN_HEIGHT}. Cannot parse the file.");
+        }
 
-            if (room.IsDLCMap == false) {
-                List<RoomObj>[,] roomArray = null;
-                switch (levelType) {
-                    case GameTypes.LevelType.Castle:
-                        roomArray = m_castleRoomArray;
-                        break;
+        var i = room.Width / GlobalEV.SCREEN_WIDTH;
+        var k = room.Height / GlobalEV.SCREEN_HEIGHT;
 
-                    case GameTypes.LevelType.Dungeon:
-                        roomArray = m_dungeonRoomArray;
-                        break;
+        if (room.IsDLCMap == false) {
+            List<RoomObj>[,] roomArray = levelType switch {
+                GameTypes.LevelType.Castle  => CastleRoomArray,
+                GameTypes.LevelType.Dungeon => DungeonRoomArray,
+                GameTypes.LevelType.Tower   => TowerRoomArray,
+                GameTypes.LevelType.Garden  => GardenRoomArray,
+                _                           => null,
+            };
 
-                    case GameTypes.LevelType.Tower:
-                        roomArray = m_towerRoomArray;
-                        break;
+            roomArray![i - 1, k - 1].Add(room.Clone() as RoomObj);
 
-                    case GameTypes.LevelType.Garden:
-                        roomArray = m_gardenRoomArray;
-                        break;
-                }
+            // Do not reverse the actual room.
+            var roomClone = room.Clone() as RoomObj;
+            roomClone!.Reverse();
+            roomArray[i - 1, k - 1].Add(roomClone);
+        } else {
+            // Storing DLC maps in a separate array.
+            List<RoomObj> dlcRoomArray = GetSequencedDLCRoomList(levelType);
+            dlcRoomArray.Add(room.Clone() as RoomObj);
 
-                roomArray[i - 1, k - 1].Add(room.Clone() as RoomObj);
-                var roomClone = room.Clone() as RoomObj;
-                roomClone.Reverse(); // Do not reverse the actual room.
-                roomArray[i - 1, k - 1].Add(roomClone);
-            } else // Storing DLC maps in a separate array.
-            {
-                List<RoomObj> dlcRoomArray = GetSequencedDLCRoomList(levelType);
-
-                dlcRoomArray.Add(room.Clone() as RoomObj);
-                var roomClone = room.Clone() as RoomObj;
-                roomClone.Reverse(); // Do not reverse the actual room.
-                dlcRoomArray.Add(roomClone);
-            }
+            // Do not reverse the actual room.
+            var roomClone = room.Clone() as RoomObj;
+            roomClone!.Reverse();
+            dlcRoomArray.Add(roomClone);
         }
     }
 
     public static void StoreSpecialRoom(RoomObj room, GameTypes.LevelType levelType, bool storeDebug = false) {
         if (storeDebug) {
-            m_testRoom = room.Clone() as RoomObj;
-            m_testRoom.LevelType = LevelEV.TestRoomLevelType;
+            _testRoom = room.Clone() as RoomObj;
+            _testRoom!.LevelType = LevelEV.TestRoomLevelType;
         }
 
-        //else
-        {
-            switch (room.Name) {
-                case "Start":
-                    //if (m_bossEntranceRoom != null) throw new Exception("More than 1 boss entrance room found");
-                    if (StartingRoom == null) // Only store the first found copy of the starting room.
-                    {
-                        StartingRoom = new StartingRoomObj();
-                        StartingRoom.CopyRoomProperties(room);
-                        StartingRoom.CopyRoomObjects(room);
-                    }
+        switch (room.Name) {
+            case "Start":
+                if (StartingRoom == null) // Only store the first found copy of the starting room.
+                {
+                    StartingRoom = new StartingRoomObj();
+                    StartingRoom.CopyRoomProperties(room);
+                    StartingRoom.CopyRoomObjects(room);
+                }
 
-                    break;
+                break;
 
-                case "Linker":
-                    //if (m_linkerRoom != null) throw new Exception("More than 1 linker room found");
-                    var linkerRoom = room.Clone() as RoomObj;
+            case "Linker":
+                var linkerRoom = room.Clone() as RoomObj;
 
-                    switch (levelType) {
-                        case GameTypes.LevelType.Castle:
-                            m_linkerCastleRoom = linkerRoom;
-                            break;
+                switch (levelType) {
+                    case GameTypes.LevelType.Castle:
+                        _linkerCastleRoom = linkerRoom;
+                        break;
 
-                        case GameTypes.LevelType.Dungeon:
-                            m_linkerDungeonRoom = linkerRoom;
-                            break;
+                    case GameTypes.LevelType.Dungeon:
+                        _linkerDungeonRoom = linkerRoom;
+                        break;
 
-                        case GameTypes.LevelType.Tower:
-                            m_linkerTowerRoom = linkerRoom;
-                            break;
+                    case GameTypes.LevelType.Tower:
+                        _linkerTowerRoom = linkerRoom;
+                        break;
 
-                        case GameTypes.LevelType.Garden:
-                            m_linkerGardenRoom = linkerRoom;
-                            break;
-                    }
+                    case GameTypes.LevelType.Garden:
+                        _linkerGardenRoom = linkerRoom;
+                        break;
+                }
 
-                    var teleporter = new TeleporterObj();
-                    teleporter.Position = new Vector2(linkerRoom.X + (linkerRoom.Width / 2f) - (teleporter.Bounds.Right - teleporter.AnchorX), linkerRoom.Y + linkerRoom.Height - 60);
-                    linkerRoom.GameObjList.Add(teleporter);
-                    break;
+                var teleporter = new TeleporterObj();
+                teleporter.Position = new Vector2(linkerRoom!.X + (linkerRoom.Width / 2f) - (teleporter.Bounds.Right - teleporter.AnchorX), linkerRoom.Y + linkerRoom.Height - 60);
+                linkerRoom.GameObjList.Add(teleporter);
+                break;
 
-                case "Boss":
-                    foreach (var door in room.DoorList) // Locking the doors to boss rooms so you can't exit a boss fight.
-                    {
-                        if (door.IsBossDoor) {
-                            door.Locked = true;
-                        }
-                    }
+            case "Boss":
+                // Locking the doors to boss rooms so you can't exit a boss fight.
+                foreach (var door in room.DoorList.Where(door => door.IsBossDoor))
+                {
+                    door.Locked = true;
+                }
 
-                    m_bossRoomArray.Add(room.Clone() as RoomObj);
-                    break;
+                _bossRoomArray.Add(room.Clone() as RoomObj);
+                break;
 
-                case "EntranceBoss":
-                    //if (m_bossEntranceRoom != null) throw new Exception("More than 1 boss entrance room found");
-                    var bossEntranceRoom = room.Clone() as RoomObj;
-                    var bossTeleporter = new TeleporterObj();
-                    bossTeleporter.Position = new Vector2(bossEntranceRoom.X + (bossEntranceRoom.Width / 2f) - (bossTeleporter.Bounds.Right - bossTeleporter.AnchorX), bossEntranceRoom.Y + bossEntranceRoom.Height - 60);
-                    bossEntranceRoom.GameObjList.Add(bossTeleporter);
+            case "EntranceBoss":
+                var bossEntranceRoom = room.Clone() as RoomObj;
+                var bossTeleporter = new TeleporterObj();
+                bossTeleporter.Position = new Vector2(bossEntranceRoom!.X + (bossEntranceRoom.Width / 2f) - (bossTeleporter.Bounds.Right - bossTeleporter.AnchorX), bossEntranceRoom.Y + bossEntranceRoom.Height - 60);
+                bossEntranceRoom.GameObjList.Add(bossTeleporter);
 
-                    NpcObj donationBox = null;
-                    foreach (var obj in bossEntranceRoom.GameObjList) {
-                        if (obj.Name == "donationbox") {
-                            donationBox = new NpcObj((obj as ObjContainer).SpriteName);
-                            donationBox.Position = obj.Position;
-                            donationBox.Y -= 2;
-                            donationBox.Name = obj.Name;
-                            donationBox.Scale = obj.Scale;
-                            donationBox.useArrowIcon = true;
-                            obj.Visible = false;
-                        }
-                    }
+                NpcObj donationBox = null;
+                foreach (var obj in bossEntranceRoom.GameObjList.Where(obj => obj.Name == "donationbox"))
+                {
+                    donationBox = new NpcObj((obj as ObjContainer)!.SpriteName) { 
+                        useArrowIcon = true,
+                        Position = obj.Position,
+                        Name = obj.Name,
+                        Scale = obj.Scale,
+                    };
+                    donationBox.Y -= 2;
+                    obj.Visible = false;
+                }
 
-                    if (donationBox != null) {
-                        bossEntranceRoom.GameObjList.Add(donationBox);
-                    }
+                if (donationBox != null) {
+                    bossEntranceRoom.GameObjList.Add(donationBox);
+                }
 
-                    switch (levelType) {
-                        case GameTypes.LevelType.Castle:
-                            m_bossCastleEntranceRoom = bossEntranceRoom;
-                            break;
+                switch (levelType) {
+                    case GameTypes.LevelType.Castle:
+                        _bossCastleEntranceRoom = bossEntranceRoom;
+                        break;
 
-                        case GameTypes.LevelType.Dungeon:
-                            m_bossDungeonEntranceRoom = bossEntranceRoom;
-                            break;
+                    case GameTypes.LevelType.Dungeon:
+                        _bossDungeonEntranceRoom = bossEntranceRoom;
+                        break;
 
-                        case GameTypes.LevelType.Tower:
-                            m_bossTowerEntranceRoom = bossEntranceRoom;
-                            break;
+                    case GameTypes.LevelType.Tower:
+                        _bossTowerEntranceRoom = bossEntranceRoom;
+                        break;
 
-                        case GameTypes.LevelType.Garden:
-                            m_bossGardenEntranceRoom = bossEntranceRoom;
-                            break;
-                    }
+                    case GameTypes.LevelType.Garden:
+                        _bossGardenEntranceRoom = bossEntranceRoom;
+                        break;
+                }
 
-                    break;
+                break;
 
-                case "CastleEntrance":
-                    // Only store the first copy of the castle entrance room.
-                    if (m_castleEntranceRoom == null) {
-                        m_castleEntranceRoom = new CastleEntranceRoomObj();
-                        m_castleEntranceRoom.CopyRoomProperties(room);
-                        m_castleEntranceRoom.CopyRoomObjects(room);
-                        m_castleEntranceRoom.LevelType = GameTypes.LevelType.Castle;
-                    }
+            case "CastleEntrance":
+                // Only store the first copy of the castle entrance room.
+                if (_castleEntranceRoom == null) {
+                    _castleEntranceRoom = new CastleEntranceRoomObj();
+                    _castleEntranceRoom.CopyRoomProperties(room);
+                    _castleEntranceRoom.CopyRoomObjects(room);
+                    _castleEntranceRoom.LevelType = GameTypes.LevelType.Castle;
+                }
 
-                    break;
+                break;
 
-                case "Compass":
-                    if (m_compassRoom == null) {
-                        m_compassRoom = new CompassRoomObj();
-                        m_compassRoom.CopyRoomProperties(room);
-                        m_compassRoom.CopyRoomObjects(room);
-                    }
+            case "Compass":
+                if (_compassRoom == null) {
+                    _compassRoom = new CompassRoomObj();
+                    _compassRoom.CopyRoomProperties(room);
+                    _compassRoom.CopyRoomObjects(room);
+                }
 
-                    break;
+                break;
 
-                case "Secret":
-                    List<RoomObj> secretRoomArray = null;
+            case "Secret":
+                List<RoomObj> secretRoomArray = null;
 
-                    switch (levelType) {
-                        case GameTypes.LevelType.Castle:
-                            secretRoomArray = m_secretCastleRoomArray;
-                            break;
+                switch (levelType) {
+                    case GameTypes.LevelType.Castle:
+                        secretRoomArray = _secretCastleRoomArray;
+                        break;
 
-                        case GameTypes.LevelType.Dungeon:
-                            secretRoomArray = m_secretDungeonRoomArray;
-                            break;
+                    case GameTypes.LevelType.Dungeon:
+                        secretRoomArray = _secretDungeonRoomArray;
+                        break;
 
-                        case GameTypes.LevelType.Tower:
-                            secretRoomArray = m_secretTowerRoomArray;
-                            break;
+                    case GameTypes.LevelType.Tower:
+                        secretRoomArray = _secretTowerRoomArray;
+                        break;
 
-                        case GameTypes.LevelType.Garden:
-                            secretRoomArray = m_secretGardenRoomArray;
-                            break;
-                    }
+                    case GameTypes.LevelType.Garden:
+                        secretRoomArray = _secretGardenRoomArray;
+                        break;
+                }
 
-                    secretRoomArray.Add(room.Clone() as RoomObj);
-                    var roomClone = room.Clone() as RoomObj;
-                    roomClone.Reverse(); // Do not reverse the actual room.
-                    secretRoomArray.Add(roomClone);
-                    break;
+                secretRoomArray!.Add(room.Clone() as RoomObj);
+                
+                // Do not reverse the actual room.
+                var roomClone = room.Clone() as RoomObj;
+                roomClone!.Reverse();
+                secretRoomArray.Add(roomClone);
+                break;
 
-                case "Bonus":
-                    List<RoomObj> bonusRoomArray = null;
+            case "Bonus":
+                List<RoomObj> bonusRoomArray = null;
 
-                    switch (levelType) {
-                        case GameTypes.LevelType.Castle:
-                            bonusRoomArray = m_bonusCastleRoomArray;
-                            break;
+                switch (levelType) {
+                    case GameTypes.LevelType.Castle:
+                        bonusRoomArray = _bonusCastleRoomArray;
+                        break;
 
-                        case GameTypes.LevelType.Dungeon:
-                            bonusRoomArray = m_bonusDungeonRoomArray;
-                            break;
+                    case GameTypes.LevelType.Dungeon:
+                        bonusRoomArray = _bonusDungeonRoomArray;
+                        break;
 
-                        case GameTypes.LevelType.Tower:
-                            bonusRoomArray = m_bonusTowerRoomArray;
-                            break;
+                    case GameTypes.LevelType.Tower:
+                        bonusRoomArray = _bonusTowerRoomArray;
+                        break;
 
-                        case GameTypes.LevelType.Garden:
-                            bonusRoomArray = m_bonusGardenRoomArray;
-                            break;
-                    }
+                    case GameTypes.LevelType.Garden:
+                        bonusRoomArray = _bonusGardenRoomArray;
+                        break;
+                }
 
-                    bonusRoomArray.Add(room.Clone() as RoomObj);
-                    var bonusRoomClone = room.Clone() as RoomObj;
-                    bonusRoomClone.Reverse(); // Do not reverse the actual room.
-                    bonusRoomArray.Add(bonusRoomClone);
-                    break;
+                bonusRoomArray!.Add(room.Clone() as RoomObj);
+                var bonusRoomClone = room.Clone() as RoomObj;
 
-                case "Tutorial":
-                    if (m_tutorialRoom == null) {
-                        m_tutorialRoom = new TutorialRoomObj();
-                        m_tutorialRoom.CopyRoomProperties(room);
-                        m_tutorialRoom.CopyRoomObjects(room);
-                    }
+                // Do not reverse the actual room.
+                bonusRoomClone!.Reverse(); 
+                bonusRoomArray.Add(bonusRoomClone);
+                break;
 
-                    break;
+            case "Tutorial":
+                if (_tutorialRoom == null) {
+                    _tutorialRoom = new TutorialRoomObj();
+                    _tutorialRoom.CopyRoomProperties(room);
+                    _tutorialRoom.CopyRoomObjects(room);
+                }
 
-                case "Throne":
-                    if (m_throneRoom == null) {
-                        m_throneRoom = new ThroneRoomObj();
-                        m_throneRoom.CopyRoomProperties(room);
-                        m_throneRoom.CopyRoomObjects(room);
-                    }
+                break;
 
-                    break;
+            case "Throne":
+                if (_throneRoom == null) {
+                    _throneRoom = new ThroneRoomObj();
+                    _throneRoom.CopyRoomProperties(room);
+                    _throneRoom.CopyRoomObjects(room);
+                }
 
-                case "Ending":
-                    if (m_endingRoom == null) {
-                        m_endingRoom = new EndingRoomObj();
-                        m_endingRoom.CopyRoomProperties(room);
-                        m_endingRoom.CopyRoomObjects(room);
-                    }
+                break;
 
-                    break;
+            case "Ending":
+                if (_endingRoom == null) {
+                    _endingRoom = new EndingRoomObj();
+                    _endingRoom.CopyRoomProperties(room);
+                    _endingRoom.CopyRoomObjects(room);
+                }
 
-                case "ChallengeBoss":
-                    foreach (var door in room.DoorList) // Locking the doors to challenge rooms so you can't exit the challenge.
-                    {
-                        if (door.IsBossDoor) {
-                            door.Locked = true;
-                        }
-                    }
+                break;
 
-                    m_challengeRoomArray.Add(room.Clone() as RoomObj);
-                    break;
-            }
+            case "ChallengeBoss":
+                // Locking the doors to challenge rooms so you can't exit the challenge.
+                foreach (var door in room.DoorList.Where(door => door.IsBossDoor))
+                {
+                    door.Locked = true;
+                }
+
+                _challengeRoomArray.Add(room.Clone() as RoomObj);
+                break;
         }
     }
-
-    //public static List<RoomObj> CreateArea(int roomSize, GameTypes.LevelType levelType, List<RoomObj> roomsToCheckCollisionsList, RoomObj startingRoom, bool firstRoom)
+    
     public static List<RoomObj> CreateArea(int areaSize, AreaStruct areaInfo, List<RoomObj> roomsToCheckCollisionsList, RoomObj startingRoom, bool firstRoom) {
         // The way boss rooms work, is as more and more rooms get built, the chance of a boss room appearing increases, until it hits 100% for the final room.
         var bossAdded = false;
@@ -456,23 +438,23 @@ internal class LevelBuilder2 {
         List<RoomObj> bonusRoomArray = null;
         switch (areaInfo.LevelType) {
             case GameTypes.LevelType.Castle:
-                secretRoomArray = m_secretCastleRoomArray;
-                bonusRoomArray = m_bonusCastleRoomArray;
+                secretRoomArray = _secretCastleRoomArray;
+                bonusRoomArray = _bonusCastleRoomArray;
                 break;
 
             case GameTypes.LevelType.Dungeon:
-                secretRoomArray = m_secretDungeonRoomArray;
-                bonusRoomArray = m_bonusDungeonRoomArray;
+                secretRoomArray = _secretDungeonRoomArray;
+                bonusRoomArray = _bonusDungeonRoomArray;
                 break;
 
             case GameTypes.LevelType.Garden:
-                secretRoomArray = m_secretGardenRoomArray;
-                bonusRoomArray = m_bonusGardenRoomArray;
+                secretRoomArray = _secretGardenRoomArray;
+                bonusRoomArray = _bonusGardenRoomArray;
                 break;
 
             case GameTypes.LevelType.Tower:
-                secretRoomArray = m_secretTowerRoomArray;
-                bonusRoomArray = m_bonusTowerRoomArray;
+                secretRoomArray = _secretTowerRoomArray;
+                bonusRoomArray = _bonusTowerRoomArray;
                 break;
         }
 
@@ -554,7 +536,7 @@ internal class LevelBuilder2 {
             MoveRoom(startingRoom, Vector2.Zero); // Sets the starting room to position (0,0) for simplicity.
 
             // Adding the castle entrance room to the game after the starting room.
-            var castleEntrance = m_castleEntranceRoom.Clone() as RoomObj;
+            var castleEntrance = _castleEntranceRoom.Clone() as RoomObj;
             roomList.Add(castleEntrance);
             tempRoomsToCheckCollisionsList.Add(castleEntrance);
             //castleEntrance.LevelType = GameTypes.LevelType.NONE;//GameTypes.LevelType.CASTLE; // Why?
@@ -643,19 +625,19 @@ internal class LevelBuilder2 {
 
                 switch (areaInfo.LevelType) {
                     case GameTypes.LevelType.Castle:
-                        bossEntranceRoom = m_bossCastleEntranceRoom;
+                        bossEntranceRoom = _bossCastleEntranceRoom;
                         break;
 
                     case GameTypes.LevelType.Dungeon:
-                        bossEntranceRoom = m_bossDungeonEntranceRoom;
+                        bossEntranceRoom = _bossDungeonEntranceRoom;
                         break;
 
                     case GameTypes.LevelType.Garden:
-                        bossEntranceRoom = m_bossGardenEntranceRoom;
+                        bossEntranceRoom = _bossGardenEntranceRoom;
                         break;
 
                     case GameTypes.LevelType.Tower:
-                        bossEntranceRoom = m_bossTowerEntranceRoom;
+                        bossEntranceRoom = _bossTowerEntranceRoom;
                         break;
                 }
 
@@ -1130,19 +1112,19 @@ internal class LevelBuilder2 {
         RoomObj linkerRoom = null;
         switch (needsLinking.Room.LevelType) {
             case GameTypes.LevelType.Castle:
-                linkerRoom = m_linkerCastleRoom.Clone() as RoomObj;
+                linkerRoom = _linkerCastleRoom.Clone() as RoomObj;
                 break;
 
             case GameTypes.LevelType.Dungeon:
-                linkerRoom = m_linkerDungeonRoom.Clone() as RoomObj;
+                linkerRoom = _linkerDungeonRoom.Clone() as RoomObj;
                 break;
 
             case GameTypes.LevelType.Tower:
-                linkerRoom = m_linkerTowerRoom.Clone() as RoomObj;
+                linkerRoom = _linkerTowerRoom.Clone() as RoomObj;
                 break;
 
             case GameTypes.LevelType.Garden:
-                linkerRoom = m_linkerGardenRoom.Clone() as RoomObj;
+                linkerRoom = _linkerGardenRoom.Clone() as RoomObj;
                 break;
         }
 
@@ -1202,66 +1184,66 @@ internal class LevelBuilder2 {
 
     public static void AddRemoveExtraObjects(List<RoomObj> roomList) {
         foreach (var room in roomList) {
-            hasTopDoor = false;
-            hasBottomDoor = false;
-            hasLeftDoor = false;
-            hasRightDoor = false;
+            _hasTopDoor = false;
+            _hasBottomDoor = false;
+            _hasLeftDoor = false;
+            _hasRightDoor = false;
 
-            hasTopLeftDoor = false;
-            hasTopRightDoor = false;
-            hasBottomLeftDoor = false;
-            hasBottomRightDoor = false;
-            hasRightTopDoor = false;
-            hasRightBottomDoor = false;
-            hasLeftTopDoor = false;
-            hasLeftBottomDoor = false;
+            _hasTopLeftDoor = false;
+            _hasTopRightDoor = false;
+            _hasBottomLeftDoor = false;
+            _hasBottomRightDoor = false;
+            _hasRightTopDoor = false;
+            _hasRightBottomDoor = false;
+            _hasLeftTopDoor = false;
+            _hasLeftBottomDoor = false;
 
             foreach (var door in room.DoorList) {
                 switch (door.DoorPosition) {
                     case "Top":
-                        hasTopDoor = true;
+                        _hasTopDoor = true;
                         if (door.X - room.X == 540) {
-                            hasTopLeftDoor = true;
+                            _hasTopLeftDoor = true;
                         }
 
                         if (room.Bounds.Right - door.X == 780) {
-                            hasTopRightDoor = true;
+                            _hasTopRightDoor = true;
                         }
 
                         break;
 
                     case "Bottom":
-                        hasBottomDoor = true;
+                        _hasBottomDoor = true;
                         if (door.X - room.X == 540) {
-                            hasBottomLeftDoor = true;
+                            _hasBottomLeftDoor = true;
                         }
 
                         if (room.Bounds.Right - door.X == 780) {
-                            hasBottomRightDoor = true;
+                            _hasBottomRightDoor = true;
                         }
 
                         break;
 
                     case "Left":
-                        hasLeftDoor = true;
+                        _hasLeftDoor = true;
                         if (door.Y - room.Y == 240) {
-                            hasLeftTopDoor = true;
+                            _hasLeftTopDoor = true;
                         }
 
                         if (room.Bounds.Bottom - door.Y == 480) {
-                            hasLeftBottomDoor = true;
+                            _hasLeftBottomDoor = true;
                         }
 
                         break;
 
                     case "Right":
-                        hasRightDoor = true;
+                        _hasRightDoor = true;
                         if (door.Y - room.Y == 240) {
-                            hasRightTopDoor = true;
+                            _hasRightTopDoor = true;
                         }
 
                         if (room.Bounds.Bottom - door.Y == 480) {
-                            hasRightBottomDoor = true;
+                            _hasRightBottomDoor = true;
                         }
 
                         break;
@@ -1280,33 +1262,33 @@ internal class LevelBuilder2 {
             var name = (list[i] as GameObj).Name;
             if (name != null) {
                 //if ((hasTopDoor == false && name.IndexOf("Top") != -1 && name.IndexOf("!Top") == -1) || (hasTopDoor == true && name.IndexOf("!Top") != -1))
-                if ((hasTopLeftDoor == false && name.IndexOf("TopLeft") != -1 && name.IndexOf("!TopLeft") == -1) || (hasTopLeftDoor && name.IndexOf("!TopLeft") != -1) ||
-                    (hasTopRightDoor == false && name.IndexOf("TopRight") != -1 && name.IndexOf("!TopRight") == -1) || (hasTopRightDoor && name.IndexOf("!TopRight") != -1) ||
-                    (hasTopDoor == false && name.IndexOf("Top") != -1 && name.IndexOf("!Top") == -1 && name.Length == 3) || (hasTopDoor && name.IndexOf("!Top") != -1 && name.Length == 4)) {
+                if ((_hasTopLeftDoor == false && name.IndexOf("TopLeft") != -1 && name.IndexOf("!TopLeft") == -1) || (_hasTopLeftDoor && name.IndexOf("!TopLeft") != -1) ||
+                    (_hasTopRightDoor == false && name.IndexOf("TopRight") != -1 && name.IndexOf("!TopRight") == -1) || (_hasTopRightDoor && name.IndexOf("!TopRight") != -1) ||
+                    (_hasTopDoor == false && name.IndexOf("Top") != -1 && name.IndexOf("!Top") == -1 && name.Length == 3) || (_hasTopDoor && name.IndexOf("!Top") != -1 && name.Length == 4)) {
                     list.Remove(list[i]);
                     i--;
                 }
 
                 //if ((hasBottomDoor == false && name.IndexOf("Bottom") != -1 && name.IndexOf("!Bottom") == -1) || (hasBottomDoor == true && name.IndexOf("!Bottom") != -1))
-                if ((hasBottomLeftDoor == false && name.IndexOf("BottomLeft") != -1 && name.IndexOf("!BottomLeft") == -1) || (hasBottomLeftDoor && name.IndexOf("!BottomLeft") != -1) ||
-                    (hasBottomRightDoor == false && name.IndexOf("BottomRight") != -1 && name.IndexOf("!BottomRight") == -1) || (hasBottomRightDoor && name.IndexOf("!BottomRight") != -1) ||
-                    (hasBottomDoor == false && name.IndexOf("Bottom") != -1 && name.IndexOf("!Bottom") == -1 && name.Length == 6) || (hasBottomDoor && name.IndexOf("!Bottom") != -1 && name.Length == 7)) {
+                if ((_hasBottomLeftDoor == false && name.IndexOf("BottomLeft") != -1 && name.IndexOf("!BottomLeft") == -1) || (_hasBottomLeftDoor && name.IndexOf("!BottomLeft") != -1) ||
+                    (_hasBottomRightDoor == false && name.IndexOf("BottomRight") != -1 && name.IndexOf("!BottomRight") == -1) || (_hasBottomRightDoor && name.IndexOf("!BottomRight") != -1) ||
+                    (_hasBottomDoor == false && name.IndexOf("Bottom") != -1 && name.IndexOf("!Bottom") == -1 && name.Length == 6) || (_hasBottomDoor && name.IndexOf("!Bottom") != -1 && name.Length == 7)) {
                     list.Remove(list[i]);
                     i--;
                 }
 
                 //if ((hasLeftDoor == false && name.IndexOf("Left") != -1 && name.IndexOf("!Left") == -1) || (hasLeftDoor == true && name.IndexOf("!Left") != -1))
-                if ((hasLeftTopDoor == false && name.IndexOf("LeftTop") != -1 && name.IndexOf("!LeftTop") == -1) || (hasLeftTopDoor && name.IndexOf("!LeftTop") != -1) ||
-                    (hasLeftBottomDoor == false && name.IndexOf("LeftBottom") != -1 && name.IndexOf("!LeftBottom") == -1) || (hasLeftBottomDoor && name.IndexOf("!LeftBottom") != -1) ||
-                    (hasLeftDoor == false && name.IndexOf("Left") != -1 && name.IndexOf("!Left") == -1 && name.Length == 4) || (hasLeftDoor && name.IndexOf("!Left") != -1 && name.Length == 5)) {
+                if ((_hasLeftTopDoor == false && name.IndexOf("LeftTop") != -1 && name.IndexOf("!LeftTop") == -1) || (_hasLeftTopDoor && name.IndexOf("!LeftTop") != -1) ||
+                    (_hasLeftBottomDoor == false && name.IndexOf("LeftBottom") != -1 && name.IndexOf("!LeftBottom") == -1) || (_hasLeftBottomDoor && name.IndexOf("!LeftBottom") != -1) ||
+                    (_hasLeftDoor == false && name.IndexOf("Left") != -1 && name.IndexOf("!Left") == -1 && name.Length == 4) || (_hasLeftDoor && name.IndexOf("!Left") != -1 && name.Length == 5)) {
                     list.Remove(list[i]);
                     i--;
                 }
 
                 //if ((hasRightDoor == false && name.IndexOf("Right") != -1 && name.IndexOf("!Right") == -1) || (hasRightDoor == true && name.IndexOf("!Right") != -1))
-                if ((hasRightTopDoor == false && name.IndexOf("RightTop") != -1 && name.IndexOf("!RightTop") == -1) || (hasRightTopDoor && name.IndexOf("!RightTop") != -1) ||
-                    (hasRightBottomDoor == false && name.IndexOf("RightBottom") != -1 && name.IndexOf("!RightBottom") == -1) || (hasRightBottomDoor && name.IndexOf("!RightBottom") != -1) ||
-                    (hasRightDoor == false && name.IndexOf("Right") != -1 && name.IndexOf("!Right") == -1 && name.Length == 5) || (hasRightDoor && name.IndexOf("!Right") != -1 && name.Length == 6)) {
+                if ((_hasRightTopDoor == false && name.IndexOf("RightTop") != -1 && name.IndexOf("!RightTop") == -1) || (_hasRightTopDoor && name.IndexOf("!RightTop") != -1) ||
+                    (_hasRightBottomDoor == false && name.IndexOf("RightBottom") != -1 && name.IndexOf("!RightBottom") == -1) || (_hasRightBottomDoor && name.IndexOf("!RightBottom") != -1) ||
+                    (_hasRightDoor == false && name.IndexOf("Right") != -1 && name.IndexOf("!Right") == -1 && name.Length == 5) || (_hasRightDoor && name.IndexOf("!Right") != -1 && name.Length == 6)) {
                     list.Remove(list[i]);
                     i--;
                 }
@@ -1589,14 +1571,14 @@ internal class LevelBuilder2 {
     }
 
     public static void AddCompassRoom(List<RoomObj> roomList) {
-        var compassRoom = m_compassRoom.Clone() as CompassRoomObj;
+        var compassRoom = _compassRoom.Clone() as CompassRoomObj;
         MoveRoom(compassRoom, new Vector2(-999999, -999999));
         roomList.Add(compassRoom);
     }
 
     public static ProceduralLevelScreen CreateEndingRoom() {
         var endingScreen = new ProceduralLevelScreen();
-        var endingRoom = m_endingRoom.Clone() as RoomObj;
+        var endingRoom = _endingRoom.Clone() as RoomObj;
         MoveRoom(endingRoom, Vector2.Zero);
         endingScreen.AddRoom(endingRoom);
         AddDoorBorders(endingScreen.RoomList);
@@ -1642,12 +1624,12 @@ internal class LevelBuilder2 {
         Game.ScreenManager.Player.Position = new Vector2(150, 150);
 
         // Adding tutorial room.
-        var tutorialRoom = m_tutorialRoom.Clone() as TutorialRoomObj;
+        var tutorialRoom = _tutorialRoom.Clone() as TutorialRoomObj;
         MoveRoom(tutorialRoom, new Vector2(introRoom.Width, -tutorialRoom.Height + introRoom.Height));
         tutorialRoomScreen.AddRoom(tutorialRoom);
 
         // Adding throne room.
-        var throneRoom = m_throneRoom.Clone() as ThroneRoomObj;
+        var throneRoom = _throneRoom.Clone() as ThroneRoomObj;
         MoveRoom(throneRoom, new Vector2(-10000, -10000));
         tutorialRoomScreen.AddRoom(throneRoom);
 
@@ -1736,10 +1718,10 @@ internal class LevelBuilder2 {
     }
 
     public static ProceduralLevelScreen CreateLevel(RoomObj startingRoom = null, params AreaStruct[] areaStructs) {
-        if (m_testRoom != null && LevelEV.RunTestRoom) {
+        if (_testRoom != null && LevelEV.RunTestRoom) {
             Console.WriteLine("OVERRIDING ROOM CREATION. RUNNING TEST ROOM");
             var debugLevel = new ProceduralLevelScreen();
-            var debugRoom = m_testRoom.Clone() as RoomObj;
+            var debugRoom = _testRoom.Clone() as RoomObj;
             if (LevelEV.TestRoomReverse) {
                 debugRoom.Reverse();
             }
@@ -2223,7 +2205,7 @@ internal class LevelBuilder2 {
 
     public static void LinkAllBossEntrances(List<RoomObj> roomList) {
         var newRoomPosition = new Vector2(-100000, 0); // This is where all the boss rooms will float in. It must be left of the level so that it doesn't accidentally run into any of the level's rooms.
-        var maxRoomIndex = m_bossRoomArray.Count - 1;
+        var maxRoomIndex = _bossRoomArray.Count - 1;
 
         RoomObj bossRoom = null;
         var bossRoomsToAdd = new List<RoomObj>();
@@ -2285,7 +2267,7 @@ internal class LevelBuilder2 {
             } else if (room.Name == "CastleEntrance") // Creating the special Last boss room that links to tutorial room.
             {
                 // Creating tutorial room and boss room.
-                var tutorialRoom = m_tutorialRoom.Clone() as TutorialRoomObj;
+                var tutorialRoom = _tutorialRoom.Clone() as TutorialRoomObj;
                 bossRoom = GetSpecificBossRoom(BossRoomType.LAST_BOSS_ROOM).Clone() as RoomObj;
 
                 // Moving tutorial room and boss room to proper positions.
@@ -2328,11 +2310,11 @@ internal class LevelBuilder2 {
     }
 
     public static RoomObj GetBossRoom(int index) {
-        return m_bossRoomArray[index];
+        return _bossRoomArray[index];
     }
 
     public static RoomObj GetSpecificBossRoom(byte bossRoomType) {
-        foreach (var room in m_bossRoomArray) {
+        foreach (var room in _bossRoomArray) {
             if (room.Tag != "" && byte.Parse(room.Tag) == bossRoomType) {
                 return room;
             }
@@ -2342,7 +2324,7 @@ internal class LevelBuilder2 {
     }
 
     public static RoomObj GetChallengeRoom(byte bossRoomType) {
-        foreach (var room in m_challengeRoomArray) {
+        foreach (var room in _challengeRoomArray) {
             if (room.Tag != "" && byte.Parse(room.Tag) == bossRoomType) {
                 return room;
             }
@@ -2370,16 +2352,16 @@ internal class LevelBuilder2 {
                 throw new Exception("Cannot create level of type NONE");
 
             case GameTypes.LevelType.Castle:
-                return m_castleRoomArray;
+                return CastleRoomArray;
 
             case GameTypes.LevelType.Garden:
-                return m_gardenRoomArray;
+                return GardenRoomArray;
 
             case GameTypes.LevelType.Tower:
-                return m_towerRoomArray;
+                return TowerRoomArray;
 
             case GameTypes.LevelType.Dungeon:
-                return m_dungeonRoomArray;
+                return DungeonRoomArray;
         }
     }
 
@@ -2430,16 +2412,16 @@ internal class LevelBuilder2 {
     public static List<RoomObj> GetSequencedDLCRoomList(GameTypes.LevelType levelType) {
         switch (levelType) {
             case GameTypes.LevelType.Castle:
-                return m_dlcCastleRoomArray;
+                return _dlcCastleRoomArray;
 
             case GameTypes.LevelType.Dungeon:
-                return m_dlcDungeonRoomArray;
+                return _dlcDungeonRoomArray;
 
             case GameTypes.LevelType.Garden:
-                return m_dlcGardenRoomArray;
+                return _dlcGardenRoomArray;
 
             case GameTypes.LevelType.Tower:
-                return m_dlcTowerRoomArray;
+                return _dlcTowerRoomArray;
         }
 
         return null;
