@@ -1,1015 +1,995 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using InputSystem;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Tweener.Ease;
-using Tweener;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
 using RogueCastle.Objects;
 using RogueCastle.Screens.BaseScreens;
+using Tweener;
+using Tweener.Ease;
 
-namespace RogueCastle
+namespace RogueCastle.GameObjects.RoomObjs;
+
+public class StartingRoomObj : RoomObj
 {
-    public class StartingRoomObj : RoomObj
+    private BlacksmithObj _blacksmith;
+    private SpriteObj _blacksmithIcon;
+    private Vector2 _blacksmithIconPosition;
+
+    private const int ENCHANTRESS_HEAD_LAYER = 4;
+    private ObjContainer _enchantress;
+    private SpriteObj _enchantressIcon;
+    private Vector2 _enchantressIconPosition;
+
+    private const byte ARCHITECT_HEAD_LAYER = 1;
+    private ObjContainer _architect;
+    private SpriteObj _architectIcon;
+    private Vector2 _architectIconPosition;
+    private bool _architectRenovating;
+    private float _screenShakeCounter;
+
+    private FrameSoundObj _blacksmithAnvilSound;
+    private GameObj _tree1, _tree2, _tree3;
+    private GameObj _fern1, _fern2, _fern3;
+
+    private bool _isRaining;
+    private List<RaindropObj> _rainFG;
+    private Cue _rainSFX;
+
+    private SpriteObj _tent;
+    private SpriteObj _blacksmithBoard;
+    private SpriteObj _screw;
+
+    private PhysicsObjContainer _tollCollector;
+    private SpriteObj _tollCollectorIcon;
+
+    private bool _playerWalkedOut;
+
+    private SpriteObj _mountain1, _mountain2;
+    private float _lightningTimer;
+
+    private SpriteObj _blacksmithNewIcon;
+    private SpriteObj _enchantressNewIcon;
+
+    private TerrainObj _blacksmithBlock;
+    private TerrainObj _enchantressBlock;
+    private TerrainObj _architectBlock;
+
+    private bool _controlsLocked;
+
+    private bool _isSnowing;
+
+    public StartingRoomObj()
     {
-        private BlacksmithObj m_blacksmith;
-        private SpriteObj m_blacksmithIcon;
-        private Vector2 m_blacksmithIconPosition;
+        //TraitSystem.LevelUpTrait(TraitSystem.GetTrait(TraitType.Smithy)); // Debug just so I can see the smithy.
+        //TraitSystem.LevelUpTrait(TraitSystem.GetTrait(TraitType.Enchanter)); // Debug just so I can see the enchantress.
+        //TraitSystem.LevelUpTrait(TraitSystem.GetTrait(TraitType.Architect)); // Debug just so I can see the architect.
 
-        private const int ENCHANTRESS_HEAD_LAYER = 4;
-        private ObjContainer m_enchantress;
-        private SpriteObj m_enchantressIcon;
-        private Vector2 m_enchantressIconPosition;
+        _blacksmith = new BlacksmithObj();
+        _blacksmith.Flip = SpriteEffects.FlipHorizontally;
+        _blacksmith.Scale = new Vector2(2.5f, 2.5f);
+        _blacksmith.Position = new Vector2(700, 720 - 60 - (_blacksmith.Bounds.Bottom - _blacksmith.Y) - 1); // -60 to subtract one tile.
+        _blacksmith.OutlineWidth = 2;
 
-        private const byte ARCHITECT_HEAD_LAYER = 1;
-        private ObjContainer m_architect;
-        private SpriteObj m_architectIcon;
-        private Vector2 m_architectIconPosition;
-        private bool m_architectRenovating;
-        private float m_screenShakeCounter = 0;
+        _blacksmithBoard = new SpriteObj("StartRoomBlacksmithBoard_Sprite");
+        _blacksmithBoard.Scale = new Vector2(2, 2);
+        _blacksmithBoard.OutlineWidth = 2;
+        _blacksmithBoard.Position = new Vector2(_blacksmith.X - _blacksmithBoard.Width / 2 - 35, _blacksmith.Bounds.Bottom - _blacksmithBoard.Height - 1);
 
-        private FrameSoundObj m_blacksmithAnvilSound;
-        private GameObj m_tree1, m_tree2, m_tree3;
-        private GameObj m_fern1, m_fern2, m_fern3;
+        //m_blacksmithIcon = new SpriteObj("TalkBubbleUpArrow_Sprite");
+        _blacksmithIcon = new SpriteObj("UpArrowBubble_Sprite");
+        _blacksmithIcon.Scale = new Vector2(2, 2);
+        _blacksmithIcon.Visible = false;
+        _blacksmithIconPosition = new Vector2(_blacksmith.X - 60, _blacksmith.Y - 10);
+        _blacksmithIcon.Flip = _blacksmith.Flip;
+        _blacksmithIcon.OutlineWidth = 2;
 
-        private bool m_isRaining = false;
-        private List<RaindropObj> m_rainFG;
-        private Cue m_rainSFX;
+        //m_blacksmithNewIcon = new SpriteObj("TalkBubble2_Sprite");
+        _blacksmithNewIcon = new SpriteObj("ExclamationSquare_Sprite");
+        _blacksmithNewIcon.Visible = false;
+        _blacksmithNewIcon.OutlineWidth = 2;
+        _enchantressNewIcon = _blacksmithNewIcon.Clone() as SpriteObj;
 
-        private SpriteObj m_tent;
-        private SpriteObj m_blacksmithBoard;
-        private SpriteObj m_screw;
+        _enchantress = new ObjContainer("Enchantress_Character");
+        _enchantress.Scale = new Vector2(2f, 2f);
+        _enchantress.Flip = SpriteEffects.FlipHorizontally;
+        _enchantress.Position = new Vector2(1150, 720 - 60 - (_enchantress.Bounds.Bottom - _enchantress.AnchorY) - 2);
+        _enchantress.PlayAnimation();
+        _enchantress.AnimationDelay = 1 / 10f;
+        (_enchantress.GetChildAt(ENCHANTRESS_HEAD_LAYER) as IAnimateableObj).StopAnimation();
+        _enchantress.OutlineWidth = 2;
 
-        private PhysicsObjContainer m_tollCollector;
-        private SpriteObj m_tollCollectorIcon;
+        _tent = new SpriteObj("StartRoomGypsyTent_Sprite");
+        _tent.Scale = new Vector2(1.5f, 1.5f);
+        _tent.OutlineWidth = 2;
+        _tent.Position = new Vector2(_enchantress.X - _tent.Width / 2 + 5, _enchantress.Bounds.Bottom - _tent.Height);
 
-        private bool m_playerWalkedOut = false;
+        //m_enchantressIcon = new SpriteObj("TalkBubbleUpArrow_Sprite");
+        _enchantressIcon = new SpriteObj("UpArrowBubble_Sprite");
+        _enchantressIcon.Scale = new Vector2(2f, 2f);
+        _enchantressIcon.Visible = false;
+        _enchantressIconPosition = new Vector2(_enchantress.X - 60, _enchantress.Y - 100);
+        _enchantressIcon.Flip = _enchantress.Flip;
+        _enchantressIcon.OutlineWidth = 2;
 
-        private SpriteObj m_mountain1, m_mountain2;
-        private float m_lightningTimer = 0;
+        _architect = new ObjContainer("ArchitectIdle_Character");
+        _architect.Flip = SpriteEffects.FlipHorizontally;
+        _architect.Scale = new Vector2(2, 2);
+        _architect.Position = new Vector2(1550, 720 - 60 - (_architect.Bounds.Bottom - _architect.AnchorY) - 2);
+        _architect.PlayAnimation(true);
+        _architect.AnimationDelay = 1 / 10f;
+        _architect.OutlineWidth = 2;
+        (_architect.GetChildAt(ARCHITECT_HEAD_LAYER) as IAnimateableObj).StopAnimation();
 
-        private SpriteObj m_blacksmithNewIcon;
-        private SpriteObj m_enchantressNewIcon;
+        //m_architectIcon = new SpriteObj("TalkBubbleUpArrow_Sprite");
+        _architectIcon = new SpriteObj("UpArrowBubble_Sprite");
+        _architectIcon.Scale = new Vector2(2, 2);
+        _architectIcon.Visible = false;
+        _architectIconPosition = new Vector2(_architect.X - 60, _architect.Y - 100);
+        _architectIcon.Flip = _architect.Flip;
+        _architectIcon.OutlineWidth = 2;
+        _architectRenovating = false;
 
-        private TerrainObj m_blacksmithBlock;
-        private TerrainObj m_enchantressBlock;
-        private TerrainObj m_architectBlock;
+        _screw = new SpriteObj("ArchitectGear_Sprite");
+        _screw.Scale = new Vector2(2, 2);
+        _screw.OutlineWidth = 2;
+        _screw.Position = new Vector2(_architect.X + 30, _architect.Bounds.Bottom - 1);
+        _screw.AnimationDelay = 1 / 10f;
 
-        private bool m_controlsLocked = false;
+        _tollCollector = new PhysicsObjContainer("NPCTollCollectorIdle_Character");
+        _tollCollector.Flip = SpriteEffects.FlipHorizontally;
+        _tollCollector.Scale = new Vector2(2.5f, 2.5f);
+        _tollCollector.IsWeighted = false;
+        _tollCollector.IsCollidable = true;
+        _tollCollector.Position = new Vector2(2565, 720 - 60 * 5 - (_tollCollector.Bounds.Bottom - _tollCollector.AnchorY));
+        _tollCollector.PlayAnimation(true);
+        _tollCollector.AnimationDelay = 1 / 10f;
+        _tollCollector.OutlineWidth = 2;
+        _tollCollector.CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL;
 
-        private bool m_isSnowing = false;
+        //m_tollCollectorIcon = new SpriteObj("TalkBubbleUpArrow_Sprite");
+        _tollCollectorIcon = new SpriteObj("UpArrowBubble_Sprite");
+        _tollCollectorIcon.Scale = new Vector2(2, 2);
+        _tollCollectorIcon.Visible = false;
+        _tollCollectorIcon.Flip = _tollCollector.Flip;
+        _tollCollectorIcon.OutlineWidth = 2;
 
-        public StartingRoomObj()
+        _rainFG = new List<RaindropObj>();
+        int numRainDrops = 400;
+        if (LevelEV.SaveFrames)
+            numRainDrops /= 2;
+
+        for (int i = 0; i < numRainDrops; i++)
         {
-            //TraitSystem.LevelUpTrait(TraitSystem.GetTrait(TraitType.Smithy)); // Debug just so I can see the smithy.
-            //TraitSystem.LevelUpTrait(TraitSystem.GetTrait(TraitType.Enchanter)); // Debug just so I can see the enchantress.
-            //TraitSystem.LevelUpTrait(TraitSystem.GetTrait(TraitType.Architect)); // Debug just so I can see the architect.
-
-            m_blacksmith = new BlacksmithObj();
-            m_blacksmith.Flip = SpriteEffects.FlipHorizontally;
-            m_blacksmith.Scale = new Vector2(2.5f, 2.5f);
-            m_blacksmith.Position = new Vector2(700, 720 - 60 - (m_blacksmith.Bounds.Bottom - m_blacksmith.Y) - 1); // -60 to subtract one tile.
-            m_blacksmith.OutlineWidth = 2;
-
-            m_blacksmithBoard = new SpriteObj("StartRoomBlacksmithBoard_Sprite");
-            m_blacksmithBoard.Scale = new Vector2(2, 2);
-            m_blacksmithBoard.OutlineWidth = 2;
-            m_blacksmithBoard.Position = new Vector2(m_blacksmith.X - m_blacksmithBoard.Width / 2 - 35, m_blacksmith.Bounds.Bottom - m_blacksmithBoard.Height - 1);
-
-            //m_blacksmithIcon = new SpriteObj("TalkBubbleUpArrow_Sprite");
-            m_blacksmithIcon = new SpriteObj("UpArrowBubble_Sprite");
-            m_blacksmithIcon.Scale = new Vector2(2, 2);
-            m_blacksmithIcon.Visible = false;
-            m_blacksmithIconPosition = new Vector2(m_blacksmith.X - 60, m_blacksmith.Y - 10);
-            m_blacksmithIcon.Flip = m_blacksmith.Flip;
-            m_blacksmithIcon.OutlineWidth = 2;
-
-            //m_blacksmithNewIcon = new SpriteObj("TalkBubble2_Sprite");
-            m_blacksmithNewIcon = new SpriteObj("ExclamationSquare_Sprite");
-            m_blacksmithNewIcon.Visible = false;
-            m_blacksmithNewIcon.OutlineWidth = 2;
-            m_enchantressNewIcon = m_blacksmithNewIcon.Clone() as SpriteObj;
-
-            m_enchantress = new ObjContainer("Enchantress_Character");
-            m_enchantress.Scale = new Vector2(2f, 2f);
-            m_enchantress.Flip = SpriteEffects.FlipHorizontally;
-            m_enchantress.Position = new Vector2(1150, 720 - 60 - (m_enchantress.Bounds.Bottom - m_enchantress.AnchorY) - 2);
-            m_enchantress.PlayAnimation();
-            m_enchantress.AnimationDelay = 1 / 10f;
-            (m_enchantress.GetChildAt(ENCHANTRESS_HEAD_LAYER) as IAnimateableObj).StopAnimation();
-            m_enchantress.OutlineWidth = 2;
-
-            m_tent = new SpriteObj("StartRoomGypsyTent_Sprite");
-            m_tent.Scale = new Vector2(1.5f, 1.5f);
-            m_tent.OutlineWidth = 2;
-            m_tent.Position = new Vector2(m_enchantress.X - m_tent.Width / 2 + 5, m_enchantress.Bounds.Bottom - m_tent.Height);
-
-            //m_enchantressIcon = new SpriteObj("TalkBubbleUpArrow_Sprite");
-            m_enchantressIcon = new SpriteObj("UpArrowBubble_Sprite");
-            m_enchantressIcon.Scale = new Vector2(2f, 2f);
-            m_enchantressIcon.Visible = false;
-            m_enchantressIconPosition = new Vector2(m_enchantress.X - 60, m_enchantress.Y - 100);
-            m_enchantressIcon.Flip = m_enchantress.Flip;
-            m_enchantressIcon.OutlineWidth = 2;
-
-            m_architect = new ObjContainer("ArchitectIdle_Character");
-            m_architect.Flip = SpriteEffects.FlipHorizontally;
-            m_architect.Scale = new Vector2(2, 2);
-            m_architect.Position = new Vector2(1550, 720 - 60 - (m_architect.Bounds.Bottom - m_architect.AnchorY) - 2);
-            m_architect.PlayAnimation(true);
-            m_architect.AnimationDelay = 1 / 10f;
-            m_architect.OutlineWidth = 2;
-            (m_architect.GetChildAt(ARCHITECT_HEAD_LAYER) as IAnimateableObj).StopAnimation();
-
-            //m_architectIcon = new SpriteObj("TalkBubbleUpArrow_Sprite");
-            m_architectIcon = new SpriteObj("UpArrowBubble_Sprite");
-            m_architectIcon.Scale = new Vector2(2, 2);
-            m_architectIcon.Visible = false;
-            m_architectIconPosition = new Vector2(m_architect.X - 60, m_architect.Y - 100);
-            m_architectIcon.Flip = m_architect.Flip;
-            m_architectIcon.OutlineWidth = 2;
-            m_architectRenovating = false;
-
-            m_screw = new SpriteObj("ArchitectGear_Sprite");
-            m_screw.Scale = new Vector2(2, 2);
-            m_screw.OutlineWidth = 2;
-            m_screw.Position = new Vector2(m_architect.X + 30, m_architect.Bounds.Bottom - 1);
-            m_screw.AnimationDelay = 1 / 10f;
-
-            m_tollCollector = new PhysicsObjContainer("NPCTollCollectorIdle_Character");
-            m_tollCollector.Flip = SpriteEffects.FlipHorizontally;
-            m_tollCollector.Scale = new Vector2(2.5f, 2.5f);
-            m_tollCollector.IsWeighted = false;
-            m_tollCollector.IsCollidable = true;
-            m_tollCollector.Position = new Vector2(2565, 720 - 60 * 5 - (m_tollCollector.Bounds.Bottom - m_tollCollector.AnchorY));
-            m_tollCollector.PlayAnimation(true);
-            m_tollCollector.AnimationDelay = 1 / 10f;
-            m_tollCollector.OutlineWidth = 2;
-            m_tollCollector.CollisionTypeTag = GameTypes.COLLISION_TYPE_WALL;
-
-            //m_tollCollectorIcon = new SpriteObj("TalkBubbleUpArrow_Sprite");
-            m_tollCollectorIcon = new SpriteObj("UpArrowBubble_Sprite");
-            m_tollCollectorIcon.Scale = new Vector2(2, 2);
-            m_tollCollectorIcon.Visible = false;
-            m_tollCollectorIcon.Flip = m_tollCollector.Flip;
-            m_tollCollectorIcon.OutlineWidth = 2;
-
-            m_rainFG = new List<RaindropObj>();
-            int numRainDrops = 400;
-            if (LevelEV.SaveFrames == true)
-                numRainDrops /= 2;
-
-            for (int i = 0; i < numRainDrops; i++)
-            {
-                RaindropObj rain = new RaindropObj(new Vector2(CDGMath.RandomInt(-100, 1270 * 2), CDGMath.RandomInt(-400, 720)));
-                m_rainFG.Add(rain);
-            }
+            RaindropObj rain = new RaindropObj(new Vector2(CDGMath.RandomInt(-100, 1270 * 2), CDGMath.RandomInt(-400, 720)));
+            _rainFG.Add(rain);
         }
+    }
 
-        public override void Initialize()
+    public override void Initialize()
+    {
+        foreach (var obj in TerrainObjList)
         {
-            foreach (TerrainObj obj in TerrainObjList)
+            switch (obj.Name)
             {
-                if (obj.Name == "BlacksmithBlock")
-                    m_blacksmithBlock = obj;
-                if (obj.Name == "EnchantressBlock")
-                    m_enchantressBlock = obj;
-                if (obj.Name == "ArchitectBlock")
-                    m_architectBlock = obj;
-
-                if (obj.Name == "bridge")
+                case "BlacksmithBlock":
+                    _blacksmithBlock = obj;
+                    break;
+                case "EnchantressBlock":
+                    _enchantressBlock = obj;
+                    break;
+                case "ArchitectBlock":
+                    _architectBlock = obj;
+                    break;
+                case "bridge":
                     obj.ShowTerrain = false;
-            }       
-
-            for (int i = 0; i < GameObjList.Count; i++)
-            {
-                if (GameObjList[i].Name == "Mountains 1")
-                    m_mountain1 = GameObjList[i] as SpriteObj;
-
-                if (GameObjList[i].Name == "Mountains 2")
-                    m_mountain2 = GameObjList[i] as SpriteObj;
+                    break;
             }
+        }       
 
-            base.Initialize();
+        foreach (var obj in GameObjList)
+        {
+            switch (obj.Name)
+            {
+                case "Mountains 1":
+                    _mountain1 = obj as SpriteObj;
+                    break;
+                case "Mountains 2":
+                    _mountain2 = obj as SpriteObj;
+                    break;
+            }
         }
 
-        public override void LoadContent(GraphicsDevice graphics)
+        base.Initialize();
+    }
+
+    public override void LoadContent(GraphicsDevice graphics)
+    {
+        if (_tree1 == null)
         {
-            if (m_tree1 == null)
+            foreach (var obj in GameObjList)
             {
-                foreach (GameObj obj in GameObjList)
+                switch (obj.Name)
                 {
-                    if (obj.Name == "Tree1")
-                        m_tree1 = obj;
-                    else if (obj.Name == "Tree2")
-                        m_tree2 = obj;
-                    else if (obj.Name == "Tree3")
-                        m_tree3 = obj;
-                    else if (obj.Name == "Fern1")
-                        m_fern1 = obj;
-                    else if (obj.Name == "Fern2")
-                        m_fern2 = obj;
-                    else if (obj.Name == "Fern3")
-                        m_fern3 = obj;
+                    case "Tree1":
+                        _tree1 = obj;
+                        break;
+                    case "Tree2":
+                        _tree2 = obj;
+                        break;
+                    case "Tree3":
+                        _tree3 = obj;
+                        break;
+                    case "Fern1":
+                        _fern1 = obj;
+                        break;
+                    case "Fern2":
+                        _fern2 = obj;
+                        break;
+                    case "Fern3":
+                        _fern3 = obj;
+                        break;
                 }
             }
-
-            base.LoadContent(graphics);
         }
 
-        public override void OnEnter()
+        base.LoadContent(graphics);
+    }
+
+    public override void OnEnter()
+    {
+        switch (Game.PlayerStats.SpecialItem)
         {
-            // Extra check to make sure sure you don't have a challenge token for a challenge already beaten.
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.EYEBALL_TOKEN && Game.PlayerStats.ChallengeEyeballBeaten == true)
+            // Extra check to make sure you don't have a challenge token for a challenge already beaten.
+            case SpecialItemType.EYEBALL_TOKEN when Game.PlayerStats.ChallengeEyeballBeaten:
+            case SpecialItemType.SKULL_TOKEN when Game.PlayerStats.ChallengeSkullBeaten:
+            case SpecialItemType.FIREBALL_TOKEN when Game.PlayerStats.ChallengeFireballBeaten:
+            case SpecialItemType.BLOB_TOKEN when Game.PlayerStats.ChallengeBlobBeaten:
+            case SpecialItemType.LAST_BOSS_TOKEN when Game.PlayerStats.ChallengeLastBossBeaten:
                 Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.SKULL_TOKEN && Game.PlayerStats.ChallengeSkullBeaten == true)
-                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.FIREBALL_TOKEN && Game.PlayerStats.ChallengeFireballBeaten == true)
-                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.BLOB_TOKEN && Game.PlayerStats.ChallengeBlobBeaten == true)
-                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.LAST_BOSS_TOKEN && Game.PlayerStats.ChallengeLastBossBeaten == true)
-                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
-            Player.AttachedLevel.UpdatePlayerHUDSpecialItem();
-
-            m_isSnowing = (DateTime.Now.Month == 12 || DateTime.Now.Month == 1); // Only snows in Dec. and Jan.
-            if (m_isSnowing == true)
-            {
-                foreach (RaindropObj rainDrop in m_rainFG)
-                {
-                    rainDrop.ChangeToSnowflake();
-                }
-            }
-
-            if ((Game.ScreenManager.Game as Game).SaveManager.FileExists(SaveType.Map) == false && Game.PlayerStats.HasArchitectFee == true)
-                Game.PlayerStats.HasArchitectFee = false;
-
-            Game.PlayerStats.TutorialComplete = true; // This needs to be removed later.
-            Game.PlayerStats.IsDead = false;
-
-            m_lightningTimer = 5;
-            Player.CurrentHealth = Player.MaxHealth;
-            Player.CurrentMana = Player.MaxMana;
-            Player.ForceInvincible = false;
-            (Player.AttachedLevel.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Archipelago);
-
-            if (TollCollectorAvailable == true)
-            {
-                if (Player.AttachedLevel.PhysicsManager.ObjectList.Contains(m_tollCollector) == false)
-                    Player.AttachedLevel.PhysicsManager.AddObject(m_tollCollector);
-            }
-
-            if (m_blacksmithAnvilSound == null)
-                m_blacksmithAnvilSound = new FrameSoundObj(m_blacksmith.GetChildAt(5) as IAnimateableObj, Player, 7, "Anvil1", "Anvil2", "Anvil3");
-
-            // Special check for Glaucoma
-            if (Game.PlayerStats.HasTrait(TraitType.GLAUCOMA))
-                Game.ShadowEffect.Parameters["ShadowIntensity"].SetValue(0.7f);
-            else
-                Game.ShadowEffect.Parameters["ShadowIntensity"].SetValue(0);
-
-            m_playerWalkedOut = false;
-            //if (Game.PlayerSaveData.SaveLoaded == false)
-            {
-                Player.UpdateCollisionBoxes(); // Necessary check since the OnEnter() is called before player can update its collision boxes.
-                Player.Position = new Vector2(0, 720 - 60 - (Player.Bounds.Bottom - Player.Y));
-                Player.State = 1; // Force the player into a walking state. This state will not update until the logic set is complete.
-                Player.IsWeighted = false;
-                Player.IsCollidable = false;
-                LogicSet playerMoveLS = new LogicSet(Player);
-                playerMoveLS.AddAction(new RunFunctionLogicAction(Player, "LockControls"));
-                playerMoveLS.AddAction(new MoveDirectionLogicAction(new Vector2(1, 0)));
-                playerMoveLS.AddAction(new ChangeSpriteLogicAction("PlayerWalking_Character"));
-                playerMoveLS.AddAction(new PlayAnimationLogicAction(true));
-                playerMoveLS.AddAction(new DelayLogicAction(0.5f));
-                playerMoveLS.AddAction(new ChangePropertyLogicAction(Player, "CurrentSpeed", 0));
-                playerMoveLS.AddAction(new ChangePropertyLogicAction(Player, "IsWeighted", true));
-                playerMoveLS.AddAction(new ChangePropertyLogicAction(Player, "IsCollidable", true));
-                Player.RunExternalLogicSet(playerMoveLS); // Do not dispose this logic set. The player object will do it on its own.
-                Tween.By(this, 1.0f, Linear.EaseNone);
-                Tween.AddEndHandlerToLastTween(Player, "UnlockControls");
-            }
-
-            SoundManager.StopMusic(1);
-
-            m_isRaining = CDGMath.RandomPlusMinus() > 0;
-            m_isRaining = true;
-
-            if (m_isRaining == true)
-            {
-                if (m_rainSFX != null) 
-                    m_rainSFX.Dispose();
-
-                if (m_isSnowing == false)
-                    m_rainSFX = SoundManager.PlaySound("Rain1");
-                else
-                    m_rainSFX = SoundManager.PlaySound("snowloop_filtered");
-                //m_rainSFX = SoundManager.Play3DSound(m_blacksmith, Player, "Rain1");
-            }
-
-            m_tent.TextureColor = new Color(200, 200, 200);
-            m_blacksmithBoard.TextureColor = new Color(200, 200, 200);
-            m_screw.TextureColor = new Color(200, 200, 200);
-
-            if (Game.PlayerStats.LockCastle == true)
-            {
-                m_screw.GoToFrame(m_screw.TotalFrames);
-                m_architectBlock.Position = new Vector2(1492, 439 + 140);
-            }
-            else
-            {
-                m_screw.GoToFrame(1);
-                m_architectBlock.Position = new Vector2(1492, 439);
-            }
-
-            Player.UpdateEquipmentColours();
-
-
-            base.OnEnter();
+                break;
         }
 
-        public override void OnExit()
+        Player.AttachedLevel.UpdatePlayerHUDSpecialItem();
+
+        _isSnowing = DateTime.Now.Month == 12 || DateTime.Now.Month == 1; // Only snows in Dec. and Jan.
+        if (_isSnowing)
         {
-            if (m_rainSFX != null && m_rainSFX.IsDisposed == false)
-                m_rainSFX.Stop(AudioStopOptions.Immediate);
+            foreach (var rainDrop in _rainFG)
+            {
+                rainDrop.ChangeToSnowflake();
+            }
         }
 
-        public override void Update(GameTime gameTime)
+        if (!Program.Game.SaveManager.FileExists(SaveType.Map) && Game.PlayerStats.HasArchitectFee)
+            Game.PlayerStats.HasArchitectFee = false;
+
+        Game.PlayerStats.TutorialComplete = true; // This needs to be removed later.
+        Game.PlayerStats.IsDead = false;
+
+        _lightningTimer = 5;
+        Player.CurrentHealth = Player.MaxHealth;
+        Player.CurrentMana = Player.MaxMana;
+        Player.ForceInvincible = false;
+        Program.Game.SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Archipelago);
+
+        if (TollCollectorAvailable && !Player.AttachedLevel.PhysicsManager.ObjectList.Contains(_tollCollector))
+            Player.AttachedLevel.PhysicsManager.AddObject(_tollCollector);
+        
+        _blacksmithAnvilSound ??= new FrameSoundObj(_blacksmith.GetChildAt(5) as IAnimateableObj, Player, 7, "Anvil1", "Anvil2", "Anvil3");
+
+        // Special check for Glaucoma
+        if (Game.PlayerStats.HasTrait(TraitType.GLAUCOMA))
+            Game.ShadowEffect.Parameters["ShadowIntensity"].SetValue(0.7f);
+        else
+            Game.ShadowEffect.Parameters["ShadowIntensity"].SetValue(0);
+
+        _playerWalkedOut = false;
+        //if (Game.PlayerSaveData.SaveLoaded == false)
         {
-            // Player should have max hp and mp while in the starting room.
-            Player.CurrentMana = Player.MaxMana;
-            Player.CurrentHealth = Player.MaxHealth; 
+            Player.UpdateCollisionBoxes(); // Necessary check since the OnEnter() is called before player can update its collision boxes.
+            Player.Position = new Vector2(0, 720 - 60 - (Player.Bounds.Bottom - Player.Y));
+            Player.State = 1; // Force the player into a walking state. This state will not update until the logic set is complete.
+            Player.IsWeighted = false;
+            Player.IsCollidable = false;
+            var playerMoveLS = new LogicSet(Player);
+            playerMoveLS.AddAction(new RunFunctionLogicAction(Player, "LockControls"));
+            playerMoveLS.AddAction(new MoveDirectionLogicAction(new Vector2(1, 0)));
+            playerMoveLS.AddAction(new ChangeSpriteLogicAction("PlayerWalking_Character"));
+            playerMoveLS.AddAction(new PlayAnimationLogicAction(true));
+            playerMoveLS.AddAction(new DelayLogicAction(0.5f));
+            playerMoveLS.AddAction(new ChangePropertyLogicAction(Player, "CurrentSpeed", 0));
+            playerMoveLS.AddAction(new ChangePropertyLogicAction(Player, "IsWeighted", true));
+            playerMoveLS.AddAction(new ChangePropertyLogicAction(Player, "IsCollidable", true));
+            Player.RunExternalLogicSet(playerMoveLS); // Do not dispose this logic set. The player object will do it on its own.
+            Tween.By(this, 1.0f, Linear.EaseNone);
+            Tween.AddEndHandlerToLastTween(Player, "UnlockControls");
+        }
 
-            m_enchantressBlock.Visible = EnchantressAvailable;
-            m_blacksmithBlock.Visible = SmithyAvailable;
-            m_architectBlock.Visible = ArchitectAvailable;
+        SoundManager.StopMusic(1);
 
-            float totalSeconds = Game.TotalGameTime;
+        _isRaining = CDGMath.RandomPlusMinus() > 0;
+        _isRaining = true;
 
-            if (m_playerWalkedOut == false)
+        if (_isRaining)
+        {
+            _rainSFX?.Dispose();
+
+            _rainSFX = SoundManager.PlaySound(_isSnowing == false ? "Rain1" : "snowloop_filtered");
+        }
+
+        _tent.TextureColor = new Color(200, 200, 200);
+        _blacksmithBoard.TextureColor = new Color(200, 200, 200);
+        _screw.TextureColor = new Color(200, 200, 200);
+
+        if (Game.PlayerStats.LockCastle)
+        {
+            _screw.GoToFrame(_screw.TotalFrames);
+            _architectBlock.Position = new Vector2(1492, 439 + 140);
+        }
+        else
+        {
+            _screw.GoToFrame(1);
+            _architectBlock.Position = new Vector2(1492, 439);
+        }
+
+        Player.UpdateEquipmentColours();
+        
+        base.OnEnter();
+    }
+
+    public override void OnExit()
+    {
+        if (_rainSFX is { IsDisposed: false })
+            _rainSFX.Stop(AudioStopOptions.Immediate);
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        // Player should have max hp and mp while in the starting room.
+        Player.CurrentMana = Player.MaxMana;
+        Player.CurrentHealth = Player.MaxHealth; 
+
+        _enchantressBlock.Visible = EnchantressAvailable;
+        _blacksmithBlock.Visible = SmithyAvailable;
+        _architectBlock.Visible = ArchitectAvailable;
+
+        var totalSeconds = Game.TotalGameTime;
+
+        if (_playerWalkedOut == false)
+        {
+            switch (Player.ControlsLocked)
             {
-                if (Player.ControlsLocked == false && Player.X < this.Bounds.Left)
-                {
-                    m_playerWalkedOut = true;
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).StartWipeTransition();
+                case false when Player.X < Bounds.Left:
+                    _playerWalkedOut = true;
+                    (Player.AttachedLevel.ScreenManager as RCScreenManager)!.StartWipeTransition();
                     Tween.RunFunction(0.2f, Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.SKILL, true, typeof(List<object>));
-                }
-                else if (Player.ControlsLocked == false && Player.X > this.Bounds.Right && TollCollectorAvailable == false) // Make sure the player can't pass the toll collector
-                {
-                    m_playerWalkedOut = true;
+                    break;
+
+                // Make sure the player can't pass the toll collector
+                case false when Player.X > Bounds.Right && TollCollectorAvailable == false:
+                    _playerWalkedOut = true;
                     LoadLevel();
-                }
+                    break;
             }
-
-            if (m_isRaining == true)
-            {
-                foreach (TerrainObj obj in TerrainObjList) // Optimization
-                    obj.UseCachedValues = true; // No need to set it back to false.  The physics manager will do that
-
-                foreach (RaindropObj raindrop in m_rainFG)
-                    raindrop.Update(this.TerrainObjList, gameTime);
-            }
-
-            m_tree1.Rotation = -(float)Math.Sin(totalSeconds) * 2;
-            m_tree2.Rotation = (float)Math.Sin(totalSeconds * 2);
-            m_tree3.Rotation = (float)Math.Sin(totalSeconds * 2) * 2;
-            m_fern1.Rotation = (float)Math.Sin(totalSeconds * 3f) / 2;
-            m_fern2.Rotation = -(float)Math.Sin(totalSeconds * 4f);
-            m_fern3.Rotation = (float)Math.Sin(totalSeconds * 4f) / 2f;
-
-            if (m_architectRenovating == false)
-                HandleInput();
-
-            if (SmithyAvailable)
-            {
-                if (m_blacksmithAnvilSound != null)
-                    m_blacksmithAnvilSound.Update();
-                m_blacksmith.Update(gameTime);
-            }
-
-            m_blacksmithIcon.Visible = false;
-            if (Player != null && CollisionMath.Intersects(Player.TerrainBounds, m_blacksmith.Bounds) && Player.IsTouchingGround == true && SmithyAvailable == true)
-                m_blacksmithIcon.Visible = true;
-            m_blacksmithIcon.Position = new Vector2(m_blacksmithIconPosition.X, m_blacksmithIconPosition.Y - 70 + (float)Math.Sin(totalSeconds * 20) * 2);
-
-            m_enchantressIcon.Visible = false;
-            Rectangle enchantressBounds = new Rectangle((int)(m_enchantress.X - 100), (int)m_enchantress.Y, m_enchantress.Bounds.Width + 100, m_enchantress.Bounds.Height);
-            if (Player != null && CollisionMath.Intersects(Player.TerrainBounds, enchantressBounds) && Player.IsTouchingGround == true && EnchantressAvailable == true)
-                m_enchantressIcon.Visible = true;
-            m_enchantressIcon.Position = new Vector2(m_enchantressIconPosition.X + 20, m_enchantressIconPosition.Y + (float)Math.Sin(totalSeconds * 20) * 2);
-
-            if (Player != null && CollisionMath.Intersects(Player.TerrainBounds, new Rectangle((int)m_architect.X - 100, (int)m_architect.Y, m_architect.Width + 200, m_architect.Height))
-                && Player.X < m_architect.X && Player.Flip == SpriteEffects.None && ArchitectAvailable == true)
-                m_architectIcon.Visible = true;
-            else
-                m_architectIcon.Visible = false;
-            m_architectIcon.Position = new Vector2(m_architectIconPosition.X, m_architectIconPosition.Y + (float)Math.Sin(totalSeconds * 20) * 2);
-
-            if (Player != null && CollisionMath.Intersects(Player.TerrainBounds, new Rectangle((int)m_tollCollector.X - 100, (int)m_tollCollector.Y, m_tollCollector.Width + 200, m_tollCollector.Height))
-                 && Player.X < m_tollCollector.X && Player.Flip == SpriteEffects.None && TollCollectorAvailable == true && m_tollCollector.SpriteName == "NPCTollCollectorIdle_Character")
-                m_tollCollectorIcon.Visible = true;
-            else
-                m_tollCollectorIcon.Visible = false;
-            m_tollCollectorIcon.Position = new Vector2(m_tollCollector.X - m_tollCollector.Width/2 - 10, m_tollCollector.Y - m_tollCollectorIcon.Height - m_tollCollector.Height/2 + (float)Math.Sin(totalSeconds * 20) * 2);
-
-            // Setting blacksmith new icons settings.
-            m_blacksmithNewIcon.Visible = false;
-            if (SmithyAvailable == true)
-            {
-                if (m_blacksmithIcon.Visible == true && m_blacksmithNewIcon.Visible == true)
-                    m_blacksmithNewIcon.Visible = false;
-                else if (m_blacksmithIcon.Visible == false && BlacksmithNewIconVisible == true)
-                    m_blacksmithNewIcon.Visible = true;
-                m_blacksmithNewIcon.Position = new Vector2(m_blacksmithIcon.X + 50, m_blacksmithIcon.Y - 30);
-            }
-
-            // Setting enchantress new icons settings.
-            m_enchantressNewIcon.Visible = false;
-            if (EnchantressAvailable == true)
-            {
-                if (m_enchantressIcon.Visible == true && m_enchantressNewIcon.Visible == true)
-                    m_enchantressNewIcon.Visible = false;
-                else if (m_enchantressIcon.Visible == false && EnchantressNewIconVisible == true)
-                    m_enchantressNewIcon.Visible = true;
-                m_enchantressNewIcon.Position = new Vector2(m_enchantressIcon.X + 40, m_enchantressIcon.Y - 0);
-            }
-
-            // lightning effect.
-            if (m_isRaining == true && m_isSnowing == false)
-            {
-                if (m_lightningTimer > 0)
-                {
-                    m_lightningTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    if (m_lightningTimer <= 0)
-                    {
-                        if (CDGMath.RandomInt(0, 100) > 70)
-                        {
-                            if (CDGMath.RandomInt(0, 1) > 0)
-                                Player.AttachedLevel.LightningEffectTwice();
-                            else
-                                Player.AttachedLevel.LightningEffectOnce();
-                        }
-                        m_lightningTimer = 5;
-                    }
-                }
-            }
-
-            if (m_shakeScreen == true)
-                UpdateShake();
-
-            // Prevents the player from getting passed the Toll Collector.
-            if (Player.Bounds.Right > m_tollCollector.Bounds.Left && TollCollectorAvailable == true)// && !Game.PlayerStats.HasTrait(TraitType.Dwarfism))
-            {
-                Player.X = m_tollCollector.Bounds.Left - (Player.Bounds.Right - Player.X);
-                Player.AttachedLevel.UpdateCamera();
-            }
-
-            base.Update(gameTime);
         }
 
-        private void LoadLevel()
+        if (_isRaining)
         {
-            Game.ScreenManager.DisplayScreen(ScreenType.LEVEL, true, null);
+            foreach (var obj in TerrainObjList) // Optimization
+                obj.UseCachedValues = true; // No need to set it back to false.  The physics manager will do that
+
+            foreach (var raindrop in _rainFG)
+                raindrop.Update(TerrainObjList, gameTime);
         }
 
-        private void HandleInput()
+        _tree1.Rotation = -(float)Math.Sin(totalSeconds) * 2;
+        _tree2.Rotation = (float)Math.Sin(totalSeconds * 2);
+        _tree3.Rotation = (float)Math.Sin(totalSeconds * 2) * 2;
+        _fern1.Rotation = (float)Math.Sin(totalSeconds * 3f) / 2;
+        _fern2.Rotation = -(float)Math.Sin(totalSeconds * 4f);
+        _fern3.Rotation = (float)Math.Sin(totalSeconds * 4f) / 2f;
+
+        if (_architectRenovating == false)
+            HandleInput();
+
+        if (SmithyAvailable)
         {
-            if (m_controlsLocked == false)
+            _blacksmithAnvilSound?.Update();
+            _blacksmith.Update(gameTime);
+        }
+
+        _blacksmithIcon.Visible = Player != null && CollisionMath.Intersects(Player.TerrainBounds, _blacksmith.Bounds) && Player.IsTouchingGround && SmithyAvailable;
+        _blacksmithIcon.Position = new Vector2(_blacksmithIconPosition.X, _blacksmithIconPosition.Y - 70 + (float)Math.Sin(totalSeconds * 20) * 2);
+
+        var enchantressBounds = new Rectangle((int)(_enchantress.X - 100), (int)_enchantress.Y, _enchantress.Bounds.Width + 100, _enchantress.Bounds.Height);
+        _enchantressIcon.Visible = Player != null && CollisionMath.Intersects(Player.TerrainBounds, enchantressBounds) && Player.IsTouchingGround && EnchantressAvailable;
+        _enchantressIcon.Position = new Vector2(_enchantressIconPosition.X + 20, _enchantressIconPosition.Y + (float)Math.Sin(totalSeconds * 20) * 2);
+
+        if (Player != null && CollisionMath.Intersects(Player.TerrainBounds, new Rectangle((int)_architect.X - 100, (int)_architect.Y, _architect.Width + 200, _architect.Height))
+                           && Player.X < _architect.X && Player.Flip == SpriteEffects.None && ArchitectAvailable)
+            _architectIcon.Visible = true;
+        else
+            _architectIcon.Visible = false;
+        _architectIcon.Position = new Vector2(_architectIconPosition.X, _architectIconPosition.Y + (float)Math.Sin(totalSeconds * 20) * 2);
+
+        if (Player != null && CollisionMath.Intersects(Player.TerrainBounds, new Rectangle((int)_tollCollector.X - 100, (int)_tollCollector.Y, _tollCollector.Width + 200, _tollCollector.Height))
+                           && Player.X < _tollCollector.X && Player.Flip == SpriteEffects.None && TollCollectorAvailable && _tollCollector.SpriteName == "NPCTollCollectorIdle_Character")
+            _tollCollectorIcon.Visible = true;
+        else
+            _tollCollectorIcon.Visible = false;
+        _tollCollectorIcon.Position = new Vector2(_tollCollector.X - _tollCollector.Width/2 - 10, _tollCollector.Y - _tollCollectorIcon.Height - _tollCollector.Height/2 + (float)Math.Sin(totalSeconds * 20) * 2);
+
+        // Setting blacksmith new icons settings.
+        _blacksmithNewIcon.Visible = false;
+        if (SmithyAvailable)
+        {
+            _blacksmithNewIcon.Visible = _blacksmithIcon.Visible switch
             {
-                if (Player.State != PlayerObj.STATE_DASHING)
+                true when _blacksmithNewIcon.Visible => false,
+                false when BlacksmithNewIconVisible   => true,
+                _                                     => _blacksmithNewIcon.Visible,
+            };
+            
+            _blacksmithNewIcon.Position = new Vector2(_blacksmithIcon.X + 50, _blacksmithIcon.Y - 30);
+        }
+
+        // Setting enchantress new icons settings.
+        _enchantressNewIcon.Visible = false;
+        if (EnchantressAvailable)
+        {
+            _enchantressNewIcon.Visible = _enchantressIcon.Visible switch
+            {
+                true when _enchantressNewIcon.Visible => false,
+                false when EnchantressNewIconVisible   => true,
+                _                                      => _enchantressNewIcon.Visible,
+            };
+            
+            _enchantressNewIcon.Position = new Vector2(_enchantressIcon.X + 40, _enchantressIcon.Y - 0);
+        }
+
+        // lightning effect.
+        if (_isRaining && _isSnowing == false)
+        {
+            if (_lightningTimer > 0)
+            {
+                _lightningTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_lightningTimer <= 0)
                 {
-                    if (m_blacksmithIcon.Visible == true && (Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP2)))
+                    if (CDGMath.RandomInt(0, 100) > 70)
                     {
-                        MovePlayerTo(m_blacksmith);
+                        if (CDGMath.RandomInt(0, 1) > 0)
+                            Player.AttachedLevel.LightningEffectTwice();
+                        else
+                            Player.AttachedLevel.LightningEffectOnce();
                     }
+                    _lightningTimer = 5;
+                }
+            }
+        }
 
-                    if (m_enchantressIcon.Visible == true && (Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP2)))
-                    {
-                        MovePlayerTo(m_enchantress);
-                    }
+        if (_shakeScreen)
+            UpdateShake();
 
-                    if (m_architectIcon.Visible == true && (Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP2)))
+        // Prevents the player from getting passed the Toll Collector.
+        if (Player.Bounds.Right > _tollCollector.Bounds.Left && TollCollectorAvailable)// && !Game.PlayerStats.HasTrait(TraitType.Dwarfism))
+        {
+            Player.X = _tollCollector.Bounds.Left - (Player.Bounds.Right - Player.X);
+            Player.AttachedLevel.UpdateCamera();
+        }
+
+        base.Update(gameTime);
+    }
+
+    private void LoadLevel()
+    {
+        Game.ScreenManager.DisplayScreen(ScreenType.LEVEL, true);
+    }
+
+    private void HandleInput()
+    {
+        if (_controlsLocked)
+        {
+            return;
+        }
+
+        var manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
+        
+        if (Player.State != PlayerObj.STATE_DASHING)
+        {
+            if (_blacksmithIcon.Visible && (Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP2)))
+            {
+                MovePlayerTo(_blacksmith);
+            }
+
+            if (_enchantressIcon.Visible && (Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP2)))
+            {
+                MovePlayerTo(_enchantress);
+            }
+
+            if (_architectIcon.Visible && (Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP2)))
+            {
+                if (Program.Game.SaveManager.FileExists(SaveType.Map))
+                {
+                    if (Game.PlayerStats.LockCastle == false)
                     {
-                        RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
-                        if ((Game.ScreenManager.Game as Game).SaveManager.FileExists(SaveType.Map))
+                        if (Game.PlayerStats.SpokeToArchitect == false)
                         {
-                            if (Game.PlayerStats.LockCastle == false)
-                            {
-                                if (Game.PlayerStats.SpokeToArchitect == false)
-                                {
-                                    Game.PlayerStats.SpokeToArchitect = true;
-                                    //(manager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData);
-                                    manager.DialogueScreen.SetDialogue("Meet Architect");
-                                }
-                                else
-                                    manager.DialogueScreen.SetDialogue("Meet Architect 2");
-
-                                manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
-                                manager.DialogueScreen.SetConfirmEndHandler(this, "ActivateArchitect");
-                                manager.DialogueScreen.SetCancelEndHandler(typeof(Console), "WriteLine", "Canceling Selection");
-                            }
-                            else
-                                manager.DialogueScreen.SetDialogue("Castle Already Locked Architect");
+                            Game.PlayerStats.SpokeToArchitect = true;
+                            //(manager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData);
+                            manager!.DialogueScreen.SetDialogue("Meet Architect");
                         }
                         else
-                            manager.DialogueScreen.SetDialogue("No Castle Architect");
+                        {
+                            manager!.DialogueScreen.SetDialogue("Meet Architect 2");
+                        }
 
-                        manager.DisplayScreen(ScreenType.DIALOGUE, true);
-                    }
-                }
-
-                if (m_tollCollectorIcon.Visible == true && (Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP1) || Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP2)))
-                {
-                    RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
-                    if (Game.PlayerStats.SpecialItem == SpecialItemType.FREE_ENTRANCE)
-                    {
-                        Tween.RunFunction(0.1f, this, "TollPaid", false);
-                        manager.DialogueScreen.SetDialogue("Toll Collector Obol");
-                        manager.DisplayScreen(ScreenType.DIALOGUE, true);
-                    }
-                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.EYEBALL_TOKEN)
-                    {
-                        manager.DialogueScreen.SetDialogue("Challenge Icon Eyeball");
-                        RunTollPaidSelection(manager);
-                    }
-                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.SKULL_TOKEN)
-                    {
-                        manager.DialogueScreen.SetDialogue("Challenge Icon Skull");
-                        RunTollPaidSelection(manager);
-                    }
-                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.FIREBALL_TOKEN)
-                    {
-                        manager.DialogueScreen.SetDialogue("Challenge Icon Fireball");
-                        RunTollPaidSelection(manager);
-                    }
-                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.BLOB_TOKEN)
-                    {
-                        manager.DialogueScreen.SetDialogue("Challenge Icon Blob");
-                        RunTollPaidSelection(manager);
-                    }
-                    else if (Game.PlayerStats.SpecialItem == SpecialItemType.LAST_BOSS_TOKEN)
-                    {
-                        manager.DialogueScreen.SetDialogue("Challenge Icon Last Boss");
-                        RunTollPaidSelection(manager);
+                        manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
+                        manager.DialogueScreen.SetConfirmEndHandler(this, "ActivateArchitect");
+                        manager.DialogueScreen.SetCancelEndHandler(typeof(Console), "WriteLine", "Canceling Selection");
                     }
                     else
                     {
-                        if (Game.PlayerStats.SpokeToTollCollector == false)
-                            manager.DialogueScreen.SetDialogue("Meet Toll Collector 1");
-                        else
-                        {
-                            float amount = SkillSystem.GetSkill(SkillType.PricesDown).ModifierAmount * 100;
-                            manager.DialogueScreen.SetDialogue("Meet Toll Collector Skip" + (int)Math.Round(amount, MidpointRounding.AwayFromZero));
-                        }
-
-                        RunTollPaidSelection(manager);
+                        manager!.DialogueScreen.SetDialogue("Castle Already Locked Architect");
                     }
-                }
-            }
-        }
-
-        private void RunTollPaidSelection(RCScreenManager manager)
-        {
-            manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
-            manager.DialogueScreen.SetConfirmEndHandler(this, "TollPaid", true);
-            manager.DialogueScreen.SetCancelEndHandler(typeof(Console), "WriteLine", "Canceling Selection");
-            manager.DisplayScreen(ScreenType.DIALOGUE, true);
-        }
-
-        public void MovePlayerTo(GameObj target)
-        {
-            m_controlsLocked = true;
-            if (Player.X != target.X - 150)
-            {
-                if (Player.X > target.Position.X - 150)
-                    Player.Flip = SpriteEffects.FlipHorizontally;
-
-                float duration = CDGMath.DistanceBetweenPts(Player.Position, new Vector2(target.X - 150, target.Y)) / (float)(Player.Speed);
-
-                Player.UpdateCollisionBoxes(); // Necessary check since the OnEnter() is called before player can update its collision boxes.
-                Player.State = 1; // Force the player into a walking state. This state will not update until the logic set is complete.
-                Player.IsWeighted = false;
-                Player.AccelerationY = 0;
-                Player.AccelerationX = 0;
-                Player.IsCollidable = false;
-                Player.CurrentSpeed = 0;
-                Player.LockControls();
-                Player.ChangeSprite("PlayerWalking_Character");
-                Player.PlayAnimation(true);
-                LogicSet playerMoveLS = new LogicSet(Player);
-                playerMoveLS.AddAction(new DelayLogicAction(duration));
-                Player.RunExternalLogicSet(playerMoveLS);
-                Tween.To(Player, duration, Tween.EaseNone, "X", (target.Position.X - 150).ToString());
-                Tween.AddEndHandlerToLastTween(this, "MovePlayerComplete", target);
-            }
-            else
-                MovePlayerComplete(target);
-        }
-
-        public void MovePlayerComplete(GameObj target)
-        {
-            m_controlsLocked = false;
-            Player.IsWeighted = true;
-            Player.IsCollidable = true;
-            Player.UnlockControls();
-            Player.Flip = SpriteEffects.None;
-            if (target == m_blacksmith)
-            {
-                if (Game.PlayerStats.SpokeToBlacksmith == false)
-                {
-                    Game.PlayerStats.SpokeToBlacksmith = true;
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetDialogue("Meet Blacksmith");
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetConfirmEndHandler(Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.BLACKSMITH, true, null);
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true);
                 }
                 else
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.BLACKSMITH, true);
-            }
-            else if (target == m_enchantress)
-            {
-                if (Game.PlayerStats.SpokeToEnchantress == false)
                 {
-                    Game.PlayerStats.SpokeToEnchantress = true;
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetDialogue("Meet Enchantress");
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DialogueScreen.SetConfirmEndHandler(Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.ENCHANTRESS, true, null);
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.DIALOGUE, true);
+                    manager!.DialogueScreen.SetDialogue("No Castle Architect");
+                }
+
+                manager.DisplayScreen(ScreenType.DIALOGUE, true);
+            }
+        }
+
+        if (!_tollCollectorIcon.Visible || (!Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP1) && !Game.GlobalInput.JustPressed(InputMapType.PLAYER_UP2)))
+        {
+            return;
+        }
+        
+        switch (Game.PlayerStats.SpecialItem)
+        {
+            case SpecialItemType.FREE_ENTRANCE:
+                Tween.RunFunction(0.1f, this, "TollPaid", false);
+                manager!.DialogueScreen.SetDialogue("Toll Collector Obol");
+                manager.DisplayScreen(ScreenType.DIALOGUE, true);
+                break;
+            case SpecialItemType.EYEBALL_TOKEN:
+                manager!.DialogueScreen.SetDialogue("Challenge Icon Eyeball");
+                RunTollPaidSelection(manager);
+                break;
+            case SpecialItemType.SKULL_TOKEN:
+                manager!.DialogueScreen.SetDialogue("Challenge Icon Skull");
+                RunTollPaidSelection(manager);
+                break;
+            case SpecialItemType.FIREBALL_TOKEN:
+                manager!.DialogueScreen.SetDialogue("Challenge Icon Fireball");
+                RunTollPaidSelection(manager);
+                break;
+            case SpecialItemType.BLOB_TOKEN:
+                manager!.DialogueScreen.SetDialogue("Challenge Icon Blob");
+                RunTollPaidSelection(manager);
+                break;
+            case SpecialItemType.LAST_BOSS_TOKEN:
+                manager!.DialogueScreen.SetDialogue("Challenge Icon Last Boss");
+                RunTollPaidSelection(manager);
+                break;
+            default:
+            {
+                if (!Game.PlayerStats.SpokeToTollCollector)
+                {
+                    manager!.DialogueScreen.SetDialogue("Meet Toll Collector 1");
                 }
                 else
-                    (Player.AttachedLevel.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.ENCHANTRESS, true);
-            }
-        }
-
-        public void TollPaid(bool chargeFee)
-        {
-            if (chargeFee == true)
-            {
-                float goldLost = Game.PlayerStats.Gold * (GameEV.GATEKEEPER_TOLL_COST - SkillSystem.GetSkill(SkillType.PricesDown).ModifierAmount);
-                Game.PlayerStats.Gold -= (int)(goldLost);
-                if (goldLost > 0)
-                    Player.AttachedLevel.TextManager.DisplayNumberStringText(-(int)goldLost, "LOC_ID_PLAYER_OBJ_1" /*"gold"*/, Color.Yellow, new Vector2(Player.X, Player.Bounds.Top));
-            }
-
-            if (Game.PlayerStats.SpokeToTollCollector == true && Game.PlayerStats.SpecialItem != SpecialItemType.FREE_ENTRANCE
-                && Game.PlayerStats.SpecialItem != SpecialItemType.BLOB_TOKEN
-                && Game.PlayerStats.SpecialItem != SpecialItemType.LAST_BOSS_TOKEN
-                && Game.PlayerStats.SpecialItem != SpecialItemType.FIREBALL_TOKEN
-                && Game.PlayerStats.SpecialItem != SpecialItemType.EYEBALL_TOKEN
-                && Game.PlayerStats.SpecialItem != SpecialItemType.SKULL_TOKEN)
-            {
-                Player.AttachedLevel.ImpactEffectPool.DisplayDeathEffect(m_tollCollector.Position);
-                SoundManager.PlaySound("Charon_Laugh");
-                HideTollCollector();
-            }
-            else
-            {
-                Game.PlayerStats.SpokeToTollCollector = true;
-                SoundManager.PlaySound("Charon_Laugh");
-                m_tollCollector.ChangeSprite("NPCTollCollectorLaugh_Character");
-                m_tollCollector.AnimationDelay = 1 / 20f;
-                m_tollCollector.PlayAnimation(true);
-                Tween.RunFunction(1, Player.AttachedLevel.ImpactEffectPool, "DisplayDeathEffect", m_tollCollector.Position);
-                Tween.RunFunction(1, this, "HideTollCollector");
-            }
-
-            if (Game.PlayerStats.SpecialItem == SpecialItemType.FREE_ENTRANCE ||
-                Game.PlayerStats.SpecialItem == SpecialItemType.SKULL_TOKEN ||
-                Game.PlayerStats.SpecialItem == SpecialItemType.EYEBALL_TOKEN ||
-                Game.PlayerStats.SpecialItem == SpecialItemType.LAST_BOSS_TOKEN ||
-                Game.PlayerStats.SpecialItem == SpecialItemType.FIREBALL_TOKEN||
-                Game.PlayerStats.SpecialItem == SpecialItemType.BLOB_TOKEN)
-            {
-                if (Game.PlayerStats.SpecialItem == SpecialItemType.EYEBALL_TOKEN)
-                    Game.PlayerStats.ChallengeEyeballUnlocked = true;
-                else if (Game.PlayerStats.SpecialItem == SpecialItemType.SKULL_TOKEN)
-                    Game.PlayerStats.ChallengeSkullUnlocked = true;
-                else if (Game.PlayerStats.SpecialItem == SpecialItemType.FIREBALL_TOKEN)
-                    Game.PlayerStats.ChallengeFireballUnlocked = true;
-                else if (Game.PlayerStats.SpecialItem == SpecialItemType.BLOB_TOKEN)
-                    Game.PlayerStats.ChallengeBlobUnlocked = true;
-                else if (Game.PlayerStats.SpecialItem == SpecialItemType.LAST_BOSS_TOKEN)
-                    Game.PlayerStats.ChallengeLastBossUnlocked = true;
-
-                Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
-                Player.AttachedLevel.UpdatePlayerHUDSpecialItem();
-            }
-        }
-
-        public void HideTollCollector()
-        {
-            SoundManager.Play3DSound(this, Player, "Charon_Poof");
-            m_tollCollector.Visible = false;
-            Player.AttachedLevel.PhysicsManager.RemoveObject(m_tollCollector);
-        }
-
-        public void ActivateArchitect()
-        {
-            Player.LockControls();
-            Player.CurrentSpeed = 0;
-            m_architectIcon.Visible = false;
-            m_architectRenovating = true;
-            m_architect.ChangeSprite("ArchitectPull_Character");
-            (m_architect.GetChildAt(1) as SpriteObj).PlayAnimation(false);
-            m_screw.AnimationDelay = 1 / 30f;
-
-            Game.PlayerStats.ArchitectUsed = true;
-
-            Tween.RunFunction(0.5f, m_architect.GetChildAt(0), "PlayAnimation", true);
-            Tween.RunFunction(0.5f, typeof(SoundManager), "PlaySound", "Architect_Lever");
-            Tween.RunFunction(1, typeof(SoundManager), "PlaySound", "Architect_Screw");
-            Tween.RunFunction(1f, m_screw, "PlayAnimation", false);
-            Tween.By(m_architectBlock, 0.8f, Tween.EaseNone, "delay", "1.1", "Y", "135");
-            Tween.RunFunction(1f, this, "ShakeScreen", 2, true, false);
-            Tween.RunFunction(1.5f, this, "StopScreenShake");
-            Tween.RunFunction(1.5f, Player.AttachedLevel.ImpactEffectPool, "SkillTreeDustEffect", new Vector2(m_screw.X - m_screw.Width / 2f, m_screw.Y - 40), true, m_screw.Width);
-            Tween.RunFunction(3f, this, "StopArchitectActivation");
-        }
-
-        public void StopArchitectActivation()
-        {
-            m_architectRenovating = false;
-            m_architectIcon.Visible = true;
-            Player.UnlockControls();
-
-            Game.PlayerStats.LockCastle = true;
-            Game.PlayerStats.HasArchitectFee = true;
-
-            foreach (ChestObj chest in Player.AttachedLevel.ChestList) // Resetting all fairy chests.
-            {
-                FairyChestObj fairyChest = chest as FairyChestObj;
-                if (fairyChest != null)
                 {
-                    if (fairyChest.State == ChestState.Failed)
-                        fairyChest.ResetChest();
+                    var amount = SkillSystem.GetSkill(SkillType.PricesDown).ModifierAmount * 100;
+                    manager!.DialogueScreen.SetDialogue("Meet Toll Collector Skip" + (int)Math.Round(amount, MidpointRounding.AwayFromZero));
                 }
+
+                RunTollPaidSelection(manager);
+                break;
             }
-
-            foreach (RoomObj room in Player.AttachedLevel.RoomList)
-            {
-                foreach (GameObj obj in room.GameObjList)
-                {
-                    BreakableObj breakableObj = obj as BreakableObj;
-                    if (breakableObj != null)
-                        breakableObj.Reset();
-                }
-            }
-
-            RCScreenManager manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
-            manager.DialogueScreen.SetDialogue("Castle Lock Complete Architect");
-            manager.DisplayScreen(ScreenType.DIALOGUE, true);
-        }
-
-        public override void Draw(Camera2D camera)
-        {
-            // Hacked parallaxing.
-            m_mountain1.X = camera.TopLeftCorner.X * 0.5f;
-            m_mountain2.X = m_mountain1.X + 2640; // 2640 not 1320 because it is mountain1 flipped.
-
-            base.Draw(camera);
-
-            if (m_isRaining == true)
-                camera.Draw(Game.GenericTexture, new Rectangle(0, 0, 1320 * 2, 720), Color.Black * 0.3f);
-
-            if (m_screenShakeCounter > 0)
-            {
-                camera.X += CDGMath.RandomPlusMinus();
-                camera.Y += CDGMath.RandomPlusMinus();
-                m_screenShakeCounter -= (float)camera.GameTime.ElapsedGameTime.TotalSeconds;
-            }
-            
-            if (SmithyAvailable)
-            {
-                m_blacksmithBoard.Draw(camera);
-                m_blacksmith.Draw(camera);
-                m_blacksmithIcon.Draw(camera);
-            }
-
-            if (EnchantressAvailable)
-            {
-                m_tent.Draw(camera);
-                m_enchantress.Draw(camera);
-                m_enchantressIcon.Draw(camera);
-            }
-
-            if (ArchitectAvailable)
-            {
-                m_screw.Draw(camera);
-                m_architect.Draw(camera);
-                m_architectIcon.Draw(camera);
-            }
-
-            if (TollCollectorAvailable)
-            {
-                m_tollCollector.Draw(camera);
-                m_tollCollectorIcon.Draw(camera);
-            }
-
-            m_blacksmithNewIcon.Draw(camera);
-            m_enchantressNewIcon.Draw(camera);
-
-            if (m_isRaining == true)
-            {
-                foreach (RaindropObj raindrop in m_rainFG)
-                    raindrop.Draw(camera);
-            }
-        }
-
-        public override void PauseRoom()
-        {
-            foreach (RaindropObj rainDrop in m_rainFG)
-                rainDrop.PauseAnimation();
-
-            if (m_rainSFX != null)
-                m_rainSFX.Pause();
-
-            m_enchantress.PauseAnimation();
-            m_blacksmith.PauseAnimation();
-            m_architect.PauseAnimation();
-            m_tollCollector.PauseAnimation();
-
-            base.PauseRoom();
-        }
-
-        public override void UnpauseRoom()
-        {
-            foreach (RaindropObj rainDrop in m_rainFG)
-                rainDrop.ResumeAnimation();
-
-            if (m_rainSFX != null && m_rainSFX.IsPaused)
-                m_rainSFX.Resume();
-
-            m_enchantress.ResumeAnimation();
-            m_blacksmith.ResumeAnimation();
-            m_architect.ResumeAnimation();
-            m_tollCollector.ResumeAnimation();
-
-            base.UnpauseRoom();
-        }
-
-        private bool m_horizontalShake;
-        private bool m_verticalShake;
-        private bool m_shakeScreen;
-        private float m_screenShakeMagnitude;
-        private Vector2 m_shakeStartingPos;
-
-        public void ShakeScreen(float magnitude, bool horizontalShake = true, bool verticalShake = true)
-        {
-            m_shakeStartingPos = Player.AttachedLevel.Camera.Position;
-            Player.AttachedLevel.CameraLockedToPlayer = false;
-            m_screenShakeMagnitude = magnitude;
-            m_horizontalShake = horizontalShake;
-            m_verticalShake = verticalShake;
-            m_shakeScreen = true;
-        }
-
-        public void UpdateShake()
-        {
-            if (m_horizontalShake == true)
-                Player.AttachedLevel.Camera.X = m_shakeStartingPos.X + CDGMath.RandomPlusMinus() * (CDGMath.RandomFloat(0, 1) * m_screenShakeMagnitude);
-
-            if (m_verticalShake == true)
-                Player.AttachedLevel.Camera.Y = m_shakeStartingPos.Y + CDGMath.RandomPlusMinus() * (CDGMath.RandomFloat(0, 1) * m_screenShakeMagnitude);
-        }
-
-        public void StopScreenShake()
-        {
-            Player.AttachedLevel.CameraLockedToPlayer = true;
-            m_shakeScreen = false;
-        }
-        protected override GameObj CreateCloneInstance()
-        {
-            return new StartingRoomObj();
-        }
-
-        protected override void FillCloneInstance(object obj)
-        {
-            base.FillCloneInstance(obj);
-        }
-
-        public override void Dispose()
-        {
-            if (IsDisposed == false)
-            {
-                // Done
-                m_blacksmith.Dispose();
-                m_blacksmith = null;
-                m_blacksmithIcon.Dispose();
-                m_blacksmithIcon = null;
-                m_blacksmithNewIcon.Dispose();
-                m_blacksmithNewIcon = null;
-                m_blacksmithBoard.Dispose();
-                m_blacksmithBoard = null;
-
-                m_enchantress.Dispose();
-                m_enchantress = null;
-                m_enchantressIcon.Dispose();
-                m_enchantressIcon = null;
-                m_enchantressNewIcon.Dispose();
-                m_enchantressNewIcon = null;
-                m_tent.Dispose();
-                m_tent = null;
-
-                m_architect.Dispose();
-                m_architect = null;
-                m_architectIcon.Dispose();
-                m_architectIcon = null;
-                m_screw.Dispose();
-                m_screw = null;
-
-                if (m_blacksmithAnvilSound != null) // If the blacksmith is never unlocked, this stays null and cannot be disposed.
-                    m_blacksmithAnvilSound.Dispose();
-                m_blacksmithAnvilSound = null;
-
-                m_tree1 = null;
-                m_tree2 = null;
-                m_tree3 = null;
-                m_fern1 = null;
-                m_fern2 = null;
-                m_fern3 = null;
-
-                foreach (RaindropObj raindrop in m_rainFG)
-                    raindrop.Dispose();
-                m_rainFG.Clear();
-                m_rainFG = null;
-
-                m_mountain1 = null;
-                m_mountain2 = null;
-
-                m_tollCollector.Dispose();
-                m_tollCollector = null;
-                m_tollCollectorIcon.Dispose();
-                m_tollCollectorIcon = null;
-
-                m_blacksmithBlock = null;
-                m_enchantressBlock = null;
-                m_architectBlock = null;
-
-                if (m_rainSFX != null)
-                    m_rainSFX.Dispose();
-                m_rainSFX = null;
-
-                base.Dispose();
-            }
-        }
-
-        private bool BlacksmithNewIconVisible
-        {
-            get
-            {
-                foreach (byte[] category in Game.PlayerStats.GetBlueprintArray)
-                {
-                    foreach (byte state in category)
-                    {
-                        if (state == EquipmentState.FOUND_BUT_NOT_SEEN)
-                            return true;
-                    }
-                }
-                return false;
-            }
-        }
-
-        private bool EnchantressNewIconVisible
-        {
-            get
-            {
-                foreach (byte[] category in Game.PlayerStats.GetRuneArray)
-                {
-                    foreach (byte state in category)
-                    {
-                        if (state == EquipmentState.FOUND_BUT_NOT_SEEN)
-                            return true;
-                    }
-                }
-                return false;
-            }
-        }
-
-
-        private bool SmithyAvailable
-        {
-            get { return SkillSystem.GetSkill(SkillType.Smithy).ModifierAmount > 0; }
-        }
-
-        private bool EnchantressAvailable
-        {
-            get { return SkillSystem.GetSkill(SkillType.Enchanter).ModifierAmount > 0; }
-        }
-
-        private bool ArchitectAvailable
-        {
-            get { return SkillSystem.GetSkill(SkillType.Architect).ModifierAmount > 0; }
-        }
-
-        private bool TollCollectorAvailable
-        {
-            get { return (Game.PlayerStats.TimesDead > 0 && m_tollCollector.Visible == true); }
         }
     }
+
+    private void RunTollPaidSelection(RCScreenManager manager)
+    {
+        manager.DialogueScreen.SetDialogueChoice("ConfirmTest1");
+        manager.DialogueScreen.SetConfirmEndHandler(this, "TollPaid", true);
+        manager.DialogueScreen.SetCancelEndHandler(typeof(Console), "WriteLine", "Canceling Selection");
+        manager.DisplayScreen(ScreenType.DIALOGUE, true);
+    }
+
+    public void MovePlayerTo(GameObj target)
+    {
+        _controlsLocked = true;
+        if (Player.X != target.X - 150)
+        {
+            if (Player.X > target.Position.X - 150)
+                Player.Flip = SpriteEffects.FlipHorizontally;
+
+            var duration = CDGMath.DistanceBetweenPts(Player.Position, new Vector2(target.X - 150, target.Y)) / (float)(Player.Speed);
+
+            Player.UpdateCollisionBoxes(); // Necessary check since the OnEnter() is called before player can update its collision boxes.
+            Player.State = 1; // Force the player into a walking state. This state will not update until the logic set is complete.
+            Player.IsWeighted = false;
+            Player.AccelerationY = 0;
+            Player.AccelerationX = 0;
+            Player.IsCollidable = false;
+            Player.CurrentSpeed = 0;
+            Player.LockControls();
+            Player.ChangeSprite("PlayerWalking_Character");
+            Player.PlayAnimation(true);
+            var playerMoveLS = new LogicSet(Player);
+            playerMoveLS.AddAction(new DelayLogicAction(duration));
+            Player.RunExternalLogicSet(playerMoveLS);
+            Tween.To(Player, duration, Tween.EaseNone, "X", $"{target.Position.X - 150}");
+            Tween.AddEndHandlerToLastTween(this, "MovePlayerComplete", target);
+            return;
+        }
+        
+        MovePlayerComplete(target);
+    }
+
+    public void MovePlayerComplete(GameObj target)
+    {
+        _controlsLocked = false;
+        Player.IsWeighted = true;
+        Player.IsCollidable = true;
+        Player.UnlockControls();
+        Player.Flip = SpriteEffects.None;
+
+        var manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
+        
+        if (target == _blacksmith)
+        {
+            if (Game.PlayerStats.SpokeToBlacksmith == false)
+            {
+                Game.PlayerStats.SpokeToBlacksmith = true;
+                manager!.DialogueScreen.SetDialogue("Meet Blacksmith");
+                manager.DialogueScreen.SetConfirmEndHandler(Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.BLACKSMITH, true, null);
+                manager.DisplayScreen(ScreenType.DIALOGUE, true);
+            }
+            else
+                manager!.DisplayScreen(ScreenType.BLACKSMITH, true);
+        }
+        else if (target == _enchantress)
+        {
+            if (Game.PlayerStats.SpokeToEnchantress == false)
+            {
+                Game.PlayerStats.SpokeToEnchantress = true;
+                manager!.DialogueScreen.SetDialogue("Meet Enchantress");
+                manager.DialogueScreen.SetConfirmEndHandler(Player.AttachedLevel.ScreenManager, "DisplayScreen", ScreenType.ENCHANTRESS, true, null);
+                manager.DisplayScreen(ScreenType.DIALOGUE, true);
+            }
+            else
+                manager!.DisplayScreen(ScreenType.ENCHANTRESS, true);
+        }
+    }
+
+    public void TollPaid(bool chargeFee)
+    {
+        if (chargeFee)
+        {
+            var goldLost = Game.PlayerStats.Gold * (GameEV.GATEKEEPER_TOLL_COST - SkillSystem.GetSkill(SkillType.PricesDown).ModifierAmount);
+            Game.PlayerStats.Gold -= (int)goldLost;
+            if (goldLost > 0)
+                Player.AttachedLevel.TextManager.DisplayNumberStringText(-(int)goldLost, "LOC_ID_PLAYER_OBJ_1" /*"gold"*/, Color.Yellow, new Vector2(Player.X, Player.Bounds.Top));
+        }
+
+        if (Game.PlayerStats.SpokeToTollCollector && Game.PlayerStats.SpecialItem != SpecialItemType.FREE_ENTRANCE
+                                                  && Game.PlayerStats.SpecialItem != SpecialItemType.BLOB_TOKEN
+                                                  && Game.PlayerStats.SpecialItem != SpecialItemType.LAST_BOSS_TOKEN
+                                                  && Game.PlayerStats.SpecialItem != SpecialItemType.FIREBALL_TOKEN
+                                                  && Game.PlayerStats.SpecialItem != SpecialItemType.EYEBALL_TOKEN
+                                                  && Game.PlayerStats.SpecialItem != SpecialItemType.SKULL_TOKEN)
+        {
+            Player.AttachedLevel.ImpactEffectPool.DisplayDeathEffect(_tollCollector.Position);
+            SoundManager.PlaySound("Charon_Laugh");
+            HideTollCollector();
+        }
+        else
+        {
+            Game.PlayerStats.SpokeToTollCollector = true;
+            SoundManager.PlaySound("Charon_Laugh");
+            _tollCollector.ChangeSprite("NPCTollCollectorLaugh_Character");
+            _tollCollector.AnimationDelay = 1 / 20f;
+            _tollCollector.PlayAnimation(true);
+            Tween.RunFunction(1, Player.AttachedLevel.ImpactEffectPool, "DisplayDeathEffect", _tollCollector.Position);
+            Tween.RunFunction(1, this, "HideTollCollector");
+        }
+
+        if (Game.PlayerStats.SpecialItem == SpecialItemType.FREE_ENTRANCE ||
+            Game.PlayerStats.SpecialItem == SpecialItemType.SKULL_TOKEN ||
+            Game.PlayerStats.SpecialItem == SpecialItemType.EYEBALL_TOKEN ||
+            Game.PlayerStats.SpecialItem == SpecialItemType.LAST_BOSS_TOKEN ||
+            Game.PlayerStats.SpecialItem == SpecialItemType.FIREBALL_TOKEN||
+            Game.PlayerStats.SpecialItem == SpecialItemType.BLOB_TOKEN)
+        {
+            switch (Game.PlayerStats.SpecialItem)
+            {
+                case SpecialItemType.EYEBALL_TOKEN:
+                    Game.PlayerStats.ChallengeEyeballUnlocked = true;
+                    break;
+                case SpecialItemType.SKULL_TOKEN:
+                    Game.PlayerStats.ChallengeSkullUnlocked = true;
+                    break;
+                case SpecialItemType.FIREBALL_TOKEN:
+                    Game.PlayerStats.ChallengeFireballUnlocked = true;
+                    break;
+                case SpecialItemType.BLOB_TOKEN:
+                    Game.PlayerStats.ChallengeBlobUnlocked = true;
+                    break;
+                case SpecialItemType.LAST_BOSS_TOKEN:
+                    Game.PlayerStats.ChallengeLastBossUnlocked = true;
+                    break;
+            }
+
+            Game.PlayerStats.SpecialItem = SpecialItemType.NONE;
+            Player.AttachedLevel.UpdatePlayerHUDSpecialItem();
+        }
+    }
+
+    public void HideTollCollector()
+    {
+        SoundManager.Play3DSound(this, Player, "Charon_Poof");
+        _tollCollector.Visible = false;
+        Player.AttachedLevel.PhysicsManager.RemoveObject(_tollCollector);
+    }
+
+    public void ActivateArchitect()
+    {
+        Player.LockControls();
+        Player.CurrentSpeed = 0;
+        _architectIcon.Visible = false;
+        _architectRenovating = true;
+        _architect.ChangeSprite("ArchitectPull_Character");
+        (_architect.GetChildAt(1) as SpriteObj)!.PlayAnimation(false);
+        _screw.AnimationDelay = 1 / 30f;
+
+        Game.PlayerStats.ArchitectUsed = true;
+
+        Tween.RunFunction(0.5f, _architect.GetChildAt(0), "PlayAnimation", true);
+        Tween.RunFunction(0.5f, typeof(SoundManager), "PlaySound", "Architect_Lever");
+        Tween.RunFunction(1, typeof(SoundManager), "PlaySound", "Architect_Screw");
+        Tween.RunFunction(1f, _screw, "PlayAnimation", false);
+        Tween.By(_architectBlock, 0.8f, Tween.EaseNone, "delay", "1.1", "Y", "135");
+        Tween.RunFunction(1f, this, "ShakeScreen", 2, true, false);
+        Tween.RunFunction(1.5f, this, "StopScreenShake");
+        Tween.RunFunction(1.5f, Player.AttachedLevel.ImpactEffectPool, "SkillTreeDustEffect", new Vector2(_screw.X - _screw.Width / 2f, _screw.Y - 40), true, _screw.Width);
+        Tween.RunFunction(3f, this, "StopArchitectActivation");
+    }
+
+    public void StopArchitectActivation()
+    {
+        _architectRenovating = false;
+        _architectIcon.Visible = true;
+        Player.UnlockControls();
+
+        Game.PlayerStats.LockCastle = true;
+        Game.PlayerStats.HasArchitectFee = true;
+
+        foreach (var chest in Player.AttachedLevel.ChestList) // Resetting all fairy chests.
+        {
+            if (chest is FairyChestObj { State: ChestState.Failed } fairyChest) 
+                fairyChest.ResetChest();
+        }
+
+        foreach (var breakableObj in Player.AttachedLevel.RoomList.SelectMany(room => room.GameObjList.OfType<BreakableObj>()))
+            breakableObj.Reset();
+
+        var manager = Player.AttachedLevel.ScreenManager as RCScreenManager;
+        manager!.DialogueScreen.SetDialogue("Castle Lock Complete Architect");
+        manager.DisplayScreen(ScreenType.DIALOGUE, true);
+    }
+
+    public override void Draw(Camera2D camera)
+    {
+        // Hacked parallaxing.
+        _mountain1.X = camera.TopLeftCorner.X * 0.5f;
+        _mountain2.X = _mountain1.X + 2640; // 2640 not 1320 because it is mountain1 flipped.
+
+        base.Draw(camera);
+
+        if (_isRaining)
+            camera.Draw(Game.GenericTexture, new Rectangle(0, 0, 1320 * 2, 720), Color.Black * 0.3f);
+
+        if (_screenShakeCounter > 0)
+        {
+            camera.X += CDGMath.RandomPlusMinus();
+            camera.Y += CDGMath.RandomPlusMinus();
+            _screenShakeCounter -= (float)camera.GameTime.ElapsedGameTime.TotalSeconds;
+        }
+            
+        if (SmithyAvailable)
+        {
+            _blacksmithBoard.Draw(camera);
+            _blacksmith.Draw(camera);
+            _blacksmithIcon.Draw(camera);
+        }
+
+        if (EnchantressAvailable)
+        {
+            _tent.Draw(camera);
+            _enchantress.Draw(camera);
+            _enchantressIcon.Draw(camera);
+        }
+
+        if (ArchitectAvailable)
+        {
+            _screw.Draw(camera);
+            _architect.Draw(camera);
+            _architectIcon.Draw(camera);
+        }
+
+        if (TollCollectorAvailable)
+        {
+            _tollCollector.Draw(camera);
+            _tollCollectorIcon.Draw(camera);
+        }
+
+        _blacksmithNewIcon.Draw(camera);
+        _enchantressNewIcon.Draw(camera);
+
+        if (_isRaining)
+        {
+            foreach (var raindrop in _rainFG)
+                raindrop.Draw(camera);
+        }
+    }
+
+    public override void PauseRoom()
+    {
+        foreach (var rainDrop in _rainFG)
+            rainDrop.PauseAnimation();
+
+        _rainSFX?.Pause();
+
+        _enchantress.PauseAnimation();
+        _blacksmith.PauseAnimation();
+        _architect.PauseAnimation();
+        _tollCollector.PauseAnimation();
+
+        base.PauseRoom();
+    }
+
+    public override void UnpauseRoom()
+    {
+        foreach (var rainDrop in _rainFG)
+            rainDrop.ResumeAnimation();
+
+        if (_rainSFX is { IsPaused: true })
+            _rainSFX.Resume();
+
+        _enchantress.ResumeAnimation();
+        _blacksmith.ResumeAnimation();
+        _architect.ResumeAnimation();
+        _tollCollector.ResumeAnimation();
+
+        base.UnpauseRoom();
+    }
+
+    private bool _horizontalShake;
+    private bool _verticalShake;
+    private bool _shakeScreen;
+    private float _screenShakeMagnitude;
+    private Vector2 _shakeStartingPos;
+
+    public void ShakeScreen(float magnitude, bool horizontalShake = true, bool verticalShake = true)
+    {
+        _shakeStartingPos = Player.AttachedLevel.Camera.Position;
+        Player.AttachedLevel.CameraLockedToPlayer = false;
+        _screenShakeMagnitude = magnitude;
+        _horizontalShake = horizontalShake;
+        _verticalShake = verticalShake;
+        _shakeScreen = true;
+    }
+
+    public void UpdateShake()
+    {
+        if (_horizontalShake)
+            Player.AttachedLevel.Camera.X = _shakeStartingPos.X + CDGMath.RandomPlusMinus() * (CDGMath.RandomFloat(0, 1) * _screenShakeMagnitude);
+
+        if (_verticalShake)
+            Player.AttachedLevel.Camera.Y = _shakeStartingPos.Y + CDGMath.RandomPlusMinus() * (CDGMath.RandomFloat(0, 1) * _screenShakeMagnitude);
+    }
+
+    public void StopScreenShake()
+    {
+        Player.AttachedLevel.CameraLockedToPlayer = true;
+        _shakeScreen = false;
+    }
+    protected override GameObj CreateCloneInstance()
+    {
+        return new StartingRoomObj();
+    }
+
+    protected override void FillCloneInstance(object obj)
+    {
+        base.FillCloneInstance(obj);
+    }
+
+    public override void Dispose()
+    {
+        if (IsDisposed)
+        {
+            return;
+        }
+
+        // Done
+        _blacksmith.Dispose();
+        _blacksmith = null;
+        _blacksmithIcon.Dispose();
+        _blacksmithIcon = null;
+        _blacksmithNewIcon.Dispose();
+        _blacksmithNewIcon = null;
+        _blacksmithBoard.Dispose();
+        _blacksmithBoard = null;
+
+        _enchantress.Dispose();
+        _enchantress = null;
+        _enchantressIcon.Dispose();
+        _enchantressIcon = null;
+        _enchantressNewIcon.Dispose();
+        _enchantressNewIcon = null;
+        _tent.Dispose();
+        _tent = null;
+
+        _architect.Dispose();
+        _architect = null;
+        _architectIcon.Dispose();
+        _architectIcon = null;
+        _screw.Dispose();
+        _screw = null;
+
+        _blacksmithAnvilSound?.Dispose();
+        _blacksmithAnvilSound = null;
+
+        _tree1 = null;
+        _tree2 = null;
+        _tree3 = null;
+        _fern1 = null;
+        _fern2 = null;
+        _fern3 = null;
+
+        foreach (var raindrop in _rainFG)
+            raindrop.Dispose();
+        _rainFG.Clear();
+        _rainFG = null;
+
+        _mountain1 = null;
+        _mountain2 = null;
+
+        _tollCollector.Dispose();
+        _tollCollector = null;
+        _tollCollectorIcon.Dispose();
+        _tollCollectorIcon = null;
+
+        _blacksmithBlock = null;
+        _enchantressBlock = null;
+        _architectBlock = null;
+
+        _rainSFX?.Dispose();
+        _rainSFX = null;
+
+        base.Dispose();
+    }
+
+    private bool BlacksmithNewIconVisible => Game.PlayerStats.GetBlueprintArray.SelectMany(category => category).Any(state => state == EquipmentState.FOUND_BUT_NOT_SEEN);
+
+    private bool EnchantressNewIconVisible => Game.PlayerStats.GetRuneArray.SelectMany(category => category).Any(state => state == EquipmentState.FOUND_BUT_NOT_SEEN);
+
+
+    private bool SmithyAvailable => SkillSystem.GetSkill(SkillType.Smithy).ModifierAmount > 0;
+
+    private bool EnchantressAvailable => SkillSystem.GetSkill(SkillType.Enchanter).ModifierAmount > 0;
+
+    private bool ArchitectAvailable => SkillSystem.GetSkill(SkillType.Architect).ModifierAmount > 0;
+
+    private bool TollCollectorAvailable => (Game.PlayerStats.TimesDead > 0 && _tollCollector.Visible);
 }

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using DS2DEngine;
 using System.Globalization;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameObjects.RoomObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 

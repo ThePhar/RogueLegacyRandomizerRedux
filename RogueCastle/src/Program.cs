@@ -10,6 +10,7 @@ namespace RogueCastle;
 public static class Program
 {
     public static readonly string OSDir = GetOSDir();
+    public static Game Game;
 
     /// <summary>
     /// The main entry point for the application.
@@ -109,9 +110,8 @@ public static class Program
         {
             try
             {
-                using var game = new Game();
-
-                game.Run();
+                Game = new Game();
+                Game.Run();
             }
             catch (Exception e)
             {
@@ -138,9 +138,8 @@ public static class Program
         }
         else
         {
-            using var game = new Game();
-
-            game.Run();
+            Game = new Game();
+            Game.Run();
         }
 
         Steamworks.Shutdown();
