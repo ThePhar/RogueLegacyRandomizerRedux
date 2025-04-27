@@ -5,8 +5,7 @@ using RogueCastle.Screens;
 
 namespace RogueCastle;
 
-public static class EnemyBuilder
-{
+public static class EnemyBuilder {
     public static EnemyObj BuildEnemy(
         byte enemyType,
         PlayerObj player,
@@ -14,10 +13,8 @@ public static class EnemyBuilder
         ProceduralLevelScreen levelToAttachTo,
         GameTypes.EnemyDifficulty difficulty,
         bool doNotInitialize = false
-    )
-    {
-        EnemyObj objToReturn = enemyType switch
-        {
+    ) {
+        EnemyObj objToReturn = enemyType switch {
             EnemyType.SKELETON        => new EnemyObj_Skeleton(player, physMgr, levelToAttachTo, difficulty),
             EnemyType.KNIGHT          => new EnemyObj_Knight(player, physMgr, levelToAttachTo, difficulty),
             EnemyType.FIREBALL        => new EnemyObj_Fireball(player, physMgr, levelToAttachTo, difficulty),
@@ -54,8 +51,7 @@ public static class EnemyBuilder
             _                         => throw new NotImplementedException($"Unsupported enemy type: {enemyType}"),
         };
 
-        if (player == null && doNotInitialize == false)
-        {
+        if (player == null && doNotInitialize == false) {
             objToReturn.Initialize();
         }
 

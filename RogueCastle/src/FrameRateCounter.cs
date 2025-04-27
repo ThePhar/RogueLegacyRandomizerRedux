@@ -6,8 +6,7 @@ using RogueCastle.EnvironmentVariables;
 
 namespace RogueCastle;
 
-public class FrameRateCounter : DrawableGameComponent
-{
+public class FrameRateCounter : DrawableGameComponent {
     private readonly ContentManager _content;
     private TimeSpan _elapsedTime = TimeSpan.Zero;
     private int _frameCounter;
@@ -15,28 +14,22 @@ public class FrameRateCounter : DrawableGameComponent
     private SpriteBatch _spriteBatch;
     private SpriteFont _spriteFont;
 
-    public FrameRateCounter(Game game) : base(game)
-    {
+    public FrameRateCounter(Game game) : base(game) {
         _content = Game.Content;
     }
 
-    protected override void LoadContent()
-    {
+    protected override void LoadContent() {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         _spriteFont = _content.Load<SpriteFont>(@"Fonts\FpsFont");
     }
 
-    protected override void UnloadContent()
-    {
+    protected override void UnloadContent() {
         _content.Unload();
     }
 
-    public override void Update(GameTime gameTime)
-    {
+    public override void Update(GameTime gameTime) {
         _elapsedTime += gameTime.ElapsedGameTime;
-
-        if (_elapsedTime <= TimeSpan.FromSeconds(1))
-        {
+        if (_elapsedTime <= TimeSpan.FromSeconds(1)) {
             return;
         }
 
@@ -45,11 +38,10 @@ public class FrameRateCounter : DrawableGameComponent
         _frameCounter = 0;
     }
 
-    public override void Draw(GameTime gameTime)
-    {
+    public override void Draw(GameTime gameTime) {
         _frameCounter++;
 
-        var fps = $"fps: {_frameRate}";
+        var fps = $"FPS: {_frameRate}";
 
         _spriteBatch.Begin();
 
