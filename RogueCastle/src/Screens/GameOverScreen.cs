@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
+using RogueCastle.Randomizer;
 using RogueCastle.Screens.BaseScreens;
 using Tweener;
 using Tweener.Ease;
@@ -51,29 +52,39 @@ public class GameOverScreen : Screen
 
     public override void PassInData(List<object> objList)
     {
-        if (objList != null)
+        if (objList == null)
         {
-            _player = objList[0] as PlayerObj;
-
-            if (_playerFallSound == null)
-            {
-                _playerFallSound = new FrameSoundObj(_player, 14, "Player_Death_BodyFall");
-                _playerSwordSpinSound = new FrameSoundObj(_player, 2, "Player_Death_SwordTwirl");
-                _playerSwordFallSound = new FrameSoundObj(_player, 9, "Player_Death_SwordLand");
-            }
-
-            _enemyList = objList[1] as List<EnemyObj>;
-            _coinsCollected = (int)objList[2];
-            _bagsCollected = (int)objList[3];
-            _diamondsCollected = (int)objList[4];
-            _bigDiamondsCollected = (int)objList[5];
-            if (objList[6] != null)
-                _objKilledPlayer = objList[6] as GameObj;
-            SetObjectKilledPlayerText();
-
-            _enemyStoredPositions.Clear();
-            base.PassInData(objList);
+            return;
         }
+
+        _player = objList[0] as PlayerObj;
+
+        if (_playerFallSound == null)
+        {
+            _playerFallSound = new FrameSoundObj(_player, 14, "Player_Death_BodyFall");
+            _playerSwordSpinSound = new FrameSoundObj(_player, 2, "Player_Death_SwordTwirl");
+            _playerSwordFallSound = new FrameSoundObj(_player, 9, "Player_Death_SwordLand");
+        }
+
+        _enemyList = objList[1] as List<EnemyObj>;
+        _coinsCollected = (int)objList[2];
+        _bagsCollected = (int)objList[3];
+        _diamondsCollected = (int)objList[4];
+        _bigDiamondsCollected = (int)objList[5];
+        if (objList[6] != null)
+        {
+            _objKilledPlayer = objList[6] as GameObj;
+        }
+        
+        var cause = SetObjectKilledPlayerText();
+        _enemyStoredPositions.Clear();
+        
+        if (_objKilledPlayer is not DeathLinkObj)
+        {
+            (ScreenManager.Game as Game)!.ArchipelagoManager.SendDeath(cause);
+        }
+        
+        base.PassInData(objList);
     }
 
     public override void LoadContent()
@@ -246,7 +257,13 @@ public class GameOverScreen : Screen
         //2 = parting words
         //3 = parting words title.
 
-        if (Game.PlayerStats.HasTrait(TraitType.TOURETTES))
+        if (_objKilledPlayer is DeathLinkObj dl)
+        {
+            (_dialoguePlate.GetChildAt(2) as TextObj)!.Text = string.IsNullOrEmpty(dl.Cause) 
+                ? string.Format("LOC_ID_GAME_OVER_SCREEN_10_NEW".GetResourceString(), dl.Name) 
+                : dl.Cause;
+        }
+        else if (Game.PlayerStats.HasTrait(TraitType.TOURETTES))
         {
             (_dialoguePlate.GetChildAt(2) as TextObj).Text = "#)!(%*#@!%^"; // not localized
             (_dialoguePlate.GetChildAt(2) as TextObj).RandomizeSentence(true);
@@ -279,10 +296,7 @@ public class GameOverScreen : Screen
         Tween.To(_dialoguePlate, 0.5f, Tween.EaseNone, "delay", "2", "Opacity", "1");
         Tween.RunFunction(4f, this, "DropStats");
         Tween.To(_continueText, 0.4f, Linear.EaseNone, "delay", "4", "Opacity", "1");
-
-        // Randomizer - Send DeathLink
-        (ScreenManager.Game as Game)!.ArchipelagoManager.SendDeath((_dialoguePlate.GetChildAt(1) as TextObj).Text);
-
+        
         base.OnEnter();
     }
 
@@ -377,66 +391,66 @@ public class GameOverScreen : Screen
         SoundManager.PlaySound("Enemy_Kill_Plant");
     }
 
-    private void SetObjectKilledPlayerText()
+    private string SetObjectKilledPlayerText()
     {
-        TextObj playerSlainText = _dialoguePlate.GetChildAt(1) as TextObj;
+        var playerSlainText = _dialoguePlate.GetChildAt(1) as TextObj;
 
         try
         {
-            playerSlainText.ChangeFontNoDefault(LocaleBuilder.GetLanguageFont(playerSlainText));
+            playerSlainText!.ChangeFontNoDefault(playerSlainText.GetLanguageFont());
             playerSlainText.Text = Game.PlayerStats.PlayerName;
             if (LocaleBuilder.LanguageType != LanguageType.ChineseSimple && Regex.IsMatch(playerSlainText.Text, @"\p{IsCyrillic}"))
+            {
                 playerSlainText.ChangeFontNoDefault(Game.RobotoSlabFont);
+            }
         }
         catch
         {
-            playerSlainText.ChangeFontNoDefault(Game.NotoSansSCFont);
+            playerSlainText!.ChangeFontNoDefault(Game.NotoSansSCFont);
         }
 
         if (m_debugEnemyLocID > 0)
-            playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_4_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString("LOC_ID_ENEMY_NAME_" + m_debugEnemyLocID));
-        else
         {
-            if (_objKilledPlayer != null)
+            playerSlainText.Text = string.Format("LOC_ID_GAME_OVER_SCREEN_4_NEW".GetResourceString(), Game.NameHelper(), $"LOC_ID_ENEMY_NAME_{m_debugEnemyLocID}".GetResourceString());
+        }
+        else if (_objKilledPlayer is null)
+        {
+            playerSlainText.Text = string.Format("LOC_ID_GAME_OVER_SCREEN_7_NEW".GetResourceString(), Game.NameHelper());
+        }
+        
+        if (_objKilledPlayer is EnemyObj enemy)
+        {
+            if (enemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss || enemy is EnemyObj_LastBoss)
+                playerSlainText.Text = string.Format("LOC_ID_GAME_OVER_SCREEN_3_NEW".GetResourceString(), Game.NameHelper(), enemy.LocStringID.GetResourceString());
+            else
+                playerSlainText.Text = string.Format("LOC_ID_GAME_OVER_SCREEN_4_NEW".GetResourceString(), Game.NameHelper(), enemy.LocStringID.GetResourceString());
+        }
+        else if (_objKilledPlayer is ProjectileObj projectile)
+        {
+            enemy = projectile.Source as EnemyObj;
+            if (enemy != null)
             {
-                EnemyObj enemy = _objKilledPlayer as EnemyObj;
-                ProjectileObj projectile = _objKilledPlayer as ProjectileObj;
-
-                if (enemy != null)
-                {
-                    if (enemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss || enemy is EnemyObj_LastBoss)
-                        playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_3_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString(enemy.LocStringID));
-                    //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_3") + " " + LocaleBuilder.getResourceString(enemy.LocStringID);
-                    else
-                        playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_4_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString(enemy.LocStringID));
-                    //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_4") + " " + LocaleBuilder.getResourceString(enemy.LocStringID);
-                }
-                else if (projectile != null)
-                {
-                    enemy = projectile.Source as EnemyObj;
-                    if (enemy != null)
-                    {
-                        if (enemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss || enemy is EnemyObj_LastBoss)
-                            playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_3_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString(enemy.LocStringID));
-                        //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_3") + " " + LocaleBuilder.getResourceString(enemy.LocStringID);
-                        else
-                            playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_4_NEW"), Game.NameHelper(), LocaleBuilder.GetResourceString(enemy.LocStringID));
-                        //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_4") + " " + LocaleBuilder.getResourceString(enemy.LocStringID);
-                    }
-                    else
-                        playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_5_NEW"), Game.NameHelper());
-                    //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_5");
-                }
-
-                HazardObj hazard = _objKilledPlayer as HazardObj;
-                if (hazard != null)
-                    playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_6_NEW"), Game.NameHelper());
-                //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_6");
+                if (enemy.Difficulty == GameTypes.EnemyDifficulty.Miniboss || enemy is EnemyObj_LastBoss)
+                    playerSlainText.Text = string.Format("LOC_ID_GAME_OVER_SCREEN_3_NEW".GetResourceString(), Game.NameHelper(), enemy.LocStringID.GetResourceString());
+                else
+                    playerSlainText.Text = string.Format("LOC_ID_GAME_OVER_SCREEN_4_NEW".GetResourceString(), Game.NameHelper(), enemy.LocStringID.GetResourceString());
             }
             else
-                playerSlainText.Text = string.Format(LocaleBuilder.GetResourceString("LOC_ID_GAME_OVER_SCREEN_7_NEW"), Game.NameHelper());
-            //playerSlainText.Text = Game.PlayerStats.PlayerName + " " + LocaleBuilder.getResourceString("LOC_ID_GAME_OVER_SCREEN_7");
+            {
+                playerSlainText.Text = string.Format("LOC_ID_GAME_OVER_SCREEN_5_NEW".GetResourceString(), Game.NameHelper());
+            }
         }
+        else if (_objKilledPlayer is DeathLinkObj dl)
+        {
+            playerSlainText.Text = string.Format("LOC_ID_GAME_OVER_SCREEN_9_NEW".GetResourceString(), Game.NameHelper(), dl.Name);
+        }
+            
+        if (_objKilledPlayer is HazardObj)
+        {
+            playerSlainText.Text = string.Format("LOC_ID_GAME_OVER_SCREEN_6_NEW".GetResourceString(), Game.NameHelper());
+        }
+
+        return playerSlainText.Text;
     }
 
     public override void HandleInput()

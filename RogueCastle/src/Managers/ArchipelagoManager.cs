@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
@@ -104,7 +105,7 @@ public class ArchipelagoManager(Game game)
 
     public void SendDeath(string deathMessage)
     {
-        if (!_session.Socket.Connected)
+        if (!_session.Socket.Connected || !_session.ConnectionInfo.Tags.Contains("DeathLink"))
         {
             return;
         }

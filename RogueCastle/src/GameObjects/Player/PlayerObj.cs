@@ -11,6 +11,7 @@ using RogueCastle.EnvironmentVariables;
 using RogueCastle.GameStructs;
 using RogueCastle.LogicActions;
 using RogueCastle.Managers;
+using RogueCastle.Randomizer;
 using RogueCastle.Screens;
 using RogueCastle.Screens.BaseScreens;
 using Tweener;
@@ -1252,8 +1253,20 @@ namespace RogueCastle
 
         public override void Update(GameTime gameTime)
         {
-            float elapsedSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            var elapsedSeconds = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
+            // Check if we should force a DeathLink
+            if (!m_lockControls && !Game.PlayerStats.IsDead && m_levelScreen.CurrentRoom.Name is not "Boss" and not "ChallengeBoss" and not "Start")
+            {
+                var apManager = m_game.ArchipelagoManager;
+                if (apManager.QueuedDeathLink is not null)
+                {
+                    AttachedLevel.SetObjectKilledPlayer(new DeathLinkObj(apManager.QueuedDeathLink.Source, apManager.QueuedDeathLink.Cause));
+                    apManager.ClearDeath();
+                    Kill();
+                }
+            }
+            
             if (m_dropThroughGroundTimer > 0)
                 m_dropThroughGroundTimer -= elapsedSeconds;
 
@@ -1319,7 +1332,9 @@ namespace RogueCastle
             }
 
             if (m_blockInvincibleCounter > 0)
+            {
                 m_blockInvincibleCounter -= elapsedSeconds;
+            }
 
             if (IsFlying == true)
             {
@@ -1502,7 +1517,9 @@ namespace RogueCastle
                 base.Update(gameTime);
             }
             else if (m_externalLS.IsActive == true)
+            {
                 m_externalLS.Update(gameTime);
+            }
         }
 
         private void UpdateAnimationState()

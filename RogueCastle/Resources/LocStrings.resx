@@ -5020,4 +5020,13 @@
   <data name="LOC_ID_RANDOMIZER_DIALOGUE_TEXT_1" xml:space="preserve">
     <value>Failed to connect to the Archipelago server!</value>
   </data>
+  <data name="LOC_ID_GAME_OVER_SCREEN_9_NEW" xml:space="preserve">
+    <value>{0}'s life was cut short due to {1}'s negligence.</value>
+  </data>
+  <data name="LOC_ID_GAME_OVER_SCREEN_9_NEW_F" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LOC_ID_GAME_OVER_SCREEN_10_NEW" xml:space="preserve">
+    <value>Received a mysterious DeathLink from {0}...</value>
+  </data>
 </root>

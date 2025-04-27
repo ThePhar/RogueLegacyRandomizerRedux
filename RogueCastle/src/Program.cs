@@ -42,7 +42,7 @@ public static class Program
 
                 case "--debug":
                     LevelEV.EnableDebugInput = true;
-                    LevelEV.ShowDebugText = true;
+                    LevelEV.ShowDebugText = false;
                     LevelEV.ShowSaveLoadDebugText = true;
                     LevelEV.RunCrashLogs = false;
                     LevelEV.CreateRetailVersion = false;
