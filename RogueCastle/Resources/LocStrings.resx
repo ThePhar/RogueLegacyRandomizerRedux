@@ -5035,4 +5035,13 @@
   <data name="LOC_ID_RANDOMIZER_RECEIVED_OTHER" xml:space="preserve">
     <value>Received from {0}!</value>
   </data>
+  <data name="LOC_ID_RANDO_PARSE_INCOMPATIBLE" xml:space="preserve">
+    <value>The server is running a newer version of the Rogue Legacy world than this client supports. Please check if there are any available updates for the Rogue Legacy Randomizer.</value>
+  </data>
+  <data name="LOC_ID_RANDO_PARSE_CORRUPTED" xml:space="preserve">
+    <value>The server is running an incompatible version of the Rogue Legacy world. Please ask host to check their version against the latest supported release.</value>
+  </data>
+  <data name="LOC_ID_RANDO_PARSE_OUTDATED" xml:space="preserve">
+    <value>The server is running an older version of the Rogue Legacy world. Download an older version of Rogue Legacy Randomizer or request host to update their world to a supported version.</value>
+  </data>
 </root>

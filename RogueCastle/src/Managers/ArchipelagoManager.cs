@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Concurrent;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.BounceFeatures.DeathLink;
@@ -20,7 +20,7 @@ public class ArchipelagoManager {
     private ArchipelagoSession _session;
 
     public ConnectionStatus Status { get; private set; }
-    public SlotDataV1 SlotData { get; private set; }
+    public RandoSettings Settings { get; private set; }
     public string Password { get; private set; }
     public DeathLink QueuedDeathLink { get; private set; }
     public ConcurrentQueue<ItemInfo> ItemQueue { get; private set; } = new();
@@ -68,16 +68,17 @@ public class ArchipelagoManager {
                 return false;
             }
 
-            Password = password;
-            Status = ConnectionStatus.Ready;
             var success = result as LoginSuccessful;
-
-            // todo test for v2
-            SlotData = new SlotDataV1(success!.SlotData);
-            if (SlotData.DeathLink) {
-                _deathLinkService.EnableDeathLink();
+            var (isSuccess, errorMessage) = RandoSettings.TryParse(success!.SlotData, out var settings);
+            if (!isSuccess) {
+                Game.ScreenManager.DialogueScreen.SetDialogue("MultiworldConnectFailure", errorMessage);
+                Game.ScreenManager.DisplayScreen(ScreenType.DIALOGUE, false);
+                return false;
             }
 
+            Settings = settings;
+            Password = password;
+            Status = ConnectionStatus.Ready;
             return true;
         } catch (Exception exception) {
             // Display issue
@@ -96,7 +97,7 @@ public class ArchipelagoManager {
         _session?.Socket.DisconnectAsync();
 
         Status = ConnectionStatus.Disconnected;
-        SlotData = null;
+        Settings = null;
         Password = "";
         QueuedDeathLink = null;
         ItemQueue = new ConcurrentQueue<ItemInfo>();
@@ -134,7 +135,7 @@ public class ArchipelagoManager {
     #region DeathLink
 
     public void SendDeath(GameObj deathCauseObj) {
-        if (!_session.Socket.Connected || !_session.ConnectionInfo.Tags.Contains("DeathLink")) {
+        if (!_session.Socket.Connected) {
             return;
         }
 
@@ -172,6 +173,17 @@ public class ArchipelagoManager {
     }
 
     #endregion
+
+    private static void NestedPrint(Dictionary<string, object> dict, int level = 0) {
+        foreach (KeyValuePair<string, object> item in dict) {
+            if (item.Value is Dictionary<string, object> nested) {
+                Console.WriteLine($@"{new string(' ', level)}{item.Key}:");
+                NestedPrint(nested, level + 1);
+            } else {
+                Console.WriteLine($@"{new string(' ', level)}{item.Key} = {item.Value} ({item.Value.GetType()})");
+            }
+        }
+    }
 }
 
 public enum ConnectionStatus {

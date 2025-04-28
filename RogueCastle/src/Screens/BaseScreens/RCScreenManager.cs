@@ -539,7 +539,6 @@ public class RCScreenManager(Game game) : ScreenManager(game) {
             }
 
             Camera.DrawString(RogueCastle.Game.PixelArtFont, $"Forced Gender Language: {forcedGenderString}", new Vector2(10, 10), Color.White);
-            Camera.DrawString(RogueCastle.Game.PixelArtFont, $"Current Screen: {CurrentScreenType}", new Vector2(10, 30), Color.White);
             Camera.DrawString(RogueCastle.Game.PixelArtFont, $"God Mode: {godModeString}", new Vector2(10, 50), Color.White);
             Camera.End();
         }

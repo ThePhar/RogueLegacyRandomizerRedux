@@ -41,7 +41,7 @@ public class FrameRateCounter : DrawableGameComponent {
     public override void Draw(GameTime gameTime) {
         _frameCounter++;
 
-        var fps = $"FPS: {_frameRate}";
+        var fps = $"fps: {_frameRate}";
 
         _spriteBatch.Begin();
 

@@ -176,7 +176,7 @@ public class StartingRoomObj : RoomObj {
 
     private bool ArchitectAvailable => SkillSystem.GetSkill(SkillType.Architect).ModifierAmount > 0;
 
-    private bool TollCollectorAvailable => Game.PlayerStats.TimesDead > 0 && _tollCollector.Visible && !Program.Game.ArchipelagoManager.SlotData.DisabledCharon;
+    private bool TollCollectorAvailable => Game.PlayerStats.TimesDead > 0 && _tollCollector.Visible;
 
     public override void Initialize() {
         foreach (var obj in TerrainObjList) {
