@@ -53,20 +53,22 @@ public class EnemyObj_LastBoss : EnemyObj {
     private bool _isHurt;
     private bool _isNeo;
     private bool _neoDying;
-    private float _shakeTimer;
-    private bool _shookLeft;
     private float _smokeCounter = 0.05f;
     private float _teleportDuration;
 
-    public EnemyObj_LastBoss(PlayerObj target, PhysicsManager physicsManager, ProceduralLevelScreen levelToAttachTo, GameTypes.EnemyDifficulty difficulty)
-        : base("PlayerIdle_Character", target, physicsManager, levelToAttachTo, difficulty) {
+    public EnemyObj_LastBoss(
+        PlayerObj target,
+        PhysicsManager physicsManager,
+        ProceduralLevelScreen levelToAttachTo,
+        GameTypes.EnemyDifficulty difficulty
+    ) : base("PlayerIdle_Character", target, physicsManager, levelToAttachTo, difficulty) {
         foreach (var obj in _objectList) {
             obj.TextureColor = new Color(100, 100, 100);
         }
 
         Type = EnemyType.LAST_BOSS;
 
-        _damageShieldProjectiles = new List<ProjectileObj>();
+        _damageShieldProjectiles = [];
 
         _objectList[PlayerPart.BOOBS].Visible = false;
         _objectList[PlayerPart.EXTRA].Visible = false;
@@ -75,15 +77,14 @@ public class EnemyObj_LastBoss : EnemyObj {
         _objectList[PlayerPart.BOWTIE].Visible = false;
         _objectList[PlayerPart.WINGS].Visible = false;
 
-        var headPart = (_objectList[PlayerPart.HEAD] as IAnimateableObj).SpriteName;
-        var numberIndex = headPart.IndexOf("_") - 1;
+        var headPart = (_objectList[PlayerPart.HEAD] as IAnimateableObj)!.SpriteName;
+        var numberIndex = headPart.IndexOf("_", StringComparison.Ordinal) - 1;
         headPart = headPart.Remove(numberIndex, 1);
         headPart = headPart.Replace("_", PlayerPart.INTRO_HELM + "_");
         _objectList[PlayerPart.HEAD].ChangeSprite(headPart);
         PlayAnimation();
 
         _delayObj = new BlankObj(0, 0);
-
         _walkDownSoundFinalBoss = new FrameSoundObj(this, 3, "FinalBoss_St2_Foot_01", "FinalBoss_St2_Foot_02", "FinalBoss_St2_Foot_03");
         _walkUpSoundFinalBoss = new FrameSoundObj(this, 6, "FinalBoss_St2_Foot_04", "FinalBoss_St2_Foot_05");
     }
@@ -94,14 +95,16 @@ public class EnemyObj_LastBoss : EnemyObj {
         get => _isNeo;
         set {
             _isNeo = value;
-            if (value) {
-                HealthGainPerLevel = 0;
-                DamageGainPerLevel = 0;
-                ItemDropChance = 0;
-                MoneyDropChance = 0;
-                m_saveToEnemiesKilledList = false;
-                CanFallOffLedges = true; //TEDDY - Making Neo last boss fall off ledges.
+            if (!value) {
+                return;
             }
+
+            HealthGainPerLevel = 0;
+            DamageGainPerLevel = 0;
+            ItemDropChance = 0;
+            MoneyDropChance = 0;
+            m_saveToEnemiesKilledList = false;
+            CanFallOffLedges = true;
         }
     }
 
@@ -110,35 +113,28 @@ public class EnemyObj_LastBoss : EnemyObj {
 
         Name = EnemyEV.LAST_BOSS_BASIC_NAME;
         LocStringID = EnemyEV.LAST_BOSS_BASIC_NAME_LOC_ID;
-
         MaxHealth = EnemyEV.LAST_BOSS_BASIC_MAX_HEALTH;
         Damage = EnemyEV.LAST_BOSS_BASIC_DAMAGE;
         XPValue = EnemyEV.LAST_BOSS_BASIC_XP_VALUE;
-
         MinMoneyDropAmount = EnemyEV.LAST_BOSS_BASIC_MIN_DROP_AMOUNT;
         MaxMoneyDropAmount = EnemyEV.LAST_BOSS_BASIC_MAX_DROP_AMOUNT;
         MoneyDropChance = EnemyEV.LAST_BOSS_BASIC_DROP_CHANCE;
-
         Speed = EnemyEV.LAST_BOSS_BASIC_SPEED;
         TurnSpeed = EnemyEV.LAST_BOSS_BASIC_TURN_SPEED;
         ProjectileSpeed = EnemyEV.LAST_BOSS_BASIC_PROJECTILE_SPEED;
         JumpHeight = EnemyEV.LAST_BOSS_BASIC_JUMP;
         CooldownTime = EnemyEV.LAST_BOSS_BASIC_COOLDOWN;
         AnimationDelay = 1 / EnemyEV.LAST_BOSS_BASIC_ANIMATION_DELAY;
-
         AlwaysFaceTarget = EnemyEV.LAST_BOSS_BASIC_ALWAYS_FACE_TARGET;
         CanFallOffLedges = EnemyEV.LAST_BOSS_BASIC_CAN_FALL_OFF_LEDGES;
         CanBeKnockedBack = EnemyEV.LAST_BOSS_BASIC_CAN_BE_KNOCKED_BACK;
         IsWeighted = EnemyEV.LAST_BOSS_BASIC_IS_WEIGHTED;
-
         Scale = EnemyEV.LastBossBasicScale;
         ProjectileScale = EnemyEV.LastBossBasicProjectileScale;
         TintablePart.TextureColor = EnemyEV.LastBossBasicTint;
-
         MeleeRadius = EnemyEV.LAST_BOSS_BASIC_MELEE_RADIUS;
         ProjectileRadius = EnemyEV.LAST_BOSS_BASIC_PROJECTILE_RADIUS;
         EngageRadius = EnemyEV.LAST_BOSS_BASIC_ENGAGE_RADIUS;
-
         ProjectileDamage = Damage;
         KnockBack = EnemyEV.LastBossBasicKnockBack;
 
@@ -151,35 +147,28 @@ public class EnemyObj_LastBoss : EnemyObj {
 
                 Name = EnemyEV.LAST_BOSS_MINIBOSS_NAME;
                 LocStringID = EnemyEV.LAST_BOSS_MINIBOSS_NAME_LOC_ID;
-
                 MaxHealth = EnemyEV.LAST_BOSS_MINIBOSS_MAX_HEALTH;
                 Damage = EnemyEV.LAST_BOSS_MINIBOSS_DAMAGE;
                 XPValue = EnemyEV.LAST_BOSS_MINIBOSS_XP_VALUE;
-
                 MinMoneyDropAmount = EnemyEV.LAST_BOSS_MINIBOSS_MIN_DROP_AMOUNT;
                 MaxMoneyDropAmount = EnemyEV.LAST_BOSS_MINIBOSS_MAX_DROP_AMOUNT;
                 MoneyDropChance = EnemyEV.LAST_BOSS_MINIBOSS_DROP_CHANCE;
-
                 Speed = EnemyEV.LAST_BOSS_MINIBOSS_SPEED;
                 TurnSpeed = EnemyEV.LAST_BOSS_MINIBOSS_TURN_SPEED;
                 ProjectileSpeed = EnemyEV.LAST_BOSS_MINIBOSS_PROJECTILE_SPEED;
                 JumpHeight = EnemyEV.LAST_BOSS_MINIBOSS_JUMP;
                 CooldownTime = EnemyEV.LAST_BOSS_MINIBOSS_COOLDOWN;
                 AnimationDelay = 1 / EnemyEV.LAST_BOSS_MINIBOSS_ANIMATION_DELAY;
-
                 AlwaysFaceTarget = EnemyEV.LAST_BOSS_MINIBOSS_ALWAYS_FACE_TARGET;
                 CanFallOffLedges = EnemyEV.LAST_BOSS_MINIBOSS_CAN_FALL_OFF_LEDGES;
                 CanBeKnockedBack = EnemyEV.LAST_BOSS_MINIBOSS_CAN_BE_KNOCKED_BACK;
                 IsWeighted = EnemyEV.LAST_BOSS_MINIBOSS_IS_WEIGHTED;
-
                 Scale = EnemyEV.LastBossMinibossScale;
                 ProjectileScale = EnemyEV.LastBossMinibossProjectileScale;
                 TintablePart.TextureColor = EnemyEV.LastBossMinibossTint;
-
                 MeleeRadius = EnemyEV.LAST_BOSS_MINIBOSS_MELEE_RADIUS;
                 ProjectileRadius = EnemyEV.LAST_BOSS_MINIBOSS_PROJECTILE_RADIUS;
                 EngageRadius = EnemyEV.LAST_BOSS_MINIBOSS_ENGAGE_RADIUS;
-
                 ProjectileDamage = Damage;
                 KnockBack = EnemyEV.LastBossMinibossKnockBack;
 
@@ -193,35 +182,28 @@ public class EnemyObj_LastBoss : EnemyObj {
 
                 Name = EnemyEV.LAST_BOSS_EXPERT_NAME;
                 LocStringID = EnemyEV.LAST_BOSS_EXPERT_NAME_LOC_ID;
-
                 MaxHealth = EnemyEV.LAST_BOSS_EXPERT_MAX_HEALTH;
                 Damage = EnemyEV.LAST_BOSS_EXPERT_DAMAGE;
                 XPValue = EnemyEV.LAST_BOSS_EXPERT_XP_VALUE;
-
                 MinMoneyDropAmount = EnemyEV.LAST_BOSS_EXPERT_MIN_DROP_AMOUNT;
                 MaxMoneyDropAmount = EnemyEV.LAST_BOSS_EXPERT_MAX_DROP_AMOUNT;
                 MoneyDropChance = EnemyEV.LAST_BOSS_EXPERT_DROP_CHANCE;
-
                 Speed = EnemyEV.LAST_BOSS_EXPERT_SPEED;
                 TurnSpeed = EnemyEV.LAST_BOSS_EXPERT_TURN_SPEED;
                 ProjectileSpeed = EnemyEV.LAST_BOSS_EXPERT_PROJECTILE_SPEED;
                 JumpHeight = EnemyEV.LAST_BOSS_EXPERT_JUMP;
                 CooldownTime = EnemyEV.LAST_BOSS_EXPERT_COOLDOWN;
                 AnimationDelay = 1 / EnemyEV.LAST_BOSS_EXPERT_ANIMATION_DELAY;
-
                 AlwaysFaceTarget = EnemyEV.LAST_BOSS_EXPERT_ALWAYS_FACE_TARGET;
                 CanFallOffLedges = EnemyEV.LAST_BOSS_EXPERT_CAN_FALL_OFF_LEDGES;
                 CanBeKnockedBack = EnemyEV.LAST_BOSS_EXPERT_CAN_BE_KNOCKED_BACK;
                 IsWeighted = EnemyEV.LAST_BOSS_EXPERT_IS_WEIGHTED;
-
                 Scale = EnemyEV.LastBossExpertScale;
                 ProjectileScale = EnemyEV.LastBossExpertProjectileScale;
                 TintablePart.TextureColor = EnemyEV.LastBossExpertTint;
-
                 MeleeRadius = EnemyEV.LAST_BOSS_EXPERT_MELEE_RADIUS;
                 ProjectileRadius = EnemyEV.LAST_BOSS_EXPERT_PROJECTILE_RADIUS;
                 EngageRadius = EnemyEV.LAST_BOSS_EXPERT_ENGAGE_RADIUS;
-
                 ProjectileDamage = Damage;
                 KnockBack = EnemyEV.LastBossExpertKnockBack;
 
@@ -235,35 +217,28 @@ public class EnemyObj_LastBoss : EnemyObj {
 
                 Name = EnemyEV.LAST_BOSS_ADVANCED_NAME;
                 LocStringID = EnemyEV.LAST_BOSS_ADVANCED_NAME_LOC_ID;
-
                 MaxHealth = EnemyEV.LAST_BOSS_ADVANCED_MAX_HEALTH;
                 Damage = EnemyEV.LAST_BOSS_ADVANCED_DAMAGE;
                 XPValue = EnemyEV.LAST_BOSS_ADVANCED_XP_VALUE;
-
                 MinMoneyDropAmount = EnemyEV.LAST_BOSS_ADVANCED_MIN_DROP_AMOUNT;
                 MaxMoneyDropAmount = EnemyEV.LAST_BOSS_ADVANCED_MAX_DROP_AMOUNT;
                 MoneyDropChance = EnemyEV.LAST_BOSS_ADVANCED_DROP_CHANCE;
-
                 Speed = EnemyEV.LAST_BOSS_ADVANCED_SPEED;
                 TurnSpeed = EnemyEV.LAST_BOSS_ADVANCED_TURN_SPEED;
                 ProjectileSpeed = EnemyEV.LAST_BOSS_ADVANCED_PROJECTILE_SPEED;
                 JumpHeight = EnemyEV.LAST_BOSS_ADVANCED_JUMP;
                 CooldownTime = EnemyEV.LAST_BOSS_ADVANCED_COOLDOWN;
                 AnimationDelay = 1 / EnemyEV.LAST_BOSS_ADVANCED_ANIMATION_DELAY;
-
                 AlwaysFaceTarget = EnemyEV.LAST_BOSS_ADVANCED_ALWAYS_FACE_TARGET;
                 CanFallOffLedges = EnemyEV.LAST_BOSS_ADVANCED_CAN_FALL_OFF_LEDGES;
                 CanBeKnockedBack = EnemyEV.LAST_BOSS_ADVANCED_CAN_BE_KNOCKED_BACK;
                 IsWeighted = EnemyEV.LAST_BOSS_ADVANCED_IS_WEIGHTED;
-
                 Scale = EnemyEV.LastBossAdvancedScale;
                 ProjectileScale = EnemyEV.LastBossAdvancedProjectileScale;
                 TintablePart.TextureColor = EnemyEV.LastBossAdvancedTint;
-
                 MeleeRadius = EnemyEV.LAST_BOSS_ADVANCED_MELEE_RADIUS;
                 EngageRadius = EnemyEV.LAST_BOSS_ADVANCED_ENGAGE_RADIUS;
                 ProjectileRadius = EnemyEV.LAST_BOSS_ADVANCED_PROJECTILE_RADIUS;
-
                 ProjectileDamage = Damage;
                 KnockBack = EnemyEV.LastBossAdvancedKnockBack;
 
@@ -302,7 +277,6 @@ public class EnemyObj_LastBoss : EnemyObj {
         walkAwayLS.AddAction(new GroundCheckLogicAction());
         walkAwayLS.AddAction(new ChangeSpriteLogicAction("PlayerWalking_Character"));
         walkAwayLS.AddAction(new MoveLogicAction(m_target, false));
-        //walkAwayLS.AddAction(new LockFaceDirectionLogicAction(true));
         walkAwayLS.AddAction(new DelayLogicAction(0.2f, 0.75f));
         walkAwayLS.AddAction(new LockFaceDirectionLogicAction(false));
 
@@ -350,7 +324,6 @@ public class EnemyObj_LastBoss : EnemyObj {
         throwShieldLS.AddAction(new LockFaceDirectionLogicAction(true));
         throwShieldLS.AddAction(new ChangeSpriteLogicAction("PlayerLevelUp_Character"));
         throwShieldLS.AddAction(new PlayAnimationLogicAction(false));
-        //CastCloseShield(throwShieldLS);
         throwShieldLS.AddAction(new RunFunctionLogicAction(this, "CastCloseShield"));
         throwShieldLS.AddAction(new LockFaceDirectionLogicAction(false));
         throwShieldLS.Tag = GameTypes.LOGIC_SET_TYPE_ATTACK;
@@ -400,7 +373,6 @@ public class EnemyObj_LastBoss : EnemyObj {
         jumpLS.AddAction(new Play3DSoundLogicAction(this, m_target, "Player_Jump"));
         jumpLS.AddAction(new JumpLogicAction());
         jumpLS.AddAction(new DelayLogicAction(0.2f));
-        //ThrowAxeProjectiles(jumpLS);
         jumpLS.AddAction(new RunFunctionLogicAction(this, "ThrowAxeProjectiles"));
         jumpLS.AddAction(new DelayLogicAction(0.75f));
         jumpLS.AddAction(new LockFaceDirectionLogicAction(false));
@@ -417,7 +389,6 @@ public class EnemyObj_LastBoss : EnemyObj {
         jumpNeoLS.AddAction(new Play3DSoundLogicAction(this, m_target, "Player_Jump"));
         jumpNeoLS.AddAction(new JumpLogicAction());
         jumpNeoLS.AddAction(new DelayLogicAction(0.2f));
-        //ThrowAxeProjectiles(jumpLS);
         jumpNeoLS.AddAction(new RunFunctionLogicAction(this, "ThrowAxeProjectilesNeo"));
         jumpNeoLS.AddAction(new DelayLogicAction(0.75f));
         jumpNeoLS.AddAction(new LockFaceDirectionLogicAction(false));
@@ -427,7 +398,6 @@ public class EnemyObj_LastBoss : EnemyObj {
 
         var dashLS = new LogicSet(this);
         dashLS.AddAction(new DebugTraceLogicAction("dashLS"));
-        //CastCloseShield(dashLS);
         dashLS.AddAction(new RunFunctionLogicAction(this, "CastCloseShield"));
         dashLS.AddAction(new RunFunctionLogicAction(this, "Dash", 0));
         dashLS.AddAction(new DelayLogicAction(0.25f));
@@ -533,35 +503,15 @@ public class EnemyObj_LastBoss : EnemyObj {
         castSwordRightSF.AddAction(new LockFaceDirectionLogicAction(false));
 
         var castShield1SF = new LogicSet(this);
-        //castShield1SF.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / 20f));
-        //castShield1SF.AddAction(new ChangeSpriteLogicAction("EnemyLastBossSpell_Character", false, false));
-        //castShield1SF.AddAction(new PlayAnimationLogicAction("Start", "BeforeCast"));
-        //castShield1SF.AddAction(new DelayLogicAction(m_castDelay));
         castShield1SF.AddAction(new RunFunctionLogicAction(this, "CastDamageShield", ORBS_EASY));
-        //castShield1SF.AddAction(new PlayAnimationLogicAction("BeforeCast", "End"));
-        //castShield1SF.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / 10f));
-        //castShield1SF.AddAction(new DelayLogicAction(0));
         castShield1SF.AddAction(new LockFaceDirectionLogicAction(false));
 
         var castShield2SF = new LogicSet(this);
-        //castShield2SF.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / 20f));
-        //castShield2SF.AddAction(new ChangeSpriteLogicAction("EnemyLastBossSpell_Character", false, false));
-        //castShield2SF.AddAction(new PlayAnimationLogicAction("Start", "BeforeCast"));
-        //castShield2SF.AddAction(new DelayLogicAction(m_castDelay));
         castShield2SF.AddAction(new RunFunctionLogicAction(this, "CastDamageShield", ORBS_NORMAL));
-        //castShield2SF.AddAction(new PlayAnimationLogicAction("BeforeCast", "End"));
-        //castShield2SF.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / 10f));
-        //castShield2SF.AddAction(new DelayLogicAction(0));
         castShield2SF.AddAction(new LockFaceDirectionLogicAction(false));
 
         var castShield3SF = new LogicSet(this);
-        //castShield3SF.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / 20f));
-        //castShield3SF.AddAction(new ChangeSpriteLogicAction("EnemyLastBossSpell_Character", false, false));
-        //castShield3SF.AddAction(new PlayAnimationLogicAction("Start", "BeforeCast"));
-        //castShield3SF.AddAction(new DelayLogicAction(m_castDelay));
         castShield3SF.AddAction(new RunFunctionLogicAction(this, "CastDamageShield", ORBS_HARD));
-        //castShield3SF.AddAction(new PlayAnimationLogicAction("BeforeCast", "End"));
-        //castShield3SF.AddAction(new ChangePropertyLogicAction(this, "AnimationDelay", 1 / 10f));
         castShield3SF.AddAction(new DelayLogicAction(0));
         castShield3SF.AddAction(new LockFaceDirectionLogicAction(false));
 
@@ -572,7 +522,6 @@ public class EnemyObj_LastBoss : EnemyObj {
         _damageShieldLB.AddLogicSet(castShield1SF, castShield2SF, castShield3SF);
         _cooldownLB.AddLogicSet(walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS);
         _secondFormCooldownLB.AddLogicSet(walkTowardsSF, walkAwaySF, walkStopSF);
-
         _generalBasicNeoLB.AddLogicSet(walkTowardsLS, walkAwayLS, walkStopLS, jumpNeoLS, moveAttackLS, throwShieldLS, throwDaggerNeoLS, dashLS);
 
         logicBlocksToDispose.Add(_generalBasicLB);
@@ -580,20 +529,18 @@ public class EnemyObj_LastBoss : EnemyObj {
         logicBlocksToDispose.Add(_damageShieldLB);
         logicBlocksToDispose.Add(_cooldownLB);
         logicBlocksToDispose.Add(_secondFormCooldownLB);
-
         logicBlocksToDispose.Add(_generalBasicNeoLB);
 
         // Special logic block to get out of corners.
         _firstFormDashAwayLB.AddLogicSet(dashLeftLS, dashRightLS);
         logicBlocksToDispose.Add(_firstFormDashAwayLB);
 
-        SetCooldownLogicBlock(_cooldownLB, 70, 0, 30, 0, 0, 0, 0, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
-        //TEDDY MEGA BOSS COOLDOWN <- Look for that to find boss variant
+        // walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
+        SetCooldownLogicBlock(_cooldownLB, 70, 0, 30, 0, 0, 0, 0, 0);
         base.InitializeLogic();
     }
 
     private void RunTeleportLS(LogicSet logicSet, string roomPosition) {
-        //logicSet.AddAction(new GroundCheckLogicAction());
         logicSet.AddAction(new ChangePropertyLogicAction(this, "IsCollidable", false));
         logicSet.AddAction(new ChangePropertyLogicAction(this, "IsWeighted", false));
         logicSet.AddAction(new ChangePropertyLogicAction(this, "Opacity", 0.5f));
@@ -602,7 +549,6 @@ public class EnemyObj_LastBoss : EnemyObj {
         logicSet.AddAction(new Play3DSoundLogicAction(this, m_target, "FinalBoss_St2_BlockAction"));
         logicSet.AddAction(new DelayLogicAction(0.25f));
         logicSet.AddAction(new RunFunctionLogicAction(this, "TeleportTo", roomPosition));
-        //logicSet.AddAction(new DelayLogicAction(0.25f)); //1.1f
         logicSet.AddAction(new DelayObjLogicAction(_delayObj));
         logicSet.AddAction(new ChangePropertyLogicAction(this, "IsCollidable", true));
         logicSet.AddAction(new ChangePropertyLogicAction(this, "IsWeighted", true));
@@ -624,7 +570,7 @@ public class EnemyObj_LastBoss : EnemyObj {
             RotationSpeed = 10,
             Damage = Damage,
             AngleOffset = 0,
-            Angle = new Vector2(-90, -90), //(-72, -72),
+            Angle = new Vector2(-90, -90),
             CollidesWithTerrain = false,
             Scale = _axeSpellScale,
         };
@@ -651,18 +597,14 @@ public class EnemyObj_LastBoss : EnemyObj {
             RotationSpeed = 10,
             Damage = Damage,
             AngleOffset = 0,
-            Angle = new Vector2(-90, -90), //(-72, -72),
+            Angle = new Vector2(-90, -90),
             CollidesWithTerrain = false,
             Scale = _axeSpellScale,
         };
 
-        //Tween.RunFunction(0, this, "CastAxe", false);
-        //Tween.RunFunction(0.15f, this, "CastAxe", true);
         Tween.RunFunction(0.3f, this, "CastAxe", true);
         Tween.RunFunction(0.3f, this, "CastAxe", true);
         Tween.RunFunction(0.3f, this, "CastAxe", true);
-        //Tween.RunFunction(0.45f, this, "CastAxe", true);
-        //Tween.RunFunction(0.6f, this, "CastAxe", true);
     }
 
     public void CastAxe(bool randomize) {
@@ -674,96 +616,6 @@ public class EnemyObj_LastBoss : EnemyObj {
         SoundManager.Play3DSound(this, m_target, "Cast_Axe");
         m_levelScreen.ImpactEffectPool.LastBossSpellCastEffect(this, 45, true);
     }
-
-    //private void ThrowAxeProjectiles(LogicSet ls)
-    //{
-    //    ProjectileData projData = new ProjectileData(this)
-    //    {
-    //        SpriteName = "SpellAxe_Sprite",
-    //        SourceAnchor = new Vector2(20, -20),
-    //        Target = null,
-    //        Speed = new Vector2(AxeProjectileSpeed, AxeProjectileSpeed),
-    //        IsWeighted = true,
-    //        RotationSpeed = 10,
-    //        Damage = Damage,
-    //        AngleOffset = 0,
-    //        Angle = new Vector2(-90, -90),//(-72, -72),
-    //        CollidesWithTerrain = false,
-    //        Scale = AxeSpellScale,
-    //    };
-
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_Axe"));            
-    //    ls.AddAction(new RunFunctionLogicAction(m_levelScreen.ImpactEffectPool, "LastBossSpellCastEffect", this, 45, true)); 
-    //    ls.AddAction(new DelayLogicAction(0.15f));
-    //    projData.AngleOffset = CDGMath.RandomInt(-70, 70);
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_Axe"));
-    //    ls.AddAction(new RunFunctionLogicAction(m_levelScreen.ImpactEffectPool, "LastBossSpellCastEffect", this, 45, true)); 
-    //    ls.AddAction(new DelayLogicAction(0.15f));
-    //    projData.AngleOffset = CDGMath.RandomInt(-70, 70);
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_Axe"));
-    //    ls.AddAction(new RunFunctionLogicAction(m_levelScreen.ImpactEffectPool, "LastBossSpellCastEffect", this, 45, true));
-    //    projData.AngleOffset = CDGMath.RandomInt(-70, 70);
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_Axe"));
-    //    ls.AddAction(new RunFunctionLogicAction(m_levelScreen.ImpactEffectPool, "LastBossSpellCastEffect", this, 45, true)); 
-    //    ls.AddAction(new DelayLogicAction(0.15f));
-    //    projData.AngleOffset = CDGMath.RandomInt(-70, 70);
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_Axe"));
-    //    ls.AddAction(new RunFunctionLogicAction(m_levelScreen.ImpactEffectPool, "LastBossSpellCastEffect", this, 45, true));
-    //    ls.AddAction(new DelayLogicAction(0.15f));
-
-    //    projData.Dispose();
-    //}
-
-    //private void ThrowDaggerProjectiles(LogicSet ls)
-    //{
-    //    ProjectileData projData = new ProjectileData(this)
-    //    {
-    //        SpriteName = "SpellDagger_Sprite",
-    //        SourceAnchor = Vector2.Zero,
-    //        Target = m_target,
-    //        Speed = new Vector2(DaggerProjectileSpeed, DaggerProjectileSpeed),
-    //        IsWeighted = false,
-    //        RotationSpeed = 0,
-    //        Damage = Damage,
-    //        AngleOffset = 0,
-    //        CollidesWithTerrain = false,
-    //        Scale = DaggerSpellScale,
-    //    };
-
-    //    float rotation = 0;
-    //    float x = m_target.X - this.X;
-    //    float y = m_target.Y - this.Y;
-    //    rotation = MathHelper.ToDegrees((float)Math.Atan2(y, x));
-
-    //    //m_levelScreen.ImpactEffectPool.SpellCastEffect(this.Position, rotation, true);
-
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_Dagger"));
-    //    ls.AddAction(new RunFunctionLogicAction(m_levelScreen.ImpactEffectPool, "LastBossSpellCastEffect", this, rotation, true)); 
-    //    ls.AddAction(new DelayLogicAction(0.05f));
-    //    projData.AngleOffset = CDGMath.RandomInt(-8, 8);
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_Dagger"));
-    //    ls.AddAction(new DelayLogicAction(0.05f));
-    //    projData.AngleOffset = CDGMath.RandomInt(-8, 8);
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_Dagger"));
-    //    ls.AddAction(new DelayLogicAction(0.05f));
-    //    projData.AngleOffset = CDGMath.RandomInt(-8, 8);
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_Dagger"));
-    //    ls.AddAction(new DelayLogicAction(0.05f));
-    //    projData.AngleOffset = CDGMath.RandomInt(-8, 8);
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_Dagger"));
-
-    //    projData.Dispose();
-    //}
 
     public void ThrowDaggerProjectiles() {
         if (_daggerProjData != null) {
@@ -784,7 +636,6 @@ public class EnemyObj_LastBoss : EnemyObj {
             Scale = _daggerSpellScale,
         };
 
-        //m_levelScreen.ImpactEffectPool.SpellCastEffect(this.Position, rotation, true);
         Tween.RunFunction(0, this, "CastDaggers", false);
         Tween.RunFunction(0.05f, this, "CastDaggers", true);
         Tween.RunFunction(0.1f, this, "CastDaggers", true);
@@ -811,7 +662,6 @@ public class EnemyObj_LastBoss : EnemyObj {
             Scale = _daggerSpellScale,
         };
 
-        //m_levelScreen.ImpactEffectPool.SpellCastEffect(this.Position, rotation, true);
         Tween.RunFunction(0, this, "CastDaggers", false);
         Tween.RunFunction(0.05f, this, "CastDaggers", true);
         Tween.RunFunction(0.1f, this, "CastDaggers", true);
@@ -830,9 +680,7 @@ public class EnemyObj_LastBoss : EnemyObj {
     public void CastCloseShield() {
         var projData = new ProjectileData(this) {
             SpriteName = "SpellClose_Sprite",
-            //Angle = new Vector2(90, 90),
-            //SourceAnchor = new Vector2(120, -60),//(75,-200),//(50, 0),
-            Speed = new Vector2(0, 0), //(450,450),//(1000, 1000),
+            Speed = new Vector2(0, 0),
             IsWeighted = false,
             RotationSpeed = 0f,
             DestroysWithEnemy = false,
@@ -851,29 +699,19 @@ public class EnemyObj_LastBoss : EnemyObj {
     }
 
     public void TeleportTo(string roomPosition) {
-        var position = Vector2.Zero;
-        float xDistance = 0;
+        float xDistance = roomPosition switch {
+            "Left"   => m_levelScreen.CurrentRoom.Bounds.Left + 200,
+            "Right"  => m_levelScreen.CurrentRoom.Bounds.Right - 200,
+            "Centre" => m_levelScreen.CurrentRoom.Bounds.Center.X,
+            _        => 0,
+        };
 
-        switch (roomPosition) {
-            case "Left":
-                xDistance = m_levelScreen.CurrentRoom.Bounds.Left + 200;
-                break;
-
-            case "Right":
-                xDistance = m_levelScreen.CurrentRoom.Bounds.Right - 200;
-                break;
-
-            case "Centre":
-                xDistance = m_levelScreen.CurrentRoom.Bounds.Center.X;
-                break;
-        }
-
-        position = new Vector2(xDistance, Y);
+        var position = new Vector2(xDistance, Y);
 
         var totalMovement = Math.Abs(CDGMath.DistanceBetweenPts(Position, position));
         _teleportDuration = totalMovement * 0.001f;
         _delayObj.X = _teleportDuration; // Delay hack.
-        Tween.To(this, _teleportDuration, Quad.EaseInOut, "X", position.X.ToString());
+        Tween.To(this, _teleportDuration, Quad.EaseInOut, "X", $"{position.X}");
         SoundManager.Play3DSound(this, m_target, "FinalBoss_St2_BlockMove");
     }
 
@@ -902,11 +740,11 @@ public class EnemyObj_LastBoss : EnemyObj {
             var spellPos = new Vector2(X, Y + CDGMath.RandomInt(-1320, 100));
             var proj = m_levelScreen.ProjectileManager.FireProjectile(swordData);
             proj.Position = spellPos;
-            Tween.By(proj, 2.5f, Tween.EaseNone, "delay", delay.ToString(), "X", projSpeed.ToString());
+            Tween.By(proj, 2.5f, Tween.EaseNone, "delay", $"{delay}", "X", projSpeed.ToString());
             Tween.AddEndHandlerToLastTween(proj, "KillProjectile");
             Tween.RunFunction(delay, typeof(SoundManager), "Play3DSound", this, m_target, new[] { "FinalBoss_St2_SwordSummon_c_01", "FinalBoss_St2_SwordSummon_c_02", "FinalBoss_St2_SwordSummon_c_03", "FinalBoss_St2_SwordSummon_c_04", "FinalBoss_St2_SwordSummon_c_05", "FinalBoss_St2_SwordSummon_c_06", "FinalBoss_St2_SwordSummon_c_07", "FinalBoss_St2_SwordSummon_c_08" });
             m_levelScreen.ImpactEffectPool.SpellCastEffect(spellPos, 0, false);
-            delay += 0.075f; //0.05f;
+            delay += 0.075f;
         }
     }
 
@@ -938,12 +776,9 @@ public class EnemyObj_LastBoss : EnemyObj {
             var proj = m_levelScreen.ProjectileManager.FireProjectile(spearData);
             proj.Scale = new Vector2(2, 2);
             proj.X = roomCentre.X + 50 + xOffsetRight;
-            proj.Y = Y + (Bounds.Bottom - Y); // this.Bounds.Bottom + proj.Width / 2f - 10;
+            proj.Y = Y + (Bounds.Bottom - Y);
             proj.StopAnimation();
-            //Tween.By(proj, 0.2f, Tween.EaseNone, "delay", delay.ToString(), "Y", (-(proj.Width + 10)).ToString());
-            //proj.Y -= proj.Width;
-            //Tween.By(proj, 0.2f, Tween.EaseNone, "delay", (delay + 1).ToString(), "Y", proj.Width.ToString());
-            //proj.Y += proj.Width;
+            
             xOffsetRight += proj.Width;
             Tween.RunFunction(delay, typeof(SoundManager), "Play3DSound", this, m_target, new[] { "FinalBoss_St2_Lance_01", "FinalBoss_St2_Lance_02", "FinalBoss_St2_Lance_03", "FinalBoss_St2_Lance_04", "FinalBoss_St2_Lance_05", "FinalBoss_St2_Lance_06", "FinalBoss_St2_Lance_07", "FinalBoss_St2_Lance_08" });
             Tween.RunFunction(delay, proj, "PlayAnimation", "Before", "End", false);
@@ -957,10 +792,7 @@ public class EnemyObj_LastBoss : EnemyObj {
             projLeft.X = roomCentre.X - 50 + xOffsetLeft;
             projLeft.Y = Y + (Bounds.Bottom - Y);
             projLeft.StopAnimation();
-            //Tween.By(projLeft, 0.2f, Tween.EaseNone, "delay", delay.ToString(), "Y", (-(projLeft.Width + 10)).ToString());
-            //projLeft.Y -= projLeft.Width;
-            //Tween.By(projLeft, 0.2f, Tween.EaseNone, "delay", (delay + 1).ToString(), "Y", projLeft.Width.ToString());
-            //projLeft.Y += projLeft.Width;
+
             xOffsetLeft -= projLeft.Width;
             Tween.RunFunction(delay, projLeft, "PlayAnimation", "Before", "End", false);
             Tween.RunFunction(delay + duration, projLeft, "PlayAnimation", "Retract", "RetractComplete", false);
@@ -989,8 +821,6 @@ public class EnemyObj_LastBoss : EnemyObj {
             LockPosition = true,
         };
 
-        var projSpeed = MEGA_UPWARD_SWORD_PROJECTILE_SPEED;
-
         var xOffsetRight = 0;
         var xOffsetLeft = 0;
         float delay = 1;
@@ -1001,7 +831,7 @@ public class EnemyObj_LastBoss : EnemyObj {
             proj.Y = roomCentre.Y + (Bounds.Bottom - Y) + 120;
             proj.Opacity = 0;
             Tween.To(proj, 0.25f, Tween.EaseNone, "Opacity", "1");
-            Tween.By(proj, 2.5f, Quad.EaseIn, "delay", delay.ToString(), "Y", (-projSpeed).ToString());
+            Tween.By(proj, 2.5f, Quad.EaseIn, "delay", $"{delay}", "Y", $"{-MEGA_UPWARD_SWORD_PROJECTILE_SPEED}");
             Tween.AddEndHandlerToLastTween(proj, "KillProjectile");
 
             xOffsetRight = CDGMath.RandomInt(50, 1000);
@@ -1012,7 +842,7 @@ public class EnemyObj_LastBoss : EnemyObj {
             projLeft.Y = roomCentre.Y + (Bounds.Bottom - Y) + 120;
             projLeft.Opacity = 0;
             Tween.To(projLeft, 0.25f, Tween.EaseNone, "Opacity", "1");
-            Tween.By(projLeft, 2.5f, Quad.EaseIn, "delay", delay.ToString(), "Y", (-projSpeed).ToString());
+            Tween.By(projLeft, 2.5f, Quad.EaseIn, "delay", $"{delay}", "Y", $"{-MEGA_UPWARD_SWORD_PROJECTILE_SPEED}");
             Tween.AddEndHandlerToLastTween(proj, "KillProjectile");
 
             xOffsetLeft = -CDGMath.RandomInt(50, 1000);
@@ -1038,7 +868,7 @@ public class EnemyObj_LastBoss : EnemyObj {
         var orbData = new ProjectileData(this) {
             SpriteName = "LastBossOrbProjectile_Sprite",
             Angle = new Vector2(-65, -65),
-            Speed = new Vector2(MEGA_SHIELD_SPEED, MEGA_SHIELD_SPEED), //(1.5f, 1.5f),//(2, 2),
+            Speed = new Vector2(MEGA_SHIELD_SPEED, MEGA_SHIELD_SPEED),
             Target = this,
             IsWeighted = false,
             RotationSpeed = 0,
@@ -1052,19 +882,20 @@ public class EnemyObj_LastBoss : EnemyObj {
         };
 
         SoundManager.Play3DSound(this, m_target, "FinalBoss_St2_SwordSummon_b");
-        var projectileDistance = MEGA_SHIELD_DISTANCE;
         for (var i = 0; i < numOrbs; i++) {
             var angle = 360f / numOrbs * i;
 
             var proj = m_levelScreen.ProjectileManager.FireProjectile(orbData);
-            proj.AltX = angle; // AltX and AltY are used as holders to hold the projectiles angle and distance from player respectively.
-            proj.AltY = projectileDistance;
+
+            // AltX and AltY are used as holders to hold the projectiles angle and distance from player respectively.
+            proj.AltX = angle;
+            proj.AltY = MEGA_SHIELD_DISTANCE;
             proj.Spell = SpellType.DAMAGE_SHIELD;
             proj.AccelerationXEnabled = false;
             proj.AccelerationYEnabled = false;
             proj.IgnoreBoundsCheck = true;
             proj.Scale = new Vector2(MEGA_SHIELD_SCALE, MEGA_SHIELD_SCALE);
-            proj.Position = CDGMath.GetCirclePosition(angle, projectileDistance, Position);
+            proj.Position = CDGMath.GetCirclePosition(angle, MEGA_SHIELD_DISTANCE, Position);
             m_levelScreen.ImpactEffectPool.SpellCastEffect(proj.Position, proj.Rotation, false);
 
             _damageShieldProjectiles.Add(proj);
@@ -1073,30 +904,21 @@ public class EnemyObj_LastBoss : EnemyObj {
 
     public void Dash(int heading) {
         HeadingY = 0;
-        if (m_target.Position.X < X) // to the right of the player.
+        if (m_target.Position.X < X) /* RIGHT of Player */
         {
             if (heading == 0) {
                 HeadingX = 1;
             }
 
-            if (Flip == SpriteEffects.None) {
-                ChangeSprite("PlayerFrontDash_Character");
-            } else {
-                ChangeSprite("PlayerDash_Character");
-            }
+            ChangeSprite(Flip == SpriteEffects.None ? "PlayerFrontDash_Character" : "PlayerDash_Character");
 
             m_levelScreen.ImpactEffectPool.DisplayDashEffect(new Vector2(X, TerrainBounds.Bottom), false);
-        } else // to the left of the player.
-        {
+        } else /* LEFT of Player */ {
             if (heading == 0) {
                 HeadingX = -1;
             }
 
-            if (Flip == SpriteEffects.None) {
-                ChangeSprite("PlayerDash_Character");
-            } else {
-                ChangeSprite("PlayerFrontDash_Character");
-            }
+            ChangeSprite(Flip == SpriteEffects.None ? "PlayerDash_Character" : "PlayerFrontDash_Character");
 
             m_levelScreen.ImpactEffectPool.DisplayDashEffect(new Vector2(X, TerrainBounds.Bottom), true);
         }
@@ -1137,18 +959,22 @@ public class EnemyObj_LastBoss : EnemyObj {
             }
         }
 
-        if (IsSecondForm == false) {
-            if (m_isTouchingGround == false && m_currentActiveLB != null && SpriteName != "PlayerAttacking3_Character" && _isDashing == false && SpriteName != "PlayerLevelUp_Character") {
-                if (AccelerationY < 0 && SpriteName != "PlayerJumping_Character") {
-                    ChangeSprite("PlayerJumping_Character");
-                    PlayAnimation();
-                } else if (AccelerationY > 0 && SpriteName != "PlayerFalling_Character") {
-                    ChangeSprite("PlayerFalling_Character");
-                    PlayAnimation();
+        if (!IsSecondForm) {
+            if (!m_isTouchingGround && m_currentActiveLB != null && SpriteName != "PlayerAttacking3_Character" && !_isDashing && SpriteName != "PlayerLevelUp_Character") {
+                switch (AccelerationY) {
+                    case < 0 when SpriteName != "PlayerJumping_Character":
+                        ChangeSprite("PlayerJumping_Character");
+                        PlayAnimation();
+                        break;
+
+                    case > 0 when SpriteName != "PlayerFalling_Character":
+                        ChangeSprite("PlayerFalling_Character");
+                        PlayAnimation();
+                        break;
                 }
             } else if (m_isTouchingGround && m_currentActiveLB != null && SpriteName == "PlayerAttacking3_Character" && CurrentSpeed != 0) {
                 var bossLegs = GetChildAt(PlayerPart.LEGS) as SpriteObj;
-                if (bossLegs.SpriteName != "PlayerWalkingLegs_Sprite") {
+                if (bossLegs!.SpriteName != "PlayerWalkingLegs_Sprite") {
                     bossLegs.ChangeSprite("PlayerWalkingLegs_Sprite");
                     bossLegs.PlayAnimation(CurrentFrame, TotalFrames);
                     bossLegs.Y += 4;
@@ -1163,7 +989,7 @@ public class EnemyObj_LastBoss : EnemyObj {
             }
         }
 
-        if (IsSecondForm == false && CurrentHealth <= 0 && m_target.CurrentHealth > 0 && IsNeo == false) {
+        if (!IsSecondForm && CurrentHealth <= 0 && m_target.CurrentHealth > 0 && !IsNeo) {
             // This is the first form death animation.
             if (IsTouchingGround && _firstFormDying == false) {
                 _firstFormDying = true;
@@ -1171,7 +997,6 @@ public class EnemyObj_LastBoss : EnemyObj {
                 m_levelScreen.ItemDropManager.DropItemWide(Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
                 m_levelScreen.ItemDropManager.DropItemWide(Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
                 m_levelScreen.ItemDropManager.DropItemWide(Position, ItemDropType.HEALTH, GameEV.ITEM_HEALTHDROP_AMOUNT);
-                //m_levelScreen.ItemDropManager.DropItemWide(this.Position, ItemDropType.Mana, GameEV.ITEM_MANADROP_AMOUNT);
                 m_levelScreen.ItemDropManager.DropItemWide(Position, ItemDropType.MANA, GameEV.ITEM_MANADROP_AMOUNT);
                 m_levelScreen.ItemDropManager.DropItemWide(Position, ItemDropType.MANA, GameEV.ITEM_MANADROP_AMOUNT);
                 m_levelScreen.ItemDropManager.DropItemWide(Position, ItemDropType.MANA, GameEV.ITEM_MANADROP_AMOUNT);
@@ -1188,13 +1013,9 @@ public class EnemyObj_LastBoss : EnemyObj {
                 m_target.StopAllSpells();
                 m_target.ForceInvincible = true;
 
-                if (m_target.X < X) {
-                    Flip = SpriteEffects.FlipHorizontally;
-                } else {
-                    Flip = SpriteEffects.None;
-                }
+                Flip = m_target.X < X ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-                if (m_currentActiveLB != null && m_currentActiveLB.IsActive) {
+                if (m_currentActiveLB is { IsActive: true }) {
                     m_currentActiveLB.StopLogicBlock();
                 }
             }
@@ -1205,12 +1026,12 @@ public class EnemyObj_LastBoss : EnemyObj {
             }
         }
 
-        if ((_firstFormDying == false && IsSecondForm == false) || (_firstFormDying && IsSecondForm) || (IsNeo && CurrentHealth > 0)) {
+        if ((!_firstFormDying && !IsSecondForm) || (_firstFormDying && IsSecondForm) || (IsNeo && CurrentHealth > 0)) {
             base.Update(gameTime);
         }
 
         // Code for the neo version
-        if (IsSecondForm == false && CurrentHealth <= 0 && m_target.CurrentHealth > 0 && IsNeo && IsTouchingGround && _firstFormDying == false) {
+        if (!IsSecondForm && CurrentHealth <= 0 && m_target.CurrentHealth > 0 && IsNeo && IsTouchingGround && !_firstFormDying) {
             KillPlayerNeo();
             _firstFormDying = true;
         }
@@ -1224,11 +1045,10 @@ public class EnemyObj_LastBoss : EnemyObj {
         m_levelScreen.RunCinematicBorders(16);
         m_currentActiveLB.StopLogicBlock();
 
-        var xOffset = 250;
+        const int xOffset = 250;
+        Vector2 targetPos;
 
-        var targetPos = Vector2.Zero;
-
-        if ((m_target.X < X && X > m_levelScreen.CurrentRoom.X + 500) || X > m_levelScreen.CurrentRoom.Bounds.Right - 500) //&& this.X < m_levelScreen.CurrentRoom.Bounds.Right - 300)
+        if ((m_target.X < X && X > m_levelScreen.CurrentRoom.X + 500) || X > m_levelScreen.CurrentRoom.Bounds.Right - 500)
         {
             targetPos = new Vector2(X - xOffset, Y); // Move to the left of the boss.
             if (targetPos.X > m_levelScreen.CurrentRoom.Bounds.Right - 500) {
@@ -1245,8 +1065,8 @@ public class EnemyObj_LastBoss : EnemyObj {
 
         var duration = CDGMath.DistanceBetweenPts(m_target.Position, targetPos) / m_target.Speed;
 
-        m_target.UpdateCollisionBoxes(); // Necessary check since the OnEnter() is called before m_target can update its collision boxes.
-        m_target.State = 1; // Force the m_target into a walking state. This state will not update until the logic set is complete.
+        m_target.UpdateCollisionBoxes();
+        m_target.State = 1;
         m_target.IsWeighted = false;
         m_target.AccelerationY = 0;
         m_target.AccelerationX = 0;
@@ -1259,17 +1079,13 @@ public class EnemyObj_LastBoss : EnemyObj {
         playerMoveLS.AddAction(new DelayLogicAction(duration));
         m_target.RunExternalLogicSet(playerMoveLS);
         m_target.PlayAnimation();
-        Tween.To(m_target, duration, Tween.EaseNone, "X", targetPos.X.ToString());
+        Tween.To(m_target, duration, Tween.EaseNone, "X", $"{targetPos.X}");
         Tween.AddEndHandlerToLastTween(this, "SecondFormDeath");
     }
 
     // This is where the death animation code needs to go.
     public void SecondFormDeath() {
-        if (m_target.X < X) {
-            m_target.Flip = SpriteEffects.None;
-        } else {
-            m_target.Flip = SpriteEffects.FlipHorizontally;
-        }
+        m_target.Flip = m_target.X < X ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 
         PlayAnimation(false);
         SoundManager.PlaySound("FinalBoss_St1_DeathGrunt");
@@ -1298,7 +1114,7 @@ public class EnemyObj_LastBoss : EnemyObj {
 
     public void SecondFormDialogue() {
         var manager = m_levelScreen.ScreenManager as RCScreenManager;
-        manager.DialogueScreen.SetDialogue("FinalBossTalk02");
+        manager!.DialogueScreen.SetDialogue("FinalBossTalk02");
         manager.DialogueScreen.SetConfirmEndHandler(m_levelScreen.CurrentRoom, "RunFountainCutscene");
         manager.DisplayScreen(ScreenType.DIALOGUE, true);
     }
@@ -1306,7 +1122,6 @@ public class EnemyObj_LastBoss : EnemyObj {
     public void SecondFormComplete() {
         m_target.ForceInvincible = false;
         Level += LevelEV.LAST_BOSS_MODE2_LEVEL_MOD;
-
         Flip = SpriteEffects.FlipHorizontally;
         Visible = true;
         MaxHealth = EnemyEV.LAST_BOSS_ADVANCED_MAX_HEALTH;
@@ -1320,28 +1135,24 @@ public class EnemyObj_LastBoss : EnemyObj {
         MinMoneyDropAmount = EnemyEV.LAST_BOSS_ADVANCED_MIN_DROP_AMOUNT;
         MaxMoneyDropAmount = EnemyEV.LAST_BOSS_ADVANCED_MAX_DROP_AMOUNT;
         MoneyDropChance = EnemyEV.LAST_BOSS_ADVANCED_DROP_CHANCE;
-
         Speed = EnemyEV.LAST_BOSS_ADVANCED_SPEED;
         TurnSpeed = EnemyEV.LAST_BOSS_ADVANCED_TURN_SPEED;
         ProjectileSpeed = EnemyEV.LAST_BOSS_ADVANCED_PROJECTILE_SPEED;
         JumpHeight = EnemyEV.LAST_BOSS_ADVANCED_JUMP;
         CooldownTime = EnemyEV.LAST_BOSS_ADVANCED_COOLDOWN;
         AnimationDelay = 1 / EnemyEV.LAST_BOSS_ADVANCED_ANIMATION_DELAY;
-
         AlwaysFaceTarget = EnemyEV.LAST_BOSS_ADVANCED_ALWAYS_FACE_TARGET;
         CanFallOffLedges = EnemyEV.LAST_BOSS_ADVANCED_CAN_FALL_OFF_LEDGES;
         CanBeKnockedBack = EnemyEV.LAST_BOSS_ADVANCED_CAN_BE_KNOCKED_BACK;
-
         ProjectileScale = EnemyEV.LastBossAdvancedProjectileScale;
         TintablePart.TextureColor = EnemyEV.LastBossAdvancedTint;
-
         MeleeRadius = EnemyEV.LAST_BOSS_ADVANCED_MELEE_RADIUS;
         EngageRadius = EnemyEV.LAST_BOSS_ADVANCED_ENGAGE_RADIUS;
         ProjectileRadius = EnemyEV.LAST_BOSS_ADVANCED_PROJECTILE_RADIUS;
-
         ProjectileDamage = Damage;
         KnockBack = EnemyEV.LastBossAdvancedKnockBack;
         ChangeSprite("EnemyLastBossIdle_Character");
+        
         //TEDDY MEGA BOSS COOLDOWN
         SetCooldownLogicBlock(_secondFormCooldownLB, 40, 20, 40); //walkTowardsSF, walkAwaySF, walkStopSF
         PlayAnimation();
@@ -1349,9 +1160,6 @@ public class EnemyObj_LastBoss : EnemyObj {
 
         IsWeighted = true;
         IsCollidable = true;
-
-        //this.Y -= 50;
-        //Tween.RunFunction(2, this, "SecondFormActive");
     }
 
     public void SecondFormActive() {
@@ -1367,79 +1175,69 @@ public class EnemyObj_LastBoss : EnemyObj {
     }
 
     public override void HitEnemy(int damage, Vector2 collisionPt, bool isPlayer) {
-        if (IsSecondForm == false) {
-            if (_isHurt == false && _isDashing == false) {
-                SoundManager.Play3DSound(this, m_target, "FinalBoss_St1_Dmg_01", "FinalBoss_St1_Dmg_02", "FinalBoss_St1_Dmg_03", "FinalBoss_St1_Dmg_04");
-                /*
-                this.LockFlip = false;
-                this.AnimationDelay = 1 / 10f;
-
-                if (m_currentActiveLB != null && m_currentActiveLB.IsActive == true)
-                    m_currentActiveLB.StopLogicBlock();
-
-                this.ChangeSprite("PlayerHurt_Character");
-                m_isHurt = true;
-                */ // TEDDY I REMOVED THIS SO THAT ENEMY DOESNT GO INTO HURT STATE.
-                base.HitEnemy(damage, collisionPt, isPlayer);
+        if (!IsSecondForm) {
+            if (_isHurt || _isDashing) {
+                return;
             }
+
+            SoundManager.Play3DSound(this, m_target, "FinalBoss_St1_Dmg_01", "FinalBoss_St1_Dmg_02", "FinalBoss_St1_Dmg_03", "FinalBoss_St1_Dmg_04");
         } else {
             SoundManager.Play3DSound(this, m_target, "FinalBoss_St2_Hit_01", "FinalBoss_St2_Hit_03", "FinalBoss_St2_Hit_04");
             SoundManager.Play3DSound(this, m_target, "FinalBoss_St2_DmgVox_01", "FinalBoss_St2_DmgVox_02", "FinalBoss_St2_DmgVox_03", "FinalBoss_St2_DmgVox_04",
                 "FinalBoss_St2_DmgVox_05", "FinalBoss_St2_DmgVox_06", "FinalBoss_St2_DmgVox_07", "FinalBoss_St2_DmgVox_08", "FinalBoss_St2_DmgVox_09");
-            base.HitEnemy(damage, collisionPt, isPlayer);
         }
+
+        base.HitEnemy(damage, collisionPt, isPlayer);
     }
 
     public override void Kill(bool giveXP = true) {
-        if (m_target.CurrentHealth > 0) {
-            if (IsSecondForm && m_bossVersionKilled == false) {
-                m_bossVersionKilled = true;
-                SetPlayerData();
+        if (m_target.CurrentHealth <= 0) {
+            return;
+        }
 
-                m_levelScreen.PauseScreen();
-                m_levelScreen.ProjectileManager.DestroyAllProjectiles(false);
-                m_target.StopAllSpells();
-                m_levelScreen.RunWhiteSlashEffect();
-                ChangeSprite("EnemyLastBossDeath_Character");
-                if (m_target.X < X) {
-                    Flip = SpriteEffects.FlipHorizontally;
-                } else {
-                    Flip = SpriteEffects.None;
-                }
+        if (IsSecondForm && m_bossVersionKilled == false) {
+            // TODO: This is where the victory conditions should go.
+            m_bossVersionKilled = true;
+            SetPlayerData();
 
-                Tween.RunFunction(1f, this, "Part2");
-                SoundManager.PlaySound("Boss_Flash");
-                SoundManager.PlaySound("Boss_Eyeball_Freeze");
-                SoundManager.StopMusic();
-                m_target.LockControls();
+            m_levelScreen.PauseScreen();
+            m_levelScreen.ProjectileManager.DestroyAllProjectiles(false);
+            m_target.StopAllSpells();
+            m_levelScreen.RunWhiteSlashEffect();
+            ChangeSprite("EnemyLastBossDeath_Character");
+            Flip = m_target.X < X ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-                GameUtil.UnlockAchievement("FEAR_OF_FATHERS");
+            Tween.RunFunction(1f, this, "Part2");
+            SoundManager.PlaySound("Boss_Flash");
+            SoundManager.PlaySound("Boss_Eyeball_Freeze");
+            SoundManager.StopMusic();
+            m_target.LockControls();
 
-                if (Game.PlayerStats.TimesCastleBeaten > 1) {
-                    GameUtil.UnlockAchievement("FEAR_OF_TWINS");
-                }
-            }
+            GameUtil.UnlockAchievement("FEAR_OF_FATHERS");
 
-            if (IsNeo && _neoDying == false) {
-                _neoDying = true;
-                m_levelScreen.PauseScreen();
-                SoundManager.PauseMusic();
-
-                m_levelScreen.RunWhiteSlashEffect();
-
-                SoundManager.PlaySound("Boss_Flash");
-                SoundManager.PlaySound("Boss_Eyeball_Freeze");
-                Tween.RunFunction(1, m_levelScreen, "UnpauseScreen");
-                Tween.RunFunction(1, typeof(SoundManager), "ResumeMusic");
+            if (Game.PlayerStats.TimesCastleBeaten > 1) {
+                GameUtil.UnlockAchievement("FEAR_OF_TWINS");
             }
         }
-        //base.Kill(giveXP);
+
+        if (IsNeo && _neoDying == false) {
+            _neoDying = true;
+            m_levelScreen.PauseScreen();
+            SoundManager.PauseMusic();
+
+            m_levelScreen.RunWhiteSlashEffect();
+
+            SoundManager.PlaySound("Boss_Flash");
+            SoundManager.PlaySound("Boss_Eyeball_Freeze");
+            Tween.RunFunction(1, m_levelScreen, "UnpauseScreen");
+            Tween.RunFunction(1, typeof(SoundManager), "ResumeMusic");
+        }
     }
 
     public void KillPlayerNeo() {
         m_isKilled = true;
 
-        if (m_currentActiveLB != null && m_currentActiveLB.IsActive) {
+        if (m_currentActiveLB is { IsActive: true }) {
             m_currentActiveLB.StopLogicBlock();
         }
 
@@ -1459,7 +1257,7 @@ public class EnemyObj_LastBoss : EnemyObj {
     }
 
     // This sets all the player data once the last boss has been beaten.
-    public void SetPlayerData() {
+    public static void SetPlayerData() {
         // Creating a new family tree node and saving.
         var newNode = new FamilyTreeNode {
             Name = Game.PlayerStats.PlayerName,
@@ -1478,8 +1276,6 @@ public class EnemyObj_LastBoss : EnemyObj {
         Game.PlayerStats.FamilyTreeArray.Add(newNode);
 
         // Setting necessary after-death flags and saving.
-        //Game.PlayerStats.IsDead = true;
-        //Game.PlayerStats.Traits = Vector2.Zero;
         Game.PlayerStats.NewBossBeaten = false;
         Game.PlayerStats.RerolledChildren = false;
         Game.PlayerStats.NumEnemiesBeaten = 0;
@@ -1498,16 +1294,14 @@ public class EnemyObj_LastBoss : EnemyObj {
             GameUtil.UnlockAchievement("FEAR_OF_DYING");
         }
 
-        (m_target.AttachedLevel.ScreenManager.Game as Game).SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Archipelago);
+        Program.Game.SaveManager.SaveFiles(SaveType.PlayerData, SaveType.Archipelago);
     }
 
     public override void CollisionResponse(CollisionBox thisBox, CollisionBox otherBox, int collisionResponseType) {
         var mtd = CollisionMath.CalculateMTD(thisBox.AbsRect, otherBox.AbsRect);
 
-        var player = otherBox.AbsParent as PlayerObj;
-
         // Hits the player in Tanooki mode.
-        if (player != null && otherBox.Type == Consts.TERRAIN_HITBOX && player.IsInvincible == false && player.State != PlayerObj.STATE_HURT) {
+        if (otherBox.AbsParent is PlayerObj player && otherBox.Type == Consts.TERRAIN_HITBOX && player.IsInvincible == false && player.State != PlayerObj.STATE_HURT) {
             player.HitPlayer(this);
         }
 
@@ -1524,29 +1318,32 @@ public class EnemyObj_LastBoss : EnemyObj {
         }
 
         // This code gets him out of corners.
-        var terrain = otherBox.AbsParent as TerrainObj;
-        if (terrain != null && m_isTouchingGround == false && terrain is DoorObj == false && IsSecondForm == false) {
-            if (m_currentActiveLB != null && m_currentActiveLB.IsActive) {
-                m_currentActiveLB.StopLogicBlock();
-            }
+        if (otherBox.AbsParent is not TerrainObj terrain || m_isTouchingGround || terrain is DoorObj || IsSecondForm) {
+            return;
+        }
 
-            if (mtd.X > 0) // Dash right
-            {
+        if (m_currentActiveLB is { IsActive: true }) {
+            m_currentActiveLB.StopLogicBlock();
+        }
+
+        switch (mtd.X)
+        {
+            // Dash right
+            case > 0:
                 RunLogicBlock(true, _firstFormDashAwayLB, 0, 100); // dashLeftLS, dashRightLS
-            } else if (mtd.X < 0) //Dash left
-            {
+                break;
+
+            //Dash left
+            case < 0:
                 RunLogicBlock(true, _firstFormDashAwayLB, 100, 0); // dashLeftLS, dashRightLS
-            }
+                break;
         }
     }
 
     public void Part2() {
         SoundManager.PlaySound("FinalBoss_St2_WeatherChange_a");
         m_levelScreen.UnpauseScreen();
-
-        if (m_currentActiveLB != null) {
-            m_currentActiveLB.StopLogicBlock();
-        }
+        m_currentActiveLB?.StopLogicBlock();
 
         PauseEnemy(true);
         m_target.CurrentSpeed = 0;
@@ -1559,34 +1356,34 @@ public class EnemyObj_LastBoss : EnemyObj {
 
     public void Part3() {
         var manager = m_levelScreen.ScreenManager as RCScreenManager;
-        manager.DialogueScreen.SetDialogue("FinalBossTalk03");
+        manager!.DialogueScreen.SetDialogue("FinalBossTalk03");
         manager.DialogueScreen.SetConfirmEndHandler(this, "Part4");
         manager.DisplayScreen(ScreenType.DIALOGUE, true);
     }
 
     public void Part4() {
-        var dataList = new List<object>();
-        dataList.Add(this);
-        (m_levelScreen.ScreenManager as RCScreenManager).DisplayScreen(ScreenType.GAME_OVER_BOSS, true, dataList);
+        var dataList = new List<object> { this };
+        (m_levelScreen.ScreenManager as RCScreenManager)!.DisplayScreen(ScreenType.GAME_OVER_BOSS, true, dataList);
     }
 
     public override void ChangeSprite(string spriteName) {
         base.ChangeSprite(spriteName);
-
-        if (IsSecondForm == false) {
-            var headPart = (_objectList[PlayerPart.HEAD] as IAnimateableObj).SpriteName;
-            var numberIndex = headPart.IndexOf("_") - 1;
-            headPart = headPart.Remove(numberIndex, 1);
-            headPart = headPart.Replace("_", PlayerPart.INTRO_HELM + "_");
-            _objectList[PlayerPart.HEAD].ChangeSprite(headPart);
-
-            _objectList[PlayerPart.BOOBS].Visible = false;
-            _objectList[PlayerPart.EXTRA].Visible = false;
-            _objectList[PlayerPart.LIGHT].Visible = false;
-            _objectList[PlayerPart.GLASSES].Visible = false;
-            _objectList[PlayerPart.BOWTIE].Visible = false;
-            _objectList[PlayerPart.WINGS].Visible = false;
+        if (IsSecondForm) {
+            return;
         }
+
+        var headPart = (_objectList[PlayerPart.HEAD] as IAnimateableObj)!.SpriteName;
+        var numberIndex = headPart.IndexOf("_", StringComparison.Ordinal) - 1;
+        headPart = headPart.Remove(numberIndex, 1);
+        headPart = headPart.Replace("_", PlayerPart.INTRO_HELM + "_");
+        _objectList[PlayerPart.HEAD].ChangeSprite(headPart);
+
+        _objectList[PlayerPart.BOOBS].Visible = false;
+        _objectList[PlayerPart.EXTRA].Visible = false;
+        _objectList[PlayerPart.LIGHT].Visible = false;
+        _objectList[PlayerPart.GLASSES].Visible = false;
+        _objectList[PlayerPart.BOWTIE].Visible = false;
+        _objectList[PlayerPart.WINGS].Visible = false;
     }
 
     public override void Draw(Camera2D camera) {
@@ -1608,134 +1405,105 @@ public class EnemyObj_LastBoss : EnemyObj {
     }
 
     public override void Dispose() {
-        if (IsDisposed == false) {
-            // Done
-            _damageShieldProjectiles.Clear();
-            _damageShieldProjectiles = null;
-            _delayObj.Dispose();
-            _delayObj = null;
-
-            if (_daggerProjData != null) {
-                _daggerProjData.Dispose();
-                _daggerProjData = null;
-            }
-
-            if (_axeProjData != null) {
-                _axeProjData.Dispose();
-                _axeProjData = null;
-            }
-
-            base.Dispose();
+        if (IsDisposed) {
+            return;
         }
+
+        // Done
+        _damageShieldProjectiles.Clear();
+        _damageShieldProjectiles = null;
+        _delayObj.Dispose();
+        _delayObj = null;
+
+        if (_daggerProjData != null) {
+            _daggerProjData.Dispose();
+            _daggerProjData = null;
+        }
+
+        if (_axeProjData != null) {
+            _axeProjData.Dispose();
+            _axeProjData = null;
+        }
+
+        base.Dispose();
     }
 
     public void ForceSecondForm(bool value) {
         IsSecondForm = value;
     }
 
-    //private void CastCloseShield(LogicSet ls)
-    //{
-    //    ProjectileData projData = new ProjectileData(this)
-    //    {
-    //        SpriteName = "SpellClose_Sprite",
-    //        //Angle = new Vector2(90, 90),
-    //        //SourceAnchor = new Vector2(120, -60),//(75,-200),//(50, 0),
-    //        Speed = new Vector2(0, 0),//(450,450),//(1000, 1000),
-    //        IsWeighted = false,
-    //        RotationSpeed = 0f,
-    //        DestroysWithEnemy = false,
-    //        DestroysWithTerrain = false,
-    //        CollidesWithTerrain = false,
-    //        Scale = new Vector2(m_Spell_Close_Scale, m_Spell_Close_Scale),
-    //        Damage = Damage,
-    //        Lifespan = m_Spell_Close_Lifespan,
-    //        LockPosition = true,
-    //    };
-
-    //    ls.AddAction(new Play3DSoundLogicAction(this, m_target, "Cast_GiantSword"));
-    //    ls.AddAction(new FireProjectileLogicAction(m_levelScreen.ProjectileManager, projData));
-    //    ls.AddAction(new RunFunctionLogicAction(m_levelScreen.ImpactEffectPool, "LastBossSpellCastEffect", this, 90, true));
-
-    //    projData.Dispose();
-    //}
-
     #region Basic and Advanced Logic
 
     protected override void RunBasicLogic() {
-        if (CurrentHealth > 0) {
-            if (IsSecondForm == false) {
-                if (_isHurt == false) {
-                    switch (State) {
-                        case STATE_MELEE_ENGAGE:
-                            if (IsNeo == false) {
-                                RunLogicBlock(true, _generalBasicLB, 0, 0, 0, 35, 35, 00, 0, 30); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
-                            } else {
-                                RunLogicBlock(true, _generalBasicNeoLB, 0, 0, 0, 50, 20, 00, 0, 30); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
-                            }
+        if (CurrentHealth <= 0) {
+            return;
+        }
 
-                            break;
+        if (IsSecondForm) {
+            RunAdvancedLogic();
+            return;
+        }
 
-                        case STATE_PROJECTILE_ENGAGE:
-                            if (IsNeo == false) {
-                                RunLogicBlock(true, _generalBasicLB, 35, 0, 0, 25, 0, 00, 20, 20); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
-                            } else {
-                                RunLogicBlock(true, _generalBasicNeoLB, 25, 0, 20, 15, 0, 00, 15, 25); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
-                            }
+        if (_isHurt) {
+            return;
+        }
 
-                            break;
-
-                        case STATE_ENGAGE:
-                            if (IsNeo == false) {
-                                RunLogicBlock(true, _generalBasicLB, 40, 0, 0, 20, 0, 00, 40, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
-                            } else {
-                                RunLogicBlock(true, _generalBasicNeoLB, 40, 0, 20, 20, 0, 00, 20, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
-                            }
-
-                            break;
-
-                        case STATE_WANDER:
-                            if (IsNeo == false) {
-                                RunLogicBlock(true, _generalBasicLB, 50, 0, 0, 0, 0, 00, 50, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
-                            } else {
-                                RunLogicBlock(true, _generalBasicNeoLB, 50, 0, 10, 10, 0, 00, 30, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
-                            }
-
-                            break;
-                    }
+        switch (State) {
+            case STATE_MELEE_ENGAGE:
+                if (IsNeo == false) {
+                    RunLogicBlock(true, _generalBasicLB, 0, 0, 0, 35, 35, 00, 0, 30); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
+                } else {
+                    RunLogicBlock(true, _generalBasicNeoLB, 0, 0, 0, 50, 20, 00, 0, 30); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
                 }
-            } else {
-                RunAdvancedLogic();
-            }
+
+                break;
+
+            case STATE_PROJECTILE_ENGAGE:
+                if (IsNeo == false) {
+                    RunLogicBlock(true, _generalBasicLB, 35, 0, 0, 25, 0, 00, 20, 20); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
+                } else {
+                    RunLogicBlock(true, _generalBasicNeoLB, 25, 0, 20, 15, 0, 00, 15, 25); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
+                }
+
+                break;
+
+            case STATE_ENGAGE:
+                if (IsNeo == false) {
+                    RunLogicBlock(true, _generalBasicLB, 40, 0, 0, 20, 0, 00, 40, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
+                } else {
+                    RunLogicBlock(true, _generalBasicNeoLB, 40, 0, 20, 20, 0, 00, 20, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
+                }
+
+                break;
+
+            case STATE_WANDER:
+                if (IsNeo == false) {
+                    RunLogicBlock(true, _generalBasicLB, 50, 0, 0, 0, 0, 00, 50, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
+                } else {
+                    RunLogicBlock(true, _generalBasicNeoLB, 50, 0, 10, 10, 0, 00, 30, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwShieldLS, throwDaggerLS, dashLS
+                }
+
+                break;
         }
     }
 
     protected override void RunAdvancedLogic() {
-        //if ((CurrentHealth < (MaxHealth / 3) * 2) && m_damageShieldProjectiles.Count < m_orbsNormal)
-        //    RunLogicBlock(false, m_damageShieldLB, 0, 100, 0);  // castShield1SF, castShield2SF, castShield3SF
-        //else if ((CurrentHealth < (MaxHealth / 3) * 1) && m_damageShieldProjectiles.Count < m_orbsHard)
-        //    RunLogicBlock(false, m_damageShieldLB, 0, 0, 100);  // castShield1SF, castShield2SF, castShield3SF
-        //else if (m_damageShieldProjectiles.Count < 1)
-        //    RunLogicBlock(false, m_damageShieldLB, 100, 0, 0);  // castShield1SF, castShield2SF, castShield3SF
-        //else
-        {
-            //RunLogicBlock(true, m_generalAdvancedLB, 0, 0, 0, 100, 0, 0, 0, 0);
-            switch (State) {
-                case STATE_MELEE_ENGAGE:
-                    RunLogicBlock(true, _generalAdvancedLB, 31, 15, 0, 26, 3, 13, 6, 6); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
-                    break;
+        switch (State) {
+            case STATE_MELEE_ENGAGE:
+                RunLogicBlock(true, _generalAdvancedLB, 31, 15, 0, 26, 3, 13, 6, 6); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
+                break;
 
-                case STATE_PROJECTILE_ENGAGE:
-                    RunLogicBlock(true, _generalAdvancedLB, 52, 12, 0, 0, 11, 15, 5, 5); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
-                    break;
+            case STATE_PROJECTILE_ENGAGE:
+                RunLogicBlock(true, _generalAdvancedLB, 52, 12, 0, 0, 11, 15, 5, 5); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
+                break;
 
-                case STATE_ENGAGE:
-                    RunLogicBlock(true, _generalAdvancedLB, 68, 0, 0, 0, 10, 12, 5, 5); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
-                    break;
+            case STATE_ENGAGE:
+                RunLogicBlock(true, _generalAdvancedLB, 68, 0, 0, 0, 10, 12, 5, 5); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
+                break;
 
-                case STATE_WANDER:
-                    RunLogicBlock(true, _generalAdvancedLB, 63, 0, 0, 0, 15, 12, 5, 5); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
-                    break;
-            }
+            case STATE_WANDER:
+                RunLogicBlock(true, _generalAdvancedLB, 63, 0, 0, 0, 15, 12, 5, 5); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
+                break;
         }
     }
 
@@ -1744,81 +1512,60 @@ public class EnemyObj_LastBoss : EnemyObj {
     #region Expert and Miniboss (Not Used)
 
     protected override void RunExpertLogic() {
-        if (CurrentHealth > 0) {
-            if (IsSecondForm == false) {
-                if (_isHurt == false) {
-                    switch (State) {
-                        case STATE_MELEE_ENGAGE:
-                            if (m_isTouchingGround) {
-                                RunLogicBlock(true, _generalBasicLB, 0, 10, 0, 20, 35, 10, 0, 25); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
-                            } else {
-                                RunLogicBlock(true, _generalBasicLB, 0, 10, 0, 0, 55, 10, 0, 25); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
-                            }
+        if (CurrentHealth <= 0) {
+            return;
+        }
 
-                            break;
+        if (IsSecondForm) {
+            RunAdvancedLogic();
+            return;
+        }
 
-                        case STATE_PROJECTILE_ENGAGE:
-                            if (m_target.IsJumping == false) {
-                                RunLogicBlock(true, _generalBasicLB, 20, 0, 10, 10, 0, 15, 20, 10); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
-                            } else {
-                                RunLogicBlock(true, _generalBasicLB, 40, 0, 15, 0, 0, 15, 20, 10); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
-                            }
+        if (_isHurt) {
+            return;
+        }
 
-                            break;
-
-                        case STATE_ENGAGE:
-                            if (m_target.IsJumping == false) {
-                                RunLogicBlock(true, _generalBasicLB, 30, 0, 15, 20, 0, 25, 0, 10); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
-                            } else {
-                                RunLogicBlock(true, _generalBasicLB, 50, 0, 15, 0, 0, 25, 0, 10); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
-                            }
-
-                            break;
-
-                        case STATE_WANDER:
-                            if (m_target.IsJumping == false) {
-                                RunLogicBlock(true, _generalBasicLB, 50, 0, 10, 20, 0, 0, 20, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
-                            } else {
-                                RunLogicBlock(true, _generalBasicLB, 50, 0, 10, 20, 0, 0, 20, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
-                            }
-
-                            break;
-                    }
+        switch (State) {
+            case STATE_MELEE_ENGAGE:
+                if (m_isTouchingGround) {
+                    RunLogicBlock(true, _generalBasicLB, 0, 10, 0, 20, 35, 10, 0, 25); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
+                } else {
+                    RunLogicBlock(true, _generalBasicLB, 0, 10, 0, 0, 55, 10, 0, 25); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
                 }
-            } else {
-                RunAdvancedLogic();
-            }
+
+                break;
+
+            case STATE_PROJECTILE_ENGAGE:
+                if (m_target.IsJumping == false) {
+                    RunLogicBlock(true, _generalBasicLB, 20, 0, 10, 10, 0, 15, 20, 10); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
+                } else {
+                    RunLogicBlock(true, _generalBasicLB, 40, 0, 15, 0, 0, 15, 20, 10); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
+                }
+
+                break;
+
+            case STATE_ENGAGE:
+                if (m_target.IsJumping == false) {
+                    RunLogicBlock(true, _generalBasicLB, 30, 0, 15, 20, 0, 25, 0, 10); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
+                } else {
+                    RunLogicBlock(true, _generalBasicLB, 50, 0, 15, 0, 0, 25, 0, 10); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
+                }
+
+                break;
+
+            case STATE_WANDER:
+                if (m_target.IsJumping == false) {
+                    RunLogicBlock(true, _generalBasicLB, 50, 0, 10, 20, 0, 0, 20, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
+                } else {
+                    RunLogicBlock(true, _generalBasicLB, 50, 0, 10, 20, 0, 0, 20, 0); //walkTowardsLS, walkAwayLS, walkStopLS, jumpLS, moveAttackLS, throwAxeLS, throwDaggerLS, dashLS
+                }
+
+                break;
         }
     }
 
     protected override void RunMinibossLogic() {
         RunLogicBlock(true, _generalAdvancedLB, 0, 0, 0, 0, 100, 0, 0, 0); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
-        //if ((CurrentHealth < (MaxHealth / 3) * 2) && m_damageShieldProjectiles.Count < m_orbsNormal)
-        //    RunLogicBlock(false, m_damageShieldLB, 0, 100, 0);  // castShield1SF, castShield2SF, castShield3SF
-        //else if ((CurrentHealth < (MaxHealth / 3) * 1) && m_damageShieldProjectiles.Count < m_orbsHard)
-        //    RunLogicBlock(false, m_damageShieldLB, 0, 0, 100);  // castShield1SF, castShield2SF, castShield3SF
-        //else if (m_damageShieldProjectiles.Count < 1)
-        //    RunLogicBlock(false, m_damageShieldLB, 100, 0, 0);  // castShield1SF, castShield2SF, castShield3SF
-        //else
-        //{
-        //    switch (State)
-        //    {
-        //        case (STATE_MELEE_ENGAGE):
-        //            RunLogicBlock(true, m_generalAdvancedLB, 30, 20, 0, 40, 0, 0, 5, 5); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
-        //            break;
-        //        case (STATE_PROJECTILE_ENGAGE):
-        //            RunLogicBlock(true, m_generalAdvancedLB, 50, 20, 10, 0, 5, 5, 5, 5); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
-        //            break;
-        //        case (STATE_ENGAGE):
-        //            RunLogicBlock(true, m_generalAdvancedLB, 80, 0, 0, 0, 10, 10, 0, 0); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
-        //            break;
-        //        case (STATE_WANDER):
-        //            RunLogicBlock(true, m_generalAdvancedLB, 80, 0, 0, 0, 10, 10, 0, 0); //walkTowardsSF, walkAwaySF, walkStopSF, attackSF, castSpearsSF, castRandomSwordsSF, castSwordsLeftSF, castSwordRightSF
-        //            break;
-        //        default:
-        //            break;
-        //    }
-        //}
     }
 
     #endregion
