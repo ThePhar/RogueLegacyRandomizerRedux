@@ -4,7 +4,10 @@ using System.Collections.Generic;
 namespace RogueCastle.Randomizer;
 
 public record RandoSettings {
-    // public readonly bool DeathLink { get; init; }
+    private RandoSettings() { } // Only create settings from TryParse.
+
+    // All settings.
+    public bool DeathLink { get; init; }
 
     public static (bool, string) TryParse(Dictionary<string, object> data, out RandoSettings settings) {
         settings = null;
@@ -33,18 +36,28 @@ public record RandoSettings {
     }
 
     private static RandoSettings BuildVersion3(Dictionary<string, object> data) {
-        return new RandoSettings();
+        return new RandoSettings {
+            DeathLink = data.GetCast<bool>("death_link"),
+        };
     }
 }
 
 file static class SlotDataParseExtensions {
-    public static bool TryCastValue<TK, TV, TVCast>(this IDictionary<TK, TV> dict, TK key, out TVCast value) where TVCast : TV {
-        if (dict.TryGetValue(key, out var obj) && obj is TVCast valueCast) {
+    public static bool TryCastValue<T>(this IDictionary<string, object> dict, string key, out T value) {
+        if (dict.TryGetValue(key, out var obj) && obj is T valueCast) {
             value = valueCast;
             return true;
         }
 
         value = default;
         return false;
+    }
+
+    public static T GetCast<T>(this IDictionary<string, object> dict, string key) {
+        if (dict.TryGetValue(key, out var obj) && obj is T valueCast) {
+            return valueCast;
+        }
+
+        throw new InvalidCastException($"Unable to cast {key} to desired type.");
     }
 }

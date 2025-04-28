@@ -58,15 +58,12 @@ public static class Program {
                     LevelEV.ShowDebugText = false;
                     LevelEV.RunCrashLogs = false;
                     LevelEV.ShowFps = true;
+                    LevelEV.LoadSplashScreen = false;
                     break;
 
                 case "--no_save":
                     LevelEV.DisableSaving = true;
                     LevelEV.EnableBackupSaving = false;
-                    break;
-
-                case "--no_splash":
-                    LevelEV.LoadSplashScreen = false;
                     break;
             }
         }

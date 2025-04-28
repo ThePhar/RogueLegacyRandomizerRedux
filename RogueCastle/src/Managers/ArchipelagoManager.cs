@@ -132,6 +132,17 @@ public class ArchipelagoManager {
         return _session.Players.GetPlayerAlias(slot);
     }
 
+    private static void NestedPrint(Dictionary<string, object> dict, int level = 0) {
+        foreach (KeyValuePair<string, object> item in dict) {
+            if (item.Value is Dictionary<string, object> nested) {
+                Console.WriteLine($@"{new string(' ', level)}{item.Key}:");
+                NestedPrint(nested, level + 1);
+            } else {
+                Console.WriteLine($@"{new string(' ', level)}{item.Key} = {item.Value} ({item.Value.GetType()})");
+            }
+        }
+    }
+
     #region DeathLink
 
     public void SendDeath(GameObj deathCauseObj) {
@@ -173,17 +184,6 @@ public class ArchipelagoManager {
     }
 
     #endregion
-
-    private static void NestedPrint(Dictionary<string, object> dict, int level = 0) {
-        foreach (KeyValuePair<string, object> item in dict) {
-            if (item.Value is Dictionary<string, object> nested) {
-                Console.WriteLine($@"{new string(' ', level)}{item.Key}:");
-                NestedPrint(nested, level + 1);
-            } else {
-                Console.WriteLine($@"{new string(' ', level)}{item.Key} = {item.Value} ({item.Value.GetType()})");
-            }
-        }
-    }
 }
 
 public enum ConnectionStatus {
