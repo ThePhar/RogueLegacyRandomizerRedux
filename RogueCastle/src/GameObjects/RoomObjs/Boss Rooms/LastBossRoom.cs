@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
-using InputSystem;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameObjects.EnemyObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens.BaseScreens;
-using Tweener.Ease;
 using Tweener;
+using Tweener.Ease;
 
 namespace RogueCastle
 {
@@ -166,7 +162,7 @@ namespace RogueCastle
             m_playerX = camera.X;
 
             SoundManager.PlaySound("Cutsc_CameraMove");
-            Tween.To(camera, 1f, Tweener.Ease.Quad.EaseInOut, "X", (m_fountain.Bounds.Center.X - 400).ToString());
+            Tween.To(camera, 1f, Quad.EaseInOut, "X", (m_fountain.Bounds.Center.X - 400).ToString());
             Tween.RunFunction(2, this, "RunFountainCutscene2");
         }
 
@@ -223,7 +219,7 @@ namespace RogueCastle
 
         public void RunFountainCutscene4()
         {
-            Tween.To(Player.AttachedLevel.Camera, 1f, Tweener.Ease.Quad.EaseInOut, "X", m_playerX.ToString());
+            Tween.To(Player.AttachedLevel.Camera, 1f, Quad.EaseInOut, "X", m_playerX.ToString());
             Tween.AddEndHandlerToLastTween(m_boss, "SecondFormActive");
         }
 

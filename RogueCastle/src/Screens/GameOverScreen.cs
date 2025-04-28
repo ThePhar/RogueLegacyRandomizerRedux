@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameObjects.EnemyObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Managers;
 using RogueCastle.Randomizer;

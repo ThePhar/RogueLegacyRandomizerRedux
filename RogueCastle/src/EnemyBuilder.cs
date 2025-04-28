@@ -1,5 +1,6 @@
 ﻿using System;
 using DS2DEngine;
+using RogueCastle.GameObjects.EnemyObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.Screens;
 

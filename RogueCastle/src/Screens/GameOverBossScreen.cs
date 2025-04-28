@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DS2DEngine;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.GameObjects.EnemyObjs;
+using RogueCastle.GameStructs;
 using Tweener;
 using Tweener.Ease;
-using InputSystem;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Graphics;
-using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {

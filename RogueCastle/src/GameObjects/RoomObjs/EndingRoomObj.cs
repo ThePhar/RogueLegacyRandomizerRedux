@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using DS2DEngine;
-using InputSystem;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameObjects.EnemyObjs;
+using RogueCastle.GameStructs;
 using Tweener;
 using Tweener.Ease;
-using Microsoft.Xna.Framework.Graphics;
-using System.Globalization;
-using RogueCastle.EnvironmentVariables;
-using RogueCastle.GameStructs;
 
 namespace RogueCastle
 {
@@ -49,7 +46,7 @@ namespace RogueCastle
             base.InitializeRenderTarget(bgRenderTarget);
         }
 
-        public override void LoadContent(Microsoft.Xna.Framework.Graphics.GraphicsDevice graphics)
+        public override void LoadContent(GraphicsDevice graphics)
         {
             m_continueText = new KeyIconTextObj(Game.JunicodeFont);
             m_continueText.FontSize = 14;

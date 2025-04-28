@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DS2DEngine;
 using InputSystem;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using RogueCastle.EnvironmentVariables;
+using RogueCastle.GameObjects.EnemyObjs;
 using RogueCastle.GameStructs;
 using RogueCastle.LogicActions;
 using RogueCastle.Managers;
@@ -15,6 +15,7 @@ using RogueCastle.Randomizer;
 using RogueCastle.Screens;
 using RogueCastle.Screens.BaseScreens;
 using Tweener;
+using Tweener.Ease;
 
 namespace RogueCastle
 {
@@ -2135,9 +2136,9 @@ namespace RogueCastle
                 itemDrop.AnimationDelay = 1 / 60f;
                 itemDrop.AccelerationY = 0;
                 itemDrop.AccelerationX = 0;
-                Tweener.Tween.By(itemDrop, 0.4f, Tweener.Ease.Quad.EaseOut, "Y", "-120");
-                Tweener.Tween.To(itemDrop, 0.1f, Tweener.Ease.Linear.EaseNone, "delay", "0.6", "Opacity", "0");
-                Tweener.Tween.AddEndHandlerToLastTween(m_levelScreen.ItemDropManager, "DestroyItemDrop", itemDrop);
+                Tween.By(itemDrop, 0.4f, Quad.EaseOut, "Y", "-120");
+                Tween.To(itemDrop, 0.1f, Linear.EaseNone, "delay", "0.6", "Opacity", "0");
+                Tween.AddEndHandlerToLastTween(m_levelScreen.ItemDropManager, "DestroyItemDrop", itemDrop);
                 //SoundManager.PlaySound("CoinCollect1", "CoinCollect2", "CoinCollect3");
                 SoundManager.PlaySound("CoinDrop1", "CoinDrop2", "CoinDrop3", "CoinDrop4", "CoinDrop5");
 
@@ -2204,11 +2205,11 @@ namespace RogueCastle
                 teleporter = m_lastTouchedTeleporter;
             Console.WriteLine("Player pos: " + this.Position + " teleporter: " + teleporter.Position);
 
-            Tween.To(this, 0.4f, Tweener.Ease.Linear.EaseNone, "X", teleporter.X.ToString());
-            Tween.To(this, 0.05f, Tweener.Ease.Linear.EaseNone, "delay", "1.5", "ScaleX", "0");
+            Tween.To(this, 0.4f, Linear.EaseNone, "X", teleporter.X.ToString());
+            Tween.To(this, 0.05f, Linear.EaseNone, "delay", "1.5", "ScaleX", "0");
             Vector2 storedScale = this.Scale;
             this.ScaleX = 0;
-            Tween.To(this, 0.05f, Tweener.Ease.Linear.EaseNone, "delay", "3.3", "ScaleX", storedScale.X.ToString());
+            Tween.To(this, 0.05f, Linear.EaseNone, "delay", "3.3", "ScaleX", storedScale.X.ToString());
             this.ScaleX = storedScale.X;
             Vector2 playerTeleportPos = new Vector2(position.X, position.Y - (this.TerrainBounds.Bottom - this.Y));
 
@@ -2973,7 +2974,7 @@ namespace RogueCastle
                         m_levelScreen.TextManager.DisplayNumberStringText(-manaCost, "LOC_ID_SKILL_SCREEN_15" /*"mp"*/, Color.SkyBlue, new Vector2(this.X, this.Bounds.Top));
 
                         AttachedLevel.ImpactEffectPool.StartInverseEmit(m_translocatorSprite.Position);
-                        Tween.To(m_translocatorSprite, 0.4f, Tweener.Ease.Linear.EaseNone, "ScaleX", this.ScaleX.ToString(), "ScaleY", this.ScaleY.ToString());
+                        Tween.To(m_translocatorSprite, 0.4f, Linear.EaseNone, "ScaleX", this.ScaleX.ToString(), "ScaleY", this.ScaleY.ToString());
                         SoundManager.PlaySound("mfqt_teleport_out");
                     }
                     else if (m_translocatorSprite.Visible == true && m_translocatorSprite.Scale == this.Scale)
@@ -2999,8 +3000,8 @@ namespace RogueCastle
         public void Translocate(Vector2 position)
         {
             this.DisableAllWeight = true;
-            Tween.To(this, 0.08f, Tweener.Ease.Linear.EaseNone, "ScaleX", "3", "ScaleY", "0");
-            Tween.To(this, 0, Tweener.Ease.Linear.EaseNone, "delay", "0.1", "X", position.X.ToString(), "Y", position.Y.ToString());
+            Tween.To(this, 0.08f, Linear.EaseNone, "ScaleX", "3", "ScaleY", "0");
+            Tween.To(this, 0, Linear.EaseNone, "delay", "0.1", "X", position.X.ToString(), "Y", position.Y.ToString());
             Tween.AddEndHandlerToLastTween(this, "ResetTranslocution");
             //this.Position = m_translocatorSprite.Position;
             this.AttachedLevel.UpdateCamera();
@@ -4308,7 +4309,7 @@ namespace RogueCastle
 
                         float storedX = m_internalScale.X;
                         this.ScaleX = 0;
-                        m_flipTween = Tween.To(this, 0.15f, Tweener.Tween.EaseNone, "ScaleX", storedX.ToString());
+                        m_flipTween = Tween.To(this, 0.15f, Tween.EaseNone, "ScaleX", storedX.ToString());
                     }
                 }
                 base.Flip = value;
