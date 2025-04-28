@@ -399,40 +399,40 @@ public class Game : Microsoft.Xna.Framework.Game
         {
             Name = "The Grand Entrance",
             LevelType = GameTypes.LevelType.Castle,
-            TotalRooms = new Vector2(24, 28), //(17,19),//(20, 22),//(25,35),//(20,25),//(15, 25),
+            TotalRooms = (24, 28), //(17,19),//(20, 22),//(25,35),//(20,25),//(15, 25),
             BossInArea = true,
-            SecretRooms = new Vector2(1, 3), //(2, 3),
-            BonusRooms = new Vector2(2, 3),
+            SecretRooms = (1, 3), //(2, 3),
+            BonusRooms = (2, 3),
             Color = Color.White,
         };
 
         var gardenZone = new AreaStruct
         {
             LevelType = GameTypes.LevelType.Garden,
-            TotalRooms = new Vector2(23, 27), //(25,29),//(25, 35),//(15, 25),
+            TotalRooms = (23, 27), //(25,29),//(25, 35),//(15, 25),
             BossInArea = true,
-            SecretRooms = new Vector2(1, 3),
-            BonusRooms = new Vector2(2, 3),
+            SecretRooms = (1, 3),
+            BonusRooms = (2, 3),
             Color = Color.Green,
         };
 
         var towerZone = new AreaStruct
         {
             LevelType = GameTypes.LevelType.Tower,
-            TotalRooms = new Vector2(23, 27), //(27,31),//(25,29),//(25, 35),//(15, 25),
+            TotalRooms = (23, 27), //(27,31),//(25,29),//(25, 35),//(15, 25),
             BossInArea = true,
-            SecretRooms = new Vector2(1, 3),
-            BonusRooms = new Vector2(2, 3),
+            SecretRooms = (1, 3),
+            BonusRooms = (2, 3),
             Color = Color.DarkBlue,
         };
 
         var dungeonZone = new AreaStruct
         {
             LevelType = GameTypes.LevelType.Dungeon,
-            TotalRooms = new Vector2(23, 27), //(29,33),//(25, 29),//(25, 35),//(15, 25),
+            TotalRooms = (23, 27), //(29,33),//(25, 29),//(25, 35),//(15, 25),
             BossInArea = true,
-            SecretRooms = new Vector2(1, 3),
-            BonusRooms = new Vector2(2, 3),
+            SecretRooms = (1, 3),
+            BonusRooms = (2, 3),
             Color = Color.Red,
         };
 
