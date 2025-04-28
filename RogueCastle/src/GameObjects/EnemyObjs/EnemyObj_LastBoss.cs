@@ -1196,7 +1196,6 @@ public class EnemyObj_LastBoss : EnemyObj {
         }
 
         if (IsSecondForm && m_bossVersionKilled == false) {
-            // TODO: This is where the victory conditions should go.
             m_bossVersionKilled = true;
             SetPlayerData();
 
@@ -1218,6 +1217,9 @@ public class EnemyObj_LastBoss : EnemyObj {
             if (Game.PlayerStats.TimesCastleBeaten > 1) {
                 GameUtil.UnlockAchievement("FEAR_OF_TWINS");
             }
+
+            // Randomizer Victory Condition
+            Program.Game.ArchipelagoManager.CompleteGoal();
         }
 
         if (IsNeo && _neoDying == false) {

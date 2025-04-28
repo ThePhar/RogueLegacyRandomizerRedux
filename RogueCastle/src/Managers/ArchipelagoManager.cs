@@ -143,6 +143,10 @@ public class ArchipelagoManager {
         }
     }
 
+    public void CompleteGoal() {
+        _session.SetGoalAchieved();
+    }
+    
     #region DeathLink
 
     public void SendDeath(GameObj deathCauseObj) {
